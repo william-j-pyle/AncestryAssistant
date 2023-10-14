@@ -1,0 +1,60 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="AncestorsPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\Geneology\Ancestors\</Value>
+    </Setting>
+    <Setting Name="MainForm_ClientSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">892, 546</Value>
+    </Setting>
+    <Setting Name="MainSplitter" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">239</Value>
+    </Setting>
+    <Setting Name="MainSplitter_Panel1Collapsed" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MainSplitter_Panel2Collapsed" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SideSplitter_Panel1Collapsed" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SideSplitter_Panel2Collapsed" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SideSplitter" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">188</Value>
+    </Setting>
+    <Setting Name="SideSplitter_Panel1Visible" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SideSplitter_Panel2Visible" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Ancestor_Name_Width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">175</Value>
+    </Setting>
+    <Setting Name="Ancestor_Death_Width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">175</Value>
+    </Setting>
+    <Setting Name="Ancestor_Birth_Width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="Ancestor_Task_Item" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">75</Value>
+    </Setting>
+    <Setting Name="Ancestor_Task_Comments" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="TB_ANCESTRY_LOC" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">28, 388</Value>
+    </Setting>
+    <Setting Name="TB_WEB_LOC" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">24, 3</Value>
+    </Setting>
+    <Setting Name="TB_RESEARCH_LOC" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">242, 24</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

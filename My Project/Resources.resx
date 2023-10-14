@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ico_20_black__181" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__181.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__152" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__152.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Panel-Top-Right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\Panel-Top-Right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Panel-Bottom-Left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\Panel-Bottom-Left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__154" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__154.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_home" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__46" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__46.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__77" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__77.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__138" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__138.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__75_Gallery" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__75_Gallery.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AssistantAPI" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Source\ancestry\javascript\AssistantAPI.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ico_20_black__29" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__29.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__75_hint" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__75_hint.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__118" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__118.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__501" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Panel-Bottom-Right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\Panel-Bottom-Right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black_fan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black_fan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_red__145" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_red__145.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__110" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__110.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__176" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__176.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__196" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__196.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__12.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__198" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__198.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__106" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__106.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__108" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__108.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__41" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__41.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__137" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__137.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_green__751" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_green__75.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__33" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__33.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_green__131" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_green__131.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__36.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_green__75" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_green__75.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__39" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__39.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__112" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__112.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__194" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__194.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_newspapercom_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__153.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ancestry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ancestry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__91" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__91.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__72" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__72.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__75" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__75.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_grey__75" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_grey__75.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__143" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__143.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__751" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__75.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__51" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__51.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__752" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__75.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__145" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__145.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ancestry1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ancestry1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__148" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__148.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_red__75" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_red__75.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__129" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__129.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_brown__131" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_brown__131.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__124" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__124.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__38" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__38.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__109" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__109.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__179" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__179.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Panel-Top-Left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\Panel-Top-Left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_yellow__75" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_yellow__75.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_red__131" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_red__131.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__75_story" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__75_story.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__151" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__151.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__31" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__104" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__104.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Panel-Bottom-Center" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\Panel-Bottom-Center.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__27" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__27.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__05" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__05.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__131" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__131.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__141" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__141.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__87" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__87.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__144" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__144.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__28" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__28.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__84" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__84.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AsymmetricKeyError" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AsymmetricKeyError.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__191" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__191.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__34" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__34.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__50" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__117" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__117.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__126" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__126.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__114" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__114.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__140" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__140.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_20_black__111" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__111.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AddAgent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddAgent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>
