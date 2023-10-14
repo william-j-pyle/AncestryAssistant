@@ -196,6 +196,8 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Source\components\components.md" />
+    <None Include="Source\theme\Images.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />

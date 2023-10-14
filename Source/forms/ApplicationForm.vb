@@ -554,4 +554,9 @@ Public Class ApplicationForm
   Private Sub web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles web.NavigationCompleted
     Cursor = Cursors.Default
   End Sub
+
+  Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+    My.Settings.Save()
+    Close()
+  End Sub
 End Class
