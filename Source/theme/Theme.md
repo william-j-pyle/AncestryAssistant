@@ -1,4 +1,37 @@
-﻿# Needed Images for App
+﻿# Application Theme Information
+
+The theme object should provide all major visual information required by a project.
+
+* Font
+* Color
+* Image
+
+## Application Font
+
+The Default font for this project is:
+
+*Segoe UI Historic*
+
+
+## Application Colors
+
+* APP_BG
+* APP_FG
+* APP_ACCENT
+
+## Application Images
+
+All Icon related images will begin as SVG files.
+
+|Layer|Attributes|Description|
+|-----|----------|-----------|
+|IconImportance|Color=Various, Red=e5,14,00, Yellow=ff,cc,00|Main Focus of Icon. For example, X, !, ? symbol indicating some type of issue or information|
+|IconAction|Color=Various, Green=38,8a,34|Main Focus or purpose of Icon. For example, a + indicating Adding a new type of IconBG|
+|IconFG|Color=f0,ef,f1|Punchout Filler of IconBG|
+|IconBG|Color=42,42,42, Color does change for other types of main items, for example, a Folder would have a Color=dc,b6,7a|Main Image of the Icon|
+|IconOutline|Color=f6,f6,f6, Width=1px|Border used to outline everything|
+|Canvas|Transparent, Size=16x16 px|Base size of the SVG|
+
 
 * Application
   * App-Icon
