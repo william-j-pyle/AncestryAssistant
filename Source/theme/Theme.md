@@ -15,7 +15,19 @@ The Default font for this project is:
 
 ## Application Colors
 
-* APP_BG
+|KEY|HEX|RGB|
+|APP_BG|1f1f1f|rgb(31, 31, 31)|
+|PANEL_BG|1a1a1a|26, 26, 26|
+|PANEL_FG|fafafa|rgb(250, 250, 250)|
+|PANEL_BORDER|3d3d3d|rgb(61, 61, 61)|
+|SEARCH_BG|383838|rgb(56, 56, 56)|
+|TREEVIEW_SELECTEDITEM_INACTIVE|383838|rgb(56, 56, 56)|
+|TREEVIEW_SELECTEDITEM|3d3d3d|rgb(61, 61, 61)|
+|TREEVIEW_SELECTEDITEM_BORDER|707070|rgb(112, 112, 112)|
+|SCROLLBAR|2e2e2e|rgb(46, 46, 46)|
+|STATUSBAR_FG|fafafa|rgb(250, 250, 250)|
+|STATUSBAR_BG|424242|rgb(66, 66, 66)|
+
 * APP_FG
 * APP_ACCENT
 

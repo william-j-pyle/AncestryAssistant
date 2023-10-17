@@ -31,7 +31,6 @@ Partial Class ApplicationForm
         Me.SplitLeft_Middle = New System.Windows.Forms.SplitContainer()
         Me.SplitLeft = New System.Windows.Forms.SplitContainer()
         Me.AncestorDetails = New System.Windows.Forms.ListView()
-        Me.JDockPanelHeader1 = New AncestryAssistant.jDockPanelHeader()
         Me.mnuPanelDock = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuDockTopLeft = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDockTopRight = New System.Windows.Forms.ToolStripMenuItem()
@@ -39,7 +38,6 @@ Partial Class ApplicationForm
         Me.mnuDockBottomMiddle = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDockBottomRight = New System.Windows.Forms.ToolStripMenuItem()
         Me.AncestorsList = New System.Windows.Forms.ListView()
-        Me.JDockPanelHeader2 = New AncestryAssistant.jDockPanelHeader()
         Me.SplitMiddle = New System.Windows.Forms.SplitContainer()
         Me.tabs = New System.Windows.Forms.TabControl()
         Me.tabAncestry = New System.Windows.Forms.TabPage()
@@ -78,14 +76,41 @@ Partial Class ApplicationForm
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SplitLeftMiddle_Right = New System.Windows.Forms.SplitContainer()
         Me.SplitRight = New System.Windows.Forms.SplitContainer()
-        Me.JDockPanelHeader3 = New AncestryAssistant.jDockPanelHeader()
-        Me.JDockPanelHeader4 = New AncestryAssistant.jDockPanelHeader()
+        Me.AncestorAttributes = New System.Windows.Forms.TreeView()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblBirthYear = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblPersonName = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblID = New System.Windows.Forms.ToolStripStatusLabel()
         Me.AncestryDirectorWatcher = New System.IO.FileSystemWatcher()
+        Me.JDockPanelHeader1 = New AncestryAssistant.jDockPanelHeader()
+        Me.JDockPanelHeader2 = New AncestryAssistant.jDockPanelHeader()
+        Me.JDockPanelHeader3 = New AncestryAssistant.jDockPanelHeader()
+        Me.JDockPanelHeader4 = New AncestryAssistant.jDockPanelHeader()
+        Me.JPanel1 = New AncestryAssistant.JPanel()
+        Me.JPanel2 = New AncestryAssistant.JPanel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.tabCensus = New System.Windows.Forms.TabPage()
+        Me.tabNotebooks = New System.Windows.Forms.TabPage()
+        Me.tabGallery = New System.Windows.Forms.TabPage()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripButton8 = New System.Windows.Forms.ToolStripButton()
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.TreeView1 = New System.Windows.Forms.TreeView()
+        Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripButton9 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton10 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton11 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripTextBox2 = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripButton12 = New System.Windows.Forms.ToolStripButton()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.StatusStrip2 = New System.Windows.Forms.StatusStrip()
         CType(Me.web, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitLeft_Middle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitLeft_Middle.Panel1.SuspendLayout()
@@ -114,8 +139,19 @@ Partial Class ApplicationForm
         Me.SplitRight.Panel1.SuspendLayout()
         Me.SplitRight.Panel2.SuspendLayout()
         Me.SplitRight.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.AncestryDirectorWatcher, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.JPanel1.SuspendLayout()
+        Me.JPanel2.SuspendLayout()
+        Me.tabNotebooks.SuspendLayout()
+        Me.tabGallery.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer1.Panel1.SuspendLayout()
+        Me.SplitContainer1.Panel2.SuspendLayout()
+        Me.SplitContainer1.SuspendLayout()
+        Me.ToolStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
         'imgViewerList
@@ -160,7 +196,7 @@ Partial Class ApplicationForm
         Me.web.Location = New System.Drawing.Point(0, 25)
         Me.web.Margin = New System.Windows.Forms.Padding(0)
         Me.web.Name = "web"
-        Me.web.Size = New System.Drawing.Size(351, 288)
+        Me.web.Size = New System.Drawing.Size(513, 288)
         Me.web.Source = New System.Uri("https://www.ancestry.com/family-tree/tree/65171586", System.UriKind.Absolute)
         Me.web.TabIndex = 0
         Me.web.ZoomFactor = 0.75R
@@ -180,7 +216,7 @@ Partial Class ApplicationForm
         'SplitLeft_Middle.Panel2
         '
         Me.SplitLeft_Middle.Panel2.Controls.Add(Me.SplitMiddle)
-        Me.SplitLeft_Middle.Size = New System.Drawing.Size(662, 468)
+        Me.SplitLeft_Middle.Size = New System.Drawing.Size(824, 468)
         Me.SplitLeft_Middle.SplitterDistance = 297
         Me.SplitLeft_Middle.TabIndex = 3
         '
@@ -225,25 +261,6 @@ Partial Class ApplicationForm
         Me.AncestorDetails.TabIndex = 2
         Me.AncestorDetails.UseCompatibleStateImageBehavior = False
         Me.AncestorDetails.View = System.Windows.Forms.View.Details
-        '
-        'JDockPanelHeader1
-        '
-        Me.JDockPanelHeader1.BackColor = System.Drawing.Color.DarkGray
-        Me.JDockPanelHeader1.BackColorDisabled = System.Drawing.Color.LightGray
-        Me.JDockPanelHeader1.BackColorEnabled = System.Drawing.Color.DarkGray
-        Me.JDockPanelHeader1.Caption = "Ancestor"
-        Me.JDockPanelHeader1.ContextMenuStrip = Me.mnuPanelDock
-        Me.JDockPanelHeader1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.JDockPanelHeader1.ForeColor = System.Drawing.Color.Black
-        Me.JDockPanelHeader1.ForeColorDisabled = System.Drawing.Color.Black
-        Me.JDockPanelHeader1.ForeColorEnabled = System.Drawing.Color.Black
-        Me.JDockPanelHeader1.Location = New System.Drawing.Point(1, 1)
-        Me.JDockPanelHeader1.MaximumSize = New System.Drawing.Size(0, 24)
-        Me.JDockPanelHeader1.MinimumSize = New System.Drawing.Size(0, 24)
-        Me.JDockPanelHeader1.Name = "JDockPanelHeader1"
-        Me.JDockPanelHeader1.Size = New System.Drawing.Size(295, 24)
-        Me.JDockPanelHeader1.TabIndex = 1
-        Me.JDockPanelHeader1.Tag = "TOP_LEFT"
         '
         'mnuPanelDock
         '
@@ -305,25 +322,6 @@ Partial Class ApplicationForm
         Me.AncestorsList.UseCompatibleStateImageBehavior = False
         Me.AncestorsList.View = System.Windows.Forms.View.Details
         '
-        'JDockPanelHeader2
-        '
-        Me.JDockPanelHeader2.BackColor = System.Drawing.Color.DarkGray
-        Me.JDockPanelHeader2.BackColorDisabled = System.Drawing.Color.LightGray
-        Me.JDockPanelHeader2.BackColorEnabled = System.Drawing.Color.DarkGray
-        Me.JDockPanelHeader2.Caption = "Ancestors Research List"
-        Me.JDockPanelHeader2.ContextMenuStrip = Me.mnuPanelDock
-        Me.JDockPanelHeader2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.JDockPanelHeader2.ForeColor = System.Drawing.Color.Black
-        Me.JDockPanelHeader2.ForeColorDisabled = System.Drawing.Color.Black
-        Me.JDockPanelHeader2.ForeColorEnabled = System.Drawing.Color.Black
-        Me.JDockPanelHeader2.Location = New System.Drawing.Point(1, 1)
-        Me.JDockPanelHeader2.MaximumSize = New System.Drawing.Size(0, 24)
-        Me.JDockPanelHeader2.MinimumSize = New System.Drawing.Size(0, 24)
-        Me.JDockPanelHeader2.Name = "JDockPanelHeader2"
-        Me.JDockPanelHeader2.Size = New System.Drawing.Size(295, 24)
-        Me.JDockPanelHeader2.TabIndex = 2
-        Me.JDockPanelHeader2.Tag = "BOTTOM_LEFT"
-        '
         'SplitMiddle
         '
         Me.SplitMiddle.Dock = System.Windows.Forms.DockStyle.Fill
@@ -342,13 +340,16 @@ Partial Class ApplicationForm
         Me.SplitMiddle.Panel2.BackColor = System.Drawing.Color.Silver
         Me.SplitMiddle.Panel2.Controls.Add(Me.DataGridView1)
         Me.SplitMiddle.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.SplitMiddle.Size = New System.Drawing.Size(361, 468)
+        Me.SplitMiddle.Size = New System.Drawing.Size(523, 468)
         Me.SplitMiddle.SplitterDistance = 343
         Me.SplitMiddle.TabIndex = 0
         '
         'tabs
         '
         Me.tabs.Controls.Add(Me.tabAncestry)
+        Me.tabs.Controls.Add(Me.tabCensus)
+        Me.tabs.Controls.Add(Me.tabGallery)
+        Me.tabs.Controls.Add(Me.tabNotebooks)
         Me.tabs.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabs.ImageList = Me.imgList20
         Me.tabs.Location = New System.Drawing.Point(1, 1)
@@ -356,22 +357,21 @@ Partial Class ApplicationForm
         Me.tabs.Name = "tabs"
         Me.tabs.Padding = New System.Drawing.Point(0, 0)
         Me.tabs.SelectedIndex = 0
-        Me.tabs.Size = New System.Drawing.Size(359, 341)
+        Me.tabs.Size = New System.Drawing.Size(521, 341)
         Me.tabs.TabIndex = 3
         '
         'tabAncestry
         '
-        Me.tabAncestry.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.tabAncestry.BackColor = System.Drawing.Color.Transparent
         Me.tabAncestry.Controls.Add(Me.web)
         Me.tabAncestry.Controls.Add(Me.tsWeb)
         Me.tabAncestry.ImageKey = "Ancestry.png"
         Me.tabAncestry.Location = New System.Drawing.Point(4, 24)
         Me.tabAncestry.Margin = New System.Windows.Forms.Padding(0)
         Me.tabAncestry.Name = "tabAncestry"
-        Me.tabAncestry.Size = New System.Drawing.Size(351, 313)
+        Me.tabAncestry.Size = New System.Drawing.Size(513, 313)
         Me.tabAncestry.TabIndex = 0
         Me.tabAncestry.Text = "Ancestry"
-        Me.tabAncestry.UseVisualStyleBackColor = True
         '
         'tsWeb
         '
@@ -384,7 +384,7 @@ Partial Class ApplicationForm
         Me.tsWeb.Name = "tsWeb"
         Me.tsWeb.Padding = New System.Windows.Forms.Padding(4, 0, 16, 0)
         Me.tsWeb.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.tsWeb.Size = New System.Drawing.Size(351, 25)
+        Me.tsWeb.Size = New System.Drawing.Size(513, 25)
         Me.tsWeb.Stretch = True
         Me.tsWeb.TabIndex = 2
         '
@@ -447,7 +447,7 @@ Partial Class ApplicationForm
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView1.Location = New System.Drawing.Point(1, 1)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(359, 119)
+        Me.DataGridView1.Size = New System.Drawing.Size(521, 119)
         Me.DataGridView1.TabIndex = 0
         '
         'tsAncestry
@@ -461,7 +461,7 @@ Partial Class ApplicationForm
         Me.tsAncestry.Name = "tsAncestry"
         Me.tsAncestry.Padding = New System.Windows.Forms.Padding(4, 0, 1, 0)
         Me.tsAncestry.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.tsAncestry.Size = New System.Drawing.Size(892, 25)
+        Me.tsAncestry.Size = New System.Drawing.Size(1114, 25)
         Me.tsAncestry.TabIndex = 3
         Me.tsAncestry.Text = "Ancestry"
         '
@@ -631,7 +631,7 @@ Partial Class ApplicationForm
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.MenuStrip1.Size = New System.Drawing.Size(892, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1114, 24)
         Me.MenuStrip1.TabIndex = 7
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -645,18 +645,18 @@ Partial Class ApplicationForm
         'PreferencesToolStripMenuItem
         '
         Me.PreferencesToolStripMenuItem.Name = "PreferencesToolStripMenuItem"
-        Me.PreferencesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PreferencesToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.PreferencesToolStripMenuItem.Text = "Preferences"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(132, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'ViewToolStripMenuItem
@@ -687,8 +687,8 @@ Partial Class ApplicationForm
         Me.SplitLeftMiddle_Right.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
         Me.SplitLeftMiddle_Right.Panel2.Controls.Add(Me.SplitRight)
         Me.SplitLeftMiddle_Right.Panel2.Padding = New System.Windows.Forms.Padding(0, 2, 2, 2)
-        Me.SplitLeftMiddle_Right.Size = New System.Drawing.Size(892, 472)
-        Me.SplitLeftMiddle_Right.SplitterDistance = 664
+        Me.SplitLeftMiddle_Right.Size = New System.Drawing.Size(1114, 472)
+        Me.SplitLeftMiddle_Right.SplitterDistance = 826
         Me.SplitLeftMiddle_Right.TabIndex = 8
         '
         'SplitRight
@@ -701,6 +701,8 @@ Partial Class ApplicationForm
         'SplitRight.Panel1
         '
         Me.SplitRight.Panel1.BackColor = System.Drawing.Color.Silver
+        Me.SplitRight.Panel1.Controls.Add(Me.AncestorAttributes)
+        Me.SplitRight.Panel1.Controls.Add(Me.Panel1)
         Me.SplitRight.Panel1.Controls.Add(Me.JDockPanelHeader3)
         Me.SplitRight.Panel1.Padding = New System.Windows.Forms.Padding(1)
         '
@@ -709,47 +711,37 @@ Partial Class ApplicationForm
         Me.SplitRight.Panel2.BackColor = System.Drawing.Color.Silver
         Me.SplitRight.Panel2.Controls.Add(Me.JDockPanelHeader4)
         Me.SplitRight.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.SplitRight.Size = New System.Drawing.Size(222, 468)
+        Me.SplitRight.Size = New System.Drawing.Size(282, 468)
         Me.SplitRight.SplitterDistance = 229
         Me.SplitRight.TabIndex = 9
         '
-        'JDockPanelHeader3
+        'AncestorAttributes
         '
-        Me.JDockPanelHeader3.BackColor = System.Drawing.Color.DarkGray
-        Me.JDockPanelHeader3.BackColorDisabled = System.Drawing.Color.LightGray
-        Me.JDockPanelHeader3.BackColorEnabled = System.Drawing.Color.DarkGray
-        Me.JDockPanelHeader3.Caption = "jDockPanelHeader"
-        Me.JDockPanelHeader3.ContextMenuStrip = Me.mnuPanelDock
-        Me.JDockPanelHeader3.Dock = System.Windows.Forms.DockStyle.Top
-        Me.JDockPanelHeader3.ForeColor = System.Drawing.Color.Black
-        Me.JDockPanelHeader3.ForeColorDisabled = System.Drawing.Color.Black
-        Me.JDockPanelHeader3.ForeColorEnabled = System.Drawing.Color.Black
-        Me.JDockPanelHeader3.Location = New System.Drawing.Point(1, 1)
-        Me.JDockPanelHeader3.MaximumSize = New System.Drawing.Size(0, 24)
-        Me.JDockPanelHeader3.MinimumSize = New System.Drawing.Size(0, 24)
-        Me.JDockPanelHeader3.Name = "JDockPanelHeader3"
-        Me.JDockPanelHeader3.Size = New System.Drawing.Size(220, 24)
-        Me.JDockPanelHeader3.TabIndex = 0
-        Me.JDockPanelHeader3.Tag = "TOP_RIGHT"
+        Me.AncestorAttributes.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.AncestorAttributes.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.AncestorAttributes.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText
+        Me.AncestorAttributes.FullRowSelect = True
+        Me.AncestorAttributes.HotTracking = True
+        Me.AncestorAttributes.Location = New System.Drawing.Point(1, 43)
+        Me.AncestorAttributes.Margin = New System.Windows.Forms.Padding(0)
+        Me.AncestorAttributes.Name = "AncestorAttributes"
+        Me.AncestorAttributes.ShowLines = False
+        Me.AncestorAttributes.Size = New System.Drawing.Size(280, 185)
+        Me.AncestorAttributes.TabIndex = 1
         '
-        'JDockPanelHeader4
+        'Panel1
         '
-        Me.JDockPanelHeader4.BackColor = System.Drawing.Color.DarkGray
-        Me.JDockPanelHeader4.BackColorDisabled = System.Drawing.Color.LightGray
-        Me.JDockPanelHeader4.BackColorEnabled = System.Drawing.Color.DarkGray
-        Me.JDockPanelHeader4.Caption = "jDockPanelHeader"
-        Me.JDockPanelHeader4.ContextMenuStrip = Me.mnuPanelDock
-        Me.JDockPanelHeader4.Dock = System.Windows.Forms.DockStyle.Top
-        Me.JDockPanelHeader4.ForeColor = System.Drawing.Color.Black
-        Me.JDockPanelHeader4.ForeColorDisabled = System.Drawing.Color.Black
-        Me.JDockPanelHeader4.ForeColorEnabled = System.Drawing.Color.Black
-        Me.JDockPanelHeader4.Location = New System.Drawing.Point(1, 1)
-        Me.JDockPanelHeader4.MaximumSize = New System.Drawing.Size(0, 24)
-        Me.JDockPanelHeader4.MinimumSize = New System.Drawing.Size(0, 24)
-        Me.JDockPanelHeader4.Name = "JDockPanelHeader4"
-        Me.JDockPanelHeader4.Size = New System.Drawing.Size(220, 24)
-        Me.JDockPanelHeader4.TabIndex = 0
-        Me.JDockPanelHeader4.Tag = "BOTTOM_RIGHT"
+        Me.Panel1.Controls.Add(Me.JPanel2)
+        Me.Panel1.Controls.Add(Me.JPanel1)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Panel1.Location = New System.Drawing.Point(1, 25)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
+        Me.Panel1.MaximumSize = New System.Drawing.Size(0, 18)
+        Me.Panel1.MinimumSize = New System.Drawing.Size(0, 18)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(280, 18)
+        Me.Panel1.TabIndex = 2
         '
         'StatusStrip1
         '
@@ -757,7 +749,7 @@ Partial Class ApplicationForm
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus, Me.lblBirthYear, Me.lblPersonName, Me.lblID})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 521)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(892, 25)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1114, 25)
         Me.StatusStrip1.TabIndex = 9
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -766,7 +758,7 @@ Partial Class ApplicationForm
         Me.lblStatus.BackColor = System.Drawing.SystemColors.MenuBar
         Me.lblStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(689, 20)
+        Me.lblStatus.Size = New System.Drawing.Size(911, 20)
         Me.lblStatus.Spring = True
         Me.lblStatus.Text = "Status"
         Me.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -806,6 +798,352 @@ Partial Class ApplicationForm
         Me.AncestryDirectorWatcher.EnableRaisingEvents = True
         Me.AncestryDirectorWatcher.Path = Global.AncestryAssistant.My.MySettings.Default.AncestorsPath
         Me.AncestryDirectorWatcher.SynchronizingObject = Me
+        '
+        'JDockPanelHeader1
+        '
+        Me.JDockPanelHeader1.BackColor = System.Drawing.Color.DarkGray
+        Me.JDockPanelHeader1.BackColorDisabled = System.Drawing.Color.LightGray
+        Me.JDockPanelHeader1.BackColorEnabled = System.Drawing.Color.DarkGray
+        Me.JDockPanelHeader1.Caption = "Ancestor"
+        Me.JDockPanelHeader1.ContextMenuStrip = Me.mnuPanelDock
+        Me.JDockPanelHeader1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.JDockPanelHeader1.ForeColor = System.Drawing.Color.Black
+        Me.JDockPanelHeader1.ForeColorDisabled = System.Drawing.Color.Black
+        Me.JDockPanelHeader1.ForeColorEnabled = System.Drawing.Color.Black
+        Me.JDockPanelHeader1.Location = New System.Drawing.Point(1, 1)
+        Me.JDockPanelHeader1.MaximumSize = New System.Drawing.Size(0, 24)
+        Me.JDockPanelHeader1.MinimumSize = New System.Drawing.Size(0, 24)
+        Me.JDockPanelHeader1.Name = "JDockPanelHeader1"
+        Me.JDockPanelHeader1.Size = New System.Drawing.Size(295, 24)
+        Me.JDockPanelHeader1.TabIndex = 1
+        Me.JDockPanelHeader1.Tag = "TOP_LEFT"
+        '
+        'JDockPanelHeader2
+        '
+        Me.JDockPanelHeader2.BackColor = System.Drawing.Color.DarkGray
+        Me.JDockPanelHeader2.BackColorDisabled = System.Drawing.Color.LightGray
+        Me.JDockPanelHeader2.BackColorEnabled = System.Drawing.Color.DarkGray
+        Me.JDockPanelHeader2.Caption = "Ancestors Research List"
+        Me.JDockPanelHeader2.ContextMenuStrip = Me.mnuPanelDock
+        Me.JDockPanelHeader2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.JDockPanelHeader2.ForeColor = System.Drawing.Color.Black
+        Me.JDockPanelHeader2.ForeColorDisabled = System.Drawing.Color.Black
+        Me.JDockPanelHeader2.ForeColorEnabled = System.Drawing.Color.Black
+        Me.JDockPanelHeader2.Location = New System.Drawing.Point(1, 1)
+        Me.JDockPanelHeader2.MaximumSize = New System.Drawing.Size(0, 24)
+        Me.JDockPanelHeader2.MinimumSize = New System.Drawing.Size(0, 24)
+        Me.JDockPanelHeader2.Name = "JDockPanelHeader2"
+        Me.JDockPanelHeader2.Size = New System.Drawing.Size(295, 24)
+        Me.JDockPanelHeader2.TabIndex = 2
+        Me.JDockPanelHeader2.Tag = "BOTTOM_LEFT"
+        '
+        'JDockPanelHeader3
+        '
+        Me.JDockPanelHeader3.BackColor = System.Drawing.Color.DarkGray
+        Me.JDockPanelHeader3.BackColorDisabled = System.Drawing.Color.LightGray
+        Me.JDockPanelHeader3.BackColorEnabled = System.Drawing.Color.DarkGray
+        Me.JDockPanelHeader3.Caption = "jDockPanelHeader"
+        Me.JDockPanelHeader3.ContextMenuStrip = Me.mnuPanelDock
+        Me.JDockPanelHeader3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.JDockPanelHeader3.ForeColor = System.Drawing.Color.Black
+        Me.JDockPanelHeader3.ForeColorDisabled = System.Drawing.Color.Black
+        Me.JDockPanelHeader3.ForeColorEnabled = System.Drawing.Color.Black
+        Me.JDockPanelHeader3.Location = New System.Drawing.Point(1, 1)
+        Me.JDockPanelHeader3.MaximumSize = New System.Drawing.Size(0, 24)
+        Me.JDockPanelHeader3.MinimumSize = New System.Drawing.Size(0, 24)
+        Me.JDockPanelHeader3.Name = "JDockPanelHeader3"
+        Me.JDockPanelHeader3.Size = New System.Drawing.Size(280, 24)
+        Me.JDockPanelHeader3.TabIndex = 0
+        Me.JDockPanelHeader3.Tag = "TOP_RIGHT"
+        '
+        'JDockPanelHeader4
+        '
+        Me.JDockPanelHeader4.BackColor = System.Drawing.Color.DarkGray
+        Me.JDockPanelHeader4.BackColorDisabled = System.Drawing.Color.LightGray
+        Me.JDockPanelHeader4.BackColorEnabled = System.Drawing.Color.DarkGray
+        Me.JDockPanelHeader4.Caption = "jDockPanelHeader"
+        Me.JDockPanelHeader4.ContextMenuStrip = Me.mnuPanelDock
+        Me.JDockPanelHeader4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.JDockPanelHeader4.ForeColor = System.Drawing.Color.Black
+        Me.JDockPanelHeader4.ForeColorDisabled = System.Drawing.Color.Black
+        Me.JDockPanelHeader4.ForeColorEnabled = System.Drawing.Color.Black
+        Me.JDockPanelHeader4.Location = New System.Drawing.Point(1, 1)
+        Me.JDockPanelHeader4.MaximumSize = New System.Drawing.Size(0, 24)
+        Me.JDockPanelHeader4.MinimumSize = New System.Drawing.Size(0, 24)
+        Me.JDockPanelHeader4.Name = "JDockPanelHeader4"
+        Me.JDockPanelHeader4.Size = New System.Drawing.Size(280, 24)
+        Me.JDockPanelHeader4.TabIndex = 0
+        Me.JDockPanelHeader4.Tag = "BOTTOM_RIGHT"
+        '
+        'JPanel1
+        '
+        Me.JPanel1.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.JPanel1.BorderColor = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel1.BorderColorBottom = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel1.BorderColorLeft = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel1.BorderColorRight = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel1.BorderColorTop = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel1.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
+        Me.JPanel1.Controls.Add(Me.Label2)
+        Me.JPanel1.CornerRadius = New System.Windows.Forms.Padding(0)
+        Me.JPanel1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.JPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.JPanel1.MaximumSize = New System.Drawing.Size(150, 0)
+        Me.JPanel1.MinimumSize = New System.Drawing.Size(150, 0)
+        Me.JPanel1.Name = "JPanel1"
+        Me.JPanel1.Padding = New System.Windows.Forms.Padding(1)
+        Me.JPanel1.Size = New System.Drawing.Size(150, 18)
+        Me.JPanel1.TabIndex = 3
+        '
+        'JPanel2
+        '
+        Me.JPanel2.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.JPanel2.BorderColor = System.Drawing.Color.Transparent
+        Me.JPanel2.BorderColorBottom = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel2.BorderColorLeft = System.Drawing.SystemColors.ButtonHighlight
+        Me.JPanel2.BorderColorRight = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel2.BorderColorTop = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel2.BorderWidth = New System.Windows.Forms.Padding(1, 0, 1, 1)
+        Me.JPanel2.Controls.Add(Me.Label1)
+        Me.JPanel2.CornerRadius = New System.Windows.Forms.Padding(0)
+        Me.JPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.JPanel2.Location = New System.Drawing.Point(150, 0)
+        Me.JPanel2.Name = "JPanel2"
+        Me.JPanel2.Padding = New System.Windows.Forms.Padding(1)
+        Me.JPanel2.Size = New System.Drawing.Size(130, 18)
+        Me.JPanel2.TabIndex = 4
+        '
+        'Label1
+        '
+        Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label1.Location = New System.Drawing.Point(1, 1)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
+        Me.Label1.Size = New System.Drawing.Size(128, 16)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Value"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label2
+        '
+        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label2.Location = New System.Drawing.Point(1, 1)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
+        Me.Label2.Size = New System.Drawing.Size(148, 16)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "Attribute"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'tabCensus
+        '
+        Me.tabCensus.Location = New System.Drawing.Point(4, 24)
+        Me.tabCensus.Margin = New System.Windows.Forms.Padding(0)
+        Me.tabCensus.Name = "tabCensus"
+        Me.tabCensus.Size = New System.Drawing.Size(513, 313)
+        Me.tabCensus.TabIndex = 1
+        Me.tabCensus.Text = "Census"
+        '
+        'tabNotebooks
+        '
+        Me.tabNotebooks.Controls.Add(Me.SplitContainer1)
+        Me.tabNotebooks.Location = New System.Drawing.Point(4, 24)
+        Me.tabNotebooks.Margin = New System.Windows.Forms.Padding(0)
+        Me.tabNotebooks.Name = "tabNotebooks"
+        Me.tabNotebooks.Size = New System.Drawing.Size(513, 313)
+        Me.tabNotebooks.TabIndex = 2
+        Me.tabNotebooks.Text = "Notebooks"
+        '
+        'tabGallery
+        '
+        Me.tabGallery.Controls.Add(Me.ToolStrip1)
+        Me.tabGallery.Location = New System.Drawing.Point(4, 24)
+        Me.tabGallery.Margin = New System.Windows.Forms.Padding(0)
+        Me.tabGallery.Name = "tabGallery"
+        Me.tabGallery.Size = New System.Drawing.Size(513, 313)
+        Me.tabGallery.TabIndex = 3
+        Me.tabGallery.Text = "Gallery"
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.CanOverflow = False
+        Me.ToolStrip1.DataBindings.Add(New System.Windows.Forms.Binding("Location", Global.AncestryAssistant.My.MySettings.Default, "TB_WEB_LOC", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton5, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripTextBox1, Me.ToolStripButton8})
+        Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
+        Me.ToolStrip1.Location = Global.AncestryAssistant.My.MySettings.Default.TB_WEB_LOC
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Padding = New System.Windows.Forms.Padding(4, 0, 16, 0)
+        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.ToolStrip1.Size = New System.Drawing.Size(513, 25)
+        Me.ToolStrip1.Stretch = True
+        Me.ToolStrip1.TabIndex = 3
+        '
+        'ToolStripButton5
+        '
+        Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton5.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_black__36
+        Me.ToolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton5.Name = "ToolStripButton5"
+        Me.ToolStripButton5.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton5.Text = "ToolStripButton2"
+        Me.ToolStripButton5.ToolTipText = "Previous Page"
+        '
+        'ToolStripButton6
+        '
+        Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton6.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_black__191
+        Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton6.Name = "ToolStripButton6"
+        Me.ToolStripButton6.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton6.Text = "ToolStripButton1"
+        Me.ToolStripButton6.ToolTipText = "Refresh"
+        '
+        'ToolStripButton7
+        '
+        Me.ToolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton7.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_home
+        Me.ToolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton7.Name = "ToolStripButton7"
+        Me.ToolStripButton7.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton7.Text = "ToolStripButton1"
+        Me.ToolStripButton7.ToolTipText = "Ancestry Home Page"
+        '
+        'ToolStripTextBox1
+        '
+        Me.ToolStripTextBox1.AutoSize = False
+        Me.ToolStripTextBox1.BackColor = System.Drawing.SystemColors.Window
+        Me.ToolStripTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ToolStripTextBox1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
+        Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 23)
+        Me.ToolStripTextBox1.ToolTipText = "Website URL"
+        '
+        'ToolStripButton8
+        '
+        Me.ToolStripButton8.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton8.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_black__50
+        Me.ToolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton8.Name = "ToolStripButton8"
+        Me.ToolStripButton8.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton8.Text = "Download"
+        Me.ToolStripButton8.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
+        Me.ToolStripButton8.ToolTipText = "Download Available Information"
+        '
+        'SplitContainer1
+        '
+        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer1.Name = "SplitContainer1"
+        '
+        'SplitContainer1.Panel1
+        '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.TreeView1)
+        '
+        'SplitContainer1.Panel2
+        '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.StatusStrip2)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.RichTextBox1)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.ToolStrip2)
+        Me.SplitContainer1.Size = New System.Drawing.Size(513, 313)
+        Me.SplitContainer1.SplitterDistance = 171
+        Me.SplitContainer1.TabIndex = 4
+        '
+        'TreeView1
+        '
+        Me.TreeView1.BackColor = System.Drawing.SystemColors.Control
+        Me.TreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TreeView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TreeView1.Location = New System.Drawing.Point(0, 0)
+        Me.TreeView1.Name = "TreeView1"
+        Me.TreeView1.Size = New System.Drawing.Size(171, 313)
+        Me.TreeView1.TabIndex = 0
+        '
+        'ToolStrip2
+        '
+        Me.ToolStrip2.CanOverflow = False
+        Me.ToolStrip2.DataBindings.Add(New System.Windows.Forms.Binding("Location", Global.AncestryAssistant.My.MySettings.Default, "TB_WEB_LOC", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton9, Me.ToolStripButton10, Me.ToolStripButton11, Me.ToolStripTextBox2, Me.ToolStripButton12})
+        Me.ToolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
+        Me.ToolStrip2.Location = Global.AncestryAssistant.My.MySettings.Default.TB_WEB_LOC
+        Me.ToolStrip2.Name = "ToolStrip2"
+        Me.ToolStrip2.Padding = New System.Windows.Forms.Padding(4, 0, 16, 0)
+        Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.ToolStrip2.Size = New System.Drawing.Size(338, 25)
+        Me.ToolStrip2.Stretch = True
+        Me.ToolStrip2.TabIndex = 4
+        '
+        'ToolStripButton9
+        '
+        Me.ToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton9.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_black__36
+        Me.ToolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton9.Name = "ToolStripButton9"
+        Me.ToolStripButton9.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton9.Text = "ToolStripButton2"
+        Me.ToolStripButton9.ToolTipText = "Previous Page"
+        '
+        'ToolStripButton10
+        '
+        Me.ToolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton10.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_black__191
+        Me.ToolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton10.Name = "ToolStripButton10"
+        Me.ToolStripButton10.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton10.Text = "ToolStripButton1"
+        Me.ToolStripButton10.ToolTipText = "Refresh"
+        '
+        'ToolStripButton11
+        '
+        Me.ToolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton11.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_home
+        Me.ToolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton11.Name = "ToolStripButton11"
+        Me.ToolStripButton11.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton11.Text = "ToolStripButton1"
+        Me.ToolStripButton11.ToolTipText = "Ancestry Home Page"
+        '
+        'ToolStripTextBox2
+        '
+        Me.ToolStripTextBox2.AutoSize = False
+        Me.ToolStripTextBox2.BackColor = System.Drawing.SystemColors.Window
+        Me.ToolStripTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ToolStripTextBox2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.ToolStripTextBox2.Name = "ToolStripTextBox2"
+        Me.ToolStripTextBox2.Size = New System.Drawing.Size(100, 23)
+        Me.ToolStripTextBox2.ToolTipText = "Website URL"
+        '
+        'ToolStripButton12
+        '
+        Me.ToolStripButton12.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton12.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_black__50
+        Me.ToolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton12.Name = "ToolStripButton12"
+        Me.ToolStripButton12.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton12.Text = "Download"
+        Me.ToolStripButton12.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
+        Me.ToolStripButton12.ToolTipText = "Download Available Information"
+        '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RichTextBox1.Location = New System.Drawing.Point(0, 25)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(338, 288)
+        Me.RichTextBox1.TabIndex = 5
+        Me.RichTextBox1.Text = ""
+        '
+        'StatusStrip2
+        '
+        Me.StatusStrip2.Location = New System.Drawing.Point(0, 291)
+        Me.StatusStrip2.Name = "StatusStrip2"
+        Me.StatusStrip2.Size = New System.Drawing.Size(338, 22)
+        Me.StatusStrip2.SizingGrip = False
+        Me.StatusStrip2.TabIndex = 6
+        Me.StatusStrip2.Text = "StatusStrip2"
         '
         'ApplicationForm
         '
@@ -856,9 +1194,24 @@ Partial Class ApplicationForm
         Me.SplitRight.Panel2.ResumeLayout(False)
         CType(Me.SplitRight, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitRight.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         CType(Me.AncestryDirectorWatcher, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.JPanel1.ResumeLayout(False)
+        Me.JPanel2.ResumeLayout(False)
+        Me.tabNotebooks.ResumeLayout(False)
+        Me.tabGallery.ResumeLayout(False)
+        Me.tabGallery.PerformLayout()
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
+        Me.SplitContainer1.Panel1.ResumeLayout(False)
+        Me.SplitContainer1.Panel2.ResumeLayout(False)
+        Me.SplitContainer1.Panel2.PerformLayout()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer1.ResumeLayout(False)
+        Me.ToolStrip2.ResumeLayout(False)
+        Me.ToolStrip2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -926,4 +1279,29 @@ Partial Class ApplicationForm
     Friend WithEvents tabs As TabControl
     Friend WithEvents tabAncestry As TabPage
     Friend WithEvents ToolStripButton4 As ToolStripButton
+    Friend WithEvents AncestorAttributes As TreeView
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents JPanel2 As JPanel
+    Friend WithEvents JPanel1 As JPanel
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents tabCensus As TabPage
+    Friend WithEvents tabNotebooks As TabPage
+    Friend WithEvents tabGallery As TabPage
+    Friend WithEvents SplitContainer1 As SplitContainer
+    Friend WithEvents TreeView1 As TreeView
+    Friend WithEvents ToolStrip2 As ToolStrip
+    Friend WithEvents ToolStripButton9 As ToolStripButton
+    Friend WithEvents ToolStripButton10 As ToolStripButton
+    Friend WithEvents ToolStripButton11 As ToolStripButton
+    Friend WithEvents ToolStripTextBox2 As ToolStripTextBox
+    Friend WithEvents ToolStripButton12 As ToolStripButton
+    Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents ToolStripButton5 As ToolStripButton
+    Friend WithEvents ToolStripButton6 As ToolStripButton
+    Friend WithEvents ToolStripButton7 As ToolStripButton
+    Friend WithEvents ToolStripTextBox1 As ToolStripTextBox
+    Friend WithEvents ToolStripButton8 As ToolStripButton
+    Friend WithEvents StatusStrip2 As StatusStrip
+    Friend WithEvents RichTextBox1 As RichTextBox
 End Class

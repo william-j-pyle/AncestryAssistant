@@ -3,311 +3,184 @@
 Public Class JPanel
   Inherits Panel
 
-  Private _BorderRadius As Integer = 0
-  Dim _BorderWidth As Integer = 0
-  Dim _BorderColor As Color = Color.DimGray
-
   Public Sub New()
     SetStyle(ControlStyles.UserPaint Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
   End Sub
 
-
-  <Category("Apperance"), Description("Sets the pixel width of the border")>
-  Public Property BorderWidth As Integer
+  <Browsable(True), Category("JControl"), Description("Width in pixels of the border around the control")>
+  Dim _BorderWidth As Padding = New Padding(0)
+  Public Property BorderWidth As Padding
     Get
       Return _BorderWidth
     End Get
-    Set(value As Integer)
-      If value < 0 Then value = 0
+    Set(value As Padding)
+      If value.All = -1 Then
+        value.Left = Math.Max(value.Left, 0)
+        value.Top = Math.Max(value.Top, 0)
+        value.Right = Math.Max(value.Right, 0)
+        value.Bottom = Math.Max(value.Bottom, 0)
+      Else
+        value.All = Math.Max(value.All, 0)
+      End If
       _BorderWidth = value
-      Padding = New Padding(value)
-      Refresh()
+      Invalidate()
     End Set
   End Property
 
-  <Category("Apperance"), Description("Sets the border color")>
+  <Browsable(True), Category("JControl"), Description("Color of the border around the control")>
+  Dim _BorderColor As Color = Color.Transparent
   Public Property BorderColor As Color
     Get
       Return _BorderColor
     End Get
     Set(value As Color)
       _BorderColor = value
-      Refresh()
+      _BorderColorTop = value
+      _BorderColorLeft = value
+      _BorderColorRight = value
+      _BorderColorBottom = value
+      Invalidate()
+    End Set
+  End Property
+  Dim _BorderColorTop As Color = Color.Transparent
+  Public Property BorderColorTop As Color
+    Get
+      Return _BorderColorTop
+    End Get
+    Set(value As Color)
+      _BorderColorTop = value
+      _BorderColor = Color.Transparent
+      Invalidate()
+    End Set
+  End Property
+  Dim _BorderColorLeft As Color = Color.Transparent
+  Public Property BorderColorLeft As Color
+    Get
+      Return _BorderColorLeft
+    End Get
+    Set(value As Color)
+      _BorderColorLeft = value
+      _BorderColor = Color.Transparent
+      Invalidate()
+    End Set
+  End Property
+  Dim _BorderColorRight As Color = Color.Transparent
+  Public Property BorderColorRight As Color
+    Get
+      Return _BorderColorRight
+    End Get
+    Set(value As Color)
+      _BorderColorRight = value
+      _BorderColor = Color.Transparent
+      Invalidate()
+    End Set
+  End Property
+  Dim _BorderColorBottom As Color = Color.Transparent
+  Public Property BorderColorBottom As Color
+    Get
+      Return _BorderColorBottom
+    End Get
+    Set(value As Color)
+      _BorderColorBottom = value
+      _BorderColor = Color.Transparent
+      Invalidate()
     End Set
   End Property
 
-
-  Public Shadows Property Margin As Padding
+  <Browsable(True), Category("JControl"), Description("Sets the number of pixels for the Corner radius. Valid 0 to Min(Height,Width)/2")>
+  Private _CornerRadius As Padding = New Padding(0)
+  Public Property CornerRadius As Padding
     Get
-      Return MyBase.Margin
+      Return _CornerRadius
     End Get
     Set(value As Padding)
-      MyBase.Margin = value
-      Refresh()
+      Dim mxVal As Integer = CInt(Math.Min(Width, Height) / 2)
+      If value.All = -1 Then
+        value.Left = Math.Min(Math.Max(value.Left, 0), mxVal)
+        value.Top = Math.Min(Math.Max(value.Top, 0), mxVal)
+        value.Right = Math.Min(Math.Max(value.Right, 0), mxVal)
+        value.Bottom = Math.Min(Math.Max(value.Bottom, 0), mxVal)
+      Else
+        value.All = Math.Min(Math.Max(value.All, 0), mxVal)
+      End If
+      _CornerRadius = value
+      Invalidate()
     End Set
   End Property
-
-  <Category("Apperance"), Description("Sets the number of pixels for the corner radius")>
-  Public Property BorderRadius As Integer
-    Get
-      Return _BorderRadius
-    End Get
-    Set(value As Integer)
-      If value < 0 Then value = 0
-      _BorderRadius = value
-      Refresh()
-    End Set
-  End Property
-
-  Protected Overrides Sub OnResize(eventargs As EventArgs)
-    Refresh()
-    MyBase.OnResize(eventargs)
-  End Sub
-
-  Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
-    'Dim gfx As Graphics = e.Graphics
-    'Dim rect As New Rectangle(0, 0, Me.Width - 1, Me.Height - 9)
-    Dim radius As Integer = _BorderRadius + 1
-    Dim bgWidth As Integer = Width - Margin.Left - Margin.Right
-    Dim bgHeight As Integer = Height - Margin.Top - Margin.Bottom
-
-
-    Dim path As New Drawing2D.GraphicsPath()
-    path.StartFigure()
-    path.AddArc(New Rectangle(Margin.Left, 0, radius * 2, radius * 2), 180, 90)
-    path.AddLine(Margin.Left + radius, 0, bgWidth - radius, 0)
-    path.AddArc(New Rectangle(Margin.Left + bgWidth - (radius * 2), 0, radius * 2, radius * 2), -90, 90)
-    path.AddLine(Margin.Left + bgWidth, radius, Margin.Left + bgWidth, bgHeight - radius)
-    path.AddArc(New Rectangle(Margin.Left + bgWidth - (radius * 2), bgHeight - (radius * 2), radius * 2, radius * 2), 0, 90)
-    path.AddLine(Margin.Left + bgWidth - radius, bgHeight, radius, bgHeight)
-    path.AddArc(New Rectangle(Margin.Left, bgHeight - (radius * 2), radius * 2, radius * 2), 90, 90)
-    path.AddLine(Margin.Left, bgHeight - radius, Margin.Left, radius)
-    path.CloseFigure()
-    Region = New Region(path)
-    Using brush As SolidBrush = New SolidBrush(BackColor)
-      e.Graphics.FillRectangle(brush, ClientRectangle)
-    End Using
-    Dim jPen As Pen
-
-    'LEFT
-    If _BorderWidth > 0 Then
-      jPen = New Pen(_BorderColor, _BorderWidth * 2)
-      e.Graphics.DrawArc(jPen, New Rectangle(Margin.Left, 0, radius * 2, radius * 2), 180, 90)
-      e.Graphics.DrawLine(jPen, Margin.Left + radius, 0, bgWidth, 0) ' - radius
-      e.Graphics.DrawArc(jPen, New Rectangle(Margin.Left + bgWidth - (radius * 2), 0, radius * 2, radius * 2), -90, 90)
-      e.Graphics.DrawLine(jPen, Margin.Left + bgWidth, radius, Margin.Left + bgWidth, bgHeight - radius)
-      e.Graphics.DrawArc(jPen, New Rectangle(Margin.Left + bgWidth - (radius * 2), bgHeight - (radius * 2), radius * 2, radius * 2), 0, 90)
-      e.Graphics.DrawLine(jPen, Margin.Left + bgWidth - radius, bgHeight, radius, bgHeight)
-      e.Graphics.DrawArc(jPen, New Rectangle(Margin.Left, bgHeight - (radius * 2), radius * 2, radius * 2), 90, 90)
-      e.Graphics.DrawLine(jPen, Margin.Left, bgHeight - radius, Margin.Left, radius)
-    End If
-
-    MyBase.OnPaint(e)
-  End Sub
-#Const SHOW_PROPERTIES = False
-#If SHOW_PROPERTIES Then
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
   Public Shadows Property BorderStyle As BorderStyle
-    Get
-      Return MyBase.BorderStyle
-    End Get
-    Set(value As BorderStyle)
-      MyBase.BorderStyle = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property AllowDrop As Boolean
-    Get
-      Return MyBase.AllowDrop
-    End Get
-    Set(value As Boolean)
-      MyBase.AllowDrop = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property Anchor As AnchorStyles
-    Get
-      Return MyBase.Anchor
-    End Get
-    Set(value As AnchorStyles)
-      MyBase.Anchor = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property AutoSize As Boolean
-    Get
-      Return MyBase.AutoSize
-    End Get
-    Set(value As Boolean)
-      MyBase.AutoSize = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property BackgroundImage As Image
-    Get
-      Return MyBase.BackgroundImage
-    End Get
-    Set(value As Image)
-      MyBase.BackgroundImage = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property BackgroundImageLayout As ImageLayout
-    Get
-      Return MyBase.BackgroundImageLayout
-    End Get
-    Set(value As ImageLayout)
-      MyBase.BackgroundImageLayout = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property CausesValidation As Boolean
-    Get
-      Return MyBase.CausesValidation
-    End Get
-    Set(value As Boolean)
-      MyBase.CausesValidation = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property Cursor As Cursor
-    Get
-      Return MyBase.Cursor
-    End Get
-    Set(value As Cursor)
-      MyBase.Cursor = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows ReadOnly Property DataBindings As ControlBindingsCollection
-    Get
-      Return MyBase.DataBindings
-    End Get
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property DataContext As Object
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property ImeMode As ImeMode
-    Get
-      Return MyBase.ImeMode
-    End Get
-    Set(value As ImeMode)
-      MyBase.ImeMode = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property Location As Point
-    Get
-      Return MyBase.Location
-    End Get
-    Set(value As Point)
-      MyBase.Location = value
-    End Set
-  End Property
 
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property MinimumSize As Size
-    Get
-      Return MyBase.MinimumSize
-    End Get
-    Set(value As Size)
-      MyBase.MinimumSize = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property MaximumSize As Size
-    Get
-      Return MyBase.MaximumSize
-    End Get
-    Set(value As Size)
-      MyBase.MaximumSize = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property Padding As Padding
-    Get
-      Return MyBase.Padding
-    End Get
-    Set(value As Padding)
-      MyBase.Padding = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property RightToLeft As RightToLeft
-    Get
-      Return MyBase.RightToLeft
-    End Get
-    Set(value As RightToLeft)
-      MyBase.RightToLeft = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property Size As Size
-    Get
-      Return MyBase.Size
-    End Get
-    Set(value As Size)
-      MyBase.Size = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property UseWaitCursor As Boolean
-    Get
-      Return MyBase.UseWaitCursor
-    End Get
-    Set(value As Boolean)
-      MyBase.UseWaitCursor = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property AutoScrollMargin As Size
-    Get
-      Return MyBase.AutoScrollMargin
-    End Get
-    Set(value As Size)
-      MyBase.AutoScrollMargin = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property AutoScrollMinSize As Size
-    Get
-      Return MyBase.AutoScrollMinSize
-    End Get
-    Set(value As Size)
-      MyBase.AutoScrollMinSize = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property AutoScrollPosition As Point
-    Get
-      Return MyBase.AutoScrollPosition
-    End Get
-    Set(value As Point)
-      MyBase.AutoScrollPosition = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property AutoScroll As Boolean
-    Get
-      Return MyBase.AutoScroll
-    End Get
-    Set(value As Boolean)
-      MyBase.AutoScroll = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property AutoSizeMode As AutoSizeMode
-    Get
-      Return MyBase.AutoSizeMode
-    End Get
-    Set(value As AutoSizeMode)
-      MyBase.AutoSizeMode = value
-    End Set
-  End Property
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property GenerateMember As Boolean
+  Private Sub JPanel_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
+    'MyBase.OnPaint(e)
+    'Until I learn to do a custom param property guy, using Padding
+    'So   Padding.Top   =   Top-Left
+    '     Padding.Left  =   Bottom-Left
+    '     Padding.Right =   Top-Right
+    '     Padding.Bottom=   Bottom-Right
+    Dim CornerRadiusTopLeft As Integer = CornerRadius.Top
+    Dim CornerRadiusBottomLeft As Integer = CornerRadius.Left
+    Dim CornerRadiusTopRight As Integer = CornerRadius.Right
+    Dim CornerRadiusBottomRight As Integer = CornerRadius.Bottom
 
-#End If
+    If CornerRadius.All <> 0 Then
+      Dim path As New Drawing2D.GraphicsPath()
+      path.StartFigure()
+      If CornerRadiusTopLeft > 0 Then
+        path.AddArc(New Rectangle(0, 0, CornerRadiusTopLeft * 2, CornerRadiusTopLeft * 2), 180, 90)
+      End If
+      path.AddLine(CornerRadiusTopLeft, 0, Width - CornerRadiusTopRight, 0)
+      If CornerRadiusTopRight > 0 Then
+        path.AddArc(New Rectangle(Width - (CornerRadiusTopRight * 2), 0, CornerRadiusTopRight * 2, CornerRadiusTopRight * 2), -90, 90)
+      End If
+      path.AddLine(Width, CornerRadiusTopRight, Width, Height - CornerRadiusBottomRight)
+      If CornerRadiusBottomRight > 0 Then
+        path.AddArc(New Rectangle(Width - (CornerRadiusBottomRight * 2), Height - (CornerRadiusBottomRight * 2), CornerRadiusBottomRight * 2, CornerRadiusBottomRight * 2), 0, 90)
+      End If
+      path.AddLine(Width - CornerRadiusBottomRight, Height, CornerRadiusBottomLeft, Height)
+      If CornerRadiusBottomLeft > 0 Then
+        path.AddArc(New Rectangle(0, Height - (CornerRadiusBottomLeft * 2), CornerRadiusBottomLeft * 2, CornerRadiusBottomLeft * 2), 90, 90)
+      End If
+      path.AddLine(0, Height - CornerRadiusBottomLeft, 0, CornerRadiusTopLeft)
+      path.CloseFigure()
+      Region = New Region(path)
+      Using brush As SolidBrush = New SolidBrush(BackColor)
+        e.Graphics.FillRectangle(brush, ClientRectangle)
+      End Using
+    End If
 
+    If BorderWidth.All <> 0 Then
+      Dim jPenLeft As Pen = New Pen(BorderColorLeft, BorderWidth.Left * 2)
+      Dim jPenTop As Pen = New Pen(BorderColorTop, BorderWidth.Top * 2)
+      Dim jPenRight As Pen = New Pen(BorderColorRight, BorderWidth.Right * 2)
+      Dim jPenBottom As Pen = New Pen(BorderColorBottom, BorderWidth.Bottom * 2)
+      If CornerRadius.All <> 0 Then
+        If BorderWidth.Top > 0 And CornerRadiusTopLeft > 0 Then
+          e.Graphics.DrawArc(jPenTop, New Rectangle(0, 0, CornerRadiusTopLeft * 2, CornerRadiusTopLeft * 2), 180, 90)
+        End If
+        If BorderWidth.Top > 0 And CornerRadiusTopRight > 0 Then
+          e.Graphics.DrawArc(jPenTop, New Rectangle(Width - (CornerRadiusTopRight * 2), 0, CornerRadiusTopRight * 2, CornerRadiusTopRight * 2), -90, 90)
+        End If
+        If BorderWidth.Right > 0 And CornerRadiusBottomRight > 0 Then
+          e.Graphics.DrawArc(jPenRight, New Rectangle(Width - (CornerRadiusBottomRight * 2), Height - (CornerRadiusBottomRight * 2), CornerRadiusBottomRight * 2, CornerRadiusBottomRight * 2), 0, 90)
+        End If
+        If BorderWidth.Left > 0 And CornerRadiusBottomLeft > 0 Then
+          e.Graphics.DrawArc(jPenLeft, New Rectangle(0, Height - (CornerRadiusBottomLeft * 2), CornerRadiusBottomLeft * 2, CornerRadiusBottomLeft * 2), 90, 90)
+        End If
+      End If
+      If BorderWidth.Top > 0 Then
+        e.Graphics.DrawLine(jPenTop, CornerRadiusTopLeft, 0, Width - CornerRadiusTopRight, 0)
+      End If
+      If BorderWidth.Right > 0 Then
+        e.Graphics.DrawLine(jPenRight, Width, CornerRadiusTopRight, Width, Height - CornerRadiusBottomRight)
+      End If
+      If BorderWidth.Bottom > 0 Then
+        e.Graphics.DrawLine(jPenBottom, Width - CornerRadiusBottomRight, Height, CornerRadiusBottomLeft, Height)
+      End If
+      If BorderWidth.Left > 0 Then
+        e.Graphics.DrawLine(jPenLeft, 0, Height - CornerRadiusBottomLeft, 0, CornerRadiusTopLeft)
+      End If
+    End If
+
+  End Sub
 End Class

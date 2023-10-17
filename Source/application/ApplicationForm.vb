@@ -190,7 +190,7 @@ Public Class ApplicationForm
     Dim details As ArrayList = New ArrayList
     If workingAncestor Is Nothing Then workingAncestor = activeAncestor
     If workingAncestor.IsValid Then
-
+      LoadAncestorAttributes(workingAncestor)
       details.Add({"AncestryID", workingAncestor.IDFromFile, "ANCESTOR", "N", ""})
       details.Add({"Surname", workingAncestor.Surname, "ANCESTOR", "N", ""})
       details.Add({"Given", workingAncestor.Givenname, "ANCESTOR", "N", ""})
@@ -222,6 +222,72 @@ Public Class ApplicationForm
     End If
     Return details
   End Function
+
+
+  Private Sub LoadAncestorAttributes(workingAncestor As Ancestor)
+    AncestorAttributes.DrawMode = TreeViewDrawMode.OwnerDrawText
+    AncestorAttributes.Nodes.Clear()
+    Dim item As TreeNode
+    item = AncestorAttributes.Nodes.Add("NAME", "Name" & vbTab & workingAncestor.Name, "", "")
+    item.Nodes.Add("SURNAME", "Surname" & vbTab & workingAncestor.Surname)
+    item.Nodes.Add("GIVENNAME", "Givenname" & vbTab & workingAncestor.Givenname)
+
+    item = AncestorAttributes.Nodes.Add("ID", "Research", "", "")
+    item.Nodes.Add("ANCESTRYID", "Ancestry.com" & vbTab & workingAncestor.IDFromFile)
+
+    item = AncestorAttributes.Nodes.Add("PROFILEIMG", "HasProfileImage" & vbTab & workingAncestor.hasProfileImage, "", "")
+
+    item = AncestorAttributes.Nodes.Add("BIRTH", "Birth" & vbTab & workingAncestor.ProfileBirthDate, "", "")
+    item.Nodes.Add("BIRTHPLACE", "Place" & vbTab & workingAncestor.ProfileBirthPlace)
+    item.Nodes.Add("BIRTHDOCUMENTS", "HasDocuments" & vbTab & workingAncestor.hasBirthCertificate)
+
+    item = AncestorAttributes.Nodes.Add("DEATH", "Death" & vbTab & workingAncestor.ProfileDeathDate, "", "")
+    item.Nodes.Add("DEATHPLACE", "Place" & vbTab & workingAncestor.ProfileDeathPlace)
+    item.Nodes.Add("DEATHDOCUMENTS", "HasDocuments" & vbTab & workingAncestor.hasDeathCertificate)
+    item.Nodes.Add("DEATHHEADSTONE", "HasHeadstone" & vbTab & workingAncestor.hasHeadstoneImage)
+
+    item = AncestorAttributes.Nodes.Add("CENSUS", "Census Records", "", "")
+
+    'Census
+    Dim aCensus As ArrayList = workingAncestor.getCensusList()
+    Dim byear As Integer = Val(workingAncestor.BirthYear)
+    Dim dyear As Integer = Val(workingAncestor.DeathYear)
+    If byear > 0 Then
+      If dyear = 0 Then dyear = byear + 90
+      Dim census() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
+      For Each dt As Integer In census
+        If byear <= dt And dyear >= dt Then
+          item.Nodes.Add(dt & " Census", dt & " Census" & vbTab & aCensus.Contains(dt.ToString), "", "")
+        End If
+      Next
+    End If
+  End Sub
+
+  Private Sub AncestorAttributes_DrawNode(sender As Object, e As DrawTreeNodeEventArgs) Handles AncestorAttributes.DrawNode
+    ' Get the current node
+    Dim node As TreeNode = e.Node
+
+    ' Define the bounds for the first column
+    Dim boundsColumn1 As Rectangle = New Rectangle(e.Bounds.Left, e.Bounds.Top, 100, e.Bounds.Height) ' Adjust width as needed
+    ' Define the bounds for the second column
+    'boundsColumn1.Right
+    Dim boundsColumn2 As Rectangle = New Rectangle(150, e.Bounds.Top, 100, e.Bounds.Height) ' Adjust width as needed
+
+    Dim txt As String = node.Text & vbTab & vbTab
+    Dim txtA() As String = txt.Split(vbTab)
+
+    ' Draw the first column
+    Dim fnt As Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+
+    TextRenderer.DrawText(e.Graphics, txtA(0), fnt, boundsColumn1, Color.Black, TextFormatFlags.Left Or TextFormatFlags.EndEllipsis)
+
+    ' Draw the second column
+    TextRenderer.DrawText(e.Graphics, txtA(1), AncestorAttributes.Font, boundsColumn2, Color.DarkGray, TextFormatFlags.Left)
+
+    ' Prevent default drawing of the node's text
+    e.DrawDefault = False
+  End Sub
+
 
   Private Sub LoadAncestorTree()
     Debug.Print("LoadAncestorTree: TAG=" & AncestorDetails.Tag)
@@ -559,4 +625,5 @@ Public Class ApplicationForm
     My.Settings.Save()
     Close()
   End Sub
+
 End Class
