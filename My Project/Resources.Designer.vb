@@ -828,16 +828,6 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property ico_20_red__131() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("ico_20_red__131", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
         Friend ReadOnly Property ico_20_red__145() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("ico_20_red__145", resourceCulture)
@@ -871,56 +861,6 @@ Namespace My.Resources
         Friend ReadOnly Property ico_newspapercom_black() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("ico_newspapercom_black", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property Panel_Bottom_Center() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Panel-Bottom-Center", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property Panel_Bottom_Left() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Panel-Bottom-Left", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property Panel_Bottom_Right() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Panel-Bottom-Right", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property Panel_Top_Left() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Panel-Top-Left", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property Panel_Top_Right() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Panel-Top-Right", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

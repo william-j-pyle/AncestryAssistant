@@ -56,5 +56,11 @@
     <Setting Name="TB_RESEARCH_LOC" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">242, 24</Value>
     </Setting>
+    <Setting Name="APP_FONT" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI Semibold, 9pt, style=Bold</Value>
+    </Setting>
+    <Setting Name="FORM_A_FG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">ControlText</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

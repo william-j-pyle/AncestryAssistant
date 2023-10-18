@@ -1,4 +1,4 @@
-﻿Partial Class jTheme
+﻿Partial Class JTheme
   Inherits System.ComponentModel.Component
 
   <System.Diagnostics.DebuggerNonUserCode()> _

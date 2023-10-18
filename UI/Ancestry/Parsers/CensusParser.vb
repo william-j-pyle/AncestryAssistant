@@ -1,4 +1,4 @@
-﻿Public Class AncestryCensusParser
+﻿Public Class CensusParser
   Private fields As Collection
   Private data As Collection
   Private dataRowIndex As Integer

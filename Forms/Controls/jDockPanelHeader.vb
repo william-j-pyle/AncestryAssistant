@@ -5,7 +5,7 @@ Public Class jDockPanelHeader
 
   Private Const FIXED_HEIGHT = 24
 
-  Private WithEvents theme As jTheme = New jTheme()
+  Private WithEvents theme As JTheme = New JTheme()
 
   Private WithEvents HeaderCloseButton As Button
   Private WithEvents HeaderCaption As Label
@@ -23,7 +23,7 @@ Public Class jDockPanelHeader
     End Set
   End Property
 
-  Private _BackColorEnabled As Color = theme.HeadingBackColor
+  Private _BackColorEnabled As Color = Color.Black ' theme.HeadingBackColor
   Public Property BackColorEnabled As Color
     Get
       Return _BackColorEnabled
@@ -36,7 +36,7 @@ Public Class jDockPanelHeader
     End Set
   End Property
 
-  Private _BackColorDisabled As Color = theme.HeadingBackColorDisabled
+  Private _BackColorDisabled As Color = Color.DarkGray ' theme.HeadingBackColorDisabled
   Public Property BackColorDisabled As Color
     Get
       Return _BackColorDisabled
@@ -49,7 +49,7 @@ Public Class jDockPanelHeader
     End Set
   End Property
 
-  Private _ForeColorEnabled As Color = theme.HeadingForeColor
+  Private _ForeColorEnabled As Color = Color.White ' theme.HeadingForeColor
   Public Property ForeColorEnabled As Color
     Get
       Return _ForeColorEnabled
@@ -62,7 +62,7 @@ Public Class jDockPanelHeader
     End Set
   End Property
 
-  Private _ForeColorDisabled As Color = theme.HeadingBackColorDisabled
+  Private _ForeColorDisabled As Color = Color.Black ' theme.HeadingBackColorDisabled
   Public Property ForeColorDisabled As Color
     Get
       Return _ForeColorDisabled

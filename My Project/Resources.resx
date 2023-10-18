@@ -124,12 +124,6 @@
   <data name="ico_20_black__152" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ico_20_black__152.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Panel-Top-Right" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\Panel-Top-Right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panel-Bottom-Left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\Panel-Bottom-Left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ico_20_black__154" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ico_20_black__154.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -149,7 +143,7 @@
     <value>..\Resources\image\ico_20_black__75_Gallery.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AssistantAPI" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Source\ancestry\javascript\AssistantAPI.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>..\Resources\javascript\AssistantAPI.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
     <comment>Javascript API loaded into webview for easy control</comment>
   </data>
   <data name="ico_20_black__29" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -163,9 +157,6 @@
   </data>
   <data name="ico_20_black__501" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ico_20_black__50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panel-Bottom-Right" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\Panel-Bottom-Right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ico_20_black_fan" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ico_20_black_fan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -234,7 +225,7 @@
     <value>..\Resources\image\ico_20_black__153.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Ancestry" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Ancestry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\image\Ancestry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ico_20_black__91" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ico_20_black__91.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -264,7 +255,7 @@
     <value>..\Resources\image\ico_20_black__145.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Ancestry1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Ancestry1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\image\Ancestry1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ico_20_black__148" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ico_20_black__148.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -293,14 +284,8 @@
   <data name="ico_20_black__179" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ico_20_black__179.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Panel-Top-Left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\Panel-Top-Left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ico_20_yellow__75" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ico_20_yellow__75.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ico_20_red__131" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ico_20_red__131.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ico_20_black__75_story" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ico_20_black__75_story.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -316,9 +301,6 @@
   </data>
   <data name="ico_20_close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ico_20_close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panel-Bottom-Center" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\Panel-Bottom-Center.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ico_20_black__27" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ico_20_black__27.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -345,7 +327,7 @@
     <value>..\Resources\image\ico_20_black__84.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AsymmetricKeyError" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AsymmetricKeyError.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\image\AsymmetricKeyError.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ico_20_black__191" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ico_20_black__191.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -372,6 +354,6 @@
     <value>..\Resources\image\ico_20_black__111.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AddAgent" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AddAgent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\image\AddAgent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

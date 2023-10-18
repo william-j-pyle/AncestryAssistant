@@ -105,54 +105,58 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\Ancestry\DataTypes\GedDate.vb" />
+    <Compile Include="UI\Ancestry\DataTypes\GedName.vb" />
+    <Compile Include="UI\Ancestry\DataTypes\GedPlace.vb" />
+    <Compile Include="UI\Ancestry\Enums\ThemeCategoryEnum.vb" />
+    <Compile Include="UI\Ancestry\Enums\ThemeIconsEnum.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Source\ancestry\enum\CaptureTypeEnum.vb" />
-    <Compile Include="Source\ancestry\enum\DataTypeEnum.vb" />
-    <Compile Include="Source\ancestry\enum\URLTypeEnum.vb" />
-    <Compile Include="Source\components\jDockPanelHeader.vb">
+    <Compile Include="Forms\Controls\JTheme.Designer.vb">
+      <DependentUpon>JTheme.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Controls\JTheme.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\image\jImageViewer.vb">
+    <Compile Include="UI\Ancestry\AncestryViewer.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\theme\jTheme.Designer.vb">
-      <DependentUpon>jTheme.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\theme\jTheme.vb">
+    <Compile Include="UI\Ancestry\Enums\CaptureTypeEnum.vb" />
+    <Compile Include="UI\Ancestry\Enums\DataTypeEnum.vb" />
+    <Compile Include="UI\Ancestry\Enums\URLTypeEnum.vb" />
+    <Compile Include="Forms\Controls\jDockPanelHeader.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\utils\Utils.vb" />
-    <Compile Include="Source\dialogs\ImageSaveDialog.Designer.vb">
+    <Compile Include="Forms\Controls\jImageViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Helpers\Utils.vb" />
+    <Compile Include="UI\Ancestry\Dialogs\ImageSaveDialog.Designer.vb">
       <DependentUpon>ImageSaveDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\dialogs\ImageSaveDialog.vb">
+    <Compile Include="UI\Ancestry\Dialogs\ImageSaveDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\ancestry\ancestor\Ancestor.vb" />
-    <Compile Include="Source\ancestry\AncestryBrowser.vb" />
-    <Compile Include="Source\application\ApplicationEvents.vb" />
-    <Compile Include="Source\application\ApplicationForm.vb">
+    <Compile Include="UI\Ancestry\DataTypes\Ancestor.vb" />
+    <Compile Include="Forms\ApplicationEvents.vb" />
+    <Compile Include="Forms\ApplicationForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\application\ApplicationForm.Designer.vb">
+    <Compile Include="Forms\ApplicationForm.Designer.vb">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\ancestry\parsers\DateParser.vb" />
-    <Compile Include="Source\components\jLabel.vb">
+    <Compile Include="UI\Ancestry\Parsers\DateParser.vb" />
+    <Compile Include="Forms\Controls\JPanel.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\components\JPanel.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Source\ancestry\javascript\WebMessage.vb" />
-    <Compile Include="Source\ancestry\parsers\AncestryCensusParser.vb" />
-    <Compile Include="Source\ancestry\parsers\AncestryFactsParser.vb" />
-    <Compile Include="Source\renderers\MenuStripRenderer.vb" />
+    <Compile Include="UI\Ancestry\DataTypes\JSMessage.vb" />
+    <Compile Include="UI\Ancestry\Parsers\CensusParser.vb" />
+    <Compile Include="UI\Ancestry\Parsers\AncestorParser.vb" />
+    <Compile Include="Forms\Renderers\MenuStripRenderer.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -164,15 +168,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Source\renderers\StatusStripRenderer.vb" />
-    <Compile Include="Source\renderers\ToolStripRenderer.vb" />
+    <Compile Include="Forms\Renderers\StatusStripRenderer.vb" />
+    <Compile Include="Forms\Renderers\ToolStripRenderer.vb" />
+    <Compile Include="UI\Census\CensusViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Gallery\GalleryViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Notebooks\NotebooksViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Source\application\ApplicationForm.resx">
+    <EmbeddedResource Include="Forms\ApplicationForm.resx">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\dialogs\ImageSaveDialog.resx">
+    <EmbeddedResource Include="UI\Ancestry\Dialogs\ImageSaveDialog.resx">
       <DependentUpon>ImageSaveDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -196,13 +209,13 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Source\components\components.md" />
-    <None Include="Source\theme\Theme.md" />
+    <None Include="Documentation\Components.md" />
+    <None Include="Documentation\Theme.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
     <None Include=".gitignore" />
-    <None Include="Source\ancestry\javascript\AssistantAPI.js" />
+    <None Include="Resources\javascript\AssistantAPI.js" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
@@ -217,10 +230,244 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Source\theme\png16\" />
-    <Folder Include="Source\theme\png20\" />
-    <Folder Include="Source\theme\png32\" />
-    <Folder Include="Source\theme\svg\" />
+    <Folder Include="Documentation\assets\" />
+    <Folder Include="Resources\image\png16\" />
+    <Folder Include="Resources\image\png20\" />
+    <Folder Include="Resources\image\png32\" />
+    <Folder Include="Resources\image\svg\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\image\AddAgent.png" />
+    <Content Include="Resources\image\Ancestry.png" />
+    <Content Include="Resources\image\Ancestry1.png" />
+    <Content Include="Resources\adobe\Assets.psd" />
+    <Content Include="Resources\image\AsymmetricKeyError.png" />
+    <Content Include="Resources\image\ico_20_2people.png" />
+    <Content Include="Resources\image\ico_20_ancestry.png" />
+    <Content Include="Resources\image\ico_20_birth.png" />
+    <Content Include="Resources\image\ico_20_black_fan.png" />
+    <Content Include="Resources\image\ico_20_black__01.png" />
+    <Content Include="Resources\image\ico_20_black__02.png" />
+    <Content Include="Resources\image\ico_20_black__03.png" />
+    <Content Include="Resources\image\ico_20_black__04.png" />
+    <Content Include="Resources\image\ico_20_black__05.png" />
+    <Content Include="Resources\image\ico_20_black__06.png" />
+    <Content Include="Resources\image\ico_20_black__07.png" />
+    <Content Include="Resources\image\ico_20_black__08.png" />
+    <Content Include="Resources\image\ico_20_black__09.png" />
+    <Content Include="Resources\image\ico_20_black__100.png" />
+    <Content Include="Resources\image\ico_20_black__101.png" />
+    <Content Include="Resources\image\ico_20_black__102.png" />
+    <Content Include="Resources\image\ico_20_black__103.png" />
+    <Content Include="Resources\image\ico_20_black__104.png" />
+    <Content Include="Resources\image\ico_20_black__105.png" />
+    <Content Include="Resources\image\ico_20_black__106.png" />
+    <Content Include="Resources\image\ico_20_black__107.png" />
+    <Content Include="Resources\image\ico_20_black__108.png" />
+    <Content Include="Resources\image\ico_20_black__109.png" />
+    <Content Include="Resources\image\ico_20_black__11.png" />
+    <Content Include="Resources\image\ico_20_black__110.png" />
+    <Content Include="Resources\image\ico_20_black__111.png" />
+    <Content Include="Resources\image\ico_20_black__112.png" />
+    <Content Include="Resources\image\ico_20_black__113.png" />
+    <Content Include="Resources\image\ico_20_black__114.png" />
+    <Content Include="Resources\image\ico_20_black__115.png" />
+    <Content Include="Resources\image\ico_20_black__116.png" />
+    <Content Include="Resources\image\ico_20_black__117.png" />
+    <Content Include="Resources\image\ico_20_black__118.png" />
+    <Content Include="Resources\image\ico_20_black__119.png" />
+    <Content Include="Resources\image\ico_20_black__12.png" />
+    <Content Include="Resources\image\ico_20_black__120.png" />
+    <Content Include="Resources\image\ico_20_black__121.png" />
+    <Content Include="Resources\image\ico_20_black__122.png" />
+    <Content Include="Resources\image\ico_20_black__123.png" />
+    <Content Include="Resources\image\ico_20_black__124.png" />
+    <Content Include="Resources\image\ico_20_black__125.png" />
+    <Content Include="Resources\image\ico_20_black__126.png" />
+    <Content Include="Resources\image\ico_20_black__127.png" />
+    <Content Include="Resources\image\ico_20_black__128.png" />
+    <Content Include="Resources\image\ico_20_black__129.png" />
+    <Content Include="Resources\image\ico_20_black__13.png" />
+    <Content Include="Resources\image\ico_20_black__130.png" />
+    <Content Include="Resources\image\ico_20_black__131.png" />
+    <Content Include="Resources\image\ico_20_black__132.png" />
+    <Content Include="Resources\image\ico_20_black__133.png" />
+    <Content Include="Resources\image\ico_20_black__134.png" />
+    <Content Include="Resources\image\ico_20_black__135.png" />
+    <Content Include="Resources\image\ico_20_black__136.png" />
+    <Content Include="Resources\image\ico_20_black__137.png" />
+    <Content Include="Resources\image\ico_20_black__138.png" />
+    <Content Include="Resources\image\ico_20_black__139.png" />
+    <Content Include="Resources\image\ico_20_black__14.png" />
+    <Content Include="Resources\image\ico_20_black__140.png" />
+    <Content Include="Resources\image\ico_20_black__141.png" />
+    <Content Include="Resources\image\ico_20_black__142.png" />
+    <Content Include="Resources\image\ico_20_black__143.png" />
+    <Content Include="Resources\image\ico_20_black__144.png" />
+    <Content Include="Resources\image\ico_20_black__145.png" />
+    <Content Include="Resources\image\ico_20_black__146.png" />
+    <Content Include="Resources\image\ico_20_black__147.png" />
+    <Content Include="Resources\image\ico_20_black__148.png" />
+    <Content Include="Resources\image\ico_20_black__149.png" />
+    <Content Include="Resources\image\ico_20_black__15.png" />
+    <Content Include="Resources\image\ico_20_black__150.png" />
+    <Content Include="Resources\image\ico_20_black__151.png" />
+    <Content Include="Resources\image\ico_20_black__152.png" />
+    <Content Include="Resources\image\ico_20_black__153.png" />
+    <Content Include="Resources\image\ico_20_black__154.png" />
+    <Content Include="Resources\image\ico_20_black__155.png" />
+    <Content Include="Resources\image\ico_20_black__156.png" />
+    <Content Include="Resources\image\ico_20_black__157.png" />
+    <Content Include="Resources\image\ico_20_black__158.png" />
+    <Content Include="Resources\image\ico_20_black__159.png" />
+    <Content Include="Resources\image\ico_20_black__16.png" />
+    <Content Include="Resources\image\ico_20_black__160.png" />
+    <Content Include="Resources\image\ico_20_black__161.png" />
+    <Content Include="Resources\image\ico_20_black__162.png" />
+    <Content Include="Resources\image\ico_20_black__163.png" />
+    <Content Include="Resources\image\ico_20_black__164.png" />
+    <Content Include="Resources\image\ico_20_black__165.png" />
+    <Content Include="Resources\image\ico_20_black__166.png" />
+    <Content Include="Resources\image\ico_20_black__167.png" />
+    <Content Include="Resources\image\ico_20_black__168.png" />
+    <Content Include="Resources\image\ico_20_black__169.png" />
+    <Content Include="Resources\image\ico_20_black__17.png" />
+    <Content Include="Resources\image\ico_20_black__170.png" />
+    <Content Include="Resources\image\ico_20_black__171.png" />
+    <Content Include="Resources\image\ico_20_black__172.png" />
+    <Content Include="Resources\image\ico_20_black__173.png" />
+    <Content Include="Resources\image\ico_20_black__174.png" />
+    <Content Include="Resources\image\ico_20_black__175.png" />
+    <Content Include="Resources\image\ico_20_black__176.png" />
+    <Content Include="Resources\image\ico_20_black__177.png" />
+    <Content Include="Resources\image\ico_20_black__178.png" />
+    <Content Include="Resources\image\ico_20_black__179.png" />
+    <Content Include="Resources\image\ico_20_black__18.png" />
+    <Content Include="Resources\image\ico_20_black__180.png" />
+    <Content Include="Resources\image\ico_20_black__181.png" />
+    <Content Include="Resources\image\ico_20_black__182.png" />
+    <Content Include="Resources\image\ico_20_black__183.png" />
+    <Content Include="Resources\image\ico_20_black__184.png" />
+    <Content Include="Resources\image\ico_20_black__185.png" />
+    <Content Include="Resources\image\ico_20_black__186.png" />
+    <Content Include="Resources\image\ico_20_black__187.png" />
+    <Content Include="Resources\image\ico_20_black__188.png" />
+    <Content Include="Resources\image\ico_20_black__189.png" />
+    <Content Include="Resources\image\ico_20_black__19.png" />
+    <Content Include="Resources\image\ico_20_black__190.png" />
+    <Content Include="Resources\image\ico_20_black__191.png" />
+    <Content Include="Resources\image\ico_20_black__192.png" />
+    <Content Include="Resources\image\ico_20_black__193.png" />
+    <Content Include="Resources\image\ico_20_black__194.png" />
+    <Content Include="Resources\image\ico_20_black__195.png" />
+    <Content Include="Resources\image\ico_20_black__196.png" />
+    <Content Include="Resources\image\ico_20_black__197.png" />
+    <Content Include="Resources\image\ico_20_black__198.png" />
+    <Content Include="Resources\image\ico_20_black__199.png" />
+    <Content Include="Resources\image\ico_20_black__200.png" />
+    <Content Include="Resources\image\ico_20_black__201.png" />
+    <Content Include="Resources\image\ico_20_black__202.png" />
+    <Content Include="Resources\image\ico_20_black__22.png" />
+    <Content Include="Resources\image\ico_20_black__23.png" />
+    <Content Include="Resources\image\ico_20_black__24.png" />
+    <Content Include="Resources\image\ico_20_black__25.png" />
+    <Content Include="Resources\image\ico_20_black__26.png" />
+    <Content Include="Resources\image\ico_20_black__27.png" />
+    <Content Include="Resources\image\ico_20_black__28.png" />
+    <Content Include="Resources\image\ico_20_black__29.png" />
+    <Content Include="Resources\image\ico_20_black__30.png" />
+    <Content Include="Resources\image\ico_20_black__31.png" />
+    <Content Include="Resources\image\ico_20_black__32.png" />
+    <Content Include="Resources\image\ico_20_black__33.png" />
+    <Content Include="Resources\image\ico_20_black__34.png" />
+    <Content Include="Resources\image\ico_20_black__35.png" />
+    <Content Include="Resources\image\ico_20_black__36.png" />
+    <Content Include="Resources\image\ico_20_black__37.png" />
+    <Content Include="Resources\image\ico_20_black__38.png" />
+    <Content Include="Resources\image\ico_20_black__39.png" />
+    <Content Include="Resources\image\ico_20_black__40.png" />
+    <Content Include="Resources\image\ico_20_black__41.png" />
+    <Content Include="Resources\image\ico_20_black__42.png" />
+    <Content Include="Resources\image\ico_20_black__43.png" />
+    <Content Include="Resources\image\ico_20_black__44.png" />
+    <Content Include="Resources\image\ico_20_black__45.png" />
+    <Content Include="Resources\image\ico_20_black__46.png" />
+    <Content Include="Resources\image\ico_20_black__47.png" />
+    <Content Include="Resources\image\ico_20_black__48.png" />
+    <Content Include="Resources\image\ico_20_black__49.png" />
+    <Content Include="Resources\image\ico_20_black__50.png" />
+    <Content Include="Resources\image\ico_20_black__51.png" />
+    <Content Include="Resources\image\ico_20_black__52.png" />
+    <Content Include="Resources\image\ico_20_black__53.png" />
+    <Content Include="Resources\image\ico_20_black__54.png" />
+    <Content Include="Resources\image\ico_20_black__55.png" />
+    <Content Include="Resources\image\ico_20_black__56.png" />
+    <Content Include="Resources\image\ico_20_black__57.png" />
+    <Content Include="Resources\image\ico_20_black__58.png" />
+    <Content Include="Resources\image\ico_20_black__59.png" />
+    <Content Include="Resources\image\ico_20_black__60.png" />
+    <Content Include="Resources\image\ico_20_black__61.png" />
+    <Content Include="Resources\image\ico_20_black__62.png" />
+    <Content Include="Resources\image\ico_20_black__63.png" />
+    <Content Include="Resources\image\ico_20_black__64.png" />
+    <Content Include="Resources\image\ico_20_black__65.png" />
+    <Content Include="Resources\image\ico_20_black__66.png" />
+    <Content Include="Resources\image\ico_20_black__67.png" />
+    <Content Include="Resources\image\ico_20_black__68.png" />
+    <Content Include="Resources\image\ico_20_black__69.png" />
+    <Content Include="Resources\image\ico_20_black__70.png" />
+    <Content Include="Resources\image\ico_20_black__71.png" />
+    <Content Include="Resources\image\ico_20_black__72.png" />
+    <Content Include="Resources\image\ico_20_black__73.png" />
+    <Content Include="Resources\image\ico_20_black__74.png" />
+    <Content Include="Resources\image\ico_20_black__75.png" />
+    <Content Include="Resources\image\ico_20_black__75_Gallery.png" />
+    <Content Include="Resources\image\ico_20_black__75_hint.png" />
+    <Content Include="Resources\image\ico_20_black__75_story.png" />
+    <Content Include="Resources\image\ico_20_black__76.png" />
+    <Content Include="Resources\image\ico_20_black__77.png" />
+    <Content Include="Resources\image\ico_20_black__78.png" />
+    <Content Include="Resources\image\ico_20_black__79.png" />
+    <Content Include="Resources\image\ico_20_black__80.png" />
+    <Content Include="Resources\image\ico_20_black__81.png" />
+    <Content Include="Resources\image\ico_20_black__82.png" />
+    <Content Include="Resources\image\ico_20_black__83.png" />
+    <Content Include="Resources\image\ico_20_black__84.png" />
+    <Content Include="Resources\image\ico_20_black__85.png" />
+    <Content Include="Resources\image\ico_20_black__86.png" />
+    <Content Include="Resources\image\ico_20_black__87.png" />
+    <Content Include="Resources\image\ico_20_black__88.png" />
+    <Content Include="Resources\image\ico_20_black__89.png" />
+    <Content Include="Resources\image\ico_20_black__90.png" />
+    <Content Include="Resources\image\ico_20_black__91.png" />
+    <Content Include="Resources\image\ico_20_black__92.png" />
+    <Content Include="Resources\image\ico_20_black__93.png" />
+    <Content Include="Resources\image\ico_20_black__94.png" />
+    <Content Include="Resources\image\ico_20_black__95.png" />
+    <Content Include="Resources\image\ico_20_black__96.png" />
+    <Content Include="Resources\image\ico_20_black__97.png" />
+    <Content Include="Resources\image\ico_20_black__98.png" />
+    <Content Include="Resources\image\ico_20_black__99.png" />
+    <Content Include="Resources\image\ico_20_close.png" />
+    <Content Include="Resources\image\ico_20_death.png" />
+    <Content Include="Resources\image\ico_20_dna.png" />
+    <Content Include="Resources\image\ico_20_familysearch.png" />
+    <Content Include="Resources\image\ico_20_female.png" />
+    <Content Include="Resources\image\ico_20_hint.png" />
+    <Content Include="Resources\image\ico_20_home.png" />
+    <Content Include="Resources\image\ico_20_home1.png" />
+    <Content Include="Resources\image\ico_20_livingtree.png" />
+    <Content Include="Resources\image\ico_20_male.png" />
+    <Content Include="Resources\image\ico_20_marriage.png" />
+    <Content Include="Resources\image\ico_20_person.png" />
+    <Content Include="Resources\image\ico_20_tree_h.png" />
+    <Content Include="Resources\image\ico_20_tree_v.png" />
+    <Content Include="Resources\image\Panel-Bottom-Center.png" />
+    <Content Include="Resources\image\Panel-Bottom-Left.png" />
+    <Content Include="Resources\image\Panel-Bottom-Right.png" />
+    <Content Include="Resources\image\Panel-Top-Left.png" />
+    <Content Include="Resources\image\Panel-Top-Right.png" />
+    <Content Include="Resources\adobe\Panel.psd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="packages\Microsoft.Web.WebView2.1.0.2045.28\build\Microsoft.Web.WebView2.targets" Condition="Exists('packages\Microsoft.Web.WebView2.1.0.2045.28\build\Microsoft.Web.WebView2.targets')" />

@@ -1,23 +1,35 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
-Imports Microsoft.Web.WebView2.Core
 
 #Const SHOW_DEBUG = False
 
 Public Class ApplicationForm
-  Private WithEvents ancestry As WebHandler
-  Private activeAncestor As Ancestor
+
+  Public Event ValidActiveAncestor()
+  Public Event PartialActiveAncestor()
+
+  Private _activeAncestor As Ancestor = New Ancestor()
+  Property activeAncestor As Ancestor
+    Get
+      Return _activeAncestor
+    End Get
+    Set(value As Ancestor)
+      _activeAncestor = value
+      If _activeAncestor.IsValid Then
+        RaiseEvent ValidActiveAncestor()
+      Else
+        RaiseEvent PartialActiveAncestor()
+      End If
+    End Set
+  End Property
 
   Public Sub New()
     InitializeComponent()
     InitializeAncestorDetail()
     InitializeAncestorList()
     ' Setup Ancestor Object
-    activeAncestor = New Ancestor
-    ' Setup Ancestry Web Handler
-    ancestry = New WebHandler(web)
     ' Open Home Tree
-    ancestry.NavigateTo(URLTypeEnum.TREE_HOME)
+    'ancestry.NavigateTo(URLTypeEnum.TREE_HOME)
   End Sub
 
   ' ==========================
@@ -61,7 +73,6 @@ Public Class ApplicationForm
   End Sub
 
   Private Sub ancestry_SourceChanged(sourceString As String) Handles ancestry.SourceChanged
-    txtHref.Text = sourceString
     SetUIState()
   End Sub
 
@@ -191,7 +202,7 @@ Public Class ApplicationForm
     If workingAncestor Is Nothing Then workingAncestor = activeAncestor
     If workingAncestor.IsValid Then
       LoadAncestorAttributes(workingAncestor)
-      details.Add({"AncestryID", workingAncestor.IDFromFile, "ANCESTOR", "N", ""})
+      details.Add({"AncestryID", workingAncestor.IDFromProfile, "ANCESTOR", "N", ""})
       details.Add({"Surname", workingAncestor.Surname, "ANCESTOR", "N", ""})
       details.Add({"Given", workingAncestor.Givenname, "ANCESTOR", "N", ""})
       details.Add({"HasProfileImage", workingAncestor.hasProfileImage, "ANCESTOR", "Y", ""})
@@ -233,7 +244,7 @@ Public Class ApplicationForm
     item.Nodes.Add("GIVENNAME", "Givenname" & vbTab & workingAncestor.Givenname)
 
     item = AncestorAttributes.Nodes.Add("ID", "Research", "", "")
-    item.Nodes.Add("ANCESTRYID", "Ancestry.com" & vbTab & workingAncestor.IDFromFile)
+    item.Nodes.Add("ANCESTRYID", "Ancestry.com" & vbTab & workingAncestor.IDFromProfile)
 
     item = AncestorAttributes.Nodes.Add("PROFILEIMG", "HasProfileImage" & vbTab & workingAncestor.hasProfileImage, "", "")
 
@@ -306,7 +317,7 @@ Public Class ApplicationForm
       End If
       Debug.Print("LoadAncestorTree: RELOADING")
       AncestorDetails.Tag = newTag
-      Dim hasProfile As Boolean = activeAncestor.PathExists
+      Dim hasProfile As Boolean = activeAncestor.IsLocal
       With AncestorDetails
         If hasProfile Then
           .ForeColor = Color.Black
@@ -352,10 +363,7 @@ Public Class ApplicationForm
   ' ==========================
   ' = Set Visual States
   ' ==========================
-
-  Private Sub SetUIState()
-    Dim haveActiveAncestor As Boolean = activeAncestor.IsValid
-
+  Private Sub SetSplitterState()
     ' Manage the Panels
     Dim RP1 As Boolean = False, RP2 As Boolean = False, GP2 As Boolean = False, BP1 As Boolean = False, BP2 As Boolean = False
 
@@ -386,33 +394,55 @@ Public Class ApplicationForm
       SplitLeftMiddle_Right.Panel2Collapsed = True
     End If
 
+  End Sub
 
-    ' Apply ActiveAncestor data
+  Private Sub SetStatusBarState()
+    ' Apply Whatever data we have
     lblID.Visible = activeAncestor.ID.Length > 3
     lblPersonName.Visible = activeAncestor.Name.Length > 3
     lblBirthYear.Visible = activeAncestor.BirthYear.Length = 4
 
     If lblPersonName.Visible Then
-      If activeAncestor.PathExists Then
+      If activeAncestor.IsLocal Then
         lblPersonName.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_black__75
       Else
         lblPersonName.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_red__75
       End If
     End If
 
-
     lblID.Text = activeAncestor.ID
     lblPersonName.Text = activeAncestor.Name
     lblBirthYear.Text = activeAncestor.BirthYear
+  End Sub
 
-    ' Apply Menubar state
-    Dim e As Boolean
-    e = txtHref.Text.Contains("mediaui-viewer") Or lblStatus.Text.Contains("Census") Or lblStatus.Text.Contains("Fact") Or txtHref.Text.EndsWith("jpg") Or txtHref.Text.EndsWith("jpeg")
-    btnDownload.Enabled = e And lblID.Visible And lblBirthYear.Visible And lblPersonName.Visible
-    btnPersonFact.Enabled = lblID.Visible
-    btnPersonGallery.Enabled = lblID.Visible
-    btnPersonHints.Enabled = lblID.Visible
-    btnPersonStory.Enabled = lblID.Visible
+  Private Sub SetToolbarState()
+    Dim isIDValid As Boolean = activeAncestor.ID.Length > 3
+    btnPersonFact.Enabled = isIDValid
+    btnPersonGallery.Enabled = isIDValid
+    btnPersonHints.Enabled = isIDValid
+    btnPersonStory.Enabled = isIDValid
+  End Sub
+
+  Private Sub SetTabState()
+    Dim isLocal As Boolean = activeAncestor.IsLocal
+    If isLocal And tabs.TabPages.Count > 1 Then Exit Sub
+    If isLocal And tabs.TabPages.Count = 1 Then
+      tabs.TabPages.Add(tabCensus)
+      tabs.TabPages.Add(tabGallery)
+      tabs.TabPages.Add(tabNotebooks)
+    Else
+      For i As Integer = 1 To tabs.TabPages.Count - 1
+        tabs.TabPages.RemoveAt(1)
+      Next
+    End If
+  End Sub
+
+
+  Private Sub SetUIState()
+    SetSplitterState()
+    SetStatusBarState()
+    SetToolbarState()
+    SetTabState()
   End Sub
 
 
@@ -429,36 +459,6 @@ Public Class ApplicationForm
     SetUIState()
   End Sub
 
-  ' ==========================
-  ' = Menubar Event Handlers
-  ' ==========================
-  Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
-    If lblStatus.Text.Contains("Fact") Then
-      ancestry.capture(AncestryCaptureType.ANCESTOR)
-    End If
-    If lblStatus.Text.Contains("Census") Then
-      ancestry.capture(AncestryCaptureType.CENSUS)
-      ancestry.capture(AncestryCaptureType.CENSUS_IMAGE)
-    End If
-    If txtHref.Text.EndsWith("jpg") Or txtHref.Text.EndsWith("jpeg") Then
-      ancestry.capture(AncestryCaptureType.IMAGE)
-    End If
-    If txtHref.Text.Contains("mediaui-viewer") Then
-      ancestry.capture(AncestryCaptureType.GALLERY_IMAGE)
-    End If
-  End Sub
-
-  Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-    web.GoBack()
-  End Sub
-
-  Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
-    ancestry.Refresh()
-  End Sub
-
-  Private Sub btnHome_Click_1(sender As Object, e As EventArgs) Handles btnHome.Click
-    ancestry.NavigateTo(URLTypeEnum.HOME)
-  End Sub
 
   Private Sub btnHomeTree_Click(sender As Object, e As EventArgs) Handles btnHomeTree.Click
     ancestry.NavigateTo(URLTypeEnum.TREE_HOME)
@@ -492,37 +492,8 @@ Public Class ApplicationForm
     ancestry.NavigateTo(URLTypeEnum.PERSON_STORY)
   End Sub
 
-  Private Sub txtHref_Enter(sender As Object, e As EventArgs) Handles txtHref.Enter
-    ancestry.NavigateTo(URLTypeEnum.CUSTOM, txtHref.Text)
-  End Sub
-
-  Private Sub btnAncestor_Click(sender As Object, e As EventArgs) Handles btnAncestor.Click
+  Private Sub menuStateHandler(sender As Object, e As EventArgs) Handles btnAncestor.Click, btnAncestors.Click, ToolStripButton1.Click, ToolStripButton2.Click, ToolStripButton3.Click
     SetUIState()
-  End Sub
-
-  Private Sub btnAncestors_Click(sender As Object, e As EventArgs) Handles btnAncestors.Click
-    SetUIState()
-
-  End Sub
-
-  Private Sub tsWeb_Resize(sender As Object, e As EventArgs) Handles tsWeb.Resize
-    txtHref.Width = tsWeb.Bounds.Width - btnHome.Bounds.Right - 46
-    'tsWeb.Refresh()
-  End Sub
-
-  Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-    SetUIState()
-
-  End Sub
-
-  Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
-    SetUIState()
-
-  End Sub
-
-  Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
-    SetUIState()
-
   End Sub
 
   Private Sub AncestryDirectorWatcher_Created(sender As Object, e As FileSystemEventArgs) Handles AncestryDirectorWatcher.Created
@@ -613,12 +584,13 @@ Public Class ApplicationForm
     End If
   End Sub
 
-  Private Sub web_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles web.NavigationStarting
-    Cursor = Cursors.WaitCursor
-  End Sub
-
-  Private Sub web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles web.NavigationCompleted
-    Cursor = Cursors.Default
+  Private Sub AncestryViewerBusy(busy As Boolean) Handles ancestry.AncestryViewerBusy
+    If busy Then
+      Cursor = Cursors.WaitCursor
+      tabs.SelectTab(0)
+    Else
+      Cursor = Cursors.Default
+    End If
   End Sub
 
   Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
@@ -626,4 +598,7 @@ Public Class ApplicationForm
     Close()
   End Sub
 
+  Private Sub AncestryToolbarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AncestryToolbarToolStripMenuItem.Click
+    ancestry.ShowToolbar = AncestryToolbarToolStripMenuItem.Checked
+  End Sub
 End Class

@@ -3,6 +3,7 @@
 Public Class JPanel
   Inherits Panel
 
+
   Public Sub New()
     SetStyle(ControlStyles.UserPaint Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
   End Sub
@@ -183,4 +184,6 @@ Public Class JPanel
     End If
 
   End Sub
+
+
 End Class

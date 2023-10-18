@@ -114,7 +114,7 @@ Public Class Ancestor
            DefaultValueAttribute(False),
            DesignOnly(False),
            DescriptionAttribute("Ancestor is being tracked locally")>
-  Public ReadOnly Property PathExists As Boolean
+  Public ReadOnly Property IsLocal As Boolean
     Get
       If IsValid Then
         Return Directory.Exists(Path)
@@ -193,7 +193,7 @@ Public Class Ancestor
 
   Public Sub createPath()
     If IsValid Then
-      If Not PathExists Then
+      If Not IsLocal Then
         Directory.CreateDirectory(Path)
       End If
     End If
@@ -223,15 +223,15 @@ Public Class Ancestor
   End Sub
 
   Public Function hasProfile() As Boolean
-    If PathExists Then
+    If IsLocal Then
       Return File.Exists(Path & "Profile.txt")
     End If
     Return False
   End Function
 
-  Public Function IDFromFile() As String
+  Public Function IDFromProfile() As String
     Dim data As String = ""
-    If PathExists Then
+    If IsLocal Then
       If File.Exists(Path & "Ancestry.id") Then
         data = File.ReadAllText(Path & "Ancestry.id")
       End If
@@ -255,7 +255,7 @@ Public Class Ancestor
   End Function
 
   Private Function hasMatchingFile(startText As String, endText As String) As Boolean
-    If PathExists Then
+    If IsLocal Then
       Dim files = Directory.GetFiles(Path)
       For Each file As String In files
         Dim fname As String = file.Replace(Path, "").ToLower()
@@ -270,7 +270,7 @@ Public Class Ancestor
 
   Public Function getCensusList() As ArrayList
     Dim list As ArrayList = New ArrayList()
-    If PathExists Then
+    If IsLocal Then
       Dim files = Directory.GetFiles(Path)
       For Each file As String In files
         Dim fname As String = file.Replace(Path, "").ToLower()

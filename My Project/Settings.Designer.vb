@@ -269,6 +269,30 @@ Namespace My
                 Me("TB_RESEARCH_LOC") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Segoe UI Semibold, 9pt, style=Bold")>  _
+        Public Property APP_FONT() As Global.System.Drawing.Font
+            Get
+                Return CType(Me("APP_FONT"),Global.System.Drawing.Font)
+            End Get
+            Set
+                Me("APP_FONT") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("ControlText")>  _
+        Public Property FORM_A_FG() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("FORM_A_FG"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("FORM_A_FG") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
