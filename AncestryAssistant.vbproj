@@ -105,16 +105,16 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\Controls\Viewers\ImageViewer.Designer.vb">
+    <Compile Include="Source\Controls\ImageViewer.Designer.vb">
       <DependentUpon>ImageViewer.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Controls\Viewers\ImageViewer.vb">
+    <Compile Include="Source\Controls\ImageViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Viewers\NotebookViewer.Designer.vb">
+    <Compile Include="Source\Controls\NotebookViewer.Designer.vb">
       <DependentUpon>NotebookViewer.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Controls\Viewers\NotebookViewer.vb">
+    <Compile Include="Source\Controls\NotebookViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\DataTypes\GedDate.vb" />
@@ -133,13 +133,13 @@
     <Compile Include="Source\Components\JTheme.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Viewers\AncestryViewer.vb">
+    <Compile Include="Source\Controls\AncestryViewer.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Enums\CaptureTypeEnum.vb" />
     <Compile Include="Source\Enums\DataTypeEnum.vb" />
     <Compile Include="Source\Enums\URLTypeEnum.vb" />
-    <Compile Include="Source\Controls\Dock\jDockPanelHeader.vb">
+    <Compile Include="Source\Controls\jDockPanelHeader.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Helpers\Utils.vb" />
@@ -159,7 +159,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Parsers\DateParser.vb" />
-    <Compile Include="Source\Controls\Panel\JPanel.vb">
+    <Compile Include="Source\Controls\JPanel.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\DataTypes\JSMessage.vb" />
@@ -179,22 +179,22 @@
     </Compile>
     <Compile Include="Source\Renderers\StatusStripRenderer.vb" />
     <Compile Include="Source\Renderers\ToolStripRenderer.vb" />
-    <Compile Include="Source\Controls\Viewers\OldCensusViewer.vb">
+    <Compile Include="Source\Controls\OldCensusViewer.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Viewers\OLDGalleryViewer.vb">
+    <Compile Include="Source\Controls\OLDGalleryViewer.vb">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Source\Controls\Viewers\NotebookViewer.resx">
+    <EmbeddedResource Include="Source\Controls\NotebookViewer.resx">
       <DependentUpon>NotebookViewer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\ApplicationForm.resx">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Controls\Viewers\ImageViewer.resx">
+    <EmbeddedResource Include="Source\Controls\ImageViewer.resx">
       <DependentUpon>ImageViewer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\ImageSaveDialog.resx">
