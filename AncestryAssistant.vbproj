@@ -105,67 +105,67 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Viewers\ImageViewer.Designer.vb">
+    <Compile Include="Source\Controls\Viewers\ImageViewer.Designer.vb">
       <DependentUpon>ImageViewer.vb</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Viewers\ImageViewer.vb">
+    <Compile Include="Source\Controls\Viewers\ImageViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Viewers\NotebookViewer.Designer.vb">
+    <Compile Include="Source\Controls\Viewers\NotebookViewer.Designer.vb">
       <DependentUpon>NotebookViewer.vb</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Viewers\NotebookViewer.vb">
+    <Compile Include="Source\Controls\Viewers\NotebookViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DataTypes\GedDate.vb" />
-    <Compile Include="DataTypes\GedName.vb" />
-    <Compile Include="DataTypes\GedPlace.vb" />
-    <Compile Include="Enums\ThemeCategoryEnum.vb" />
-    <Compile Include="Enums\ThemeIconsEnum.vb" />
+    <Compile Include="Source\DataTypes\GedDate.vb" />
+    <Compile Include="Source\DataTypes\GedName.vb" />
+    <Compile Include="Source\DataTypes\GedPlace.vb" />
+    <Compile Include="Source\Enums\ThemeCategoryEnum.vb" />
+    <Compile Include="Source\Enums\ThemeIconsEnum.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Components\JTheme.Designer.vb">
+    <Compile Include="Source\Components\JTheme.Designer.vb">
       <DependentUpon>JTheme.vb</DependentUpon>
     </Compile>
-    <Compile Include="Components\JTheme.vb">
+    <Compile Include="Source\Components\JTheme.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Viewers\AncestryViewer.vb">
+    <Compile Include="Source\Controls\Viewers\AncestryViewer.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Enums\CaptureTypeEnum.vb" />
-    <Compile Include="Enums\DataTypeEnum.vb" />
-    <Compile Include="Enums\URLTypeEnum.vb" />
-    <Compile Include="Controls\Dock\jDockPanelHeader.vb">
+    <Compile Include="Source\Enums\CaptureTypeEnum.vb" />
+    <Compile Include="Source\Enums\DataTypeEnum.vb" />
+    <Compile Include="Source\Enums\URLTypeEnum.vb" />
+    <Compile Include="Source\Controls\Dock\jDockPanelHeader.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Helpers\Utils.vb" />
-    <Compile Include="Forms\ImageSaveDialog.Designer.vb">
+    <Compile Include="Source\Helpers\Utils.vb" />
+    <Compile Include="Source\Forms\ImageSaveDialog.Designer.vb">
       <DependentUpon>ImageSaveDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ImageSaveDialog.vb">
+    <Compile Include="Source\Forms\ImageSaveDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataTypes\Ancestor.vb" />
-    <Compile Include="Forms\ApplicationEvents.vb" />
-    <Compile Include="Forms\ApplicationForm.vb">
+    <Compile Include="Source\DataTypes\Ancestor.vb" />
+    <Compile Include="Source\Forms\ApplicationEvents.vb" />
+    <Compile Include="Source\Forms\ApplicationForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ApplicationForm.Designer.vb">
+    <Compile Include="Source\Forms\ApplicationForm.Designer.vb">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Parsers\DateParser.vb" />
-    <Compile Include="Controls\Panel\JPanel.vb">
+    <Compile Include="Source\Parsers\DateParser.vb" />
+    <Compile Include="Source\Controls\Panel\JPanel.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DataTypes\JSMessage.vb" />
-    <Compile Include="Parsers\CensusParser.vb" />
-    <Compile Include="Parsers\AncestorParser.vb" />
-    <Compile Include="Renderers\MenuStripRenderer.vb" />
+    <Compile Include="Source\DataTypes\JSMessage.vb" />
+    <Compile Include="Source\Parsers\CensusParser.vb" />
+    <Compile Include="Source\Parsers\AncestorParser.vb" />
+    <Compile Include="Source\Renderers\MenuStripRenderer.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -177,27 +177,27 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Renderers\StatusStripRenderer.vb" />
-    <Compile Include="Renderers\ToolStripRenderer.vb" />
-    <Compile Include="Controls\Viewers\OldCensusViewer.vb">
+    <Compile Include="Source\Renderers\StatusStripRenderer.vb" />
+    <Compile Include="Source\Renderers\ToolStripRenderer.vb" />
+    <Compile Include="Source\Controls\Viewers\OldCensusViewer.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Viewers\OLDGalleryViewer.vb">
+    <Compile Include="Source\Controls\Viewers\OLDGalleryViewer.vb">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\Viewers\NotebookViewer.resx">
+    <EmbeddedResource Include="Source\Controls\Viewers\NotebookViewer.resx">
       <DependentUpon>NotebookViewer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ApplicationForm.resx">
+    <EmbeddedResource Include="Source\Forms\ApplicationForm.resx">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Viewers\ImageViewer.resx">
+    <EmbeddedResource Include="Source\Controls\Viewers\ImageViewer.resx">
       <DependentUpon>ImageViewer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ImageSaveDialog.resx">
+    <EmbeddedResource Include="Source\Forms\ImageSaveDialog.resx">
       <DependentUpon>ImageSaveDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -219,8 +219,8 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="Config\App.config" />
+    <None Include="Config\packages.config" />
     <None Include="Documentation\Components.md" />
     <None Include="Documentation\Theme.md" />
   </ItemGroup>
