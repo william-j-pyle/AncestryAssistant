@@ -105,6 +105,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Source\Controls\ImageViewer.Designer.vb">
       <DependentUpon>ImageViewer.vb</DependentUpon>
     </Compile>
@@ -122,11 +127,6 @@
     <Compile Include="Source\DataTypes\GedPlace.vb" />
     <Compile Include="Source\Enums\ThemeCategoryEnum.vb" />
     <Compile Include="Source\Enums\ThemeIconsEnum.vb" />
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Source\Components\JTheme.Designer.vb">
       <DependentUpon>JTheme.vb</DependentUpon>
     </Compile>
@@ -247,15 +247,15 @@
   <ItemGroup>
     <Content Include="Resources\adobe\Assets.psd" />
     <Content Include="Resources\adobe\Panel.psd" />
-    <None Include="Resources\tastatur-bold.png" />
+    <None Include="Resources\image\tastatur-bold.png" />
     <None Include="Resources\image\JFOLDER_ICO20.png" />
     <None Include="Resources\image\JFOLDER_PLUS_ICO20.png" />
     <None Include="Resources\image\JFOLDER_MINUS_ICO20.png" />
-    <None Include="Resources\ico_20_black_fan.png" />
-    <None Include="Resources\ico_20_black__118.png" />
-    <None Include="Resources\ico_20_black__117.png" />
-    <None Include="Resources\ico_20_black__179.png" />
-    <None Include="Resources\ico_20_ancestry.png" />
+    <None Include="Resources\image\ico_20_black_fan.png" />
+    <None Include="Resources\image\ico_20_black__118.png" />
+    <None Include="Resources\image\ico_20_black__117.png" />
+    <None Include="Resources\image\ico_20_black__179.png" />
+    <None Include="Resources\image\ico_20_ancestry.png" />
     <None Include="Resources\image\Panel_Top_Right.png" />
     <None Include="Resources\image\Panel_Top_Left.png" />
     <None Include="Resources\image\Panel_Bottom_Right.png" />

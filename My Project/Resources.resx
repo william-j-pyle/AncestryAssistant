@@ -729,13 +729,13 @@
     <value>..\Resources\image\CORNER_UP_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ANCESTRY_FAMILY_VIEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ico_20_black__118.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\image\ico_20_black__118.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="USER_EXCLAMATION_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\USER_EXCLAMATION_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ANCESTRY_PEDIGREE_VIEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ico_20_black__117.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\image\ico_20_black__117.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -978,7 +978,7 @@
     <value>..\Resources\image\GIFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ANCESTRY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ico_20_ancestry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\image\ico_20_ancestry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MAXIMIZE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\MAXIMIZE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1002,7 +1002,7 @@
     <value>..\Resources\image\BOX_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ANCESTRY_FAN_VIEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ico_20_black_fan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\image\ico_20_black_fan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TEMPLATE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\TEMPLATE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1104,7 +1104,7 @@
     <value>..\Resources\image\PAGE_IMPORT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tastatur-bold" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\tastatur-bold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\image\tastatur-bold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ID_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ID_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
