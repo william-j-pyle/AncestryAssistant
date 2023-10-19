@@ -404,9 +404,9 @@ Public Class ApplicationForm
 
     If lblPersonName.Visible Then
       If activeAncestor.IsLocal Then
-        lblPersonName.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_black__75
+        lblPersonName.Image = Global.AncestryAssistant.My.Resources.Resources.USER_ICO20
       Else
-        lblPersonName.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_red__75
+        lblPersonName.Image = Global.AncestryAssistant.My.Resources.Resources.USER_ICO20
       End If
     End If
 

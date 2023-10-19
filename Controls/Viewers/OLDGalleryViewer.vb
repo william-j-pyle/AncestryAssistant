@@ -1,4 +1,4 @@
-﻿Public Class GalleryViewer
+﻿Public Class OLDGalleryViewer
   Inherits Panel
 
   Friend WithEvents pnlImageViewer As Panel

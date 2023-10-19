@@ -88,25 +88,25 @@
   Public Function Icon(themeIcon As ThemeIconsEnum, reColor As Color) As Image
     Select Case themeIcon
       Case ThemeIconsEnum.APP
-        Return My.Resources.ico_20_black_fan
+        'Return My.Resources.ico_20_black_fan
       Case ThemeIconsEnum.SEARCH
-        Return My.Resources.ico_20_black_fan
+        'Return My.Resources.ico_20_black_fan
       Case ThemeIconsEnum.PANEL_BG
-        Return My.Resources.ico_20_black_fan
+        'Return My.Resources.ico_20_black_fan
       Case ThemeIconsEnum.SEARCH_SM
-        Return My.Resources.ico_20_black_fan
+        'Return My.Resources.ico_20_black_fan
       Case ThemeIconsEnum.CLOSE
-        Return My.Resources.ico_20_black_fan
+        'Return My.Resources.ico_20_black_fan
       Case ThemeIconsEnum.CLOSE_SM
-        Return My.Resources.ico_20_black_fan
+        'Return My.Resources.ico_20_black_fan
       Case ThemeIconsEnum.PINNED
-        Return My.Resources.ico_20_black_fan
+        'Return My.Resources.ico_20_black_fan
       Case ThemeIconsEnum.UNPINNED
-        Return My.Resources.ico_20_black_fan
+        'Return My.Resources.ico_20_black_fan
       Case ThemeIconsEnum.DD
-        Return My.Resources.ico_20_black_fan
+        'Return My.Resources.ico_20_black_fan
       Case ThemeIconsEnum.DD_SM
-        Return My.Resources.ico_20_black_fan
+        'Return My.Resources.ico_20_black_fan
     End Select
     Return Nothing
   End Function

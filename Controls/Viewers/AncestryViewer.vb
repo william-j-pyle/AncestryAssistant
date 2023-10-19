@@ -87,7 +87,7 @@ Public Class AncestryViewer
     'btnBack
     '
     btnBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    btnBack.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_black__36
+    btnBack.Image = Global.AncestryAssistant.My.Resources.Resources.LEFT_ICO20
     btnBack.ImageTransparentColor = System.Drawing.Color.Magenta
     btnBack.Name = "btnBack"
     btnBack.Size = New System.Drawing.Size(23, 22)
@@ -97,7 +97,7 @@ Public Class AncestryViewer
     'btnReload
     '
     btnReload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    btnReload.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_black__191
+    btnReload.Image = Global.AncestryAssistant.My.Resources.Resources.REFRESH_ICO20
     btnReload.ImageTransparentColor = System.Drawing.Color.Magenta
     btnReload.Name = "btnReload"
     btnReload.Size = New System.Drawing.Size(23, 22)
@@ -107,7 +107,7 @@ Public Class AncestryViewer
     'btnHome
     '
     btnHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    btnHome.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_home
+    btnHome.Image = Global.AncestryAssistant.My.Resources.Resources.HOME_ICO20
     btnHome.ImageTransparentColor = System.Drawing.Color.Magenta
     btnHome.Name = "btnHome"
     btnHome.Size = New System.Drawing.Size(23, 22)
@@ -128,7 +128,7 @@ Public Class AncestryViewer
     '
     btnDownload.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
     btnDownload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    btnDownload.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_black__50
+    btnDownload.Image = Global.AncestryAssistant.My.Resources.Resources.DOWNLOAD_ICO20
     btnDownload.ImageTransparentColor = System.Drawing.Color.Magenta
     btnDownload.Name = "btnDownload"
     btnDownload.Size = New System.Drawing.Size(23, 22)

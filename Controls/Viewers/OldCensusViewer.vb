@@ -1,4 +1,4 @@
-﻿Public Class CensusViewer
+﻿Public Class OldCensusViewer
   Inherits Panel
 
   Friend WithEvents dataCensus As DataGridView

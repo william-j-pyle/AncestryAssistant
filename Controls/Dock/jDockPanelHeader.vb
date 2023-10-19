@@ -99,7 +99,7 @@ Public Class jDockPanelHeader
     HeaderCloseButton.Dock = System.Windows.Forms.DockStyle.Right
     HeaderCloseButton.FlatAppearance.BorderSize = 0
     HeaderCloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    HeaderCloseButton.Image = Global.AncestryAssistant.My.Resources.Resources.ico_20_close
+    HeaderCloseButton.Image = Global.AncestryAssistant.My.Resources.Resources.X_ICO20
     HeaderCloseButton.Location = New System.Drawing.Point(276, 0)
     HeaderCloseButton.Margin = New System.Windows.Forms.Padding(0)
     HeaderCloseButton.Name = "HeaderCloseButton"
