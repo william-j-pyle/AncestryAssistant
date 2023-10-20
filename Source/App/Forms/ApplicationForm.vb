@@ -64,12 +64,12 @@ Public Class ApplicationForm
   ' ==========================
   ' = Ancestry Event Handlers
   ' ==========================
-  Private Sub ancestry_AncestorChanged(newAncestor As Ancestor) Handles ancestry.AncestorChanged
+  Private Sub ancestry_AncestorChanged(newAncestor As Ancestor)
     activeAncestor = newAncestor
     SetUIState()
   End Sub
 
-  Private Sub ancestry_ImageDownload(fromPage As String, filename As String) Handles ancestry.ImageDownload
+  Private Sub ancestry_ImageDownload(fromPage As String, filename As String)
     If activeAncestor.IsValid Then
       activeAncestor.createPath()
       If fromPage.StartsWith("Census") Then
@@ -97,7 +97,7 @@ Public Class ApplicationForm
     SetUIState()
   End Sub
 
-  Private Sub ancestry_AncestryData(dataType As DataTypeEnum, ancestryData As Object) Handles ancestry.DataChanged
+  Private Sub ancestry_AncestryData(dataType As DataTypeEnum, ancestryData As Object) 'TODO Handles ancestry.DataChanged
     If activeAncestor.IsValid Then
       activeAncestor.createPath()
       saveFile(activeAncestor.ID, activeAncestor.Path, "Ancestry.id", False)
@@ -459,35 +459,35 @@ Public Class ApplicationForm
 
 
   Private Sub btnHomeTree_Click(sender As Object, e As EventArgs) Handles btnHomeTree.Click
-    ancestry.NavigateTo(URLTypeEnum.TREE_HOME)
+    'TODO ancestry.NavigateTo(URLTypeEnum.TREE_HOME)
   End Sub
 
   Private Sub btnViewPedigree_Click(sender As Object, e As EventArgs) Handles btnViewPedigree.Click
-    ancestry.NavigateTo(URLTypeEnum.TREE_HORIZONTAL)
+    'TODO ancestry.NavigateTo(URLTypeEnum.TREE_HORIZONTAL)
   End Sub
 
   Private Sub btnViewTree_Click(sender As Object, e As EventArgs) Handles btnViewTree.Click
-    ancestry.NavigateTo(URLTypeEnum.TREE_VERTICAL)
+    'TODO ancestry.NavigateTo(URLTypeEnum.TREE_VERTICAL)
   End Sub
 
   Private Sub btnViewFan_Click(sender As Object, e As EventArgs) Handles btnViewFan.Click
-    ancestry.NavigateTo(URLTypeEnum.TREE_FAN)
+    'TODO ancestry.NavigateTo(URLTypeEnum.TREE_FAN)
   End Sub
 
   Private Sub btnPersonFact_Click(sender As Object, e As EventArgs) Handles btnPersonFact.Click
-    ancestry.NavigateTo(URLTypeEnum.PERSON_FACTS)
+    'TODO ancestry.NavigateTo(URLTypeEnum.PERSON_FACTS)
   End Sub
 
   Private Sub btnPersonHints_Click(sender As Object, e As EventArgs) Handles btnPersonHints.Click
-    ancestry.NavigateTo(URLTypeEnum.PERSON_HINTS)
+    'TODO ancestry.NavigateTo(URLTypeEnum.PERSON_HINTS)
   End Sub
 
   Private Sub btnPersonGallery_Click(sender As Object, e As EventArgs) Handles btnPersonGallery.Click
-    ancestry.NavigateTo(URLTypeEnum.PERSON_GALLERY)
+    'TODO ancestry.NavigateTo(URLTypeEnum.PERSON_GALLERY)
   End Sub
 
   Private Sub btnPersonStory_Click(sender As Object, e As EventArgs) Handles btnPersonStory.Click
-    ancestry.NavigateTo(URLTypeEnum.PERSON_STORY)
+    'TODO ancestry.NavigateTo(URLTypeEnum.PERSON_STORY)
   End Sub
 
   Private Sub menuStateHandler(sender As Object, e As EventArgs) Handles btnAncestor.Click, btnAncestors.Click, ToolStripButton1.Click, ToolStripButton2.Click, ToolStripButton3.Click
@@ -578,11 +578,11 @@ Public Class ApplicationForm
   Private Sub AncestorsList_DoubleClick(sender As Object, e As EventArgs) Handles AncestorsList.DoubleClick
     Dim id As String = AncestorsList.SelectedItems.Item(0).Tag
     If Not id.Equals("") Then
-      ancestry.NavigateTo(URLTypeEnum.PERSON_FACTS, id)
+      'TODO ancestry.NavigateTo(URLTypeEnum.PERSON_FACTS, id)
     End If
   End Sub
 
-  Private Sub AncestryViewerBusy(busy As Boolean) Handles ancestry.AncestryViewerBusy
+  Private Sub AncestryViewerBusy(busy As Boolean)
     If busy Then
       Cursor = Cursors.WaitCursor
       tabs.SelectTab(0)
@@ -597,7 +597,7 @@ Public Class ApplicationForm
   End Sub
 
   Private Sub AncestryToolbarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AncestryToolbarToolStripMenuItem.Click
-    ancestry.ShowToolbar = AncestryToolbarToolStripMenuItem.Checked
+    'TODO ancestry.ShowToolbar = AncestryToolbarToolStripMenuItem.Checked
   End Sub
 
   Private Sub InitializeImageGallery()

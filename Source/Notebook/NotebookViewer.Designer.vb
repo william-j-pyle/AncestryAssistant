@@ -36,7 +36,7 @@ Partial Class NotebookViewer
     Me.PnlBody = New System.Windows.Forms.Panel()
     Me.TxtBody = New System.Windows.Forms.RichTextBox()
     Me.PnlHeader = New System.Windows.Forms.Panel()
-    Me.PnlHeaderStretch = New AncestryAssistant.JPanel()
+    Me.PnlHeaderStretch = New AncestryAssistant.BordersPanel()
     Me.TxtHeader = New System.Windows.Forms.TextBox()
     Me.LblStretch = New System.Windows.Forms.Label()
     Me.tsPage = New System.Windows.Forms.ToolStrip()
@@ -398,7 +398,7 @@ Partial Class NotebookViewer
   Friend WithEvents tsSections As ToolStrip
   Friend WithEvents BtnAddSection As ToolStripButton
   Friend WithEvents PnlHeader As Panel
-  Friend WithEvents PnlHeaderStretch As JPanel
+  Friend WithEvents PnlHeaderStretch As BordersPanel
   Friend WithEvents TxtHeader As TextBox
   Friend WithEvents PnlBody As Panel
   Friend WithEvents LblStretch As Label

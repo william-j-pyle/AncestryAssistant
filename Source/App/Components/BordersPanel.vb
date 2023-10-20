@@ -1,6 +1,6 @@
 ﻿Imports System.ComponentModel
 
-Public Class JPanel
+Public Class BordersPanel
   Inherits Panel
 
 

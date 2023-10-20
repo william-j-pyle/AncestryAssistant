@@ -1,6 +1,6 @@
 ﻿Imports System.ComponentModel
 
-Public Class jDockPanelHeader
+Public Class DockHeaderPanel
   Inherits Panel
 
   Private Const FIXED_HEIGHT = 24

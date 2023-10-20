@@ -24,14 +24,13 @@ Partial Class ApplicationForm
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ApplicationForm))
-        Dim Ancestor1 As AncestryAssistant.Ancestor = New AncestryAssistant.Ancestor()
         Me.imgViewerList = New System.Windows.Forms.ImageList(Me.components)
         Me.imgList20 = New System.Windows.Forms.ImageList(Me.components)
         Me.imgList32 = New System.Windows.Forms.ImageList(Me.components)
         Me.SplitLeft_Middle = New System.Windows.Forms.SplitContainer()
         Me.SplitLeft = New System.Windows.Forms.SplitContainer()
         Me.AncestorDetails = New System.Windows.Forms.ListView()
-        Me.JDockPanelHeader1 = New AncestryAssistant.jDockPanelHeader()
+        Me.JDockPanelHeader1 = New AncestryAssistant.DockHeaderPanel()
         Me.mnuPanelDock = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuDockTopLeft = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDockTopRight = New System.Windows.Forms.ToolStripMenuItem()
@@ -39,12 +38,13 @@ Partial Class ApplicationForm
         Me.mnuDockBottomMiddle = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDockBottomRight = New System.Windows.Forms.ToolStripMenuItem()
         Me.AncestorsList = New System.Windows.Forms.ListView()
-        Me.JDockPanelHeader2 = New AncestryAssistant.jDockPanelHeader()
+        Me.JDockPanelHeader2 = New AncestryAssistant.DockHeaderPanel()
         Me.SplitMiddle = New System.Windows.Forms.SplitContainer()
         Me.tabs = New System.Windows.Forms.TabControl()
         Me.tabAncestry = New System.Windows.Forms.TabPage()
-        Me.ancestry = New AncestryAssistant.AncestryViewer()
+        Me.Ancestry = New AncestryAssistant.AncestryWebViewer()
         Me.tabCensus = New System.Windows.Forms.TabPage()
+        Me.CensusViewer1 = New AncestryAssistant.CensusViewer()
         Me.tabGallery = New System.Windows.Forms.TabPage()
         Me.imgViewer = New AncestryAssistant.ImageViewer()
         Me.imgGallery = New AncestryAssistant.ImageGallery()
@@ -82,19 +82,18 @@ Partial Class ApplicationForm
         Me.SplitRight = New System.Windows.Forms.SplitContainer()
         Me.AncestorAttributes = New System.Windows.Forms.TreeView()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.JPanel2 = New AncestryAssistant.JPanel()
+        Me.JPanel2 = New AncestryAssistant.BordersPanel()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.JPanel1 = New AncestryAssistant.JPanel()
+        Me.JPanel1 = New AncestryAssistant.BordersPanel()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.JDockPanelHeader3 = New AncestryAssistant.jDockPanelHeader()
-        Me.JDockPanelHeader4 = New AncestryAssistant.jDockPanelHeader()
+        Me.JDockPanelHeader3 = New AncestryAssistant.DockHeaderPanel()
+        Me.JDockPanelHeader4 = New AncestryAssistant.DockHeaderPanel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblBirthYear = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblPersonName = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblID = New System.Windows.Forms.ToolStripStatusLabel()
         Me.AncestryDirectorWatcher = New System.IO.FileSystemWatcher()
-        Me.CensusViewer1 = New AncestryAssistant.CensusViewer()
         CType(Me.SplitLeft_Middle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitLeft_Middle.Panel1.SuspendLayout()
         Me.SplitLeft_Middle.Panel2.SuspendLayout()
@@ -358,7 +357,7 @@ Partial Class ApplicationForm
         'tabAncestry
         '
         Me.tabAncestry.BackColor = System.Drawing.Color.Transparent
-        Me.tabAncestry.Controls.Add(Me.ancestry)
+        Me.tabAncestry.Controls.Add(Me.Ancestry)
         Me.tabAncestry.ImageKey = "Ancestry.png"
         Me.tabAncestry.Location = New System.Drawing.Point(4, 24)
         Me.tabAncestry.Margin = New System.Windows.Forms.Padding(0)
@@ -367,36 +366,44 @@ Partial Class ApplicationForm
         Me.tabAncestry.TabIndex = 0
         Me.tabAncestry.Text = "Ancestry"
         '
-        'ancestry
+        'Ancestry
         '
-        Ancestor1.BirthYear = ""
-        Ancestor1.DeathYear = ""
-        Ancestor1.Name = " "
-        Me.ancestry.activeAncestor = Ancestor1
-        Me.ancestry.AncestorBirthYear = ""
-        Me.ancestry.AncestorDeathYear = ""
-        Me.ancestry.AncestorID = ""
-        Me.ancestry.AncestorName = " "
-        Me.ancestry.AncestryPage = ""
-        Me.ancestry.BrowserStatus = ""
-        Me.ancestry.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ancestry.HREF = "https://www.ancestry.com/"
-        Me.ancestry.Location = New System.Drawing.Point(0, 0)
-        Me.ancestry.Name = "ancestry"
-        Me.ancestry.ShowToolbar = True
-        Me.ancestry.Size = New System.Drawing.Size(348, 313)
-        Me.ancestry.TabIndex = 0
-        Me.ancestry.URL = New System.Uri("https://www.ancestry.com/", System.UriKind.Absolute)
+        Me.Ancestry.AncestorID = ""
+        Me.Ancestry.AncestryBaseURL = "https://www.ancestry.com/"
+        Me.Ancestry.AncestryPage = ""
+        Me.Ancestry.AncestryTreeID = "65171586"
+        Me.Ancestry.BlockedWebDomains = New String() {"facebook", "doubleclick", "tiktok", "pinterest", "adservice"}
+        Me.Ancestry.BlockWebTracking = False
+        Me.Ancestry.BrowserStatus = ""
+        Me.Ancestry.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Ancestry.HREF = "https://www.ancestry.com/"
+        Me.Ancestry.Location = New System.Drawing.Point(0, 0)
+        Me.Ancestry.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.Ancestry.Name = "Ancestry"
+        Me.Ancestry.ShowDownload = False
+        Me.Ancestry.ShowToolbar = True
+        Me.Ancestry.Size = New System.Drawing.Size(348, 313)
+        Me.Ancestry.TabIndex = 0
+        Me.Ancestry.URL = New System.Uri("https://www.ancestry.com/", System.UriKind.Absolute)
         '
         'tabCensus
         '
         Me.tabCensus.Controls.Add(Me.CensusViewer1)
-        Me.tabCensus.Location = New System.Drawing.Point(4, 24)
+        Me.tabCensus.Location = New System.Drawing.Point(4, 23)
         Me.tabCensus.Margin = New System.Windows.Forms.Padding(0)
         Me.tabCensus.Name = "tabCensus"
-        Me.tabCensus.Size = New System.Drawing.Size(348, 313)
+        Me.tabCensus.Size = New System.Drawing.Size(348, 314)
         Me.tabCensus.TabIndex = 1
         Me.tabCensus.Text = "Census"
+        '
+        'CensusViewer1
+        '
+        Me.CensusViewer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CensusViewer1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CensusViewer1.Location = New System.Drawing.Point(0, 0)
+        Me.CensusViewer1.Name = "CensusViewer1"
+        Me.CensusViewer1.Size = New System.Drawing.Size(348, 314)
+        Me.CensusViewer1.TabIndex = 0
         '
         'tabGallery
         '
@@ -923,15 +930,6 @@ Partial Class ApplicationForm
         Me.AncestryDirectorWatcher.Path = Global.AncestryAssistant.My.MySettings.Default.AncestorsPath
         Me.AncestryDirectorWatcher.SynchronizingObject = Me
         '
-        'CensusViewer1
-        '
-        Me.CensusViewer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CensusViewer1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CensusViewer1.Location = New System.Drawing.Point(0, 0)
-        Me.CensusViewer1.Name = "CensusViewer1"
-        Me.CensusViewer1.Size = New System.Drawing.Size(348, 313)
-        Me.CensusViewer1.TabIndex = 0
-        '
         'ApplicationForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -997,8 +995,8 @@ Partial Class ApplicationForm
     Friend WithEvents imgList32 As ImageList
   Friend WithEvents imgViewerList As ImageList
   Friend WithEvents SplitLeft_Middle As SplitContainer
-    Friend WithEvents JDockPanelHeader1 As jDockPanelHeader
-    Friend WithEvents AncestorDetails As ListView
+  Friend WithEvents JDockPanelHeader1 As DockHeaderPanel
+  Friend WithEvents AncestorDetails As ListView
     Friend WithEvents tsAncestry As ToolStrip
     Friend WithEvents btnHomeTree As ToolStripButton
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
@@ -1012,16 +1010,16 @@ Partial Class ApplicationForm
     Friend WithEvents btnPersonStory As ToolStripButton
     Friend WithEvents SplitLeft As SplitContainer
     Friend WithEvents AncestorsList As ListView
-    Friend WithEvents JDockPanelHeader2 As jDockPanelHeader
-    Friend WithEvents MenuStrip1 As MenuStrip
+  Friend WithEvents JDockPanelHeader2 As DockHeaderPanel
+  Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents SplitLeftMiddle_Right As SplitContainer
     Friend WithEvents SplitMiddle As SplitContainer
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents SplitRight As SplitContainer
-    Friend WithEvents JDockPanelHeader3 As jDockPanelHeader
-    Friend WithEvents JDockPanelHeader4 As jDockPanelHeader
-    Friend WithEvents StatusStrip1 As StatusStrip
+  Friend WithEvents JDockPanelHeader3 As DockHeaderPanel
+  Friend WithEvents JDockPanelHeader4 As DockHeaderPanel
+  Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents lblBirthYear As ToolStripStatusLabel
     Friend WithEvents lblPersonName As ToolStripStatusLabel
     Friend WithEvents lblID As ToolStripStatusLabel
@@ -1050,17 +1048,17 @@ Partial Class ApplicationForm
     Friend WithEvents ToolStripButton4 As ToolStripButton
     Friend WithEvents AncestorAttributes As TreeView
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents JPanel2 As JPanel
-    Friend WithEvents JPanel1 As JPanel
-    Friend WithEvents Label1 As Label
+  Friend WithEvents JPanel2 As BordersPanel
+  Friend WithEvents JPanel1 As BordersPanel
+  Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents tabCensus As TabPage
     Friend WithEvents tabNotebooks As TabPage
     Friend WithEvents tabGallery As TabPage
-    Friend WithEvents ancestry As AncestryViewer
-    Friend WithEvents AncestryToolbarToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NotebookViewer1 As NotebookViewer
+  Friend WithEvents AncestryToolbarToolStripMenuItem As ToolStripMenuItem
+  Friend WithEvents NotebookViewer1 As NotebookViewer
     Friend WithEvents imgGallery As ImageGallery
     Friend WithEvents imgViewer As ImageViewer
     Friend WithEvents CensusViewer1 As CensusViewer
+    Friend WithEvents Ancestry As AncestryWebViewer
 End Class

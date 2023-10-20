@@ -1,144 +1,49 @@
 ﻿Imports System.ComponentModel
 Imports Microsoft.Web.WebView2.Core
-Imports Microsoft.Web.WebView2.WinForms
 Imports Newtonsoft.Json
 
-Public Class AncestryViewer
-  Inherits Panel
+Public Class AncestryWebViewer
   ' Web Interface
-  Private WithEvents web As WebView2
   Private WithEvents CoreWeb As CoreWebView2
   Private WithEvents CoreWebDownload As CoreWebView2DownloadOperation
-  ' Tool Strip
-  Private WithEvents tsWeb As ToolStrip
-  Private WithEvents btnHome As ToolStripButton
-  Private WithEvents txtHref As ToolStripTextBox
-  Private WithEvents btnBack As ToolStripButton
-  Private WithEvents btnReload As ToolStripButton
-  Private WithEvents btnDownload As ToolStripButton
 
   ' Tracking
   Private isReady As Boolean = False
 
-  ' Temporary Constants, remove these to settings
-  Public Const ANCESTRY_URL = "https://www.ancestry.com/"
-  Public Const ANCESTRY_TREE_ID = "65171586"
-
   ' Public Events
-  Public Event AncestryData(dataType As DataTypeEnum, data As AncestryMessageData)
+  Public Event AncestryData(dataType As DataTypeEnum, data As AncestryDataMessage)
   Public Event AncestorChanged(AncestorID As String)
   Public Event AncestryViewerBusy(busy As Boolean)
-
+  Public Event AncestryDownloadAvailable()
 
   Public Sub New()
-    activeAncestor = New Ancestor()
-    web = New Microsoft.Web.WebView2.WinForms.WebView2()
-    tsWeb = New System.Windows.Forms.ToolStrip()
-    btnBack = New System.Windows.Forms.ToolStripButton()
-    btnReload = New System.Windows.Forms.ToolStripButton()
-    btnHome = New System.Windows.Forms.ToolStripButton()
-    txtHref = New System.Windows.Forms.ToolStripTextBox()
-    btnDownload = New System.Windows.Forms.ToolStripButton()
-
-    CType(web, System.ComponentModel.ISupportInitialize).BeginInit()
-    tsWeb.SuspendLayout()
-
-    Dock = DockStyle.Fill
-
-    '
-    'web
-    '
-    web.AllowExternalDrop = True
-    web.BackColor = System.Drawing.Color.White
-    web.CreationProperties = Nothing
-    web.DefaultBackgroundColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
-    web.Dock = System.Windows.Forms.DockStyle.Fill
-    web.Location = New System.Drawing.Point(0, 25)
-    web.Margin = New System.Windows.Forms.Padding(0)
-    web.Name = "web"
-    web.Size = New System.Drawing.Size(348, 288)
-    web.Source = New System.Uri("https://www.ancestry.com/family-tree/tree/65171586", System.UriKind.Absolute)
-    web.TabIndex = 0
-    web.ZoomFactor = 0.75R
-
-    Controls.Add(web)
-    Controls.Add(tsWeb)
-
-    '
-    'tsWeb
-    '
-    tsWeb.CanOverflow = False
-    tsWeb.DataBindings.Add(New System.Windows.Forms.Binding("Location", Global.AncestryAssistant.My.MySettings.Default, "TB_WEB_LOC", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-    tsWeb.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-    tsWeb.Items.AddRange(New System.Windows.Forms.ToolStripItem() {btnBack, btnReload, btnHome, txtHref, btnDownload})
-    tsWeb.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-    tsWeb.Location = Global.AncestryAssistant.My.MySettings.Default.TB_WEB_LOC
-    tsWeb.Name = "tsWeb"
-    tsWeb.Padding = New System.Windows.Forms.Padding(4, 0, 16, 0)
-    tsWeb.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-    tsWeb.Size = New System.Drawing.Size(348, 25)
-    tsWeb.Stretch = True
-    tsWeb.TabIndex = 2
-    '
-    'btnBack
-    '
-    btnBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    btnBack.Image = Global.AncestryAssistant.My.Resources.Resources.LEFT_ICO20
-    btnBack.ImageTransparentColor = System.Drawing.Color.Magenta
-    btnBack.Name = "btnBack"
-    btnBack.Size = New System.Drawing.Size(23, 22)
-    btnBack.Text = "ToolStripButton2"
-    btnBack.ToolTipText = "Previous Page"
-    '
-    'btnReload
-    '
-    btnReload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    btnReload.Image = Global.AncestryAssistant.My.Resources.Resources.REFRESH_ICO20
-    btnReload.ImageTransparentColor = System.Drawing.Color.Magenta
-    btnReload.Name = "btnReload"
-    btnReload.Size = New System.Drawing.Size(23, 22)
-    btnReload.Text = "ToolStripButton1"
-    btnReload.ToolTipText = "Refresh"
-    '
-    'btnHome
-    '
-    btnHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    btnHome.Image = Global.AncestryAssistant.My.Resources.Resources.HOME_ICO20
-    btnHome.ImageTransparentColor = System.Drawing.Color.Magenta
-    btnHome.Name = "btnHome"
-    btnHome.Size = New System.Drawing.Size(23, 22)
-    btnHome.Text = "ToolStripButton1"
-    btnHome.ToolTipText = "Ancestry Home Page"
-    '
-    'txtHref
-    '
-    txtHref.AutoSize = False
-    txtHref.BackColor = System.Drawing.SystemColors.Window
-    txtHref.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    txtHref.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-    txtHref.Name = "txtHref"
-    txtHref.Size = New System.Drawing.Size(100, 23)
-    txtHref.ToolTipText = "Website URL"
-    '
-    'btnDownload
-    '
-    btnDownload.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-    btnDownload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    btnDownload.Image = Global.AncestryAssistant.My.Resources.Resources.DOWNLOAD_ICO20
-    btnDownload.ImageTransparentColor = System.Drawing.Color.Magenta
-    btnDownload.Name = "btnDownload"
-    btnDownload.Size = New System.Drawing.Size(23, 22)
-    btnDownload.Text = "Download"
-    btnDownload.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
-    btnDownload.ToolTipText = "Download Available Information"
-
-    CType(web, System.ComponentModel.ISupportInitialize).EndInit()
+    InitializeComponent()
     web.EnsureCoreWebView2Async()
-    tsWeb.ResumeLayout(False)
-    tsWeb.PerformLayout()
-    ResumeLayout(False)
-    PerformLayout()
   End Sub
+
+  Public Property BlockWebTracking As Boolean = False
+
+  Public Property BlockedWebDomains As String() = {"facebook", "doubleclick", "tiktok", "pinterest", "adservice"}
+
+  Public Property AncestryBaseURL As String = "https://www.ancestry.com/"
+
+  Public Property AncestryTreeID As String = "65171586"
+
+  Public Property BrowserStatus As String = ""
+
+  Private _ShowDownload As Boolean = False
+  Public Property ShowDownload As Boolean
+    Get
+      Return _ShowDownload
+    End Get
+    Set(value As Boolean)
+      _ShowDownload = value
+      btnDownload.Enabled = value
+      If value Then
+        RaiseEvent AncestryDownloadAvailable()
+      End If
+    End Set
+  End Property
 
   Private _ShowToolbar As Boolean = True
   Public Property ShowToolbar As Boolean
@@ -151,83 +56,22 @@ Public Class AncestryViewer
     End Set
   End Property
 
-  Public Property BrowserStatus As String = ""
-
-  Public Property activeAncestor As Ancestor
-
-
+  Private _AncestorID As String = ""
   Public Property AncestorID As String
     Get
-      Return activeAncestor.ID
+      Return _AncestorID
     End Get
     Set(value As String)
-      If Not value.Equals(activeAncestor.ID) Then
-        activeAncestor.ID = value
-        If activeAncestor.IsValid Then
-          RaiseEvent AncestorChanged(activeAncestor)
-        End If
+      If Not value.Equals(_AncestorID) Then
+        _AncestorID = value
+        RaiseEvent AncestorChanged(value)
       End If
     End Set
   End Property
 
-  Public Property AncestorName As String
-    Get
-      Return activeAncestor.Name
-    End Get
-    Set(value As String)
-      If Not value.Equals(activeAncestor.Name) Then
-        activeAncestor.Name = value
-        If activeAncestor.IsValid Then
-          RaiseEvent AncestorChanged(activeAncestor)
-        End If
-      End If
-    End Set
-  End Property
+  Public Property AncestryPage As String = ""
 
-  Public Property AncestorBirthYear As String
-    Get
-      Return activeAncestor.BirthYear
-    End Get
-    Set(value As String)
-      If Not value.Equals(activeAncestor.BirthYear) Then
-        activeAncestor.BirthYear = value
-        If activeAncestor.IsValid Then
-          RaiseEvent AncestorChanged(activeAncestor)
-        End If
-      End If
-    End Set
-  End Property
-
-  Public Property AncestorDeathYear As String
-    Get
-      Return activeAncestor.DeathYear
-    End Get
-    Set(value As String)
-      If Not value.Equals(activeAncestor.DeathYear) Then
-        activeAncestor.DeathYear = value
-        If activeAncestor.IsValid Then
-          RaiseEvent AncestorChanged(activeAncestor)
-        End If
-      End If
-    End Set
-  End Property
-
-  Private _AncestryPage As String = ""
-  Public Property AncestryPage As String
-    Get
-      Return _AncestryPage
-    End Get
-    Set(value As String)
-      Dim wasPage As String = _AncestryPage
-      _AncestryPage = value
-      If value.Equals("Facts") Then
-        JSAPI_Execute("window.AncestryAssistant.captureFactsInternal();")
-      End If
-      RaiseEvent PageChanged(wasPage, value)
-    End Set
-  End Property
-
-  Private _URL As Uri = New Uri(ANCESTRY_URL)
+  Private _URL As Uri = New Uri(AncestryBaseURL)
   <Browsable(False)>
   Public Property URL As Uri
     Get
@@ -235,7 +79,11 @@ Public Class AncestryViewer
     End Get
     Set(value As Uri)
       _URL = value
-      TryToNavigate()
+      If isReady And value IsNot Nothing Then
+        If value.OriginalString.Length > 0 Then
+          web.Source = value
+        End If
+      End If
     End Set
   End Property
 
@@ -247,16 +95,6 @@ Public Class AncestryViewer
       URL = New Uri(value)
     End Set
   End Property
-
-  Private Sub TryToNavigate()
-    If isReady Then
-      If URL IsNot Nothing Then
-        If URL.OriginalString.Length > 0 Then
-          web.Source = URL
-        End If
-      End If
-    End If
-  End Sub
 
   ' ==========================
   ' = JSAPI Related Functions
@@ -289,7 +127,7 @@ Public Class AncestryViewer
             fromPage = "FindAGrave"
           End If
           My.Computer.Network.DownloadFile(src, fname)
-          RaiseEvent ImageDownload(fromPage, fname)
+          'TODO RaiseEvent ImageDownload(fromPage, fname)
         End If
     End Select
     Return False
@@ -297,9 +135,6 @@ Public Class AncestryViewer
 
 
   Private Async Sub JSAPI_Execute(script As String)
-#If SHOW_DEBUG Then
-    Debug.Print("Executeing Script: " & script)
-#End If
     Await web.CoreWebView2.ExecuteScriptAsync(script)
   End Sub
 
@@ -307,39 +142,16 @@ Public Class AncestryViewer
   Private Sub JSAPI_Message(sender As Object, e As CoreWebView2WebMessageReceivedEventArgs) Handles web.WebMessageReceived
     Dim msg As JSMessage = JsonConvert.DeserializeObject(Of JSMessage)(e.WebMessageAsJson)
     Select Case msg.MessageType
-      Case "InternalFactData"
-        Dim data As AncestryFactsParser = New AncestryFactsParser(msg.Payload)
-        If data.deathYear.Length = 4 Then
-          AncestorDeathYear = data.deathYear
-        End If
-        If data.birthYear.Length = 4 Then
-          AncestorBirthYear = data.birthYear
-        End If
       Case "FactData"
         Dim data As AncestryFactsParser = New AncestryFactsParser(msg.Payload)
-        If data.deathYear.Length = 4 Then
-          AncestorDeathYear = data.deathYear
-        End If
-        If data.birthYear.Length = 4 Then
-          AncestorBirthYear = data.birthYear
-        End If
-        If data.FamilyArray.Length > 1 Then
-          RaiseEvent DataChanged(DataTypeEnum.anFAMILYDATA, data.FamilyArray)
-        End If
-        If data.SourcesArray.Length > 1 Then
-          RaiseEvent DataChanged(DataTypeEnum.anSOURCEDATA, data.SourcesArray)
-        End If
-        If data.TimelineArray.Length > 1 Then
-          RaiseEvent DataChanged(DataTypeEnum.anFACTDATA, data.TimelineArray)
-          RaiseEvent DataChanged(DataTypeEnum.anPROFILEDATA, data.ProfileData)
-        End If
       Case "CensusData"
         Dim data As CensusParser = New CensusParser(msg.Payload, msg.MessageKey)
         If data.CensusArray.Length > 1 Then
           Dim year As String = data.CensusArray(1)(0).ToString
           Dim page As String = data.CensusArray(1)(1).ToString
-          _AncestryPage = "Census-" & year & "-p" & page
-          RaiseEvent DataChanged(DataTypeEnum.anCENSUSDATA, data.CensusArray)
+          AncestryPage = "Census-" & year & "-p" & page
+
+          'TODO RaiseEvent DataChanged(DataTypeEnum.anCENSUSDATA, data.CensusArray)
         End If
       Case Else
 
@@ -381,7 +193,11 @@ Public Class AncestryViewer
       .AddScriptToExecuteOnDocumentCreatedAsync(My.Resources.AssistantAPI)
     End With
     isReady = True
-    TryToNavigate()
+    If URL IsNot Nothing Then
+      If URL.OriginalString.Length > 0 Then
+        web.Source = URL
+      End If
+    End If
   End Sub
 
 
@@ -400,19 +216,20 @@ Public Class AncestryViewer
 
   ' If enabled, this routine will cancel every request to various tracking sites
   Private Sub CoreWeb_FrameNavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles CoreWeb.FrameNavigationStarting
-#If SHOW_DEBUG Then
-      Debug.Print("CoreWeb_FrameNavigationStarting: " & e.NavigationId & "-" & e.Uri)
-#End If
-    'If e.Uri.Contains("facebook") Or e.Uri.Contains("doubleclick") Or e.Uri.Contains("tiktok") Or e.Uri.Contains("pinterest") Or e.Uri.Contains("adservice") Then
-    'e.Cancel = True
-    'End If
+    If BlockWebTracking Then
+      For Each partialDomain As String In BlockedWebDomains
+        If e.Uri.Contains(partialDomain) Then
+          e.Cancel = True
+          Exit Sub
+        End If
+      Next
+    End If
   End Sub
 
   Private Sub CoreWeb_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles CoreWeb.NavigationCompleted
     If Visible = False Then Visible = True
     _URL = web.Source
-    Dim b As Boolean = txtHref.Text.Contains("mediaui-viewer") Or BrowserStatus.Contains("Census") Or BrowserStatus.Contains("Fact") Or txtHref.Text.EndsWith("jpg") Or txtHref.Text.EndsWith("jpeg")
-    btnDownload.Enabled = b And activeAncestor.IsValid
+    ShowDownload = txtHref.Text.Contains("mediaui-viewer") Or BrowserStatus.Contains("Census") Or BrowserStatus.Contains("Fact") Or txtHref.Text.EndsWith("jpg") Or txtHref.Text.EndsWith("jpeg")
   End Sub
 
   ' If the result of the current navigation attempts to open a new window
@@ -447,12 +264,12 @@ Public Class AncestryViewer
       End If
       If p.Length > 9 Then
         If p(3).Equals("family-tree") And p(4).Equals("person") _
-      And p(5).Equals("tree") And p(6) = ANCESTRY_TREE_ID _
+      And p(5).Equals("tree") And p(6) = AncestryTreeID _
       And p(7).Equals("person") Then
           If (p(9).StartsWith("facts") And title.EndsWith("Facts")) Or src.Contains("facts") Then
             AncestorID = p(8)
             If title.EndsWith("Facts") Then
-              AncestorName = title.Split("-")(0).Trim()
+              'TODO AncestorName = title.Split("-")(0).Trim()
             End If
             AncestryPage = "Facts"
             BrowserStatus = AncestryPage
@@ -460,21 +277,21 @@ Public Class AncestryViewer
           End If
           If p(9).StartsWith("gallery") And title.EndsWith("Gallery") Then
             AncestorID = p(8)
-            AncestorName = title.Split("-")(0).Trim()
+            'TODO AncestorName = title.Split("-")(0).Trim()
             AncestryPage = "Gallery"
             BrowserStatus = AncestryPage
             Exit Sub
           End If
           If p(9).StartsWith("hints") And title.EndsWith("Hints") Then
             AncestorID = p(8)
-            AncestorName = title.Split("-")(0).Trim()
+            'TODO AncestorName = title.Split("-")(0).Trim()
             AncestryPage = "Hints"
             BrowserStatus = AncestryPage
             Exit Sub
           End If
           If p(9).StartsWith("story") And title.EndsWith("LifeStory") Then
             AncestorID = p(8)
-            AncestorName = title.Split("-")(0).Trim()
+            'TODO AncestorName = title.Split("-")(0).Trim()
             AncestryPage = "LifeStory"
             BrowserStatus = AncestryPage
             Exit Sub
@@ -486,13 +303,10 @@ Public Class AncestryViewer
   End Sub
 
   Private Sub CoreWebDownload_StateChanged(sender As Object, e As Object) Handles CoreWebDownload.StateChanged
-#If SHOW_DEBUG Then
-    Debug.Print("CoreWebDownload_StateChanged: " & CoreWebDownload.State.ToString())
-#End If
     If CoreWebDownload.State = CoreWebView2DownloadState.Completed And CoreWeb.IsDefaultDownloadDialogOpen Then
       CoreWeb.CloseDefaultDownloadDialog()
       JSAPI_Execute("document.body.click();")
-      RaiseEvent ImageDownload(AncestryPage, CoreWebDownload.ResultFilePath())
+      'TODO RaiseEvent ImageDownload(AncestryPage, CoreWebDownload.ResultFilePath())
     End If
   End Sub
 
@@ -500,9 +314,6 @@ Public Class AncestryViewer
   ' this routine will fire, we Capture the DownloadOperation object and monitor its events
   ' for completion of the download, then fire an event about the download
   Private Sub CoreWeb_DownloadStarting(sender As Object, e As CoreWebView2DownloadStartingEventArgs) Handles CoreWeb.DownloadStarting
-#If SHOW_DEBUG Then
-    Debug.Print("CoreWeb_DownloadStarting:  " & e.ResultFilePath)
-#End If
     CoreWebDownload = e.DownloadOperation
   End Sub
 
@@ -511,7 +322,7 @@ Public Class AncestryViewer
   ' = Public Methods
   ' ==========================
   Public Sub NavigateTo(target As URLTypeEnum, Optional customParam As String = "")
-    Dim rtn As String = ANCESTRY_URL
+    Dim rtn As String = AncestryBaseURL
     Select Case target
       Case URLTypeEnum.CUSTOM
         rtn = customParam
@@ -535,10 +346,10 @@ Public Class AncestryViewer
       Case Else
     End Select
     ' Replace Variables with ID's
-    rtn = rtn.Replace("{TREEID}", ANCESTRY_TREE_ID)
+    rtn = rtn.Replace("{TREEID}", AncestryTreeID)
     rtn = rtn.Replace("{CFID}", "?cfpid={PERSONID}")
     If target <> URLTypeEnum.CUSTOM And customParam.Length > 0 Then
-      activeAncestor.Reset()
+      'TODO activeAncestor.Reset()
       rtn = rtn.Replace("{PERSONID}", customParam)
     Else
       rtn = rtn.Replace("{PERSONID}", AncestorID)
@@ -580,7 +391,6 @@ Public Class AncestryViewer
 
   Private Sub tsWeb_Resize(sender As Object, e As EventArgs) Handles tsWeb.Resize
     txtHref.Width = tsWeb.Bounds.Width - btnHome.Bounds.Right - 46
-    'tsWeb.Refresh()
   End Sub
 
   Private Sub txtHref_Enter(sender As Object, e As EventArgs) Handles txtHref.Enter
@@ -594,4 +404,5 @@ Public Class AncestryViewer
   Private Sub web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles web.NavigationCompleted
     RaiseEvent AncestryViewerBusy(False)
   End Sub
+
 End Class
