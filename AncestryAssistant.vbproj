@@ -122,10 +122,12 @@
     <Compile Include="Source\Census\CensusViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Source\Gedcom\DataObjects\GedDate.vb" />
+    <Compile Include="Source\Gedcom\DataObjects\GedPlace.vb" />
     <Compile Include="Source\Gedcom\GedComFile.vb" />
     <Compile Include="Source\Gedcom\Objects\GedComData.vb" />
     <Compile Include="Source\Gedcom\Objects\GedComFileLine.vb" />
-    <Compile Include="Source\Gedcom\Objects\GedDate.vb" />
+    <Compile Include="Source\Gedcom\Objects\GedDateRecord.vb" />
     <Compile Include="Source\Gedcom\Objects\GedEventCollection.vb" />
     <Compile Include="Source\Gedcom\Objects\GedEventRecord.vb" />
     <Compile Include="Source\Gedcom\Objects\GedFactCollection.vb" />
@@ -142,7 +144,7 @@
     <Compile Include="Source\Gedcom\Objects\GedMediaReferenceCollection.vb" />
     <Compile Include="Source\Gedcom\Objects\GedNameCollection.vb" />
     <Compile Include="Source\Gedcom\Objects\GedNameRecord.vb" />
-    <Compile Include="Source\Gedcom\Objects\GedPlace.vb" />
+    <Compile Include="Source\Gedcom\Objects\GedPlaceRecord.vb" />
     <Compile Include="Source\Gedcom\Objects\GedReference.vb" />
     <Compile Include="Source\Gedcom\Objects\GedReferenceCollection.vb" />
     <Compile Include="Source\Gedcom\Objects\GedRepositoryCollection.vb" />
@@ -176,9 +178,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Ancestry\DataObjects\AncestryDataMessage.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedDate.vb" />
     <Compile Include="Source\Gedcom\DataObjects\GedName.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedPlace.vb" />
     <Compile Include="Source\Theme\Enums\ThemeCategoryEnum.vb" />
     <Compile Include="Source\Theme\Enums\ThemeIconsEnum.vb" />
     <Compile Include="Source\Theme\JTheme.Designer.vb">

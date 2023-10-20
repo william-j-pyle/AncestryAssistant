@@ -2,17 +2,17 @@
 Public Class GedMediaRecord
 
   Public Property Key As GedReference
-  Public Property CreateDate As GedDate
+  Public Property CreateDate As GedDateRecord
   Public Property FileName As String
   Public Property FormatType As String
   Public Property Title As String
-  Public Property Place As GedPlace
+  Public Property Place As GedPlaceRecord
   Public Property RIN As String
   Public Property Ex_CLonOID As String
   Public Property Ex_CLonPID As String
   Public Property Ex_CLonTID As String
-  Public Property Ex_CLonDate As GedDate
-  Public Property Ex_CreateDate As GedDate
+  Public Property Ex_CLonDate As GedDateRecord
+  Public Property Ex_CreateDate As GedDateRecord
   Public Property Ex_Description As String
   Public Property Ex_Meta As String
   Public Property Ex_MserLKID As String
@@ -47,10 +47,10 @@ Public Class GedMediaRecord
             Ex_CLonTID = data.Data
             data.NextRow()
           Case "OBJE._CLON._DATE"
-            Ex_CLonDate = New GedDate(data.Data)
+            Ex_CLonDate = New GedDateRecord(data.Data)
             data.NextRow()
           Case "OBJE._CREA"
-            Ex_CreateDate = New GedDate(data.Data)
+            Ex_CreateDate = New GedDateRecord(data.Data)
             data.NextRow()
           Case "OBJE._DSCR"
             Ex_Description = data.MultiLineData()
@@ -80,7 +80,7 @@ Public Class GedMediaRecord
           Case "OBJE._ORIG._URL"
             data.NextRow()
           Case "OBJE.DATE"
-            CreateDate = New GedDate(data.Data)
+            CreateDate = New GedDateRecord(data.Data)
             data.NextRow()
           Case "OBJE.FILE"
             FileName = data.Data
@@ -110,7 +110,7 @@ Public Class GedMediaRecord
             Title = data.MultiLineData()
             data.NextRow()
           Case "OBJE.PLAC"
-            Place = New GedPlace(data.Data)
+            Place = New GedPlaceRecord(data.Data)
             data.NextRow()
           Case "OBJE.RIN"
             RIN = data.Data

@@ -3,7 +3,7 @@
     Public Property GedVersion As String
     Public Property GedFormat As String
     Public Property FileVersion As String
-    Public Property FileDate As GedDate
+    Public Property FileDate As GedDateRecord
     Public Property FileTime As GedTime
     Public Property FileCharacterSet As String
     Public Property AncestryTreeName As String
@@ -51,7 +51,7 @@
                         Ignore = data.MultiLineData()
                         data.NextRow()
                     Case "HEAD.DATE"
-                        FileDate = New GedDate(data.Data)
+                        FileDate = New GedDateRecord(data.Data)
                         data.NextRow()
                     Case "HEAD.DATE.TIME"
                         FileTime = New GedTime(data.Data)
