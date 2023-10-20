@@ -24,15 +24,16 @@ Partial Class ImageViewer
   Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ImageViewer))
         Me.imgToolbar = New System.Windows.Forms.Panel()
-        Me.zoomSlider = New System.Windows.Forms.TrackBar()
-        Me.zoomText = New System.Windows.Forms.TextBox()
-        Me.imgContainer = New System.Windows.Forms.Panel()
-        Me.imgBox = New System.Windows.Forms.PictureBox()
         Me.btnFlipV = New System.Windows.Forms.Button()
         Me.btnFlipH = New System.Windows.Forms.Button()
         Me.btnZoomFitHeightWidth = New System.Windows.Forms.Button()
         Me.btnZoomFitWidth = New System.Windows.Forms.Button()
         Me.btnZoomFitHeight = New System.Windows.Forms.Button()
+        Me.zoomSlider = New System.Windows.Forms.TrackBar()
+        Me.zoomText = New System.Windows.Forms.TextBox()
+        Me.imgContainer = New System.Windows.Forms.Panel()
+        Me.imgBox = New System.Windows.Forms.PictureBox()
+        Me.btnGallery = New System.Windows.Forms.Button()
         Me.imgToolbar.SuspendLayout()
         CType(Me.zoomSlider, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.imgContainer.SuspendLayout()
@@ -48,6 +49,7 @@ Partial Class ImageViewer
         Me.imgToolbar.Controls.Add(Me.btnZoomFitHeight)
         Me.imgToolbar.Controls.Add(Me.zoomSlider)
         Me.imgToolbar.Controls.Add(Me.zoomText)
+        Me.imgToolbar.Controls.Add(Me.btnGallery)
         Me.imgToolbar.Dock = System.Windows.Forms.DockStyle.Top
         Me.imgToolbar.Location = New System.Drawing.Point(0, 0)
         Me.imgToolbar.Margin = New System.Windows.Forms.Padding(0)
@@ -55,6 +57,67 @@ Partial Class ImageViewer
         Me.imgToolbar.Padding = New System.Windows.Forms.Padding(16, 0, 8, 0)
         Me.imgToolbar.Size = New System.Drawing.Size(702, 20)
         Me.imgToolbar.TabIndex = 2
+        '
+        'btnFlipV
+        '
+        Me.btnFlipV.AutoSize = True
+        Me.btnFlipV.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnFlipV.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnFlipV.Image = Global.AncestryAssistant.My.Resources.Resources.FLIP_VERTICAL_ICO20
+        Me.btnFlipV.Location = New System.Drawing.Point(130, 0)
+        Me.btnFlipV.Name = "btnFlipV"
+        Me.btnFlipV.Size = New System.Drawing.Size(22, 20)
+        Me.btnFlipV.TabIndex = 9
+        Me.btnFlipV.UseVisualStyleBackColor = True
+        '
+        'btnFlipH
+        '
+        Me.btnFlipH.AutoSize = True
+        Me.btnFlipH.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnFlipH.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnFlipH.Image = Global.AncestryAssistant.My.Resources.Resources.FLIP_HORIZONTAL_ICO20
+        Me.btnFlipH.Location = New System.Drawing.Point(108, 0)
+        Me.btnFlipH.Margin = New System.Windows.Forms.Padding(0, 3, 3, 3)
+        Me.btnFlipH.Name = "btnFlipH"
+        Me.btnFlipH.Size = New System.Drawing.Size(22, 20)
+        Me.btnFlipH.TabIndex = 8
+        Me.btnFlipH.UseVisualStyleBackColor = True
+        '
+        'btnZoomFitHeightWidth
+        '
+        Me.btnZoomFitHeightWidth.AutoSize = True
+        Me.btnZoomFitHeightWidth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnZoomFitHeightWidth.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnZoomFitHeightWidth.Image = Global.AncestryAssistant.My.Resources.Resources.MAXIMIZE_2_ICO20
+        Me.btnZoomFitHeightWidth.Location = New System.Drawing.Point(86, 0)
+        Me.btnZoomFitHeightWidth.Name = "btnZoomFitHeightWidth"
+        Me.btnZoomFitHeightWidth.Size = New System.Drawing.Size(22, 20)
+        Me.btnZoomFitHeightWidth.TabIndex = 6
+        Me.btnZoomFitHeightWidth.UseVisualStyleBackColor = True
+        '
+        'btnZoomFitWidth
+        '
+        Me.btnZoomFitWidth.AutoSize = True
+        Me.btnZoomFitWidth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnZoomFitWidth.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnZoomFitWidth.Image = CType(resources.GetObject("btnZoomFitWidth.Image"), System.Drawing.Image)
+        Me.btnZoomFitWidth.Location = New System.Drawing.Point(60, 0)
+        Me.btnZoomFitWidth.Name = "btnZoomFitWidth"
+        Me.btnZoomFitWidth.Size = New System.Drawing.Size(26, 20)
+        Me.btnZoomFitWidth.TabIndex = 5
+        Me.btnZoomFitWidth.UseVisualStyleBackColor = True
+        '
+        'btnZoomFitHeight
+        '
+        Me.btnZoomFitHeight.AutoSize = True
+        Me.btnZoomFitHeight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnZoomFitHeight.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnZoomFitHeight.Image = Global.AncestryAssistant.My.Resources.Resources.VERTICAL_ICO20
+        Me.btnZoomFitHeight.Location = New System.Drawing.Point(38, 0)
+        Me.btnZoomFitHeight.Name = "btnZoomFitHeight"
+        Me.btnZoomFitHeight.Size = New System.Drawing.Size(22, 20)
+        Me.btnZoomFitHeight.TabIndex = 4
+        Me.btnZoomFitHeight.UseVisualStyleBackColor = True
         '
         'zoomSlider
         '
@@ -64,7 +127,7 @@ Partial Class ImageViewer
         Me.zoomSlider.Maximum = 150
         Me.zoomSlider.Minimum = 10
         Me.zoomSlider.Name = "zoomSlider"
-        Me.zoomSlider.Size = New System.Drawing.Size(119, 45)
+        Me.zoomSlider.Size = New System.Drawing.Size(119, 20)
         Me.zoomSlider.TabIndex = 0
         Me.zoomSlider.TickFrequency = 10
         Me.zoomSlider.Value = 100
@@ -109,66 +172,19 @@ Partial Class ImageViewer
         Me.imgBox.TabIndex = 0
         Me.imgBox.TabStop = False
         '
-        'btnFlipV
+        'btnGallery
         '
-        Me.btnFlipV.AutoSize = True
-        Me.btnFlipV.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnFlipV.Dock = System.Windows.Forms.DockStyle.Left
-    Me.btnFlipV.Image = Global.AncestryAssistant.My.Resources.Resources.FLIP_VERTICAL_ICO20
-    Me.btnFlipV.Location = New System.Drawing.Point(108, 0)
-        Me.btnFlipV.Name = "btnFlipV"
-        Me.btnFlipV.Size = New System.Drawing.Size(22, 20)
-        Me.btnFlipV.TabIndex = 9
-        Me.btnFlipV.UseVisualStyleBackColor = True
-        '
-        'btnFlipH
-        '
-        Me.btnFlipH.AutoSize = True
-        Me.btnFlipH.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnFlipH.Dock = System.Windows.Forms.DockStyle.Left
-    Me.btnFlipH.Image = Global.AncestryAssistant.My.Resources.Resources.FLIP_HORIZONTAL_ICO20
-    Me.btnFlipH.Location = New System.Drawing.Point(86, 0)
-        Me.btnFlipH.Margin = New System.Windows.Forms.Padding(0, 3, 3, 3)
-        Me.btnFlipH.Name = "btnFlipH"
-        Me.btnFlipH.Size = New System.Drawing.Size(22, 20)
-        Me.btnFlipH.TabIndex = 8
-        Me.btnFlipH.UseVisualStyleBackColor = True
-        '
-        'btnZoomFitHeightWidth
-        '
-        Me.btnZoomFitHeightWidth.AutoSize = True
-        Me.btnZoomFitHeightWidth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnZoomFitHeightWidth.Dock = System.Windows.Forms.DockStyle.Left
-    Me.btnZoomFitHeightWidth.Image = Global.AncestryAssistant.My.Resources.Resources.MAXIMIZE_2_ICO20
-    Me.btnZoomFitHeightWidth.Location = New System.Drawing.Point(64, 0)
-        Me.btnZoomFitHeightWidth.Name = "btnZoomFitHeightWidth"
-        Me.btnZoomFitHeightWidth.Size = New System.Drawing.Size(22, 20)
-        Me.btnZoomFitHeightWidth.TabIndex = 6
-        Me.btnZoomFitHeightWidth.UseVisualStyleBackColor = True
-        '
-        'btnZoomFitWidth
-        '
-        Me.btnZoomFitWidth.AutoSize = True
-        Me.btnZoomFitWidth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnZoomFitWidth.Dock = System.Windows.Forms.DockStyle.Left
-        Me.btnZoomFitWidth.Image = CType(resources.GetObject("btnZoomFitWidth.Image"), System.Drawing.Image)
-        Me.btnZoomFitWidth.Location = New System.Drawing.Point(38, 0)
-        Me.btnZoomFitWidth.Name = "btnZoomFitWidth"
-        Me.btnZoomFitWidth.Size = New System.Drawing.Size(26, 20)
-        Me.btnZoomFitWidth.TabIndex = 5
-        Me.btnZoomFitWidth.UseVisualStyleBackColor = True
-        '
-        'btnZoomFitHeight
-        '
-        Me.btnZoomFitHeight.AutoSize = True
-        Me.btnZoomFitHeight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnZoomFitHeight.Dock = System.Windows.Forms.DockStyle.Left
-    Me.btnZoomFitHeight.Image = Global.AncestryAssistant.My.Resources.Resources.VERTICAL_ICO20
-    Me.btnZoomFitHeight.Location = New System.Drawing.Point(16, 0)
-        Me.btnZoomFitHeight.Name = "btnZoomFitHeight"
-        Me.btnZoomFitHeight.Size = New System.Drawing.Size(22, 20)
-        Me.btnZoomFitHeight.TabIndex = 4
-        Me.btnZoomFitHeight.UseVisualStyleBackColor = True
+        Me.btnGallery.AutoSize = True
+        Me.btnGallery.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnGallery.BackColor = System.Drawing.Color.Transparent
+        Me.btnGallery.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnGallery.FlatAppearance.BorderSize = 0
+        Me.btnGallery.Image = Global.AncestryAssistant.My.Resources.Resources.BIG_LEFT_ICO20
+        Me.btnGallery.Location = New System.Drawing.Point(16, 0)
+        Me.btnGallery.Name = "btnGallery"
+        Me.btnGallery.Size = New System.Drawing.Size(22, 20)
+        Me.btnGallery.TabIndex = 10
+        Me.btnGallery.UseVisualStyleBackColor = False
         '
         'ImageViewer
         '
@@ -203,4 +219,5 @@ Partial Class ImageViewer
     Friend WithEvents zoomText As TextBox
     Friend WithEvents imgContainer As Panel
     Friend WithEvents imgBox As PictureBox
+    Friend WithEvents btnGallery As Button
 End Class

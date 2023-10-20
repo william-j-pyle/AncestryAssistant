@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AncestryAssistant.ImageGallery">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="_GalleryPath" Hidden="true" />
+      <Method Name="AddImage" Hidden="true" />
+      <Field Name="components" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="GetImageThumbnail" Hidden="true" />
+      <Field Name="imgViewer" Hidden="true" />
+      <Method Name="imgViewer_DoubleClick" Hidden="true" />
+      <Method Name="imgViewer_ItemSelectionChanged" Hidden="true" />
+      <Field Name="imgViewerList" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>gAgAgAABQCABADAAAACAAAACAAAAAAAAEAYAAABCBAA=</HashCode>
+      <FileName>Source\Controls\ImageGallery.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AncestryAssistant.ImageViewer">
+    <Position X="3.75" Y="0.5" Width="2" />
+    <Members>
+      <Field Name="btnFlipH" Hidden="true" />
+      <Method Name="btnFlipH_Click" Hidden="true" />
+      <Field Name="btnFlipV" Hidden="true" />
+      <Method Name="btnFlipV_Click" Hidden="true" />
+      <Field Name="btnGallery" Hidden="true" />
+      <Method Name="btnGallery_Click" Hidden="true" />
+      <Field Name="btnZoomFitHeight" Hidden="true" />
+      <Method Name="btnZoomFitHeight_Click" Hidden="true" />
+      <Field Name="btnZoomFitHeightWidth" Hidden="true" />
+      <Method Name="btnZoomFitHeightWidth_Click" Hidden="true" />
+      <Field Name="btnZoomFitWidth" Hidden="true" />
+      <Method Name="btnZoomFitWidth_Click" Hidden="true" />
+      <Field Name="components" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Field Name="imgBox" Hidden="true" />
+      <Method Name="imgBox_LoadCompleted" Hidden="true" />
+      <Method Name="imgBox_MouseDown" Hidden="true" />
+      <Method Name="imgBox_MouseMove" Hidden="true" />
+      <Method Name="imgBox_MouseUp" Hidden="true" />
+      <Field Name="imgContainer" Hidden="true" />
+      <Method Name="imgContainer_Resize" Hidden="true" />
+      <Field Name="imgToolbar" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Field Name="panningActive" Hidden="true" />
+      <Field Name="smoothedMousePosition" Hidden="true" />
+      <Field Name="zoomActive" Hidden="true" />
+      <Field Name="zoomSlider" Hidden="true" />
+      <Method Name="zoomSlider_ValueChanged" Hidden="true" />
+      <Field Name="zoomText" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>iAAARAQQCDGEBAAESITYEDIiAAAoAwBAAAAQgAAIAsA=</HashCode>
+      <FileName>Source\Controls\ImageViewer.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

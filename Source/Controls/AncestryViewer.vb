@@ -25,12 +25,8 @@ Public Class AncestryViewer
   Public Const ANCESTRY_TREE_ID = "65171586"
 
   ' Public Events
-  Public Event ImageDownload(fromPage As String, filename As String)
-  Public Event StatusChanged(text As String)
-  Public Event PageChanged(wasPage As String, toPage As String)
-  Public Event DataChanged(dataType As DataTypeEnum, data As Object)
-  Public Event AncestorChanged(activeAncestor As Ancestor)
-  Public Event SourceChanged(sourceString As String)
+  Public Event AncestryData(dataType As DataTypeEnum, data As AncestryMessageData)
+  Public Event AncestorChanged(AncestorID As String)
   Public Event AncestryViewerBusy(busy As Boolean)
 
 
@@ -155,17 +151,7 @@ Public Class AncestryViewer
     End Set
   End Property
 
-
-  Private _BrowserStatus As String = ""
-  Public Property BrowserStatus As String
-    Get
-      Return _BrowserStatus
-    End Get
-    Set(value As String)
-      _BrowserStatus = value
-      RaiseEvent StatusChanged(value)
-    End Set
-  End Property
+  Public Property BrowserStatus As String = ""
 
   Public Property activeAncestor As Ancestor
 
@@ -401,8 +387,6 @@ Public Class AncestryViewer
 
   Private Sub web_SourceChanged(sender As Object, e As CoreWebView2SourceChangedEventArgs) Handles web.SourceChanged
     txtHref.Text = web.Source.AbsoluteUri
-
-    RaiseEvent SourceChanged(web.Source.AbsoluteUri)
   End Sub
 
 

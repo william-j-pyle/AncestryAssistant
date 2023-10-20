@@ -110,6 +110,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Source\Controls\CensusViewer.Designer.vb">
+      <DependentUpon>CensusViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Controls\CensusViewer.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\ImageGallery.Designer.vb">
+      <DependentUpon>ImageGallery.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Controls\ImageGallery.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Source\Controls\ImageViewer.Designer.vb">
       <DependentUpon>ImageViewer.vb</DependentUpon>
     </Compile>
@@ -179,14 +191,14 @@
     </Compile>
     <Compile Include="Source\Renderers\StatusStripRenderer.vb" />
     <Compile Include="Source\Renderers\ToolStripRenderer.vb" />
-    <Compile Include="Source\Controls\OldCensusViewer.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Source\Controls\OLDGalleryViewer.vb">
-      <SubType>Component</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Source\Controls\CensusViewer.resx">
+      <DependentUpon>CensusViewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Controls\ImageGallery.resx">
+      <DependentUpon>ImageGallery.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Source\Controls\NotebookViewer.resx">
       <DependentUpon>NotebookViewer.vb</DependentUpon>
     </EmbeddedResource>
@@ -208,6 +220,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Source\Controls\ControlsClassDiagram.cd" />
     <None Include="LICENSE" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">

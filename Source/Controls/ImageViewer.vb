@@ -1,10 +1,14 @@
 ﻿Imports System.ComponentModel
 
 Public Class ImageViewer
+
+  Public Event BackToGallery()
+
   Private panningActive As Boolean = False
   Private smoothedMousePosition As Point
   Private zoomActive As Boolean = False
-  'Private panningEnabled As Boolean = True
+
+  ''' <value>True</value>
   <Description("Enable/Disable Toolbar")>
   Public Property ToolbarEnabled As Boolean
     Get
@@ -15,13 +19,16 @@ Public Class ImageViewer
     End Set
   End Property
 
+  ''' <value>True</value>
   <Description("Enable/Disable Panning")>
   Public Property PanningEnabled As Boolean = True
 
+  ''' <value>0.1</value>
   <Description("Enable/Disable Panning")>
   Public Property MouseSmoothingFactor As Double = 0.1
 
 
+  ''' <value>100</value>
   <Category("Zoom"), Description("Zoom factor (10 to 150)")>
   Public Property ZoomFactor As Integer
     Get
@@ -34,6 +41,7 @@ Public Class ImageViewer
     End Set
   End Property
 
+  ''' <value>True</value>
   <Category("Zoom"), Description("Enable/Disable Zooming")>
   Public Property ZoomEnabled As Boolean
     Get
@@ -50,6 +58,10 @@ Public Class ImageViewer
   End Property
 
 
+  ''' <summary>
+  ''' This is the Summary
+  ''' </summary>
+  ''' <remarks>These are the remarks</remarks>
   <Category("Image"), Description("Image Filename")>
   Public Property ImageFile As String
     Get
@@ -187,5 +199,9 @@ Public Class ImageViewer
   Private Sub btnFlipH_Click(sender As Object, e As EventArgs) Handles btnFlipH.Click
     imgBox.Image.RotateFlip(RotateFlipType.RotateNoneFlipY)
     imgBox.Invalidate()
+  End Sub
+
+  Private Sub btnGallery_Click(sender As Object, e As EventArgs) Handles btnGallery.Click
+    RaiseEvent BackToGallery()
   End Sub
 End Class

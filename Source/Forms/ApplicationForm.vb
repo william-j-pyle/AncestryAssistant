@@ -27,6 +27,7 @@ Public Class ApplicationForm
     InitializeComponent()
     InitializeAncestorDetail()
     InitializeAncestorList()
+    InitializeImageGallery()
     ' Setup Ancestor Object
     ' Open Home Tree
     'ancestry.NavigateTo(URLTypeEnum.TREE_HOME)
@@ -63,19 +64,6 @@ Public Class ApplicationForm
   ' ==========================
   ' = Ancestry Event Handlers
   ' ==========================
-  Private Sub ancestry_StatusBarChanged(text As String) Handles ancestry.StatusChanged
-    lblStatus.Text = text
-    SetUIState()
-  End Sub
-
-  Private Sub ancestry_PageChanged(wasPage As String, toPage As String) Handles ancestry.PageChanged
-    SetUIState()
-  End Sub
-
-  Private Sub ancestry_SourceChanged(sourceString As String) Handles ancestry.SourceChanged
-    SetUIState()
-  End Sub
-
   Private Sub ancestry_AncestorChanged(newAncestor As Ancestor) Handles ancestry.AncestorChanged
     activeAncestor = newAncestor
     SetUIState()
@@ -437,12 +425,22 @@ Public Class ApplicationForm
     End If
   End Sub
 
+  Private Sub SetGalleryState()
+    If activeAncestor.IsLocal Then
+      If Not imgGallery.GalleryPath.Equals(activeAncestor.Path) Then
+        Debug.Print("SetGalleryState: " + activeAncestor.Path)
+        imgGallery.GalleryPath = activeAncestor.Path
+        imgGallery.BringToFront()
+      End If
+    End If
+  End Sub
 
   Private Sub SetUIState()
     SetSplitterState()
     SetStatusBarState()
     SetToolbarState()
     SetTabState()
+    SetGalleryState()
   End Sub
 
 
@@ -600,5 +598,38 @@ Public Class ApplicationForm
 
   Private Sub AncestryToolbarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AncestryToolbarToolStripMenuItem.Click
     ancestry.ShowToolbar = AncestryToolbarToolStripMenuItem.Checked
+  End Sub
+
+  Private Sub InitializeImageGallery()
+    imgGallery.Dock = DockStyle.Fill
+    imgViewer.Dock = DockStyle.Fill
+    imgGallery.Clear()
+    imgGallery.SendToBack()
+    imgViewer.BringToFront()
+    imgViewer.Visible = False
+  End Sub
+
+  Private Sub imgGallery_ImageViewRequested(imageFilename As String) Handles imgGallery.ImageViewRequested
+    imgViewer.ImageFile = imageFilename
+    imgViewer.Visible = True
+    imgViewer.BringToFront()
+  End Sub
+
+  Private Sub imgViewer_BackToGallery() Handles imgViewer.BackToGallery
+    imgViewer.Visible = False
+    imgGallery.BringToFront()
+  End Sub
+
+  Private Sub imgViewer_Load(sender As Object, e As EventArgs)
+
+  End Sub
+
+  Private Sub imgGallery_Load(sender As Object, e As EventArgs)
+
+  End Sub
+
+  Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
+    CensusViewer1.AddCensusFile("1920", "D:\Geneology\Ancestors\Pyles, William Charlie - 1918\Census-1920-p9.csv")
+    CensusViewer1.AddCensusFile("1940", "D:\Geneology\Ancestors\Pyles, William Charlie - 1918\Census-1940-p18.csv")
   End Sub
 End Class

@@ -121,13 +121,19 @@
     Next
     birthYear = Trim(Left(Split(birthEntry & vbTab & vbTab, vbTab)(0), 4))
     deathYear = Trim(Left(Split(deathEntry & vbTab & vbTab, vbTab)(0), 4))
-    Dim nm() As String
-    nm = Split(name, " ")
-    surname = nm(UBound(nm))
-    If Len(surname) < 4 Then
-      surname = nm(UBound(nm) - 1) & " " & surname
-    End If
-    givenname = Trim(Left(name, Len(name) - Len(surname) - 1))
+    Try
+      Dim nm() As String
+      nm = Split(name, " ")
+      surname = nm(UBound(nm))
+      If Len(surname) < 4 Then
+        surname = nm(UBound(nm) - 1) & " " & surname
+      End If
+      givenname = Trim(Left(name, Len(name) - Len(surname) - 1))
+    Catch ex As Exception
+      surname = ""
+      givenname = ""
+    End Try
+
   End Sub
 
   Private Function processRow(row As String) As Boolean
