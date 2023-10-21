@@ -8,12 +8,12 @@ Public Class ApplicationForm
   Public Event ValidActiveAncestor()
   Public Event PartialActiveAncestor()
 
-  Private _activeAncestor As Ancestor = New Ancestor()
-  Property activeAncestor As Ancestor
+  Private _activeAncestor As Ancestors.Ancestor = Nothing
+  Property activeAncestor As Ancestors.Ancestor
     Get
       Return _activeAncestor
     End Get
-    Set(value As Ancestor)
+    Set(value As Ancestors.Ancestor)
       _activeAncestor = value
       If _activeAncestor.IsValid Then
         RaiseEvent ValidActiveAncestor()
@@ -64,7 +64,7 @@ Public Class ApplicationForm
   ' ==========================
   ' = Ancestry Event Handlers
   ' ==========================
-  Private Sub ancestry_AncestorChanged(newAncestor As Ancestor)
+  Private Sub ancestry_AncestorChanged(newAncestor As Ancestors.Ancestor)
     activeAncestor = newAncestor
     SetUIState()
   End Sub
@@ -185,7 +185,7 @@ Public Class ApplicationForm
     End With
   End Sub
 
-  Private Function getAncestorDetails(Optional workingAncestor As Ancestor = Nothing) As ArrayList
+  Private Function getAncestorDetails(Optional workingAncestor As Ancestors.Ancestor = Nothing) As ArrayList
     Dim details As ArrayList = New ArrayList
     If workingAncestor Is Nothing Then workingAncestor = activeAncestor
     If workingAncestor.IsValid Then
@@ -193,7 +193,7 @@ Public Class ApplicationForm
       details.Add({"AncestryID", workingAncestor.IDFromProfile, "ANCESTOR", "N", ""})
       details.Add({"Surname", workingAncestor.Surname, "ANCESTOR", "N", ""})
       details.Add({"Given", workingAncestor.Givenname, "ANCESTOR", "N", ""})
-      details.Add({"HasProfileImage", workingAncestor.hasProfileImage, "ANCESTOR", "Y", ""})
+      details.Add({"HasProfileImage", workingAncestor.HasProfileImage, "ANCESTOR", "Y", ""})
 
       details.Add({"Date", workingAncestor.ProfileBirthDate, "BIRTH", "N", "CAL_BLACK"})
       details.Add({"Place", workingAncestor.ProfileBirthPlace, "BIRTH", "N", "LOCATION_BLACK"})
@@ -223,7 +223,7 @@ Public Class ApplicationForm
   End Function
 
 
-  Private Sub LoadAncestorAttributes(workingAncestor As Ancestor)
+  Private Sub LoadAncestorAttributes(workingAncestor As Ancestors.Ancestor)
     AncestorAttributes.DrawMode = TreeViewDrawMode.OwnerDrawText
     AncestorAttributes.Nodes.Clear()
     Dim item As TreeNode
@@ -234,7 +234,7 @@ Public Class ApplicationForm
     item = AncestorAttributes.Nodes.Add("ID", "Research", "", "")
     item.Nodes.Add("ANCESTRYID", "Ancestry.com" & vbTab & workingAncestor.IDFromProfile)
 
-    item = AncestorAttributes.Nodes.Add("PROFILEIMG", "HasProfileImage" & vbTab & workingAncestor.hasProfileImage, "", "")
+    item = AncestorAttributes.Nodes.Add("PROFILEIMG", "HasProfileImage" & vbTab & workingAncestor.HasProfileImage, "", "")
 
     item = AncestorAttributes.Nodes.Add("BIRTH", "Birth" & vbTab & workingAncestor.ProfileBirthDate, "", "")
     item.Nodes.Add("BIRTHPLACE", "Place" & vbTab & workingAncestor.ProfileBirthPlace)

@@ -5,7 +5,7 @@
     Public Property Author As String
     Public Property Note As String
     Public Property Publisher As String
-    Public Property PublishDate As GedDateRecord
+    Public Property PublishDate As GedDate
     Public Property PublishPlace As GedPlaceRecord
     Public Property RepoRefKey As GedReference
 
@@ -28,7 +28,7 @@
                         Publisher = data.MultiLineData()
                         data.NextRow()
                     Case "SOUR.PUBL.DATE"
-                        PublishDate = New GedDateRecord(data.Data)
+                        PublishDate = New GedDate(data.Data)
                         data.NextRow()
                     Case "SOUR.PUBL.PLAC"
                         PublishPlace = New GedPlaceRecord(data.Data)

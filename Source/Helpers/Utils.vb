@@ -34,7 +34,7 @@ Module Utils
       Exit Sub
     End If
     Using writer As New StreamWriter(dirPath & fileName)
-      writer.WriteLine(data)
+      writer.Write(data)
     End Using
   End Sub
 

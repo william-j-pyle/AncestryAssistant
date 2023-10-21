@@ -84,8 +84,8 @@ Public Class ImageSaveDialog
     If Not fname.EndsWith("\") Then fname += "\"
     fname += cmbCategory.Text.ToLower
     If txtDate.Text.Trim.Length > 0 Then
-      Dim dt As DateParser = New DateParser()
-      If dt.Parse(txtDate.Text) And dt.HasYear Then
+      Dim dt As GedDate = New GedDate(txtDate.Text)
+      If dt.HasYear Then
         fname += "-" + dt.Year
       End If
     End If

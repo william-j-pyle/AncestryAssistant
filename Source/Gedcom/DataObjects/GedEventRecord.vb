@@ -4,7 +4,7 @@ Public Class GedEventRecord
   Public Property FileKey As String
   Public Property RecordType As String
   Public Property EventType As String
-  Public Property EventDate As GedDateRecord
+  Public Property EventDate As GedDate
   Public Property Place As GedPlaceRecord
   Public Property Source As New GedSourceReferenceCollection
   Public Property Media As New GedMediaReferenceCollection
@@ -29,7 +29,7 @@ Public Class GedEventRecord
             EventType = data.Data
             data.NextRow()
           Case "EVNT.DATE"
-            EventDate = New GedDateRecord(data.Data)
+            EventDate = New GedDate(data.Data)
             data.NextRow()
           Case "EVNT.OBJE"
             Media.addObject(data, data.Key)

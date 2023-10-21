@@ -3,7 +3,7 @@ Public Class GedNameCollection
     Private NameRecords As New ArrayList
 
 
-    Default Public ReadOnly Property Name(idx As Integer) As GedNameRecord
+    Default Public ReadOnly Property Name(idx As Integer) As GedName
         Get
             Return NameRecords(idx)
         End Get
@@ -16,7 +16,7 @@ Public Class GedNameCollection
     End Property
 
     Public Sub addObject(data As GedComData)
-        Dim rec As New GedNameRecord
+        Dim rec As New GedName
         rec.addObject(data)
         NameRecords.Add(rec)
     End Sub

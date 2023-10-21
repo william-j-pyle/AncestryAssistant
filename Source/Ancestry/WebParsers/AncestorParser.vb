@@ -184,16 +184,16 @@
   Private Function correctDatePlace(dp As String) As String
     Dim rtn As String
     Dim p() As String
-    Dim dt As New DateParser
     If dp.Contains(" • ") Then
       rtn = dp.Replace(" • ", vbTab)
       p = Split(rtn, vbTab)
-      rtn = dt.toStandardDateFormat(p(0)) & vbTab & p(1)
+
+      rtn = New GedDate(p(0)).toAssistantDate() & vbTab & p(1)
     Else
       If dp.Contains(",") Then
         rtn = vbTab & dp
       Else
-        rtn = dt.toStandardDateFormat(dp) & vbTab
+        rtn = New GedDate(dp).toAssistantDate() & vbTab
       End If
     End If
     Return rtn
