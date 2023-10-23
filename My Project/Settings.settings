@@ -62,5 +62,50 @@
     <Setting Name="FORM_A_FG" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">ControlText</Value>
     </Setting>
+    <Setting Name="SPLIT_LM_R_DISTANCE" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">661</Value>
+    </Setting>
+    <Setting Name="SPLIT_LM_R_P1_COLLAPSED" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SPLIT_LM_R_P2_COLLAPSED" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SPLIT_L_M_DISTANCE" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">297</Value>
+    </Setting>
+    <Setting Name="SPLIT_L_M_P1_COLLAPSED" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SPLIT_L_M_P2_COLLAPSED" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SPLIT_L_DISTANCE" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">242</Value>
+    </Setting>
+    <Setting Name="SPLIT_L_P1_COLLAPSED" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SPLIT_L_P2_COLLAPSED" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SPLIT_R_DISTANCE" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">241</Value>
+    </Setting>
+    <Setting Name="SPLIT_R_P1_COLLAPSED" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SPLIT_R_P2_COLLAPSED" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ANCESTRY_SHOW_TOOLBAR" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MNU_ANCESTOR_CHECKED" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MNU_ANCESTORLIST_CHECKED" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

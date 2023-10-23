@@ -1,4 +1,7 @@
-﻿<DefaultPropertyAttribute("ID")>
+﻿Imports System.ComponentModel
+Imports System.IO
+
+<DefaultPropertyAttribute("ID")>
 Public Class OldAncestor
   Public Sub New()
     Reset()

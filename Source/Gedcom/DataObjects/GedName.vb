@@ -10,10 +10,9 @@
   Public Property Given As String = ""
   Public Property Suffix As String = ""
   Public Property Surname As String = ""
-  Private _Name As String = ""
   Public Property Name As String
     Get
-      Return (Suffix + Surname).Trim() + ", " + Given
+      Return (Suffix + Surname).Trim() + IIf(Given.Trim.Length > 1, ", " + Given.Trim, "")
     End Get
     Set(value As String)
       Dim s As String

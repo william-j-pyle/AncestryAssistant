@@ -293,6 +293,186 @@ Namespace My
                 Me("FORM_A_FG") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("661")>  _
+        Public Property SPLIT_LM_R_DISTANCE() As Integer
+            Get
+                Return CType(Me("SPLIT_LM_R_DISTANCE"),Integer)
+            End Get
+            Set
+                Me("SPLIT_LM_R_DISTANCE") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property SPLIT_LM_R_P1_COLLAPSED() As Boolean
+            Get
+                Return CType(Me("SPLIT_LM_R_P1_COLLAPSED"),Boolean)
+            End Get
+            Set
+                Me("SPLIT_LM_R_P1_COLLAPSED") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property SPLIT_LM_R_P2_COLLAPSED() As Boolean
+            Get
+                Return CType(Me("SPLIT_LM_R_P2_COLLAPSED"),Boolean)
+            End Get
+            Set
+                Me("SPLIT_LM_R_P2_COLLAPSED") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("297")>  _
+        Public Property SPLIT_L_M_DISTANCE() As Integer
+            Get
+                Return CType(Me("SPLIT_L_M_DISTANCE"),Integer)
+            End Get
+            Set
+                Me("SPLIT_L_M_DISTANCE") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property SPLIT_L_M_P1_COLLAPSED() As Boolean
+            Get
+                Return CType(Me("SPLIT_L_M_P1_COLLAPSED"),Boolean)
+            End Get
+            Set
+                Me("SPLIT_L_M_P1_COLLAPSED") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property SPLIT_L_M_P2_COLLAPSED() As Boolean
+            Get
+                Return CType(Me("SPLIT_L_M_P2_COLLAPSED"),Boolean)
+            End Get
+            Set
+                Me("SPLIT_L_M_P2_COLLAPSED") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("242")>  _
+        Public Property SPLIT_L_DISTANCE() As Integer
+            Get
+                Return CType(Me("SPLIT_L_DISTANCE"),Integer)
+            End Get
+            Set
+                Me("SPLIT_L_DISTANCE") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property SPLIT_L_P1_COLLAPSED() As Boolean
+            Get
+                Return CType(Me("SPLIT_L_P1_COLLAPSED"),Boolean)
+            End Get
+            Set
+                Me("SPLIT_L_P1_COLLAPSED") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property SPLIT_L_P2_COLLAPSED() As Boolean
+            Get
+                Return CType(Me("SPLIT_L_P2_COLLAPSED"),Boolean)
+            End Get
+            Set
+                Me("SPLIT_L_P2_COLLAPSED") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("241")>  _
+        Public Property SPLIT_R_DISTANCE() As Integer
+            Get
+                Return CType(Me("SPLIT_R_DISTANCE"),Integer)
+            End Get
+            Set
+                Me("SPLIT_R_DISTANCE") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property SPLIT_R_P1_COLLAPSED() As Boolean
+            Get
+                Return CType(Me("SPLIT_R_P1_COLLAPSED"),Boolean)
+            End Get
+            Set
+                Me("SPLIT_R_P1_COLLAPSED") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property SPLIT_R_P2_COLLAPSED() As Boolean
+            Get
+                Return CType(Me("SPLIT_R_P2_COLLAPSED"),Boolean)
+            End Get
+            Set
+                Me("SPLIT_R_P2_COLLAPSED") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property ANCESTRY_SHOW_TOOLBAR() As Boolean
+            Get
+                Return CType(Me("ANCESTRY_SHOW_TOOLBAR"),Boolean)
+            End Get
+            Set
+                Me("ANCESTRY_SHOW_TOOLBAR") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property MNU_ANCESTOR_CHECKED() As Boolean
+            Get
+                Return CType(Me("MNU_ANCESTOR_CHECKED"),Boolean)
+            End Get
+            Set
+                Me("MNU_ANCESTOR_CHECKED") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property MNU_ANCESTORLIST_CHECKED() As Boolean
+            Get
+                Return CType(Me("MNU_ANCESTORLIST_CHECKED"),Boolean)
+            End Get
+            Set
+                Me("MNU_ANCESTORLIST_CHECKED") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

@@ -11,10 +11,10 @@ Public Class AncestryWebViewer
   Private isReady As Boolean = False
 
   ' Public Events
-  Public Event AncestryData(dataType As DataTypeEnum, data As AncestryDataMessage)
+  Public Event DataDownload(dataType As DataTypeEnum, data As AncestryDataMessage)
   Public Event AncestorChanged(AncestorID As String)
-  Public Event AncestryViewerBusy(busy As Boolean)
-  Public Event AncestryDownloadAvailable()
+  Public Event ViewerBusy(busy As Boolean)
+  Public Event DownloadEnabled(enabled As Boolean)
 
   Public Sub New()
     InitializeComponent()
@@ -39,13 +39,11 @@ Public Class AncestryWebViewer
     Set(value As Boolean)
       _ShowDownload = value
       btnDownload.Enabled = value
-      If value Then
-        RaiseEvent AncestryDownloadAvailable()
-      End If
+      RaiseEvent DownloadEnabled(value)
     End Set
   End Property
 
-  Private _ShowToolbar As Boolean = True
+  Private _ShowToolbar As Boolean = False
   Public Property ShowToolbar As Boolean
     Get
       Return _ShowToolbar
@@ -398,11 +396,11 @@ Public Class AncestryWebViewer
   End Sub
 
   Private Sub web_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles web.NavigationStarting
-    RaiseEvent AncestryViewerBusy(True)
+    RaiseEvent ViewerBusy(True)
   End Sub
 
   Private Sub web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles web.NavigationCompleted
-    RaiseEvent AncestryViewerBusy(False)
+    RaiseEvent ViewerBusy(False)
   End Sub
 
 End Class

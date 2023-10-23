@@ -1,0 +1,6 @@
+﻿Public Enum AAFileTypeEnum
+  UNDEFINED = -1
+  KEYVALUEPAIRS = 1
+  SINGLEVALUE = 2
+  LISTARRAY = 3
+End Enum
