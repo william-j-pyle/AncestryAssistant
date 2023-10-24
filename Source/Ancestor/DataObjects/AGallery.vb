@@ -24,4 +24,5 @@ Public Class AGallery
     dataEntries = Directory.GetFiles(RecordsBasePath, "*.jpg")
 
   End Sub
+
 End Class

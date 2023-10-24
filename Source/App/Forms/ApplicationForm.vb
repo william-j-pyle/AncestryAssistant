@@ -1,5 +1,4 @@
-﻿Imports System.ComponentModel
-Imports System.IO
+﻿Imports System.IO
 
 #Const SHOW_DEBUG = False
 
@@ -8,6 +7,7 @@ Public Class ApplicationForm
   Public Event ValidActiveAncestor()
 
   Private _activeAncestor As AncestorCollection.Ancestor = Nothing
+
   Property activeAncestor As AncestorCollection.Ancestor
     Get
       Return _activeAncestor
@@ -20,6 +20,12 @@ Public Class ApplicationForm
     End Set
   End Property
 
+#Region "App Form - Event Handlers"
+
+  ' ==========================
+  ' = App Form - Event Handlers
+  ' ==========================
+
   Public Sub New()
     InitializeComponent()
     InitializeAncestorDetail()
@@ -31,115 +37,114 @@ Public Class ApplicationForm
     'ancestry.NavigateTo(URLTypeEnum.TREE_HOME)
   End Sub
 
-  ' ==========================
-  ' = Form Event Handlers
-  ' ==========================
   Private Sub ApplicationForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     LoadAncestorList()
   End Sub
 
   ' ==========================
-  ' = Ancestry Event Handlers
+  ' = Set Visual States
   ' ==========================
-  Private Sub ancestry_AncestorChanged(newAncestor As AncestorCollection.Ancestor)
-    activeAncestor = newAncestor
+  Private Sub SetSplitterState()
+    If btnAncestor.Checked Or btnAncestors.Checked Then
+      SplitPanel.Panel1Collapsed = Not btnAncestor.Checked
+      SplitPanel.Panel2Collapsed = Not btnAncestors.Checked
+      SplitPanel_Main.Panel1Collapsed = False
+    Else
+      SplitPanel_Main.Panel1Collapsed = True
+    End If
   End Sub
 
-  Private Sub ancestry_ImageDownload(fromPage As String, filename As String)
-    'If activeAncestor.IsValid Then
-    '  activeAncestor.createPath()
-    '  If fromPage.StartsWith("Census") Then
-    '    fromPage += ".jpg"
-    '    If File.Exists(activeAncestor.Path & fromPage) Then
-    '      Dim rslt As MsgBoxResult
-    '      rslt = MsgBox("File Already Exists" & vbCrLf & fromPage & vbCrLf & "Replace?", vbCritical Or vbYesNoCancel, "File Exists")
-    '      Select Case rslt
-    '        Case MsgBoxResult.Yes
-    '          File.Delete(activeAncestor.Path & fromPage)
-    '        Case Else
-    '          File.Delete(filename)
-    '          Exit Sub
-    '      End Select
-    '    End If
-    '    File.Move(filename, activeAncestor.Path & fromPage)
-    '  Else
-    '    Dim frm As ImageSaveDialog = New ImageSaveDialog()
-    '    frm.DstDir = activeAncestor.Path
-    '    frm.SrcFilename = filename
-    '    frm.SrcPage = fromPage
-    '    frm.Show()
-    '  End If
-    'End If
+  Private Sub SetUIState()
+    SetSplitterState()
+    SetToolbarState()
+    SetGalleryState()
+  End Sub
+
+#End Region
+
+#Region "App Toolbar - Event Handlers"
+
+  ' ==========================
+  ' = App Toolbar - Event Handlers
+  ' ==========================
+
+  Private Sub SetToolbarState()
+    'Dim isIDValid As Boolean = activeAncestor.ID.Length > 3
+    'btnPersonFact.Enabled = isIDValid
+    'btnPersonGallery.Enabled = isIDValid
+    'btnPersonHints.Enabled = isIDValid
+    'btnPersonStory.Enabled = isIDValid
+  End Sub
+
+  Private Sub btnHomeTree_Click(sender As Object, e As EventArgs) Handles btnHomeTree.Click
+    Ancestry.NavigateTo(URLTypeEnum.TREE_HOME)
+  End Sub
+
+  Private Sub btnViewPedigree_Click(sender As Object, e As EventArgs) Handles btnViewPedigree.Click
+    Ancestry.NavigateTo(URLTypeEnum.TREE_HORIZONTAL)
+  End Sub
+
+  Private Sub btnViewTree_Click(sender As Object, e As EventArgs) Handles btnViewTree.Click
+    Ancestry.NavigateTo(URLTypeEnum.TREE_VERTICAL)
+  End Sub
+
+  Private Sub btnViewFan_Click(sender As Object, e As EventArgs) Handles btnViewFan.Click
+    Ancestry.NavigateTo(URLTypeEnum.TREE_FAN)
+  End Sub
+
+  Private Sub btnPersonFact_Click(sender As Object, e As EventArgs) Handles btnPersonFact.Click
+    Ancestry.NavigateTo(URLTypeEnum.PERSON_FACTS)
+  End Sub
+
+  Private Sub btnPersonHints_Click(sender As Object, e As EventArgs) Handles btnPersonHints.Click
+    Ancestry.NavigateTo(URLTypeEnum.PERSON_HINTS)
+  End Sub
+
+  Private Sub btnPersonGallery_Click(sender As Object, e As EventArgs) Handles btnPersonGallery.Click
+    Ancestry.NavigateTo(URLTypeEnum.PERSON_GALLERY)
+  End Sub
+
+  Private Sub btnPersonStory_Click(sender As Object, e As EventArgs) Handles btnPersonStory.Click
+    Ancestry.NavigateTo(URLTypeEnum.PERSON_STORY)
+  End Sub
+
+  Private Sub AncestryToolbarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AncestryToolbarToolStripMenuItem.Click
+    Ancestry.ShowToolbar = AncestryToolbarToolStripMenuItem.Checked
+  End Sub
+
+  Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
+
+  End Sub
+
+#End Region
+
+#Region "App Menu - Event Handlers"
+
+  ' ==========================
+  ' = App Menu - Event Handlers
+  ' ==========================
+
+  Private Sub menuStateHandler(sender As Object, e As EventArgs) Handles btnAncestor.Click, btnAncestors.Click
     SetUIState()
   End Sub
 
-  Private Sub ancestry_AncestryData(dataType As DataTypeEnum, ancestryData As Object) 'TODO Handles ancestry.DataChanged
-    'If activeAncestor.IsValid Then
-    '  activeAncestor.createPath()
-    '  saveFile(activeAncestor.ID, activeAncestor.Path, "Ancestry.id", False)
-    '  Select Case dataType
-    '    Case DataTypeEnum.anFACTDATA
-    '      Dim data As Array = ancestryData
-    '      saveCSV(data, activeAncestor.Path, "Timeline.csv")
-    '    Case DataTypeEnum.anSOURCEDATA
-    '      Dim data As Array = ancestryData
-    '      saveCSV(data, activeAncestor.Path, "Sources.csv")
-    '    Case DataTypeEnum.anFAMILYDATA
-    '      Dim data As Array = ancestryData
-    '      saveCSV(data, activeAncestor.Path, "Family.csv")
-    '    Case DataTypeEnum.anCENSUSDATA
-    '      Dim data As Array = ancestryData
-    '      Dim year As String = data(1)(0).ToString
-    '      Dim page As String = data(1)(1).ToString
-    '      saveCSV(data, activeAncestor.Path, "Census-" & year & "-p" & page & ".csv")
-    '    Case DataTypeEnum.anPROFILEDATA
-    '      Dim data As String = ancestryData
-    '      saveFile(data, activeAncestor.Path, "Profile.txt")
-    '    Case Else
-
-    '  End Select
-    'End If
-    'SetUIState()
+  Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+    My.Settings.Save()
+    Close()
   End Sub
 
-  ' ==========================
-  ' = Ancestors List
-  ' ==========================
-  Private Sub InitializeAncestorList()
-    With AncestorsList
-      .Tag = ""
-      .Items.Clear()
-      .Columns.Clear()
-      .Columns.Add("Name", CInt(.Width / 2))
-      .Columns.Add("Birth Year", CInt(.Width / 2))
-      .Groups.Clear()
-    End With
-  End Sub
+#End Region
 
-  Private Sub LoadAncestorList()
-    With AncestorsList
-      '.Tag = ""
-      '.Items.Clear()
-      'Dim dirs() As String = Directory.GetDirectories(My.Settings.AncestorsPath)
-      'For Each dir As String In dirs
-      '  Dim dirname As String = dir.Replace(My.Settings.AncestorsPath, "")
-      '  Dim p() As String = dirname.Split("-")
-      '  If p.Length() > 0 Then
-      '    item = .Items.Add(p(0).Trim())
-      '    item.SubItems.Add(p(1).Trim())
-      '    If File.Exists(dir + "\Ancestry.id") Then
-      '      item.Tag = File.ReadAllLines(dir + "\Ancestry.id")(0).Trim
-      '    Else
-      '      item.Tag = ""
-      '    End If
-      '  End If
-      'Next
-    End With
-  End Sub
+#Region "Viewer - Ancestor"
 
   ' ==========================
-  ' = Ancestor Details
+  ' = Viewer - Ancestor
   ' ==========================
+  Private Sub JDockPanelHeader1_HeaderCloseClicked() Handles JDockPanelHeader1.HeaderCloseClicked
+    btnAncestor.Checked = False
+    SetUIState()
+  End Sub
+
   Private Sub InitializeAncestorDetail()
     'With AncestorDetails
     '  .Tag = ""
@@ -174,7 +179,6 @@ Public Class ApplicationForm
     '  details.Add({"Place", workingAncestor.ProfileBirthPlace, "BIRTH", "N", "LOCATION_BLACK"})
     '  details.Add({"HasCertificateImage", workingAncestor.hasBirthCertificate, "BIRTH", "Y", ""})
 
-
     '  details.Add({"Date", workingAncestor.ProfileDeathDate, "DEATH", "N", "CAL_BLACK"})
     '  details.Add({"Place", workingAncestor.ProfileDeathPlace, "DEATH", "N", "LOCATION_BLACK"})
     '  details.Add({"HasCertificateImage", workingAncestor.hasDeathCertificate, "DEATH", "Y", ""})
@@ -196,7 +200,6 @@ Public Class ApplicationForm
     'End If
     Return details
   End Function
-
 
   Private Sub LoadAncestorAttributes(workingAncestor As AncestorCollection.Ancestor)
     AncestorAttributes.DrawMode = TreeViewDrawMode.OwnerDrawText
@@ -262,7 +265,6 @@ Public Class ApplicationForm
     e.DrawDefault = False
   End Sub
 
-
   Private Sub LoadAncestorTree()
     'Debug.Print("LoadAncestorTree: TAG=" & AncestorDetails.Tag)
     'If activeAncestor.IsValid Then
@@ -323,107 +325,49 @@ Public Class ApplicationForm
     'End If
   End Sub
 
-  ' ==========================
-  ' = Set Visual States
-  ' ==========================
-  Private Sub SetSplitterState()
-    If btnAncestor.Checked Or btnAncestors.Checked Then
-      SplitPanel.Panel1Collapsed = Not btnAncestor.Checked
-      SplitPanel.Panel2Collapsed = Not btnAncestors.Checked
-      SplitPanel_Main.Panel1Collapsed = False
-    Else
-      SplitPanel_Main.Panel1Collapsed = True
-    End If
-  End Sub
+#End Region
 
-  Private Sub SetToolbarState()
-    'Dim isIDValid As Boolean = activeAncestor.ID.Length > 3
-    'btnPersonFact.Enabled = isIDValid
-    'btnPersonGallery.Enabled = isIDValid
-    'btnPersonHints.Enabled = isIDValid
-    'btnPersonStory.Enabled = isIDValid
-  End Sub
-
-  Private Sub SetTabState()
-    'Dim isLocal As Boolean = activeAncestor.IsLocal
-    'If isLocal And tabs.TabPages.Count > 1 Then Exit Sub
-    'If isLocal And tabs.TabPages.Count = 1 Then
-    '  tabs.TabPages.Add(tabCensus)
-    '  tabs.TabPages.Add(tabGallery)
-    '  tabs.TabPages.Add(tabNotebooks)
-    'Else
-    '  For i As Integer = 1 To tabs.TabPages.Count - 1
-    '    tabs.TabPages.RemoveAt(1)
-    '  Next
-    'End If
-  End Sub
-
-  Private Sub SetGalleryState()
-    'If activeAncestor.IsLocal Then
-    '  If Not imgGallery.GalleryPath.Equals(activeAncestor.Path) Then
-    '    Debug.Print("SetGalleryState: " + activeAncestor.Path)
-    '    imgGallery.GalleryPath = activeAncestor.Path
-    '    imgGallery.BringToFront()
-    '  End If
-    'End If
-  End Sub
-
-  Private Sub SetUIState()
-    SetSplitterState()
-    SetToolbarState()
-    SetTabState()
-    SetGalleryState()
-  End Sub
-
+#Region "Viewer - Ancestors List"
 
   ' ==========================
-  ' = Panel Event Handlers
+  ' = Viewer - Ancestors List
   ' ==========================
-  Private Sub JDockPanelHeader1_HeaderCloseClicked() Handles JDockPanelHeader1.HeaderCloseClicked
-    btnAncestor.Checked = False
-    SetUIState()
-  End Sub
 
   Private Sub JDockPanelHeader2_HeaderCloseClicked() Handles JDockPanelHeader2.HeaderCloseClicked
     btnAncestors.Checked = False
     SetUIState()
   End Sub
 
-
-  Private Sub btnHomeTree_Click(sender As Object, e As EventArgs) Handles btnHomeTree.Click
-    Ancestry.NavigateTo(URLTypeEnum.TREE_HOME)
+  Private Sub InitializeAncestorList()
+    With AncestorsList
+      .Tag = ""
+      .Items.Clear()
+      .Columns.Clear()
+      .Columns.Add("Name", CInt(.Width / 2))
+      .Columns.Add("Birth Year", CInt(.Width / 2))
+      .Groups.Clear()
+    End With
   End Sub
 
-  Private Sub btnViewPedigree_Click(sender As Object, e As EventArgs) Handles btnViewPedigree.Click
-    Ancestry.NavigateTo(URLTypeEnum.TREE_HORIZONTAL)
-  End Sub
-
-  Private Sub btnViewTree_Click(sender As Object, e As EventArgs) Handles btnViewTree.Click
-    Ancestry.NavigateTo(URLTypeEnum.TREE_VERTICAL)
-  End Sub
-
-  Private Sub btnViewFan_Click(sender As Object, e As EventArgs) Handles btnViewFan.Click
-    Ancestry.NavigateTo(URLTypeEnum.TREE_FAN)
-  End Sub
-
-  Private Sub btnPersonFact_Click(sender As Object, e As EventArgs) Handles btnPersonFact.Click
-    Ancestry.NavigateTo(URLTypeEnum.PERSON_FACTS)
-  End Sub
-
-  Private Sub btnPersonHints_Click(sender As Object, e As EventArgs) Handles btnPersonHints.Click
-    Ancestry.NavigateTo(URLTypeEnum.PERSON_HINTS)
-  End Sub
-
-  Private Sub btnPersonGallery_Click(sender As Object, e As EventArgs) Handles btnPersonGallery.Click
-    Ancestry.NavigateTo(URLTypeEnum.PERSON_GALLERY)
-  End Sub
-
-  Private Sub btnPersonStory_Click(sender As Object, e As EventArgs) Handles btnPersonStory.Click
-    Ancestry.NavigateTo(URLTypeEnum.PERSON_STORY)
-  End Sub
-
-  Private Sub menuStateHandler(sender As Object, e As EventArgs) Handles btnAncestor.Click, btnAncestors.Click
-    SetUIState()
+  Private Sub LoadAncestorList()
+    With AncestorsList
+      '.Tag = ""
+      '.Items.Clear()
+      'Dim dirs() As String = Directory.GetDirectories(My.Settings.AncestorsPath)
+      'For Each dir As String In dirs
+      '  Dim dirname As String = dir.Replace(My.Settings.AncestorsPath, "")
+      '  Dim p() As String = dirname.Split("-")
+      '  If p.Length() > 0 Then
+      '    item = .Items.Add(p(0).Trim())
+      '    item.SubItems.Add(p(1).Trim())
+      '    If File.Exists(dir + "\Ancestry.id") Then
+      '      item.Tag = File.ReadAllLines(dir + "\Ancestry.id")(0).Trim
+      '    Else
+      '      item.Tag = ""
+      '    End If
+      '  End If
+      'Next
+    End With
   End Sub
 
   Private Sub AncestryDirectorWatcher_Created(sender As Object, e As FileSystemEventArgs) Handles AncestryDirectorWatcher.Created
@@ -438,81 +382,20 @@ Public Class ApplicationForm
     LoadAncestorList()
   End Sub
 
-
-  Private Sub mnuDockBottomLeft_Click(sender As Object, e As EventArgs) Handles mnuDockBottomLeft.Click
-    Debug.Print("mnuDockBottomLeft_Click")
-  End Sub
-
-  Private Sub mnuDockTopLeft_Click(sender As Object, e As EventArgs) Handles mnuDockTopLeft.Click
-    Debug.Print("mnuDockTopLeft_Click")
-
-  End Sub
-
-  Private Sub mnuDockTopRight_Click(sender As Object, e As EventArgs) Handles mnuDockTopRight.Click
-    Debug.Print("mnuDockTopRight_Click")
-
-  End Sub
-
-  Private Sub mnuDockBottomMiddle_Click(sender As Object, e As EventArgs) Handles mnuDockBottomMiddle.Click
-    Debug.Print("mnuDockBottomMiddle_Click")
-
-  End Sub
-
-  Private Sub mnuDockBottomRight_Click(sender As Object, e As EventArgs) Handles mnuDockBottomRight.Click
-    Debug.Print("mnuDockBottomRight_Click")
-
-  End Sub
-
-  Private Sub JDockPanelHeader1_ContextMenuChanged(sender As Object, e As EventArgs) Handles JDockPanelHeader1.ContextMenuChanged
-    Debug.Print("JDockPanelHeader1_ContextMenuChanged")
-  End Sub
-
-  Private Sub JDockPanelHeader1_ContextMenuStripChanged(sender As Object, e As EventArgs) Handles JDockPanelHeader1.ContextMenuStripChanged
-    Debug.Print("JDockPanelHeader1_ContextMenuStripChanged")
-
-  End Sub
-
-  Private Sub mnuPanelDock_Opening(sender As Object, e As CancelEventArgs) Handles mnuPanelDock.Opening
-    Debug.Print("mnuPanelDock_Opening: " & sender.SourceControl.tag)
-
-  End Sub
-
-  Private Sub mnuPanelDock_Opened(sender As Object, e As EventArgs) Handles mnuPanelDock.Opened
-    Debug.Print("mnuPanelDock_Opened")
-
-  End Sub
-
-  Private Sub mnuPanelDock_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles mnuPanelDock.ItemClicked
-    Debug.Print("mnuPanelDock_ItemClicked")
-
-  End Sub
-
-  Private Sub mnuPanelDock_Closed(sender As Object, e As ToolStripDropDownClosedEventArgs) Handles mnuPanelDock.Closed
-    Debug.Print("mnuPanelDock_Closed")
-
-  End Sub
-
-  Private Sub mnuPanelDock_Closing(sender As Object, e As ToolStripDropDownClosingEventArgs) Handles mnuPanelDock.Closing
-    Debug.Print("mnuPanelDock_Closing")
-
-  End Sub
-
-  Private Sub mnuPanelDock_BindingContextChanged(sender As Object, e As EventArgs) Handles mnuPanelDock.BindingContextChanged
-    Debug.Print("mnuPanelDock_BindingContextChanged")
-
-  End Sub
-
-  Private Sub mnuPanelDock_ParentChanged(sender As Object, e As EventArgs) Handles mnuPanelDock.ParentChanged
-    Debug.Print("mnuPanelDock_ParentChanged")
-  End Sub
-
-
   Private Sub AncestorsList_DoubleClick(sender As Object, e As EventArgs) Handles AncestorsList.DoubleClick
     Dim id As String = AncestorsList.SelectedItems.Item(0).Tag
     If Not id.Equals("") Then
       Ancestry.NavigateTo(URLTypeEnum.PERSON_FACTS, id)
     End If
   End Sub
+
+#End Region
+
+#Region "Viewer - Ancestry Web"
+
+  ' ==========================
+  ' = Viewer - Ancestry Web
+  ' ==========================
 
   Private Sub Ancestry_ViewerBusy(busy As Boolean) Handles Ancestry.ViewerBusy
     If busy Then
@@ -523,13 +406,101 @@ Public Class ApplicationForm
     End If
   End Sub
 
-  Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
-    My.Settings.Save()
-    Close()
+  Private Sub ancestry_AncestorChanged(newAncestor As AncestorCollection.Ancestor)
+    activeAncestor = newAncestor
   End Sub
 
-  Private Sub AncestryToolbarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AncestryToolbarToolStripMenuItem.Click
-    Ancestry.ShowToolbar = AncestryToolbarToolStripMenuItem.Checked
+  Private Sub ancestry_ImageDownload(fromPage As String, filename As String)
+    'If activeAncestor.IsValid Then
+    '  activeAncestor.createPath()
+    '  If fromPage.StartsWith("Census") Then
+    '    fromPage += ".jpg"
+    '    If File.Exists(activeAncestor.Path & fromPage) Then
+    '      Dim rslt As MsgBoxResult
+    '      rslt = MsgBox("File Already Exists" & vbCrLf & fromPage & vbCrLf & "Replace?", vbCritical Or vbYesNoCancel, "File Exists")
+    '      Select Case rslt
+    '        Case MsgBoxResult.Yes
+    '          File.Delete(activeAncestor.Path & fromPage)
+    '        Case Else
+    '          File.Delete(filename)
+    '          Exit Sub
+    '      End Select
+    '    End If
+    '    File.Move(filename, activeAncestor.Path & fromPage)
+    '  Else
+    '    Dim frm As ImageSaveDialog = New ImageSaveDialog()
+    '    frm.DstDir = activeAncestor.Path
+    '    frm.SrcFilename = filename
+    '    frm.SrcPage = fromPage
+    '    frm.Show()
+    '  End If
+    'End If
+    SetUIState()
+  End Sub
+
+  Private Sub ancestry_AncestryData(dataType As DataTypeEnum, ancestryData As Object) 'TODO Handles ancestry.DataChanged
+    'If activeAncestor.IsValid Then
+    '  activeAncestor.createPath()
+    '  saveFile(activeAncestor.ID, activeAncestor.Path, "Ancestry.id", False)
+    '  Select Case dataType
+    '    Case DataTypeEnum.anFACTDATA
+    '      Dim data As Array = ancestryData
+    '      saveCSV(data, activeAncestor.Path, "Timeline.csv")
+    '    Case DataTypeEnum.anSOURCEDATA
+    '      Dim data As Array = ancestryData
+    '      saveCSV(data, activeAncestor.Path, "Sources.csv")
+    '    Case DataTypeEnum.anFAMILYDATA
+    '      Dim data As Array = ancestryData
+    '      saveCSV(data, activeAncestor.Path, "Family.csv")
+    '    Case DataTypeEnum.anCENSUSDATA
+    '      Dim data As Array = ancestryData
+    '      Dim year As String = data(1)(0).ToString
+    '      Dim page As String = data(1)(1).ToString
+    '      saveCSV(data, activeAncestor.Path, "Census-" & year & "-p" & page & ".csv")
+    '    Case DataTypeEnum.anPROFILEDATA
+    '      Dim data As String = ancestryData
+    '      saveFile(data, activeAncestor.Path, "Profile.txt")
+    '    Case Else
+
+    '  End Select
+    'End If
+    'SetUIState()
+  End Sub
+
+  Private Sub Ancestry_AncestorChanged(AncestorID As String) Handles Ancestry.AncestorChanged
+    If AncestorID.Equals("0") Then
+      btnDownload.Text = ""
+      btnDownload.ToolTipText = "No Downloadable Content"
+    Else
+      btnDownload.Text = AncestorID
+      btnDownload.ToolTipText = "Download and import Ancestor Information"
+    End If
+  End Sub
+
+  Private Sub Ancestry_AncestryData(dataType As DataTypeEnum, data As AncestryDataMessage) Handles Ancestry.DataDownload
+
+  End Sub
+
+  Private Sub Ancestry_DownloadEnabled(isEnabled As Boolean) Handles Ancestry.DownloadEnabled
+    btnDownload.Enabled = isEnabled
+  End Sub
+
+#End Region
+
+#Region "Viewer - Image/Gallery"
+
+  ' ==========================
+  ' = Viewer - Image/Gallery
+  ' ==========================
+
+  Private Sub SetGalleryState()
+    'If activeAncestor.IsLocal Then
+    '  If Not imgGallery.GalleryPath.Equals(activeAncestor.Path) Then
+    '    Debug.Print("SetGalleryState: " + activeAncestor.Path)
+    '    imgGallery.GalleryPath = activeAncestor.Path
+    '    imgGallery.BringToFront()
+    '  End If
+    'End If
   End Sub
 
   Private Sub InitializeImageGallery()
@@ -552,25 +523,22 @@ Public Class ApplicationForm
     imgGallery.BringToFront()
   End Sub
 
-  Private Sub Ancestry_AncestorChanged(AncestorID As String) Handles Ancestry.AncestorChanged
-    If AncestorID.Equals("0") Then
-      btnDownload.Text = ""
-      btnDownload.ToolTipText = "No Downloadable Content"
-    Else
-      btnDownload.Text = AncestorID
-      btnDownload.ToolTipText = "Download and import Ancestor Information"
-    End If
-  End Sub
+#End Region
 
-  Private Sub Ancestry_AncestryData(dataType As DataTypeEnum, data As AncestryDataMessage) Handles Ancestry.DataDownload
+#Region "Viewer - Notes"
 
-  End Sub
+  ' ==========================
+  ' = Viewer - Notes
+  ' ==========================
 
-  Private Sub Ancestry_DownloadEnabled(isEnabled As Boolean) Handles Ancestry.DownloadEnabled
-    btnDownload.Enabled = isEnabled
-  End Sub
+#End Region
 
-  Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
+#Region "Viewer - Census"
 
-  End Sub
+  ' ==========================
+  ' = Viewer - Census
+  ' ==========================
+
+#End Region
+
 End Class

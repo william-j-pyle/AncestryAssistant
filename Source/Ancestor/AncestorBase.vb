@@ -17,6 +17,7 @@ Public MustInherit Class AncestorBase
   Public ReadOnly Property IsValid As Boolean = False
 
   Private sID As String = ""
+
   Public Property ID As String
     Get
       Return sID
@@ -68,6 +69,7 @@ Public MustInherit Class AncestorBase
   End Property
 
   Private sAncestorPath As String = ""
+
   Public Property AncestorPath As String
     Get
       Return sAncestorPath
@@ -87,7 +89,7 @@ Public MustInherit Class AncestorBase
 
   Public ReadOnly Property HasImages As Boolean
     Get
-      Return gallery.Length > 0
+      Return gallery.length > 0
     End Get
   End Property
 
@@ -97,19 +99,19 @@ Public MustInherit Class AncestorBase
 
   Public ReadOnly Property HasSources As Boolean
     Get
-      Return sources.Length > 0
+      Return sources.length > 0
     End Get
   End Property
 
   Public ReadOnly Property HasCensus As Boolean
     Get
-      Return census.Length > 0
+      Return census.length > 0
     End Get
   End Property
 
   Public ReadOnly Property HasTimeline As Boolean
     Get
-      Return events.Length > 0
+      Return events.length > 0
     End Get
   End Property
 
@@ -156,7 +158,5 @@ Public MustInherit Class AncestorBase
     notebook = New ANotebook(FullPath("Notebook"))
 
   End Sub
-
-
 
 End Class

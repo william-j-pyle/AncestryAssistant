@@ -3,7 +3,9 @@
 Public Class ImageGallery
 
   Public Event ImageViewRequested(imageFilename As String)
+
   Public Event ImageSelectionChanged(imageFilename As String)
+
   Public Event ViewRefreshed()
 
   Public ReadOnly Property GalleryItemCount As Integer
@@ -12,8 +14,8 @@ Public Class ImageGallery
     End Get
   End Property
 
-
   Private _GalleryPath As String = ""
+
   Public Property GalleryPath As String
     Get
       Return _GalleryPath
@@ -62,7 +64,6 @@ Public Class ImageGallery
     imgViewerList.Images.Clear()
   End Sub
 
-
   Private Function GetImageThumbnail(ByVal originalImage As Image, ByVal targetSize As Integer) As Image
     Dim paddedImage As New Bitmap(targetSize, targetSize)
     Using g As Graphics = Graphics.FromImage(paddedImage)
@@ -102,4 +103,5 @@ Public Class ImageGallery
       RaiseEvent ImageViewRequested(imgViewer.SelectedItems.Item(0).Tag)
     End If
   End Sub
+
 End Class

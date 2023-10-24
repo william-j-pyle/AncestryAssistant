@@ -15,7 +15,6 @@
   Public Property birthYear As String
   Public Property deathYear As String
 
-
   Public Sub New(payloadData As String)
     sources = New Collection
     facts = New Collection
@@ -179,8 +178,6 @@
     Return 1
   End Function
 
-
-
   Private Function correctDatePlace(dp As String) As String
     Dim rtn As String
     Dim p() As String
@@ -216,7 +213,6 @@
     family.Add(item, key)
     Return rtn
   End Function
-
 
   Private Function addFact(l1 As String, l2 As String, l3 As String, l4 As String) As Integer
     Dim item As String = ""
@@ -357,6 +353,5 @@
 
     Return dataSet.ToArray
   End Function
-
 
 End Class

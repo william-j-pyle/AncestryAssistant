@@ -3,6 +3,7 @@ Imports System.IO
 
 <DefaultPropertyAttribute("ID")>
 Public Class OldAncestor
+
   Public Sub New()
     Reset()
   End Sub
@@ -16,9 +17,8 @@ Public Class OldAncestor
     ResetProfile()
   End Sub
 
-
-
   Private _ID As String = ""
+
   <CategoryAttribute("Tracking"),
            Browsable(True),
            [ReadOnly](False),
@@ -51,6 +51,7 @@ Public Class OldAncestor
            DesignOnly(False),
            DescriptionAttribute("Sur or Family Name")>
   Public Property Surname As String = ""
+
   <CategoryAttribute("Name"),
            Browsable(True),
            [ReadOnly](False),
@@ -59,6 +60,7 @@ Public Class OldAncestor
            DesignOnly(False),
            DescriptionAttribute("Given Name")>
   Public Property Givenname As String = ""
+
   <CategoryAttribute("Name"), Browsable(False),
            DescriptionAttribute("Display Name, GivenName Surname")>
   Public Property Name As String
@@ -149,41 +151,52 @@ Public Class OldAncestor
   Public Property DeathYear As String
 
   Private _ProfileSurName As String = ""
+
   Public ReadOnly Property ProfileSurName As String
     Get
       If _ProfileSurName.Equals("") Then LoadProfile()
       Return _ProfileSurName
     End Get
   End Property
+
   Private _ProfileGivenName As String = ""
+
   Public ReadOnly Property ProfileGivenName As String
     Get
       If _ProfileSurName.Equals("") Then LoadProfile()
       Return _ProfileGivenName
     End Get
   End Property
+
   Private _ProfileBirthDate As String = ""
+
   Public ReadOnly Property ProfileBirthDate As String
     Get
       If _ProfileSurName.Equals("") Then LoadProfile()
       Return _ProfileBirthDate
     End Get
   End Property
+
   Private _ProfileBirthPlace As String = ""
+
   Public ReadOnly Property ProfileBirthPlace As String
     Get
       If _ProfileSurName.Equals("") Then LoadProfile()
       Return _ProfileBirthPlace
     End Get
   End Property
+
   Private _ProfileDeathDate As String = ""
+
   Public ReadOnly Property ProfileDeathDate As String
     Get
       If _ProfileSurName.Equals("") Then LoadProfile()
       Return _ProfileDeathDate
     End Get
   End Property
+
   Private _ProfileDeathPlace As String = ""
+
   Public ReadOnly Property ProfileDeathPlace As String
     Get
       If _ProfileSurName.Equals("") Then LoadProfile()
@@ -242,6 +255,7 @@ Public Class OldAncestor
   Public Function hasBirthCertificate() As Boolean
     Return hasMatchingFile("certificate-birth", "jpg")
   End Function
+
   Public Function hasDeathCertificate() As Boolean
     Return hasMatchingFile("certificate-death", "jpg")
   End Function
@@ -267,7 +281,6 @@ Public Class OldAncestor
     Return False
   End Function
 
-
   Public Function getCensusList() As ArrayList
     Dim list As ArrayList = New ArrayList()
     If IsLocal Then
@@ -284,6 +297,5 @@ Public Class OldAncestor
     End If
     Return list
   End Function
-
 
 End Class

@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 
 Module Utils
+
   Public Function GetImageThumbnail(ByVal fileName As String, ByVal targetSize As Integer) As Image
     Dim originalImage As Image = Image.FromFile(fileName)
     Dim thumb As Image = GetImageThumbnail(originalImage, targetSize)
@@ -8,6 +9,7 @@ Module Utils
     originalImage = Nothing
     Return thumb
   End Function
+
   Public Function GetImageThumbnail(ByVal originalImage As Image, ByVal targetSize As Integer) As Image
     Dim paddedImage As New Bitmap(targetSize, targetSize)
     Using g As Graphics = Graphics.FromImage(paddedImage)
@@ -37,7 +39,6 @@ Module Utils
       writer.Write(data)
     End Using
   End Sub
-
 
   Public Sub saveCSV(ByVal data As Array, ByVal dirPath As String, ByVal fileName As String)
     Dim line As String

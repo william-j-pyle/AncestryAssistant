@@ -24,4 +24,5 @@ Public Class ASource
     End If
     dataEntries = Directory.GetFiles(RecordsBasePath, "*.aa")
   End Sub
+
 End Class

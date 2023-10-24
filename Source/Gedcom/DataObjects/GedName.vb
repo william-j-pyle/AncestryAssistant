@@ -1,6 +1,7 @@
 ﻿Public Class GedName
 
   Private source As GedSourceReferenceCollection
+
   Public ReadOnly Property Sources As GedSourceReferenceCollection
     Get
       Return source
@@ -10,6 +11,7 @@
   Public Property Given As String = ""
   Public Property Suffix As String = ""
   Public Property Surname As String = ""
+
   Public Property Name As String
     Get
       Return (Suffix + Surname).Trim() + IIf(Given.Trim.Length > 1, ", " + Given.Trim, "")

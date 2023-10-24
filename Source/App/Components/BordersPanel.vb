@@ -3,13 +3,13 @@
 Public Class BordersPanel
   Inherits Panel
 
-
   Public Sub New()
     SetStyle(ControlStyles.UserPaint Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
   End Sub
 
   <Browsable(True), Category("JControl"), Description("Width in pixels of the border around the control")>
   Dim _BorderWidth As Padding = New Padding(0)
+
   Public Property BorderWidth As Padding
     Get
       Return _BorderWidth
@@ -30,6 +30,7 @@ Public Class BordersPanel
 
   <Browsable(True), Category("JControl"), Description("Color of the border around the control")>
   Dim _BorderColor As Color = Color.Transparent
+
   Public Property BorderColor As Color
     Get
       Return _BorderColor
@@ -43,7 +44,9 @@ Public Class BordersPanel
       Invalidate()
     End Set
   End Property
+
   Dim _BorderColorTop As Color = Color.Transparent
+
   Public Property BorderColorTop As Color
     Get
       Return _BorderColorTop
@@ -54,7 +57,9 @@ Public Class BordersPanel
       Invalidate()
     End Set
   End Property
+
   Dim _BorderColorLeft As Color = Color.Transparent
+
   Public Property BorderColorLeft As Color
     Get
       Return _BorderColorLeft
@@ -65,7 +70,9 @@ Public Class BordersPanel
       Invalidate()
     End Set
   End Property
+
   Dim _BorderColorRight As Color = Color.Transparent
+
   Public Property BorderColorRight As Color
     Get
       Return _BorderColorRight
@@ -76,7 +83,9 @@ Public Class BordersPanel
       Invalidate()
     End Set
   End Property
+
   Dim _BorderColorBottom As Color = Color.Transparent
+
   Public Property BorderColorBottom As Color
     Get
       Return _BorderColorBottom
@@ -90,6 +99,7 @@ Public Class BordersPanel
 
   <Browsable(True), Category("JControl"), Description("Sets the number of pixels for the Corner radius. Valid 0 to Min(Height,Width)/2")>
   Private _CornerRadius As Padding = New Padding(0)
+
   Public Property CornerRadius As Padding
     Get
       Return _CornerRadius
@@ -184,6 +194,5 @@ Public Class BordersPanel
     End If
 
   End Sub
-
 
 End Class

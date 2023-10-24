@@ -6,7 +6,6 @@ Public Class CensusViewer
   Private AvailableYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
   Const UNIFIED_TEXT = "Unified"
 
-
   Public Sub New()
     InitializeComponent()
     Dock = DockStyle.Fill
@@ -36,7 +35,6 @@ Public Class CensusViewer
       ShowCensus(sender.text)
     End If
   End Sub
-
 
   Public Sub AddCensusFile(CensusYear As String, Filename As String)
     CensusFileList.Add(Filename, CensusYear)
@@ -78,7 +76,6 @@ Public Class CensusViewer
     CensusData.Add(data, csvFilePath)
     Return data
   End Function
-
 
   Private Sub LoadFile(csvFilePath As String)
     Dim lines As ArrayList = GetData(csvFilePath)

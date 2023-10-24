@@ -6,6 +6,7 @@ Public Class AAFile
   Const FIELD_SEPERATOR_CODE = 175
 
   Private _IsDirty As Boolean = False
+
   Public ReadOnly Property IsDirty As Boolean
     Get
       Return _IsDirty
@@ -13,6 +14,7 @@ Public Class AAFile
   End Property
 
   Private sAAFileName As String = ""
+
   Public Property AAFileName As String
     Get
       Return sAAFileName
@@ -24,6 +26,7 @@ Public Class AAFile
   End Property
 
   Private iAAFileType As AAFileTypeEnum = AAFileTypeEnum.UNDEFINED
+
   Public Property AAFileType As AAFileTypeEnum
     Get
       Return iAAFileType
@@ -53,7 +56,6 @@ Public Class AAFile
     End Get
   End Property
 
-
   Public Sub New()
     Initialize()
   End Sub
@@ -72,6 +74,7 @@ Public Class AAFile
   End Sub
 
   Private aValueHeaders() As String = {}
+
   Public Function getHeaders() As String()
     Return aValueHeaders
   End Function
@@ -82,6 +85,7 @@ Public Class AAFile
   End Sub
 
   Private aValues As ArrayList = New ArrayList()
+
   Public Function getValues() As ArrayList
     Return aValues
   End Function
@@ -109,6 +113,7 @@ Public Class AAFile
 
   Private sSingleValue As String = ""
   Private dKeyValuePair As Dictionary(Of String, String) = New Dictionary(Of String, String)
+
   Public Property Value(Optional key As String = "") As String
     Get
       Select Case AAFileType
@@ -217,7 +222,5 @@ Public Class AAFile
     File.WriteAllText(AAFileName, sb.ToString)
     _IsDirty = False
   End Sub
-
-
 
 End Class

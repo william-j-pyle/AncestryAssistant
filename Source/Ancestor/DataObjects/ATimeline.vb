@@ -24,4 +24,5 @@ Public Class ATimeline
     dataEntries = Directory.GetFiles(RecordsBasePath, "*.aa")
 
   End Sub
+
 End Class

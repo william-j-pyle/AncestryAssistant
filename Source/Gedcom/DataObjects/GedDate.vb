@@ -24,7 +24,6 @@ Public Class GedDate
     End Set
   End Property
 
-
   Public ReadOnly Property Year As String
     Get
       If bValid And bYear Then
@@ -62,6 +61,7 @@ Public Class GedDate
   End Property
 
   Private bRange As Boolean = False
+
   Public ReadOnly Property IsRange As Boolean
     Get
       Return bRange
@@ -69,6 +69,7 @@ Public Class GedDate
   End Property
 
   Private bAbout As Boolean = False
+
   Public ReadOnly Property IsAbout As Boolean
     Get
       Return bAbout
@@ -76,6 +77,7 @@ Public Class GedDate
   End Property
 
   Private bBefore As Boolean = False
+
   Public ReadOnly Property IsBefore As Boolean
     Get
       Return bBefore
@@ -83,6 +85,7 @@ Public Class GedDate
   End Property
 
   Private bAfter As Boolean = False
+
   Public ReadOnly Property IsAfter As Boolean
     Get
       Return bAfter
@@ -90,6 +93,7 @@ Public Class GedDate
   End Property
 
   Private bYear As Boolean = False
+
   Public ReadOnly Property HasYear As Boolean
     Get
       Return bYear
@@ -97,6 +101,7 @@ Public Class GedDate
   End Property
 
   Private bMonth As Boolean = False
+
   Public ReadOnly Property HasMonth As Boolean
     Get
       Return bMonth
@@ -104,6 +109,7 @@ Public Class GedDate
   End Property
 
   Private bDay As Boolean = False
+
   Public ReadOnly Property HasDay As Boolean
     Get
       Return bDay
@@ -111,6 +117,7 @@ Public Class GedDate
   End Property
 
   Private bValid As Boolean = False
+
   Public ReadOnly Property IsValid As Boolean
     Get
       Return bValid
@@ -347,8 +354,6 @@ Public Class GedDate
     End If
     Return rtnString
   End Function
-
-
 
   Public Function toAssistantDate() As String
     Dim rtnString As String = ""

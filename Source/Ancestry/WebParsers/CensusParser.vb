@@ -14,7 +14,6 @@
   Private sCity As String = ""
   Private sDistrict As String = ""
 
-
   Public ReadOnly Property target As String
     Get
       Return sTarget
@@ -38,7 +37,6 @@
       Return data.Count
     End Get
   End Property
-
 
   Public Sub New(payloadData As String, pageNumber As String)
     fields = New Collection
@@ -102,7 +100,6 @@
       End If
     Next
   End Sub
-
 
   Public Sub addField(name As String)
     fields.Add(name, "" & (fields.Count + 1))

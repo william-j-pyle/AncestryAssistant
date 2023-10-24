@@ -7,13 +7,16 @@ Public Class AncestorCollection
 
   Public Class Ancestor
     Inherits AncestorBase
+
     Friend Sub New(AncestorPath As String)
       LoadAncestor(AncestorPath)
     End Sub
+
   End Class
 
   'Private AncestorEntries As Dictionary(Of String, Ancestor)
   Private _RepositoryPath As String = ""
+
   Public Property RepositoryPath As String
     Get
       Return _RepositoryPath

@@ -7,8 +7,6 @@
   Public Property Page As String
   Public Property Media As New GedMediaReferenceCollection
 
-
-
   Public Sub addObject(data As GedComData, fileKey As String)
     Dim processedRoot As Boolean = False
     While data.HasNext
@@ -49,4 +47,5 @@
       End If
     End While
   End Sub
+
 End Class

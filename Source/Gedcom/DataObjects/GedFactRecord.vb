@@ -3,7 +3,6 @@ Public Class GedFactRecord
   Public Property FactType As String = ""
   Public Property Note As String = ""
 
-
   Public Sub addObject(data As GedComData, fileKey As String)
     Dim processedRoot As Boolean = False
     While data.HasNext

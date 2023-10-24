@@ -2,20 +2,28 @@
 
 Public Class GedComFile
   Private data As New GedComData
+
   'HEAD
   Public Property Header As New GedHeader
+
   'SUBM
   Public Property Submitters As New GedSubmitterCollection
+
   'INDI
   Public Property Individuals As New GedIndividualCollection
+
   'FAM
   Public Property Family As New GedFamilyCollection
+
   'OBJE
   Public Property Media As New GedMediaCollection
+
   'SOUR
   Public Property Source As New GedSourceCollection
+
   'REPO
   Public Property Repository As New GedRepositoryCollection
+
   '_MTTAG
   Public Property Tags As New GedTagCollection
 
@@ -66,7 +74,6 @@ Public Class GedComFile
     parseData()
     'RaiseEvent GedComDataLoaded(Me, New GedComEventArgs(Me.treeID, Me.gedindi.Count))
   End Sub
-
 
   Private Sub parseData()
     Dim maxLoops As Double = 100000
@@ -120,4 +127,5 @@ Public Class GedComFile
       Next
     Next
   End Sub
+
 End Class

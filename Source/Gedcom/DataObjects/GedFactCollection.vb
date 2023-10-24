@@ -1,7 +1,6 @@
-﻿'TODO: Not Finished 
+﻿'TODO: Not Finished
 Public Class GedFactCollection
   Private FactRecords As New ArrayList
-
 
   Default Public ReadOnly Property Fact(idx As Integer) As GedFactRecord
     Get
@@ -20,4 +19,5 @@ Public Class GedFactCollection
     rec.addObject(data, data.Key)
     FactRecords.Add(rec)
   End Sub
+
 End Class

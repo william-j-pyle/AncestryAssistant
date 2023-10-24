@@ -2,9 +2,13 @@
 Imports Microsoft.Web.WebView2.Core
 Imports Newtonsoft.Json
 
+#Const SHOW_DEBUG = True
+
 Public Class AncestryWebViewer
+
   ' Web Interface
   Private WithEvents CoreWeb As CoreWebView2
+
   Private WithEvents CoreWebDownload As CoreWebView2DownloadOperation
 
   ' Tracking
@@ -12,14 +16,19 @@ Public Class AncestryWebViewer
 
   ' Public Events
   Public Event DataDownload(dataType As DataTypeEnum, data As AncestryDataMessage)
+
   Public Event AncestorChanged(AncestorID As String)
+
   Public Event ViewerBusy(busy As Boolean)
+
   Public Event DownloadEnabled(enabled As Boolean)
 
   Public Sub New()
     InitializeComponent()
     web.EnsureCoreWebView2Async()
   End Sub
+
+#Region "Viewer - Public Properties"
 
   Public Property BlockWebTracking As Boolean = False
 
@@ -32,6 +41,7 @@ Public Class AncestryWebViewer
   Public Property BrowserStatus As String = ""
 
   Private _ShowDownload As Boolean = False
+
   Public Property ShowDownload As Boolean
     Get
       Return _ShowDownload
@@ -44,6 +54,7 @@ Public Class AncestryWebViewer
   End Property
 
   Private _ShowToolbar As Boolean = False
+
   Public Property ShowToolbar As Boolean
     Get
       Return _ShowToolbar
@@ -55,6 +66,7 @@ Public Class AncestryWebViewer
   End Property
 
   Private _AncestorID As String = ""
+
   Public Property AncestorID As String
     Get
       Return _AncestorID
@@ -70,6 +82,7 @@ Public Class AncestryWebViewer
   Public Property AncestryPage As String = ""
 
   Private _URL As Uri = New Uri(AncestryBaseURL)
+
   <Browsable(False)>
   Public Property URL As Uri
     Get
@@ -93,6 +106,54 @@ Public Class AncestryWebViewer
       URL = New Uri(value)
     End Set
   End Property
+
+#End Region
+
+#Region "Viewer - Public Methods"
+
+  ' ==========================
+  ' = Public Methods
+  ' ==========================
+  Public Sub NavigateTo(target As URLTypeEnum, Optional customParam As String = "")
+    Dim rtn As String = AncestryBaseURL
+    Select Case target
+      Case URLTypeEnum.CUSTOM
+        rtn = customParam
+      Case URLTypeEnum.HOME
+      Case URLTypeEnum.TREE_HOME
+        rtn += "family-tree/tree/{TREEID}/family/pedigree?cfpid=0"
+      Case URLTypeEnum.TREE_VERTICAL
+        rtn += "family-tree/tree/{TREEID}/family/familyview{CFID}"
+      Case URLTypeEnum.TREE_HORIZONTAL
+        rtn += "family-tree/tree/{TREEID}/family/pedigree{CFID}"
+      Case URLTypeEnum.TREE_FAN
+        rtn += "family-tree/tree/{TREEID}/family/fanview{CFID}"
+      Case URLTypeEnum.PERSON_FACTS
+        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/facts"
+      Case URLTypeEnum.PERSON_STORY
+        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/story"
+      Case URLTypeEnum.PERSON_GALLERY
+        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/gallery?galleryPage=1&tab=0"
+      Case URLTypeEnum.PERSON_HINTS
+        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/hints"
+      Case Else
+    End Select
+    ' Replace Variables with ID's
+    rtn = rtn.Replace("{TREEID}", AncestryTreeID)
+    rtn = rtn.Replace("{CFID}", "?cfpid={PERSONID}")
+    If target <> URLTypeEnum.CUSTOM And customParam.Length > 0 Then
+      'TODO activeAncestor.Reset()
+      rtn = rtn.Replace("{PERSONID}", customParam)
+    Else
+      rtn = rtn.Replace("{PERSONID}", AncestorID)
+    End If
+    ' Perform Navigation
+    HREF = rtn
+  End Sub
+
+#End Region
+
+#Region "JavaScript API"
 
   ' ==========================
   ' = JSAPI Related Functions
@@ -131,13 +192,12 @@ Public Class AncestryWebViewer
     Return False
   End Function
 
-
   Private Async Sub JSAPI_Execute(script As String)
     Await web.CoreWebView2.ExecuteScriptAsync(script)
   End Sub
 
-
   Private Sub JSAPI_Message(sender As Object, e As CoreWebView2WebMessageReceivedEventArgs) Handles web.WebMessageReceived
+    Exit Sub
     Dim msg As JSMessage = JsonConvert.DeserializeObject(Of JSMessage)(e.WebMessageAsJson)
     Select Case msg.MessageType
       Case "FactData"
@@ -155,6 +215,10 @@ Public Class AncestryWebViewer
 
     End Select
   End Sub
+
+#End Region
+
+#Region "Viewer - Browser Event Handlers"
 
   ' ==========================
   ' = Web Event Handlers
@@ -198,11 +262,17 @@ Public Class AncestryWebViewer
     End If
   End Sub
 
-
   Private Sub web_SourceChanged(sender As Object, e As CoreWebView2SourceChangedEventArgs) Handles web.SourceChanged
     txtHref.Text = web.Source.AbsoluteUri
   End Sub
 
+  Private Sub web_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles web.NavigationStarting
+    RaiseEvent ViewerBusy(True)
+  End Sub
+
+  Private Sub web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles web.NavigationCompleted
+    RaiseEvent ViewerBusy(False)
+  End Sub
 
   ' ==========================
   ' = CoreWeb Event Handlers
@@ -315,46 +385,9 @@ Public Class AncestryWebViewer
     CoreWebDownload = e.DownloadOperation
   End Sub
 
+#End Region
 
-  ' ==========================
-  ' = Public Methods
-  ' ==========================
-  Public Sub NavigateTo(target As URLTypeEnum, Optional customParam As String = "")
-    Dim rtn As String = AncestryBaseURL
-    Select Case target
-      Case URLTypeEnum.CUSTOM
-        rtn = customParam
-      Case URLTypeEnum.HOME
-      Case URLTypeEnum.TREE_HOME
-        rtn += "family-tree/tree/{TREEID}/family/pedigree?cfpid=0"
-      Case URLTypeEnum.TREE_VERTICAL
-        rtn += "family-tree/tree/{TREEID}/family/familyview{CFID}"
-      Case URLTypeEnum.TREE_HORIZONTAL
-        rtn += "family-tree/tree/{TREEID}/family/pedigree{CFID}"
-      Case URLTypeEnum.TREE_FAN
-        rtn += "family-tree/tree/{TREEID}/family/fanview{CFID}"
-      Case URLTypeEnum.PERSON_FACTS
-        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/facts"
-      Case URLTypeEnum.PERSON_STORY
-        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/story"
-      Case URLTypeEnum.PERSON_GALLERY
-        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/gallery?galleryPage=1&tab=0"
-      Case URLTypeEnum.PERSON_HINTS
-        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/hints"
-      Case Else
-    End Select
-    ' Replace Variables with ID's
-    rtn = rtn.Replace("{TREEID}", AncestryTreeID)
-    rtn = rtn.Replace("{CFID}", "?cfpid={PERSONID}")
-    If target <> URLTypeEnum.CUSTOM And customParam.Length > 0 Then
-      'TODO activeAncestor.Reset()
-      rtn = rtn.Replace("{PERSONID}", customParam)
-    Else
-      rtn = rtn.Replace("{PERSONID}", AncestorID)
-    End If
-    ' Perform Navigation
-    HREF = rtn
-  End Sub
+#Region "Viewer - Menu "
 
   ' ==========================
   ' = Menubar Event Handlers
@@ -395,12 +428,6 @@ Public Class AncestryWebViewer
     NavigateTo(URLTypeEnum.CUSTOM, txtHref.Text)
   End Sub
 
-  Private Sub web_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles web.NavigationStarting
-    RaiseEvent ViewerBusy(True)
-  End Sub
-
-  Private Sub web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles web.NavigationCompleted
-    RaiseEvent ViewerBusy(False)
-  End Sub
+#End Region
 
 End Class

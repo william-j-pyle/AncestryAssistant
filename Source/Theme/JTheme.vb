@@ -153,5 +153,4 @@
     Return newImage
   End Function
 
-
 End Class

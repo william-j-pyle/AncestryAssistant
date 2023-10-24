@@ -1,8 +1,11 @@
 ﻿Imports System.IO
 
 Public Class ANotebook
+
   Public Event SectionChanged(SectionName As String)
+
   Public Event PageChanged(PageName As String)
+
   Public Event TestMe(FromWhere As String)
 
   Private Const NOTE_SECTION_CONFIG = "anote_sections.aa"
@@ -12,6 +15,7 @@ Public Class ANotebook
   Private pages As AAFile
 
   Private sActiveSection As String = ""
+
   Public Property ActiveSection As String
     Get
       Return sActiveSection
@@ -31,6 +35,7 @@ Public Class ANotebook
   End Property
 
   Private sActivePage As String = ""
+
   Public Property ActivePage As String
     Get
       Return sActivePage

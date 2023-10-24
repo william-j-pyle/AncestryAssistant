@@ -124,5 +124,5 @@ Public Class GedMediaRecord
       End If
     End While
   End Sub
-End Class
 
+End Class

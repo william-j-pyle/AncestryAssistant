@@ -27,7 +27,6 @@ Public Class ImageViewer
   <Description("Enable/Disable Panning")>
   Public Property MouseSmoothingFactor As Double = 0.1
 
-
   ''' <value>100</value>
   <Category("Zoom"), Description("Zoom factor (10 to 150)")>
   Public Property ZoomFactor As Integer
@@ -56,7 +55,6 @@ Public Class ImageViewer
       btnZoomFitWidth.Enabled = value
     End Set
   End Property
-
 
   ''' <summary>
   ''' This is the Summary
@@ -204,4 +202,5 @@ Public Class ImageViewer
   Private Sub btnGallery_Click(sender As Object, e As EventArgs) Handles btnGallery.Click
     RaiseEvent BackToGallery()
   End Sub
+
 End Class

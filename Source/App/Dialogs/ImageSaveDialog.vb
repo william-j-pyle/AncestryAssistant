@@ -12,6 +12,7 @@ Public Class ImageSaveDialog
   End Property
 
   Private _SrcFilename As String = ""
+
   Public Property SrcFilename As String
     Get
       Return _SrcFilename
@@ -27,6 +28,7 @@ Public Class ImageSaveDialog
   Private _DstFilename As String = ""
 
   Private _DstDir As String = ""
+
   Public Property DstDir As String
     Get
       Return _DstDir
@@ -58,7 +60,6 @@ Public Class ImageSaveDialog
     originalImage = Nothing
     Return paddedImage
   End Function
-
 
   Private Sub ImageType_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     With cmbCategory.Items
@@ -107,4 +108,5 @@ Public Class ImageSaveDialog
   Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
     Close()
   End Sub
+
 End Class

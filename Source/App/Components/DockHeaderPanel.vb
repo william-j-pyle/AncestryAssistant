@@ -13,6 +13,7 @@ Public Class DockHeaderPanel
   Public Event HeaderCloseClicked()
 
   Private _Caption As String = "jDockPanelHeader"
+
   Public Property Caption As String
     Get
       Return _Caption
@@ -24,6 +25,7 @@ Public Class DockHeaderPanel
   End Property
 
   Private _BackColorEnabled As Color = Color.Black ' theme.HeadingBackColor
+
   Public Property BackColorEnabled As Color
     Get
       Return _BackColorEnabled
@@ -37,6 +39,7 @@ Public Class DockHeaderPanel
   End Property
 
   Private _BackColorDisabled As Color = Color.DarkGray ' theme.HeadingBackColorDisabled
+
   Public Property BackColorDisabled As Color
     Get
       Return _BackColorDisabled
@@ -50,6 +53,7 @@ Public Class DockHeaderPanel
   End Property
 
   Private _ForeColorEnabled As Color = Color.White ' theme.HeadingForeColor
+
   Public Property ForeColorEnabled As Color
     Get
       Return _ForeColorEnabled
@@ -63,6 +67,7 @@ Public Class DockHeaderPanel
   End Property
 
   Private _ForeColorDisabled As Color = Color.Black ' theme.HeadingBackColorDisabled
+
   Public Property ForeColorDisabled As Color
     Get
       Return _ForeColorDisabled
@@ -74,9 +79,6 @@ Public Class DockHeaderPanel
       End If
     End Set
   End Property
-
-
-
 
   Public Sub New()
 
@@ -153,4 +155,5 @@ Public Class DockHeaderPanel
       MyBase.Margin = value
     End Set
   End Property
+
 End Class
