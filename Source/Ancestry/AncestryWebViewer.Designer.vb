@@ -32,7 +32,6 @@ Partial Class AncestryWebViewer
         Me.btnReload = New System.Windows.Forms.ToolStripButton()
         Me.btnHome = New System.Windows.Forms.ToolStripButton()
         Me.txtHref = New System.Windows.Forms.ToolStripTextBox()
-        Me.btnDownload = New System.Windows.Forms.ToolStripButton()
         CType(Me.web, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tsWeb.SuspendLayout()
         Me.SuspendLayout()
@@ -56,7 +55,7 @@ Partial Class AncestryWebViewer
         Me.tsWeb.CanOverflow = False
         Me.tsWeb.DataBindings.Add(New System.Windows.Forms.Binding("Location", Global.AncestryAssistant.My.MySettings.Default, "TB_WEB_LOC", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.tsWeb.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.tsWeb.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnBack, Me.btnReload, Me.btnHome, Me.txtHref, Me.btnDownload})
+        Me.tsWeb.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnBack, Me.btnReload, Me.btnHome, Me.txtHref})
         Me.tsWeb.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.tsWeb.Location = Global.AncestryAssistant.My.MySettings.Default.TB_WEB_LOC
         Me.tsWeb.Name = "tsWeb"
@@ -106,18 +105,6 @@ Partial Class AncestryWebViewer
         Me.txtHref.Size = New System.Drawing.Size(100, 23)
         Me.txtHref.ToolTipText = "Website URL"
         '
-        'btnDownload
-        '
-        Me.btnDownload.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.btnDownload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnDownload.Image = Global.AncestryAssistant.My.Resources.Resources.DOWNLOAD_ICO20
-        Me.btnDownload.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnDownload.Name = "btnDownload"
-        Me.btnDownload.Size = New System.Drawing.Size(23, 22)
-        Me.btnDownload.Text = "Download"
-        Me.btnDownload.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
-        Me.btnDownload.ToolTipText = "Download Available Information"
-        '
         'AncestryWebViewer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -142,5 +129,4 @@ Partial Class AncestryWebViewer
     Private WithEvents txtHref As ToolStripTextBox
     Private WithEvents btnBack As ToolStripButton
     Private WithEvents btnReload As ToolStripButton
-    Private WithEvents btnDownload As ToolStripButton
 End Class

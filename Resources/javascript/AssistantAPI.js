@@ -1,6 +1,13 @@
 ﻿if (typeof ancestryAssistant === 'undefined')
 	ancestryAssistant = {};
 
+ancestryAssistant.MessageTypes = {};
+ancestryAssistant.MessageTypes.MT_PERSON = 'person';
+ancestryAssistant.MessageTypes.MT_ACCOUNT = 'account';
+ancestryAssistant.MessageTypes.MT_TREES = 'trees';
+ancestryAssistant.MessageTypes.MT_PAGE = 'page';
+ancestryAssistant.MessageTypes.MT_TABLEDATA = 'tabledata';
+
 ancestryAssistant.postMessage = function (msgType, msgKey, payload) {
 	var msg = {};
 	msg.MessageType = msgType;
@@ -12,59 +19,68 @@ ancestryAssistant.postMessage = function (msgType, msgKey, payload) {
 
 ancestryAssistant.getPerson = function () {
 	var key = "";
-	var rows = [];
-	rows[0] = ["key", "value"];
+	var hdr = [], dta = [];
 	if (typeof(PersonCard) !== 'undefined') {
 		key = PersonCard.personId;
-		rows[1] = ["personId", PersonCard.personId];
-		rows[2] = ["treeId", PersonCard.treeId];
-		rows[3] = ["name", PersonCard.name];
-		rows[4] = ["given", PersonCard.fullName.given];
-		rows[5] = ["surname", PersonCard.fullName.surname];
-		rows[6] = ["suffix", PersonCard.fullName.suffix];
-		rows[7] = ["treeName", PersonCard.treeName];
-		rows[8] = ["lifeYearRange", PersonCard.lifeYearRange];
-		rows[9] = ["birthPlace", PersonCard.birthPlace];
-		rows[10] = ["birthDate", PersonCard.birthDate];
-		rows[11] = ["deathPlace", PersonCard.deathPlace];
-		rows[12] = ["deathDate", PersonCard.deathDate];
-		rows[13] = ["gender", PersonCard.gender];
-		rows[14] = ["photo", PersonCard.photo];
-		rows[15] = ["tabName", PersonCard.tabName];
-	} else {
-		rows[1] = ["personId", ""];
+		hdr.push("personId"); dta.push(PersonCard.personId);
+		hdr.push("treeId"); dta.push(PersonCard.treeId);
+		hdr.push("name"); dta.push(PersonCard.name);
+		hdr.push("given"); dta.push(PersonCard.fullName.given);
+		hdr.push("surname"); dta.push(PersonCard.fullName.surname);
+		hdr.push("suffix"); dta.push(PersonCard.fullName.suffix);
+		hdr.push("treeName"); dta.push(PersonCard.treeName);
+		hdr.push("lifeYearRange"); dta.push(PersonCard.lifeYearRange);
+		hdr.push("birthPlace"); dta.push(PersonCard.birthPlace);
+		hdr.push("birthDate"); dta.push(PersonCard.birthDate);
+		hdr.push("deathPlace"); dta.push(PersonCard.deathPlace);
+		hdr.push("deathDate"); dta.push(PersonCard.deathDate);
+		hdr.push("gender"); dta.push(PersonCard.gender);
+		hdr.push("photo"); dta.push(PersonCard.photo);
+		hdr.push("tabName"); dta.push(PersonCard.tabName);
+		this.postMessage(this.MessageTypes.MT_PERSON,key,[hdr,dta]);
 	}
-  this.postMessage('person',key,rows);
 };
 
 ancestryAssistant.getState = function () {
 	if (typeof (InitialState) !== 'undefined') {
 		var state = JSON.parse(initialState.text);
 		var trees = state.reduxInitialState.userTrees.sortedUserTrees;
-	  var rows = [];
-	  rows[0] = ["key", "value"];
-		rows[1] = ["userId", state.reduxInitialState.user.uhomeUserProfile.userHandle];
-		rows[2] = ["lastLoginDate", state.reduxInitialState.user.uhomeUserProfile.lastLoginDate];
-		this.postMessage('initAccount', '', rows);
+		var hdr = [], dta = [];
 
-		rows = [];
-		rows[0] = ["treeId", "Name", "LastModifiedDateTime", "lastViewedTree"];
+		// Add Key(hdr)/Value(dta) entries
+		hdr.push("USERID"); dta.push(state.reduxInitialState.user.uhomeUserProfile.userHandle);
+		hdr.push("LASTLOGINDATE"); dta.push(state.reduxInitialState.user.uhomeUserProfile.lastLoginDate);
+		// Send message
+		this.postMessage(this.MessageTypes.MT_ACCOUNT, '', [hdr,dta]);
+
+		var rows = [];
+		// Add Header Rows
+		rows.push(["TREEID", "NAME", "LASTMODIFIED", "ACTIVETREE"]);
+		// Add Data Rows
 		for (var r = 0; r < trees.length; r++)
-			rows[r + 1] = [trees[r].Id.v, trees[r].Name, trees[r].LastModifiedDateTime, trees[r].lastViewedTree];
-		this.postMessage('initTrees', '', rows);
-
+			rows.push([trees[r].Id.v, trees[r].Name, trees[r].LastModifiedDateTime, trees[r].lastViewedTree]);
+		// Send Message
+		this.postMessage(this.MessageTypes.MT_TREES, '', rows);
 	}
 };
 
 
 ancestryAssistant.getPage = function () {
-	var rows = [];
-	if (typeof (page_name) !== 'undefined') {
-		rows[0] = page_name.replaceAll(' ', '').split(':');
-	} else {
-		rows[0] = location.hostname.split('.');
+	console.log("getPage");
+	if (typeof (window.page_name) == 'undefined' && location.host=='www.ancestry.com')  {
+		setTimeout(() => {ancestryAssistant.getPage();}, 2000); 
+		return;
 	}
-	this.postMessage('page', '', rows);
+	console.log("getPage:Running");
+	var rows = [];
+	rows.push(['PAGEKEY']);
+
+	if (typeof (window.page_name) !== 'undefined') {
+		rows.push([window.page_name.replaceAll(' ', '')]);
+	} else {
+		rows.push([(location.hostname.replaceAll('.', ':') + location.pathname.replaceAll('/', ':')).replaceAll(' ', '')]);
+	}
+	this.postMessage(this.MessageTypes.MT_PAGE, '', rows);
 };
 
 
@@ -76,7 +92,7 @@ ancestryAssistant.getTableData = function (personId) {
 	var rows = [];
 	var relationship = '';
 	var f = 0;
-	var L = document.getElementsByClassName('breadcrumbWrapper')[0].getElementsByClassName('pathText')
+	var L = document.getElementsByClassName('breadcrumbWrapper')[0].getElementsByClassName('pathText');
 
 	for (var r = 0; r < document.getElementsByClassName('grid-row').length; r++) {
 		var cells = document.getElementsByClassName('grid-row')[r].getElementsByClassName('grid-cell');
@@ -108,6 +124,16 @@ ancestryAssistant.getTableData = function (personId) {
 		}
 		rows[r] = crow;
 	}
-	this.postMessage('tableData', pid, rows);
+	this.postMessage(this.MessageTypes.MT_TABLEDATA, pid, rows);
+	//Trigger the download
+	var items = document.getElementsByClassName('iconTools calloutTrigger');
+	if (items.length > 0) {
+		items[0].click();
+	}
+	document.getElementsByClassName('iconDownload')[0].click();
+	if (document.getElementsByClassName('saveToComputerDialog').length > 0) {
+		document.getElementsByClassName('saveToComputerDialog')[0].getElementsByTagName('button')[0].click();
+	}
+	document.body.click();
 };
 

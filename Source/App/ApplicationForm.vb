@@ -1,21 +1,25 @@
 ﻿Imports System.IO
+Imports System.Text
 
-#Const SHOW_DEBUG = False
+
+#Const SHOW_DEBUG = True
 
 Public Class ApplicationForm
 
-  Public Event ValidActiveAncestor()
+  Public Event ActiveAncestorChanged()
 
-  Private _activeAncestor As AncestorCollection.Ancestor = Nothing
+  Private Ancestors As AncestorCollection
 
-  Property activeAncestor As AncestorCollection.Ancestor
+  Private _AncestorId As String = String.Empty
+
+  Property AncestorId As String
     Get
-      Return _activeAncestor
+      Return _AncestorId
     End Get
-    Set(value As AncestorCollection.Ancestor)
-      _activeAncestor = value
-      If _activeAncestor.IsValid Then
-        RaiseEvent ValidActiveAncestor()
+    Set(value As String)
+      If Ancestors.ContainsKey(value) Then
+        _AncestorId = value
+        RaiseEvent ActiveAncestorChanged()
       End If
     End Set
   End Property
@@ -28,17 +32,12 @@ Public Class ApplicationForm
 
   Public Sub New()
     InitializeComponent()
+    Ancestors = New AncestorCollection(My.Settings.AncestorsPath)
     InitializeAncestorDetail()
     InitializeAncestorList()
+    LoadAncestorList()
     InitializeImageGallery()
     SetUIState()
-    ' Setup Ancestor Object
-    ' Open Home Tree
-    'ancestry.NavigateTo(URLTypeEnum.TREE_HOME)
-  End Sub
-
-  Private Sub ApplicationForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    LoadAncestorList()
   End Sub
 
   ' ==========================
@@ -77,42 +76,42 @@ Public Class ApplicationForm
   End Sub
 
   Private Sub btnHomeTree_Click(sender As Object, e As EventArgs) Handles btnHomeTree.Click
-    Ancestry.NavigateTo(URLTypeEnum.TREE_HOME)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_OVERVIEW_TREE)
   End Sub
 
   Private Sub btnViewPedigree_Click(sender As Object, e As EventArgs) Handles btnViewPedigree.Click
-    Ancestry.NavigateTo(URLTypeEnum.TREE_HORIZONTAL)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_PEDIGREEVIEW_PERSON)
   End Sub
 
   Private Sub btnViewTree_Click(sender As Object, e As EventArgs) Handles btnViewTree.Click
-    Ancestry.NavigateTo(URLTypeEnum.TREE_VERTICAL)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_TREEVIEW_PERSON)
   End Sub
 
   Private Sub btnViewFan_Click(sender As Object, e As EventArgs) Handles btnViewFan.Click
-    Ancestry.NavigateTo(URLTypeEnum.TREE_FAN)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FANVIEW_PERSON)
   End Sub
 
   Private Sub btnPersonFact_Click(sender As Object, e As EventArgs) Handles btnPersonFact.Click
-    Ancestry.NavigateTo(URLTypeEnum.PERSON_FACTS)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON)
   End Sub
 
   Private Sub btnPersonHints_Click(sender As Object, e As EventArgs) Handles btnPersonHints.Click
-    Ancestry.NavigateTo(URLTypeEnum.PERSON_HINTS)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON)
   End Sub
 
   Private Sub btnPersonGallery_Click(sender As Object, e As EventArgs) Handles btnPersonGallery.Click
-    Ancestry.NavigateTo(URLTypeEnum.PERSON_GALLERY)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON)
   End Sub
 
   Private Sub btnPersonStory_Click(sender As Object, e As EventArgs) Handles btnPersonStory.Click
-    Ancestry.NavigateTo(URLTypeEnum.PERSON_STORY)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_STORY_PERSON)
   End Sub
 
   Private Sub AncestryToolbarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AncestryToolbarToolStripMenuItem.Click
     Ancestry.ShowToolbar = AncestryToolbarToolStripMenuItem.Checked
   End Sub
 
-  Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
+  Private Sub btnDownload_Click(sender As Object, e As EventArgs)
 
   End Sub
 
@@ -385,7 +384,7 @@ Public Class ApplicationForm
   Private Sub AncestorsList_DoubleClick(sender As Object, e As EventArgs) Handles AncestorsList.DoubleClick
     Dim id As String = AncestorsList.SelectedItems.Item(0).Tag
     If Not id.Equals("") Then
-      Ancestry.NavigateTo(URLTypeEnum.PERSON_FACTS, id)
+      Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON, id)
     End If
   End Sub
 
@@ -404,10 +403,6 @@ Public Class ApplicationForm
     Else
       Cursor = Cursors.Default
     End If
-  End Sub
-
-  Private Sub ancestry_AncestorChanged(newAncestor As AncestorCollection.Ancestor)
-    activeAncestor = newAncestor
   End Sub
 
   Private Sub ancestry_ImageDownload(fromPage As String, filename As String)
@@ -467,22 +462,54 @@ Public Class ApplicationForm
     'SetUIState()
   End Sub
 
-  Private Sub Ancestry_AncestorChanged(AncestorID As String) Handles Ancestry.AncestorChanged
-    If AncestorID.Equals("0") Then
-      btnDownload.Text = ""
-      btnDownload.ToolTipText = "No Downloadable Content"
-    Else
-      btnDownload.Text = AncestorID
-      btnDownload.ToolTipText = "Download and import Ancestor Information"
+  'Private Sub Ancestry_AncestorChanged(AncestorID As String) Handles Ancestry.AncestorChanged
+  '  If AncestorID.Equals("0") Then
+  '    btnDownload.Text = ""
+  '    btnDownload.ToolTipText = "No Downloadable Content"
+  '  Else
+  '    btnDownload.Text = AncestorID
+  '    btnDownload.ToolTipText = "Download and import Ancestor Information"
+  '  End If
+  'End Sub
+
+#If SHOW_DEBUG Then
+  Private Sub dumpMessage(msg As APIMessage)
+    Debug.Print("----------------MSG-------------------------------")
+    Debug.Print("MessageType=" & msg.MessageType)
+    Debug.Print("MessageKey =" & msg.MessageKey)
+    Debug.Print("RowsOfData =" & msg.Payload.Count)
+    Dim sb As StringBuilder = New System.Text.StringBuilder
+    Dim sep As String = ""
+    For r As Integer = 0 To msg.Payload.Count - 1
+      sb = New StringBuilder
+      sb.Append("ROW[" & r & "] = ")
+      sep = ""
+      For c As Integer = 0 To msg.Payload.Item(r).Count - 1
+        Dim s As String = msg.Payload.Item(r).Item(c)
+        sb.Append(sep & s)
+        sep = ","
+      Next
+      Debug.Print(sb.ToString)
+    Next
+  End Sub
+#End If
+
+  Private Sub Ancestry_AncestryData(msg As APIMessage) Handles Ancestry.DataDownload
+#If SHOW_DEBUG Then
+    dumpMessage(msg)
+#End If
+    ' We have a person with a valid ancestryid
+    If msg.MessageType = APIMessage.MT_PERSON And msg.MessageKey.Length > 3 Then
+      If Not Ancestors.ContainsKey(msg.MessageKey) Then
+        With btnActions
+          .Tag = msg
+          .Text = "Add Ancestor To Assistant"
+          .Image = My.Resources.ANCESTOR_ADD_WHITE
+          .Enabled = True
+          .Visible = True
+        End With
+      End If
     End If
-  End Sub
-
-  Private Sub Ancestry_AncestryData(dataType As DataTypeEnum, data As AncestryDataMessage) Handles Ancestry.DataDownload
-
-  End Sub
-
-  Private Sub Ancestry_DownloadEnabled(isEnabled As Boolean) Handles Ancestry.DownloadEnabled
-    btnDownload.Enabled = isEnabled
   End Sub
 
 #End Region

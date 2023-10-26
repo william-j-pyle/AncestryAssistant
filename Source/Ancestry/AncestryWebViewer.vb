@@ -14,14 +14,16 @@ Public Class AncestryWebViewer
   ' Tracking
   Private isReady As Boolean = False
 
+  Private UriTrackingGroupDecoder As UriTrackingGroup = New UriTrackingGroup()
+
   ' Public Events
-  Public Event DataDownload(dataType As DataTypeEnum, data As AncestryDataMessage)
+  Public Event UriTrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
+
+  Public Event DataDownload(data As APIMessage)
 
   Public Event AncestorChanged(AncestorID As String)
 
   Public Event ViewerBusy(busy As Boolean)
-
-  Public Event DownloadEnabled(enabled As Boolean)
 
   Public Sub New()
     InitializeComponent()
@@ -32,25 +34,34 @@ Public Class AncestryWebViewer
 
   Public Property BlockWebTracking As Boolean = False
 
-  Public Property BlockedWebDomains As String() = {"facebook", "doubleclick", "tiktok", "pinterest", "adservice"}
+  Public Property BlockedWebDomains As String() = {"adsafe", "syndication", "facebook", "doubleclick", "tiktok", "pinterest", "adservice", "ad-delivery", "adspsp", "adsystem", "adnxs", "securepubads"}
 
   Public Property AncestryBaseURL As String = "https://www.ancestry.com/"
 
-  Public Property AncestryTreeID As String = "65171586"
+  Public Property AncestryTreeID As String = ""
 
-  Public Property BrowserStatus As String = ""
-
-  Private _ShowDownload As Boolean = False
-
-  Public Property ShowDownload As Boolean
+  Private _UriTrackingGroup As UriTrackingGroupEnum = UriTrackingGroupEnum.ANCESTRY
+  Public Property UriTrackingGroup As UriTrackingGroupEnum
     Get
-      Return _ShowDownload
+      Return _UriTrackingGroup
     End Get
-    Set(value As Boolean)
-      _ShowDownload = value
-      btnDownload.Enabled = value
-      RaiseEvent DownloadEnabled(value)
+    Set(value As UriTrackingGroupEnum)
+      If value <> _UriTrackingGroup Then
+        Debug.Print("UriTrackingGroup: " & value.ToString)
+        Dim oldValue As UriTrackingGroupEnum = _UriTrackingGroup
+        _UriTrackingGroup = value
+        RaiseEvent UriTrackingGroupChanged(value, oldValue)
+      End If
     End Set
+  End Property
+
+  Private _MsgSyncKey As Integer = 0
+  Public ReadOnly Property MessageSyncKey As Integer
+    Get
+      _MsgSyncKey += 1
+      If _MsgSyncKey > 999 Then _MsgSyncKey = 1
+      Return _MsgSyncKey
+    End Get
   End Property
 
   Private _ShowToolbar As Boolean = False
@@ -114,34 +125,36 @@ Public Class AncestryWebViewer
   ' ==========================
   ' = Public Methods
   ' ==========================
-  Public Sub NavigateTo(target As URLTypeEnum, Optional customParam As String = "")
+  Public Sub NavigateTo(target As UriTrackingGroupEnum, Optional customParam As String = "")
     Dim rtn As String = AncestryBaseURL
     Select Case target
-      Case URLTypeEnum.CUSTOM
+      Case UriTrackingGroupEnum.CUSTOM
         rtn = customParam
-      Case URLTypeEnum.HOME
-      Case URLTypeEnum.TREE_HOME
+      Case UriTrackingGroupEnum.ANCESTRY
+      Case UriTrackingGroupEnum.ANCESTRY_OVERVIEW_TREE
+        rtn += "family-tree/tree/{TREEID}/recent"
+      Case UriTrackingGroupEnum.ANCESTRY_TREEVIEW_FAMILY
         rtn += "family-tree/tree/{TREEID}/family/pedigree?cfpid=0"
-      Case URLTypeEnum.TREE_VERTICAL
+      Case UriTrackingGroupEnum.ANCESTRY_TREEVIEW_PERSON
         rtn += "family-tree/tree/{TREEID}/family/familyview{CFID}"
-      Case URLTypeEnum.TREE_HORIZONTAL
+      Case UriTrackingGroupEnum.ANCESTRY_PEDIGREEVIEW_PERSON
         rtn += "family-tree/tree/{TREEID}/family/pedigree{CFID}"
-      Case URLTypeEnum.TREE_FAN
+      Case UriTrackingGroupEnum.ANCESTRY_FANVIEW_PERSON
         rtn += "family-tree/tree/{TREEID}/family/fanview{CFID}"
-      Case URLTypeEnum.PERSON_FACTS
+      Case UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON
         rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/facts"
-      Case URLTypeEnum.PERSON_STORY
+      Case UriTrackingGroupEnum.ANCESTRY_STORY_PERSON
         rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/story"
-      Case URLTypeEnum.PERSON_GALLERY
+      Case UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON
         rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/gallery?galleryPage=1&tab=0"
-      Case URLTypeEnum.PERSON_HINTS
+      Case UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON
         rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/hints"
       Case Else
     End Select
     ' Replace Variables with ID's
     rtn = rtn.Replace("{TREEID}", AncestryTreeID)
     rtn = rtn.Replace("{CFID}", "?cfpid={PERSONID}")
-    If target <> URLTypeEnum.CUSTOM And customParam.Length > 0 Then
+    If target <> UriTrackingGroupEnum.CUSTOM And customParam.Length > 0 Then
       'TODO activeAncestor.Reset()
       rtn = rtn.Replace("{PERSONID}", customParam)
     Else
@@ -197,23 +210,35 @@ Public Class AncestryWebViewer
   End Sub
 
   Private Sub JSAPI_Message(sender As Object, e As CoreWebView2WebMessageReceivedEventArgs) Handles web.WebMessageReceived
-    Exit Sub
-    Dim msg As JSMessage = JsonConvert.DeserializeObject(Of JSMessage)(e.WebMessageAsJson)
-    Select Case msg.MessageType
-      Case "FactData"
-        Dim data As AncestryFactsParser = New AncestryFactsParser(msg.Payload)
-      Case "CensusData"
-        Dim data As CensusParser = New CensusParser(msg.Payload, msg.MessageKey)
-        If data.CensusArray.Length > 1 Then
-          Dim year As String = data.CensusArray(1)(0).ToString
-          Dim page As String = data.CensusArray(1)(1).ToString
-          AncestryPage = "Census-" & year & "-p" & page
+    Dim msg As APIMessage = JsonConvert.DeserializeObject(Of APIMessage)(e.WebMessageAsJson)
 
-          'TODO RaiseEvent DataChanged(DataTypeEnum.anCENSUSDATA, data.CensusArray)
-        End If
-      Case Else
 
-    End Select
+    If msg.MessageType.Equals("person") And msg.MessageKey.Length > 4 Then
+      AncestorID = msg.MessageKey
+    End If
+
+    If msg.MessageType.Equals("page") Then
+      Dim tracks As String = msg.GetValue("PAGEKEY")
+      Dim utg As UriTrackingGroupEnum = UriTrackingGroupDecoder.getEnum(tracks.Split(":"))
+      Debug.Print("-----------Page Data------------")
+      Debug.Print("-- tracks        = " & tracks)
+      Debug.Print("-- TrackingGroup = " & utg.ToString)
+      UriTrackingGroup = utg
+      Exit Sub
+    End If
+
+    'If msg.hasPersonID() Then
+    'AncestorID = msg.getPersonId()
+    'End If
+    'If msg.hasTreeId() Then
+    ' AncestryTreeID = msg.getTreeId()
+    'End If
+    'Case "tableData"
+    'Case "page"
+    'Case "initTrees"
+    'Case "initAccount"
+    'Case "person"
+    RaiseEvent DataDownload(msg)
   End Sub
 
 #End Region
@@ -263,6 +288,10 @@ Public Class AncestryWebViewer
   End Sub
 
   Private Sub web_SourceChanged(sender As Object, e As CoreWebView2SourceChangedEventArgs) Handles web.SourceChanged
+    Debug.Print("web_SourceChanged")
+    JSAPI_Execute("ancestryAssistant.getPage();")
+    JSAPI_Execute("ancestryAssistant.getState();")
+    JSAPI_Execute("ancestryAssistant.getPerson();")
     txtHref.Text = web.Source.AbsoluteUri
   End Sub
 
@@ -271,6 +300,7 @@ Public Class AncestryWebViewer
   End Sub
 
   Private Sub web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles web.NavigationCompleted
+    Debug.Print("web_NavigationCompleted")
     RaiseEvent ViewerBusy(False)
   End Sub
 
@@ -279,14 +309,22 @@ Public Class AncestryWebViewer
   ' ==========================
 
   Private Sub CoreWeb_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles CoreWeb.NavigationStarting
-    BrowserStatus = ""
+    If BlockWebTracking Then
+      For Each partialDomain As String In BlockedWebDomains
+        If e.Uri.ToLower.Contains(partialDomain.ToLower) Then
+          e.Cancel = True
+          Exit Sub
+        End If
+      Next
+    End If
   End Sub
 
   ' If enabled, this routine will cancel every request to various tracking sites
   Private Sub CoreWeb_FrameNavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles CoreWeb.FrameNavigationStarting
     If BlockWebTracking Then
       For Each partialDomain As String In BlockedWebDomains
-        If e.Uri.Contains(partialDomain) Then
+        If e.Uri.ToLower.Contains(partialDomain.ToLower) Then
+          'Debug.Print("BLOCKED:  " + e.Uri)
           e.Cancel = True
           Exit Sub
         End If
@@ -295,9 +333,7 @@ Public Class AncestryWebViewer
   End Sub
 
   Private Sub CoreWeb_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles CoreWeb.NavigationCompleted
-    If Visible = False Then Visible = True
     _URL = web.Source
-    ShowDownload = txtHref.Text.Contains("mediaui-viewer") Or BrowserStatus.Contains("Census") Or BrowserStatus.Contains("Fact") Or txtHref.Text.EndsWith("jpg") Or txtHref.Text.EndsWith("jpeg")
   End Sub
 
   ' If the result of the current navigation attempts to open a new window
@@ -308,73 +344,23 @@ Public Class AncestryWebViewer
     HREF = e.Uri
   End Sub
 
-  Private Sub CoreWeb_DocumentTitleChanged(sender As Object, e As Object) Handles CoreWeb.DocumentTitleChanged
-    Dim src = CoreWeb.Source
-    Dim title = CoreWeb.DocumentTitle
-    Dim p() As String
-    p = src.Split("/")
-    If p(2).Equals("www.ancestry.com") Then
-      If p.Length() >= 6 And title.Contains("View - Ancestry") Then
-        If src.Contains("?cfpid=") Then
-          p = src.Split("=")
-          AncestorID = p(1)
-        End If
-        AncestryPage = title.Replace("View - Ancestry", "").Trim
-        BrowserStatus = title
-        Exit Sub
-      End If
-      If p.Length() > 4 Then
-        If p(4).Equals("collections") And title.Contains("Census") Then
-          AncestryPage = "Census"
-          BrowserStatus = title.Replace("Ancestry.com -", "").Trim()
-          Exit Sub
-        End If
-      End If
-      If p.Length > 9 Then
-        If p(3).Equals("family-tree") And p(4).Equals("person") _
-      And p(5).Equals("tree") And p(6) = AncestryTreeID _
-      And p(7).Equals("person") Then
-          If (p(9).StartsWith("facts") And title.EndsWith("Facts")) Or src.Contains("facts") Then
-            AncestorID = p(8)
-            If title.EndsWith("Facts") Then
-              'TODO AncestorName = title.Split("-")(0).Trim()
-            End If
-            AncestryPage = "Facts"
-            BrowserStatus = AncestryPage
-            Exit Sub
-          End If
-          If p(9).StartsWith("gallery") And title.EndsWith("Gallery") Then
-            AncestorID = p(8)
-            'TODO AncestorName = title.Split("-")(0).Trim()
-            AncestryPage = "Gallery"
-            BrowserStatus = AncestryPage
-            Exit Sub
-          End If
-          If p(9).StartsWith("hints") And title.EndsWith("Hints") Then
-            AncestorID = p(8)
-            'TODO AncestorName = title.Split("-")(0).Trim()
-            AncestryPage = "Hints"
-            BrowserStatus = AncestryPage
-            Exit Sub
-          End If
-          If p(9).StartsWith("story") And title.EndsWith("LifeStory") Then
-            AncestorID = p(8)
-            'TODO AncestorName = title.Split("-")(0).Trim()
-            AncestryPage = "LifeStory"
-            BrowserStatus = AncestryPage
-            Exit Sub
-          End If
-        End If
-      End If
-    End If
-    BrowserStatus = title & " - " & src
-  End Sub
 
   Private Sub CoreWebDownload_StateChanged(sender As Object, e As Object) Handles CoreWebDownload.StateChanged
     If CoreWebDownload.State = CoreWebView2DownloadState.Completed And CoreWeb.IsDefaultDownloadDialogOpen Then
       CoreWeb.CloseDefaultDownloadDialog()
       JSAPI_Execute("document.body.click();")
-      'TODO RaiseEvent ImageDownload(AncestryPage, CoreWebDownload.ResultFilePath())
+      Dim msg As APIMessage = New APIMessage()
+      msg.MessageType = "imageDownload"
+      msg.MessageKey = AncestorID
+      Dim payload As New List(Of List(Of String))
+      Dim row As New List(Of String)
+      row.Add("fileName")
+      payload.Add(row)
+      row = New List(Of String)
+      row.Add(CoreWebDownload.ResultFilePath())
+      payload.Add(row)
+      msg.Payload = payload
+      RaiseEvent DataDownload(msg)
     End If
   End Sub
 
@@ -392,21 +378,6 @@ Public Class AncestryWebViewer
   ' ==========================
   ' = Menubar Event Handlers
   ' ==========================
-  Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
-    If BrowserStatus.Contains("Fact") Then
-      JSAPI_Capture(AncestryCaptureType.ANCESTOR)
-    End If
-    If BrowserStatus.Contains("Census") Then
-      JSAPI_Capture(AncestryCaptureType.CENSUS)
-      JSAPI_Capture(AncestryCaptureType.CENSUS_IMAGE)
-    End If
-    If txtHref.Text.EndsWith("jpg") Or txtHref.Text.EndsWith("jpeg") Then
-      JSAPI_Capture(AncestryCaptureType.IMAGE)
-    End If
-    If txtHref.Text.Contains("mediaui-viewer") Then
-      JSAPI_Capture(AncestryCaptureType.GALLERY_IMAGE)
-    End If
-  End Sub
 
   Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
     web.GoBack()
@@ -417,7 +388,7 @@ Public Class AncestryWebViewer
   End Sub
 
   Private Sub btnHome_Click_1(sender As Object, e As EventArgs) Handles btnHome.Click
-    NavigateTo(URLTypeEnum.HOME)
+    NavigateTo(UriTrackingGroupEnum.ANCESTRY_HOME)
   End Sub
 
   Private Sub tsWeb_Resize(sender As Object, e As EventArgs) Handles tsWeb.Resize
@@ -425,7 +396,7 @@ Public Class AncestryWebViewer
   End Sub
 
   Private Sub txtHref_Enter(sender As Object, e As EventArgs) Handles txtHref.Enter
-    NavigateTo(URLTypeEnum.CUSTOM, txtHref.Text)
+    NavigateTo(UriTrackingGroupEnum.CUSTOM, txtHref.Text)
   End Sub
 
 #End Region

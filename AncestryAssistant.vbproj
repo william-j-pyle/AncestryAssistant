@@ -212,17 +212,37 @@
     <Compile Include="Source\Ancestry\AncestryWebViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\App\Forms\ApplicationEvents.vb" />
-    <Compile Include="Source\App\Forms\ApplicationForm.Designer.vb">
+    <Compile Include="Source\Ancestry\DataObjects\UriTracks.vb" />
+    <Compile Include="Source\Ancestry\DataObjects\UriTrackingGroup.vb" />
+    <Compile Include="Source\App\ApplicationEvents.vb" />
+    <Compile Include="Source\App\ApplicationForm.Designer.vb">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\Forms\ApplicationForm.vb">
+    <Compile Include="Source\App\ApplicationForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\App\Forms\Form1.Designer.vb">
+    <Compile Include="Source\App\Components\JButton.Designer.vb">
+      <DependentUpon>JButton.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\App\Components\JButton.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\App\Components\JRibbon.Designer.vb">
+      <DependentUpon>JRibbon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\App\Components\JRibbon.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Source\App\Components\JRibbonGroup.Designer.vb">
+      <DependentUpon>JRibbonGroup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\App\Components\JRibbonGroup.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Source\App\Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\Forms\Form1.vb">
+    <Compile Include="Source\App\Form1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Census\CensusViewer.Designer.vb">
@@ -286,6 +306,8 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Ancestry\DataObjects\AncestryDataMessage.vb" />
+    <Compile Include="Source\Theme\Enums\FontAncestryIconEnum.vb" />
+    <Compile Include="Source\Theme\Enums\FontSegoeFluentIconsEnum.vb" />
     <Compile Include="Source\Theme\Enums\ThemeCategoryEnum.vb" />
     <Compile Include="Source\Theme\Enums\ThemeIconsEnum.vb" />
     <Compile Include="Source\Theme\JTheme.Designer.vb">
@@ -296,7 +318,7 @@
     </Compile>
     <Compile Include="Source\Ancestry\Enums\CaptureTypeEnum.vb" />
     <Compile Include="Source\Ancestry\Enums\DataTypeEnum.vb" />
-    <Compile Include="Source\Ancestry\Enums\URLTypeEnum.vb" />
+    <Compile Include="Source\Ancestry\Enums\UriTrackingGroupEnum.vb" />
     <Compile Include="Source\App\Components\DockHeaderPanel.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -310,7 +332,7 @@
     <Compile Include="Source\App\Components\BordersPanel.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Ancestry\DataObjects\JSMessage.vb" />
+    <Compile Include="Source\Ancestry\DataObjects\APIMessage.vb" />
     <Compile Include="Source\Ancestry\WebParsers\CensusParser.vb" />
     <Compile Include="Source\Ancestry\WebParsers\AncestorParser.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -329,10 +351,19 @@
     <EmbeddedResource Include="Source\Ancestry\AncestryWebViewer.resx">
       <DependentUpon>AncestryWebViewer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Forms\ApplicationForm.resx">
+    <EmbeddedResource Include="Source\App\ApplicationForm.resx">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Forms\Form1.resx">
+    <EmbeddedResource Include="Source\App\Components\JButton.resx">
+      <DependentUpon>JButton.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\App\Components\JRibbon.resx">
+      <DependentUpon>JRibbon.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\App\Components\JRibbonGroup.resx">
+      <DependentUpon>JRibbonGroup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\App\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Census\CensusViewer.resx">
@@ -401,6 +432,13 @@
   <ItemGroup>
     <Content Include="Resources\adobe\Assets.psd" />
     <Content Include="Resources\adobe\Panel.psd" />
+    <None Include="Resources\interaktionen-copy.png" />
+    <None Include="Resources\interaktionen-cut.png" />
+    <None Include="Resources\interaktionen-clipboard-list1.png" />
+    <None Include="Resources\interaktionen-clipboard-list.png" />
+    <None Include="Resources\image\ANCESTOR_WHITE.png" />
+    <None Include="Resources\image\ANCESTOR_MERGE_WHITE.png" />
+    <None Include="Resources\image\ANCESTOR_ADD_WHITE.png" />
     <None Include="Resources\image\tastatur-bold.png" />
     <None Include="Resources\image\JFOLDER_ICO20.png" />
     <None Include="Resources\image\JFOLDER_PLUS_ICO20.png" />

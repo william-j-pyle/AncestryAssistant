@@ -118,998 +118,1019 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CROP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CROP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LETTERS_CASE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LETTERS_CASE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CLIPBOARD_LIST_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CLIPBOARD_LIST_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TARGET_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\TARGET_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panel_Top_Right" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\Panel_Top_Right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CHECKBOX_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CHECKBOX_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DISC_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DISC_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="USER_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\USER_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CLOUD_UPLOAD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CLOUD_UPLOAD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HOME_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\HOME_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LOCK_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LOCK_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NEWS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\NEWS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PAGE_UPLOAD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_UPLOAD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CUT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\CUT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BIG_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BIG_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LOCK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LOCK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PAGE_INVOICE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_INVOICE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LICENSE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LICENSE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FILTER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FILTER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CLOUD_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CLOUD_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ZOOM_OUT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ZOOM_OUT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ANCESTOR_MERGE_WHITE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ANCESTOR_MERGE_WHITE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MAP_PIN_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MAP_PIN_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FLAME_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FLAME_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TAG_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\TAG_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BRIEFCASE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BRIEFCASE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FOLDER_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FOLDER_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UP_LEFT_4_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UP_LEFT_4_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PENCIL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PENCIL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ZOOM_IN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ZOOM_IN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UP_RIGHT_4_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UP_RIGHT_4_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ALIGN_JUSTIFIED_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ALIGN_JUSTIFIED_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FOLDER_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FOLDER_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\AT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DIRECTION_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DIRECTION_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MAXIMIZE_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MAXIMIZE_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UPLOAD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UPLOAD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SEARCH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SEARCH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UP_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UP_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MED_BLOOD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MED_BLOOD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CLOCK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CLOCK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="H_5_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\H_5_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FORWARD_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FORWARD_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PHONE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PHONE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SHIELD_LOCK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SHIELD_LOCK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PHOTO_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PHOTO_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PLANT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\PLANT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CORNER_UP_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CORNER_UP_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BUCKET_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BUCKET_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="QUESTION_MARK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\QUESTION_MARK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CIRCLE_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CIRCLE_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MESSAGE_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MESSAGE_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ITALIC_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ITALIC_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PHOTO_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PHOTO_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PAGE_SEARCH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_SEARCH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BELL_RINGING_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BELL_RINGING_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DICE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DICE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EGG_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\EGG_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FOLDER_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FOLDER_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CALENDAR_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CALENDAR_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="REFRESH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\REFRESH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UP_RIGHT_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UP_RIGHT_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CAMERA_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CAMERA_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="COLOR_PICKER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\COLOR_PICKER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CORNER_LEFT_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CORNER_LEFT_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LOGOUT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LOGOUT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BOOKMARKS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BOOKMARKS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UP_4_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UP_4_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MAP_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MAP_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOWN_RIGHT_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOWN_RIGHT_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ADJUSTMENTS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ADJUSTMENTS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SORT_DESCENDING_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SORT_DESCENDING_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_BLANK_LANDSCAPE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_BLANK_LANDSCAPE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_TEXT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_TEXT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MAP_PINS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MAP_PINS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOWNLOAD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOWNLOAD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_CODE_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_CODE_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SEEDING_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SEEDING_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UNDERLINE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UNDERLINE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="H_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\H_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LEFT_4_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LEFT_4_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TRIANGLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\TRIANGLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CHART_PIE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CHART_PIE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FOLDER_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FOLDER_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LIST_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LIST_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CARET_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CARET_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="REFRESH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\REFRESH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SORT_ASCENDING_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\SORT_ASCENDING_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ZOOM_CANCEL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ZOOM_CANCEL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TAG_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\TAG_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SELECT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SELECT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FOLDER_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FOLDER_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UNLINK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UNLINK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MED_VIRUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MED_VIRUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CHART_DONUT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CHART_DONUT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PAGE_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CORNER_RIGHT_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CORNER_RIGHT_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UP_RIGHT_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UP_RIGHT_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SORT_DESCENDING_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SORT_DESCENDING_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MED_PILL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MED_PILL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ID_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ID_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CLIPBOARD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CLIPBOARD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CALENDAR_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CALENDAR_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PLANT_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PLANT_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BOOKMARK_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BOOKMARK_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DIRECTION_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DIRECTION_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MAIL_OPENED_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MAIL_OPENED_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BACKSPACE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\BACKSPACE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UP_RIGHT_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UP_RIGHT_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SQUARE_DOT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SQUARE_DOT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NOTES_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\NOTES_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UP_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UP_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CLOCK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CLOCK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ARCHIVE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ARCHIVE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CARET_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CARET_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SHIELD_LOCK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SHIELD_LOCK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MAP_PINS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MAP_PINS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UP_LEFT_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UP_LEFT_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="USER_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\USER_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOWN_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOWN_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CAMERA_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CAMERA_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Panel_Top_Left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\Panel_Top_Left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SELECT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SELECT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EGG_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\EGG_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VENUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\VENUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="COLOR_PICKER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\COLOR_PICKER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOWN_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOWN_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\H_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOWN_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOWN_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CALCULATOR_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CALCULATOR_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BIG_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BIG_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOWN_LEFT_CIRCLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOWN_LEFT_CIRCLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FORWARD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FORWARD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ANCESTOR_WHITE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ANCESTOR_WHITE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LEFT_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LEFT_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOTS_3X3_GRID_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOTS_3X3_GRID_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CERTIFICATE_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CERTIFICATE_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOWNLOAD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOWNLOAD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CIRCLE_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CIRCLE_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TARGET_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\TARGET_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PHONE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PHONE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PINNED_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PINNED_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BACK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BACK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ALIGN_JUSTIFIED_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ALIGN_JUSTIFIED_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CORNER_UP_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CORNER_UP_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LOCK_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LOCK_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_EXCLAMATION_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_EXCLAMATION_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BUILDING_HOSPITAL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BUILDING_HOSPITAL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="QUESTION_MARK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\QUESTION_MARK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MUSIC_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MUSIC_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LOCATION_TARGET_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LOCATION_TARGET_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BAR_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BAR_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SQUARE_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SQUARE_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RIGHT_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\RIGHT_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ANCESTRY" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_ancestry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FOLDERS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FOLDERS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TEMPLATE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\TEMPLATE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CROP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CROP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pfeile_pfeile_horizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\pfeile-pfeile-horizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CARET_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CARET_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="USER_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\USER_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BOOKMARK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BOOKMARK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ALERT_OCTAGON_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ALERT_OCTAGON_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOWN_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOWN_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UNDERLINE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UNDERLINE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="USERS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\USERS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BUILDING_FORTRESS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BUILDING_FORTRESS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MESSAGE_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MESSAGE_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MAP_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MAP_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_SLASH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_SLASH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MAP_PIN_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MAP_PIN_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CHART_PIE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CHART_PIE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DEVICE_FLOPPY_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DEVICE_FLOPPY_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_MUSIC_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_MUSIC_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MED_VIRUS_SEARCH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MED_VIRUS_SEARCH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BUILDING_CHURCH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BUILDING_CHURCH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PIN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PIN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BUILDING_CASTLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BUILDING_CASTLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EDIT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\EDIT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SHIELD_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SHIELD_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PACKAGE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PACKAGE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_EXPORT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_EXPORT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_INVOICE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_INVOICE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ANCESTRY_PEDIGREE_VIEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__117.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SHIELD_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SHIELD_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SYMLINK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SYMLINK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EXTERNAL_LINK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\EXTERNAL_LINK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BAR_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BAR_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FOLDER_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FOLDER_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BOOK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BOOK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NEWS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\NEWS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="USER_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\USER_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CIRCLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CIRCLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RIGHT_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\RIGHT_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROTATE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ROTATE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CORNER_LEFT_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CORNER_LEFT_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MAP_PIN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MAP_PIN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BUILDING_SKYSCRAPER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BUILDING_SKYSCRAPER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DIAGONAL_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DIAGONAL_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CARET_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CARET_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FORWARD_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FORWARD_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ALERT_TRIANGLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ALERT_TRIANGLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LINK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LINK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TOGGLE_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\TOGGLE_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UP_LEFT_4_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UP_LEFT_4_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MED_BANDAID_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MED_BANDAID_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LIST_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LIST_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BELL_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BELL_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DATABASE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DATABASE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BAR_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BAR_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LIST_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LIST_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SQUARE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SQUARE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SCHOOL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SCHOOL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TOGGLE_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\TOGGLE_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HOME_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\HOME_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOWN_CIRCLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOWN_CIRCLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BUILDING_MONUMENT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BUILDING_MONUMENT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Panel_Bottom_Left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\Panel_Bottom_Left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SCISSORS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SCISSORS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SQUARE_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SQUARE_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FILTER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FILTER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CHART_AREA_LINE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CHART_AREA_LINE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_LIKE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_LIKE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MINIMIZE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MINIMIZE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_DIFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_DIFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PINNED_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PINNED_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MAXIMIZE_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MAXIMIZE_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TOOLS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\TOOLS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FLAG_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FLAG_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOWNLOAD_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOWNLOAD_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VERTICAL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\VERTICAL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CORNER_DOWN_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CORNER_DOWN_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CLIPBOARD_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CLIPBOARD_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_CODE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_CODE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MARS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MARS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\H_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CORNER_UP_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CORNER_UP_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOWN_RIGHT_CIRCLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOWN_RIGHT_CIRCLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="interaktionen-clipboard-list1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\interaktionen-clipboard-list1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_CODE_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_CODE_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SHIELD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SHIELD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LOGOUT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LOGOUT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MAIL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MAIL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CORNER_RIGHT_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CORNER_RIGHT_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TICKET_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\TICKET_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CLIPBOARD_LIST_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CLIPBOARD_LIST_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BELL_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BELL_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CLIPBOARD_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CLIPBOARD_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NOTEBOOK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\NOTEBOOK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UNLINK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UNLINK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_DOWNLOAD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_DOWNLOAD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CIRCLE_DASHED_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CIRCLE_DASHED_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ALIGN_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ALIGN_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BAR_TO_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BAR_TO_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOTS_3_VERT_T_B_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOTS_3_VERT_T_B_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAUSE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAUSE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UP_4_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UP_4_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ERASER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ERASER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ANCESTRY_FAMILY_VIEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black__118.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BIG_TOP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BIG_TOP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BELL_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BELL_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H_1_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\H_1_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BACK_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BACK_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CHART_BAR_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CHART_BAR_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BAR_TO_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BAR_TO_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FILTER_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FILTER_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DISC_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DISC_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_BLANK_LANDSCAPE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_BLANK_LANDSCAPE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CALENDAR_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CALENDAR_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H_5_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\H_5_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BOX_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BOX_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CIRCLE_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CIRCLE_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="THUMB_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\THUMB_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BELL_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BELL_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LOCK_OPEN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LOCK_OPEN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CHART_LINE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CHART_LINE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_CERTIFICATE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_CERTIFICATE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BUILDING_LIGHTHOUSE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BUILDING_LIGHTHOUSE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOTS_2x3_HORI_L_R_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOTS_2x3_HORI_L_R_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LEFT_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LEFT_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H_6_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\H_6_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UP_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UP_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CHART_DONUT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CHART_DONUT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CORNER_LEFT_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CORNER_LEFT_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MAP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MAP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PENNANT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PENNANT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DIRECTION_HORIZONTAL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DIRECTION_HORIZONTAL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DIAMOND_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DIAMOND_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ANCESTOR_ADD_WHITE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ANCESTOR_ADD_WHITE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RULER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\RULER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FLIP_VERTICAL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FLIP_VERTICAL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LETTERS_CASE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LETTERS_CASE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CHART_BUBBLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CHART_BUBBLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="interaktionen-clipboard-list" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\interaktionen-clipboard-list.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\AT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ALIGN_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ALIGN_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_BLANK_PORTRAIT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_BLANK_PORTRAIT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="COPY_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\COPY_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KEY_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\KEY_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CHART_RADAR_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CHART_RADAR_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UPLOAD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UPLOAD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOTS_3_HORI_L_R_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOTS_3_HORI_L_R_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BIG_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BIG_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SQUARE_FORBID_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SQUARE_FORBID_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ZOOM_IN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ZOOM_IN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="USER_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\USER_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="USER_EXCLAMATION_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\USER_EXCLAMATION_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOWN_RIGHT_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOWN_RIGHT_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ADJUSTMENTS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ADJUSTMENTS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SELECTOR_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SELECTOR_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ALIGN_CENTER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ALIGN_CENTER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PENCIL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PENCIL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SQUARE_FORBID_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SQUARE_FORBID_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Panel_Top_Right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\Panel_Top_Right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BRIEFCASE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BRIEFCASE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UP_RIGHT_4_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UP_RIGHT_4_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tastatur-bold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\tastatur-bold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CIRCLES_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CIRCLES_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CHART_AREA_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CHART_AREA_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UP_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UP_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Panel_Bottom_Center" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\Panel_Bottom_Center.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SEARCH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SEARCH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="THUMB_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\THUMB_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UP_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UP_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOWN_LEFT_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOWN_LEFT_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BOOKMARKS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BOOKMARKS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ZOOM_CANCEL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ZOOM_CANCEL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MOVIE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MOVIE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DIAGONAL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DIAGONAL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOTS_2x3_VERT_T_B_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOTS_2x3_VERT_T_B_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SQUARE_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SQUARE_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MED_BLOOD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MED_BLOOD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GIFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\GIFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BELL_RINGING_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BELL_RINGING_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BIG_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BIG_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="STRIKETHROUGH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\STRIKETHROUGH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SETTINGS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SETTINGS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MINIMIZE_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MINIMIZE_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="interaktionen-cut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\interaktionen-cut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FLIP_HORIZONTAL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FLIP_HORIZONTAL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MAXIMIZE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MAXIMIZE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TRASH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\TRASH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CLOUD_DOWNLOAD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CLOUD_DOWNLOAD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NOTE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\NOTE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BAR_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BAR_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CHART_CANDLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CHART_CANDLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MED_VIRUS_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\MED_VIRUS_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROTATE_CLOCKWISE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ROTATE_CLOCKWISE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DICE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DICE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HOME_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\HOME_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TOOL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\TOOL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="USER_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\USER_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ALERT_CIRCLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ALERT_CIRCLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAPERCLIP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAPERCLIP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SHIELD_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SHIELD_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BUILDING_COMMUNITY_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BUILDING_COMMUNITY_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CORNER_DOWN_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CORNER_DOWN_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DOWN_RIGHT_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\DOWN_RIGHT_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_TEXT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_TEXT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="COLOR_SWATCH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\COLOR_SWATCH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Panel_Bottom_Right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\Panel_Bottom_Right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SEEDING_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SEEDING_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CIRCLE_DOTTED_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CIRCLE_DOTTED_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CHECKBOX_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CHECKBOX_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BELL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BELL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="H_4_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\H_4_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WORLD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\WORLD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CARET_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CARET_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AssistantAPI" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\javascript\AssistantAPI.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
     <comment>Javascript API loaded into webview for easy control</comment>
   </data>
-  <data name="BELL_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BELL_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="WORLD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\WORLD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="COPY_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\COPY_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="COLOR_SWATCH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\COLOR_SWATCH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CHECKS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CHECKS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ROTATE_CLOCKWISE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ROTATE_CLOCKWISE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CORNER_DOWN_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CORNER_DOWN_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="USER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\USER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MINIMIZE_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MINIMIZE_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FOLDER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FOLDER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOWNLOAD_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOWNLOAD_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAPERCLIP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAPERCLIP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CHART_BUBBLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CHART_BUBBLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="USER_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\USER_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FLIP_HORIZONTAL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FLIP_HORIZONTAL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TICKET_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\TICKET_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="USER_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\USER_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CALENDAR_EVENT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CALENDAR_EVENT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PENNANT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PENNANT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOTS_3_HORI_L_R_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOTS_3_HORI_L_R_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_EXCLAMATION_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_EXCLAMATION_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BUILDING_COMMUNITY_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BUILDING_COMMUNITY_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UP_LEFT_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UP_LEFT_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SCHOOL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SCHOOL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PINNED_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PINNED_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="H_1_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\H_1_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CHART_AREA_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CHART_AREA_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="VERTICAL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\VERTICAL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TRASH_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\TRASH_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BUCKET_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BUCKET_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOWN_LEFT_CIRCLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOWN_LEFT_CIRCLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LINK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LINK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SHREDDER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SHREDDER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_DOWNLOAD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_DOWNLOAD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CLIPBOARD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CLIPBOARD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOTS_3_VERT_T_B_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOTS_3_VERT_T_B_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TOGGLE_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\TOGGLE_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BAR_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BAR_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CALENDAR_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CALENDAR_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="DOWN_LEFT_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\DOWN_LEFT_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ALIGN_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ALIGN_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MARS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MARS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOWN_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOWN_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FLIP_VERTICAL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FLIP_VERTICAL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LEFT_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LEFT_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BUILDING_CASTLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BUILDING_CASTLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_EXPORT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_EXPORT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CARET_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CARET_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PACKAGE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PACKAGE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ZOOM_QUESTION_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ZOOM_QUESTION_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MED_VIRUS_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MED_VIRUS_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TRASH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\TRASH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CORNER_DOWN_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CORNER_DOWN_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CLIPBOARD_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CLIPBOARD_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panel_Bottom_Left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\Panel_Bottom_Left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MUSIC_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MUSIC_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAUSE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAUSE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PLAY_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\PLAY_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BIG_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BIG_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EXTERNAL_LINK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\EXTERNAL_LINK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ARCHIVE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ARCHIVE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CIRCLE_DASHED_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CIRCLE_DASHED_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BELL_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BELL_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LOCK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LOCK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BIG_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BIG_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PLANT_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PLANT_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DATABASE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DATABASE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BOOKMARK_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BOOKMARK_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="THUMB_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\THUMB_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FILTER_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FILTER_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOWN_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOWN_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BUILDING_CHURCH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BUILDING_CHURCH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MAP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MAP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MED_PILL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MED_PILL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CIRCLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CIRCLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BAR_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BAR_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_UPLOAD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_UPLOAD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CALENDAR_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CALENDAR_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ADJUSTMENTS_HORIZONTAL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\ADJUSTMENTS_HORIZONTAL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="THUMB_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\THUMB_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="STRIKETHROUGH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\STRIKETHROUGH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BACK_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BACK_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LEAF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LEAF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panel_Bottom_Center" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\Panel_Bottom_Center.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FLAME_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FLAME_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CLOUD_DOWNLOAD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CLOUD_DOWNLOAD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="USER_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\USER_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LIST_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LIST_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UP_CIRCLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UP_CIRCLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CORNER_RIGHT_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CORNER_RIGHT_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PHOTO_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PHOTO_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DIAGONAL_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DIAGONAL_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MAP_PIN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MAP_PIN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SHIELD_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SHIELD_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pfeile_pfeile_horizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\pfeile-pfeile-horizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MED_VIRUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MED_VIRUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PINNED_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PINNED_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CERTIFICATE_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CERTIFICATE_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CARET_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CARET_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RIGHT_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\RIGHT_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="USER_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\USER_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CHART_RADAR_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CHART_RADAR_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MAIL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MAIL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_DISLIKE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_DISLIKE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="H_4_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\H_4_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FOLDERS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FOLDERS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UP_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UP_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SQUARE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SQUARE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SQUARE_FORBID_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SQUARE_FORBID_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TROPHY_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\TROPHY_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SHIELD_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SHIELD_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CORNER_RIGHT_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CORNER_RIGHT_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NOTEBOOK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\NOTEBOOK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BOOKMARK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BOOKMARK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="H_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\H_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BELL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BELL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panel_Top_Left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\Panel_Top_Left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CORNER_UP_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CORNER_UP_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ANCESTRY_FAMILY_VIEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ico_20_black__118.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="USER_EXCLAMATION_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\USER_EXCLAMATION_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ANCESTRY_PEDIGREE_VIEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ico_20_black__117.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BUILDING_LIGHTHOUSE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BUILDING_LIGHTHOUSE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DIAMOND_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DIAMOND_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EDIT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\EDIT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CERTIFICATE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CERTIFICATE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LEFT_4_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LEFT_4_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_CODE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_CODE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BAR_TO_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BAR_TO_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DIAGONAL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DIAGONAL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BOOK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BOOK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SETTINGS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SETTINGS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SHIELD_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SHIELD_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_ZIP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_ZIP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOWN_RIGHT_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOWN_RIGHT_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOTS_3X3_GRID_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOTS_3X3_GRID_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ERASER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ERASER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CHART_AREA_LINE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CHART_AREA_LINE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SQUARE_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SQUARE_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DIRECTION_HORIZONTAL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DIRECTION_HORIZONTAL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BAN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BAN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SQUARE_FORBID_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SQUARE_FORBID_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NOTE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\NOTE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BACK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BACK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOWN_RIGHT_CIRCLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOWN_RIGHT_CIRCLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CIRCLES_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CIRCLES_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TOGGLE_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\TOGGLE_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LIVE_VIEW_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LIVE_VIEW_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CHART_BAR_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CHART_BAR_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="USERS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\USERS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RIGHT_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\RIGHT_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SHIELD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SHIELD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BELL_RINGING_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BELL_RINGING_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BELL_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BELL_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_SEARCH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_SEARCH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BAR_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BAR_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CORNER_LEFT_UP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CORNER_LEFT_UP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CIRCLE_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CIRCLE_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BELL_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BELL_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DEVICE_FLOPPY_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DEVICE_FLOPPY_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SQUARE_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SQUARE_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BAR_TO_DOWN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BAR_TO_DOWN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ALERT_TRIANGLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ALERT_TRIANGLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MED_VIRUS_SEARCH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MED_VIRUS_SEARCH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UP_LEFT_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UP_LEFT_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panel_Bottom_Right" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\Panel_Bottom_Right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ALERT_CIRCLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ALERT_CIRCLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_DIFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_DIFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SHREDDER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SHREDDER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PAGE_CHART_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\PAGE_CHART_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ALERT_OCTAGON_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ALERT_OCTAGON_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CALENDAR_EVENT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CALENDAR_EVENT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PAGE_CERTIFICATE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_CERTIFICATE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TROPHY_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\TROPHY_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CIRCLE_MINUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CIRCLE_MINUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BAN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BAN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UP_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UP_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PAGE_ZIP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_ZIP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RIGHT_4_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\RIGHT_4_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BELL_RINGING_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\BELL_RINGING_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BUILDING_HOSPITAL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BUILDING_HOSPITAL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="UP_RIGHT_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UP_RIGHT_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PAGE_BLANK_PORTRAIT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_BLANK_PORTRAIT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SQUARE_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SQUARE_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BAR_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BAR_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BIG_TOP_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BIG_TOP_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CLOUD_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CLOUD_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RULER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\RULER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FOLDER_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FOLDER_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BUILDING_FORTRESS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BUILDING_FORTRESS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOWN_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOWN_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CHART_CANDLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CHART_CANDLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TOOL_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\TOOL_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LOCATION_TARGET_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LOCATION_TARGET_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FLAG_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FLAG_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TOOLS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\TOOLS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HOME_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\HOME_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOTS_2x3_VERT_T_B_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOTS_2x3_VERT_T_B_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TYPOGRAPHY_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\TYPOGRAPHY_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="H_6_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\H_6_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CARET_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CARET_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FORWARD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\FORWARD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CIRCLE_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CIRCLE_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CIRCLE_DOTTED_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CIRCLE_DOTTED_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOWN_LEFT_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOWN_LEFT_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LICENSE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LICENSE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="GIFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\GIFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ANCESTRY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ico_20_ancestry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MAXIMIZE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MAXIMIZE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="VENUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\VENUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MED_BANDAID_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MED_BANDAID_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ROTATE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ROTATE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CIRCLE_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CIRCLE_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BOX_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BOX_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ANCESTRY_FAN_VIEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ico_20_black_fan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TEMPLATE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\TEMPLATE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CHART_LINE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CHART_LINE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SCISSORS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SCISSORS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UP_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\UP_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ALIGN_LEFT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ALIGN_LEFT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MINIMIZE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MINIMIZE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SQUARE_PLUS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SQUARE_PLUS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_MUSIC_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_MUSIC_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SYMLINK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SYMLINK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BUILDING_SKYSCRAPER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BUILDING_SKYSCRAPER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MOVIE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MOVIE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BUILDING_MONUMENT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\BUILDING_MONUMENT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SQUARE_DOT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SQUARE_DOT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MAIL_OPENED_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\MAIL_OPENED_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LEFT_3_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LEFT_3_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOTS_2x3_HORI_L_R_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOTS_2x3_HORI_L_R_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_SLASH_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_SLASH_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PAGE_LIKE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PAGE_LIKE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LOCK_OPEN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LOCK_OPEN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOWN_CIRCLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOWN_CIRCLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="KEY_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\KEY_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CLIPBOARD_CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CLIPBOARD_CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NOTES_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\NOTES_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CALENDAR_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CALENDAR_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LOGIN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\LOGIN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ALIGN_CENTER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ALIGN_CENTER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CHECK_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CHECK_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DOWN_RIGHT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\DOWN_RIGHT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PIN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\PIN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CALCULATOR_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\CALCULATOR_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SELECTOR_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\SELECTOR_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="UP_CIRCLE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UP_CIRCLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PAGE_IMPORT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\PAGE_IMPORT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tastatur-bold" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\tastatur-bold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ZOOM_QUESTION_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ZOOM_QUESTION_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ID_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ID_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CLOUD_UPLOAD_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CLOUD_UPLOAD_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ITALIC_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ITALIC_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ZOOM_OUT_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ZOOM_OUT_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TRASH_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\TRASH_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PHOTO_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PHOTO_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LEAF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LEAF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SQUARE_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\SQUARE_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TYPOGRAPHY_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\TYPOGRAPHY_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CERTIFICATE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CERTIFICATE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LIVE_VIEW_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LIVE_VIEW_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RIGHT_4_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\RIGHT_4_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="USER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\USER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CIRCLE_X_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CIRCLE_X_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FOLDER_OFF_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FOLDER_OFF_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PAGE_DISLIKE_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\PAGE_DISLIKE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ANCESTRY_FAN_VIEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ico_20_black_fan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UP_LEFT_2_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\UP_LEFT_2_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LOGIN_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\LOGIN_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FOLDER_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\FOLDER_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CHECKS_ICO20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\CHECKS_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="interaktionen-copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\interaktionen-copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

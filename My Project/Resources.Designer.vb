@@ -153,6 +153,36 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property ANCESTOR_ADD_WHITE() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ANCESTOR_ADD_WHITE", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property ANCESTOR_MERGE_WHITE() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ANCESTOR_MERGE_WHITE", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property ANCESTOR_WHITE() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ANCESTOR_WHITE", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property ANCESTRY() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("ANCESTRY", resourceCulture)
@@ -201,23 +231,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to window.AncestryAssistant = {
-        '''	captureFacts: function () {
-        '''		console.log(&apos;captureFacts&apos;);
-        '''		var item = document.getElementById(&quot;toggleSiblingsBtn&quot;);
-        '''		if (item != null) {
-        '''			if (item.getAttribute(&quot;aria-expanded&quot;) == &apos;false&apos;) {
-        '''				item.click();
-        '''			}
-        '''		}
-        '''			var evnt = {};
-        '''			evnt.MessageType = &apos;FactData&apos;;
-        '''			evnt.MessageKey = &apos;&apos;;
-        '''		evnt.Payload = document.body.innerText;
-        '''			window.chrome.webview.postMessage(evnt);
-        '''	},
-        '''	captureFactsInternal: function () {
-        '''		console.log(&apos;captureFactsInternal&apos;);        ''' [rest of string was truncated]&quot;;.
+        '''  Looks up a localized string similar to if (typeof ancestryAssistant === &apos;undefined&apos;)
+        '''	ancestryAssistant = {};
+        '''
+        '''ancestryAssistant.MessageTypes = {};
+        '''ancestryAssistant.MessageTypes.MT_PERSON = &apos;person&apos;;
+        '''ancestryAssistant.MessageTypes.MT_ACCOUNT = &apos;account&apos;;
+        '''ancestryAssistant.MessageTypes.MT_TREES = &apos;trees&apos;;
+        '''ancestryAssistant.MessageTypes.MT_PAGE = &apos;page&apos;;
+        '''ancestryAssistant.MessageTypes.MT_TABLEDATA = &apos;tabledata&apos;;
+        '''
+        '''ancestryAssistant.postMessage = function (msgType, msgKey, payload) {
+        '''	var msg = {};
+        '''	msg.MessageType = msgType;
+        '''	msg.Mess [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property AssistantAPI() As String
             Get
@@ -1681,6 +1708,46 @@ Namespace My.Resources
         Friend ReadOnly Property ID_ICO20() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("ID_ICO20", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property interaktionen_clipboard_list() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("interaktionen-clipboard-list", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property interaktionen_clipboard_list1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("interaktionen-clipboard-list1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property interaktionen_copy() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("interaktionen-copy", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property interaktionen_cut() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("interaktionen-cut", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

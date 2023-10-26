@@ -30,6 +30,11 @@ Partial Class ApplicationForm
     Me.SplitPanel = New System.Windows.Forms.SplitContainer()
     Me.AncestorAttributes = New System.Windows.Forms.TreeView()
     Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.JPanel2 = New AncestryAssistant.BordersPanel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.JPanel1 = New AncestryAssistant.BordersPanel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.JDockPanelHeader1 = New AncestryAssistant.DockHeaderPanel()
         Me.mnuPanelDock = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuDockTopLeft = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDockTopRight = New System.Windows.Forms.ToolStripMenuItem()
@@ -37,11 +42,17 @@ Partial Class ApplicationForm
         Me.mnuDockBottomMiddle = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDockBottomRight = New System.Windows.Forms.ToolStripMenuItem()
         Me.AncestorsList = New System.Windows.Forms.ListView()
+        Me.JDockPanelHeader2 = New AncestryAssistant.DockHeaderPanel()
         Me.tabs = New System.Windows.Forms.TabControl()
         Me.tabAncestry = New System.Windows.Forms.TabPage()
+        Me.Ancestry = New AncestryAssistant.AncestryWebViewer()
         Me.tabCensus = New System.Windows.Forms.TabPage()
+        Me.CensusViewer1 = New AncestryAssistant.CensusViewer()
         Me.tabGallery = New System.Windows.Forms.TabPage()
+        Me.imgViewer = New AncestryAssistant.ImageViewer()
+        Me.imgGallery = New AncestryAssistant.ImageGallery()
         Me.tabNotebooks = New System.Windows.Forms.TabPage()
+        Me.NotebookViewer1 = New AncestryAssistant.NotebookViewer()
         Me.tsAncestry = New System.Windows.Forms.ToolStrip()
         Me.btnHomeTree = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -66,18 +77,8 @@ Partial Class ApplicationForm
         Me.AncestryToolbarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AncestryDirectorWatcher = New System.IO.FileSystemWatcher()
-        Me.JPanel2 = New AncestryAssistant.BordersPanel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.JPanel1 = New AncestryAssistant.BordersPanel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.JDockPanelHeader1 = New AncestryAssistant.DockHeaderPanel()
-        Me.JDockPanelHeader2 = New AncestryAssistant.DockHeaderPanel()
-        Me.Ancestry = New AncestryAssistant.AncestryWebViewer()
-        Me.CensusViewer1 = New AncestryAssistant.CensusViewer()
-        Me.imgViewer = New AncestryAssistant.ImageViewer()
-        Me.imgGallery = New AncestryAssistant.ImageGallery()
-        Me.NotebookViewer1 = New AncestryAssistant.NotebookViewer()
-        Me.btnDownload = New System.Windows.Forms.ToolStripButton()
+        Me.toolbar = New System.Windows.Forms.Panel()
+        Me.btnActions = New System.Windows.Forms.Button()
         CType(Me.SplitPanel_Main, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitPanel_Main.Panel1.SuspendLayout()
         Me.SplitPanel_Main.Panel2.SuspendLayout()
@@ -87,6 +88,8 @@ Partial Class ApplicationForm
         Me.SplitPanel.Panel2.SuspendLayout()
         Me.SplitPanel.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.JPanel2.SuspendLayout()
+        Me.JPanel1.SuspendLayout()
         Me.mnuPanelDock.SuspendLayout()
         Me.tabs.SuspendLayout()
         Me.tabAncestry.SuspendLayout()
@@ -96,8 +99,7 @@ Partial Class ApplicationForm
         Me.tsAncestry.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.AncestryDirectorWatcher, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.JPanel2.SuspendLayout()
-        Me.JPanel1.SuspendLayout()
+        Me.toolbar.SuspendLayout()
         Me.SuspendLayout()
         '
         'imgViewerList
@@ -187,8 +189,87 @@ Partial Class ApplicationForm
         Me.Panel1.MinimumSize = New System.Drawing.Size(0, 18)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel1.Size = New System.Drawing.Size(0, 18)
+        Me.Panel1.Size = New System.Drawing.Size(295, 18)
         Me.Panel1.TabIndex = 3
+        '
+        'JPanel2
+        '
+        Me.JPanel2.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.JPanel2.BorderColor = System.Drawing.Color.Transparent
+        Me.JPanel2.BorderColorBottom = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel2.BorderColorLeft = System.Drawing.SystemColors.ButtonHighlight
+        Me.JPanel2.BorderColorRight = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel2.BorderColorTop = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel2.BorderWidth = New System.Windows.Forms.Padding(1, 0, 1, 1)
+        Me.JPanel2.Controls.Add(Me.Label1)
+        Me.JPanel2.CornerRadius = New System.Windows.Forms.Padding(0)
+        Me.JPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.JPanel2.Location = New System.Drawing.Point(151, 1)
+        Me.JPanel2.Name = "JPanel2"
+        Me.JPanel2.Padding = New System.Windows.Forms.Padding(1)
+        Me.JPanel2.Size = New System.Drawing.Size(143, 16)
+        Me.JPanel2.TabIndex = 4
+        '
+        'Label1
+        '
+        Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label1.Location = New System.Drawing.Point(1, 1)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
+        Me.Label1.Size = New System.Drawing.Size(141, 14)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Value"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'JPanel1
+        '
+        Me.JPanel1.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.JPanel1.BorderColor = System.Drawing.Color.Transparent
+        Me.JPanel1.BorderColorBottom = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel1.BorderColorLeft = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel1.BorderColorRight = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel1.BorderColorTop = System.Drawing.SystemColors.ButtonShadow
+        Me.JPanel1.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
+        Me.JPanel1.Controls.Add(Me.Label2)
+        Me.JPanel1.CornerRadius = New System.Windows.Forms.Padding(0)
+        Me.JPanel1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.JPanel1.Location = New System.Drawing.Point(1, 1)
+        Me.JPanel1.MaximumSize = New System.Drawing.Size(150, 0)
+        Me.JPanel1.MinimumSize = New System.Drawing.Size(150, 0)
+        Me.JPanel1.Name = "JPanel1"
+        Me.JPanel1.Padding = New System.Windows.Forms.Padding(1)
+        Me.JPanel1.Size = New System.Drawing.Size(150, 16)
+        Me.JPanel1.TabIndex = 3
+        '
+        'Label2
+        '
+        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label2.Location = New System.Drawing.Point(1, 1)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
+        Me.Label2.Size = New System.Drawing.Size(148, 14)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "Attribute"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'JDockPanelHeader1
+        '
+        Me.JDockPanelHeader1.BackColor = System.Drawing.Color.DarkGray
+        Me.JDockPanelHeader1.BackColorDisabled = System.Drawing.Color.LightGray
+        Me.JDockPanelHeader1.BackColorEnabled = System.Drawing.Color.DarkGray
+        Me.JDockPanelHeader1.Caption = "Ancestor"
+        Me.JDockPanelHeader1.ContextMenuStrip = Me.mnuPanelDock
+        Me.JDockPanelHeader1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.JDockPanelHeader1.ForeColor = System.Drawing.Color.Black
+        Me.JDockPanelHeader1.ForeColorDisabled = System.Drawing.Color.Black
+        Me.JDockPanelHeader1.ForeColorEnabled = System.Drawing.Color.Black
+        Me.JDockPanelHeader1.Location = New System.Drawing.Point(1, 1)
+        Me.JDockPanelHeader1.MaximumSize = New System.Drawing.Size(0, 24)
+        Me.JDockPanelHeader1.MinimumSize = New System.Drawing.Size(0, 24)
+        Me.JDockPanelHeader1.Name = "JDockPanelHeader1"
+        Me.JDockPanelHeader1.Size = New System.Drawing.Size(295, 24)
+        Me.JDockPanelHeader1.TabIndex = 1
+        Me.JDockPanelHeader1.Tag = "TOP_LEFT"
         '
         'mnuPanelDock
         '
@@ -245,6 +326,25 @@ Partial Class ApplicationForm
         Me.AncestorsList.UseCompatibleStateImageBehavior = False
         Me.AncestorsList.View = System.Windows.Forms.View.Details
         '
+        'JDockPanelHeader2
+        '
+        Me.JDockPanelHeader2.BackColor = System.Drawing.Color.DarkGray
+        Me.JDockPanelHeader2.BackColorDisabled = System.Drawing.Color.LightGray
+        Me.JDockPanelHeader2.BackColorEnabled = System.Drawing.Color.DarkGray
+        Me.JDockPanelHeader2.Caption = "Ancestors Research List"
+        Me.JDockPanelHeader2.ContextMenuStrip = Me.mnuPanelDock
+        Me.JDockPanelHeader2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.JDockPanelHeader2.ForeColor = System.Drawing.Color.Black
+        Me.JDockPanelHeader2.ForeColorDisabled = System.Drawing.Color.Black
+        Me.JDockPanelHeader2.ForeColorEnabled = System.Drawing.Color.Black
+        Me.JDockPanelHeader2.Location = New System.Drawing.Point(1, 1)
+        Me.JDockPanelHeader2.MaximumSize = New System.Drawing.Size(0, 24)
+        Me.JDockPanelHeader2.MinimumSize = New System.Drawing.Size(0, 24)
+        Me.JDockPanelHeader2.Name = "JDockPanelHeader2"
+        Me.JDockPanelHeader2.Size = New System.Drawing.Size(295, 24)
+        Me.JDockPanelHeader2.TabIndex = 2
+        Me.JDockPanelHeader2.Tag = "BOTTOM_LEFT"
+        '
         'tabs
         '
         Me.tabs.Alignment = System.Windows.Forms.TabAlignment.Bottom
@@ -274,15 +374,44 @@ Partial Class ApplicationForm
         Me.tabAncestry.TabIndex = 0
         Me.tabAncestry.Text = "Ancestry"
         '
+        'Ancestry
+        '
+        Me.Ancestry.AncestorID = ""
+        Me.Ancestry.AncestryBaseURL = ""
+        Me.Ancestry.AncestryPage = ""
+        Me.Ancestry.AncestryTreeID = "65171586"
+        Me.Ancestry.BlockedWebDomains = New String() {"facebook", "doubleclick", "tiktok", "pinterest", "adservice", "ad-delivery", "adspsp", "adsystem", "adnxs", "securepubads"}
+        Me.Ancestry.BlockWebTracking = True
+        Me.Ancestry.DataBindings.Add(New System.Windows.Forms.Binding("ShowToolbar", Global.AncestryAssistant.My.MySettings.Default, "ANCESTRY_SHOW_TOOLBAR", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.Ancestry.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Ancestry.HREF = "https://www.ancestry.com/family-tree/tree/65171586/recent"
+        Me.Ancestry.Location = New System.Drawing.Point(0, 0)
+        Me.Ancestry.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.Ancestry.Name = "Ancestry"
+        Me.Ancestry.ShowToolbar = Global.AncestryAssistant.My.MySettings.Default.ANCESTRY_SHOW_TOOLBAR
+        Me.Ancestry.Size = New System.Drawing.Size(583, 469)
+        Me.Ancestry.TabIndex = 0
+        Me.Ancestry.UriTrackingGroup = AncestryAssistant.UriTrackingGroupEnum.ANCESTRY
+        Me.Ancestry.URL = New System.Uri("https://www.ancestry.com/family-tree/tree/65171586/recent", System.UriKind.Absolute)
+        '
         'tabCensus
         '
         Me.tabCensus.Controls.Add(Me.CensusViewer1)
         Me.tabCensus.Location = New System.Drawing.Point(4, 4)
         Me.tabCensus.Margin = New System.Windows.Forms.Padding(0)
         Me.tabCensus.Name = "tabCensus"
-        Me.tabCensus.Size = New System.Drawing.Size(583, 469)
+        Me.tabCensus.Size = New System.Drawing.Size(583, 470)
         Me.tabCensus.TabIndex = 1
         Me.tabCensus.Text = "Census"
+        '
+        'CensusViewer1
+        '
+        Me.CensusViewer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CensusViewer1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CensusViewer1.Location = New System.Drawing.Point(0, 0)
+        Me.CensusViewer1.Name = "CensusViewer1"
+        Me.CensusViewer1.Size = New System.Drawing.Size(583, 470)
+        Me.CensusViewer1.TabIndex = 0
         '
         'tabGallery
         '
@@ -291,9 +420,36 @@ Partial Class ApplicationForm
         Me.tabGallery.Location = New System.Drawing.Point(4, 4)
         Me.tabGallery.Margin = New System.Windows.Forms.Padding(0)
         Me.tabGallery.Name = "tabGallery"
-        Me.tabGallery.Size = New System.Drawing.Size(583, 469)
+        Me.tabGallery.Size = New System.Drawing.Size(583, 470)
         Me.tabGallery.TabIndex = 3
         Me.tabGallery.Text = "Gallery"
+        '
+        'imgViewer
+        '
+        Me.imgViewer.BackColor = System.Drawing.Color.White
+        Me.imgViewer.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.imgViewer.ForeColor = System.Drawing.Color.White
+        Me.imgViewer.ImageFile = ""
+        Me.imgViewer.Location = New System.Drawing.Point(0, 165)
+        Me.imgViewer.Margin = New System.Windows.Forms.Padding(0)
+        Me.imgViewer.MouseSmoothingFactor = 0.1R
+        Me.imgViewer.Name = "imgViewer"
+        Me.imgViewer.PanningEnabled = True
+        Me.imgViewer.Size = New System.Drawing.Size(300, 100)
+        Me.imgViewer.TabIndex = 1
+        Me.imgViewer.ToolbarEnabled = False
+        Me.imgViewer.ZoomEnabled = True
+        Me.imgViewer.ZoomFactor = 100
+        '
+        'imgGallery
+        '
+        Me.imgGallery.ForeColor = System.Drawing.Color.White
+        Me.imgGallery.GalleryPath = "D:\Geneology\Ancestors\Pyles, William Charlie - 1918\"
+        Me.imgGallery.Location = New System.Drawing.Point(0, 0)
+        Me.imgGallery.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.imgGallery.Name = "imgGallery"
+        Me.imgGallery.Size = New System.Drawing.Size(332, 141)
+        Me.imgGallery.TabIndex = 0
         '
         'tabNotebooks
         '
@@ -301,22 +457,33 @@ Partial Class ApplicationForm
         Me.tabNotebooks.Location = New System.Drawing.Point(4, 4)
         Me.tabNotebooks.Margin = New System.Windows.Forms.Padding(0)
         Me.tabNotebooks.Name = "tabNotebooks"
-        Me.tabNotebooks.Size = New System.Drawing.Size(583, 469)
+        Me.tabNotebooks.Size = New System.Drawing.Size(583, 470)
         Me.tabNotebooks.TabIndex = 2
         Me.tabNotebooks.Text = "Notebooks"
+        '
+        'NotebookViewer1
+        '
+        Me.NotebookViewer1.AllowDrop = True
+        Me.NotebookViewer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.NotebookViewer1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NotebookViewer1.Location = New System.Drawing.Point(0, 0)
+        Me.NotebookViewer1.Name = "NotebookViewer1"
+        Me.NotebookViewer1.Size = New System.Drawing.Size(583, 470)
+        Me.NotebookViewer1.TabIndex = 0
         '
         'tsAncestry
         '
         Me.tsAncestry.BackColor = System.Drawing.SystemColors.ControlLight
         Me.tsAncestry.DataBindings.Add(New System.Windows.Forms.Binding("Location", Global.AncestryAssistant.My.MySettings.Default, "TB_ANCESTRY_LOC", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.tsAncestry.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tsAncestry.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.tsAncestry.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnHomeTree, Me.ToolStripSeparator1, Me.btnViewPedigree, Me.btnViewTree, Me.btnViewFan, Me.ToolStripSeparator2, Me.btnPersonFact, Me.btnPersonHints, Me.btnPersonGallery, Me.btnPersonStory, Me.ToolStripSeparator3, Me.btnAncestor, Me.btnAncestors, Me.ToolStripSeparator4, Me.btnDownload})
+        Me.tsAncestry.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnHomeTree, Me.ToolStripSeparator1, Me.btnViewPedigree, Me.btnViewTree, Me.btnViewFan, Me.ToolStripSeparator2, Me.btnPersonFact, Me.btnPersonHints, Me.btnPersonGallery, Me.btnPersonStory, Me.ToolStripSeparator3, Me.btnAncestor, Me.btnAncestors, Me.ToolStripSeparator4})
         Me.tsAncestry.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.tsAncestry.Location = Global.AncestryAssistant.My.MySettings.Default.TB_ANCESTRY_LOC
         Me.tsAncestry.Name = "tsAncestry"
         Me.tsAncestry.Padding = New System.Windows.Forms.Padding(4, 0, 1, 0)
         Me.tsAncestry.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.tsAncestry.Size = New System.Drawing.Size(892, 25)
+        Me.tsAncestry.Size = New System.Drawing.Size(807, 25)
         Me.tsAncestry.TabIndex = 3
         Me.tsAncestry.Text = "Ancestry"
         '
@@ -490,7 +657,6 @@ Partial Class ApplicationForm
         '
         Me.AncestryToolbarToolStripMenuItem.Checked = Global.AncestryAssistant.My.MySettings.Default.ANCESTRY_SHOW_TOOLBAR
         Me.AncestryToolbarToolStripMenuItem.CheckOnClick = True
-        Me.AncestryToolbarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.AncestryToolbarToolStripMenuItem.Name = "AncestryToolbarToolStripMenuItem"
         Me.AncestryToolbarToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
         Me.AncestryToolbarToolStripMenuItem.Text = "Ancestry Toolbar"
@@ -507,179 +673,41 @@ Partial Class ApplicationForm
         Me.AncestryDirectorWatcher.Path = Global.AncestryAssistant.My.MySettings.Default.AncestorsPath
         Me.AncestryDirectorWatcher.SynchronizingObject = Me
         '
-        'JPanel2
+        'toolbar
         '
-        Me.JPanel2.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.JPanel2.BorderColor = System.Drawing.Color.Transparent
-        Me.JPanel2.BorderColorBottom = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel2.BorderColorLeft = System.Drawing.SystemColors.ButtonHighlight
-        Me.JPanel2.BorderColorRight = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel2.BorderColorTop = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel2.BorderWidth = New System.Windows.Forms.Padding(1, 0, 1, 1)
-        Me.JPanel2.Controls.Add(Me.Label1)
-        Me.JPanel2.CornerRadius = New System.Windows.Forms.Padding(0)
-        Me.JPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.JPanel2.Location = New System.Drawing.Point(151, 1)
-        Me.JPanel2.Name = "JPanel2"
-        Me.JPanel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.JPanel2.Size = New System.Drawing.Size(143, 16)
-        Me.JPanel2.TabIndex = 4
+        Me.toolbar.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.toolbar.Controls.Add(Me.tsAncestry)
+        Me.toolbar.Controls.Add(Me.btnActions)
+        Me.toolbar.Dock = System.Windows.Forms.DockStyle.Top
+        Me.toolbar.Location = New System.Drawing.Point(0, 24)
+        Me.toolbar.MaximumSize = New System.Drawing.Size(0, 25)
+        Me.toolbar.Name = "toolbar"
+        Me.toolbar.Padding = New System.Windows.Forms.Padding(0, 0, 8, 0)
+        Me.toolbar.Size = New System.Drawing.Size(892, 25)
+        Me.toolbar.TabIndex = 8
         '
-        'Label1
+        'btnActions
         '
-        Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label1.Location = New System.Drawing.Point(1, 1)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
-        Me.Label1.Size = New System.Drawing.Size(141, 14)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Value"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'JPanel1
-        '
-        Me.JPanel1.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.JPanel1.BorderColor = System.Drawing.Color.Transparent
-        Me.JPanel1.BorderColorBottom = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel1.BorderColorLeft = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel1.BorderColorRight = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel1.BorderColorTop = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel1.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
-        Me.JPanel1.Controls.Add(Me.Label2)
-        Me.JPanel1.CornerRadius = New System.Windows.Forms.Padding(0)
-        Me.JPanel1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.JPanel1.Location = New System.Drawing.Point(1, 1)
-        Me.JPanel1.MaximumSize = New System.Drawing.Size(150, 0)
-        Me.JPanel1.MinimumSize = New System.Drawing.Size(150, 0)
-        Me.JPanel1.Name = "JPanel1"
-        Me.JPanel1.Padding = New System.Windows.Forms.Padding(1)
-        Me.JPanel1.Size = New System.Drawing.Size(150, 16)
-        Me.JPanel1.TabIndex = 3
-        '
-        'Label2
-        '
-        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label2.Location = New System.Drawing.Point(1, 1)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
-        Me.Label2.Size = New System.Drawing.Size(148, 14)
-        Me.Label2.TabIndex = 0
-        Me.Label2.Text = "Attribute"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'JDockPanelHeader1
-        '
-        Me.JDockPanelHeader1.BackColor = System.Drawing.Color.DarkGray
-        Me.JDockPanelHeader1.BackColorDisabled = System.Drawing.Color.LightGray
-        Me.JDockPanelHeader1.BackColorEnabled = System.Drawing.Color.DarkGray
-        Me.JDockPanelHeader1.Caption = "Ancestor"
-        Me.JDockPanelHeader1.ContextMenuStrip = Me.mnuPanelDock
-        Me.JDockPanelHeader1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.JDockPanelHeader1.ForeColor = System.Drawing.Color.Black
-        Me.JDockPanelHeader1.ForeColorDisabled = System.Drawing.Color.Black
-        Me.JDockPanelHeader1.ForeColorEnabled = System.Drawing.Color.Black
-        Me.JDockPanelHeader1.Location = New System.Drawing.Point(1, 1)
-        Me.JDockPanelHeader1.MaximumSize = New System.Drawing.Size(0, 24)
-        Me.JDockPanelHeader1.MinimumSize = New System.Drawing.Size(0, 24)
-        Me.JDockPanelHeader1.Name = "JDockPanelHeader1"
-        Me.JDockPanelHeader1.Size = New System.Drawing.Size(295, 24)
-        Me.JDockPanelHeader1.TabIndex = 1
-        Me.JDockPanelHeader1.Tag = "TOP_LEFT"
-        '
-        'JDockPanelHeader2
-        '
-        Me.JDockPanelHeader2.BackColor = System.Drawing.Color.DarkGray
-        Me.JDockPanelHeader2.BackColorDisabled = System.Drawing.Color.LightGray
-        Me.JDockPanelHeader2.BackColorEnabled = System.Drawing.Color.DarkGray
-        Me.JDockPanelHeader2.Caption = "Ancestors Research List"
-        Me.JDockPanelHeader2.ContextMenuStrip = Me.mnuPanelDock
-        Me.JDockPanelHeader2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.JDockPanelHeader2.ForeColor = System.Drawing.Color.Black
-        Me.JDockPanelHeader2.ForeColorDisabled = System.Drawing.Color.Black
-        Me.JDockPanelHeader2.ForeColorEnabled = System.Drawing.Color.Black
-        Me.JDockPanelHeader2.Location = New System.Drawing.Point(1, 1)
-        Me.JDockPanelHeader2.MaximumSize = New System.Drawing.Size(0, 24)
-        Me.JDockPanelHeader2.MinimumSize = New System.Drawing.Size(0, 24)
-        Me.JDockPanelHeader2.Name = "JDockPanelHeader2"
-        Me.JDockPanelHeader2.Size = New System.Drawing.Size(295, 24)
-        Me.JDockPanelHeader2.TabIndex = 2
-        Me.JDockPanelHeader2.Tag = "BOTTOM_LEFT"
-        '
-        'Ancestry
-        '
-        Me.Ancestry.AncestorID = ""
-        Me.Ancestry.AncestryBaseURL = "https://www.ancestry.com/"
-        Me.Ancestry.AncestryPage = ""
-        Me.Ancestry.AncestryTreeID = "65171586"
-        Me.Ancestry.BlockedWebDomains = New String() {"facebook", "doubleclick", "tiktok", "pinterest", "adservice"}
-        Me.Ancestry.BlockWebTracking = False
-        Me.Ancestry.BrowserStatus = ""
-        Me.Ancestry.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Ancestry.HREF = "https://www.ancestry.com/"
-        Me.Ancestry.Location = New System.Drawing.Point(0, 0)
-        Me.Ancestry.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.Ancestry.Name = "Ancestry"
-        Me.Ancestry.ShowDownload = False
-        Me.Ancestry.ShowToolbar = False
-        Me.Ancestry.Size = New System.Drawing.Size(583, 469)
-        Me.Ancestry.TabIndex = 0
-        Me.Ancestry.URL = New System.Uri("https://www.ancestry.com/", System.UriKind.Absolute)
-        '
-        'CensusViewer1
-        '
-        Me.CensusViewer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CensusViewer1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CensusViewer1.Location = New System.Drawing.Point(0, 0)
-        Me.CensusViewer1.Name = "CensusViewer1"
-        Me.CensusViewer1.Size = New System.Drawing.Size(583, 470)
-        Me.CensusViewer1.TabIndex = 0
-        '
-        'imgViewer
-        '
-        Me.imgViewer.BackColor = System.Drawing.Color.White
-        Me.imgViewer.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.imgViewer.ForeColor = System.Drawing.Color.White
-        Me.imgViewer.ImageFile = ""
-        Me.imgViewer.Location = New System.Drawing.Point(0, 165)
-        Me.imgViewer.Margin = New System.Windows.Forms.Padding(0)
-        Me.imgViewer.MouseSmoothingFactor = 0.1R
-        Me.imgViewer.Name = "imgViewer"
-        Me.imgViewer.PanningEnabled = True
-        Me.imgViewer.Size = New System.Drawing.Size(300, 100)
-        Me.imgViewer.TabIndex = 1
-        Me.imgViewer.ToolbarEnabled = False
-        Me.imgViewer.ZoomEnabled = True
-        Me.imgViewer.ZoomFactor = 100
-        '
-        'imgGallery
-        '
-        Me.imgGallery.ForeColor = System.Drawing.Color.White
-        Me.imgGallery.GalleryPath = "D:\Geneology\Ancestors\Pyles, William Charlie - 1918\"
-        Me.imgGallery.Location = New System.Drawing.Point(0, 0)
-        Me.imgGallery.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.imgGallery.Name = "imgGallery"
-        Me.imgGallery.Size = New System.Drawing.Size(332, 141)
-        Me.imgGallery.TabIndex = 0
-        '
-        'NotebookViewer1
-        '
-        Me.NotebookViewer1.AllowDrop = True
-        Me.NotebookViewer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.NotebookViewer1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NotebookViewer1.Location = New System.Drawing.Point(0, 0)
-        Me.NotebookViewer1.Name = "NotebookViewer1"
-        Me.NotebookViewer1.Size = New System.Drawing.Size(583, 470)
-        Me.NotebookViewer1.TabIndex = 0
-        '
-        'btnDownload
-        '
-        Me.btnDownload.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.btnDownload.Enabled = False
-        Me.btnDownload.Image = Global.AncestryAssistant.My.Resources.Resources.DOWNLOAD_ICO20
-        Me.btnDownload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDownload.Name = "btnDownload"
-        Me.btnDownload.Size = New System.Drawing.Size(23, 22)
-        Me.btnDownload.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnActions.AutoSize = True
+        Me.btnActions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnActions.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btnActions.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnActions.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.btnActions.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnActions.ForeColor = System.Drawing.Color.White
+        Me.btnActions.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btnActions.Location = New System.Drawing.Point(807, 0)
+        Me.btnActions.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnActions.MaximumSize = New System.Drawing.Size(0, 22)
+        Me.btnActions.Name = "btnActions"
+        Me.btnActions.Size = New System.Drawing.Size(77, 22)
+        Me.btnActions.TabIndex = 4
+        Me.btnActions.Text = "btnActions"
+        Me.btnActions.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnActions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnActions.UseMnemonic = False
+        Me.btnActions.UseVisualStyleBackColor = True
+        Me.btnActions.Visible = False
         '
         'ApplicationForm
         '
@@ -688,7 +716,7 @@ Partial Class ApplicationForm
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
         Me.ClientSize = Global.AncestryAssistant.My.MySettings.Default.MainForm_ClientSize
         Me.Controls.Add(Me.SplitPanel_Main)
-        Me.Controls.Add(Me.tsAncestry)
+        Me.Controls.Add(Me.toolbar)
         Me.Controls.Add(Me.MenuStrip1)
         Me.DataBindings.Add(New System.Windows.Forms.Binding("ClientSize", Global.AncestryAssistant.My.MySettings.Default, "MainForm_ClientSize", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.AncestryAssistant.My.MySettings.Default, "APP_FONT", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
@@ -709,6 +737,8 @@ Partial Class ApplicationForm
         CType(Me.SplitPanel, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitPanel.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
+        Me.JPanel2.ResumeLayout(False)
+        Me.JPanel1.ResumeLayout(False)
         Me.mnuPanelDock.ResumeLayout(False)
         Me.tabs.ResumeLayout(False)
         Me.tabAncestry.ResumeLayout(False)
@@ -720,8 +750,8 @@ Partial Class ApplicationForm
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         CType(Me.AncestryDirectorWatcher, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.JPanel2.ResumeLayout(False)
-        Me.JPanel1.ResumeLayout(False)
+        Me.toolbar.ResumeLayout(False)
+        Me.toolbar.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -780,5 +810,6 @@ Partial Class ApplicationForm
     Friend WithEvents JPanel1 As BordersPanel
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents btnDownload As ToolStripButton
+    Friend WithEvents toolbar As Panel
+    Friend WithEvents btnActions As Button
 End Class
