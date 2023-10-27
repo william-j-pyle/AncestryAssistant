@@ -221,22 +221,13 @@
     <Compile Include="Source\App\ApplicationForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\App\Components\JButton.Designer.vb">
-      <DependentUpon>JButton.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\App\Components\JButton.vb">
+    <Compile Include="Source\App\Components\RibbonButton.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\App\Components\JRibbon.Designer.vb">
-      <DependentUpon>JRibbon.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\App\Components\JRibbon.vb">
+    <Compile Include="Source\App\Components\Ribbon.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\App\Components\JRibbonGroup.Designer.vb">
-      <DependentUpon>JRibbonGroup.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\App\Components\JRibbonGroup.vb">
+    <Compile Include="Source\App\Components\RibbonGroup.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\App\Form1.Designer.vb">
@@ -353,15 +344,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\App\ApplicationForm.resx">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Components\JButton.resx">
-      <DependentUpon>JButton.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Components\JRibbon.resx">
-      <DependentUpon>JRibbon.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Components\JRibbonGroup.resx">
-      <DependentUpon>JRibbonGroup.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\App\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>

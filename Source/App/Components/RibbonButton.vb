@@ -1,29 +1,70 @@
-﻿Public Class JButton
+﻿Public Class RibbonButton
+  Inherits UserControl
+
+  Public Enum RibbonButtonSizeEnum
+    SmallButton = 0
+    LargeButton = 1
+  End Enum
+
 
   Public Enum IconSizeEnum
-    ICON16 = 16
-    ICON20 = 20
-    ICON32 = 32
-    ICON48 = 48
-    ICON64 = 64
+    Icon16x16 = 16
+    Icon20x20 = 20
+    Icon32x32 = 32
+    'Icon48x48 = 48
+    'Icon64x64 = 64
   End Enum
 
   Private icoFont As Font
+  Private components As System.ComponentModel.IContainer
+  Friend WithEvents btn As Button
 
-  Private Sub setFont()
+  Public Event SettingsChanged()
+
+  Private Sub setSizing() Handles Me.SettingsChanged
+    Dim h As Integer
+    Dim w As Integer
+    If RibbonButtonSize = RibbonButtonSizeEnum.LargeButton Then
+      h = 72
+      w = 48
+    Else
+      h = 24
+      w = 24
+      _IconSize = IconSizeEnum.Icon20x20
+    End If
+    MinimumSize = New Size(w, h)
+    MaximumSize = New Size(w, h)
+    Size = New Size(w, h)
     icoFont = New System.Drawing.Font("Segoe Fluent Icons", IconSize, IconFontStyle, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
+    With btn
+      .MinimumSize = New Size(w, h)
+      .MaximumSize = New Size(w, h)
+      .Size = New Size(w, h)
+      .Refresh()
+    End With
   End Sub
 
 
-  Private _IconSize As IconSizeEnum = IconSizeEnum.ICON20
+  Private _RibbonButtonSize As RibbonButtonSizeEnum = RibbonButtonSizeEnum.LargeButton
+  Public Property RibbonButtonSize As RibbonButtonSizeEnum
+    Get
+      Return _RibbonButtonSize
+    End Get
+    Set(value As RibbonButtonSizeEnum)
+      _RibbonButtonSize = value
+      RaiseEvent SettingsChanged()
+    End Set
+  End Property
+
+
+  Private _IconSize As IconSizeEnum = IconSizeEnum.Icon32x32
   Public Property IconSize As IconSizeEnum
     Get
       Return _IconSize
     End Get
     Set(value As IconSizeEnum)
       _IconSize = value
-      setFont()
-      btn.Refresh()
+      RaiseEvent SettingsChanged()
     End Set
   End Property
 
@@ -34,8 +75,7 @@
     End Get
     Set(value As FontStyle)
       _IconFontStyle = value
-      setFont()
-      btn.Refresh()
+      RaiseEvent SettingsChanged()
     End Set
   End Property
 
@@ -46,7 +86,7 @@
     End Get
     Set(value As Color)
       _Layer1Color = value
-      btn.Refresh()
+      RaiseEvent SettingsChanged()
     End Set
   End Property
   Private _Layer1Icon As FontSegoeFluentIconsEnum
@@ -56,7 +96,7 @@
     End Get
     Set(value As FontSegoeFluentIconsEnum)
       _Layer1Icon = value
-      btn.Refresh()
+      RaiseEvent SettingsChanged()
     End Set
   End Property
 
@@ -67,7 +107,7 @@
     End Get
     Set(value As Color)
       _Layer2Color = value
-      btn.Refresh()
+      RaiseEvent SettingsChanged()
     End Set
   End Property
   Private _Layer2Icon As FontSegoeFluentIconsEnum
@@ -77,7 +117,7 @@
     End Get
     Set(value As FontSegoeFluentIconsEnum)
       _Layer2Icon = value
-      btn.Refresh()
+      RaiseEvent SettingsChanged()
     End Set
   End Property
 
@@ -88,7 +128,7 @@
     End Get
     Set(value As Color)
       _Layer3Color = value
-      btn.Refresh()
+      RaiseEvent SettingsChanged()
     End Set
   End Property
   Private _Layer3Icon As FontSegoeFluentIconsEnum
@@ -98,7 +138,7 @@
     End Get
     Set(value As FontSegoeFluentIconsEnum)
       _Layer3Icon = value
-      btn.Refresh()
+      RaiseEvent SettingsChanged()
     End Set
   End Property
 
@@ -110,7 +150,7 @@
     End Get
     Set(value As String)
       _Caption = value
-      btn.Refresh()
+      RaiseEvent SettingsChanged()
     End Set
   End Property
 
@@ -144,7 +184,7 @@
         textBrush = New SolidBrush(DisableColor(ForeColor))
       End If
       textSize = TextRenderer.MeasureText(Caption, Font)
-      textAdj = 4
+      textAdj = 0
       textLocation = New Point(e.ClipRectangle.Left + 1 + ((e.ClipRectangle.Width - textSize.Width) / 2), e.ClipRectangle.Bottom - textAdj - textSize.Height)
       g.DrawString(Caption, Font, textBrush, textLocation)
     End If
@@ -190,8 +230,38 @@
   End Sub
 
   Public Sub New()
-    InitializeComponent()
-    setFont()
+    btn = New System.Windows.Forms.Button()
+    SuspendLayout()
+    With btn
+      .Dock = System.Windows.Forms.DockStyle.Fill
+      .FlatAppearance.BorderSize = 0
+      .FlatStyle = System.Windows.Forms.FlatStyle.Flat
+      .Location = New System.Drawing.Point(0, 0)
+      .Margin = New System.Windows.Forms.Padding(0)
+      .UseMnemonic = False
+      .UseVisualStyleBackColor = False
+    End With
+    AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+    Controls.Add(btn)
+    BackColor = SystemColors.ButtonFace
+    DoubleBuffered = True
+    Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Margin = New System.Windows.Forms.Padding(0)
+    Name = "JButton"
+    setSizing()
+    ResumeLayout(False)
+  End Sub
+
+  'UserControl overrides dispose to clean up the component list.
+  <System.Diagnostics.DebuggerNonUserCode()>
+  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+    Try
+      If disposing AndAlso components IsNot Nothing Then
+        components.Dispose()
+      End If
+    Finally
+      MyBase.Dispose(disposing)
+    End Try
   End Sub
 
 End Class
