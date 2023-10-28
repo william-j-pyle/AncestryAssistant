@@ -14,6 +14,8 @@ Public Class AncestryWebViewer
   ' Tracking
   Private isReady As Boolean = False
 
+  Private sameImageAsFilename As String = ""
+
   Private UriTrackingGroupDecoder As UriTrackingGroup = New UriTrackingGroup()
 
   ' Public Events
@@ -36,7 +38,7 @@ Public Class AncestryWebViewer
 
   Public Property BlockedWebDomains As String() = {"adsafe", "syndication", "facebook", "doubleclick", "tiktok", "pinterest", "adservice", "ad-delivery", "adspsp", "adsystem", "adnxs", "securepubads"}
 
-  Public Property AncestryBaseURL As String = "https://www.ancestry.com/"
+  Public ReadOnly Property AncestryBaseURL As String = "https://www.ancestry.com/"
 
   Public Property AncestryTreeID As String = ""
 
@@ -218,27 +220,29 @@ Public Class AncestryWebViewer
     End If
 
     If msg.MessageType.Equals("page") Then
+      sameImageAsFilename = ""
       Dim tracks As String = msg.GetValue("PAGEKEY")
       Dim utg As UriTrackingGroupEnum = UriTrackingGroupDecoder.getEnum(tracks.Split(":"))
       Debug.Print("-----------Page Data------------")
       Debug.Print("-- tracks        = " & tracks)
       Debug.Print("-- TrackingGroup = " & utg.ToString)
       UriTrackingGroup = utg
+      If utg = UriTrackingGroupEnum.ANCESTRY_VIEWER_IMAGE Or utg = UriTrackingGroupEnum.ANCESTRY_VIEWER_MEDIA Then
+        JSAPI_Execute("ancestryAssistant.getTableData(" + AncestorID + ");")
+      End If
+      If utg = UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON Or utg = UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON Or utg = UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON Or utg = UriTrackingGroupEnum.ANCESTRY_STORY_PERSON Then
+        JSAPI_Execute("ancestryAssistant.getPerson();")
+      End If
+      'JSAPI_Execute("ancestryAssistant.getState();")
       Exit Sub
     End If
-
-    'If msg.hasPersonID() Then
-    'AncestorID = msg.getPersonId()
-    'End If
-    'If msg.hasTreeId() Then
-    ' AncestryTreeID = msg.getTreeId()
-    'End If
-    'Case "tableData"
-    'Case "page"
-    'Case "initTrees"
-    'Case "initAccount"
-    'Case "person"
     RaiseEvent DataDownload(msg)
+  End Sub
+
+  Public Sub saveImageAs(filename As String)
+    sameImageAsFilename = filename
+    JSAPI_Execute("ancestryAssistant.getImage();")
+
   End Sub
 
 #End Region
@@ -290,8 +294,6 @@ Public Class AncestryWebViewer
   Private Sub web_SourceChanged(sender As Object, e As CoreWebView2SourceChangedEventArgs) Handles web.SourceChanged
     Debug.Print("web_SourceChanged")
     JSAPI_Execute("ancestryAssistant.getPage();")
-    JSAPI_Execute("ancestryAssistant.getState();")
-    JSAPI_Execute("ancestryAssistant.getPerson();")
     txtHref.Text = web.Source.AbsoluteUri
   End Sub
 
@@ -349,6 +351,12 @@ Public Class AncestryWebViewer
     If CoreWebDownload.State = CoreWebView2DownloadState.Completed And CoreWeb.IsDefaultDownloadDialogOpen Then
       CoreWeb.CloseDefaultDownloadDialog()
       JSAPI_Execute("document.body.click();")
+      If sameImageAsFilename.Length = 0 Then Exit Sub
+      If System.IO.File.Exists(sameImageAsFilename) Then
+        System.IO.File.Delete(sameImageAsFilename)
+      End If
+      System.IO.File.Move(CoreWebDownload.ResultFilePath(), sameImageAsFilename)
+
       Dim msg As APIMessage = New APIMessage()
       msg.MessageType = "imageDownload"
       msg.MessageKey = AncestorID
@@ -357,10 +365,11 @@ Public Class AncestryWebViewer
       row.Add("fileName")
       payload.Add(row)
       row = New List(Of String)
-      row.Add(CoreWebDownload.ResultFilePath())
+      row.Add(sameImageAsFilename)
       payload.Add(row)
       msg.Payload = payload
       RaiseEvent DataDownload(msg)
+      sameImageAsFilename = ""
     End If
   End Sub
 

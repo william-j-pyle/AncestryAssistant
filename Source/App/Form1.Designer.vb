@@ -24,16 +24,16 @@ Partial Class Form1
   Private Sub InitializeComponent()
     Me.RibbonButton1 = New AncestryAssistant.RibbonButton()
     Me.Ribbon1 = New AncestryAssistant.Ribbon()
-    Me.RibbonGroup1 = New AncestryAssistant.RibbonGroup()
         Me.RibbonGroup2 = New AncestryAssistant.RibbonGroup()
-        Me.RibbonButton2 = New AncestryAssistant.RibbonButton()
         Me.RibbonButton3 = New AncestryAssistant.RibbonButton()
-        Me.RibbonButton4 = New AncestryAssistant.RibbonButton()
-        Me.RibbonButton5 = New AncestryAssistant.RibbonButton()
+        Me.RibbonGroup1 = New AncestryAssistant.RibbonGroup()
         Me.RibbonButton6 = New AncestryAssistant.RibbonButton()
+        Me.RibbonButton2 = New AncestryAssistant.RibbonButton()
+        Me.RibbonButton5 = New AncestryAssistant.RibbonButton()
+        Me.RibbonButton4 = New AncestryAssistant.RibbonButton()
         Me.Ribbon1.SuspendLayout()
-        Me.RibbonGroup1.SuspendLayout()
         Me.RibbonGroup2.SuspendLayout()
+        Me.RibbonGroup1.SuspendLayout()
         Me.SuspendLayout()
         '
         'RibbonButton1
@@ -77,6 +77,59 @@ Partial Class Form1
         Me.Ribbon1.Size = New System.Drawing.Size(796, 100)
         Me.Ribbon1.TabIndex = 2
         '
+        'RibbonGroup2
+        '
+        Me.RibbonGroup2.Caption = "RibbonGroup"
+        Me.RibbonGroup2.ColumnCount = 6
+        Me.RibbonGroup2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.RibbonGroup2.Controls.Add(Me.RibbonButton3, 0, 0)
+        Me.RibbonGroup2.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonGroup2.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize
+        Me.RibbonGroup2.Location = New System.Drawing.Point(116, 8)
+        Me.RibbonGroup2.Margin = New System.Windows.Forms.Padding(0)
+        Me.RibbonGroup2.MinimumSize = New System.Drawing.Size(100, 0)
+        Me.RibbonGroup2.Name = "RibbonGroup2"
+        Me.RibbonGroup2.RowCount = 4
+        Me.RibbonGroup2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.RibbonGroup2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.RibbonGroup2.Size = New System.Drawing.Size(100, 84)
+        Me.RibbonGroup2.TabIndex = 1
+        '
+        'RibbonButton3
+        '
+        Me.RibbonButton3.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.RibbonButton3.Caption = "XBox"
+        Me.RibbonGroup2.SetColumnSpan(Me.RibbonButton3, 2)
+        Me.RibbonButton3.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RibbonButton3.IconFontStyle = System.Drawing.FontStyle.Regular
+        Me.RibbonButton3.IconSize = AncestryAssistant.RibbonButton.IconSizeEnum.Icon32x32
+        Me.RibbonButton3.Layer1Color = System.Drawing.Color.Black
+        Me.RibbonButton3.Layer1Icon = AncestryAssistant.FontSegoeFluentIconsEnum.SegoeFluentIcons_GameConsole
+        Me.RibbonButton3.Layer2Color = System.Drawing.Color.Black
+        Me.RibbonButton3.Layer2Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
+        Me.RibbonButton3.Layer3Color = System.Drawing.Color.Black
+        Me.RibbonButton3.Layer3Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
+        Me.RibbonButton3.Location = New System.Drawing.Point(0, 0)
+        Me.RibbonButton3.Margin = New System.Windows.Forms.Padding(0)
+        Me.RibbonButton3.MaximumSize = New System.Drawing.Size(48, 72)
+        Me.RibbonButton3.MinimumSize = New System.Drawing.Size(48, 72)
+        Me.RibbonButton3.Name = "RibbonButton3"
+        Me.RibbonButton3.RibbonButtonSize = AncestryAssistant.RibbonButton.RibbonButtonSizeEnum.LargeButton
+        Me.RibbonGroup2.SetRowSpan(Me.RibbonButton3, 3)
+        Me.RibbonButton3.Size = New System.Drawing.Size(48, 72)
+        Me.RibbonButton3.TabIndex = 3
+        '
         'RibbonGroup1
         '
         Me.RibbonGroup1.Caption = "Clipboard"
@@ -107,123 +160,12 @@ Partial Class Form1
         Me.RibbonGroup1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
         Me.RibbonGroup1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
         Me.RibbonGroup1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.RibbonGroup1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.RibbonGroup1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.RibbonGroup1.Size = New System.Drawing.Size(100, 84)
         Me.RibbonGroup1.TabIndex = 0
-        '
-        'RibbonGroup2
-        '
-        Me.RibbonGroup2.Caption = "RibbonGroup"
-        Me.RibbonGroup2.ColumnCount = 6
-        Me.RibbonGroup2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        Me.RibbonGroup2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        Me.RibbonGroup2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        Me.RibbonGroup2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        Me.RibbonGroup2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        Me.RibbonGroup2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.RibbonGroup2.Controls.Add(Me.RibbonButton3, 0, 0)
-        Me.RibbonGroup2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonGroup2.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize
-        Me.RibbonGroup2.Location = New System.Drawing.Point(116, 8)
-        Me.RibbonGroup2.Margin = New System.Windows.Forms.Padding(0)
-        Me.RibbonGroup2.MinimumSize = New System.Drawing.Size(100, 0)
-        Me.RibbonGroup2.Name = "RibbonGroup2"
-        Me.RibbonGroup2.RowCount = 4
-        Me.RibbonGroup2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        Me.RibbonGroup2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        Me.RibbonGroup2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        Me.RibbonGroup2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.RibbonGroup2.Size = New System.Drawing.Size(100, 84)
-        Me.RibbonGroup2.TabIndex = 1
-        '
-        'RibbonButton2
-        '
-        Me.RibbonButton2.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.RibbonButton2.Caption = ""
-        Me.RibbonButton2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RibbonButton2.IconFontStyle = System.Drawing.FontStyle.Regular
-        Me.RibbonButton2.IconSize = AncestryAssistant.RibbonButton.IconSizeEnum.Icon20x20
-        Me.RibbonButton2.Layer1Color = System.Drawing.Color.Black
-        Me.RibbonButton2.Layer1Icon = AncestryAssistant.FontSegoeFluentIconsEnum.SegoeFluentIcons_VPN
-        Me.RibbonButton2.Layer2Color = System.Drawing.Color.Black
-        Me.RibbonButton2.Layer2Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-        Me.RibbonButton2.Layer3Color = System.Drawing.Color.Black
-        Me.RibbonButton2.Layer3Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-        Me.RibbonButton2.Location = New System.Drawing.Point(48, 0)
-        Me.RibbonButton2.Margin = New System.Windows.Forms.Padding(0)
-        Me.RibbonButton2.MaximumSize = New System.Drawing.Size(24, 24)
-        Me.RibbonButton2.MinimumSize = New System.Drawing.Size(24, 24)
-        Me.RibbonButton2.Name = "RibbonButton2"
-        Me.RibbonButton2.RibbonButtonSize = AncestryAssistant.RibbonButton.RibbonButtonSizeEnum.SmallButton
-        Me.RibbonButton2.Size = New System.Drawing.Size(24, 24)
-        Me.RibbonButton2.TabIndex = 0
-        '
-        'RibbonButton3
-        '
-        Me.RibbonButton3.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.RibbonButton3.Caption = "XBox"
-        Me.RibbonGroup2.SetColumnSpan(Me.RibbonButton3, 2)
-        Me.RibbonButton3.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RibbonButton3.IconFontStyle = System.Drawing.FontStyle.Regular
-        Me.RibbonButton3.IconSize = AncestryAssistant.RibbonButton.IconSizeEnum.Icon32x32
-        Me.RibbonButton3.Layer1Color = System.Drawing.Color.Black
-        Me.RibbonButton3.Layer1Icon = AncestryAssistant.FontSegoeFluentIconsEnum.SegoeFluentIcons_GameConsole
-        Me.RibbonButton3.Layer2Color = System.Drawing.Color.Black
-        Me.RibbonButton3.Layer2Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-        Me.RibbonButton3.Layer3Color = System.Drawing.Color.Black
-        Me.RibbonButton3.Layer3Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-        Me.RibbonButton3.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonButton3.Margin = New System.Windows.Forms.Padding(0)
-        Me.RibbonButton3.MaximumSize = New System.Drawing.Size(48, 72)
-        Me.RibbonButton3.MinimumSize = New System.Drawing.Size(48, 72)
-        Me.RibbonButton3.Name = "RibbonButton3"
-        Me.RibbonButton3.RibbonButtonSize = AncestryAssistant.RibbonButton.RibbonButtonSizeEnum.LargeButton
-        Me.RibbonGroup2.SetRowSpan(Me.RibbonButton3, 3)
-        Me.RibbonButton3.Size = New System.Drawing.Size(48, 72)
-        Me.RibbonButton3.TabIndex = 3
-        '
-        'RibbonButton4
-        '
-        Me.RibbonButton4.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.RibbonButton4.Caption = ""
-        Me.RibbonButton4.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RibbonButton4.IconFontStyle = System.Drawing.FontStyle.Regular
-        Me.RibbonButton4.IconSize = AncestryAssistant.RibbonButton.IconSizeEnum.Icon20x20
-        Me.RibbonButton4.Layer1Color = System.Drawing.Color.Black
-        Me.RibbonButton4.Layer1Icon = AncestryAssistant.FontSegoeFluentIconsEnum.SegoeFluentIcons_Bluetooth
-        Me.RibbonButton4.Layer2Color = System.Drawing.Color.Black
-        Me.RibbonButton4.Layer2Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-        Me.RibbonButton4.Layer3Color = System.Drawing.Color.Black
-        Me.RibbonButton4.Layer3Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-        Me.RibbonButton4.Location = New System.Drawing.Point(72, 0)
-        Me.RibbonButton4.Margin = New System.Windows.Forms.Padding(0)
-        Me.RibbonButton4.MaximumSize = New System.Drawing.Size(24, 24)
-        Me.RibbonButton4.MinimumSize = New System.Drawing.Size(24, 24)
-        Me.RibbonButton4.Name = "RibbonButton4"
-        Me.RibbonButton4.RibbonButtonSize = AncestryAssistant.RibbonButton.RibbonButtonSizeEnum.SmallButton
-        Me.RibbonButton4.Size = New System.Drawing.Size(24, 24)
-        Me.RibbonButton4.TabIndex = 3
-        '
-        'RibbonButton5
-        '
-        Me.RibbonButton5.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.RibbonButton5.Caption = ""
-        Me.RibbonButton5.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RibbonButton5.IconFontStyle = System.Drawing.FontStyle.Regular
-        Me.RibbonButton5.IconSize = AncestryAssistant.RibbonButton.IconSizeEnum.Icon20x20
-        Me.RibbonButton5.Layer1Color = System.Drawing.Color.Black
-        Me.RibbonButton5.Layer1Icon = AncestryAssistant.FontSegoeFluentIconsEnum.SegoeFluentIcons_Connect
-        Me.RibbonButton5.Layer2Color = System.Drawing.Color.Black
-        Me.RibbonButton5.Layer2Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-        Me.RibbonButton5.Layer3Color = System.Drawing.Color.Black
-        Me.RibbonButton5.Layer3Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-        Me.RibbonButton5.Location = New System.Drawing.Point(48, 24)
-        Me.RibbonButton5.Margin = New System.Windows.Forms.Padding(0)
-        Me.RibbonButton5.MaximumSize = New System.Drawing.Size(24, 24)
-        Me.RibbonButton5.MinimumSize = New System.Drawing.Size(24, 24)
-        Me.RibbonButton5.Name = "RibbonButton5"
-        Me.RibbonButton5.RibbonButtonSize = AncestryAssistant.RibbonButton.RibbonButtonSizeEnum.SmallButton
-        Me.RibbonButton5.Size = New System.Drawing.Size(24, 24)
-        Me.RibbonButton5.TabIndex = 4
         '
         'RibbonButton6
         '
@@ -247,19 +189,87 @@ Partial Class Form1
         Me.RibbonButton6.Size = New System.Drawing.Size(24, 24)
         Me.RibbonButton6.TabIndex = 5
         '
+        'RibbonButton2
+        '
+        Me.RibbonButton2.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.RibbonButton2.Caption = ""
+        Me.RibbonButton2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RibbonButton2.IconFontStyle = System.Drawing.FontStyle.Regular
+        Me.RibbonButton2.IconSize = AncestryAssistant.RibbonButton.IconSizeEnum.Icon20x20
+        Me.RibbonButton2.Layer1Color = System.Drawing.Color.Black
+        Me.RibbonButton2.Layer1Icon = AncestryAssistant.FontSegoeFluentIconsEnum.SegoeFluentIcons_VPN
+        Me.RibbonButton2.Layer2Color = System.Drawing.Color.Black
+        Me.RibbonButton2.Layer2Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
+        Me.RibbonButton2.Layer3Color = System.Drawing.Color.Black
+        Me.RibbonButton2.Layer3Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
+        Me.RibbonButton2.Location = New System.Drawing.Point(48, 0)
+        Me.RibbonButton2.Margin = New System.Windows.Forms.Padding(0)
+        Me.RibbonButton2.MaximumSize = New System.Drawing.Size(24, 24)
+        Me.RibbonButton2.MinimumSize = New System.Drawing.Size(24, 24)
+        Me.RibbonButton2.Name = "RibbonButton2"
+        Me.RibbonButton2.RibbonButtonSize = AncestryAssistant.RibbonButton.RibbonButtonSizeEnum.SmallButton
+        Me.RibbonButton2.Size = New System.Drawing.Size(24, 24)
+        Me.RibbonButton2.TabIndex = 0
+        '
+        'RibbonButton5
+        '
+        Me.RibbonButton5.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.RibbonButton5.Caption = ""
+        Me.RibbonButton5.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RibbonButton5.IconFontStyle = System.Drawing.FontStyle.Regular
+        Me.RibbonButton5.IconSize = AncestryAssistant.RibbonButton.IconSizeEnum.Icon20x20
+        Me.RibbonButton5.Layer1Color = System.Drawing.Color.Black
+        Me.RibbonButton5.Layer1Icon = AncestryAssistant.FontSegoeFluentIconsEnum.SegoeFluentIcons_Connect
+        Me.RibbonButton5.Layer2Color = System.Drawing.Color.Black
+        Me.RibbonButton5.Layer2Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
+        Me.RibbonButton5.Layer3Color = System.Drawing.Color.Black
+        Me.RibbonButton5.Layer3Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
+        Me.RibbonButton5.Location = New System.Drawing.Point(48, 24)
+        Me.RibbonButton5.Margin = New System.Windows.Forms.Padding(0)
+        Me.RibbonButton5.MaximumSize = New System.Drawing.Size(24, 24)
+        Me.RibbonButton5.MinimumSize = New System.Drawing.Size(24, 24)
+        Me.RibbonButton5.Name = "RibbonButton5"
+        Me.RibbonButton5.RibbonButtonSize = AncestryAssistant.RibbonButton.RibbonButtonSizeEnum.SmallButton
+        Me.RibbonButton5.Size = New System.Drawing.Size(24, 24)
+        Me.RibbonButton5.TabIndex = 4
+        '
+        'RibbonButton4
+        '
+        Me.RibbonButton4.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.RibbonButton4.Caption = ""
+        Me.RibbonButton4.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RibbonButton4.IconFontStyle = System.Drawing.FontStyle.Regular
+        Me.RibbonButton4.IconSize = AncestryAssistant.RibbonButton.IconSizeEnum.Icon20x20
+        Me.RibbonButton4.Layer1Color = System.Drawing.Color.Black
+        Me.RibbonButton4.Layer1Icon = AncestryAssistant.FontSegoeFluentIconsEnum.SegoeFluentIcons_Bluetooth
+        Me.RibbonButton4.Layer2Color = System.Drawing.Color.Black
+        Me.RibbonButton4.Layer2Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
+        Me.RibbonButton4.Layer3Color = System.Drawing.Color.Black
+        Me.RibbonButton4.Layer3Icon = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
+        Me.RibbonButton4.Location = New System.Drawing.Point(72, 0)
+        Me.RibbonButton4.Margin = New System.Windows.Forms.Padding(0)
+        Me.RibbonButton4.MaximumSize = New System.Drawing.Size(24, 24)
+        Me.RibbonButton4.MinimumSize = New System.Drawing.Size(24, 24)
+        Me.RibbonButton4.Name = "RibbonButton4"
+        Me.RibbonButton4.RibbonButtonSize = AncestryAssistant.RibbonButton.RibbonButtonSizeEnum.SmallButton
+        Me.RibbonButton4.Size = New System.Drawing.Size(24, 24)
+        Me.RibbonButton4.TabIndex = 3
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
+        Me.BackColor = System.Drawing.SystemColors.Window
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.Ribbon1)
+        Me.ForeColor = System.Drawing.SystemColors.WindowText
         Me.Name = "Form1"
         Me.Padding = New System.Windows.Forms.Padding(2)
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Form1"
         Me.Ribbon1.ResumeLayout(False)
-        Me.RibbonGroup1.ResumeLayout(False)
         Me.RibbonGroup2.ResumeLayout(False)
+        Me.RibbonGroup1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

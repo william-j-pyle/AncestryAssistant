@@ -102,6 +102,15 @@ Public Class AAFile
     Return data
   End Function
 
+  Public Sub setTableData(table As List(Of List(Of String)))
+    aValueHeaders = table.Item(0).ToArray()
+    aValues.Clear()
+    For i As Integer = 1 To table.Count - 1
+      aValues.Add(table.Item(i).ToArray())
+    Next
+    _IsDirty = True
+  End Sub
+
   Public Sub setTableData(table As ArrayList)
     aValueHeaders = table.Item(0)
     aValues.Clear()

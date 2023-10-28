@@ -24,32 +24,32 @@ Public Class GedDate
     End Set
   End Property
 
-  Public ReadOnly Property Year As String
+  Public ReadOnly Property Year As Integer
     Get
       If bValid And bYear Then
         Return dResultDate.Year
       Else
-        Return ""
+        Return 0
       End If
     End Get
   End Property
 
-  Public ReadOnly Property Month As String
+  Public ReadOnly Property Month As Integer
     Get
       If bValid And bMonth Then
         Return dResultDate.Month
       Else
-        Return ""
+        Return 0
       End If
     End Get
   End Property
 
-  Public ReadOnly Property Day As String
+  Public ReadOnly Property Day As Integer
     Get
       If bValid And bDay Then
         Return dResultDate.Day
       Else
-        Return ""
+        Return 0
       End If
     End Get
   End Property
@@ -140,6 +140,10 @@ Public Class GedDate
 
   Private Function Parse() As Boolean
     Dim workingDate As String = sSourceDateString.Replace(".", "").Replace(",", "").ToUpper()
+    If workingDate.Length < 3 Then
+      bValid = False
+      Return False
+    End If
     ' ABOUT PROCESSING
     If workingDate.StartsWith("ABOUT") Or workingDate.StartsWith("ABT") Then
       bAbout = True
@@ -357,19 +361,21 @@ Public Class GedDate
 
   Public Function toAssistantDate() As String
     Dim rtnString As String = ""
-    If bYear And Not bDay And Not bMonth Then
-      rtnString = sCleanDateString
-    Else
-      rtnString += dResultDate.Year.ToString()
-      If bMonth Then
-        rtnString += "-" + dResultDate.Month.ToString.PadLeft(2, "0")
+    If IsValid Then
+      If bYear And Not bDay And Not bMonth Then
+        rtnString = sCleanDateString
       Else
-        rtnString += "-00"
-      End If
-      If bDay Then
-        rtnString += "-" + dResultDate.Day.ToString.PadLeft(2, "0")
-      Else
-        rtnString += "-00"
+        rtnString += dResultDate.Year.ToString()
+        If bMonth Then
+          rtnString += "-" + dResultDate.Month.ToString.PadLeft(2, "0")
+        Else
+          rtnString += "-00"
+        End If
+        If bDay Then
+          rtnString += "-" + dResultDate.Day.ToString.PadLeft(2, "0")
+        Else
+          rtnString += "-00"
+        End If
       End If
     End If
     Return rtnString

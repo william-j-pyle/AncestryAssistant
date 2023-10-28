@@ -25,7 +25,7 @@ ancestryAssistant.getPerson = function () {
 		hdr.push("personId"); dta.push(PersonCard.personId);
 		hdr.push("treeId"); dta.push(PersonCard.treeId);
 		hdr.push("name"); dta.push(PersonCard.name);
-		hdr.push("given"); dta.push(PersonCard.fullName.given);
+		hdr.push("givenname"); dta.push(PersonCard.fullName.given);
 		hdr.push("surname"); dta.push(PersonCard.fullName.surname);
 		hdr.push("suffix"); dta.push(PersonCard.fullName.suffix);
 		hdr.push("treeName"); dta.push(PersonCard.treeName);
@@ -125,6 +125,10 @@ ancestryAssistant.getTableData = function (personId) {
 		rows[r] = crow;
 	}
 	this.postMessage(this.MessageTypes.MT_TABLEDATA, pid, rows);
+};
+
+
+ancestryAssistant.getImage = function () {
 	//Trigger the download
 	var items = document.getElementsByClassName('iconTools calloutTrigger');
 	if (items.length > 0) {

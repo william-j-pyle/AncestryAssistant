@@ -7,6 +7,7 @@ Imports System.Text
 Public Class ApplicationForm
 
   Public Event ActiveAncestorChanged()
+  Public Event AncestorsUpdated()
 
   Private Ancestors As AncestorCollection
 
@@ -32,12 +33,13 @@ Public Class ApplicationForm
 
   Public Sub New()
     InitializeComponent()
+    AncestryDirectorWatcher.EnableRaisingEvents = False
     Ancestors = New AncestorCollection(My.Settings.AncestorsPath)
-    InitializeAncestorDetail()
     InitializeAncestorList()
     LoadAncestorList()
     InitializeImageGallery()
     SetUIState()
+    AncestryDirectorWatcher.EnableRaisingEvents = True
   End Sub
 
   ' ==========================
@@ -144,185 +146,131 @@ Public Class ApplicationForm
     SetUIState()
   End Sub
 
-  Private Sub InitializeAncestorDetail()
-    'With AncestorDetails
-    '  .Tag = ""
-    '  .Items.Clear()
-    '  .Columns.Clear()
-    '  .Columns.Add("Property", CInt(.Width / 2))
-    '  .Columns.Add("Value", CInt(.Width / 2))
-    '  .Groups.Clear()
-    '  .Groups.Add(New ListViewGroup("ANCESTOR", "Ancestor"))
-    '  .Groups.Add(New ListViewGroup("BIRTH", "Birth"))
-    '  .Groups.Add(New ListViewGroup("DEATH", "Death"))
-    '  .Groups.Add(New ListViewGroup("PARENTS", "Parents"))
-    '  .Groups.Add(New ListViewGroup("SIBLINGS", "Siblings"))
-    '  .Groups.Add(New ListViewGroup("MARRIAGE", "Marriages"))
-    '  .Groups.Add(New ListViewGroup("CHILDREN", "Children"))
-    '  .Groups.Add(New ListViewGroup("CENSUS", "Census"))
-    '  .Groups.Add(New ListViewGroup("IMAGES", "Images"))
-    'End With
-  End Sub
-
-  Private Function getAncestorDetails(Optional workingAncestor As AncestorCollection.Ancestor = Nothing) As ArrayList
-    Dim details As ArrayList = New ArrayList
-    'If workingAncestor Is Nothing Then workingAncestor = activeAncestor
-    'If workingAncestor.IsValid Then
-    '  LoadAncestorAttributes(workingAncestor)
-    '  details.Add({"AncestryID", workingAncestor.IDFromProfile, "ANCESTOR", "N", ""})
-    '  details.Add({"Surname", workingAncestor.Surname, "ANCESTOR", "N", ""})
-    '  details.Add({"Given", workingAncestor.Givenname, "ANCESTOR", "N", ""})
-    '  details.Add({"HasProfileImage", workingAncestor.HasProfileImage, "ANCESTOR", "Y", ""})
-
-    '  details.Add({"Date", workingAncestor.ProfileBirthDate, "BIRTH", "N", "CAL_BLACK"})
-    '  details.Add({"Place", workingAncestor.ProfileBirthPlace, "BIRTH", "N", "LOCATION_BLACK"})
-    '  details.Add({"HasCertificateImage", workingAncestor.hasBirthCertificate, "BIRTH", "Y", ""})
-
-    '  details.Add({"Date", workingAncestor.ProfileDeathDate, "DEATH", "N", "CAL_BLACK"})
-    '  details.Add({"Place", workingAncestor.ProfileDeathPlace, "DEATH", "N", "LOCATION_BLACK"})
-    '  details.Add({"HasCertificateImage", workingAncestor.hasDeathCertificate, "DEATH", "Y", ""})
-    '  details.Add({"HasHeadstoneImage", workingAncestor.hasHeadstoneImage, "DEATH", "Y", ""})
-    '  'Census
-    '  Dim aCensus As ArrayList = workingAncestor.getCensusList()
-    '  Dim byear As Integer = Val(workingAncestor.BirthYear)
-    '  Dim dyear As Integer = Val(workingAncestor.DeathYear)
-    '  If byear > 0 Then
-    '    If dyear = 0 Then dyear = byear + 90
-    '    Dim census() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
-    '    For Each dt As Integer In census
-    '      If byear <= dt And dyear >= dt Then
-    '        details.Add({dt & " Census", aCensus.Contains(dt.ToString), "CENSUS", "Y", ""})
-    '      End If
-    '    Next
-    '  End If
-
-    'End If
-    Return details
+  Private Const SUBNODE_DELIMITER = vbTab
+  Private Function customNode(ParamArray subNodes() As String) As String
+    Dim sb As StringBuilder = New StringBuilder
+    For Each node As String In subNodes
+      If sb.Length > 0 Then sb.Append(SUBNODE_DELIMITER)
+      sb.Append(node)
+    Next
+    Return sb.ToString
   End Function
 
-  Private Sub LoadAncestorAttributes(workingAncestor As AncestorCollection.Ancestor)
-    AncestorAttributes.DrawMode = TreeViewDrawMode.OwnerDrawText
-    AncestorAttributes.Nodes.Clear()
-    'Dim item As TreeNode
-    'item = AncestorAttributes.Nodes.Add("NAME", "Name" & vbTab & workingAncestor.Name, "", "")
-    'item.Nodes.Add("SURNAME", "Surname" & vbTab & workingAncestor.Surname)
-    'item.Nodes.Add("GIVENNAME", "Givenname" & vbTab & workingAncestor.Givenname)
+  Private Function HaveOrMissing(haveIt As Boolean) As String
+    If haveIt Then
+      Return "Have"
+    Else
+      Return "Missing"
+    End If
+  End Function
 
-    'item = AncestorAttributes.Nodes.Add("ID", "Research", "", "")
-    'item.Nodes.Add("ANCESTRYID", "Ancestry.com" & vbTab & workingAncestor.IDFromProfile)
 
-    'item = AncestorAttributes.Nodes.Add("PROFILEIMG", "HasProfileImage" & vbTab & workingAncestor.HasProfileImage, "", "")
-
-    'item = AncestorAttributes.Nodes.Add("BIRTH", "Birth" & vbTab & workingAncestor.ProfileBirthDate, "", "")
-    'item.Nodes.Add("BIRTHPLACE", "Place" & vbTab & workingAncestor.ProfileBirthPlace)
-    'item.Nodes.Add("BIRTHDOCUMENTS", "HasDocuments" & vbTab & workingAncestor.hasBirthCertificate)
-
-    'item = AncestorAttributes.Nodes.Add("DEATH", "Death" & vbTab & workingAncestor.ProfileDeathDate, "", "")
-    'item.Nodes.Add("DEATHPLACE", "Place" & vbTab & workingAncestor.ProfileDeathPlace)
-    'item.Nodes.Add("DEATHDOCUMENTS", "HasDocuments" & vbTab & workingAncestor.hasDeathCertificate)
-    'item.Nodes.Add("DEATHHEADSTONE", "HasHeadstone" & vbTab & workingAncestor.hasHeadstoneImage)
-
-    'item = AncestorAttributes.Nodes.Add("CENSUS", "Census Records", "", "")
-
-    ''Census
-    'Dim aCensus As ArrayList = workingAncestor.getCensusList()
-    'Dim byear As Integer = Val(workingAncestor.BirthYear)
-    'Dim dyear As Integer = Val(workingAncestor.DeathYear)
-    'If byear > 0 Then
-    '  If dyear = 0 Then dyear = byear + 90
-    '  Dim census() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
-    '  For Each dt As Integer In census
-    '    If byear <= dt And dyear >= dt Then
-    '      item.Nodes.Add(dt & " Census", dt & " Census" & vbTab & aCensus.Contains(dt.ToString), "", "")
-    '    End If
-    '  Next
-    'End If
+  Private AttributeState As List(Of String)
+  Private Sub CaptureAttributeState()
+    ' Save the current expanded state
+    AttributeState = New List(Of String)
+    For Each i As TreeNode In AncestorAttributes.Nodes
+      If i.IsExpanded Then
+        AttributeState.Add(i.Tag)
+        For Each j As TreeNode In i.Nodes
+          If j.IsExpanded Then
+            AttributeState.Add(j.Tag)
+          End If
+        Next
+      End If
+    Next
+  End Sub
+  Private Sub RestoreAttributeState()
+    For Each i As TreeNode In AncestorAttributes.Nodes
+      If AttributeState.Contains(i.Tag) Then
+        i.Expand()
+      End If
+      For Each j As TreeNode In i.Nodes
+        If AttributeState.Contains(j.Tag) Then
+          j.Expand()
+        End If
+      Next
+    Next
   End Sub
 
-  Private Sub AncestorAttributes_DrawNode(sender As Object, e As DrawTreeNodeEventArgs)
+  Private LastAttributeItem As TreeNode
+
+  Private Sub AddAttributeItem(Key As String, Text As String, Optional ImageKey As String = "", Optional SelectedImageKey As String = "")
+    LastAttributeItem = AncestorAttributes.Nodes.Add(Key, Text, ImageKey, SelectedImageKey)
+    LastAttributeItem.Tag = Key
+  End Sub
+
+  Private Sub AddSubAttributeItem(Key As String, Text As String, Optional ImageKey As String = "", Optional SelectedImageKey As String = "")
+    Dim item As TreeNode
+    item = LastAttributeItem.Nodes.Add(Key, Text, ImageKey, SelectedImageKey)
+    item.Tag = Key
+  End Sub
+
+
+  Private Sub LoadAncestorAttributes()
+    CaptureAttributeState()
+    Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
+    AncestorAttributes.DrawMode = TreeViewDrawMode.OwnerDrawText
+    AncestorAttributes.Nodes.Clear()
+    AncestorAttributes.ForeColor = Color.Black
+
+    AddAttributeItem("NAME", customNode("Name", ancestor.FullName))
+    AddSubAttributeItem("SURNAME", customNode("Surname", ancestor.Surname))
+    AddSubAttributeItem("GIVENNAME", customNode("Givenname", ancestor.Givenname))
+
+    AddAttributeItem("PROFILEIMG", customNode("HasProfileImage", HaveOrMissing(ancestor.HasProfileImage)))
+
+    AddAttributeItem("BIRTH", customNode("Birth", ancestor.GedBirthDate.toAssistantDate))
+    AddSubAttributeItem("BIRTHPLACE", customNode("Place", ancestor.Fact("BirthPlace")))
+    AddSubAttributeItem("BIRTHDOCUMENTS", customNode("HasDocuments", HaveOrMissing(False)))
+
+    If Not ancestor.LifeSpan.Contains("Living") Then
+      AddAttributeItem("DEATH", customNode("Death", ancestor.GedDeathDate.toAssistantDate))
+      AddSubAttributeItem("DEATHPLACE", customNode("Place", ancestor.Fact("DeathPlace")))
+      'item.Nodes.Add("DEATHDOCUMENTS", "HasDocuments" & vbTab & workingAncestor.hasDeathCertificate)
+      'item.Nodes.Add("DEATHHEADSTONE", "HasHeadstone" & vbTab & workingAncestor.hasHeadstoneImage)
+    End If
+
+    Dim expectedCensus As List(Of Integer) = ancestor.Census.ExpectedYears
+    Dim availableCensus As List(Of Integer) = ancestor.Census.AvailableYears
+    If expectedCensus.Count > 0 Then
+      AddAttributeItem("CENSUS", "Census Records")
+      For Each censusYear As Integer In expectedCensus
+        AddSubAttributeItem(censusYear & " Census", customNode(censusYear & " Census", HaveOrMissing(availableCensus.Contains(censusYear))))
+      Next
+    End If
+
+    AddAttributeItem("ID", "Links")
+    AddSubAttributeItem("ANCESTRYID", customNode("Ancestry.com", ancestor.ID))
+
+    RestoreAttributeState()
+  End Sub
+
+  Private Sub AncestorAttributes_DrawNode(sender As Object, e As DrawTreeNodeEventArgs) Handles AncestorAttributes.DrawNode
     ' Get the current node
     Dim node As TreeNode = e.Node
 
     ' Define the bounds for the first column
-    Dim boundsColumn1 As Rectangle = New Rectangle(e.Bounds.Left, e.Bounds.Top, 100, e.Bounds.Height) ' Adjust width as needed
+    Dim boundsColumn1 As Rectangle = New Rectangle(e.Bounds.Left, e.Bounds.Top, lblAncestorAttributesCol1.Width, e.Bounds.Height) ' Adjust width as needed
     ' Define the bounds for the second column
     'boundsColumn1.Right
-    Dim boundsColumn2 As Rectangle = New Rectangle(150, e.Bounds.Top, 100, e.Bounds.Height) ' Adjust width as needed
+    Dim boundsColumn2 As Rectangle = New Rectangle(lblAncestorAttributesCol1.Width + 2, e.Bounds.Top, lblAncestorAttributesCol2.Width, e.Bounds.Height) ' Adjust width as needed
 
-    Dim txt As String = node.Text & vbTab & vbTab
-    Dim txtA() As String = txt.Split(vbTab)
+    Dim txt As String = node.Text & SUBNODE_DELIMITER & SUBNODE_DELIMITER
+    Dim txtA() As String = txt.Split(SUBNODE_DELIMITER)
 
     ' Draw the first column
-    Dim fnt As Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Dim fnt As Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 
     TextRenderer.DrawText(e.Graphics, txtA(0), fnt, boundsColumn1, Color.Black, TextFormatFlags.Left Or TextFormatFlags.EndEllipsis)
 
     ' Draw the second column
-    TextRenderer.DrawText(e.Graphics, txtA(1), AncestorAttributes.Font, boundsColumn2, Color.DarkGray, TextFormatFlags.Left)
+    TextRenderer.DrawText(e.Graphics, txtA(1), fnt, boundsColumn2, Color.Black, TextFormatFlags.Left)
 
     ' Prevent default drawing of the node's text
     e.DrawDefault = False
   End Sub
 
-  Private Sub LoadAncestorTree()
-    'Debug.Print("LoadAncestorTree: TAG=" & AncestorDetails.Tag)
-    'If activeAncestor.IsValid Then
-    '  Debug.Print("LoadAncestorTree: VALID")
-    '  If AncestorDetails.Tag Is Nothing Then AncestorDetails.Tag = 0
-    '  Dim details As ArrayList = getAncestorDetails()
-    '  Dim newTag As Double = 0
-    '  For Each detail() As Object In details
-    '    newTag += detail(2).ToString().GetHashCode And detail(1).ToString().GetHashCode And detail(0).ToString().GetHashCode
-    '  Next
-    '  Debug.Print("LoadAncestorTree: NEWTAG=" & newTag)
-    '  If newTag = AncestorDetails.Tag Then
-    '    Debug.Print("LoadAncestorTree: NOCHANGE")
-    '    Exit Sub
-    '  End If
-    '  Debug.Print("LoadAncestorTree: RELOADING")
-    '  AncestorDetails.Tag = newTag
-    '  Dim hasProfile As Boolean = activeAncestor.IsLocal
-    '  With AncestorDetails
-    '    If hasProfile Then
-    '      .ForeColor = Color.Black
-    '    Else
-    '      .ForeColor = Color.Red
-    '    End If
-    '    .Items.Clear()
-    '    For Each detail() As Object In details
-    '      '   0         1                               2       3          4
-    '      '{"Date", workingAncestor.ProfileBirthDate, "BIRTH", "N", "CAL_BLACK"}
-    '      Dim item As ListViewItem = New ListViewItem(detail(0).ToString)
-    '      If Not detail(2).ToString.Equals("") Then
-    '        item.Group = .Groups.Item(detail(2).ToString)
-    '      End If
-    '      If detail(3).ToString.Equals("Y") Then
-    '        If detail(1) Then
-    '          item.SubItems.Add("Have")
-    '        Else
-    '          item.ForeColor = Color.Red
-    '          item.SubItems.Add("Missing")
-    '        End If
-    '      Else
-    '        If detail(1).ToString.Length > 0 Then
-    '          item.SubItems.Add(detail(1).ToString)
-    '        Else
-    '          item.ForeColor = Color.Red
-    '          item.SubItems.Add("Missing")
-    '        End If
-    '      End If
-    '      If Not detail(4).ToString.Equals("") Then
-    '        item.ImageKey = details(4).ToString
-    '      End If
-    '      .Items.Add(item)
-    '    Next
-    '  End With
-    'Else
-    '  Debug.Print("LoadAncestorTree: INVALID")
-    '  'AncestorTree.Items.Clear()
-    '  AncestorDetails.Tag = 0
-    'End If
-  End Sub
 
 #End Region
 
@@ -343,41 +291,39 @@ Public Class ApplicationForm
       .Items.Clear()
       .Columns.Clear()
       .Columns.Add("Name", CInt(.Width / 2))
-      .Columns.Add("Birth Year", CInt(.Width / 2))
+      .Columns.Add("Lifespan", CInt(.Width / 2))
       .Groups.Clear()
     End With
   End Sub
 
   Private Sub LoadAncestorList()
+    If Ancestors Is Nothing Then Exit Sub
+    Dim item As ListViewItem
     With AncestorsList
-      '.Tag = ""
-      '.Items.Clear()
-      'Dim dirs() As String = Directory.GetDirectories(My.Settings.AncestorsPath)
-      'For Each dir As String In dirs
-      '  Dim dirname As String = dir.Replace(My.Settings.AncestorsPath, "")
-      '  Dim p() As String = dirname.Split("-")
-      '  If p.Length() > 0 Then
-      '    item = .Items.Add(p(0).Trim())
-      '    item.SubItems.Add(p(1).Trim())
-      '    If File.Exists(dir + "\Ancestry.id") Then
-      '      item.Tag = File.ReadAllLines(dir + "\Ancestry.id")(0).Trim
-      '    Else
-      '      item.Tag = ""
-      '    End If
-      '  End If
-      'Next
+      .Tag = ""
+      .Items.Clear()
+      For Each ancestor As AncestorCollection.Ancestor In Ancestors.Values
+        item = .Items.Add(ancestor.FullName)
+        item.SubItems.Add(ancestor.LifeSpan)
+        item.Tag = ancestor.ID
+        If AncestorId.Equals(ancestor.ID) Then
+          item.Selected = True
+        End If
+      Next
     End With
   End Sub
 
+  Private Sub AncestryDirectorWatcher_Changed(sender As Object, e As FileSystemEventArgs) Handles AncestryDirectorWatcher.Changed
+    Debug.Print("FILEWATCHER(Changed')=" & e.FullPath)
+  End Sub
+
   Private Sub AncestryDirectorWatcher_Created(sender As Object, e As FileSystemEventArgs) Handles AncestryDirectorWatcher.Created
+    Debug.Print("FILEWATCHER(Created')=" & e.FullPath)
     LoadAncestorList()
   End Sub
 
   Private Sub AncestryDirectorWatcher_Deleted(sender As Object, e As FileSystemEventArgs) Handles AncestryDirectorWatcher.Deleted
-    LoadAncestorList()
-  End Sub
-
-  Private Sub AncestryDirectorWatcher_Renamed(sender As Object, e As RenamedEventArgs) Handles AncestryDirectorWatcher.Renamed
+    Debug.Print("FILEWATCHER(Deleted')=" & e.FullPath)
     LoadAncestorList()
   End Sub
 
@@ -494,22 +440,57 @@ Public Class ApplicationForm
   End Sub
 #End If
 
+  Private Const ANCESTOR_NEW = "Add Ancestor To Assistant"
+  Private Const ANCESTOR_UPDATED = "Apply Ancestor Changes To Assistant"
+  Private Const ANCESTOR_CENSUS = "Download Census Data"
+
   Private Sub Ancestry_AncestryData(msg As APIMessage) Handles Ancestry.DataDownload
 #If SHOW_DEBUG Then
     dumpMessage(msg)
 #End If
-    ' We have a person with a valid ancestryid
-    If msg.MessageType = APIMessage.MT_PERSON And msg.MessageKey.Length > 3 Then
-      If Not Ancestors.ContainsKey(msg.MessageKey) Then
-        With btnActions
-          .Tag = msg
-          .Text = "Add Ancestor To Assistant"
-          .Image = My.Resources.ANCESTOR_ADD_WHITE
-          .Enabled = True
-          .Visible = True
-        End With
-      End If
-    End If
+    Select Case msg.MessageType
+      Case APIMessage.MT_PERSON
+        If msg.MessageKey.Length > 3 Then
+          Debug.Print("New Ancestor")
+          If Not Ancestors.ContainsKey(msg.MessageKey) Then
+            With btnActions
+              .Tag = msg
+              .Text = ANCESTOR_NEW
+              '.Image = My.Resources.ANCESTOR_ADD_WHITE
+              .Enabled = True
+              .Visible = True
+            End With
+          Else
+            Debug.Print("Check For Ancestor Changes")
+            If Not AncestorMatchesMessage(msg) Then
+              With btnActions
+                .Tag = msg
+                .Text = ANCESTOR_UPDATED
+                '.Image = My.Resources.ANCESTOR_ADD_WHITE
+                .Enabled = True
+                .Visible = True
+              End With
+            End If
+          End If
+        End If
+      Case APIMessage.MT_TABLEDATA
+        If msg.MessageKey.Length > 3 Then
+          If Ancestors.ContainsKey(msg.MessageKey) Then
+            Dim title As String = msg.GetValue("Title")
+            If title.Contains("Census") Then
+              With btnActions
+                .Tag = msg
+                .Text = ANCESTOR_CENSUS
+                '.Image = My.Resources.ANCESTOR_ADD_WHITE
+                .Enabled = True
+                .Visible = True
+              End With
+            End If
+          End If
+        End If
+      Case Else
+        btnActions.Visible = False
+    End Select
   End Sub
 
 #End Region
@@ -548,6 +529,87 @@ Public Class ApplicationForm
   Private Sub imgViewer_BackToGallery() Handles imgViewer.BackToGallery
     imgViewer.Visible = False
     imgGallery.BringToFront()
+  End Sub
+
+  Private Sub btnActions_Click(sender As Object, e As EventArgs) Handles btnActions.Click
+    btnActions.Visible = False
+    If btnActions.Tag Is Nothing Then Exit Sub
+    Dim msg As APIMessage = btnActions.Tag
+    Select Case btnActions.Text
+      Case ANCESTOR_NEW
+        If Not Ancestors.ContainsKey(msg.MessageKey) Then
+          If msg.MessageType = APIMessage.MT_PERSON Then
+            Dim ancestor As AncestorCollection.Ancestor = Ancestors.newAncestor(msg.MessageKey)
+            For Each fact As String In AncestorFactList()
+              ancestor.Fact(fact) = msg.GetValue(fact)
+            Next
+            AncestorId = msg.MessageKey
+            RaiseEvent AncestorsUpdated()
+          End If
+        End If
+      Case ANCESTOR_UPDATED
+        Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(msg.MessageKey)
+        For Each fact As String In AncestorFactDifferences(msg)
+          ancestor.Fact(fact) = msg.GetValue(fact)
+        Next
+        AncestorId = msg.MessageKey
+        RaiseEvent AncestorsUpdated()
+      Case ANCESTOR_CENSUS
+        Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(msg.MessageKey)
+        Dim imgFilename = ancestor.Census.addCensusData(msg)
+        AncestorId = msg.MessageKey
+        Ancestry.saveImageAs(imgFilename + ".jpg")
+        RaiseEvent AncestorsUpdated()
+      Case Else
+
+    End Select
+
+  End Sub
+
+  Private Function AncestorFactList() As List(Of String)
+    Dim rtn As List(Of String) = New List(Of String)
+    rtn.AddRange({"givenname", "surname", "suffix", "birthPlace", "birthDate", "deathPlace", "deathDate", "gender", "photo"})
+    Return rtn
+  End Function
+
+  Private Function AncestorFactDifferences(msg As APIMessage) As List(Of String)
+    Dim rtn As List(Of String) = New List(Of String)
+    Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(msg.MessageKey)
+    For Each fact As String In AncestorFactList()
+      If Not ancestor.Fact(fact).Equals(msg.GetValue(fact)) Then
+        Debug.Print("Fact Difference: " + fact)
+        rtn.Add(fact)
+      End If
+    Next
+    Return rtn
+  End Function
+
+
+  Private Function AncestorMatchesMessage(msg As APIMessage) As Boolean
+    Return AncestorFactDifferences(msg).Count = 0
+  End Function
+
+  Private Sub ApplicationForm_AncestorsUpdated() Handles Me.AncestorsUpdated
+    LoadAncestorList()
+  End Sub
+
+  Private Sub ApplicationForm_ActiveAncestorChanged() Handles Me.ActiveAncestorChanged
+    LoadAncestorAttributes()
+  End Sub
+
+  Private Sub AncestorsList_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles AncestorsList.ItemSelectionChanged
+    If e.IsSelected Then
+      AncestorId = e.Item.Tag
+    End If
+  End Sub
+
+  Private Sub AncestorColSplitter_SplitterMoving(sender As Object, e As SplitterEventArgs) Handles AncestorColSplitter.SplitterMoving
+    AncestorColSplitter.Tag = e.X
+  End Sub
+
+  Private Sub AncestorColSplitter_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles AncestorColSplitter.SplitterMoved
+    ancestorAttributesCol1.Width = AncestorColSplitter.Tag
+    AncestorAttributes.Refresh()
   End Sub
 
 #End Region

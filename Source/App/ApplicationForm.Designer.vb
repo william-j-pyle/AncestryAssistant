@@ -29,11 +29,12 @@ Partial Class ApplicationForm
     Me.SplitPanel_Main = New System.Windows.Forms.SplitContainer()
     Me.SplitPanel = New System.Windows.Forms.SplitContainer()
     Me.AncestorAttributes = New System.Windows.Forms.TreeView()
-    Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.JPanel2 = New AncestryAssistant.BordersPanel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.JPanel1 = New AncestryAssistant.BordersPanel()
-        Me.Label2 = New System.Windows.Forms.Label()
+    Me.AncestorAttributesHeader = New System.Windows.Forms.Panel()
+        Me.AncestorColSplitter = New System.Windows.Forms.Splitter()
+        Me.ancestorAttributesCol2 = New AncestryAssistant.BordersPanel()
+        Me.lblAncestorAttributesCol2 = New System.Windows.Forms.Label()
+        Me.ancestorAttributesCol1 = New AncestryAssistant.BordersPanel()
+        Me.lblAncestorAttributesCol1 = New System.Windows.Forms.Label()
         Me.JDockPanelHeader1 = New AncestryAssistant.DockHeaderPanel()
         Me.mnuPanelDock = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuDockTopLeft = New System.Windows.Forms.ToolStripMenuItem()
@@ -68,6 +69,7 @@ Partial Class ApplicationForm
         Me.btnAncestor = New System.Windows.Forms.ToolStripButton()
         Me.btnAncestors = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnActions = New System.Windows.Forms.ToolStripButton()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PreferencesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -78,7 +80,6 @@ Partial Class ApplicationForm
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AncestryDirectorWatcher = New System.IO.FileSystemWatcher()
         Me.toolbar = New System.Windows.Forms.Panel()
-        Me.btnActions = New System.Windows.Forms.Button()
         CType(Me.SplitPanel_Main, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitPanel_Main.Panel1.SuspendLayout()
         Me.SplitPanel_Main.Panel2.SuspendLayout()
@@ -87,9 +88,9 @@ Partial Class ApplicationForm
         Me.SplitPanel.Panel1.SuspendLayout()
         Me.SplitPanel.Panel2.SuspendLayout()
         Me.SplitPanel.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.JPanel2.SuspendLayout()
-        Me.JPanel1.SuspendLayout()
+        Me.AncestorAttributesHeader.SuspendLayout()
+        Me.ancestorAttributesCol2.SuspendLayout()
+        Me.ancestorAttributesCol1.SuspendLayout()
         Me.mnuPanelDock.SuspendLayout()
         Me.tabs.SuspendLayout()
         Me.tabAncestry.SuspendLayout()
@@ -150,7 +151,7 @@ Partial Class ApplicationForm
         '
         Me.SplitPanel.Panel1.BackColor = System.Drawing.Color.Silver
         Me.SplitPanel.Panel1.Controls.Add(Me.AncestorAttributes)
-        Me.SplitPanel.Panel1.Controls.Add(Me.Panel1)
+        Me.SplitPanel.Panel1.Controls.Add(Me.AncestorAttributesHeader)
         Me.SplitPanel.Panel1.Controls.Add(Me.JDockPanelHeader1)
         Me.SplitPanel.Panel1.Padding = New System.Windows.Forms.Padding(1)
         '
@@ -178,79 +179,90 @@ Partial Class ApplicationForm
         Me.AncestorAttributes.Size = New System.Drawing.Size(295, 197)
         Me.AncestorAttributes.TabIndex = 4
         '
-        'Panel1
+        'AncestorAttributesHeader
         '
-        Me.Panel1.BackColor = System.Drawing.Color.Silver
-        Me.Panel1.Controls.Add(Me.JPanel2)
-        Me.Panel1.Controls.Add(Me.JPanel1)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel1.Location = New System.Drawing.Point(1, 25)
-        Me.Panel1.MaximumSize = New System.Drawing.Size(0, 18)
-        Me.Panel1.MinimumSize = New System.Drawing.Size(0, 18)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel1.Size = New System.Drawing.Size(295, 18)
-        Me.Panel1.TabIndex = 3
+        Me.AncestorAttributesHeader.BackColor = System.Drawing.Color.Silver
+        Me.AncestorAttributesHeader.Controls.Add(Me.AncestorColSplitter)
+        Me.AncestorAttributesHeader.Controls.Add(Me.ancestorAttributesCol2)
+        Me.AncestorAttributesHeader.Controls.Add(Me.ancestorAttributesCol1)
+        Me.AncestorAttributesHeader.Dock = System.Windows.Forms.DockStyle.Top
+        Me.AncestorAttributesHeader.Location = New System.Drawing.Point(1, 25)
+        Me.AncestorAttributesHeader.MaximumSize = New System.Drawing.Size(0, 18)
+        Me.AncestorAttributesHeader.MinimumSize = New System.Drawing.Size(0, 18)
+        Me.AncestorAttributesHeader.Name = "AncestorAttributesHeader"
+        Me.AncestorAttributesHeader.Padding = New System.Windows.Forms.Padding(1)
+        Me.AncestorAttributesHeader.Size = New System.Drawing.Size(295, 18)
+        Me.AncestorAttributesHeader.TabIndex = 3
         '
-        'JPanel2
+        'AncestorColSplitter
         '
-        Me.JPanel2.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.JPanel2.BorderColor = System.Drawing.Color.Transparent
-        Me.JPanel2.BorderColorBottom = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel2.BorderColorLeft = System.Drawing.SystemColors.ButtonHighlight
-        Me.JPanel2.BorderColorRight = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel2.BorderColorTop = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel2.BorderWidth = New System.Windows.Forms.Padding(1, 0, 1, 1)
-        Me.JPanel2.Controls.Add(Me.Label1)
-        Me.JPanel2.CornerRadius = New System.Windows.Forms.Padding(0)
-        Me.JPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.JPanel2.Location = New System.Drawing.Point(151, 1)
-        Me.JPanel2.Name = "JPanel2"
-        Me.JPanel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.JPanel2.Size = New System.Drawing.Size(143, 16)
-        Me.JPanel2.TabIndex = 4
+        Me.AncestorColSplitter.BackColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.AncestorColSplitter.Location = New System.Drawing.Point(151, 1)
+        Me.AncestorColSplitter.Margin = New System.Windows.Forms.Padding(0)
+        Me.AncestorColSplitter.Name = "AncestorColSplitter"
+        Me.AncestorColSplitter.Size = New System.Drawing.Size(1, 16)
+        Me.AncestorColSplitter.TabIndex = 1
+        Me.AncestorColSplitter.TabStop = False
         '
-        'Label1
+        'ancestorAttributesCol2
         '
-        Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label1.Location = New System.Drawing.Point(1, 1)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
-        Me.Label1.Size = New System.Drawing.Size(141, 14)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Value"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ancestorAttributesCol2.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.ancestorAttributesCol2.BorderColor = System.Drawing.Color.Transparent
+        Me.ancestorAttributesCol2.BorderColorBottom = System.Drawing.SystemColors.ButtonShadow
+        Me.ancestorAttributesCol2.BorderColorLeft = System.Drawing.SystemColors.ButtonHighlight
+        Me.ancestorAttributesCol2.BorderColorRight = System.Drawing.SystemColors.ButtonShadow
+        Me.ancestorAttributesCol2.BorderColorTop = System.Drawing.SystemColors.ButtonShadow
+        Me.ancestorAttributesCol2.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
+        Me.ancestorAttributesCol2.Controls.Add(Me.lblAncestorAttributesCol2)
+        Me.ancestorAttributesCol2.CornerRadius = New System.Windows.Forms.Padding(0)
+        Me.ancestorAttributesCol2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ancestorAttributesCol2.Location = New System.Drawing.Point(151, 1)
+        Me.ancestorAttributesCol2.MinimumSize = New System.Drawing.Size(60, 0)
+        Me.ancestorAttributesCol2.Name = "ancestorAttributesCol2"
+        Me.ancestorAttributesCol2.Padding = New System.Windows.Forms.Padding(1)
+        Me.ancestorAttributesCol2.Size = New System.Drawing.Size(143, 16)
+        Me.ancestorAttributesCol2.TabIndex = 4
         '
-        'JPanel1
+        'lblAncestorAttributesCol2
         '
-        Me.JPanel1.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.JPanel1.BorderColor = System.Drawing.Color.Transparent
-        Me.JPanel1.BorderColorBottom = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel1.BorderColorLeft = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel1.BorderColorRight = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel1.BorderColorTop = System.Drawing.SystemColors.ButtonShadow
-        Me.JPanel1.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
-        Me.JPanel1.Controls.Add(Me.Label2)
-        Me.JPanel1.CornerRadius = New System.Windows.Forms.Padding(0)
-        Me.JPanel1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.JPanel1.Location = New System.Drawing.Point(1, 1)
-        Me.JPanel1.MaximumSize = New System.Drawing.Size(150, 0)
-        Me.JPanel1.MinimumSize = New System.Drawing.Size(150, 0)
-        Me.JPanel1.Name = "JPanel1"
-        Me.JPanel1.Padding = New System.Windows.Forms.Padding(1)
-        Me.JPanel1.Size = New System.Drawing.Size(150, 16)
-        Me.JPanel1.TabIndex = 3
+        Me.lblAncestorAttributesCol2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblAncestorAttributesCol2.Location = New System.Drawing.Point(1, 1)
+        Me.lblAncestorAttributesCol2.Name = "lblAncestorAttributesCol2"
+        Me.lblAncestorAttributesCol2.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
+        Me.lblAncestorAttributesCol2.Size = New System.Drawing.Size(141, 14)
+        Me.lblAncestorAttributesCol2.TabIndex = 0
+        Me.lblAncestorAttributesCol2.Text = "Value"
+        Me.lblAncestorAttributesCol2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Label2
+        'ancestorAttributesCol1
         '
-        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label2.Location = New System.Drawing.Point(1, 1)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
-        Me.Label2.Size = New System.Drawing.Size(148, 14)
-        Me.Label2.TabIndex = 0
-        Me.Label2.Text = "Attribute"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ancestorAttributesCol1.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.ancestorAttributesCol1.BorderColor = System.Drawing.Color.Transparent
+        Me.ancestorAttributesCol1.BorderColorBottom = System.Drawing.SystemColors.ButtonShadow
+        Me.ancestorAttributesCol1.BorderColorLeft = System.Drawing.SystemColors.ButtonShadow
+        Me.ancestorAttributesCol1.BorderColorRight = System.Drawing.SystemColors.ButtonShadow
+        Me.ancestorAttributesCol1.BorderColorTop = System.Drawing.SystemColors.ButtonShadow
+        Me.ancestorAttributesCol1.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
+        Me.ancestorAttributesCol1.Controls.Add(Me.lblAncestorAttributesCol1)
+        Me.ancestorAttributesCol1.CornerRadius = New System.Windows.Forms.Padding(0)
+        Me.ancestorAttributesCol1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.ancestorAttributesCol1.Location = New System.Drawing.Point(1, 1)
+        Me.ancestorAttributesCol1.MinimumSize = New System.Drawing.Size(80, 0)
+        Me.ancestorAttributesCol1.Name = "ancestorAttributesCol1"
+        Me.ancestorAttributesCol1.Padding = New System.Windows.Forms.Padding(1)
+        Me.ancestorAttributesCol1.Size = New System.Drawing.Size(150, 16)
+        Me.ancestorAttributesCol1.TabIndex = 3
+        '
+        'lblAncestorAttributesCol1
+        '
+        Me.lblAncestorAttributesCol1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblAncestorAttributesCol1.Location = New System.Drawing.Point(1, 1)
+        Me.lblAncestorAttributesCol1.Name = "lblAncestorAttributesCol1"
+        Me.lblAncestorAttributesCol1.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
+        Me.lblAncestorAttributesCol1.Size = New System.Drawing.Size(148, 14)
+        Me.lblAncestorAttributesCol1.TabIndex = 0
+        Me.lblAncestorAttributesCol1.Text = "Attribute"
+        Me.lblAncestorAttributesCol1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'JDockPanelHeader1
         '
@@ -377,7 +389,6 @@ Partial Class ApplicationForm
         'Ancestry
         '
         Me.Ancestry.AncestorID = ""
-        Me.Ancestry.AncestryBaseURL = ""
         Me.Ancestry.AncestryPage = ""
         Me.Ancestry.AncestryTreeID = "65171586"
         Me.Ancestry.BlockedWebDomains = New String() {"facebook", "doubleclick", "tiktok", "pinterest", "adservice", "ad-delivery", "adspsp", "adsystem", "adnxs", "securepubads"}
@@ -477,13 +488,13 @@ Partial Class ApplicationForm
         Me.tsAncestry.DataBindings.Add(New System.Windows.Forms.Binding("Location", Global.AncestryAssistant.My.MySettings.Default, "TB_ANCESTRY_LOC", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.tsAncestry.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tsAncestry.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.tsAncestry.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnHomeTree, Me.ToolStripSeparator1, Me.btnViewPedigree, Me.btnViewTree, Me.btnViewFan, Me.ToolStripSeparator2, Me.btnPersonFact, Me.btnPersonHints, Me.btnPersonGallery, Me.btnPersonStory, Me.ToolStripSeparator3, Me.btnAncestor, Me.btnAncestors, Me.ToolStripSeparator4})
+        Me.tsAncestry.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnHomeTree, Me.ToolStripSeparator1, Me.btnViewPedigree, Me.btnViewTree, Me.btnViewFan, Me.ToolStripSeparator2, Me.btnPersonFact, Me.btnPersonHints, Me.btnPersonGallery, Me.btnPersonStory, Me.ToolStripSeparator3, Me.btnAncestor, Me.btnAncestors, Me.ToolStripSeparator4, Me.btnActions})
         Me.tsAncestry.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.tsAncestry.Location = Global.AncestryAssistant.My.MySettings.Default.TB_ANCESTRY_LOC
         Me.tsAncestry.Name = "tsAncestry"
         Me.tsAncestry.Padding = New System.Windows.Forms.Padding(4, 0, 1, 0)
         Me.tsAncestry.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.tsAncestry.Size = New System.Drawing.Size(807, 25)
+        Me.tsAncestry.Size = New System.Drawing.Size(884, 25)
         Me.tsAncestry.TabIndex = 3
         Me.tsAncestry.Text = "Ancestry"
         '
@@ -612,6 +623,20 @@ Partial Class ApplicationForm
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
         '
+        'btnActions
+        '
+        Me.btnActions.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnActions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnActions.Image = CType(resources.GetObject("btnActions.Image"), System.Drawing.Image)
+        Me.btnActions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnActions.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnActions.Name = "btnActions"
+        Me.btnActions.Size = New System.Drawing.Size(99, 22)
+        Me.btnActions.Text = "ToolStripButton1"
+        Me.btnActions.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnActions.ToolTipText = "Download"
+        Me.btnActions.Visible = False
+        '
         'MenuStrip1
         '
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ViewToolStripMenuItem, Me.ToolsToolStripMenuItem})
@@ -670,6 +695,7 @@ Partial Class ApplicationForm
         'AncestryDirectorWatcher
         '
         Me.AncestryDirectorWatcher.EnableRaisingEvents = True
+        Me.AncestryDirectorWatcher.IncludeSubdirectories = True
         Me.AncestryDirectorWatcher.Path = Global.AncestryAssistant.My.MySettings.Default.AncestorsPath
         Me.AncestryDirectorWatcher.SynchronizingObject = Me
         '
@@ -677,7 +703,6 @@ Partial Class ApplicationForm
         '
         Me.toolbar.BackColor = System.Drawing.SystemColors.ControlLight
         Me.toolbar.Controls.Add(Me.tsAncestry)
-        Me.toolbar.Controls.Add(Me.btnActions)
         Me.toolbar.Dock = System.Windows.Forms.DockStyle.Top
         Me.toolbar.Location = New System.Drawing.Point(0, 24)
         Me.toolbar.MaximumSize = New System.Drawing.Size(0, 25)
@@ -685,29 +710,6 @@ Partial Class ApplicationForm
         Me.toolbar.Padding = New System.Windows.Forms.Padding(0, 0, 8, 0)
         Me.toolbar.Size = New System.Drawing.Size(892, 25)
         Me.toolbar.TabIndex = 8
-        '
-        'btnActions
-        '
-        Me.btnActions.AutoSize = True
-        Me.btnActions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnActions.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.btnActions.Dock = System.Windows.Forms.DockStyle.Right
-        Me.btnActions.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.btnActions.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnActions.ForeColor = System.Drawing.Color.White
-        Me.btnActions.ImageAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.btnActions.Location = New System.Drawing.Point(807, 0)
-        Me.btnActions.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnActions.MaximumSize = New System.Drawing.Size(0, 22)
-        Me.btnActions.Name = "btnActions"
-        Me.btnActions.Size = New System.Drawing.Size(77, 22)
-        Me.btnActions.TabIndex = 4
-        Me.btnActions.Text = "btnActions"
-        Me.btnActions.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnActions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnActions.UseMnemonic = False
-        Me.btnActions.UseVisualStyleBackColor = True
-        Me.btnActions.Visible = False
         '
         'ApplicationForm
         '
@@ -736,9 +738,9 @@ Partial Class ApplicationForm
         Me.SplitPanel.Panel2.ResumeLayout(False)
         CType(Me.SplitPanel, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitPanel.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
-        Me.JPanel2.ResumeLayout(False)
-        Me.JPanel1.ResumeLayout(False)
+        Me.AncestorAttributesHeader.ResumeLayout(False)
+        Me.ancestorAttributesCol2.ResumeLayout(False)
+        Me.ancestorAttributesCol1.ResumeLayout(False)
         Me.mnuPanelDock.ResumeLayout(False)
         Me.tabs.ResumeLayout(False)
         Me.tabAncestry.ResumeLayout(False)
@@ -805,11 +807,12 @@ Partial Class ApplicationForm
     Friend WithEvents CensusViewer1 As CensusViewer
     Friend WithEvents Ancestry As AncestryWebViewer
     Friend WithEvents AncestorAttributes As TreeView
-    Friend WithEvents JPanel2 As BordersPanel
-    Friend WithEvents Label1 As Label
-    Friend WithEvents JPanel1 As BordersPanel
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents ancestorAttributesCol2 As BordersPanel
+    Friend WithEvents lblAncestorAttributesCol2 As Label
+    Friend WithEvents ancestorAttributesCol1 As BordersPanel
+    Friend WithEvents lblAncestorAttributesCol1 As Label
+    Friend WithEvents AncestorAttributesHeader As Panel
     Friend WithEvents toolbar As Panel
-    Friend WithEvents btnActions As Button
+    Friend WithEvents btnActions As ToolStripButton
+    Friend WithEvents AncestorColSplitter As Splitter
 End Class

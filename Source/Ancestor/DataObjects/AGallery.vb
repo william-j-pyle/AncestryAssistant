@@ -1,28 +1,32 @@
 ﻿Imports System.IO
 
 Public Class AGallery
-  Private dataEntries() As String
+  Private dataEntries As List(Of String)
+  Private recordLocations() As String
 
   Public ReadOnly Property length As Integer
     Get
-      Return dataEntries.Length
+      Return dataEntries.Count
     End Get
   End Property
 
   Public ReadOnly Property RecordsBasePath As String = ""
 
-  Public Sub New(RecordsLocation As String)
-    If Not RecordsLocation.EndsWith("\") Then RecordsLocation += "\"
-    RecordsBasePath = RecordsLocation
+  Public Sub New(ParamArray RecordsLocations() As String)
+    recordLocations = RecordsLocations
+    RecordsBasePath = RecordsLocations(0)
+    If Not RecordsBasePath.EndsWith("\") Then RecordsBasePath += "\"
     Initialize()
   End Sub
 
   Private Sub Initialize()
-    If Not Directory.Exists(RecordsBasePath) Then
-      Directory.CreateDirectory(RecordsBasePath)
-    End If
-    dataEntries = Directory.GetFiles(RecordsBasePath, "*.jpg")
-
+    dataEntries = New List(Of String)
+    For Each Loc As String In recordLocations
+      If Not Directory.Exists(Loc) Then
+        Directory.CreateDirectory(Loc)
+      End If
+      dataEntries.AddRange(Directory.GetFiles(Loc, "*.jpg"))
+    Next
   End Sub
 
 End Class
