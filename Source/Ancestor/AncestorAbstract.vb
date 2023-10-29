@@ -2,7 +2,7 @@
 Imports System.IO
 
 <DefaultPropertyAttribute("ID")>
-Public MustInherit Class AncestorBase
+Public MustInherit Class AncestorAbstract
 
   Private facts As AAFile
   Private parents As AAFile

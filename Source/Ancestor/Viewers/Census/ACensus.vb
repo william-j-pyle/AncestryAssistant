@@ -1,10 +1,11 @@
 ﻿Imports System.IO
 
 Public Class ACensus
+  Private ancestor As AncestorCollection.Ancestor
+
   Private censusYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
   Private dataEntries() As String
 
-  Private ancestor As AncestorCollection.Ancestor
 
   Public ReadOnly Property length As Integer
     Get
@@ -29,11 +30,31 @@ Public Class ACensus
 
   Public ReadOnly Property RecordsBasePath As String = ""
 
+  Public Function getAADatasource(censusYear As Integer) As AAFile
+    Dim aaRtn As AAFile = Nothing
+    Dim aaTmp As AAFile = Nothing
+    For Each entry As String In dataEntries
+      If censusYear = CInt(entry.Split("-")(1)) Then
+        If aaRtn Is Nothing Then
+          aaRtn = New AAFile(entry)
+        Else
+          aaRtn.CanSave = False
+          aaTmp = New AAFile(entry)
+          Dim rVal As ArrayList = aaRtn.getValues()
+          rVal.AddRange(aaTmp.getValues)
+          aaRtn.setValues(rVal)
+        End If
+      End If
+    Next
+    Return aaRtn
+  End Function
+
+
   Public Sub New(ancestorObj As AncestorCollection.Ancestor)
     ancestor = ancestorObj
     Dim recordslocation As String = ancestor.FullPath("Census")
-    If Not RecordsLocation.EndsWith("\") Then RecordsLocation += "\"
-    RecordsBasePath = RecordsLocation
+    If Not recordslocation.EndsWith("\") Then recordslocation += "\"
+    RecordsBasePath = recordslocation
     Initialize()
   End Sub
 

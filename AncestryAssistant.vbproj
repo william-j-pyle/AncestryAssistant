@@ -196,16 +196,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Source\Ancestor\AncestorBase.vb" />
+    <Compile Include="Source\Ancestor\AncestorAbstract.vb" />
     <Compile Include="Source\Ancestor\AncestorCollection.vb" />
-    <Compile Include="Source\Ancestor\DataObjects\AAFile.vb" />
-    <Compile Include="Source\Ancestor\DataObjects\ACensus.vb" />
-    <Compile Include="Source\Ancestor\DataObjects\AGallery.vb" />
-    <Compile Include="Source\Ancestor\DataObjects\ANotebook.vb" />
-    <Compile Include="Source\Ancestor\DataObjects\ASource.vb" />
-    <Compile Include="Source\Ancestor\DataObjects\ATimeline.vb" />
-    <Compile Include="Source\Ancestor\Enums\AAFileTypeEnum.vb" />
-    <Compile Include="Source\Ancestor\OldAncestor.vb" />
+    <Compile Include="Source\AAFile\AAFile.vb" />
+    <Compile Include="Source\Ancestor\Viewers\Census\ACensus.vb" />
+    <Compile Include="Source\Ancestor\Viewers\Gallery\AGallery.vb" />
+    <Compile Include="Source\Ancestor\Viewers\Notebook\ANotebook.vb" />
+    <Compile Include="Source\Ancestor\Viewers\Sources\ASource.vb" />
+    <Compile Include="Source\Ancestor\Viewers\Timeline\ATimeline.vb" />
+    <Compile Include="Source\AAFile\Enums\AAFileTypeEnum.vb" />
     <Compile Include="Source\Ancestry\AncestryWebViewer.Designer.vb">
       <DependentUpon>AncestryWebViewer.vb</DependentUpon>
     </Compile>
@@ -214,11 +213,11 @@
     </Compile>
     <Compile Include="Source\Ancestry\DataObjects\UriTracks.vb" />
     <Compile Include="Source\Ancestry\DataObjects\UriTrackingGroup.vb" />
-    <Compile Include="Source\App\ApplicationEvents.vb" />
-    <Compile Include="Source\App\ApplicationForm.Designer.vb">
+    <Compile Include="Source\App\Forms\ApplicationEvents.vb" />
+    <Compile Include="Source\App\Forms\ApplicationForm.Designer.vb">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\ApplicationForm.vb">
+    <Compile Include="Source\App\Forms\ApplicationForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\App\Components\RibbonButton.vb">
@@ -230,22 +229,28 @@
     <Compile Include="Source\App\Components\RibbonGroup.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\App\Form1.Designer.vb">
+    <Compile Include="Source\App\Forms\Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\Form1.vb">
+    <Compile Include="Source\App\Forms\Form1.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\App\Form2.Designer.vb">
+    <Compile Include="Source\App\Forms\Form2.Designer.vb">
       <DependentUpon>Form2.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\Form2.vb">
+    <Compile Include="Source\App\Forms\Form2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Census\CensusViewer.Designer.vb">
-      <DependentUpon>CensusViewer.vb</DependentUpon>
+    <Compile Include="Source\App\Forms\Form3.Designer.vb">
+      <DependentUpon>Form3.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Census\CensusViewer.vb">
+    <Compile Include="Source\App\Forms\Form3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Ancestor\Viewers\ViewerAbstract.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Ancestor\Viewers\Census\CensusViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Gedcom\DataObjects\GedPlace.vb" />
@@ -284,22 +289,10 @@
     <Compile Include="Source\Gedcom\DataObjects\GedTagCollection.vb" />
     <Compile Include="Source\Gedcom\DataObjects\GedTagRecord.vb" />
     <Compile Include="Source\Gedcom\DataObjects\GedTime.vb" />
-    <Compile Include="Source\Image\ImageGallery.Designer.vb">
-      <DependentUpon>ImageGallery.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Image\ImageGallery.vb">
+    <Compile Include="Source\Ancestor\Viewers\Gallery\ImageGallery.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Image\ImageViewer.Designer.vb">
-      <DependentUpon>ImageViewer.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Image\ImageViewer.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Source\Notebook\NotebookViewer.Designer.vb">
-      <DependentUpon>NotebookViewer.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Notebook\NotebookViewer.vb">
+    <Compile Include="Source\Ancestor\Viewers\Notebook\NotebookViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Ancestry\DataObjects\AncestryDataMessage.vb" />
@@ -348,26 +341,17 @@
     <EmbeddedResource Include="Source\Ancestry\AncestryWebViewer.resx">
       <DependentUpon>AncestryWebViewer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\ApplicationForm.resx">
+    <EmbeddedResource Include="Source\App\Forms\ApplicationForm.resx">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Form1.resx">
+    <EmbeddedResource Include="Source\App\Forms\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Form2.resx">
+    <EmbeddedResource Include="Source\App\Forms\Form2.resx">
       <DependentUpon>Form2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Census\CensusViewer.resx">
-      <DependentUpon>CensusViewer.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Image\ImageGallery.resx">
-      <DependentUpon>ImageGallery.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Notebook\NotebookViewer.resx">
-      <DependentUpon>NotebookViewer.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Image\ImageViewer.resx">
-      <DependentUpon>ImageViewer.vb</DependentUpon>
+    <EmbeddedResource Include="Source\App\Forms\Form3.resx">
+      <DependentUpon>Form3.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\App\Dialogs\ImageSaveDialog.resx">
       <DependentUpon>ImageSaveDialog.vb</DependentUpon>

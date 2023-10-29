@@ -13,6 +13,9 @@ Public Class AAFile
     End Get
   End Property
 
+  Public Property CanSave As Boolean = True
+
+
   Private sAAFileName As String = ""
 
   Public Property AAFileName As String
@@ -73,7 +76,14 @@ Public Class AAFile
     _IsDirty = False
   End Sub
 
+
   Private aValueHeaders() As String = {}
+  Public ReadOnly Property ColumnNames As String()
+    Get
+      Return aValueHeaders
+    End Get
+  End Property
+
 
   Public Function getHeaders() As String()
     Return aValueHeaders
@@ -110,6 +120,7 @@ Public Class AAFile
     Next
     _IsDirty = True
   End Sub
+
 
   Public Sub setTableData(table As ArrayList)
     aValueHeaders = table.Item(0)
@@ -152,6 +163,7 @@ Public Class AAFile
     End Set
   End Property
 
+
   Private Sub Load()
     Initialize()
     If File.Exists(AAFileName) Then
@@ -193,6 +205,7 @@ Public Class AAFile
   End Sub
 
   Public Sub Save()
+    If Not CanSave Then Exit Sub
     If AAFileName.Length = 0 Or AAFileType < 0 Then
       Throw New FormatException("Both Filename and FileType must be set to perform a save")
       Exit Sub

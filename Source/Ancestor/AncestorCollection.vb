@@ -6,7 +6,7 @@ Public Class AncestorCollection
   Public Event RepositoryPathChanged(NewPath As String)
 
   Public Class Ancestor
-    Inherits AncestorBase
+    Inherits AncestorAbstract
 
     Friend Sub New(AncestorPath As String)
       LoadAncestor(AncestorPath)

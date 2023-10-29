@@ -6,8 +6,6 @@ Public Class ANotebook
 
   Public Event PageChanged(PageName As String)
 
-  Public Event TestMe(FromWhere As String)
-
   Private Const NOTE_SECTION_CONFIG = "anote_sections.aa"
   Private Const NOTE_PAGES_CONFIG = "anote_pages.aa"
 
@@ -135,7 +133,6 @@ Public Class ANotebook
   End Sub
 
   Private Sub Initialize()
-    RaiseEvent TestMe("Initialize")
     If Not Directory.Exists(RecordsBasePath) Then
       'Create Base path
       Directory.CreateDirectory(RecordsBasePath)

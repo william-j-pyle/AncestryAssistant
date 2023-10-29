@@ -1,63 +1,250 @@
 ﻿Imports System.IO
 
 Public Class CensusViewer
+  Inherits AbstractViewer
+
+  Friend WithEvents ts As ToolStrip
+  Friend WithEvents lblCaption As ToolStripLabel
   Private CensusData As Collection
   Private CensusFileList As Collection
   Private AvailableYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
   Const UNIFIED_TEXT = "Unified"
 
-  Public Sub New()
-    InitializeComponent()
-    Dock = DockStyle.Fill
-    InitializeToolbar()
+  Private xlsWorkbook As Dictionary(Of Integer, DataGridView)
+  Friend WithEvents xlsActiveSheet As DataGridView
+
+  Private components As System.ComponentModel.IContainer
+
+  <System.Diagnostics.DebuggerNonUserCode()>
+  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+    Try
+      If disposing AndAlso components IsNot Nothing Then
+        components.Dispose()
+      End If
+    Finally
+      MyBase.Dispose(disposing)
+    End Try
   End Sub
 
-  Private Sub InitializeToolbar()
-    Dim btn As ToolStripButton
-    CensusFileList = New Collection()
-    CensusData = New Collection
-    tsCensus.Items.Clear()
-    tsCensus.Items.Add(UNIFIED_TEXT, Nothing, AddressOf CensusSelect)
-    For Each dt As Integer In AvailableYears
-      btn = tsCensus.Items.Add(dt, Nothing, AddressOf CensusSelect)
-      btn.DisplayStyle = ToolStripItemDisplayStyle.Text
-      btn.Visible = False
-    Next
+  Private Sub ResetViewer()
+    Debug.Print("ResetViewer")
+    Dim idx As Integer = 0
+    While idx < Controls.Count
+      If TypeOf Controls.Item(idx) Is DataGridView Then
+        Controls.RemoveAt(idx)
+      Else
+        idx += 1
+      End If
+    End While
+    ts.Items.Clear()
+    xlsActiveSheet = Nothing
+    xlsWorkbook = New Dictionary(Of Integer, DataGridView)
   End Sub
 
-  Private Sub CensusSelect(sender As Object, e As EventArgs)
-    For Each btn As ToolStripButton In tsCensus.Items
-      btn.Checked = sender.text.Equals(btn.Text)
+  Private Function CreateWorkSheet(censusYear As Integer) As DataGridView
+    Dim tmpWorkSheet As DataGridView = New DataGridView
+    CType(tmpWorkSheet, System.ComponentModel.ISupportInitialize).BeginInit()
+    With tmpWorkSheet
+      .AllowUserToAddRows = False
+      .AllowUserToDeleteRows = False
+      .AllowUserToOrderColumns = True
+      .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+      .BorderStyle = BorderStyle.None
+      .ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+      .Dock = DockStyle.Fill
+      .Location = New Point(0, 25)
+      .Margin = New Padding(0)
+      .ShowEditingIcon = False
+      .Size = New Size(439, 125)
+    End With
+    CType(tmpWorkSheet, System.ComponentModel.ISupportInitialize).EndInit()
+    'Get the data
+    Dim aa As AAFile = Ancestor.Census.getAADatasource(censusYear)
+    Dim i As Integer
+    'Add Header to table
+    For Each columnName As String In aa.getHeaders
+      Dim column As New DataGridViewTextBoxColumn()
+      column.DataPropertyName = columnName
+      column.HeaderText = columnName
+      tmpWorkSheet.Columns.Add(column)
     Next
-    If sender.text.Equals(UNIFIED_TEXT) Then
-      ShowUnified()
+    'Add Data to table
+    For Each row() As String In aa.getValues
+      i = tmpWorkSheet.Rows.Add(row)
+    Next
+    'Add Sheet to the workbook
+    xlsWorkbook.Add(censusYear, tmpWorkSheet)
+    Return tmpWorkSheet
+  End Function
+
+  Private Sub showWorkSheet(censusYear As Integer)
+    If xlsWorkbook.ContainsKey(censusYear) Then
+      Debug.Print("Active Worksheet")
+      xlsActiveSheet = xlsWorkbook.Item(censusYear)
     Else
-      ShowCensus(sender.text)
+      Debug.Print("New Worksheet")
+      xlsActiveSheet = CreateWorkSheet(censusYear)
+      Controls.Add(xlsActiveSheet)
+    End If
+    xlsActiveSheet.BringToFront()
+  End Sub
+
+
+  Public Sub New()
+    ts = New ToolStrip()
+    lblCaption = New ToolStripLabel()
+    ts.SuspendLayout()
+    SuspendLayout()
+    '
+    'ts
+    '
+    ts.BackColor = SystemColors.ControlLight
+    ts.GripStyle = ToolStripGripStyle.Hidden
+    ts.Items.AddRange(New ToolStripItem() {lblCaption})
+    ts.Location = New Point(0, 0)
+    ts.Name = "ts"
+    ts.RenderMode = ToolStripRenderMode.System
+    ts.Size = New Size(439, 25)
+    ts.TabIndex = 3
+    ts.Text = "ToolStrip1"
+    '
+    'lblCaption
+    '
+    lblCaption.Name = "lblCaption"
+    lblCaption.Size = New Size(87, 22)
+    lblCaption.Text = "ToolStripLabel1"
+    '
+    'CensusViewer
+    '
+    AutoScaleDimensions = New SizeF(6.0!, 13.0!)
+    AutoScaleMode = AutoScaleMode.Font
+    BackColor = Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
+    Controls.Add(xlsActiveSheet)
+    Controls.Add(ts)
+    DoubleBuffered = True
+    Font = New Font("Segoe UI", 8.25!, FontStyle.Regular, GraphicsUnit.Point, CType(0, Byte))
+    Name = "CensusViewer"
+    Size = New Size(439, 150)
+    ts.ResumeLayout(False)
+    ts.PerformLayout()
+    ResumeLayout(False)
+    PerformLayout()
+
+    Dock = DockStyle.Fill
+    lblCaption.Text = ASSISTANTVIEWER_NOANCESTOR
+    lblCaption.Visible = True
+
+  End Sub
+
+  Private Sub CensusViewer_AncestorAssigned() Handles Me.AncestorAssigned
+    LoadCensus()
+  End Sub
+
+  Private Sub CensusViewer_AncestorUpdated() Handles Me.AncestorUpdated
+    LoadCensus()
+  End Sub
+
+  Private Sub addToolbarLabel()
+    Dim item As ToolStripLabel = New ToolStripLabel(ASSISTANTVIEWER_NODATA)
+    item.Name = "lblCaption"
+    ts.Items.Add(item)
+  End Sub
+
+
+  Private Sub LoadCensus()
+    ResetViewer()
+    If Ancestor Is Nothing Then
+      addToolbarLabel()
+      lblCaption.Text = ASSISTANTVIEWER_NOANCESTOR
+      lblCaption.Visible = True
+    Else
+      Dim item As ToolStripButton
+      Dim expectedCensus As List(Of Integer) = Ancestor.Census.ExpectedYears
+      Dim availableCensus As List(Of Integer) = Ancestor.Census.AvailableYears
+      If expectedCensus.Count > 0 Then
+        For Each censusYear As Integer In expectedCensus
+          item = New ToolStripButton(censusYear.ToString)
+          If availableCensus.Contains(censusYear) Then
+            item.CheckOnClick = True
+            item.ForeColor = Color.Black
+            item.ToolTipText = censusYear & " Census"
+            item.Tag = Nothing
+            AddHandler item.Click, AddressOf CensusSelect
+          Else
+            item.Enabled = False
+            item.ForeColor = Color.Red
+            item.ToolTipText = censusYear & " Census Unavailable"
+          End If
+          ts.Items.Add(item)
+        Next
+        If availableCensus.Count > 0 Then
+          item = New ToolStripButton(UNIFIED_TEXT)
+          item.ForeColor = Color.Black
+          item.ToolTipText = "Unified view of all available Census Years"
+          item.Tag = Nothing
+          AddHandler item.Click, AddressOf CensusSelect
+          ts.Items.Add(item)
+        End If
+      Else
+        addToolbarLabel()
+        lblCaption.Text = ASSISTANTVIEWER_NODATA
+        lblCaption.Visible = True
+      End If
     End If
   End Sub
 
-  Public Sub AddCensusFile(CensusYear As String, Filename As String)
-    CensusFileList.Add(Filename, CensusYear)
-    For Each btn As ToolStripItem In tsCensus.Items
-      If btn.Text.Equals(CensusYear) Then
-        btn.Visible = True
+  Private Sub CensusSelect(sender As Object, e As EventArgs)
+    For Each btn As ToolStripButton In ts.Items
+      If sender.text.Equals(btn.Text) Then
+        btn.Checked = True
+        btn.ForeColor = Color.DarkGreen
+      Else
+        btn.Checked = False
+        btn.ForeColor = Color.Black
       End If
     Next
+    If sender.text.Equals(UNIFIED_TEXT) Then
+      'TODO
+    Else
+      showWorkSheet(CInt(sender.text))
+    End If
   End Sub
 
-  Public Sub ShowUnified()
-    Debug.Print("Show Unified")
+  Private Sub DataGridView1_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles xlsActiveSheet.CellFormatting
+    ' Check if the current column is the first column (index 0) and the row is not a header row
+    If e.ColumnIndex = 0 AndAlso e.RowIndex >= 0 Then
+      ' Check the value of the first column
+      If xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value IsNot Nothing AndAlso xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value.ToString() = "P" Then
+        ' Set the background color to green if col(0)="P"
+        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Green
+      ElseIf xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value IsNot Nothing AndAlso xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value.ToString() = "F" Then
+        ' Set the background color to yellow if col(0)="F"
+        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Yellow
+      Else
+        ' Reset the background color for other values if needed
+        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = xlsActiveSheet.DefaultCellStyle.BackColor
+      End If
+    End If
   End Sub
 
-  Public Sub ShowCensus(CensusYear As String)
+
+
+
+
+  Private Sub AddCensusFile(CensusYear As String, Filename As String)
+    'CensusFileList.Add(Filename, CensusYear)
+    'For Each btn As ToolStripItem In tsCensus.Items
+    'If btn.Text.Equals(CensusYear) Then
+    'btn.Visible = True
+    'End If
+    'Next
+  End Sub
+
+  Private Sub ShowCensus(CensusYear As String)
     Debug.Print("ShowCensus: " + CensusYear)
     If CensusFileList.Contains(CensusYear) Then
       LoadFile(CensusFileList.Item(CensusYear))
     End If
-  End Sub
-
-  Public Sub Clear()
-    InitializeToolbar()
   End Sub
 
   Private Function GetData(csvFilePath As String) As ArrayList
@@ -79,22 +266,28 @@ Public Class CensusViewer
 
   Private Sub LoadFile(csvFilePath As String)
     Dim lines As ArrayList = GetData(csvFilePath)
-    sht.Columns.Clear()
-    sht.Rows.Clear()
-    sht.SuspendLayout()
+    xlsActiveSheet.Columns.Clear()
+    xlsActiveSheet.Rows.Clear()
+    xlsActiveSheet.SuspendLayout()
     Dim i As Integer = 0
     For Each data() As String In lines
       If i = 0 Then
         For Each column As String In data
-          sht.Columns.Add(column, column)
+          xlsActiveSheet.Columns.Add(column, column)
         Next
       Else
-        sht.Rows.Add(data)
+        xlsActiveSheet.Rows.Add(data)
       End If
       i += 1
     Next
-    sht.ResumeLayout(False)
-    sht.PerformLayout()
+    xlsActiveSheet.ResumeLayout(False)
+    xlsActiveSheet.PerformLayout()
+  End Sub
+
+#Region "Unified Census Code"
+
+  Private Sub ShowUnified()
+    Debug.Print("Show Unified")
   End Sub
 
   Private Sub GetUnifiedData()
@@ -466,5 +659,7 @@ Public Class CensusViewer
     addUnifiedData(33, 6, "District")
 
   End Sub
+
+#End Region
 
 End Class

@@ -37,7 +37,6 @@ Public Class ApplicationForm
     Ancestors = New AncestorCollection(My.Settings.AncestorsPath)
     InitializeAncestorList()
     LoadAncestorList()
-    InitializeImageGallery()
     SetUIState()
     AncestryDirectorWatcher.EnableRaisingEvents = True
   End Sub
@@ -58,7 +57,6 @@ Public Class ApplicationForm
   Private Sub SetUIState()
     SetSplitterState()
     SetToolbarState()
-    SetGalleryState()
   End Sub
 
 #End Region
@@ -207,9 +205,8 @@ Public Class ApplicationForm
   End Sub
 
 
-  Private Sub LoadAncestorAttributes()
+  Private Sub LoadAncestorAttributes(ancestor As AncestorCollection.Ancestor)
     CaptureAttributeState()
-    Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
     AncestorAttributes.DrawMode = TreeViewDrawMode.OwnerDrawText
     AncestorAttributes.Nodes.Clear()
     AncestorAttributes.ForeColor = Color.Black
@@ -495,41 +492,6 @@ Public Class ApplicationForm
 
 #End Region
 
-#Region "Viewer - Image/Gallery"
-
-  ' ==========================
-  ' = Viewer - Image/Gallery
-  ' ==========================
-
-  Private Sub SetGalleryState()
-    'If activeAncestor.IsLocal Then
-    '  If Not imgGallery.GalleryPath.Equals(activeAncestor.Path) Then
-    '    Debug.Print("SetGalleryState: " + activeAncestor.Path)
-    '    imgGallery.GalleryPath = activeAncestor.Path
-    '    imgGallery.BringToFront()
-    '  End If
-    'End If
-  End Sub
-
-  Private Sub InitializeImageGallery()
-    imgGallery.Dock = DockStyle.Fill
-    imgViewer.Dock = DockStyle.Fill
-    imgGallery.Clear()
-    imgGallery.SendToBack()
-    imgViewer.BringToFront()
-    imgViewer.Visible = False
-  End Sub
-
-  Private Sub imgGallery_ImageViewRequested(imageFilename As String) Handles imgGallery.ImageViewRequested
-    imgViewer.ImageFile = imageFilename
-    imgViewer.Visible = True
-    imgViewer.BringToFront()
-  End Sub
-
-  Private Sub imgViewer_BackToGallery() Handles imgViewer.BackToGallery
-    imgViewer.Visible = False
-    imgGallery.BringToFront()
-  End Sub
 
   Private Sub btnActions_Click(sender As Object, e As EventArgs) Handles btnActions.Click
     btnActions.Visible = False
@@ -594,7 +556,12 @@ Public Class ApplicationForm
   End Sub
 
   Private Sub ApplicationForm_ActiveAncestorChanged() Handles Me.ActiveAncestorChanged
-    LoadAncestorAttributes()
+    Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
+    LoadAncestorAttributes(ancestor)
+    imgGallery.SetAncestor(ancestor)
+    CensusViewer1.SetAncestor(ancestor)
+    NotebookViewer1.SetAncestor(ancestor)
+
   End Sub
 
   Private Sub AncestorsList_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles AncestorsList.ItemSelectionChanged
@@ -611,8 +578,6 @@ Public Class ApplicationForm
     ancestorAttributesCol1.Width = AncestorColSplitter.Tag
     AncestorAttributes.Refresh()
   End Sub
-
-#End Region
 
 #Region "Viewer - Notes"
 
