@@ -42,7 +42,7 @@ Public Class AncestorCollection
     If ContainsKey(AncestryID) Then
       Return Item(AncestryID)
     End If
-    Dim AncestorPath = RepositoryPath + AncestryID + "\"
+    Dim AncestorPath As String = RepositoryPath + AncestryID + "\"
     Directory.CreateDirectory(AncestorPath)
     Add(AncestryID, New Ancestor(AncestorPath))
     Return Item(AncestryID)

@@ -5,6 +5,8 @@ Public Class AncestorsListPanel
   Public Event AncestorIDChanged(AncestorID As String)
   Public Event PanelCloseClicked(sender As Object)
 
+  Private blockEvents As Boolean = False
+
   Public Sub New()
     InitializeComponent()
     With AncestorsList
@@ -25,13 +27,14 @@ Public Class AncestorsListPanel
   End Sub
 
   Private Sub AncestorsList_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles AncestorsList.ItemSelectionChanged
-    If e.IsSelected Then
+    If e.IsSelected And Not blockEvents Then
       RaiseEvent AncestorIDChanged(e.Item.Tag)
     End If
   End Sub
 
   Public Sub setAncestors(Ancestors As AncestorCollection, Optional SelectedAncestorID As String = "")
     Dim item As ListViewItem
+    blockEvents = True
     With AncestorsList
       .Tag = ""
       .Items.Clear()
@@ -44,12 +47,15 @@ Public Class AncestorsListPanel
         End If
       Next
     End With
+    blockEvents = False
   End Sub
 
   Public Sub setActiveAncestor(AncestorID As String)
+    blockEvents = True
     For Each item As ListViewItem In AncestorsList.Items
       item.Selected = item.Tag.Equals(AncestorID)
     Next
+    blockEvents = False
   End Sub
 
 

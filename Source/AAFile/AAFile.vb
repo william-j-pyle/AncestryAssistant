@@ -3,7 +3,7 @@ Imports System.Text
 
 Public Class AAFile
 
-  Const FIELD_SEPERATOR_CODE = 175
+  Const FIELD_SEPERATOR_CODE As Integer = 175
 
   Private _IsDirty As Boolean = False
 
@@ -137,26 +137,26 @@ Public Class AAFile
   Public Property Value(Optional key As String = "") As String
     Get
       Select Case AAFileType
-        Case 1 ' Key/Value Pairs
+        Case AAFileTypeEnum.KEYVALUEPAIRS ' Key/Value Pairs
           If dKeyValuePair.ContainsKey(key) Then
             Return dKeyValuePair.Item(key)
           Else
             Return String.Empty
           End If
-        Case 2 ' Single Value
+        Case AAFileTypeEnum.SINGLEVALUE ' Single Value
           Return sSingleValue
       End Select
       Return String.Empty
     End Get
     Set(value As String)
       Select Case AAFileType
-        Case 1 ' Key/Value Pairs
+        Case AAFileTypeEnum.KEYVALUEPAIRS ' Key/Value Pairs
           If dKeyValuePair.ContainsKey(key) Then
             dKeyValuePair.Item(key) = value
           Else
             dKeyValuePair.Add(key, value)
           End If
-        Case 2 ' Single Value
+        Case AAFileTypeEnum.SINGLEVALUE ' Single Value
           sSingleValue = value
       End Select
       _IsDirty = True
@@ -171,7 +171,7 @@ Public Class AAFile
       If lines.Length > 0 Then
         AAFileType = CInt(lines(0).Substring(0, 1))
         Select Case AAFileType
-          Case 1 ' Key/Value Pairs
+          Case AAFileTypeEnum.KEYVALUEPAIRS ' Key/Value Pairs
             Dim pair As String()
             For l As Integer = 1 To lines.Length - 1
               pair = lines(l).Split(Chr(FIELD_SEPERATOR_CODE))
@@ -180,7 +180,7 @@ Public Class AAFile
               End If
             Next
             _IsDirty = False
-          Case 2 ' Single Value
+          Case AAFileTypeEnum.SINGLEVALUE ' Single Value
             Dim sb As StringBuilder = New StringBuilder()
             If lines.Length > 1 Then
               sb.Append(lines(1))
@@ -191,7 +191,7 @@ Public Class AAFile
             End If
             Value = sb.ToString
             _IsDirty = False
-          Case 3 ' Array
+          Case AAFileTypeEnum.LISTARRAY ' Array
             If lines.Length > 1 Then
               aValueHeaders = lines(1).Split(Chr(FIELD_SEPERATOR_CODE))
               For l As Integer = 2 To lines.Length - 1
@@ -214,7 +214,7 @@ Public Class AAFile
     sb.Append(AAFileType)
     Select Case AAFileType
       Case AAFileTypeEnum.KEYVALUEPAIRS
-        For Each key In dKeyValuePair.Keys
+        For Each key As String In dKeyValuePair.Keys
           sb.AppendLine()
           sb.Append(key)
           sb.Append(Chr(FIELD_SEPERATOR_CODE))

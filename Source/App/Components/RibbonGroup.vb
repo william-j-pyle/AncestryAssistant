@@ -69,7 +69,7 @@
     Dim w As Integer = 8
     Dim h As Integer = 8
 
-    Dim tColor = Color.FromArgb(180, ForeColor)
+    Dim tColor As Color = Color.FromArgb(180, ForeColor)
     jPen = New Pen(tColor, 2)
     e.Graphics.DrawLine(jPen, l + 3, t + 3, l + 7, t + 7)
 

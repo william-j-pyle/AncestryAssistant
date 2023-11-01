@@ -31,7 +31,7 @@ Partial Class SaveImageDetails
         Me.txtSummary = New System.Windows.Forms.TextBox()
         Me.cmbType = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblDetails = New System.Windows.Forms.Label()
         Me.tblDetails = New System.Windows.Forms.DataGridView()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.tblDetails, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -41,15 +41,15 @@ Partial Class SaveImageDetails
         '
         Me.TableLayoutPanel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.sizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.sizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.OK_Button, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Cancel_Button, 1, 0)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(383, 277)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.sizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.size = New System.Drawing.size(146, 29)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(146, 29)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'OK_Button
@@ -57,7 +57,7 @@ Partial Class SaveImageDetails
         Me.OK_Button.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.OK_Button.Location = New System.Drawing.Point(3, 3)
         Me.OK_Button.Name = "OK_Button"
-        Me.OK_Button.size = New System.Drawing.size(67, 23)
+        Me.OK_Button.Size = New System.Drawing.Size(67, 23)
         Me.OK_Button.TabIndex = 5
         Me.OK_Button.Text = "Save"
         '
@@ -67,7 +67,7 @@ Partial Class SaveImageDetails
         Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Cancel_Button.Location = New System.Drawing.Point(76, 3)
         Me.Cancel_Button.Name = "Cancel_Button"
-        Me.Cancel_Button.size = New System.Drawing.size(67, 23)
+        Me.Cancel_Button.Size = New System.Drawing.Size(67, 23)
         Me.Cancel_Button.TabIndex = 6
         Me.Cancel_Button.Text = "Cancel"
         '
@@ -76,7 +76,7 @@ Partial Class SaveImageDetails
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(13, 13)
         Me.Label1.Name = "Label1"
-        Me.Label1.size = New System.Drawing.size(49, 13)
+        Me.Label1.Size = New System.Drawing.Size(49, 13)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Category"
         '
@@ -85,7 +85,7 @@ Partial Class SaveImageDetails
         Me.cmbCategory.FormattingEnabled = True
         Me.cmbCategory.Location = New System.Drawing.Point(16, 30)
         Me.cmbCategory.Name = "cmbCategory"
-        Me.cmbCategory.size = New System.Drawing.size(221, 21)
+        Me.cmbCategory.Size = New System.Drawing.Size(221, 21)
         Me.cmbCategory.TabIndex = 1
         '
         'Label2
@@ -93,7 +93,7 @@ Partial Class SaveImageDetails
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(16, 58)
         Me.Label2.Name = "Label2"
-        Me.Label2.size = New System.Drawing.size(50, 13)
+        Me.Label2.Size = New System.Drawing.Size(50, 13)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Summary"
         '
@@ -101,7 +101,7 @@ Partial Class SaveImageDetails
         '
         Me.txtSummary.Location = New System.Drawing.Point(16, 75)
         Me.txtSummary.Name = "txtSummary"
-        Me.txtSummary.size = New System.Drawing.size(513, 20)
+        Me.txtSummary.Size = New System.Drawing.Size(513, 20)
         Me.txtSummary.TabIndex = 3
         '
         'cmbType
@@ -109,7 +109,7 @@ Partial Class SaveImageDetails
         Me.cmbType.FormattingEnabled = True
         Me.cmbType.Location = New System.Drawing.Point(282, 30)
         Me.cmbType.Name = "cmbType"
-        Me.cmbType.size = New System.Drawing.size(247, 21)
+        Me.cmbType.Size = New System.Drawing.Size(247, 21)
         Me.cmbType.TabIndex = 2
         '
         'Label3
@@ -117,18 +117,18 @@ Partial Class SaveImageDetails
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(279, 14)
         Me.Label3.Name = "Label3"
-        Me.Label3.size = New System.Drawing.size(31, 13)
+        Me.Label3.Size = New System.Drawing.Size(31, 13)
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "Type"
         '
-        'Label4
+        'lblDetails
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(16, 107)
-        Me.Label4.Name = "Label4"
-        Me.Label4.size = New System.Drawing.size(39, 13)
-        Me.Label4.TabIndex = 7
-        Me.Label4.Text = "Details"
+        Me.lblDetails.AutoSize = True
+        Me.lblDetails.Location = New System.Drawing.Point(16, 107)
+        Me.lblDetails.Name = "lblDetails"
+        Me.lblDetails.Size = New System.Drawing.Size(39, 13)
+        Me.lblDetails.TabIndex = 7
+        Me.lblDetails.Text = "Details"
         '
         'tblDetails
         '
@@ -136,18 +136,18 @@ Partial Class SaveImageDetails
         Me.tblDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblDetails.Location = New System.Drawing.Point(16, 124)
         Me.tblDetails.Name = "tblDetails"
-        Me.tblDetails.size = New System.Drawing.size(513, 137)
+        Me.tblDetails.Size = New System.Drawing.Size(513, 137)
         Me.tblDetails.TabIndex = 4
         '
         'SaveImageDetails
         '
         Me.AcceptButton = Me.OK_Button
-        Me.AutoScaleDimensions = New System.Drawing.sizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.size(541, 318)
+        Me.ClientSize = New System.Drawing.Size(541, 318)
         Me.Controls.Add(Me.tblDetails)
-        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.lblDetails)
         Me.Controls.Add(Me.cmbType)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtSummary)
@@ -177,6 +177,6 @@ Partial Class SaveImageDetails
     Friend WithEvents txtSummary As TextBox
     Friend WithEvents cmbType As ComboBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblDetails As Label
     Friend WithEvents tblDetails As DataGridView
 End Class

@@ -1,6 +1,6 @@
 Public Class FamilyTag
   Inherits AbstractTag
-  Public Const GEDCOM_TAG = "FAM"
+  Public Const GEDCOM_TAG As String = "FAM"
 
   Public Sub New(data As Gedcom)
     MyBase.New(data, GEDCOM_TAG, True)
@@ -34,16 +34,16 @@ Public Class FamilyTag
 
       Case "FAM.DIV"
       Case "FAM.MARR"
-        Dim tmp = New EventTag(data, ID, data.tag())
+        Dim tmp As Object = New EventTag(data, ID, data.tag())
 
       Case "FAM.SOUR"
-        Dim tmp = New SourceRefTag(data, ID)
+        Dim tmp As Object = New SourceRefTag(data, ID)
 
       Case "FAM.OBJE"
-        Dim tmp = New MediaRefTag(data, ID)
+        Dim tmp As Object = New MediaRefTag(data, ID)
 
       Case "FAM._MTTAG"
-        Dim tmp = New MttagRefTag(data, ID)
+        Dim tmp As Object = New MttagRefTag(data, ID)
 
       Case Else
         Return False

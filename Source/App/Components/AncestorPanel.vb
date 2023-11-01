@@ -1,7 +1,7 @@
 ﻿Imports System.Text
 
 Public Class AncestorPanel
-  Private Const SUBNODE_DELIMITER = vbTab
+  Private Const SUBNODE_DELIMITER As String = vbTab
 
   Public Event PanelCloseClicked(sender As Object)
 

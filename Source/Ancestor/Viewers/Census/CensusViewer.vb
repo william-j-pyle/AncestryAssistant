@@ -8,7 +8,7 @@ Public Class CensusViewer
   Private CensusData As Collection
   Private CensusFileList As Collection
   Private AvailableYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
-  Const UNIFIED_TEXT = "Unified"
+  Const UNIFIED_TEXT As String = "Unified"
 
   Private xlsWorkbook As Dictionary(Of Integer, DataGridView)
   Friend WithEvents xlsActiveSheet As DataGridView
@@ -194,8 +194,10 @@ Public Class CensusViewer
   End Sub
 
   Private Sub CensusSelect(sender As Object, e As EventArgs)
+    If Not TypeOf sender Is ToolStripButton Then Exit Sub
+    Dim srcSender As ToolStripButton = DirectCast(sender, ToolStripButton)
     For Each btn As ToolStripButton In ts.Items
-      If sender.text.Equals(btn.Text) Then
+      If srcSender.Text.Equals(btn.Text) Then
         btn.Checked = True
         btn.ForeColor = Color.DarkGreen
       Else
@@ -203,10 +205,10 @@ Public Class CensusViewer
         btn.ForeColor = Color.Black
       End If
     Next
-    If sender.text.Equals(UNIFIED_TEXT) Then
+    If srcSender.Text.Equals(UNIFIED_TEXT) Then
       'TODO
     Else
-      showWorkSheet(CInt(sender.text))
+      showWorkSheet(CInt(srcSender.Text))
     End If
   End Sub
 

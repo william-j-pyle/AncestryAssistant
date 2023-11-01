@@ -176,38 +176,38 @@ Public Class AncestryWebViewer
   ' = JSAPI Related Functions
   ' ==========================
 
-  Private Function JSAPI_Capture(captureType As AncestryCaptureType)
-    Select Case captureType
-      Case AncestryCaptureType.ANCESTOR
-        If AncestryPage.Equals("Facts") Then
-          JSAPI_Execute("window.AncestryAssistant.captureFacts();")
-          Return True
-        End If
-      Case AncestryCaptureType.CENSUS
-        If AncestryPage.Equals("Census") Then
-          JSAPI_Execute("window.AncestryAssistant.captureCensus();")
-          Return True
-        End If
-      Case AncestryCaptureType.CENSUS_IMAGE
-        If AncestryPage.Equals("Census") Then
-          JSAPI_Execute("window.AncestryAssistant.downloadImage();")
-          Return True
-        End If
-      Case AncestryCaptureType.GALLERY_IMAGE
-      Case AncestryCaptureType.IMAGE
-        Dim src As String = web.Source.AbsoluteUri
-        If src.EndsWith("jpg") Or src.EndsWith("jpeg") Then
-          Dim fromPage As String = ""
-          Dim fname As String = My.Computer.FileSystem.GetTempFileName & ".jpg"
-          If src.Contains("findagrave") Then
-            fromPage = "FindAGrave"
-          End If
-          My.Computer.Network.DownloadFile(src, fname)
-          'TODO RaiseEvent ImageDownload(fromPage, fname)
-        End If
-    End Select
-    Return False
-  End Function
+  'Private Function JSAPI_Capture(captureType As AncestryCaptureType)
+  '  Select Case captureType
+  '    Case AncestryCaptureType.ANCESTOR
+  '      If AncestryPage.Equals("Facts") Then
+  '        JSAPI_Execute("window.AncestryAssistant.captureFacts();")
+  '        Return True
+  '      End If
+  '    Case AncestryCaptureType.CENSUS
+  '      If AncestryPage.Equals("Census") Then
+  '        JSAPI_Execute("window.AncestryAssistant.captureCensus();")
+  '        Return True
+  '      End If
+  '    Case AncestryCaptureType.CENSUS_IMAGE
+  '      If AncestryPage.Equals("Census") Then
+  '        JSAPI_Execute("window.AncestryAssistant.downloadImage();")
+  '        Return True
+  '      End If
+  '    Case AncestryCaptureType.GALLERY_IMAGE
+  '    Case AncestryCaptureType.IMAGE
+  '      Dim src As String = web.Source.AbsoluteUri
+  '      If src.EndsWith("jpg") Or src.EndsWith("jpeg") Then
+  '        Dim fromPage As String = ""
+  '        Dim fname As String = My.Computer.FileSystem.GetTempFileName & ".jpg"
+  '        If src.Contains("findagrave") Then
+  '          fromPage = "FindAGrave"
+  '        End If
+  '        My.Computer.Network.DownloadFile(src, fname)
+  '        'TODO RaiseEvent ImageDownload(fromPage, fname)
+  '      End If
+  '  End Select
+  '  Return False
+  'End Function
 
   Private Async Sub JSAPI_Execute(script As String)
     Await web.CoreWebView2.ExecuteScriptAsync(script)
@@ -255,9 +255,13 @@ Public Class AncestryWebViewer
   End Sub
 
   Public Sub saveImageAs(filename As String)
-    sameImageAsFilename = filename
-    JSAPI_Execute("ancestryAssistant.getImage();")
-
+    Dim src As String = web.Source.AbsoluteUri
+    If src.EndsWith("jpg") Or src.EndsWith("jpeg") Then
+      My.Computer.Network.DownloadFile(src, filename)
+    Else
+      sameImageAsFilename = filename
+      JSAPI_Execute("ancestryAssistant.getImage();")
+    End If
   End Sub
 
 #End Region
@@ -366,25 +370,38 @@ Public Class AncestryWebViewer
     If CoreWebDownload.State = CoreWebView2DownloadState.Completed And CoreWeb.IsDefaultDownloadDialogOpen Then
       CoreWeb.CloseDefaultDownloadDialog()
       JSAPI_Execute("document.body.click();")
-      If sameImageAsFilename.Length = 0 Then Exit Sub
-      If System.IO.File.Exists(sameImageAsFilename) Then
-        System.IO.File.Delete(sameImageAsFilename)
+      If sameImageAsFilename.Length = 0 Then
+        Dim msg As APIMessage = New APIMessage()
+        msg.MessageType = APIMessage.MT_SAVEAS
+        msg.MessageKey = AncestorID
+        Dim payload As New List(Of List(Of String))
+        Dim row As New List(Of String)
+        row.Add("fileName")
+        payload.Add(row)
+        row = New List(Of String)
+        row.Add(CoreWebDownload.ResultFilePath())
+        payload.Add(row)
+        msg.Payload = payload
+        RaiseEvent DataDownload(msg)
+      Else
+        If System.IO.File.Exists(sameImageAsFilename) Then
+          System.IO.File.Delete(sameImageAsFilename)
+        End If
+        System.IO.File.Move(CoreWebDownload.ResultFilePath(), sameImageAsFilename)
+        Dim msg As APIMessage = New APIMessage()
+        msg.MessageType = APIMessage.MT_IMGDOWNLOAD
+        msg.MessageKey = AncestorID
+        Dim payload As New List(Of List(Of String))
+        Dim row As New List(Of String)
+        row.Add("fileName")
+        payload.Add(row)
+        row = New List(Of String)
+        row.Add(sameImageAsFilename)
+        payload.Add(row)
+        msg.Payload = payload
+        RaiseEvent DataDownload(msg)
+        sameImageAsFilename = ""
       End If
-      System.IO.File.Move(CoreWebDownload.ResultFilePath(), sameImageAsFilename)
-
-      Dim msg As APIMessage = New APIMessage()
-      msg.MessageType = "imageDownload"
-      msg.MessageKey = AncestorID
-      Dim payload As New List(Of List(Of String))
-      Dim row As New List(Of String)
-      row.Add("fileName")
-      payload.Add(row)
-      row = New List(Of String)
-      row.Add(sameImageAsFilename)
-      payload.Add(row)
-      msg.Payload = payload
-      RaiseEvent DataDownload(msg)
-      sameImageAsFilename = ""
     End If
   End Sub
 

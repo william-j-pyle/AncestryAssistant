@@ -149,7 +149,7 @@ Public MustInherit Class AncestorAbstract
         Throw New DirectoryNotFoundException("Ancestor Path not found")
       End If
       sAncestorPath = value
-      Dim p() As String = value.Split("\")
+      Dim p() As String = value.Split("\"c)
       ID = p(UBound(p) - 1)
     End Set
   End Property

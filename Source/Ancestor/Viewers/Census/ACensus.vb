@@ -34,7 +34,7 @@ Public Class ACensus
     Dim aaRtn As AAFile = Nothing
     Dim aaTmp As AAFile = Nothing
     For Each entry As String In dataEntries
-      If censusYear = CInt(entry.Split("-")(1)) Then
+      If censusYear = CInt(entry.Split("-"c)(1)) Then
         If aaRtn Is Nothing Then
           aaRtn = New AAFile(entry)
         Else
@@ -59,7 +59,7 @@ Public Class ACensus
   End Sub
 
   Public Function addCensusData(msg As APIMessage) As String
-    Dim year As String = msg.GetValue("Title").Split(" ")(0)
+    Dim year As String = msg.GetValue("Title").Split(" "c)(0)
     Dim page As String = msg.GetValue("PageNbr")
     Dim filename As String = RecordsBasePath + "census-" + year + "-" + page
     Dim afile As AAFile = New AAFile(filename + ".aa", AAFileTypeEnum.LISTARRAY)
@@ -97,7 +97,7 @@ Public Class ACensus
   Private Function CreateAvailableYears() As List(Of Integer)
     Dim available As List(Of Integer) = New List(Of Integer)
     For Each entry As String In dataEntries
-      Dim y As Integer = CInt(entry.Split("-")(1))
+      Dim y As Integer = CInt(entry.Split("-"c)(1))
       available.Add(y)
     Next
     Return available

@@ -1,6 +1,6 @@
 Public Class HeaderTag
   Inherits AbstractTag
-  Public Const GEDCOM_TAG = "HEAD"
+  Public Const GEDCOM_TAG As String = "HEAD"
 
   Public Sub New(data As Gedcom)
     MyBase.New(data, GEDCOM_TAG, True)

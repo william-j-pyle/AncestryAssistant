@@ -30,8 +30,17 @@ Namespace My
 
       'DataMgr = New DBData()
       'DataMgr.LoadGedCom("D:\Geneology\Data\gedcom\Ancestry-20230711.ged")
+      Logger.log(Logger.LOG_TYPE.DEBUG, "Starting Up")
     End Sub
 
+    Private Sub MyApplication_UnhandledException(sender As Object, e As UnhandledExceptionEventArgs) Handles Me.UnhandledException
+      Logger.log(Logger.LOG_TYPE.ERR, e.Exception.Message)
+      Logger.log(Logger.LOG_TYPE.ERR, e.Exception.StackTrace)
+    End Sub
+
+    Private Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles Me.Shutdown
+      Logger.log(Logger.LOG_TYPE.DEBUG, "Shutting Down")
+    End Sub
   End Class
 
 End Namespace

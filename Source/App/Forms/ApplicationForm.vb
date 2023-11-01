@@ -1,4 +1,6 @@
 ﻿Imports System.IO
+Imports AncestryAssistant.AncestorCollection
+
 
 
 #Const SHOW_DEBUG = True
@@ -119,8 +121,9 @@ Public Class ApplicationForm
     Debug.Print("FILEWATCHER(Changed')=" & e.FullPath)
   End Sub
 
-  Private Sub AncestryDirectorWatcher_Created(sender As Object, e As FileSystemEventArgs)
+  Private Sub AncestryDirectorWatcher_Created(sender As Object, e As FileSystemEventArgs) Handles AncestryDirectorWatcher.Created
     Debug.Print("FILEWATCHER(Created')=" & e.FullPath)
+    RaiseEvent ActiveAncestorChanged()
     'TODO: LoadAncestorList()
   End Sub
 
@@ -156,14 +159,35 @@ Public Class ApplicationForm
     End If
   End Sub
 
-  Private Const ANCESTOR_NEW = "Add Ancestor To Assistant"
-  Private Const ANCESTOR_UPDATED = "Apply Ancestor Changes To Assistant"
-  Private Const ANCESTOR_CENSUS = "Download Census Data"
-  Private Const ANCESTOR_IMAGE = "Download Image"
+  Private Const ANCESTOR_NEW As String = "Add Ancestor To Assistant"
+  Private Const ANCESTOR_UPDATED As String = "Apply Ancestor Changes To Assistant"
+  Private Const ANCESTOR_CENSUS As String = "Download Census Data"
+  Private Const ANCESTOR_IMAGE As String = "Download Image"
+  Private Const FINDAGRAVE_IMAGE As String = "Download FindAGrave Image"
 
   Private Sub Ancestry_AncestryData(msg As APIMessage) Handles Ancestry.DataDownload
-
+    Logger.log(Logger.LOG_TYPE.ERR, msg.ToString)
     Select Case msg.MessageType
+      Case APIMessage.MT_SAVEAS
+        Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
+        Dim rslt As DialogResult
+        Dim dlg As New SaveImageDetails
+        dlg.InitDialog(msg)
+        dlg.HidePayload()
+        rslt = dlg.ShowDialog()
+        If rslt = DialogResult.OK Then
+          Dim i_type As String = dlg.ImageType.ToUpper
+          Dim i_category As String = dlg.ImageCategory.ToUpper
+          Dim i_summary As String = dlg.Summary
+          If i_type.Equals("") Then i_type = "PHOTO"
+          If i_category.Equals("") Then i_category = "OTHER"
+          Dim filename As String = i_type & "-" & i_category & "-" & StrConv(i_summary, VbStrConv.ProperCase).Replace(" ", "")
+          If filename.Length > 60 Then filename = filename.Substring(0, 60)
+          Dim imgFilename As String = uniqueFilename(ancestor.FullPath("Gallery\" + filename), {"jpg.txt", "jpg"})
+          File.WriteAllText(imgFilename + ".jpg.txt", dlg.Summary)
+          'Ancestry.saveImageAs(imgFilename + ".jpg")
+          System.IO.File.Move(msg.GetValue("fileName"), imgFilename + ".jpg")
+        End If
       Case APIMessage.MT_PERSON
         If msg.MessageKey.Length > 3 Then
           If Not Ancestors.ContainsKey(msg.MessageKey) Then
@@ -175,6 +199,10 @@ Public Class ApplicationForm
               .Visible = True
             End With
           Else
+            'If assistant ancestor is different, then change ancestors
+            If Not AncestorId.Equals(msg.MessageKey) Then
+              AncestorId = msg.MessageKey
+            End If
             If Not Ancestors.Item(msg.MessageKey).AncestorMatchesMessage(msg) Then
               With btnActions
                 .Tag = msg
@@ -185,6 +213,16 @@ Public Class ApplicationForm
               End With
             End If
           End If
+        End If
+      Case APIMessage.MT_PAGE
+        If msg.PageKey.Equals("FINDAGRAVE_VIEWER_IMAGE") And (msg.GetValue("PAGEKEY").EndsWith("jpg") Or msg.GetValue("PAGEKEY").EndsWith("jepg")) Then
+          With btnActions
+            .Tag = msg
+            .Text = FINDAGRAVE_IMAGE
+            '.Image = My.Resources.ANCESTOR_ADD_WHITE
+            .Enabled = True
+            .Visible = True
+          End With
         End If
       Case APIMessage.MT_FINDAGRAVE
         Debug.Print("FindAGrave Handler")
@@ -263,7 +301,7 @@ Public Class ApplicationForm
         RaiseEvent AncestorsUpdated()
       Case ANCESTOR_CENSUS
         Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(msg.MessageKey)
-        Dim imgFilename = ancestor.Census.addCensusData(msg)
+        Dim imgFilename As String = ancestor.Census.addCensusData(msg)
         AncestorId = msg.MessageKey
         Ancestry.saveImageAs(imgFilename + ".jpg")
         RaiseEvent AncestorsUpdated()
@@ -280,13 +318,32 @@ Public Class ApplicationForm
           Dim i_details As List(Of List(Of String)) = dlg.TableData
           If i_type.Equals("") Then i_type = "PHOTO"
           If i_category.Equals("") Then i_category = "OTHER"
-          Dim filename = i_type & "-" & i_category & "-" & StrConv(i_summary, VbStrConv.ProperCase).Replace(" ", "")
+          Dim filename As String = i_type & "-" & i_category & "-" & StrConv(i_summary, VbStrConv.ProperCase).Replace(" ", "")
           If filename.Length > 60 Then filename = filename.Substring(0, 60)
           Dim imgFilename As String = uniqueFilename(ancestor.FullPath("Gallery\" + filename), {"aa", "jpg.txt", "jpg"})
           File.WriteAllText(imgFilename + ".jpg.txt", dlg.Summary)
           Dim aa As AAFile = New AAFile(imgFilename + ".aa", AAFileTypeEnum.LISTARRAY)
           aa.setTableData(i_details)
           aa.Save()
+          Ancestry.saveImageAs(imgFilename + ".jpg")
+        End If
+      Case FINDAGRAVE_IMAGE
+        Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
+        Dim rslt As DialogResult
+        Dim dlg As New SaveImageDetails
+        dlg.InitDialog(msg)
+        dlg.HidePayload()
+        rslt = dlg.ShowDialog()
+        If rslt = DialogResult.OK Then
+          Dim i_type As String = dlg.ImageType.ToUpper
+          Dim i_category As String = dlg.ImageCategory.ToUpper
+          Dim i_summary As String = dlg.Summary
+          If i_type.Equals("") Then i_type = "PHOTO"
+          If i_category.Equals("") Then i_category = "OTHER"
+          Dim filename As String = i_type & "-" & i_category & "-" & StrConv(i_summary, VbStrConv.ProperCase).Replace(" ", "")
+          If filename.Length > 60 Then filename = filename.Substring(0, 60)
+          Dim imgFilename As String = uniqueFilename(ancestor.FullPath("Gallery\" + filename), {"jpg.txt", "jpg"})
+          File.WriteAllText(imgFilename + ".jpg.txt", dlg.Summary)
           Ancestry.saveImageAs(imgFilename + ".jpg")
         End If
       Case Else
@@ -313,11 +370,14 @@ Public Class ApplicationForm
   End Function
 
   Private Sub ApplicationForm_AncestorsUpdated() Handles Me.AncestorsUpdated
+    Logger.log(Logger.LOG_TYPE.INFO, "ApplicationForm_AncestorsUpdated")
     AncestorsList.setAncestors(Ancestors, AncestorId)
   End Sub
 
   Private Sub ApplicationForm_ActiveAncestorChanged() Handles Me.ActiveAncestorChanged
+    Logger.log(Logger.LOG_TYPE.INFO, "ApplicationForm_ActiveAncestorChanged")
     Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
+    AncestorsList.setActiveAncestor(AncestorId)
     AncestorAttributes.SetAncestor(ancestor)
     imgGallery.SetAncestor(ancestor)
     CensusViewer1.SetAncestor(ancestor)
@@ -325,6 +385,7 @@ Public Class ApplicationForm
   End Sub
 
   Private Sub AncestorsList_AncestorIDChanged(SelectedAncestorID As String) Handles AncestorsList.AncestorIDChanged
+    Logger.log(Logger.LOG_TYPE.INFO, "AncestorsList_AncestorIDChanged")
     AncestorId = SelectedAncestorID
   End Sub
 
@@ -343,6 +404,5 @@ Public Class ApplicationForm
     btnAncestors.Checked = False
     UIUpdateState()
   End Sub
-
 
 End Class

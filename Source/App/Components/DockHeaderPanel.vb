@@ -3,7 +3,7 @@
 Public Class DockHeaderPanel
   Inherits Panel
 
-  Private Const FIXED_HEIGHT = 24
+  Private Const FIXED_HEIGHT As Integer = 24
 
   Private WithEvents theme As JTheme = New JTheme()
 

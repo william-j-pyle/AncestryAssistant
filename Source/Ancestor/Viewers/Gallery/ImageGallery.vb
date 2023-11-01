@@ -338,7 +338,7 @@ Public Class ImageGallery
                   Dim key As String
                   key = imgViewerList.Images.Count + 1
                   imgViewerList.Images.Add(key, img)
-                  Dim newItem = imgViewer.Items.Add(caption, key)
+                  Dim newItem As ListViewItem = imgViewer.Items.Add(caption, key)
                   newItem.Tag = filename
                 End Sub)
   End Sub

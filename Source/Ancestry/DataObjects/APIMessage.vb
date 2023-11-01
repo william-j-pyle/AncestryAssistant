@@ -2,12 +2,14 @@
 
 Public Class APIMessage
 
-  Public Const MT_PERSON = "person"
-  Public Const MT_ACCOUNT = "account"
-  Public Const MT_TREES = "trees"
-  Public Const MT_PAGE = "page"
-  Public Const MT_TABLEDATA = "tabledata"
-  Public Const MT_FINDAGRAVE = "findagrave"
+  Public Const MT_PERSON As String = "person"
+  Public Const MT_ACCOUNT As String = "account"
+  Public Const MT_TREES As String = "trees"
+  Public Const MT_PAGE As String = "page"
+  Public Const MT_TABLEDATA As String = "tabledata"
+  Public Const MT_FINDAGRAVE As String = "findagrave"
+  Public Const MT_SAVEAS As String = "imageSaveAs"
+  Public Const MT_IMGDOWNLOAD As String = "imageDownload"
 
   Public Property MessageType As String
   Public Property MessageKey As String
