@@ -188,6 +188,23 @@ Public Class ApplicationForm
         End If
       Case APIMessage.MT_FINDAGRAVE
         Debug.Print("FindAGrave Handler")
+        If Ancestors.ContainsKey(AncestorId) Then
+          Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
+          'If ancestor.Surname.ToLower.Equals(msg.GetValue("lastName").ToLower) Then
+          If ancestor.GedDeathDate.Year = CInt(msg.GetValue("deathYear")) Then
+            If ancestor.Fact("cemeteryName").Equals("") Then
+              ancestor.Fact("cemeteryName") = msg.GetValue("cemeteryName")
+            End If
+            If ancestor.Fact("cemeteryPlace").Equals("") Then
+              ancestor.Fact("cemeteryPlace") = msg.GetValue("locationName")
+            End If
+            If ancestor.Fact("FindAGraveID").Equals("") Then
+              ancestor.Fact("FindAGraveID") = msg.GetValue("memorialId")
+            End If
+            RaiseEvent ActiveAncestorChanged()
+          End If
+          'End If
+        End If
       Case APIMessage.MT_TABLEDATA
         If msg.MessageKey.Length > 3 Then
           If Ancestors.ContainsKey(msg.MessageKey) Then

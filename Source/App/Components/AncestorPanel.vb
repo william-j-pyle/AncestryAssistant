@@ -116,7 +116,11 @@ Public Class AncestorPanel
 
     If Not ancestor.LifeSpan.Contains("Living") Then
       AddAttributeItem("DEATH", customNode("Death", ancestor.GedDeathDate.toAssistantDate))
-      AddSubAttributeItem("DEATHPLACE", customNode("Place", ancestor.Fact("DeathPlace")))
+      AddSubAttributeItem("DEATHPLACE", customNode("Death Location", ancestor.Fact("DeathPlace")))
+      If Not ancestor.Fact("cemeteryName").Equals("") Then
+        AddSubAttributeItem("Burial", customNode("Burial", ancestor.Fact("cemeteryName")))
+        AddSubAttributeItem("BurialPlace", customNode("Burial Location", ancestor.Fact("cemeteryPlace")))
+      End If
       'item.Nodes.Add("DEATHDOCUMENTS", "HasDocuments" & vbTab & workingAncestor.hasDeathCertificate)
       'item.Nodes.Add("DEATHHEADSTONE", "HasHeadstone" & vbTab & workingAncestor.hasHeadstoneImage)
     End If
@@ -132,6 +136,10 @@ Public Class AncestorPanel
 
     AddAttributeItem("ID", "Links")
     AddSubAttributeItem("ANCESTRYID", customNode("Ancestry.com", ancestor.ID))
+    If Not ancestor.Fact("FindAGraveID").Equals("") Then
+      AddSubAttributeItem("FindAGraveID", customNode("FindAGrave.com", ancestor.Fact("FindAGraveID")))
+    End If
+
 
     RestoreAttributeState()
   End Sub

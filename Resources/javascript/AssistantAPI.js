@@ -39,7 +39,7 @@ ancestryAssistant.getPerson = function () {
 		hdr.push("gender"); dta.push(PersonCard.gender);
 		hdr.push("photo"); dta.push(PersonCard.photo);
 		hdr.push("tabName"); dta.push(PersonCard.tabName);
-		me.postMessage(me.MessageTypes.MT_PERSON,key,[hdr,dta]);
+		this.postMessage(this.MessageTypes.MT_PERSON,key,[hdr,dta]);
 	}
 };
 
@@ -53,7 +53,7 @@ ancestryAssistant.getState = function () {
 		hdr.push("USERID"); dta.push(state.reduxInitialState.user.uhomeUserProfile.userHandle);
 		hdr.push("LASTLOGINDATE"); dta.push(state.reduxInitialState.user.uhomeUserProfile.lastLoginDate);
 		// Send message
-		me.postMessage(me.MessageTypes.MT_ACCOUNT, '', [hdr,dta]);
+		this.postMessage(this.MessageTypes.MT_ACCOUNT, '', [hdr,dta]);
 
 		var rows = [];
 		// Add Header Rows
@@ -62,7 +62,7 @@ ancestryAssistant.getState = function () {
 		for (var r = 0; r < trees.length; r++)
 			rows.push([trees[r].Id.v, trees[r].Name, trees[r].LastModifiedDateTime, trees[r].lastViewedTree]);
 		// Send Message
-		me.postMessage(me.MessageTypes.MT_TREES, '', rows);
+		this.postMessage(this.MessageTypes.MT_TREES, '', rows);
 	}
 };
 
@@ -82,7 +82,7 @@ ancestryAssistant.getPage = function () {
 	} else {
 		rows.push([(location.hostname.replaceAll('.', ':') + location.pathname.replaceAll('/', ':')).replaceAll(' ', '')]);
 	}
-	me.postMessage(me.MessageTypes.MT_PAGE, '', rows);
+	this.postMessage(this.MessageTypes.MT_PAGE, '', rows);
 };
 
 
@@ -126,7 +126,7 @@ ancestryAssistant.getTableData = function (personId) {
 		}
 		rows[r] = crow;
 	}
-	me.postMessage(me.MessageTypes.MT_TABLEDATA, pid, rows);
+	this.postMessage(this.MessageTypes.MT_TABLEDATA, pid, rows);
 };
 
 
@@ -146,7 +146,14 @@ ancestryAssistant.getImage = function () {
 ancestryAssistant.getFindAGrave = function () {
 	var key = "";
 	var hdr = [], dta = [];
+	if (typeof (findagrave) == 'undefined') {
+	  console.log("Waiting: FindAGrave object not yet loaded");
+		setTimeout(() => { ancestryAssistant.getFindAGrave(); }, 2000);
+		return;
+	}
+	console.log("Executing: getFindAGrave");
 	if (typeof (findagrave) !== 'undefined') {
+		console.log("Generating Message");
 		hdr.push("memorialId"); dta.push(findagrave.memorialId);
 		hdr.push("deathDate"); dta.push(findagrave.deathDate);
 		hdr.push("cemeteryName"); dta.push(findagrave.cemeteryName);
@@ -162,6 +169,6 @@ ancestryAssistant.getFindAGrave = function () {
 		hdr.push("deathMonth"); dta.push(findagrave.deathMonth);
 		hdr.push("deathDay"); dta.push(findagrave.deathDay);
 		hdr.push("locationName"); dta.push(findagrave.locationName);
-		me.postMessage(me.MessageTypes.MT_FINDAGRAVE, key, [hdr, dta]);
+		this.postMessage(this.MessageTypes.MT_FINDAGRAVE, key, [hdr, dta]);
 	}
 };

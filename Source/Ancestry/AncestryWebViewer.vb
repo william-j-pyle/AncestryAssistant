@@ -5,7 +5,6 @@ Imports Newtonsoft.Json
 #Const SHOW_DEBUG = True
 #Const MSG_DUMP = True
 #Const MSG_LOG = True
-#Const MSG_LOG_NAME = "D:\Geneology\Logs\APIMessages.txt"
 
 Public Class AncestryWebViewer
 
@@ -247,8 +246,9 @@ Public Class AncestryWebViewer
       End If
       If utg = UriTrackingGroupEnum.FINDAGRAVE_MEMORIAL Then
         JSAPI_Execute("ancestryAssistant.getFindAGrave();")
+        Exit Sub
       End If
-      Exit Sub
+
     End If
     msg.PageKey = UriTrackingGroup.ToString
     RaiseEvent DataDownload(msg)
