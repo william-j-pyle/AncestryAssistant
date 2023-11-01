@@ -1,13 +1,17 @@
-﻿Public Class APIMessage
+﻿Imports System.Text
+
+Public Class APIMessage
 
   Public Const MT_PERSON = "person"
   Public Const MT_ACCOUNT = "account"
   Public Const MT_TREES = "trees"
   Public Const MT_PAGE = "page"
   Public Const MT_TABLEDATA = "tabledata"
+  Public Const MT_FINDAGRAVE = "findagrave"
 
   Public Property MessageType As String
   Public Property MessageKey As String
+  Public Property PageKey As String
   Public Property Payload As List(Of List(Of String))
 
 
@@ -50,4 +54,24 @@
     Return String.Empty
   End Function
 
+  Public Overrides Function ToString() As String
+    Dim sb As StringBuilder = New StringBuilder
+    sb.AppendLine("-------------------------------------------------")
+    sb.AppendLine("--                 NEW MESSAGE                 --")
+    sb.AppendLine("-------------------------------------------------")
+    sb.AppendLine("MessageType    = " & MessageType)
+    sb.AppendLine("MessageKey     = " & MessageKey)
+    sb.AppendLine("PageKey        = " & PageKey)
+    sb.AppendLine("RowsOfData     = " & Payload.Count)
+    sb.AppendLine("Payload")
+    For r As Integer = 0 To Payload.Count - 1
+      sb.Append("     ROW[" & r & "] = ")
+      For c As Integer = 0 To Payload.Item(r).Count - 1
+        If c > 0 Then sb.Append("|")
+        sb.Append(Payload.Item(r).Item(c))
+      Next
+      sb.AppendLine()
+    Next
+    Return sb.ToString()
+  End Function
 End Class

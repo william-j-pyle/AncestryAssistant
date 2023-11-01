@@ -7,11 +7,13 @@ ancestryAssistant.MessageTypes.MT_ACCOUNT = 'account';
 ancestryAssistant.MessageTypes.MT_TREES = 'trees';
 ancestryAssistant.MessageTypes.MT_PAGE = 'page';
 ancestryAssistant.MessageTypes.MT_TABLEDATA = 'tabledata';
+ancestryAssistant.MessageTypes.MT_FINDAGRAVE = 'findagrave';
 
 ancestryAssistant.postMessage = function (msgType, msgKey, payload) {
 	var msg = {};
 	msg.MessageType = msgType;
 	msg.MessageKey = msgKey;
+	msg.PageKey = '';
 	msg.Payload = payload;
 	console.log(msg);
 	window.chrome.webview.postMessage(msg);
@@ -37,7 +39,7 @@ ancestryAssistant.getPerson = function () {
 		hdr.push("gender"); dta.push(PersonCard.gender);
 		hdr.push("photo"); dta.push(PersonCard.photo);
 		hdr.push("tabName"); dta.push(PersonCard.tabName);
-		this.postMessage(this.MessageTypes.MT_PERSON,key,[hdr,dta]);
+		me.postMessage(me.MessageTypes.MT_PERSON,key,[hdr,dta]);
 	}
 };
 
@@ -51,7 +53,7 @@ ancestryAssistant.getState = function () {
 		hdr.push("USERID"); dta.push(state.reduxInitialState.user.uhomeUserProfile.userHandle);
 		hdr.push("LASTLOGINDATE"); dta.push(state.reduxInitialState.user.uhomeUserProfile.lastLoginDate);
 		// Send message
-		this.postMessage(this.MessageTypes.MT_ACCOUNT, '', [hdr,dta]);
+		me.postMessage(me.MessageTypes.MT_ACCOUNT, '', [hdr,dta]);
 
 		var rows = [];
 		// Add Header Rows
@@ -60,7 +62,7 @@ ancestryAssistant.getState = function () {
 		for (var r = 0; r < trees.length; r++)
 			rows.push([trees[r].Id.v, trees[r].Name, trees[r].LastModifiedDateTime, trees[r].lastViewedTree]);
 		// Send Message
-		this.postMessage(this.MessageTypes.MT_TREES, '', rows);
+		me.postMessage(me.MessageTypes.MT_TREES, '', rows);
 	}
 };
 
@@ -80,7 +82,7 @@ ancestryAssistant.getPage = function () {
 	} else {
 		rows.push([(location.hostname.replaceAll('.', ':') + location.pathname.replaceAll('/', ':')).replaceAll(' ', '')]);
 	}
-	this.postMessage(this.MessageTypes.MT_PAGE, '', rows);
+	me.postMessage(me.MessageTypes.MT_PAGE, '', rows);
 };
 
 
@@ -124,7 +126,7 @@ ancestryAssistant.getTableData = function (personId) {
 		}
 		rows[r] = crow;
 	}
-	this.postMessage(this.MessageTypes.MT_TABLEDATA, pid, rows);
+	me.postMessage(me.MessageTypes.MT_TABLEDATA, pid, rows);
 };
 
 
@@ -141,3 +143,25 @@ ancestryAssistant.getImage = function () {
 	document.body.click();
 };
 
+ancestryAssistant.getFindAGrave = function () {
+	var key = "";
+	var hdr = [], dta = [];
+	if (typeof (findagrave) !== 'undefined') {
+		hdr.push("memorialId"); dta.push(findagrave.memorialId);
+		hdr.push("deathDate"); dta.push(findagrave.deathDate);
+		hdr.push("cemeteryName"); dta.push(findagrave.cemeteryName);
+		hdr.push("cemeteryCityName"); dta.push(findagrave.cemeteryCityName);
+		hdr.push("cemeteryCountyName"); dta.push(findagrave.cemeteryCountyName);
+		hdr.push("cemeteryStateName"); dta.push(findagrave.cemeteryStateName);
+		hdr.push("cemeteryCountryAbbrev"); dta.push(findagrave.cemeteryCountryAbbrev);
+		hdr.push("firstName"); dta.push(findagrave.firstName);
+		hdr.push("lastName"); dta.push(findagrave.lastName);
+		hdr.push("fullName"); dta.push(findagrave.fullName);
+		hdr.push("birthYear"); dta.push(findagrave.birthYear);
+		hdr.push("deathYear"); dta.push(findagrave.deathYear);
+		hdr.push("deathMonth"); dta.push(findagrave.deathMonth);
+		hdr.push("deathDay"); dta.push(findagrave.deathDay);
+		hdr.push("locationName"); dta.push(findagrave.locationName);
+		me.postMessage(me.MessageTypes.MT_FINDAGRAVE, key, [hdr, dta]);
+	}
+};

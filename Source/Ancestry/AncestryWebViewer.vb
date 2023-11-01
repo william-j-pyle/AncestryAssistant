@@ -3,6 +3,9 @@ Imports Microsoft.Web.WebView2.Core
 Imports Newtonsoft.Json
 
 #Const SHOW_DEBUG = True
+#Const MSG_DUMP = True
+#Const MSG_LOG = True
+#Const MSG_LOG_NAME = "D:\Geneology\Logs\APIMessages.txt"
 
 Public Class AncestryWebViewer
 
@@ -49,7 +52,7 @@ Public Class AncestryWebViewer
     End Get
     Set(value As UriTrackingGroupEnum)
       If value <> _UriTrackingGroup Then
-        Debug.Print("UriTrackingGroup: " & value.ToString)
+        Logger.log(Logger.LOG_TYPE.INFO, "UriTrackingGroup Changed {New:" & value.ToString & ", Old:" & _UriTrackingGroup.ToString & "}")
         Dim oldValue As UriTrackingGroupEnum = _UriTrackingGroup
         _UriTrackingGroup = value
         RaiseEvent UriTrackingGroupChanged(value, oldValue)
@@ -214,6 +217,9 @@ Public Class AncestryWebViewer
   Private Sub JSAPI_Message(sender As Object, e As CoreWebView2WebMessageReceivedEventArgs) Handles web.WebMessageReceived
     Dim msg As APIMessage = JsonConvert.DeserializeObject(Of APIMessage)(e.WebMessageAsJson)
 
+#If MSG_LOG Then
+    Logger.log(Logger.LOG_TYPE.DEBUG, msg.ToString)
+#End If
 
     If msg.MessageType.Equals("person") And msg.MessageKey.Length > 4 Then
       AncestorID = msg.MessageKey
@@ -223,19 +229,28 @@ Public Class AncestryWebViewer
       sameImageAsFilename = ""
       Dim tracks As String = msg.GetValue("PAGEKEY")
       Dim utg As UriTrackingGroupEnum = UriTrackingGroupDecoder.getEnum(tracks.Split(":"))
-      Debug.Print("-----------Page Data------------")
-      Debug.Print("-- tracks        = " & tracks)
-      Debug.Print("-- TrackingGroup = " & utg.ToString)
+      Logger.log(Logger.LOG_TYPE.INFO, "-----------------------------")
+      Logger.log(Logger.LOG_TYPE.INFO, "-- URITrackingGroup        --")
+      Logger.log(Logger.LOG_TYPE.INFO, "-----------------------------")
+      Logger.log(Logger.LOG_TYPE.INFO, "-- tracks        = " & tracks)
+      Logger.log(Logger.LOG_TYPE.INFO, "-- TrackingGroup = " & utg.ToString)
       UriTrackingGroup = utg
+      ' Ancestry Image and Media Viewer Data Capture
       If utg = UriTrackingGroupEnum.ANCESTRY_VIEWER_IMAGE Or utg = UriTrackingGroupEnum.ANCESTRY_VIEWER_MEDIA Then
         JSAPI_Execute("ancestryAssistant.getTableData(" + AncestorID + ");")
+        Exit Sub
       End If
+      ' Ancestry Person information data capture
       If utg = UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON Or utg = UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON Or utg = UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON Or utg = UriTrackingGroupEnum.ANCESTRY_STORY_PERSON Then
         JSAPI_Execute("ancestryAssistant.getPerson();")
+        Exit Sub
       End If
-      'JSAPI_Execute("ancestryAssistant.getState();")
+      If utg = UriTrackingGroupEnum.FINDAGRAVE_MEMORIAL Then
+        JSAPI_Execute("ancestryAssistant.getFindAGrave();")
+      End If
       Exit Sub
     End If
+    msg.PageKey = UriTrackingGroup.ToString
     RaiseEvent DataDownload(msg)
   End Sub
 
@@ -321,7 +336,7 @@ Public Class AncestryWebViewer
     End If
   End Sub
 
-  ' If enabled, this routine will cancel every request to various tracking sites
+  ' If enabled, me routine will cancel every request to various tracking sites
   Private Sub CoreWeb_FrameNavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles CoreWeb.FrameNavigationStarting
     If BlockWebTracking Then
       For Each partialDomain As String In BlockedWebDomains
@@ -339,7 +354,7 @@ Public Class AncestryWebViewer
   End Sub
 
   ' If the result of the current navigation attempts to open a new window
-  ' This routine will fire, mark the navigation event as handled,
+  ' me routine will fire, mark the navigation event as handled,
   ' then passes the url back to the original browser window
   Private Sub CoreWeb_NewWindowRequested(sender As Object, e As CoreWebView2NewWindowRequestedEventArgs) Handles CoreWeb.NewWindowRequested
     e.Handled = True
@@ -374,7 +389,7 @@ Public Class AncestryWebViewer
   End Sub
 
   ' When the browser detects a file is being downloaded
-  ' this routine will fire, we Capture the DownloadOperation object and monitor its events
+  ' me routine will fire, we Capture the DownloadOperation object and monitor its events
   ' for completion of the download, then fire an event about the download
   Private Sub CoreWeb_DownloadStarting(sender As Object, e As CoreWebView2DownloadStartingEventArgs) Handles CoreWeb.DownloadStarting
     CoreWebDownload = e.DownloadOperation

@@ -822,7 +822,7 @@ Public Enum FontSegoeFluentIconsEnum
   SegoeFluentIcons_SpeedOff = &HEC48
   SegoeFluentIcons_SpeedMedium = &HEC49
   SegoeFluentIcons_SpeedHigh = &HEC4A
-  SegoeFluentIcons_ThisPC = &HEC4E
+  SegoeFluentIcons_mePC = &HEC4E
   SegoeFluentIcons_MusicNote = &HEC4F
   SegoeFluentIcons_FileExplorer = &HEC50
   SegoeFluentIcons_FileExplorerApp = &HEC51
@@ -1348,8 +1348,8 @@ Public Enum FontSegoeFluentIconsEnum
   SegoeFluentIcons_StartPresenting = &HF71C
   SegoeFluentIcons_StopPresenting = &HF71D
   SegoeFluentIcons_ProductivityMode = &HF71E
-  SegoeFluentIcons_SetHistoryStatus = &HF738
-  SegoeFluentIcons_SetHistoryStatus2 = &HF739
+  SegoeFluentIcons_SemetoryStatus = &HF738
+  SegoeFluentIcons_SemetoryStatus2 = &HF739
   SegoeFluentIcons_Keyboardsettings20 = &HF73D
   SegoeFluentIcons_OneHandedRight20 = &HF73E
   SegoeFluentIcons_OneHandedLeft20 = &HF73F

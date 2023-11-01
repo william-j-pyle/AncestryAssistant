@@ -73,7 +73,7 @@ Public Class ImageGallery
     imgViewer.Location = New Point(0, 144)
     imgViewer.MultiSelect = False
     imgViewer.Name = "imgViewer"
-    imgViewer.Size = New Size(223, 174)
+    imgViewer.size = New Size(223, 174)
     imgViewer.TabIndex = 0
     imgViewer.TileSize = New Size(256, 256)
     imgViewer.UseCompatibleStateImageBehavior = False
@@ -92,7 +92,7 @@ Public Class ImageGallery
     imgContainer.Location = New Point(257, 144)
     imgContainer.Margin = New Padding(0)
     imgContainer.Name = "imgContainer"
-    imgContainer.Size = New Size(200, 174)
+    imgContainer.size = New Size(200, 174)
     imgContainer.TabIndex = 4
     '
     'imgBox
@@ -104,7 +104,7 @@ Public Class ImageGallery
     imgBox.Location = New Point(29, 48)
     imgBox.Margin = New Padding(0)
     imgBox.Name = "imgBox"
-    imgBox.Size = New Size(100, 100)
+    imgBox.size = New Size(100, 100)
     imgBox.SizeMode = PictureBoxSizeMode.AutoSize
     imgBox.TabIndex = 0
     imgBox.TabStop = False
@@ -122,7 +122,7 @@ Public Class ImageGallery
       .TickFrequency = 10
       .MaximumSize = New Size(120, 20)
       .MinimumSize = New Size(120, 20)
-      .Size = New Size(120, 20)
+      .size = New Size(120, 20)
     End With
 
     sliderHost = New ToolStripControlHost(slider)
@@ -136,7 +136,7 @@ Public Class ImageGallery
       .Location = New Point(0, 0)
       .Name = "ts"
       .RenderMode = ToolStripRenderMode.System
-      .Size = New Size(465, 25)
+      .size = New Size(465, 25)
       .Text = ""
     End With
 
@@ -148,7 +148,7 @@ Public Class ImageGallery
       .Image = Global.AncestryAssistant.My.Resources.Resources.BIG_LEFT_ICO20
       .ImageTransparentColor = Color.Magenta
       .Name = ""
-      .Size = New Size(23, 22)
+      .size = New Size(23, 22)
       .Text = "Back to Gallery"
     End With
     '
@@ -158,7 +158,7 @@ Public Class ImageGallery
     btnFlipV.Image = Global.AncestryAssistant.My.Resources.Resources.FLIP_HORIZONTAL_ICO20
     btnFlipV.ImageTransparentColor = Color.Magenta
     btnFlipV.Name = "btnFlipV"
-    btnFlipV.Size = New Size(23, 22)
+    btnFlipV.size = New Size(23, 22)
     btnFlipV.Text = "Flip Image Vertically"
     '
     'btnFlipH
@@ -167,14 +167,14 @@ Public Class ImageGallery
     btnFlipH.Image = Global.AncestryAssistant.My.Resources.Resources.FLIP_VERTICAL_ICO20
     btnFlipH.ImageTransparentColor = Color.Magenta
     btnFlipH.Name = "btnFlipH"
-    btnFlipH.Size = New Size(23, 22)
+    btnFlipH.size = New Size(23, 22)
     btnFlipH.Text = "Flip Image Horizontally"
     '
     'lblCaption
     '
     lblCaption.ForeColor = Color.Black
     lblCaption.Name = "lblCaption"
-    lblCaption.Size = New Size(87, 22)
+    lblCaption.size = New Size(87, 22)
     lblCaption.TextAlign = ContentAlignment.MiddleCenter
     lblCaption.Text = ""
     lblCaption.Dock = DockStyle.Fill
@@ -186,7 +186,7 @@ Public Class ImageGallery
     btnSizeHV.Image = Global.AncestryAssistant.My.Resources.Resources.MAXIMIZE_2_ICO20
     btnSizeHV.ImageTransparentColor = Color.Magenta
     btnSizeHV.Name = "btnSizeHV"
-    btnSizeHV.Size = New Size(23, 22)
+    btnSizeHV.size = New Size(23, 22)
     btnSizeHV.Text = "Fit Full Image"
     '
     'btnSizeH
@@ -196,7 +196,7 @@ Public Class ImageGallery
     btnSizeH.Image = Global.AncestryAssistant.My.Resources.Resources.pfeile_pfeile_horizontal
     btnSizeH.ImageTransparentColor = Color.Magenta
     btnSizeH.Name = "btnSizeH"
-    btnSizeH.Size = New Size(23, 22)
+    btnSizeH.size = New Size(23, 22)
     btnSizeH.Text = "Fit Image Width"
     '
     'btnSizeV
@@ -206,7 +206,7 @@ Public Class ImageGallery
     btnSizeV.Image = Global.AncestryAssistant.My.Resources.Resources.VERTICAL_ICO20
     btnSizeV.ImageTransparentColor = Color.Magenta
     btnSizeV.Name = "btnSizeV"
-    btnSizeV.Size = New Size(23, 22)
+    btnSizeV.size = New Size(23, 22)
     btnSizeV.Text = "Fit Image Height"
     '
     'lblZoom
@@ -214,18 +214,18 @@ Public Class ImageGallery
     lblZoom.Alignment = ToolStripItemAlignment.Right
     lblZoom.ForeColor = Color.Black
     lblZoom.Name = "lblZoom"
-    lblZoom.Size = New Size(25, 22)
+    lblZoom.size = New Size(25, 22)
     lblZoom.Text = "100"
     '
     'toolStripSeparator
     '
     toolStripSeparator.Alignment = ToolStripItemAlignment.Right
     toolStripSeparator.Name = "toolStripSeparator"
-    toolStripSeparator.Size = New Size(6, 25)
+    toolStripSeparator.size = New Size(6, 25)
 
     With sliderHost
       .Alignment = ToolStripItemAlignment.Right
-      .Size = New Size(120, 20)
+      .size = New Size(120, 20)
     End With
 
     '
@@ -385,14 +385,14 @@ Public Class ImageGallery
     If zoomActive Then
       Dim width As Integer = CInt(imgBox.Image.Width * (slider.Value / 100))
       Dim height As Integer = CInt(imgBox.Image.Height * (slider.Value / 100))
-      imgBox.Size = New Size(width, height)
+      imgBox.size = New Size(width, height)
     End If
   End Sub
 
   Private Sub imgBox_LoadCompleted(sender As Object, e As AsyncCompletedEventArgs) Handles imgBox.LoadCompleted
     slider.Value = 100
     imgBox.Location = New Point(15, 15)
-    imgBox.Size = imgBox.Image.Size
+    imgBox.size = imgBox.Image.Size
     imgBox.SizeMode = PictureBoxSizeMode.Zoom
     imgBox.Visible = True
     zoomActive = True

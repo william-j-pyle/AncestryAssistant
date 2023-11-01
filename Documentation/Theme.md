@@ -8,7 +8,7 @@ The theme object should provide all major visual information required by a proje
 
 ## Application Font
 
-The Default font for this project is:
+The Default font for me project is:
 
 *Segoe UI Historic*
 

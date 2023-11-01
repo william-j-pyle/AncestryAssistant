@@ -111,7 +111,7 @@ Public Class NotebookViewer
     SplitSectionsPage.Panel2.Controls.Add(PnlBody)
     SplitSectionsPage.Panel2.Controls.Add(PnlHeader)
     SplitSectionsPage.Panel2.Controls.Add(tsPage)
-    SplitSectionsPage.Size = New Size(654, 435)
+    SplitSectionsPage.size = New Size(654, 435)
     SplitSectionsPage.SplitterDistance = 102
     SplitSectionsPage.TabIndex = 4
     '
@@ -143,7 +143,7 @@ Public Class NotebookViewer
     TreeSectionPages.ShowLines = False
     TreeSectionPages.ShowNodeToolTips = True
     TreeSectionPages.ShowRootLines = False
-    TreeSectionPages.Size = New Size(102, 410)
+    TreeSectionPages.size = New Size(102, 410)
     TreeSectionPages.StateImageList = imgSection
     TreeSectionPages.TabIndex = 0
     '
@@ -166,7 +166,7 @@ Public Class NotebookViewer
     tsSections.Name = "tsSections"
     tsSections.Padding = New Padding(4, 0, 16, 0)
     tsSections.RenderMode = ToolStripRenderMode.System
-    tsSections.Size = New Size(102, 25)
+    tsSections.size = New Size(102, 25)
     tsSections.Stretch = True
     tsSections.TabIndex = 5
     '
@@ -176,7 +176,7 @@ Public Class NotebookViewer
     BtnAddSection.DisplayStyle = ToolStripItemDisplayStyle.Image
     BtnAddSection.Image = Global.AncestryAssistant.My.Resources.Resources.FOLDER_PLUS_ICO20
     BtnAddSection.Name = "BtnAddSection"
-    BtnAddSection.Size = New Size(23, 22)
+    BtnAddSection.size = New Size(23, 22)
     BtnAddSection.ToolTipText = "Add New Section to Notebook"
     '
     'BtnAddPage
@@ -186,7 +186,7 @@ Public Class NotebookViewer
     BtnAddPage.Image = Global.AncestryAssistant.My.Resources.Resources.PAGE_DOWNLOAD_ICO20
     BtnAddPage.ImageTransparentColor = Color.Magenta
     BtnAddPage.Name = "BtnAddPage"
-    BtnAddPage.Size = New Size(23, 22)
+    BtnAddPage.size = New Size(23, 22)
     BtnAddPage.ToolTipText = "Add New Page to Section"
     '
     'PnlBody
@@ -196,7 +196,7 @@ Public Class NotebookViewer
     PnlBody.Location = New Point(0, 75)
     PnlBody.Name = "PnlBody"
     PnlBody.Padding = New Padding(20, 20, 20, 0)
-    PnlBody.Size = New Size(548, 360)
+    PnlBody.size = New Size(548, 360)
     PnlBody.TabIndex = 7
     '
     'TxtBody
@@ -205,7 +205,7 @@ Public Class NotebookViewer
     TxtBody.Dock = DockStyle.Fill
     TxtBody.Location = New Point(20, 20)
     TxtBody.Name = "TxtBody"
-    TxtBody.Size = New Size(508, 340)
+    TxtBody.size = New Size(508, 340)
     TxtBody.TabIndex = 5
     TxtBody.Text = ""
     '
@@ -218,7 +218,7 @@ Public Class NotebookViewer
     PnlHeader.MinimumSize = New Size(0, 50)
     PnlHeader.Name = "PnlHeader"
     PnlHeader.Padding = New Padding(25, 0, 0, 0)
-    PnlHeader.Size = New Size(548, 50)
+    PnlHeader.size = New Size(548, 50)
     PnlHeader.TabIndex = 6
     '
     'PnlHeaderStretch
@@ -239,7 +239,7 @@ Public Class NotebookViewer
     PnlHeaderStretch.MinimumSize = New Size(200, 0)
     PnlHeaderStretch.Name = "PnlHeaderStretch"
     PnlHeaderStretch.Padding = New Padding(10, 15, 0, 3)
-    PnlHeaderStretch.Size = New Size(210, 50)
+    PnlHeaderStretch.size = New Size(210, 50)
     PnlHeaderStretch.TabIndex = 0
     '
     'TxtHeader
@@ -251,7 +251,7 @@ Public Class NotebookViewer
     TxtHeader.MaxLength = 90
     TxtHeader.MinimumSize = New Size(200, 0)
     TxtHeader.Name = "TxtHeader"
-    TxtHeader.Size = New Size(200, 25)
+    TxtHeader.size = New Size(200, 25)
     TxtHeader.TabIndex = 0
     TxtHeader.Text = "New Page"
     '
@@ -264,7 +264,7 @@ Public Class NotebookViewer
     LblStretch.Location = New Point(10, 15)
     LblStretch.MinimumSize = New Size(200, 0)
     LblStretch.Name = "LblStretch"
-    LblStretch.Size = New Size(200, 25)
+    LblStretch.size = New Size(200, 25)
     LblStretch.TabIndex = 1
     LblStretch.Text = "New Page"
     '
@@ -279,7 +279,7 @@ Public Class NotebookViewer
     tsPage.Name = "tsPage"
     tsPage.Padding = New Padding(4, 0, 16, 0)
     tsPage.RenderMode = ToolStripRenderMode.System
-    tsPage.Size = New Size(548, 25)
+    tsPage.size = New Size(548, 25)
     tsPage.Stretch = True
     tsPage.TabIndex = 4
     '
@@ -289,7 +289,7 @@ Public Class NotebookViewer
     ToolStripButton10.Image = Global.AncestryAssistant.My.Resources.Resources.CUT_ICO20
     ToolStripButton10.ImageTransparentColor = Color.Magenta
     ToolStripButton10.Name = "ToolStripButton10"
-    ToolStripButton10.Size = New Size(23, 22)
+    ToolStripButton10.size = New Size(23, 22)
     ToolStripButton10.Text = "ToolStripButton1"
     ToolStripButton10.ToolTipText = "Refresh"
     '
@@ -299,7 +299,7 @@ Public Class NotebookViewer
     ToolStripButton1.Image = Global.AncestryAssistant.My.Resources.Resources.COPY_ICO20
     ToolStripButton1.ImageTransparentColor = Color.Magenta
     ToolStripButton1.Name = "ToolStripButton1"
-    ToolStripButton1.Size = New Size(23, 22)
+    ToolStripButton1.size = New Size(23, 22)
     ToolStripButton1.Text = "ToolStripButton1"
     '
     'ToolStripButton2
@@ -308,13 +308,13 @@ Public Class NotebookViewer
     ToolStripButton2.Image = Global.AncestryAssistant.My.Resources.Resources.CLIPBOARD_CHECK_ICO20
     ToolStripButton2.ImageTransparentColor = Color.Magenta
     ToolStripButton2.Name = "ToolStripButton2"
-    ToolStripButton2.Size = New Size(23, 22)
+    ToolStripButton2.size = New Size(23, 22)
     ToolStripButton2.Text = "ToolStripButton2"
     '
     'ToolStripSeparator1
     '
     ToolStripSeparator1.Name = "ToolStripSeparator1"
-    ToolStripSeparator1.Size = New Size(6, 25)
+    ToolStripSeparator1.size = New Size(6, 25)
     '
     'ToolStripButton3
     '
@@ -322,7 +322,7 @@ Public Class NotebookViewer
     ToolStripButton3.Image = Global.AncestryAssistant.My.Resources.Resources.tastatur_bold
     ToolStripButton3.ImageTransparentColor = Color.Magenta
     ToolStripButton3.Name = "ToolStripButton3"
-    ToolStripButton3.Size = New Size(23, 22)
+    ToolStripButton3.size = New Size(23, 22)
     ToolStripButton3.Text = "ToolStripButton3"
     '
     'ToolStripButton4
@@ -331,7 +331,7 @@ Public Class NotebookViewer
     ToolStripButton4.Image = Global.AncestryAssistant.My.Resources.Resources.ITALIC_ICO20
     ToolStripButton4.ImageTransparentColor = Color.Magenta
     ToolStripButton4.Name = "ToolStripButton4"
-    ToolStripButton4.Size = New Size(23, 22)
+    ToolStripButton4.size = New Size(23, 22)
     ToolStripButton4.Text = "ToolStripButton4"
     '
     'ToolStripButton5
@@ -340,13 +340,13 @@ Public Class NotebookViewer
     ToolStripButton5.Image = Global.AncestryAssistant.My.Resources.Resources.UNDERLINE_ICO20
     ToolStripButton5.ImageTransparentColor = Color.Magenta
     ToolStripButton5.Name = "ToolStripButton5"
-    ToolStripButton5.Size = New Size(23, 22)
+    ToolStripButton5.size = New Size(23, 22)
     ToolStripButton5.Text = "ToolStripButton5"
     '
     'ToolStripSeparator2
     '
     ToolStripSeparator2.Name = "ToolStripSeparator2"
-    ToolStripSeparator2.Size = New Size(6, 25)
+    ToolStripSeparator2.size = New Size(6, 25)
     '
     'ToolStripSplitButton1
     '
@@ -355,7 +355,7 @@ Public Class NotebookViewer
     ToolStripSplitButton1.Image = Global.AncestryAssistant.My.Resources.Resources.H_1_ICO20
     ToolStripSplitButton1.ImageTransparentColor = Color.Magenta
     ToolStripSplitButton1.Name = "ToolStripSplitButton1"
-    ToolStripSplitButton1.Size = New Size(32, 22)
+    ToolStripSplitButton1.size = New Size(32, 22)
     ToolStripSplitButton1.Text = "ToolStripSplitButton1"
     '
     'BtnH1
@@ -364,7 +364,7 @@ Public Class NotebookViewer
     BtnH1.ForeColor = Color.SeaGreen
     BtnH1.Image = Global.AncestryAssistant.My.Resources.Resources.H_1_ICO20
     BtnH1.Name = "BtnH1"
-    BtnH1.Size = New Size(259, 36)
+    BtnH1.size = New Size(259, 36)
     BtnH1.Text = "Heading Style 1"
     '
     'BtnH2
@@ -373,7 +373,7 @@ Public Class NotebookViewer
     BtnH2.ForeColor = Color.LimeGreen
     BtnH2.Image = Global.AncestryAssistant.My.Resources.Resources.H_2_ICO20
     BtnH2.Name = "BtnH2"
-    BtnH2.Size = New Size(259, 36)
+    BtnH2.size = New Size(259, 36)
     BtnH2.Text = "Heading Style 2"
     '
     'BtnH3
@@ -382,7 +382,7 @@ Public Class NotebookViewer
     BtnH3.ForeColor = Color.OliveDrab
     BtnH3.Image = Global.AncestryAssistant.My.Resources.Resources.H_3_ICO20
     BtnH3.Name = "BtnH3"
-    BtnH3.Size = New Size(259, 36)
+    BtnH3.size = New Size(259, 36)
     BtnH3.Text = "Heading Style 3"
     '
     'BtnH4
@@ -391,7 +391,7 @@ Public Class NotebookViewer
     BtnH4.ForeColor = Color.Black
     BtnH4.Image = Global.AncestryAssistant.My.Resources.Resources.H_4_ICO20
     BtnH4.Name = "BtnH4"
-    BtnH4.Size = New Size(259, 36)
+    BtnH4.size = New Size(259, 36)
     BtnH4.Text = "Heading Style 4"
     '
     'NotebookViewer

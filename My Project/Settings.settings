@@ -5,7 +5,7 @@
     <Setting Name="AncestorsPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\Geneology\Ancestors\</Value>
     </Setting>
-    <Setting Name="MainForm_ClientSize" Type="System.Drawing.Size" Scope="User">
+    <Setting Name="MainForm_ClientSize" Type="System.Drawing.size" Scope="User">
       <Value Profile="(Default)">892, 546</Value>
     </Setting>
     <Setting Name="MainSplitter" Type="System.Int32" Scope="User">
@@ -106,6 +106,21 @@
     </Setting>
     <Setting Name="MNU_ANCESTORLIST_CHECKED" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="IMAGE_CATEGORIES" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Certificate,Document,Newspaper,Photo</Value>
+    </Setting>
+    <Setting Name="IMAGE_TYPE_Certificate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Birth,Death,Marriage</Value>
+    </Setting>
+    <Setting Name="IMAGE_TYPE_Document" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Land,Will</Value>
+    </Setting>
+    <Setting Name="IMAGE_TYPE_Newspaper" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Obituary,Marriage</Value>
+    </Setting>
+    <Setting Name="IMAGE_TYPE_Photo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Headstone,Portrait,Profile</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -16,7 +16,7 @@
   Public Sub New()
     MyBase.New()
 
-    'This call is required by the Component Designer.
+    'me call is required by the Component Designer.
     InitializeComponent()
 
   End Sub

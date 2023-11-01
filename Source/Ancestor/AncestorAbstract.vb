@@ -228,4 +228,26 @@ Public MustInherit Class AncestorAbstract
 
   End Sub
 
+  Public Function AncestorFactList() As List(Of String)
+    Dim rtn As List(Of String) = New List(Of String)
+    rtn.AddRange({"givenname", "surname", "suffix", "birthPlace", "birthDate", "deathPlace", "deathDate", "gender", "photo"})
+    Return rtn
+  End Function
+
+  Public Function AncestorFactDifferences(msg As APIMessage) As List(Of String)
+    Dim rtn As List(Of String) = New List(Of String)
+    For Each factkey As String In AncestorFactList()
+      If Not Fact(factkey).Equals(msg.GetValue(factkey)) Then
+        Debug.Print("Fact Difference: " + factkey)
+        rtn.Add(factkey)
+      End If
+    Next
+    Return rtn
+  End Function
+
+
+  Public Function AncestorMatchesMessage(msg As APIMessage) As Boolean
+    Return AncestorFactDifferences(msg).Count = 0
+  End Function
+
 End Class

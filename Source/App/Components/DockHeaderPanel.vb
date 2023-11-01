@@ -106,7 +106,7 @@ Public Class DockHeaderPanel
     HeaderCloseButton.Margin = New System.Windows.Forms.Padding(0)
     HeaderCloseButton.Name = "HeaderCloseButton"
     HeaderCloseButton.Padding = New System.Windows.Forms.Padding(0, 0, 2, 3)
-    HeaderCloseButton.Size = New System.Drawing.Size(FIXED_HEIGHT, FIXED_HEIGHT)
+    HeaderCloseButton.size = New System.Drawing.size(FIXED_HEIGHT, FIXED_HEIGHT)
     HeaderCloseButton.TabIndex = 3
     HeaderCloseButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter
     HeaderCloseButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText

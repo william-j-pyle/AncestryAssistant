@@ -213,6 +213,24 @@
     </Compile>
     <Compile Include="Source\Ancestry\DataObjects\UriTracks.vb" />
     <Compile Include="Source\Ancestry\DataObjects\UriTrackingGroup.vb" />
+    <Compile Include="Source\App\Components\AncestorPanel.Designer.vb">
+      <DependentUpon>AncestorPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\App\Components\AncestorPanel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\App\Components\AncestorsListPanel.Designer.vb">
+      <DependentUpon>AncestorsListPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\App\Components\AncestorsListPanel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\App\Dialogs\SaveImageDetails.Designer.vb">
+      <DependentUpon>SaveImageDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\App\Dialogs\SaveImageDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Source\App\Forms\ApplicationEvents.vb" />
     <Compile Include="Source\App\Forms\ApplicationForm.Designer.vb">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
@@ -253,49 +271,35 @@
     <Compile Include="Source\Ancestor\Viewers\Census\CensusViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Gedcom\DataObjects\GedPlace.vb" />
-    <Compile Include="Source\Gedcom\GedComFile.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedComData.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedComFileLine.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedDate.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedEventCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedEventRecord.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedFactCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedFactRecord.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedFamilyCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedFamilyRecord.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedFamilyReferenceCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedHeader.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedIndividualCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedIndividualRecord.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedMediaCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedMediaRecord.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedMediaReference.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedMediaReferenceCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedNameCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedName.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedPlaceRecord.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedReference.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedReferenceCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedRepositoryCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedRepositoryRecord.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedSex.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedSourceCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedSourceRecord.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedSourceReference.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedSourceReferenceCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedSubmitterCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedSubmitterRecord.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedTagCollection.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedTagRecord.vb" />
-    <Compile Include="Source\Gedcom\DataObjects\GedTime.vb" />
+    <Compile Include="Source\Gedcom\DataObjects\FileLineEntry.vb" />
+    <Compile Include="Source\Gedcom\types\GedDate.vb" />
+    <None Include="Source\Gedcom\DataObjects\PlaceNormalized.vb" />
     <Compile Include="Source\Ancestor\Viewers\Gallery\ImageGallery.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Ancestor\Viewers\Notebook\NotebookViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Ancestry\DataObjects\AncestryDataMessage.vb" />
+    <Compile Include="Source\Gedcom\Gedcom.vb" />
+    <Compile Include="Source\Gedcom\tags\AbstractTag.vb" />
+    <Compile Include="Source\Gedcom\tags\EventTag.vb" />
+    <Compile Include="Source\Gedcom\tags\FactTag.vb" />
+    <Compile Include="Source\Gedcom\tags\FamilyRefTag.vb" />
+    <Compile Include="Source\Gedcom\tags\FamilyTag.vb" />
+    <Compile Include="Source\Gedcom\tags\GedTagEnum.vb" />
+    <Compile Include="Source\Gedcom\tags\HeaderTag.vb" />
+    <Compile Include="Source\Gedcom\tags\IndividualTag.vb" />
+    <Compile Include="Source\Gedcom\tags\MediaRefTag.vb" />
+    <Compile Include="Source\Gedcom\tags\MediaTag.vb" />
+    <Compile Include="Source\Gedcom\tags\MttagRefTag.vb" />
+    <Compile Include="Source\Gedcom\tags\MttagTag.vb" />
+    <Compile Include="Source\Gedcom\tags\NameTag.vb" />
+    <Compile Include="Source\Gedcom\tags\PlaceTag.vb" />
+    <Compile Include="Source\Gedcom\tags\RepositoryTag.vb" />
+    <Compile Include="Source\Gedcom\tags\SourceRefTag.vb" />
+    <Compile Include="Source\Gedcom\tags\SourceTag.vb" />
+    <Compile Include="Source\Gedcom\types\GedName.vb" />
+    <Compile Include="Source\Helpers\Logger.vb" />
     <Compile Include="Source\Theme\Enums\FontAncestryIconEnum.vb" />
     <Compile Include="Source\Theme\Enums\FontSegoeFluentIconsEnum.vb" />
     <Compile Include="Source\Theme\Enums\ThemeCategoryEnum.vb" />
@@ -313,18 +317,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Helpers\Utils.vb" />
-    <Compile Include="Source\App\Dialogs\ImageSaveDialog.Designer.vb">
-      <DependentUpon>ImageSaveDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\App\Dialogs\ImageSaveDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Source\App\Components\BordersPanel.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Ancestry\DataObjects\APIMessage.vb" />
-    <Compile Include="Source\Ancestry\WebParsers\CensusParser.vb" />
-    <Compile Include="Source\Ancestry\WebParsers\AncestorParser.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -341,6 +337,15 @@
     <EmbeddedResource Include="Source\Ancestry\AncestryWebViewer.resx">
       <DependentUpon>AncestryWebViewer.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Source\App\Components\AncestorPanel.resx">
+      <DependentUpon>AncestorPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\App\Components\AncestorsListPanel.resx">
+      <DependentUpon>AncestorsListPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\App\Dialogs\SaveImageDetails.resx">
+      <DependentUpon>SaveImageDetails.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Source\App\Forms\ApplicationForm.resx">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -352,9 +357,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\App\Forms\Form3.resx">
       <DependentUpon>Form3.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Dialogs\ImageSaveDialog.resx">
-      <DependentUpon>ImageSaveDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

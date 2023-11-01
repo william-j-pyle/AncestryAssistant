@@ -9,8 +9,8 @@
     BackColor = System.Drawing.Color.Transparent
     Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Margin = New System.Windows.Forms.Padding(0)
-    MaximumSize = New System.Drawing.Size(0, 100)
-    MinimumSize = New System.Drawing.Size(100, 100)
+    MaximumSize = New System.Drawing.size(0, 100)
+    MinimumSize = New System.Drawing.size(100, 100)
     Name = "JRibbon"
     Padding = New System.Windows.Forms.Padding(16, 8, 16, 8)
     Dock = DockStyle.Top

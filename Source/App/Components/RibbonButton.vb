@@ -39,7 +39,7 @@
     With btn
       .MinimumSize = New Size(w, h)
       .MaximumSize = New Size(w, h)
-      .Size = New Size(w, h)
+      .size = New Size(w, h)
       .Refresh()
     End With
   End Sub

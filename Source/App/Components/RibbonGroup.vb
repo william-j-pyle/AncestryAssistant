@@ -19,8 +19,8 @@
   Public Sub New()
     SetStyle(ControlStyles.UserPaint Or ControlStyles.ContainerControl Or ControlStyles.FixedHeight Or ControlStyles.SupportsTransparentBackColor Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
     SuspendLayout()
-    MaximumSize = New System.Drawing.Size(0, 0)
-    MinimumSize = New System.Drawing.Size(100, 0)
+    MaximumSize = New System.Drawing.size(0, 0)
+    MinimumSize = New System.Drawing.size(100, 0)
     Padding = New Padding(0)
     Margin = New Padding(0)
     Name = "JRibbonGroup"
