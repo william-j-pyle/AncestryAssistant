@@ -307,24 +307,6 @@ Public Class Gedcom
     Return multiLineData()
   End Function
 
-  Public Function getPlaceID() As String
-    Dim sPlace As String = multiLineData()
-    If sPlace.Equals(String.Empty) Then
-      Return ""
-    End If
-    Dim oPlace As PlaceTag = Nothing
-    For Each tag As PlaceTag In places
-      If tag.place.Equals(sPlace) Then
-        Return tag.ID
-      End If
-    Next
-    If oPlace Is Nothing Then
-      oPlace = New PlaceTag(sPlace, createID(GedTagEnum.TYPE_PLACE))
-      places.Add(oPlace)
-    End If
-    Return oPlace.ID
-  End Function
-
   Public Function getIndex() As Integer
     Return fileIndex
   End Function
@@ -415,15 +397,15 @@ Public Class Gedcom
     ' PROOCESS FILE
     rewind()
     While hasNext()
-      Dim obj As Object = Nothing
-      If tag.Equals(HeaderTag.GEDCOM_TAG) Then obj = New HeaderTag(Me)
-      If tag.Equals(MediaTag.GEDCOM_TAG) Then obj = New MediaTag(Me)
-      If tag.Equals(SourceTag.GEDCOM_TAG) Then obj = New SourceTag(Me)
-      If tag.Equals(RepositoryTag.GEDCOM_TAG) Then obj = New RepositoryTag(Me)
-      If tag.Equals(MttagTag.GEDCOM_TAG) Then obj = New MttagTag(Me)
-      If tag.Equals(IndividualTag.GEDCOM_TAG) Then obj = New IndividualTag(Me)
-      If tag.Equals(FamilyTag.GEDCOM_TAG) Then obj = New FamilyTag(Me)
-      If obj Is Nothing And Not key.StartsWith("SUBM") Then
+      Dim success As Boolean = False
+      If tag.Equals(HeaderTag.GEDCOM_TAG) Then success = NewHeaderTag() IsNot Nothing
+      If tag.Equals(MediaTag.GEDCOM_TAG) Then success = NewMediaTag() IsNot Nothing
+      If tag.Equals(SourceTag.GEDCOM_TAG) Then success = NewSourceTag() IsNot Nothing
+      If tag.Equals(RepositoryTag.GEDCOM_TAG) Then success = NewRepositoryTag() IsNot Nothing
+      If tag.Equals(MttagTag.GEDCOM_TAG) Then success = NewMttagTag() IsNot Nothing
+      If tag.Equals(IndividualTag.GEDCOM_TAG) Then success = NewIndividualTag() IsNot Nothing
+      If tag.Equals(FamilyTag.GEDCOM_TAG) Then success = NewFamilyTag() IsNot Nothing
+      If Not success And Not key.StartsWith("SUBM") Then
         Debug.Print("MISSING TAG_HANDLER: [tag={}, key={}]", tag, key)
       End If
       nextRow()
@@ -436,6 +418,77 @@ Public Class Gedcom
     End If
   End Sub
 
+  Public Function NewHeaderTag() As HeaderTag
+    Return New HeaderTag(Me)
+  End Function
 
+  Public Function NewMediaTag() As MediaTag
+    Return New MediaTag(Me)
+  End Function
+  Public Function NewSourceTag() As SourceTag
+    Return New SourceTag(Me)
+  End Function
+  Public Function NewRepositoryTag() As RepositoryTag
+    Return New RepositoryTag(Me)
+  End Function
+  Public Function NewMttagTag() As MttagTag
+    Return New MttagTag(Me)
+  End Function
+  Public Function NewIndividualTag() As IndividualTag
+    Return New IndividualTag(Me)
+  End Function
+  Public Function NewFamilyTag() As FamilyTag
+    Return New FamilyTag(Me)
+  End Function
+
+  Public Function NewFactTag(OwnerID As String, Optional FactType As String = "") As FactTag
+    If FactType.Equals("") Then
+      Return New FactTag(Me, OwnerID)
+    Else
+      Return New FactTag(Me, OwnerID, FactType)
+    End If
+  End Function
+
+  Public Function NewFamilyRefTag(OwnerID As String, RefType As String) As FamilyRefTag
+    Return New FamilyRefTag(Me, OwnerID)
+  End Function
+
+  Public Function NewNameTag(OwnerID As String) As NameTag
+    Return New NameTag(Me, OwnerID)
+  End Function
+
+  Public Function NewEventTag(OwnerID As String, EventSubType As String) As EventTag
+    Return New EventTag(Me, OwnerID, EventSubType)
+  End Function
+
+  Public Function NewSourceRefTag(OwnerID As String) As SourceRefTag
+    Return New SourceRefTag(Me, OwnerID)
+  End Function
+
+  Public Function NewMediaRefTag(OwnerID As String) As MediaRefTag
+    Return New MediaRefTag(Me, OwnerID)
+  End Function
+
+  Public Function NewMttagRefTag(OwnerID As String) As MttagRefTag
+    Return New MttagRefTag(Me, OwnerID)
+  End Function
+
+  Public Function NewPlaceTag(OwnerID As String) As PlaceTag
+    Dim sPlace As String = multiLineData()
+    If sPlace.Equals(String.Empty) Then
+      Return Nothing
+    End If
+    Dim oPlace As PlaceTag = Nothing
+    For Each tag As PlaceTag In places
+      If tag.place.Equals(sPlace) Then
+        Return tag
+      End If
+    Next
+    If oPlace Is Nothing Then
+      oPlace = New PlaceTag(sPlace, createID(GedTagEnum.TYPE_PLACE))
+      places.Add(oPlace)
+    End If
+    Return oPlace
+  End Function
 
 End Class

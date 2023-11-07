@@ -299,8 +299,8 @@ Public Class CensusViewer
     'Add Header to rtn
 
     For Each dt As Integer In AvailableYears
-      If CensusFileList.Contains(dt) Then
-        data = GetData(CensusFileList.Item(dt))
+      If CensusFileList.Contains(dt.ToString) Then
+        data = GetData(CensusFileList.Item(dt.ToString).ToString)
       End If
     Next
   End Sub

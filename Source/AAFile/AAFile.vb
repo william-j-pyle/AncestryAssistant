@@ -113,12 +113,14 @@ Public Class AAFile
   End Function
 
   Public Sub setTableData(table As List(Of List(Of String)))
-    aValueHeaders = table.Item(0).ToArray()
-    aValues.Clear()
-    For i As Integer = 1 To table.Count - 1
-      aValues.Add(table.Item(i).ToArray())
-    Next
-    _IsDirty = True
+    If table.Count > 0 Then
+      aValueHeaders = table.Item(0).ToArray()
+      aValues.Clear()
+      For i As Integer = 1 To table.Count - 1
+        aValues.Add(table.Item(i).ToArray())
+      Next
+      _IsDirty = True
+    End If
   End Sub
 
 

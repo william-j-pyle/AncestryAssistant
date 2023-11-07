@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Imports AncestryAssistant.AncestorCollection
 
 
@@ -11,6 +12,9 @@ Public Class ApplicationForm
   Public Event AncestorsUpdated()
 
   Private Ancestors As AncestorCollection
+  Private WithEvents AncestorAttributes As AncestorPanel
+  Private WithEvents AncestorsList As AncestorsListPanel
+
 
   Private _AncestorId As String = String.Empty
 
@@ -36,6 +40,7 @@ Public Class ApplicationForm
     InitializeComponent()
     AncestryDirectorWatcher.EnableRaisingEvents = False
     Ancestors = New AncestorCollection(My.Settings.AncestorsPath)
+    AncestorsList = New AncestorsListPanel()
     AncestorsList.setAncestors(Ancestors)
     UIUpdateState()
     AncestryDirectorWatcher.EnableRaisingEvents = True
@@ -45,13 +50,14 @@ Public Class ApplicationForm
   ' = Set Visual States
   ' ==========================
   Private Sub UIUpdateState(Optional sender As Object = Nothing, Optional e As EventArgs = Nothing) Handles btnAncestors.CheckedChanged, btnAncestor.CheckedChanged
-    If btnAncestor.Checked Or btnAncestors.Checked Then
-      SplitPanel.Panel1Collapsed = Not btnAncestor.Checked
-      SplitPanel.Panel2Collapsed = Not btnAncestors.Checked
-      SplitPanel_Main.Panel1Collapsed = False
-    Else
-      SplitPanel_Main.Panel1Collapsed = True
-    End If
+    panelLeft(btnAncestor.Checked, btnAncestors.Checked)
+    'If btnAncestor.Checked Or btnAncestors.Checked Then
+    '  SplitPanel.Panel1Collapsed = Not btnAncestor.Checked
+    '  SplitPanel.Panel2Collapsed = Not btnAncestors.Checked
+    '  SplitPanel_Main.Panel1Collapsed = False
+    'Else
+    '  SplitPanel_Main.Panel1Collapsed = True
+    'End If
   End Sub
 
 #End Region
@@ -122,17 +128,10 @@ Public Class ApplicationForm
   End Sub
 
   Private Sub AncestryDirectorWatcher_Created(sender As Object, e As FileSystemEventArgs) Handles AncestryDirectorWatcher.Created
-    Debug.Print("FILEWATCHER(Created')=" & e.FullPath)
+    Logger.log(Logger.LOG_TYPE.INFO, "FILEWATCHER(Created')=" & e.FullPath)
     RaiseEvent ActiveAncestorChanged()
     'TODO: LoadAncestorList()
   End Sub
-
-  Private Sub AncestryDirectorWatcher_Deleted(sender As Object, e As FileSystemEventArgs)
-    Debug.Print("FILEWATCHER(Deleted')=" & e.FullPath)
-    'TODO: LoadAncestorList()
-  End Sub
-
-
 
 #End Region
 
@@ -379,9 +378,9 @@ Public Class ApplicationForm
     Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
     AncestorsList.setActiveAncestor(AncestorId)
     AncestorAttributes.SetAncestor(ancestor)
-    imgGallery.SetAncestor(ancestor)
+    'imgGallery.SetAncestor(ancestor)
     CensusViewer1.SetAncestor(ancestor)
-    NotebookViewer1.SetAncestor(ancestor)
+    'NotebookViewer1.SetAncestor(ancestor)
   End Sub
 
   Private Sub AncestorsList_AncestorIDChanged(SelectedAncestorID As String) Handles AncestorsList.AncestorIDChanged
@@ -395,14 +394,150 @@ Public Class ApplicationForm
   End Sub
 
 
-  Private Sub AncestorAttributes_PanelCloseClicked(sender As Object) Handles AncestorAttributes.PanelCloseClicked
+  Private Sub AncestorAttributes_PanelCloseClicked(sender As Object)
     btnAncestor.Checked = False
     UIUpdateState()
   End Sub
 
-  Private Sub AncestorsList_PanelCloseClicked(sender As Object) Handles AncestorsList.PanelCloseClicked
+  Private Sub AncestorsList_PanelCloseClicked(sender As Object)
     btnAncestors.Checked = False
     UIUpdateState()
   End Sub
 
+  Private Sub AncestryDirectorWatcher_Changed_1(sender As Object, e As FileSystemEventArgs) Handles AncestryDirectorWatcher.Changed
+    Logger.log(Logger.LOG_TYPE.INFO, "FILEWATCHER(Changed')=" & e.FullPath)
+
+  End Sub
+
+  Private Sub AncestryDirectorWatcher_Deleted(sender As Object, e As FileSystemEventArgs) Handles AncestryDirectorWatcher.Deleted
+    Logger.log(Logger.LOG_TYPE.INFO, "FILEWATCHER(Deleted')=" & e.FullPath)
+
+  End Sub
+
+  Private Sub AncestryDirectorWatcher_Error(sender As Object, e As ErrorEventArgs) Handles AncestryDirectorWatcher.[Error]
+    Logger.log(Logger.LOG_TYPE.INFO, "FILEWATCHER([Error]')=" & e.GetException.Message)
+
+  End Sub
+
+
+
+  Private Sub panelRight(topVis As Boolean, botVis As Boolean)
+    If pnlRightTop.Dock = DockStyle.Top Then
+      pnlRightTop.Tag = pnlRightTop.Height
+    End If
+    If topVis And Not botVis Then
+      pnlRightTop.Dock = DockStyle.Fill
+    End If
+    If topVis And botVis And pnlRightTop.Dock = DockStyle.Fill Then
+      pnlRightTop.Dock = DockStyle.Top
+      pnlRightTop.Height = CInt(pnlRightTop.Tag)
+    End If
+
+    pnlRightTop.Visible = topVis
+    pnlRightBottom.Visible = botVis
+    splitRight.Visible = topVis Or botVis
+    splitRightTopBottom.Visible = topVis And botVis
+    pnlRight.Visible = topVis Or botVis
+  End Sub
+
+  Private Sub panelLeft(topVis As Boolean, botVis As Boolean)
+    If pnlLeftTop.Dock = DockStyle.Top Then
+      pnlLeftTop.Tag = pnlLeftTop.Height
+    End If
+    If topVis And Not botVis Then
+      pnlLeftTop.Dock = DockStyle.Fill
+    End If
+    If topVis And botVis And pnlLeftTop.Dock = DockStyle.Fill Then
+      pnlLeftTop.Dock = DockStyle.Top
+      pnlLeftTop.Height = CInt(pnlLeftTop.Tag)
+    End If
+
+    pnlLeftTop.Visible = topVis
+    pnlLeftBottom.Visible = botVis
+    splitLeft.Visible = topVis Or botVis
+    splitLeftTopBottom.Visible = topVis And botVis
+    pnlLeft.Visible = topVis Or botVis
+  End Sub
+
+
+
+  Private Sub panelMiddle(leftVis As Boolean, rightVis As Boolean, bottomVis As Boolean)
+    If pnlMiddleRight.Dock = DockStyle.Right Then
+      pnlMiddleRight.Tag = pnlMiddleRight.Width
+    End If
+    If rightVis And Not leftVis Then
+      pnlMiddleRight.Dock = DockStyle.Fill
+    End If
+    If leftVis And rightVis And pnlMiddleRight.Dock = DockStyle.Fill Then
+      pnlMiddleRight.Dock = DockStyle.Right
+      pnlMiddleRight.Width = CInt(pnlMiddleRight.Tag)
+    End If
+
+    pnlMiddleBottom.Visible = bottomVis
+    splitMiddleBottom.Visible = bottomVis
+    pnlMiddleLeft.Visible = leftVis
+    pnlMiddleRight.Visible = rightVis
+    splitMiddleLeftRight.Visible = leftVis And rightVis
+    btnCensus.Checked = pnlMiddleBottom.Visible
+    btnNotebook.Checked = pnlMiddleRight.Visible
+  End Sub
+
+  Private Sub ApplicationForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    LoadUIState()
+    AncestorAttributes = New AncestorPanel
+    Dim ctl As New ImageGallery()
+    Dim ctl2 As New CensusViewer()
+    dockMiddleRight.AddClient("Image Gallery", ctl)
+    dockMiddleRight.AddClient("Census", ctl2)
+    dockTopLeft.AddClient("Ancestor Attributes", AncestorAttributes)
+    dockBottomLeft.AddClient("Ancestors List", AncestorsList)
+  End Sub
+
+  Private Sub LoadUIState()
+    Dim lb_ctl As String = My.Settings.UI_LB_CTL
+    Dim lt_ctl As String = My.Settings.UI_LT_CTL
+    Dim ml_ctl As String = My.Settings.UI_ML_CTL
+
+    pnlMiddleRight.Width = My.Settings.UI_MR_WIDTH
+    pnlMiddleBottom.Height = My.Settings.UI_MB_HEIGHT
+    panelMiddle(My.Settings.UI_ML_VIS, My.Settings.UI_MR_VIS, My.Settings.UI_MB_VIS)
+
+    pnlLeft.Width = My.Settings.UI_L_WIDTH
+    pnlLeftTop.Height = My.Settings.UI_LT_HEIGHT
+    panelLeft(My.Settings.UI_LT_VIS, My.Settings.UI_LB_VIS)
+
+    pnlRight.Width = My.Settings.UI_R_WIDTH
+    pnlRightTop.Height = My.Settings.UI_RT_HEIGHT
+    panelRight(My.Settings.UI_RT_VIS, My.Settings.UI_RB_VIS)
+  End Sub
+
+  Private Sub SaveUIState()
+    My.Settings.UI_MR_WIDTH = pnlMiddleRight.Width
+    My.Settings.UI_MB_HEIGHT = pnlMiddleBottom.Height
+    My.Settings.UI_ML_VIS = pnlMiddleLeft.Visible
+    My.Settings.UI_MR_VIS = pnlMiddleRight.Visible
+    My.Settings.UI_MB_VIS = pnlMiddleBottom.Visible
+
+    My.Settings.UI_L_WIDTH = pnlLeft.Width
+    My.Settings.UI_LT_HEIGHT = pnlLeftTop.Height
+    My.Settings.UI_LT_VIS = pnlLeftTop.Visible
+    My.Settings.UI_LB_VIS = pnlLeftBottom.Visible
+
+    My.Settings.UI_R_WIDTH = pnlRight.Width
+    My.Settings.UI_RT_HEIGHT = pnlRightTop.Height
+    My.Settings.UI_RT_VIS = pnlRightTop.Visible
+    My.Settings.UI_RB_VIS = pnlRightBottom.Visible
+  End Sub
+
+  Private Sub ApplicationForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    SaveUIState()
+  End Sub
+
+  Private Sub btnCensus_Click(sender As Object, e As EventArgs) Handles btnCensus.Click
+    panelMiddle(pnlMiddleLeft.Visible, pnlMiddleRight.Visible, btnCensus.Checked)
+  End Sub
+
+  Private Sub btnNotebook_Click(sender As Object, e As EventArgs) Handles btnNotebook.Click
+    panelMiddle(pnlMiddleLeft.Visible, btnNotebook.Checked, pnlMiddleBottom.Visible)
+  End Sub
 End Class

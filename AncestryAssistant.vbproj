@@ -86,6 +86,44 @@
     <NoWarn>
     </NoWarn>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DocumentationFile>AncestryAssistant.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>AncestryAssistant.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>AncestryAssistant.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>AncestryAssistant.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
@@ -96,14 +134,32 @@
     <Reference Include="DocumentFormat.OpenXml, Version=2.20.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>packages\DocumentFormat.OpenXml.2.20.0\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
+    <Reference Include="Emgu.CV, Version=4.8.1.5350, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <HintPath>packages\Emgu.CV.4.8.1.5350\lib\netstandard2.0\Emgu.CV.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.Bitmap, Version=4.8.1.5350, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <HintPath>packages\Emgu.CV.Bitmap.4.8.1.5350\lib\netstandard2.0\Emgu.CV.Bitmap.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.Models, Version=4.8.1.5350, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <HintPath>packages\Emgu.CV.Models.4.8.1.5350\lib\netstandard2.0\Emgu.CV.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.Platform.NetFramework, Version=4.8.1.5350, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <HintPath>packages\Emgu.CV.UI.4.8.1.5350\lib\net461\Emgu.CV.Platform.NetFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.UI.Winforms, Version=4.5.5.4823, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Emgu.UI.WinForms.4.5.5\lib\net48\Emgu.UI.Winforms.dll</HintPath>
+    </Reference>
+    <Reference Include="EmguEx, Version=4.5.5.4823, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\EmguEx.4.5.5\lib\net48\EmguEx.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Protobuf, Version=3.24.4.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Protobuf.3.24.4\lib\net45\Google.Protobuf.dll</HintPath>
+    <Reference Include="Google.Protobuf, Version=3.25.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Protobuf.3.25.0\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
     <Reference Include="K4os.Compression.LZ4, Version=1.3.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
       <HintPath>packages\K4os.Compression.LZ4.1.3.6\lib\net462\K4os.Compression.LZ4.dll</HintPath>
@@ -132,10 +188,14 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RaveMath.NETS, Version=1.0.2.20122, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\RaveMath.NETS.1.0.2\lib\netstandard2.0\RaveMath.NETS.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -157,6 +217,14 @@
       <HintPath>packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\EmguEx.4.5.5\lib\net48\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Primitives.4.3.0\lib\net45\System.Drawing.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.IO.Pipelines, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.Pipelines.7.0.0\lib\net462\System.IO.Pipelines.dll</HintPath>
     </Reference>
@@ -169,8 +237,18 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -183,10 +261,19 @@
       <HintPath>packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encodings.Web, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.7.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=7.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Json.7.0.3\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -234,17 +321,30 @@
     </Compile>
     <Compile Include="Source\Ancestry\DataObjects\UriTracks.vb" />
     <Compile Include="Source\Ancestry\DataObjects\UriTrackingGroup.vb" />
-    <Compile Include="Source\App\Components\AncestorPanel.Designer.vb">
+    <Compile Include="Source\Components\Dock\DockPanel.Designer.vb">
+      <DependentUpon>DockPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Components\Dock\DockPanel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Components\Ancestor\AncestorPanel.Designer.vb">
       <DependentUpon>AncestorPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\Components\AncestorPanel.vb">
+    <Compile Include="Source\Components\Ancestor\AncestorPanel.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\App\Components\AncestorsListPanel.Designer.vb">
+    <Compile Include="Source\Components\Ancestor\AncestorsListPanel.Designer.vb">
       <DependentUpon>AncestorsListPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\Components\AncestorsListPanel.vb">
+    <Compile Include="Source\Components\Ancestor\AncestorsListPanel.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Gedcom\GedDataTypes\Individual.vb" />
+    <Compile Include="Source\Components\Dock\DockBottomTabs.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Source\Components\Base\BordersPanel.vb">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\App\Dialogs\SaveImageDetails.Designer.vb">
       <DependentUpon>SaveImageDetails.vb</DependentUpon>
@@ -259,31 +359,43 @@
     <Compile Include="Source\App\Forms\ApplicationForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\App\Components\RibbonButton.vb">
+    <Compile Include="Source\Components\Base\IconButton.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\App\Components\Ribbon.vb">
+    <Compile Include="Source\Components\Ribbon\RibbonBar.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\App\Components\RibbonGroup.vb">
+    <Compile Include="Source\Components\Ribbon\RibbonButton.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Components\Ribbon\Ribbon.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\App\Forms\Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="Source\Components\Ribbon\RibbonGroup.vb">
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\App\Forms\Form1.vb">
+    <Compile Include="Source\App\TestForms\frmButtonTestForm.Designer.vb">
+      <DependentUpon>frmButtonTestForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\App\TestForms\frmButtonTestForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\App\Forms\Form2.Designer.vb">
-      <DependentUpon>Form2.vb</DependentUpon>
+    <Compile Include="Source\App\TestForms\frmTestRibbon.Designer.vb">
+      <DependentUpon>frmTestRibbon.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\Forms\Form2.vb">
+    <Compile Include="Source\App\TestForms\frmTestRibbon.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\App\Forms\Form3.Designer.vb">
-      <DependentUpon>Form3.vb</DependentUpon>
+    <Compile Include="Source\App\TestForms\frmColorPallet.Designer.vb">
+      <DependentUpon>frmColorPallet.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\Forms\Form3.vb">
+    <Compile Include="Source\App\TestForms\frmColorPallet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Gedcom\TestForms\frmTestGEDCOM.Designer.vb">
+      <DependentUpon>frmTestGEDCOM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Gedcom\TestForms\frmTestGEDCOM.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Ancestor\Viewers\ViewerAbstract.vb">
@@ -292,9 +404,15 @@
     <Compile Include="Source\Ancestor\Viewers\Census\CensusViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Gedcom\DataObjects\FileLineEntry.vb" />
-    <Compile Include="Source\Gedcom\types\GedDate.vb" />
-    <None Include="Source\Gedcom\DataObjects\PlaceNormalized.vb" />
+    <Compile Include="Source\App\TestForms\frmTestSplitters.Designer.vb">
+      <DependentUpon>frmTestSplitters.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\App\TestForms\frmTestSplitters.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Gedcom\Helpers\FileLineEntry.vb" />
+    <Compile Include="Source\Gedcom\GedDataTypes\GedDate.vb" />
+    <None Include="Source\Gedcom\Helpers\PlaceNormalized.vb" />
     <Compile Include="Source\Ancestor\Viewers\Gallery\ImageGallery.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -302,45 +420,35 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Gedcom\Gedcom.vb" />
-    <Compile Include="Source\Gedcom\tags\AbstractTag.vb" />
-    <Compile Include="Source\Gedcom\tags\EventTag.vb" />
-    <Compile Include="Source\Gedcom\tags\FactTag.vb" />
-    <Compile Include="Source\Gedcom\tags\FamilyRefTag.vb" />
-    <Compile Include="Source\Gedcom\tags\FamilyTag.vb" />
-    <Compile Include="Source\Gedcom\tags\GedTagEnum.vb" />
-    <Compile Include="Source\Gedcom\tags\HeaderTag.vb" />
-    <Compile Include="Source\Gedcom\tags\IndividualTag.vb" />
-    <Compile Include="Source\Gedcom\tags\MediaRefTag.vb" />
-    <Compile Include="Source\Gedcom\tags\MediaTag.vb" />
-    <Compile Include="Source\Gedcom\tags\MttagRefTag.vb" />
-    <Compile Include="Source\Gedcom\tags\MttagTag.vb" />
-    <Compile Include="Source\Gedcom\tags\NameTag.vb" />
-    <Compile Include="Source\Gedcom\tags\PlaceTag.vb" />
-    <Compile Include="Source\Gedcom\tags\RepositoryTag.vb" />
-    <Compile Include="Source\Gedcom\tags\SourceRefTag.vb" />
-    <Compile Include="Source\Gedcom\tags\SourceTag.vb" />
-    <Compile Include="Source\Gedcom\types\GedName.vb" />
+    <Compile Include="Source\Gedcom\GedTags\AbstractTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\EventTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\FactTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\FamilyRefTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\FamilyTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\GedTagEnum.vb" />
+    <Compile Include="Source\Gedcom\GedTags\HeaderTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\IndividualTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\MediaRefTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\MediaTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\MttagRefTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\MttagTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\NameTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\PlaceTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\RepositoryTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\SourceRefTag.vb" />
+    <Compile Include="Source\Gedcom\GedTags\SourceTag.vb" />
+    <Compile Include="Source\Gedcom\GedDataTypes\GedName.vb" />
     <Compile Include="Source\Helpers\Logger.vb" />
-    <Compile Include="Source\Theme\Enums\FontAncestryIconEnum.vb" />
-    <Compile Include="Source\Theme\Enums\FontSegoeFluentIconsEnum.vb" />
-    <Compile Include="Source\Theme\Enums\ThemeCategoryEnum.vb" />
-    <Compile Include="Source\Theme\Enums\ThemeIconsEnum.vb" />
-    <Compile Include="Source\Theme\JTheme.Designer.vb">
-      <DependentUpon>JTheme.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Theme\JTheme.vb">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Source\Enums\FontAncestryIconEnum.vb" />
+    <Compile Include="Source\Enums\FontSegoeFluentIconsEnum.vb" />
+    <Compile Include="Source\Enums\IconSizeEnum.vb" />
+    <Compile Include="Source\Enums\RibbonButtonSizeEnum.vb" />
+    <Compile Include="Source\Enums\ThemeCategoryEnum.vb" />
+    <Compile Include="Source\Enums\ThemeIconsEnum.vb" />
     <Compile Include="Source\Ancestry\Enums\CaptureTypeEnum.vb" />
     <Compile Include="Source\Ancestry\Enums\DataTypeEnum.vb" />
     <Compile Include="Source\Ancestry\Enums\UriTrackingGroupEnum.vb" />
-    <Compile Include="Source\App\Components\DockHeaderPanel.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Source\Helpers\Utils.vb" />
-    <Compile Include="Source\App\Components\BordersPanel.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Source\Ancestry\DataObjects\APIMessage.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -358,10 +466,13 @@
     <EmbeddedResource Include="Source\Ancestry\AncestryWebViewer.resx">
       <DependentUpon>AncestryWebViewer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Components\AncestorPanel.resx">
+    <EmbeddedResource Include="Source\Components\Dock\DockPanel.resx">
+      <DependentUpon>DockPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Components\Ancestor\AncestorPanel.resx">
       <DependentUpon>AncestorPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Components\AncestorsListPanel.resx">
+    <EmbeddedResource Include="Source\Components\Ancestor\AncestorsListPanel.resx">
       <DependentUpon>AncestorsListPanel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\App\Dialogs\SaveImageDetails.resx">
@@ -370,20 +481,26 @@
     <EmbeddedResource Include="Source\App\Forms\ApplicationForm.resx">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Forms\Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="Source\App\TestForms\frmButtonTestForm.resx">
+      <DependentUpon>frmButtonTestForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Forms\Form2.resx">
-      <DependentUpon>Form2.vb</DependentUpon>
+    <EmbeddedResource Include="Source\App\TestForms\frmTestRibbon.resx">
+      <DependentUpon>frmTestRibbon.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Forms\Form3.resx">
-      <DependentUpon>Form3.vb</DependentUpon>
+    <EmbeddedResource Include="Source\App\TestForms\frmColorPallet.resx">
+      <DependentUpon>frmColorPallet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Gedcom\TestForms\frmTestGEDCOM.resx">
+      <DependentUpon>frmTestGEDCOM.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\App\TestForms\frmTestSplitters.resx">
+      <DependentUpon>frmTestSplitters.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -425,9 +542,51 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\x64\Debug\runtimes\win-x64\native\" />
+    <Folder Include="Config\runtimes\win-x64\native\" />
     <Folder Include="Documentation\assets\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\face.xml" />
+    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\concrt140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\cvextern.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\msvcp140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\msvcp140_1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\msvcp140_2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\msvcp140_atomic_wait.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\msvcp140_codecvt_ids.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\opencv_videoio_ffmpeg481_64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\vcruntime140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\vcruntime140_1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <Content Include="Config\runtimes\win-x86\native\concrt140.dll" />
+    <Content Include="Config\runtimes\win-x86\native\cvextern.dll" />
+    <Content Include="Config\runtimes\win-x86\native\msvcp140.dll" />
+    <Content Include="Config\runtimes\win-x86\native\msvcp140_1.dll" />
+    <Content Include="Config\runtimes\win-x86\native\msvcp140_2.dll" />
+    <Content Include="Config\runtimes\win-x86\native\msvcp140_atomic_wait.dll" />
+    <Content Include="Config\runtimes\win-x86\native\msvcp140_codecvt_ids.dll" />
+    <Content Include="Config\runtimes\win-x86\native\opencv_videoio_ffmpeg481.dll" />
+    <Content Include="Config\runtimes\win-x86\native\vcruntime140.dll" />
     <Content Include="Resources\adobe\Assets.psd" />
     <Content Include="Resources\adobe\Panel.psd" />
     <None Include="Resources\interaktionen-copy.png" />

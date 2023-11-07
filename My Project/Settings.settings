@@ -107,20 +107,71 @@
     <Setting Name="MNU_ANCESTORLIST_CHECKED" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="IMAGE_CATEGORIES" Type="System.String" Scope="Application">
+    <Setting Name="IMAGE_CATEGORIES" Type="System.String" Scope="User">
       <Value Profile="(Default)">Certificate,Document,Newspaper,Photo</Value>
     </Setting>
-    <Setting Name="IMAGE_TYPE_Certificate" Type="System.String" Scope="Application">
+    <Setting Name="IMAGE_TYPE_Certificate" Type="System.String" Scope="User">
       <Value Profile="(Default)">Birth,Death,Marriage</Value>
     </Setting>
-    <Setting Name="IMAGE_TYPE_Document" Type="System.String" Scope="Application">
+    <Setting Name="IMAGE_TYPE_Document" Type="System.String" Scope="User">
       <Value Profile="(Default)">Land,Will</Value>
     </Setting>
-    <Setting Name="IMAGE_TYPE_Newspaper" Type="System.String" Scope="Application">
+    <Setting Name="IMAGE_TYPE_Newspaper" Type="System.String" Scope="User">
       <Value Profile="(Default)">Obituary,Marriage</Value>
     </Setting>
-    <Setting Name="IMAGE_TYPE_Photo" Type="System.String" Scope="Application">
+    <Setting Name="IMAGE_TYPE_Photo" Type="System.String" Scope="User">
       <Value Profile="(Default)">Headstone,Portrait,Profile</Value>
+    </Setting>
+    <Setting Name="UI_ML_VIS" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UI_MR_VIS" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UI_ML_WIDTH" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">800</Value>
+    </Setting>
+    <Setting Name="UI_MB_VIS" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UI_MB_HEIGHT" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">400</Value>
+    </Setting>
+    <Setting Name="UI_LT_VIS" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UI_LB_VIS" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UI_LT_HEIGHT" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">400</Value>
+    </Setting>
+    <Setting Name="UI_L_WIDTH" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="UI_RT_VIS" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UI_RB_VIS" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UI_RT_HEIGHT" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">400</Value>
+    </Setting>
+    <Setting Name="UI_R_WIDTH" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="UI_LT_CTL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ANCESTOR</Value>
+    </Setting>
+    <Setting Name="UI_LB_CTL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ANCESTORS</Value>
+    </Setting>
+    <Setting Name="UI_ML_CTL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ANCESTRY</Value>
+    </Setting>
+    <Setting Name="UI_MR_WIDTH" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">400</Value>
     </Setting>
   </Settings>
 </SettingsFile>

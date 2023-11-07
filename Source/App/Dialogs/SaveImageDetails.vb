@@ -1,6 +1,4 @@
-﻿Imports System.ComponentModel
-
-Public Class SaveImageDetails
+﻿Public Class SaveImageDetails
 
   Public ReadOnly Property ImageType As String
     Get
@@ -39,7 +37,6 @@ Public Class SaveImageDetails
   End Sub
 
   Private Sub SaveSettings()
-    Logger.log(Logger.LOG_TYPE.INFO, "SaveSettings.Begin")
     Dim category As String = cmbCategory.Text
     Dim type As String = cmbType.Text
     Dim categories As String = My.Settings.IMAGE_CATEGORIES
@@ -67,7 +64,6 @@ Public Class SaveImageDetails
   End Sub
 
   Public Sub InitDialog(msg As APIMessage)
-    Logger.log(Logger.LOG_TYPE.INFO, "InitDialog")
     Dim title As String = msg.GetValue("Title").ToUpper
     Dim category As String = ""
     Dim type As String = ""
@@ -113,7 +109,6 @@ Public Class SaveImageDetails
 
   Private Sub loadTypes(category As String, Optional type As String = "")
     Dim types As String = My.Settings.Properties("IMAGE_TYPE_" & category).DefaultValue
-    Logger.log(Logger.LOG_TYPE.INFO, "loadTypes")
     cmbType.Items.Clear()
     For Each str As String In types.Split(",")
       cmbType.Items.Add(str)
@@ -123,8 +118,6 @@ Public Class SaveImageDetails
   End Sub
 
   Private Sub InitDetails(data As List(Of List(Of String)))
-    Logger.log(Logger.LOG_TYPE.INFO, "InitDetails")
-
     tblDetails.Rows.Clear()
     tblDetails.Columns.Clear()
     Dim i As Integer = 0
@@ -148,31 +141,26 @@ Public Class SaveImageDetails
 
   Private Function GetDetails() As List(Of List(Of String))
     Dim data As New List(Of List(Of String))
-    Logger.log(Logger.LOG_TYPE.INFO, "GetDetails")
 
-    If tblDetails.Visible Then
-      ' Add headers to the list
-      Dim headers As New List(Of String)
-      For Each column As DataGridViewColumn In tblDetails.Columns
-        headers.Add(column.HeaderText)
+    ' Add headers to the list
+    Dim headers As New List(Of String)
+    For Each column As DataGridViewColumn In tblDetails.Columns
+      headers.Add(column.HeaderText)
+    Next
+    data.Add(headers)
+    ' Add rows to the list
+    For Each row As DataGridViewRow In tblDetails.Rows
+      Dim rowData As New List(Of String)
+      For Each cell As DataGridViewCell In row.Cells
+        rowData.Add(cell.Value)
       Next
-      data.Add(headers)
-      ' Add rows to the list
-      For Each row As DataGridViewRow In tblDetails.Rows
-        Dim rowData As New List(Of String)
-        For Each cell As DataGridViewCell In row.Cells
-          rowData.Add(cell.Value)
-        Next
-        data.Add(rowData)
-      Next
-    End If
+      data.Add(rowData)
+    Next
     Return data
   End Function
 
   Private Sub InitSummary(txt As String)
     txtSummary.Text = txt
-    Logger.log(Logger.LOG_TYPE.INFO, "InitSummary")
-
   End Sub
 
   Private Sub InitCategories(txt As String)
@@ -183,50 +171,16 @@ Public Class SaveImageDetails
     Next
     cmbCategory.Items.Add("Other")
     cmbCategory.Text = txt
-    Logger.log(Logger.LOG_TYPE.INFO, "InitCategories")
-
   End Sub
 
   Private Sub cmbCategory_TextChanged(sender As Object, e As EventArgs) Handles cmbCategory.TextChanged
     loadTypes(cmbCategory.Text)
-    Logger.log(Logger.LOG_TYPE.INFO, "cmbCategory_TextChanged")
   End Sub
 
   Public Sub HidePayload()
-    Logger.log(Logger.LOG_TYPE.INFO, "HidePayload")
-
-    lblDetails.Visible = False
-    tblDetails.Visible = False
-    Height = 187
+    ' lblDetails.Visible = False
+    'tblDetails.Visible = False
+    'Height = 187
   End Sub
 
-  Private Sub SaveImageDetails_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-    Logger.log(Logger.LOG_TYPE.INFO, "SaveImageDetails_Closing")
-
-  End Sub
-
-  Private Sub SaveImageDetails_Closed(sender As Object, e As EventArgs) Handles Me.Closed
-    Logger.log(Logger.LOG_TYPE.INFO, "SaveImageDetails_Closed")
-
-  End Sub
-
-  Private Sub SaveImageDetails_Activated(sender As Object, e As EventArgs) Handles Me.Activated
-    Logger.log(Logger.LOG_TYPE.INFO, "SaveImageDetails_Activated")
-
-  End Sub
-
-  Private Sub SaveImageDetails_Deactivate(sender As Object, e As EventArgs) Handles Me.Deactivate
-    Logger.log(Logger.LOG_TYPE.INFO, "SaveImageDetails_Deactivate")
-
-  End Sub
-
-  Private Sub SaveImageDetails_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-    Logger.log(Logger.LOG_TYPE.INFO, "SaveImageDetails_FormClosing")
-
-  End Sub
-
-  Private Sub SaveImageDetails_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-    Logger.log(Logger.LOG_TYPE.INFO, "SaveImageDetails_FormClosed")
-
-  End Sub
 End Class
