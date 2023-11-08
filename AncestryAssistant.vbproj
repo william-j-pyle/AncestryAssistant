@@ -134,24 +134,6 @@
     <Reference Include="DocumentFormat.OpenXml, Version=2.20.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>packages\DocumentFormat.OpenXml.2.20.0\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV, Version=4.8.1.5350, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <HintPath>packages\Emgu.CV.4.8.1.5350\lib\netstandard2.0\Emgu.CV.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.Bitmap, Version=4.8.1.5350, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <HintPath>packages\Emgu.CV.Bitmap.4.8.1.5350\lib\netstandard2.0\Emgu.CV.Bitmap.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.Models, Version=4.8.1.5350, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <HintPath>packages\Emgu.CV.Models.4.8.1.5350\lib\netstandard2.0\Emgu.CV.Models.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.Platform.NetFramework, Version=4.8.1.5350, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <HintPath>packages\Emgu.CV.UI.4.8.1.5350\lib\net461\Emgu.CV.Platform.NetFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.UI.Winforms, Version=4.5.5.4823, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Emgu.UI.WinForms.4.5.5\lib\net48\Emgu.UI.Winforms.dll</HintPath>
-    </Reference>
-    <Reference Include="EmguEx, Version=4.5.5.4823, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\EmguEx.4.5.5\lib\net48\EmguEx.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -217,9 +199,6 @@
       <HintPath>packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Drawing.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\EmguEx.4.5.5\lib\net48\System.Drawing.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Drawing.Primitives.4.3.0\lib\net45\System.Drawing.Primitives.dll</HintPath>
       <Private>True</Private>
@@ -304,152 +283,185 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Source\Ancestor\AncestorAbstract.vb" />
-    <Compile Include="Source\Ancestor\AncestorCollection.vb" />
-    <Compile Include="Source\AAFile\AAFile.vb" />
-    <Compile Include="Source\Ancestor\Viewers\Census\ACensus.vb" />
-    <Compile Include="Source\Ancestor\Viewers\Gallery\AGallery.vb" />
-    <Compile Include="Source\Ancestor\Viewers\Notebook\ANotebook.vb" />
-    <Compile Include="Source\Ancestor\Viewers\Sources\ASource.vb" />
-    <Compile Include="Source\Ancestor\Viewers\Timeline\ATimeline.vb" />
-    <Compile Include="Source\AAFile\Enums\AAFileTypeEnum.vb" />
-    <Compile Include="Source\Ancestry\AncestryWebViewer.Designer.vb">
+    <Compile Include="Source\Enums\PanelManagerSplitterType.vb" />
+    <Compile Include="Source\Objects\Ancestor\AncestorAbstract.vb" />
+    <Compile Include="Source\Objects\Ancestor\AncestorCollection.vb" />
+    <Compile Include="Source\Objects\AncestryAssistantFile\AAFile.vb" />
+    <Compile Include="Source\UI\Components\DockPanelItems\Census\Objects\ACensus.vb" />
+    <Compile Include="Source\UI\Components\DockPanelItems\Gallery\Objects\AGallery.vb" />
+    <Compile Include="Source\UI\Components\DockPanelItems\Notebook\Objects\ANotebook.vb" />
+    <Compile Include="Source\UI\Components\DockPanelItems\Sources\Objects\ASource.vb" />
+    <Compile Include="Source\UI\Components\DockPanelItems\Timeline\Objects\ATimeline.vb" />
+    <Compile Include="Source\Objects\AncestryAssistantFile\Enums\AAFileTypeEnum.vb" />
+    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\AncestryWebViewer.Designer.vb">
       <DependentUpon>AncestryWebViewer.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Ancestry\AncestryWebViewer.vb">
+    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\AncestryWebViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Ancestry\DataObjects\UriTracks.vb" />
-    <Compile Include="Source\Ancestry\DataObjects\UriTrackingGroup.vb" />
-    <Compile Include="Source\Components\Dock\DockPanel.Designer.vb">
+    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Objects\UriTracks.vb" />
+    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Objects\UriTrackingGroup.vb" />
+    <Compile Include="Source\UI\Components\DockPanels\IDockPanel.vb" />
+    <Compile Include="Source\UI\Components\DockPanels\DockTopTabs.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Source\UI\Components\DockPanels\DockPanel.Designer.vb">
       <DependentUpon>DockPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Components\Dock\DockPanel.vb">
+    <Compile Include="Source\UI\Components\DockPanels\DockPanel.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Components\Ancestor\AncestorPanel.Designer.vb">
+    <Compile Include="Source\UI\Components\DockPanelItems\Ancestor\AncestorPanel.Designer.vb">
       <DependentUpon>AncestorPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Components\Ancestor\AncestorPanel.vb">
+    <Compile Include="Source\UI\Components\DockPanelItems\Ancestor\AncestorPanel.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Components\Ancestor\AncestorsListPanel.Designer.vb">
+    <Compile Include="Source\UI\Components\DockPanelItems\AncestorsList\AncestorsListPanel.Designer.vb">
       <DependentUpon>AncestorsListPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Components\Ancestor\AncestorsListPanel.vb">
+    <Compile Include="Source\UI\Components\DockPanelItems\AncestorsList\AncestorsListPanel.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Gedcom\GedDataTypes\Individual.vb" />
-    <Compile Include="Source\Components\Dock\DockBottomTabs.vb">
+    <Compile Include="Source\UI\Components\DockPanels\IDockPanelItem.vb" />
+    <Compile Include="Source\UI\Components\MenuBar\MenuBarRenderer.vb" />
+    <Compile Include="Source\UI\Components\MenuBar\MenuBar.Designer.vb">
+      <DependentUpon>MenuBar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\UI\Components\MenuBar\MenuBar.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Components\Base\BordersPanel.vb">
+    <Compile Include="Source\UI\Components\Panel\PanelManager.vb" />
+    <Compile Include="Source\Enums\PanelManagerPanelType.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Primatives\Individual.vb" />
+    <Compile Include="Source\UI\Components\DockPanels\DockBottomTabs.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\App\Dialogs\SaveImageDetails.Designer.vb">
+    <Compile Include="Source\UI\Components\Panel\BordersPanel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Source\UI\Components\StatusBar\StatusBar.Designer.vb">
+      <DependentUpon>StatusBar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\UI\Components\StatusBar\StatusBar.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Source\UI\Components\StatusBar\StatusBarRenderer.vb" />
+    <Compile Include="Source\UI\Components\ToolBar\ToolBar.Designer.vb">
+      <DependentUpon>ToolBar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\UI\Components\ToolBar\ToolBar.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Source\UI\Components\ToolBar\ToolBarRenderer.vb" />
+    <Compile Include="Source\UI\Dialogs\SaveImageDetails.Designer.vb">
       <DependentUpon>SaveImageDetails.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\Dialogs\SaveImageDetails.vb">
+    <Compile Include="Source\UI\Dialogs\SaveImageDetails.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\App\Forms\ApplicationEvents.vb" />
-    <Compile Include="Source\App\Forms\ApplicationForm.Designer.vb">
+    <Compile Include="Source\UI\Forms\ApplicationEvents.vb" />
+    <Compile Include="Source\UI\Forms\ApplicationForm.Designer.vb">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\Forms\ApplicationForm.vb">
+    <Compile Include="Source\UI\Forms\ApplicationForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Components\Base\IconButton.vb">
+    <Compile Include="Source\UI\Components\Button\IconButton.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Components\Ribbon\RibbonBar.vb">
+    <Compile Include="Source\UI\Components\RibbonBar\RibbonBar.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Components\Ribbon\RibbonButton.vb">
+    <Compile Include="Source\UI\Components\RibbonBar\RibbonButton.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Components\Ribbon\Ribbon.vb">
+    <Compile Include="Source\UI\Components\RibbonBar\Ribbon.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Components\Ribbon\RibbonGroup.vb">
+    <Compile Include="Source\UI\Components\RibbonBar\RibbonGroup.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\App\TestForms\frmButtonTestForm.Designer.vb">
+    <Compile Include="Test\frmButtonTestForm.Designer.vb">
       <DependentUpon>frmButtonTestForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\TestForms\frmButtonTestForm.vb">
+    <Compile Include="Test\frmButtonTestForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\App\TestForms\frmTestRibbon.Designer.vb">
+    <Compile Include="Test\frmTestDockTopTabs.Designer.vb">
+      <DependentUpon>frmTestDockTopTabs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Test\frmTestDockTopTabs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\frmTestRibbon.Designer.vb">
       <DependentUpon>frmTestRibbon.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\TestForms\frmTestRibbon.vb">
+    <Compile Include="Test\frmTestRibbon.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\App\TestForms\frmColorPallet.Designer.vb">
+    <Compile Include="Test\frmColorPallet.Designer.vb">
       <DependentUpon>frmColorPallet.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\TestForms\frmColorPallet.vb">
+    <Compile Include="Test\frmColorPallet.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Gedcom\TestForms\frmTestGEDCOM.Designer.vb">
+    <Compile Include="Test\frmTestGEDCOM.Designer.vb">
       <DependentUpon>frmTestGEDCOM.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Gedcom\TestForms\frmTestGEDCOM.vb">
+    <Compile Include="Test\frmTestGEDCOM.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Ancestor\Viewers\ViewerAbstract.vb">
+    <Compile Include="Source\UI\Components\DockPanelItems\ViewerAbstract.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Ancestor\Viewers\Census\CensusViewer.vb">
+    <Compile Include="Source\UI\Components\DockPanelItems\Census\CensusViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\App\TestForms\frmTestSplitters.Designer.vb">
+    <Compile Include="Test\frmTestSplitters.Designer.vb">
       <DependentUpon>frmTestSplitters.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\App\TestForms\frmTestSplitters.vb">
+    <Compile Include="Test\frmTestSplitters.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Gedcom\Helpers\FileLineEntry.vb" />
-    <Compile Include="Source\Gedcom\GedDataTypes\GedDate.vb" />
-    <None Include="Source\Gedcom\Helpers\PlaceNormalized.vb" />
-    <Compile Include="Source\Ancestor\Viewers\Gallery\ImageGallery.vb">
+    <Compile Include="Source\Objects\GedcomFile\File\FileLineEntry.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Primatives\GedDate.vb" />
+    <None Include="Source\Objects\GedcomFile\File\PlaceNormalized.vb" />
+    <Compile Include="Source\UI\Components\DockPanelItems\Gallery\ImageGallery.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Ancestor\Viewers\Notebook\NotebookViewer.vb">
+    <Compile Include="Source\UI\Components\DockPanelItems\Notebook\NotebookViewer.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Gedcom\Gedcom.vb" />
-    <Compile Include="Source\Gedcom\GedTags\AbstractTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\EventTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\FactTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\FamilyRefTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\FamilyTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\GedTagEnum.vb" />
-    <Compile Include="Source\Gedcom\GedTags\HeaderTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\IndividualTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\MediaRefTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\MediaTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\MttagRefTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\MttagTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\NameTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\PlaceTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\RepositoryTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\SourceRefTag.vb" />
-    <Compile Include="Source\Gedcom\GedTags\SourceTag.vb" />
-    <Compile Include="Source\Gedcom\GedDataTypes\GedName.vb" />
-    <Compile Include="Source\Helpers\Logger.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Gedcom.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\AbstractTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\EventTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\FactTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\FamilyRefTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\FamilyTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\GedTagEnum.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\HeaderTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\IndividualTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\MediaRefTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\MediaTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\MttagRefTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\MttagTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\NameTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\PlaceTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\RepositoryTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\SourceRefTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Tags\SourceTag.vb" />
+    <Compile Include="Source\Objects\GedcomFile\Primatives\GedName.vb" />
+    <Compile Include="Source\UI\Components\Utils\Logger.vb" />
     <Compile Include="Source\Enums\FontAncestryIconEnum.vb" />
     <Compile Include="Source\Enums\FontSegoeFluentIconsEnum.vb" />
     <Compile Include="Source\Enums\IconSizeEnum.vb" />
     <Compile Include="Source\Enums\RibbonButtonSizeEnum.vb" />
-    <Compile Include="Source\Enums\ThemeCategoryEnum.vb" />
-    <Compile Include="Source\Enums\ThemeIconsEnum.vb" />
-    <Compile Include="Source\Ancestry\Enums\CaptureTypeEnum.vb" />
-    <Compile Include="Source\Ancestry\Enums\DataTypeEnum.vb" />
-    <Compile Include="Source\Ancestry\Enums\UriTrackingGroupEnum.vb" />
-    <Compile Include="Source\Helpers\Utils.vb" />
-    <Compile Include="Source\Ancestry\DataObjects\APIMessage.vb" />
+    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Enums\CaptureTypeEnum.vb" />
+    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Enums\DataTypeEnum.vb" />
+    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Enums\UriTrackingGroupEnum.vb" />
+    <Compile Include="Source\UI\Components\Utils\Utils.vb" />
+    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Objects\APIMessage.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -463,34 +475,37 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Source\Ancestry\AncestryWebViewer.resx">
+    <EmbeddedResource Include="Source\UI\Components\DockPanelItems\AncestryBrowser\AncestryWebViewer.resx">
       <DependentUpon>AncestryWebViewer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Components\Dock\DockPanel.resx">
+    <EmbeddedResource Include="Source\UI\Components\DockPanels\DockPanel.resx">
       <DependentUpon>DockPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Components\Ancestor\AncestorPanel.resx">
+    <EmbeddedResource Include="Source\UI\Components\DockPanelItems\Ancestor\AncestorPanel.resx">
       <DependentUpon>AncestorPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Components\Ancestor\AncestorsListPanel.resx">
+    <EmbeddedResource Include="Source\UI\Components\DockPanelItems\AncestorsList\AncestorsListPanel.resx">
       <DependentUpon>AncestorsListPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Dialogs\SaveImageDetails.resx">
+    <EmbeddedResource Include="Source\UI\Dialogs\SaveImageDetails.resx">
       <DependentUpon>SaveImageDetails.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\Forms\ApplicationForm.resx">
+    <EmbeddedResource Include="Source\UI\Forms\ApplicationForm.resx">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\TestForms\frmButtonTestForm.resx">
+    <EmbeddedResource Include="Test\frmButtonTestForm.resx">
       <DependentUpon>frmButtonTestForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\TestForms\frmTestRibbon.resx">
+    <EmbeddedResource Include="Test\frmTestDockTopTabs.resx">
+      <DependentUpon>frmTestDockTopTabs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\frmTestRibbon.resx">
       <DependentUpon>frmTestRibbon.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\TestForms\frmColorPallet.resx">
+    <EmbeddedResource Include="Test\frmColorPallet.resx">
       <DependentUpon>frmColorPallet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Gedcom\TestForms\frmTestGEDCOM.resx">
+    <EmbeddedResource Include="Test\frmTestGEDCOM.resx">
       <DependentUpon>frmTestGEDCOM.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -499,7 +514,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\App\TestForms\frmTestSplitters.resx">
+    <EmbeddedResource Include="Test\frmTestSplitters.resx">
       <DependentUpon>frmTestSplitters.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
