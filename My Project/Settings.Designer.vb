@@ -737,6 +737,18 @@ Namespace My
                 Me("UI_MR_WIDTH") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("65171586")>  _
+        Public Property ANCESTRY_TREE_ID() As String
+            Get
+                Return CType(Me("ANCESTRY_TREE_ID"),String)
+            End Get
+            Set
+                Me("ANCESTRY_TREE_ID") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

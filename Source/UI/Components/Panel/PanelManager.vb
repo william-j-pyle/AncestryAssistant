@@ -41,37 +41,89 @@
     Return instance
   End Function
 
-  Public Shared Sub RegisterPanel(panelType As PanelManagerPanelType, panelControl As Panel)
+  Private Function getPanel(panelLocation As DockPanelLocation) As Panel
+    Dim pnl As Panel = Nothing
+    Select Case panelLocation
+      Case DockPanelLocation.ContainerLeftPanels
+        pnl = L
+      Case DockPanelLocation.LeftTop
+        pnl = LT
+      Case DockPanelLocation.LeftBottom
+        pnl = LB
+      Case DockPanelLocation.MiddleTopLeft
+        pnl = ML
+      Case DockPanelLocation.MiddleTopRight
+        pnl = MR
+      Case DockPanelLocation.MiddleBottom
+        pnl = MB
+      Case DockPanelLocation.ContainerRightPanels
+        pnl = R
+      Case DockPanelLocation.RightTop
+        pnl = RT
+      Case DockPanelLocation.RightBottom
+        pnl = RB
+    End Select
+    Return pnl
+  End Function
+
+  Private Function IAddItem(panelLocation As DockPanelLocation, panelItem As IDockPanelItem) As IDockPanelItem
+    Dim pnl As Panel = getPanel(panelLocation)
+    If pnl IsNot Nothing Then
+      If pnl.Controls.Count = 1 Then
+        With panelItem
+          .ItemDockStyle = DockStyle.Fill
+          '.PanelShowClose = True
+          '.PanelShowSearch = False
+          '.PanelShowPinned = True
+          '.PanelShowContextMenu = False
+          '.PanelHasFocus = False
+          '.PanelIsPinned = True
+          '.PanelBackColor = Color.Black
+          '.PanelBorderColor = Color.DimGray
+          '.PanelFontColor = Color.WhiteSmoke
+          '.PanelHighlightColor = Color.LimeGreen
+          '.PanelShadowColor = ColorToShadow(Color.DimGray)
+          '.PanelAccentColor = ColorToAccent(Color.DimGray)
+        End With
+        With CType(pnl.Controls(0), IDockPanel)
+          .AddItem(panelItem)
+        End With
+        Return panelItem
+      End If
+    End If
+    Return Nothing
+  End Function
+
+  Public Shared Function AddItem(panelLocation As DockPanelLocation, panelItem As IDockPanelItem) As IDockPanelItem
+    Return GetInstance().IAddItem(panelLocation, panelItem)
+  End Function
+
+  Public Shared Sub RegisterPanel(panelLocation As DockPanelLocation, panelControl As Panel, Optional panelType As DockPanelType = DockPanelType.None)
     Dim self As PanelManager = GetInstance()
     Debug.Print("PanelManager:  RegisterPanel({0})", panelControl.Name)
 
-    Select Case panelType
-      Case PanelManagerPanelType.ContainerLeftPanels
+    Select Case panelLocation
+      Case DockPanelLocation.ContainerLeftPanels
         self.L = panelControl
-      Case PanelManagerPanelType.LeftTop
+      Case DockPanelLocation.LeftTop
         self.LT = panelControl
-      Case PanelManagerPanelType.LeftBottom
+      Case DockPanelLocation.LeftBottom
         self.LB = panelControl
-      Case PanelManagerPanelType.MiddleTopLeft
+      Case DockPanelLocation.MiddleTopLeft
         self.ML = panelControl
-      Case PanelManagerPanelType.MiddleTopRight
+      Case DockPanelLocation.MiddleTopRight
         self.MR = panelControl
-      Case PanelManagerPanelType.MiddleBottom
+      Case DockPanelLocation.MiddleBottom
         self.MB = panelControl
-      Case PanelManagerPanelType.ContainerRightPanels
+      Case DockPanelLocation.ContainerRightPanels
         self.R = panelControl
-      Case PanelManagerPanelType.RightTop
+      Case DockPanelLocation.RightTop
         self.RT = panelControl
-      Case PanelManagerPanelType.RightBottom
+      Case DockPanelLocation.RightBottom
         self.RB = panelControl
       Case Else
         Exit Sub
     End Select
-    self.setPanelDefaults(panelControl)
-  End Sub
-
-  Private Sub setPanelDefaults(panelControl As Panel)
-    Debug.Print("PanelManager:  setPanelDefaults")
 
     With panelControl
       .Margin = New Padding(0)
@@ -79,36 +131,69 @@
       .BackColor = Color.Black
       .ForeColor = Color.WhiteSmoke
     End With
+
+    Dim ctl As IDockPanel
+    Select Case panelType
+      Case DockPanelType.Panel
+        Dim bCtl As DockPanel = New DockPanel()
+        bCtl.Dock = DockStyle.Fill
+        ctl = bCtl
+      Case DockPanelType.Tab
+        Dim bCtl As DockTopTabs = New DockTopTabs()
+        bCtl.Dock = DockStyle.Fill
+        ctl = bCtl
+      Case Else
+        Exit Sub
+    End Select
+
+    With ctl
+      .PanelShowClose = True
+      .PanelShowSearch = False
+      .PanelShowPinned = True
+      .PanelShowContextMenu = False
+      .PanelHasFocus = False
+      .PanelIsPinned = True
+      .PanelBackColor = Color.Black
+      .PanelBorderColor = Color.DimGray
+      .PanelFontColor = Color.WhiteSmoke
+      .PanelHighlightColor = Color.LimeGreen
+      .PanelShadowColor = ColorToShadow(Color.DimGray)
+      .PanelAccentColor = ColorToAccent(Color.DimGray)
+    End With
+
+    panelControl.Controls.Add(CType(ctl, Control))
+
   End Sub
 
-  Public Shared Sub RegisterSplitter(splitterType As PanelManagerSplitterType, splitControl As Splitter)
+
+  Public Shared Sub RegisterSplitter(splitterType As DockPanelSplitterPlacement, splitControl As Splitter)
     Dim self As PanelManager = GetInstance()
     Debug.Print("PanelManager:  RegisterSplitter({0})", splitControl.Name)
     Select Case splitterType
-      Case PanelManagerSplitterType.SplitLeftAndMiddle
+      Case DockPanelSplitterPlacement.SplitLeftAndMiddle
         self.SL = splitControl
-      Case PanelManagerSplitterType.SplitLeftTopAndBottom
+      Case DockPanelSplitterPlacement.SplitLeftTopAndBottom
         self.SLTLB = splitControl
-      Case PanelManagerSplitterType.SplitRightAndMiddle
+      Case DockPanelSplitterPlacement.SplitRightAndMiddle
         self.SR = splitControl
-      Case PanelManagerSplitterType.SplitRightTopAndBottom
+      Case DockPanelSplitterPlacement.SplitRightTopAndBottom
         self.SRTRB = splitControl
-      Case PanelManagerSplitterType.SplitMiddleTopLeftAndTopRight
+      Case DockPanelSplitterPlacement.SplitMiddleTopLeftAndTopRight
         self.SMLMR = splitControl
-      Case PanelManagerSplitterType.SplitMiddleTopAndBottom
+      Case DockPanelSplitterPlacement.SplitMiddleTopAndBottom
         self.SMLRMB = splitControl
     End Select
   End Sub
 
-  Public Shared Sub ShowPanel(panelType As PanelManagerPanelType)
+  Public Shared Sub ShowPanel(panelType As DockPanelLocation)
     SetPanelVisibility(panelType, True)
   End Sub
 
-  Public Shared Sub HidePanel(panelType As PanelManagerPanelType)
+  Public Shared Sub HidePanel(panelType As DockPanelLocation)
     SetPanelVisibility(panelType, False)
   End Sub
 
-  Public Shared Sub SetPanelVisibility(panelType As PanelManagerPanelType, pnlVisible As Boolean)
+  Public Shared Sub SetPanelVisibility(panelType As DockPanelLocation, pnlVisible As Boolean)
     If instance Is Nothing Then
       Throw New Exception("Attempted use of PanelManager before Initialized")
       Exit Sub
@@ -117,21 +202,21 @@
   End Sub
 
 
-  Private Sub instanceSetPanelVisibility(panelType As PanelManagerPanelType, pnlVisible As Boolean)
+  Private Sub instanceSetPanelVisibility(panelType As DockPanelLocation, pnlVisible As Boolean)
     Select Case panelType
-      Case PanelManagerPanelType.LeftTop
+      Case DockPanelLocation.LeftTop
         panelLeft(pnlVisible, LB.Visible)
-      Case PanelManagerPanelType.LeftBottom
+      Case DockPanelLocation.LeftBottom
         panelLeft(LT.Visible, pnlVisible)
-      Case PanelManagerPanelType.MiddleTopLeft
+      Case DockPanelLocation.MiddleTopLeft
         panelMiddle(pnlVisible, MR.Visible, MB.Visible)
-      Case PanelManagerPanelType.MiddleTopRight
+      Case DockPanelLocation.MiddleTopRight
         panelMiddle(ML.Visible, pnlVisible, MB.Visible)
-      Case PanelManagerPanelType.MiddleBottom
+      Case DockPanelLocation.MiddleBottom
         panelMiddle(ML.Visible, MR.Visible, pnlVisible)
-      Case PanelManagerPanelType.RightTop
+      Case DockPanelLocation.RightTop
         panelRight(pnlVisible, RB.Visible)
-      Case PanelManagerPanelType.RightBottom
+      Case DockPanelLocation.RightBottom
         panelRight(RT.Visible, pnlVisible)
     End Select
   End Sub

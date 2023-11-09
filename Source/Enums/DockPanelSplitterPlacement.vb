@@ -1,4 +1,4 @@
-﻿Public Enum PanelManagerSplitterType
+﻿Public Enum DockPanelSplitterPlacement
   SplitLeftAndMiddle
   SplitLeftTopAndBottom
   SplitRightAndMiddle

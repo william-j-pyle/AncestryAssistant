@@ -152,11 +152,11 @@ Public Class DockTopTabs
   End Property
 
   Public Sub SelectItemByIndex(index As Integer) Implements IDockPanel.SelectItemByIndex
-    Throw New NotImplementedException()
+    TabPages.Item(index).Select()
   End Sub
 
   Public Sub SelectItemByKey(key As String) Implements IDockPanel.SelectItemByKey
-    Throw New NotImplementedException()
+    TabPages.Item(key).Select()
   End Sub
 
   Public Function AddItem(item As IDockPanelItem) As Integer Implements IDockPanel.AddItem
@@ -165,7 +165,10 @@ Public Class DockTopTabs
     If TabCount = 2 And TabPages(0).Text = "" Then
       TabPages.RemoveAt(0)
     End If
-    TabPages(item.ItemCaption).Controls.Add(CType(item, Control))
+    With TabPages(item.ItemCaption)
+      .Controls.Add(CType(item, Control))
+      .Select()
+    End With
     HideIfEmpty()
   End Function
 
@@ -186,6 +189,7 @@ Public Class DockTopTabs
     Dim ctl As Control = TabPages(key).Controls(0)
     If TabCount = 1 Then
       TabPages.Add("BLANK", "")
+      SelectItemByKey("BLANK")
     End If
     TabPages.RemoveByKey(key)
     HideIfEmpty()
@@ -225,7 +229,7 @@ Public Class DockTopTabs
     If TabCount = 0 Then
       Visible = False
     Else
-      If TabCount = 1 And SelectedTab.Text.Equals("") Then
+      If TabCount = 1 And TabPages.Item(0).Text.Equals("") Then
         Visible = False
       Else
         Visible = True

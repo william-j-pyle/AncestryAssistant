@@ -30,6 +30,23 @@ Module Utils
     Return paddedImage
   End Function
 
+  Public Function uniqueFilename(baseName As String, extensions() As String) As String
+    Dim uni As String = ""
+    Dim uniIdx As Integer = 0
+    Dim isUnique As Boolean = False
+    While Not isUnique
+      isUnique = True
+      For Each ext As String In extensions
+        isUnique = isUnique And Not File.Exists(baseName + uni + "." + ext)
+      Next
+      If Not isUnique Then
+        uniIdx += 1
+        uni = "-" & uniIdx.ToString.PadLeft(3, "0")
+      End If
+    End While
+    Return baseName + uni
+  End Function
+
   Public Sub saveFile(ByVal data As String, ByVal dirPath As String, ByVal fileName As String, Optional overwrite As Boolean = False)
     If Not dirPath.EndsWith("\") Then dirPath += "\"
     If File.Exists(dirPath & fileName) And Not overwrite Then

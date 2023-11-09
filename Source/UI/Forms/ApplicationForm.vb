@@ -11,6 +11,7 @@ Public Class ApplicationForm
   Public Event ActiveAncestorChanged()
   Public Event AncestorsUpdated()
 
+  Private WithEvents Ancestry As AncestryWebViewer
   Private Ancestors As AncestorCollection
   Private WithEvents AncestorAttributes As AncestorPanel
   Private WithEvents AncestorsList As AncestorsListPanel
@@ -41,102 +42,145 @@ Public Class ApplicationForm
     InitializeComponent()
     AncestryDirectorWatcher.EnableRaisingEvents = False
     Ancestors = New AncestorCollection(My.Settings.AncestorsPath)
+    AncestryDirectorWatcher.EnableRaisingEvents = False
+  End Sub
+
+
+  Private Sub ApplicationForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    ' Register All Panels
+    PanelManager.RegisterPanel(DockPanelLocation.ContainerLeftPanels, pnlLeft)
+    PanelManager.RegisterPanel(DockPanelLocation.LeftTop, pnlLeftTop, DockPanelType.Panel)
+    PanelManager.RegisterPanel(DockPanelLocation.LeftBottom, pnlLeftBottom, DockPanelType.Panel)
+
+    PanelManager.RegisterPanel(DockPanelLocation.ContainerRightPanels, pnlRight)
+    PanelManager.RegisterPanel(DockPanelLocation.RightTop, pnlRightTop, DockPanelType.Panel)
+    PanelManager.RegisterPanel(DockPanelLocation.RightBottom, pnlRightBottom, DockPanelType.Panel)
+
+    PanelManager.RegisterPanel(DockPanelLocation.MiddleTopLeft, pnlMiddleLeft, DockPanelType.Tab)
+    PanelManager.RegisterPanel(DockPanelLocation.MiddleTopRight, pnlMiddleRight, DockPanelType.Tab)
+    PanelManager.RegisterPanel(DockPanelLocation.MiddleBottom, pnlMiddleBottom, DockPanelType.Panel)
+
+    ' Register All Splitters
+    PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitLeftAndMiddle, splitLeft)
+    PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitLeftTopAndBottom, splitLeftTopBottom)
+    PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitRightAndMiddle, splitRight)
+    PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitRightTopAndBottom, splitRightTopBottom)
+    PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitMiddleTopLeftAndTopRight, splitMiddleLeftRight)
+    PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitMiddleTopAndBottom, splitMiddleBottom)
+
+    ' Load Saved Visibility and Sizes
+    PanelManager.SetPanelVisibility(DockPanelLocation.MiddleTopLeft, My.Settings.UI_ML_VIS)
+    PanelManager.SetPanelVisibility(DockPanelLocation.MiddleTopRight, My.Settings.UI_MR_VIS)
+    PanelManager.SetPanelVisibility(DockPanelLocation.MiddleBottom, My.Settings.UI_MB_VIS)
+    pnlMiddleRight.Width = My.Settings.UI_MR_WIDTH
+    pnlMiddleBottom.Height = My.Settings.UI_MB_HEIGHT
+
+    PanelManager.SetPanelVisibility(DockPanelLocation.LeftTop, My.Settings.UI_LT_VIS)
+    PanelManager.SetPanelVisibility(DockPanelLocation.LeftBottom, My.Settings.UI_LB_VIS)
+    pnlLeft.Width = My.Settings.UI_L_WIDTH
+    pnlLeftTop.Height = My.Settings.UI_LT_HEIGHT
+
+    PanelManager.SetPanelVisibility(DockPanelLocation.RightTop, False) ' My.Settings.UI_RT_VIS)
+    PanelManager.SetPanelVisibility(DockPanelLocation.RightBottom, False) 'My.Settings.UI_RB_VIS)
+    pnlRight.Width = My.Settings.UI_R_WIDTH
+    pnlRightTop.Height = My.Settings.UI_RT_HEIGHT
+
     AncestorsList = New AncestorsListPanel()
     AncestorsList.setAncestors(Ancestors)
-    AncestryDirectorWatcher.EnableRaisingEvents = True
+    PanelManager.AddItem(DockPanelLocation.LeftBottom, AncestorsList)
+
+    Ancestry = New AncestryWebViewer()
+    Ancestry.AncestryTreeID = My.Settings.ANCESTRY_TREE_ID
+    AddHandler Ancestry.ViewerBusy, AddressOf AncestryBrowserBusyChanged
+    AddHandler Ancestry.UriTrackingGroupChanged, AddressOf AncestryURITrackingGroupChanged
+    AddHandler Ancestry.DataDownload, AddressOf AncestryDataMessage
+    PanelManager.AddItem(DockPanelLocation.MiddleTopLeft, Ancestry)
+
+    AncestorAttributes = New AncestorPanel()
+    PanelManager.AddItem(DockPanelLocation.LeftTop, AncestorAttributes)
+
+    PanelManager.AddItem(DockPanelLocation.MiddleTopLeft, New ImageGallery())
+    'PanelManager.AddItem(DockPanelLocation.MiddleBottom, New CensusViewer())
   End Sub
+
 
 #End Region
 
 #Region "App Toolbar - Event Handlers"
 
-    ' ==========================
-    ' = App Toolbar - Event Handlers
-    ' ==========================
+  ' ==========================
+  ' = App Toolbar - Event Handlers
+  ' ==========================
 
-    Private Sub btnHomeTree_Click(sender As Object, e As EventArgs)
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_OVERVIEW_TREE)
-    End Sub
+  Private Sub btnHomeTree_Click(sender As Object, e As EventArgs)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_OVERVIEW_TREE)
+  End Sub
 
-    Private Sub btnViewPedigree_Click(sender As Object, e As EventArgs)
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_PEDIGREEVIEW_PERSON)
-    End Sub
+  Private Sub btnViewPedigree_Click(sender As Object, e As EventArgs)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_PEDIGREEVIEW_PERSON)
+  End Sub
 
-    Private Sub btnViewTree_Click(sender As Object, e As EventArgs)
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_TREEVIEW_PERSON)
-    End Sub
+  Private Sub btnViewTree_Click(sender As Object, e As EventArgs)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_TREEVIEW_PERSON)
+  End Sub
 
-    Private Sub btnViewFan_Click(sender As Object, e As EventArgs)
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FANVIEW_PERSON)
-    End Sub
+  Private Sub btnViewFan_Click(sender As Object, e As EventArgs)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FANVIEW_PERSON)
+  End Sub
 
-    Private Sub btnPersonFact_Click(sender As Object, e As EventArgs)
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON)
-    End Sub
+  Private Sub btnPersonFact_Click(sender As Object, e As EventArgs)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON)
+  End Sub
 
-    Private Sub btnPersonHints_Click(sender As Object, e As EventArgs)
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON)
-    End Sub
+  Private Sub btnPersonHints_Click(sender As Object, e As EventArgs)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON)
+  End Sub
 
-    Private Sub btnPersonGallery_Click(sender As Object, e As EventArgs)
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON)
-    End Sub
+  Private Sub btnPersonGallery_Click(sender As Object, e As EventArgs)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON)
+  End Sub
 
-    Private Sub btnPersonStory_Click(sender As Object, e As EventArgs)
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_STORY_PERSON)
-    End Sub
+  Private Sub btnPersonStory_Click(sender As Object, e As EventArgs)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_STORY_PERSON)
+  End Sub
 
-    Private Sub AncestryToolbarToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        Ancestry.ShowToolbar = AncestryToolbarToolStripMenuItem.Checked
-    End Sub
+  Private Sub AncestryToolbarToolStripMenuItem_Click(sender As Object, e As EventArgs)
+    Ancestry.ShowToolbar = AncestryToolbarToolStripMenuItem.Checked
+  End Sub
 
 #End Region
 
 #Region "App Menu - Event Handlers"
 
-    ' ==========================
-    ' = App Menu - Event Handlers
-    ' ==========================
+  ' ==========================
+  ' = App Menu - Event Handlers
+  ' ==========================
 
 
-    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        My.Settings.Save()
-        Close()
-    End Sub
-
-#End Region
-
-#Region "Viewer - Ancestors List"
-
-
-    Private Sub AncestryDirectorWatcher_Changed(sender As Object, e As FileSystemEventArgs)
-        Debug.Print("FILEWATCHER(Changed')=" & e.FullPath)
-    End Sub
-
-    Private Sub AncestryDirectorWatcher_Created(sender As Object, e As FileSystemEventArgs)
-        Logger.log(Logger.LOG_TYPE.INFO, "FILEWATCHER(Created')=" & e.FullPath)
-        RaiseEvent ActiveAncestorChanged()
-        'TODO: LoadAncestorList()
-    End Sub
+  Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs)
+    My.Settings.Save()
+    Close()
+  End Sub
 
 #End Region
+
 
 #Region "Viewer - Ancestry Web"
 
-    ' ==========================
-    ' = Viewer - Ancestry Web
-    ' ==========================
+  ' ==========================
+  ' = Viewer - Ancestry Web
+  ' ==========================
 
-    Private Sub Ancestry_ViewerBusy(busy As Boolean) Handles Ancestry.ViewerBusy
+  Private Sub AncestryBrowserBusyChanged(busy As Boolean)
     If busy Then
       Cursor = Cursors.WaitCursor
-      dockMiddleLeft.SelectTab(0)
     Else
       Cursor = Cursors.Default
     End If
   End Sub
 
-  Private Sub Ancestry_UriTrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum) Handles Ancestry.UriTrackingGroupChanged
+  Private Sub AncestryURITrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
     If btnActions.Visible Then
       If NewGroup <> OldGroup Then
         btnActions.Visible = False
@@ -150,7 +194,7 @@ Public Class ApplicationForm
   Private Const ANCESTOR_IMAGE As String = "Download Image"
   Private Const FINDAGRAVE_IMAGE As String = "Download FindAGrave Image"
 
-  Private Sub Ancestry_AncestryData(msg As APIMessage) Handles Ancestry.DataDownload
+  Private Sub AncestryDataMessage(msg As APIMessage)
     Logger.log(Logger.LOG_TYPE.ERR, msg.ToString)
     Select Case msg.MessageType
       Case APIMessage.MT_SAVEAS
@@ -337,23 +381,6 @@ Public Class ApplicationForm
 
   End Sub
 
-  Private Function uniqueFilename(baseName As String, extensions() As String) As String
-    Dim uni As String = ""
-    Dim uniIdx As Integer = 0
-    Dim isUnique As Boolean = False
-    While Not isUnique
-      isUnique = True
-      For Each ext As String In extensions
-        isUnique = isUnique And Not File.Exists(baseName + uni + "." + ext)
-      Next
-      If Not isUnique Then
-        uniIdx += 1
-        uni = "-" & uniIdx.ToString.PadLeft(3, "0")
-      End If
-    End While
-    Return baseName + uni
-  End Function
-
   Private Sub ApplicationForm_AncestorsUpdated() Handles Me.AncestorsUpdated
     Logger.log(Logger.LOG_TYPE.INFO, "ApplicationForm_AncestorsUpdated")
     AncestorsList.setAncestors(Ancestors, AncestorId)
@@ -365,7 +392,7 @@ Public Class ApplicationForm
     AncestorsList.setActiveAncestor(AncestorId)
     AncestorAttributes.SetAncestor(ancestor)
     'imgGallery.SetAncestor(ancestor)
-    CensusViewer1.SetAncestor(ancestor)
+    'CensusViewer1.SetAncestor(ancestor)
     'NotebookViewer1.SetAncestor(ancestor)
   End Sub
 
@@ -405,58 +432,6 @@ Public Class ApplicationForm
 
 
 
-  Private Sub ApplicationForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    LoadUIState()
-    AncestorAttributes = New AncestorPanel
-    dockMiddleLeft.AddItem(Ancestry)
-    dockMiddleRight.AddItem(New ImageGallery())
-    dockMiddleRight.AddItem(New CensusViewer())
-    dockTopLeft.AddItem(AncestorAttributes)
-    dockBottomLeft.AddItem(AncestorsList)
-  End Sub
-
-  Private Sub LoadUIState()
-
-    ' Register All Panels
-    PanelManager.RegisterPanel(PanelManagerPanelType.ContainerLeftPanels, pnlLeft)
-    PanelManager.RegisterPanel(PanelManagerPanelType.LeftTop, pnlLeftTop)
-    PanelManager.RegisterPanel(PanelManagerPanelType.LeftBottom, pnlLeftBottom)
-
-    PanelManager.RegisterPanel(PanelManagerPanelType.ContainerRightPanels, pnlRight)
-    PanelManager.RegisterPanel(PanelManagerPanelType.RightTop, pnlRightTop)
-    PanelManager.RegisterPanel(PanelManagerPanelType.RightBottom, pnlRightBottom)
-
-    PanelManager.RegisterPanel(PanelManagerPanelType.MiddleTopLeft, pnlMiddleLeft)
-    PanelManager.RegisterPanel(PanelManagerPanelType.MiddleTopRight, pnlMiddleRight)
-    PanelManager.RegisterPanel(PanelManagerPanelType.MiddleBottom, pnlMiddleBottom)
-    PanelManager.RegisterPanel(PanelManagerPanelType.LeftBottom, pnlLeftBottom)
-
-    ' Register All Splitters
-    PanelManager.RegisterSplitter(PanelManagerSplitterType.SplitLeftAndMiddle, splitLeft)
-    PanelManager.RegisterSplitter(PanelManagerSplitterType.SplitLeftTopAndBottom, splitLeftTopBottom)
-    PanelManager.RegisterSplitter(PanelManagerSplitterType.SplitRightAndMiddle, splitRight)
-    PanelManager.RegisterSplitter(PanelManagerSplitterType.SplitRightTopAndBottom, splitRightTopBottom)
-    PanelManager.RegisterSplitter(PanelManagerSplitterType.SplitMiddleTopLeftAndTopRight, splitMiddleLeftRight)
-    PanelManager.RegisterSplitter(PanelManagerSplitterType.SplitMiddleTopAndBottom, splitMiddleBottom)
-
-    ' Load Saved Visibility and Sizes
-    PanelManager.SetPanelVisibility(PanelManagerPanelType.MiddleTopLeft, My.Settings.UI_ML_VIS)
-    PanelManager.SetPanelVisibility(PanelManagerPanelType.MiddleTopRight, My.Settings.UI_MR_VIS)
-    PanelManager.SetPanelVisibility(PanelManagerPanelType.MiddleBottom, My.Settings.UI_MB_VIS)
-    pnlMiddleRight.Width = My.Settings.UI_MR_WIDTH
-    pnlMiddleBottom.Height = My.Settings.UI_MB_HEIGHT
-
-    PanelManager.SetPanelVisibility(PanelManagerPanelType.LeftTop, My.Settings.UI_LT_VIS)
-    PanelManager.SetPanelVisibility(PanelManagerPanelType.LeftBottom, My.Settings.UI_LB_VIS)
-    pnlLeft.Width = My.Settings.UI_L_WIDTH
-    pnlLeftTop.Height = My.Settings.UI_LT_HEIGHT
-
-    PanelManager.SetPanelVisibility(PanelManagerPanelType.RightTop, False) ' My.Settings.UI_RT_VIS)
-    PanelManager.SetPanelVisibility(PanelManagerPanelType.RightBottom, False) 'My.Settings.UI_RB_VIS)
-    pnlRight.Width = My.Settings.UI_R_WIDTH
-    pnlRightTop.Height = My.Settings.UI_RT_HEIGHT
-  End Sub
-
   Private Sub SaveUIState()
     My.Settings.UI_MR_WIDTH = pnlMiddleRight.Width
     My.Settings.UI_MB_HEIGHT = pnlMiddleBottom.Height
@@ -480,10 +455,22 @@ Public Class ApplicationForm
   End Sub
 
   Private Sub btnCensus_Click(sender As Object, e As EventArgs) Handles btnCensus.Click
-    PanelManager.SetPanelVisibility(PanelManagerPanelType.MiddleBottom, btnCensus.Checked)
+    PanelManager.SetPanelVisibility(DockPanelLocation.MiddleBottom, btnCensus.Checked)
   End Sub
 
   Private Sub btnNotebook_Click(sender As Object, e As EventArgs) Handles btnNotebook.Click
-    PanelManager.SetPanelVisibility(PanelManagerPanelType.MiddleTopRight, btnNotebook.Checked)
+    PanelManager.SetPanelVisibility(DockPanelLocation.MiddleTopRight, btnNotebook.Checked)
+  End Sub
+
+  Private Sub Ancestry_UriTrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
+
+  End Sub
+
+  Private Sub Ancestry_AncestryData(data As APIMessage)
+
+  End Sub
+
+  Private Sub Ancestry_ViewerBusy(busy As Boolean)
+
   End Sub
 End Class

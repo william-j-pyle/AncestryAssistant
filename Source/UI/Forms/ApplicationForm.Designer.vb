@@ -75,13 +75,6 @@ Partial Class ApplicationForm
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.dockMiddleLeft = New AncestryAssistant.DockTopTabs()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.dockMiddleRight = New AncestryAssistant.DockPanel()
-        Me.CensusViewer1 = New AncestryAssistant.CensusViewer()
-        Me.dockBottomLeft = New AncestryAssistant.DockPanel()
-        Me.dockTopLeft = New AncestryAssistant.DockPanel()
-        Me.Ancestry = New AncestryAssistant.AncestryWebViewer()
         Me.MenuBar1 = New AncestryAssistant.MenuBar()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PreferencesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -97,16 +90,9 @@ Partial Class ApplicationForm
         Me.pnlMain.SuspendLayout()
         Me.pnlMiddle.SuspendLayout()
         Me.pnlMiddleTop.SuspendLayout()
-        Me.pnlMiddleLeft.SuspendLayout()
-        Me.pnlMiddleRight.SuspendLayout()
-        Me.pnlMiddleBottom.SuspendLayout()
         Me.pnlLeft.SuspendLayout()
-        Me.pnlLeftBottom.SuspendLayout()
-        Me.pnlLeftTop.SuspendLayout()
         Me.pnlRight.SuspendLayout()
-        Me.pnlRightTop.SuspendLayout()
         Me.StatusBar1.SuspendLayout()
-        Me.dockMiddleLeft.SuspendLayout()
         Me.MenuBar1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -375,7 +361,7 @@ Partial Class ApplicationForm
         Me.pnlMain.Margin = New System.Windows.Forms.Padding(0)
         Me.pnlMain.Name = "pnlMain"
         Me.pnlMain.Padding = New System.Windows.Forms.Padding(4)
-        Me.pnlMain.Size = New System.Drawing.Size(899, 266)
+        Me.pnlMain.Size = New System.Drawing.Size(899, 428)
         Me.pnlMain.TabIndex = 9
         '
         'pnlMiddle
@@ -386,7 +372,7 @@ Partial Class ApplicationForm
         Me.pnlMiddle.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMiddle.Location = New System.Drawing.Point(214, 4)
         Me.pnlMiddle.Name = "pnlMiddle"
-        Me.pnlMiddle.Size = New System.Drawing.Size(477, 258)
+        Me.pnlMiddle.Size = New System.Drawing.Size(477, 420)
         Me.pnlMiddle.TabIndex = 13
         '
         'pnlMiddleTop
@@ -397,17 +383,16 @@ Partial Class ApplicationForm
         Me.pnlMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMiddleTop.Location = New System.Drawing.Point(0, 0)
         Me.pnlMiddleTop.Name = "pnlMiddleTop"
-        Me.pnlMiddleTop.Size = New System.Drawing.Size(477, 183)
+        Me.pnlMiddleTop.Size = New System.Drawing.Size(477, 345)
         Me.pnlMiddleTop.TabIndex = 0
         '
         'pnlMiddleLeft
         '
         Me.pnlMiddleLeft.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.pnlMiddleLeft.Controls.Add(Me.dockMiddleLeft)
         Me.pnlMiddleLeft.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMiddleLeft.Location = New System.Drawing.Point(0, 0)
         Me.pnlMiddleLeft.Name = "pnlMiddleLeft"
-        Me.pnlMiddleLeft.Size = New System.Drawing.Size(358, 183)
+        Me.pnlMiddleLeft.Size = New System.Drawing.Size(358, 345)
         Me.pnlMiddleLeft.TabIndex = 4
         '
         'splitMiddleLeftRight
@@ -415,24 +400,23 @@ Partial Class ApplicationForm
         Me.splitMiddleLeftRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.splitMiddleLeftRight.Location = New System.Drawing.Point(358, 0)
         Me.splitMiddleLeftRight.Name = "splitMiddleLeftRight"
-        Me.splitMiddleLeftRight.Size = New System.Drawing.Size(4, 183)
+        Me.splitMiddleLeftRight.Size = New System.Drawing.Size(4, 345)
         Me.splitMiddleLeftRight.TabIndex = 6
         Me.splitMiddleLeftRight.TabStop = False
         '
         'pnlMiddleRight
         '
         Me.pnlMiddleRight.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.pnlMiddleRight.Controls.Add(Me.dockMiddleRight)
         Me.pnlMiddleRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.pnlMiddleRight.Location = New System.Drawing.Point(362, 0)
         Me.pnlMiddleRight.Name = "pnlMiddleRight"
-        Me.pnlMiddleRight.Size = New System.Drawing.Size(115, 183)
+        Me.pnlMiddleRight.Size = New System.Drawing.Size(115, 345)
         Me.pnlMiddleRight.TabIndex = 5
         '
         'splitMiddleBottom
         '
         Me.splitMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.splitMiddleBottom.Location = New System.Drawing.Point(0, 183)
+        Me.splitMiddleBottom.Location = New System.Drawing.Point(0, 345)
         Me.splitMiddleBottom.Name = "splitMiddleBottom"
         Me.splitMiddleBottom.Size = New System.Drawing.Size(477, 4)
         Me.splitMiddleBottom.TabIndex = 15
@@ -441,9 +425,8 @@ Partial Class ApplicationForm
         'pnlMiddleBottom
         '
         Me.pnlMiddleBottom.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.pnlMiddleBottom.Controls.Add(Me.CensusViewer1)
         Me.pnlMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlMiddleBottom.Location = New System.Drawing.Point(0, 187)
+        Me.pnlMiddleBottom.Location = New System.Drawing.Point(0, 349)
         Me.pnlMiddleBottom.Name = "pnlMiddleBottom"
         Me.pnlMiddleBottom.Size = New System.Drawing.Size(477, 71)
         Me.pnlMiddleBottom.TabIndex = 12
@@ -452,7 +435,7 @@ Partial Class ApplicationForm
         '
         Me.splitLeft.Location = New System.Drawing.Point(210, 4)
         Me.splitLeft.Name = "splitLeft"
-        Me.splitLeft.Size = New System.Drawing.Size(4, 258)
+        Me.splitLeft.Size = New System.Drawing.Size(4, 420)
         Me.splitLeft.TabIndex = 10
         Me.splitLeft.TabStop = False
         '
@@ -464,17 +447,16 @@ Partial Class ApplicationForm
         Me.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlLeft.Location = New System.Drawing.Point(4, 4)
         Me.pnlLeft.Name = "pnlLeft"
-        Me.pnlLeft.Size = New System.Drawing.Size(206, 258)
+        Me.pnlLeft.Size = New System.Drawing.Size(206, 420)
         Me.pnlLeft.TabIndex = 9
         '
         'pnlLeftBottom
         '
         Me.pnlLeftBottom.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.pnlLeftBottom.Controls.Add(Me.dockBottomLeft)
         Me.pnlLeftBottom.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlLeftBottom.Location = New System.Drawing.Point(0, 153)
         Me.pnlLeftBottom.Name = "pnlLeftBottom"
-        Me.pnlLeftBottom.Size = New System.Drawing.Size(206, 105)
+        Me.pnlLeftBottom.Size = New System.Drawing.Size(206, 267)
         Me.pnlLeftBottom.TabIndex = 2
         '
         'splitLeftTopBottom
@@ -489,7 +471,6 @@ Partial Class ApplicationForm
         'pnlLeftTop
         '
         Me.pnlLeftTop.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.pnlLeftTop.Controls.Add(Me.dockTopLeft)
         Me.pnlLeftTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlLeftTop.Location = New System.Drawing.Point(0, 0)
         Me.pnlLeftTop.Name = "pnlLeftTop"
@@ -501,7 +482,7 @@ Partial Class ApplicationForm
         Me.splitRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.splitRight.Location = New System.Drawing.Point(691, 4)
         Me.splitRight.Name = "splitRight"
-        Me.splitRight.Size = New System.Drawing.Size(4, 258)
+        Me.splitRight.Size = New System.Drawing.Size(4, 420)
         Me.splitRight.TabIndex = 14
         Me.splitRight.TabStop = False
         '
@@ -513,7 +494,7 @@ Partial Class ApplicationForm
         Me.pnlRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.pnlRight.Location = New System.Drawing.Point(695, 4)
         Me.pnlRight.Name = "pnlRight"
-        Me.pnlRight.Size = New System.Drawing.Size(200, 258)
+        Me.pnlRight.Size = New System.Drawing.Size(200, 420)
         Me.pnlRight.TabIndex = 11
         '
         'pnlRightBottom
@@ -522,7 +503,7 @@ Partial Class ApplicationForm
         Me.pnlRightBottom.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlRightBottom.Location = New System.Drawing.Point(0, 156)
         Me.pnlRightBottom.Name = "pnlRightBottom"
-        Me.pnlRightBottom.Size = New System.Drawing.Size(200, 102)
+        Me.pnlRightBottom.Size = New System.Drawing.Size(200, 264)
         Me.pnlRightBottom.TabIndex = 1
         '
         'splitRightTopBottom
@@ -537,7 +518,6 @@ Partial Class ApplicationForm
         'pnlRightTop
         '
         Me.pnlRightTop.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.pnlRightTop.Controls.Add(Me.Ancestry)
         Me.pnlRightTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlRightTop.Location = New System.Drawing.Point(0, 0)
         Me.pnlRightTop.Name = "pnlRightTop"
@@ -557,7 +537,7 @@ Partial Class ApplicationForm
         Me.StatusBar1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.StatusBar1.ForeColor = System.Drawing.Color.White
         Me.StatusBar1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2, Me.ToolStripStatusLabel3})
-        Me.StatusBar1.Location = New System.Drawing.Point(0, 315)
+        Me.StatusBar1.Location = New System.Drawing.Point(0, 477)
         Me.StatusBar1.Name = "StatusBar1"
         Me.StatusBar1.Size = New System.Drawing.Size(899, 25)
         Me.StatusBar1.TabIndex = 10
@@ -590,146 +570,6 @@ Partial Class ApplicationForm
         Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(119, 20)
         Me.ToolStripStatusLabel3.Spring = True
         Me.ToolStripStatusLabel3.Text = "ToolStripStatusLabel3"
-        '
-        'dockMiddleLeft
-        '
-        Me.dockMiddleLeft.Controls.Add(Me.TabPage2)
-        Me.dockMiddleLeft.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dockMiddleLeft.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed
-        Me.dockMiddleLeft.HotTrack = True
-        Me.dockMiddleLeft.Location = New System.Drawing.Point(0, 0)
-        Me.dockMiddleLeft.Margin = New System.Windows.Forms.Padding(0)
-        Me.dockMiddleLeft.Name = "dockMiddleLeft"
-        Me.dockMiddleLeft.Padding = New System.Drawing.Point(20, 2)
-        Me.dockMiddleLeft.PanelAccentColor = System.Drawing.Color.FromArgb(CType(CType(233, Byte), Integer), CType(CType(233, Byte), Integer), CType(CType(233, Byte), Integer))
-        Me.dockMiddleLeft.PanelBackColor = System.Drawing.Color.Black
-        Me.dockMiddleLeft.PanelBorderColor = System.Drawing.Color.DarkGray
-        Me.dockMiddleLeft.PanelFontColor = System.Drawing.Color.WhiteSmoke
-        Me.dockMiddleLeft.PanelHasFocus = False
-        Me.dockMiddleLeft.PanelHighlightColor = System.Drawing.Color.GreenYellow
-        Me.dockMiddleLeft.PanelIsPinned = True
-        Me.dockMiddleLeft.PanelShadowColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.dockMiddleLeft.PanelShowClose = False
-        Me.dockMiddleLeft.PanelShowContextMenu = False
-        Me.dockMiddleLeft.PanelShowPinned = False
-        Me.dockMiddleLeft.PanelShowSearch = False
-        Me.dockMiddleLeft.SelectedIndex = 0
-        Me.dockMiddleLeft.ShowToolTips = True
-        Me.dockMiddleLeft.Size = New System.Drawing.Size(358, 183)
-        Me.dockMiddleLeft.TabIndex = 0
-        Me.dockMiddleLeft.Visible = False
-        '
-        'TabPage2
-        '
-        Me.TabPage2.BackColor = System.Drawing.Color.Black
-        Me.TabPage2.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.TabPage2.Location = New System.Drawing.Point(4, 23)
-        Me.TabPage2.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Size = New System.Drawing.Size(350, 156)
-        Me.TabPage2.TabIndex = 0
-        '
-        'dockMiddleRight
-        '
-        Me.dockMiddleRight.BackColor = System.Drawing.Color.Black
-        Me.dockMiddleRight.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dockMiddleRight.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dockMiddleRight.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.dockMiddleRight.Location = New System.Drawing.Point(0, 0)
-        Me.dockMiddleRight.Margin = New System.Windows.Forms.Padding(0)
-        Me.dockMiddleRight.Name = "dockMiddleRight"
-        Me.dockMiddleRight.PanelAccentColor = System.Drawing.Color.FromArgb(CType(CType(233, Byte), Integer), CType(CType(233, Byte), Integer), CType(CType(233, Byte), Integer))
-        Me.dockMiddleRight.PanelBackColor = System.Drawing.Color.Black
-        Me.dockMiddleRight.PanelBorderColor = System.Drawing.Color.DarkGray
-        Me.dockMiddleRight.PanelFontColor = System.Drawing.Color.WhiteSmoke
-        Me.dockMiddleRight.PanelHasFocus = False
-        Me.dockMiddleRight.PanelHighlightColor = System.Drawing.Color.GreenYellow
-        Me.dockMiddleRight.PanelIsPinned = True
-        Me.dockMiddleRight.PanelShadowColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.dockMiddleRight.PanelShowClose = False
-        Me.dockMiddleRight.PanelShowContextMenu = False
-        Me.dockMiddleRight.PanelShowPinned = False
-        Me.dockMiddleRight.PanelShowSearch = False
-        Me.dockMiddleRight.Size = New System.Drawing.Size(115, 183)
-        Me.dockMiddleRight.TabIndex = 0
-        '
-        'CensusViewer1
-        '
-        Me.CensusViewer1.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
-        Me.CensusViewer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CensusViewer1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CensusViewer1.ItemDockStyle = System.Windows.Forms.DockStyle.Fill
-        Me.CensusViewer1.Location = New System.Drawing.Point(0, 0)
-        Me.CensusViewer1.Name = "CensusViewer1"
-        Me.CensusViewer1.Size = New System.Drawing.Size(477, 71)
-        Me.CensusViewer1.TabIndex = 0
-        '
-        'dockBottomLeft
-        '
-        Me.dockBottomLeft.BackColor = System.Drawing.Color.Black
-        Me.dockBottomLeft.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dockBottomLeft.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dockBottomLeft.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.dockBottomLeft.Location = New System.Drawing.Point(0, 0)
-        Me.dockBottomLeft.Margin = New System.Windows.Forms.Padding(0)
-        Me.dockBottomLeft.Name = "dockBottomLeft"
-        Me.dockBottomLeft.PanelAccentColor = System.Drawing.Color.FromArgb(CType(CType(233, Byte), Integer), CType(CType(233, Byte), Integer), CType(CType(233, Byte), Integer))
-        Me.dockBottomLeft.PanelBackColor = System.Drawing.Color.Black
-        Me.dockBottomLeft.PanelBorderColor = System.Drawing.Color.DarkGray
-        Me.dockBottomLeft.PanelFontColor = System.Drawing.Color.WhiteSmoke
-        Me.dockBottomLeft.PanelHasFocus = False
-        Me.dockBottomLeft.PanelHighlightColor = System.Drawing.Color.GreenYellow
-        Me.dockBottomLeft.PanelIsPinned = True
-        Me.dockBottomLeft.PanelShadowColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.dockBottomLeft.PanelShowClose = False
-        Me.dockBottomLeft.PanelShowContextMenu = False
-        Me.dockBottomLeft.PanelShowPinned = False
-        Me.dockBottomLeft.PanelShowSearch = False
-        Me.dockBottomLeft.Size = New System.Drawing.Size(206, 105)
-        Me.dockBottomLeft.TabIndex = 0
-        '
-        'dockTopLeft
-        '
-        Me.dockTopLeft.BackColor = System.Drawing.Color.Black
-        Me.dockTopLeft.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dockTopLeft.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dockTopLeft.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.dockTopLeft.Location = New System.Drawing.Point(0, 0)
-        Me.dockTopLeft.Margin = New System.Windows.Forms.Padding(0)
-        Me.dockTopLeft.Name = "dockTopLeft"
-        Me.dockTopLeft.PanelAccentColor = System.Drawing.Color.FromArgb(CType(CType(233, Byte), Integer), CType(CType(233, Byte), Integer), CType(CType(233, Byte), Integer))
-        Me.dockTopLeft.PanelBackColor = System.Drawing.Color.Black
-        Me.dockTopLeft.PanelBorderColor = System.Drawing.Color.DarkGray
-        Me.dockTopLeft.PanelFontColor = System.Drawing.Color.WhiteSmoke
-        Me.dockTopLeft.PanelHasFocus = False
-        Me.dockTopLeft.PanelHighlightColor = System.Drawing.Color.GreenYellow
-        Me.dockTopLeft.PanelIsPinned = True
-        Me.dockTopLeft.PanelShadowColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.dockTopLeft.PanelShowClose = False
-        Me.dockTopLeft.PanelShowContextMenu = False
-        Me.dockTopLeft.PanelShowPinned = False
-        Me.dockTopLeft.PanelShowSearch = False
-        Me.dockTopLeft.Size = New System.Drawing.Size(206, 149)
-        Me.dockTopLeft.TabIndex = 1
-        '
-        'Ancestry
-        '
-        Me.Ancestry.AncestorID = ""
-        Me.Ancestry.AncestryPage = ""
-        Me.Ancestry.AncestryTreeID = "65171586"
-        Me.Ancestry.BlockedWebDomains = New String() {"facebook", "doubleclick", "tiktok", "pinterest", "adservice", "ad-delivery", "adspsp", "adsystem", "adnxs", "securepubads"}
-        Me.Ancestry.BlockWebTracking = True
-        Me.Ancestry.DataBindings.Add(New System.Windows.Forms.Binding("ShowToolbar", Global.AncestryAssistant.My.MySettings.Default, "ANCESTRY_SHOW_TOOLBAR", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.Ancestry.HREF = "https://www.ancestry.com/family-tree/tree/65171586/recent"
-        Me.Ancestry.ItemDockStyle = System.Windows.Forms.DockStyle.None
-        Me.Ancestry.Location = New System.Drawing.Point(13, 6)
-        Me.Ancestry.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.Ancestry.Name = "Ancestry"
-        Me.Ancestry.ShowToolbar = Global.AncestryAssistant.My.MySettings.Default.ANCESTRY_SHOW_TOOLBAR
-        Me.Ancestry.Size = New System.Drawing.Size(174, 123)
-        Me.Ancestry.TabIndex = 0
-        Me.Ancestry.UriTrackingGroup = AncestryAssistant.UriTrackingGroupEnum.ANCESTRY
-        Me.Ancestry.URL = New System.Uri("https://www.ancestry.com/family-tree/tree/65171586/recent", System.UriKind.Absolute)
         '
         'MenuBar1
         '
@@ -797,7 +637,7 @@ Partial Class ApplicationForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(899, 340)
+        Me.ClientSize = New System.Drawing.Size(899, 502)
         Me.Controls.Add(Me.pnlMain)
         Me.Controls.Add(Me.toolbar)
         Me.Controls.Add(Me.MenuBar1)
@@ -820,17 +660,10 @@ Partial Class ApplicationForm
         Me.pnlMain.ResumeLayout(False)
         Me.pnlMiddle.ResumeLayout(False)
         Me.pnlMiddleTop.ResumeLayout(False)
-        Me.pnlMiddleLeft.ResumeLayout(False)
-        Me.pnlMiddleRight.ResumeLayout(False)
-        Me.pnlMiddleBottom.ResumeLayout(False)
         Me.pnlLeft.ResumeLayout(False)
-        Me.pnlLeftBottom.ResumeLayout(False)
-        Me.pnlLeftTop.ResumeLayout(False)
         Me.pnlRight.ResumeLayout(False)
-        Me.pnlRightTop.ResumeLayout(False)
         Me.StatusBar1.ResumeLayout(False)
         Me.StatusBar1.PerformLayout()
-        Me.dockMiddleLeft.ResumeLayout(False)
         Me.MenuBar1.ResumeLayout(False)
         Me.MenuBar1.PerformLayout()
         Me.ResumeLayout(False)
@@ -862,8 +695,6 @@ Partial Class ApplicationForm
     Friend WithEvents mnuDockTopRight As ToolStripMenuItem
     Friend WithEvents mnuDockBottomRight As ToolStripMenuItem
     Friend WithEvents mnuDockBottomMiddle As ToolStripMenuItem
-    Friend WithEvents CensusViewer1 As CensusViewer
-    Friend WithEvents Ancestry As AncestryWebViewer
     Friend WithEvents toolbar As Panel
     Friend WithEvents btnActions As ToolStripButton
     Friend WithEvents pnlMain As Panel
@@ -886,12 +717,7 @@ Partial Class ApplicationForm
     Friend WithEvents pnlRightTop As Panel
     Friend WithEvents btnCensus As ToolStripButton
     Friend WithEvents btnNotebook As ToolStripButton
-    Friend WithEvents dockMiddleRight As DockPanel
     Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents dockTopLeft As DockPanel
-    Friend WithEvents dockBottomLeft As DockPanel
-    Friend WithEvents dockMiddleLeft As DockTopTabs
-    Friend WithEvents TabPage2 As TabPage
     Friend WithEvents StatusBar1 As ToolBar
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel

@@ -173,5 +173,8 @@
     <Setting Name="UI_MR_WIDTH" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">400</Value>
     </Setting>
+    <Setting Name="ANCESTRY_TREE_ID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">65171586</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

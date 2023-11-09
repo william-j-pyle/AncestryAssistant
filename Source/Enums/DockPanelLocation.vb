@@ -1,4 +1,4 @@
-﻿Public Enum PanelManagerPanelType
+﻿Public Enum DockPanelLocation
   LeftTop
   LeftBottom
   MiddleTopLeft

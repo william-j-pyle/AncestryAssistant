@@ -283,7 +283,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Source\Enums\PanelManagerSplitterType.vb" />
+    <Compile Include="Source\Enums\DockPanelSplitterPlacement.vb" />
+    <Compile Include="Source\Enums\DockPanelType.vb" />
     <Compile Include="Source\Objects\Ancestor\AncestorAbstract.vb" />
     <Compile Include="Source\Objects\Ancestor\AncestorCollection.vb" />
     <Compile Include="Source\Objects\AncestryAssistantFile\AAFile.vb" />
@@ -332,7 +333,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\UI\Components\Panel\PanelManager.vb" />
-    <Compile Include="Source\Enums\PanelManagerPanelType.vb" />
+    <Compile Include="Source\Enums\DockPanelLocation.vb" />
     <Compile Include="Source\Objects\GedcomFile\Primatives\Individual.vb" />
     <Compile Include="Source\UI\Components\DockPanels\DockBottomTabs.vb">
       <SubType>Component</SubType>
