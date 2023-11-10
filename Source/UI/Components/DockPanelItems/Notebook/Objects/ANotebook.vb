@@ -20,7 +20,7 @@ Public Class ANotebook
     End Get
     Set(value As String)
       sActiveSection = value
-      Debug.Print("ANotebook_SectionChanged({0})", sActiveSection)
+      'Debug.Print("ANotebook_SectionChanged({0})", sActiveSection)
       pages = New AAFile(ActiveSectionPath + NOTE_PAGES_CONFIG)
       If pages.AAFileType = AAFileTypeEnum.UNDEFINED Then
         pages.AAFileType = AAFileTypeEnum.KEYVALUEPAIRS
@@ -84,7 +84,7 @@ Public Class ANotebook
   End Sub
 
   Public Sub AddSection(SectionName As String)
-    Debug.Print("AddSection({0})", SectionName)
+    'Debug.Print("AddSection({0})", SectionName)
     Directory.CreateDirectory(RecordsBasePath + SectionName)
     sections.Value(sections.Count + 1) = SectionName
     sections.Save()
@@ -92,22 +92,22 @@ Public Class ANotebook
   End Sub
 
   Public Sub RemoveSection(SectionName As String)
-    Debug.Print("RemoveSection({0})", SectionName)
+    'Debug.Print("RemoveSection({0})", SectionName)
 
   End Sub
 
   Public Sub RenameSection(OldSectionName As String, NewSectionName As String)
-    Debug.Print("RenameSection({0},{1})", OldSectionName, NewSectionName)
+    'Debug.Print("RenameSection({0},{1})", OldSectionName, NewSectionName)
 
   End Sub
 
   Public Sub ChangeSectionOrder(OldSectionIndex As Integer, NewSectionIndex As Integer)
-    Debug.Print("ChangeSectionOrder({0},{1})", OldSectionIndex, NewSectionIndex)
+    'Debug.Print("ChangeSectionOrder({0},{1})", OldSectionIndex, NewSectionIndex)
 
   End Sub
 
   Public Sub AddPage(PageName As String)
-    Debug.Print("AddPage({0})", PageName)
+    'Debug.Print("AddPage({0})", PageName)
     Dim sectionPath As String = RecordsBasePath + sActiveSection + "\"
     Dim pagePath As String = sectionPath + PageName + ".aa"
     Dim page As AAFile = New AAFile(pagePath, AAFileTypeEnum.SINGLEVALUE)
@@ -118,17 +118,17 @@ Public Class ANotebook
   End Sub
 
   Public Sub RemovePage(PageName As String)
-    Debug.Print("RemovePage({0})", PageName)
+    'Debug.Print("RemovePage({0})", PageName)
 
   End Sub
 
   Public Sub RenamePage(OldPageName As String, NewPageName As String)
-    Debug.Print("RenamePage({0},{1})", OldPageName, NewPageName)
+    'Debug.Print("RenamePage({0},{1})", OldPageName, NewPageName)
 
   End Sub
 
   Public Sub ChangePageOrder(OldPageIndex As Integer, NewPageIndex As Integer)
-    Debug.Print("ChangePageOrder({0},{1})", OldPageIndex, NewPageIndex)
+    'Debug.Print("ChangePageOrder({0},{1})", OldPageIndex, NewPageIndex)
 
   End Sub
 

@@ -302,9 +302,11 @@
     </Compile>
     <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Objects\UriTracks.vb" />
     <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Objects\UriTrackingGroup.vb" />
-    <Compile Include="Source\UI\Components\DockPanels\IDockPanel.vb" />
-    <Compile Include="Source\UI\Components\DockPanels\DockTopTabs.vb">
-      <SubType>Component</SubType>
+    <Compile Include="Source\UI\Components\DockPanels\DockPanelManager.Designer.vb">
+      <DependentUpon>DockPanelManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\UI\Components\DockPanels\DockPanelManager.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\UI\Components\DockPanels\DockPanel.Designer.vb">
       <DependentUpon>DockPanel.vb</DependentUpon>
@@ -324,6 +326,9 @@
     <Compile Include="Source\UI\Components\DockPanelItems\AncestorsList\AncestorsListPanel.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Source\UI\Components\DockPanels\DockTabControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Source\UI\Components\DockPanels\IDockPanelItem.vb" />
     <Compile Include="Source\UI\Components\MenuBar\MenuBarRenderer.vb" />
     <Compile Include="Source\UI\Components\MenuBar\MenuBar.Designer.vb">
@@ -332,12 +337,8 @@
     <Compile Include="Source\UI\Components\MenuBar\MenuBar.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\Panel\PanelManager.vb" />
     <Compile Include="Source\Enums\DockPanelLocation.vb" />
     <Compile Include="Source\Objects\GedcomFile\Primatives\Individual.vb" />
-    <Compile Include="Source\UI\Components\DockPanels\DockBottomTabs.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Source\UI\Components\Panel\BordersPanel.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -389,10 +390,10 @@
     <Compile Include="Test\frmButtonTestForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Test\frmTestDockTopTabs.Designer.vb">
-      <DependentUpon>frmTestDockTopTabs.vb</DependentUpon>
+    <Compile Include="Test\frmTestDockPanel.Designer.vb">
+      <DependentUpon>frmTestDockPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Test\frmTestDockTopTabs.vb">
+    <Compile Include="Test\frmTestDockPanel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Test\frmTestRibbon.Designer.vb">
@@ -488,6 +489,9 @@
     <EmbeddedResource Include="Source\UI\Components\DockPanelItems\AncestorsList\AncestorsListPanel.resx">
       <DependentUpon>AncestorsListPanel.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Source\UI\Components\DockPanels\DockPanelManager.resx">
+      <DependentUpon>DockPanelManager.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Source\UI\Dialogs\SaveImageDetails.resx">
       <DependentUpon>SaveImageDetails.vb</DependentUpon>
     </EmbeddedResource>
@@ -497,8 +501,8 @@
     <EmbeddedResource Include="Test\frmButtonTestForm.resx">
       <DependentUpon>frmButtonTestForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmTestDockTopTabs.resx">
-      <DependentUpon>frmTestDockTopTabs.vb</DependentUpon>
+    <EmbeddedResource Include="Test\frmTestDockPanel.resx">
+      <DependentUpon>frmTestDockPanel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmTestRibbon.resx">
       <DependentUpon>frmTestRibbon.vb</DependentUpon>

@@ -52,29 +52,7 @@ Partial Class ApplicationForm
         Me.btnNotebook = New System.Windows.Forms.ToolStripButton()
         Me.AncestryDirectorWatcher = New System.IO.FileSystemWatcher()
         Me.toolbar = New System.Windows.Forms.Panel()
-        Me.pnlMain = New System.Windows.Forms.Panel()
-        Me.pnlMiddle = New System.Windows.Forms.Panel()
-        Me.pnlMiddleTop = New System.Windows.Forms.Panel()
-        Me.pnlMiddleLeft = New System.Windows.Forms.Panel()
-        Me.splitMiddleLeftRight = New System.Windows.Forms.Splitter()
-        Me.pnlMiddleRight = New System.Windows.Forms.Panel()
-        Me.splitMiddleBottom = New System.Windows.Forms.Splitter()
-        Me.pnlMiddleBottom = New System.Windows.Forms.Panel()
-        Me.splitLeft = New System.Windows.Forms.Splitter()
-        Me.pnlLeft = New System.Windows.Forms.Panel()
-        Me.pnlLeftBottom = New System.Windows.Forms.Panel()
-        Me.splitLeftTopBottom = New System.Windows.Forms.Splitter()
-        Me.pnlLeftTop = New System.Windows.Forms.Panel()
-        Me.splitRight = New System.Windows.Forms.Splitter()
-        Me.pnlRight = New System.Windows.Forms.Panel()
-        Me.pnlRightBottom = New System.Windows.Forms.Panel()
-        Me.splitRightTopBottom = New System.Windows.Forms.Splitter()
-        Me.pnlRightTop = New System.Windows.Forms.Panel()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.StatusBar1 = New AncestryAssistant.ToolBar()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuBar1 = New AncestryAssistant.MenuBar()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PreferencesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -83,17 +61,17 @@ Partial Class ApplicationForm
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AncestryToolbarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StatusBar1 = New AncestryAssistant.ToolBar()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.DockManager = New AncestryAssistant.DockPanelManager()
         Me.mnuPanelDock.SuspendLayout()
         Me.tsAncestry.SuspendLayout()
         CType(Me.AncestryDirectorWatcher, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.toolbar.SuspendLayout()
-        Me.pnlMain.SuspendLayout()
-        Me.pnlMiddle.SuspendLayout()
-        Me.pnlMiddleTop.SuspendLayout()
-        Me.pnlLeft.SuspendLayout()
-        Me.pnlRight.SuspendLayout()
-        Me.StatusBar1.SuspendLayout()
         Me.MenuBar1.SuspendLayout()
+        Me.StatusBar1.SuspendLayout()
         Me.SuspendLayout()
         '
         'imgViewerList
@@ -347,183 +325,6 @@ Partial Class ApplicationForm
         Me.toolbar.Size = New System.Drawing.Size(899, 25)
         Me.toolbar.TabIndex = 8
         '
-        'pnlMain
-        '
-        Me.pnlMain.BackColor = System.Drawing.Color.Black
-        Me.pnlMain.Controls.Add(Me.pnlMiddle)
-        Me.pnlMain.Controls.Add(Me.splitLeft)
-        Me.pnlMain.Controls.Add(Me.pnlLeft)
-        Me.pnlMain.Controls.Add(Me.splitRight)
-        Me.pnlMain.Controls.Add(Me.pnlRight)
-        Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMain.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.pnlMain.Location = New System.Drawing.Point(0, 49)
-        Me.pnlMain.Margin = New System.Windows.Forms.Padding(0)
-        Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Padding = New System.Windows.Forms.Padding(4)
-        Me.pnlMain.Size = New System.Drawing.Size(899, 428)
-        Me.pnlMain.TabIndex = 9
-        '
-        'pnlMiddle
-        '
-        Me.pnlMiddle.Controls.Add(Me.pnlMiddleTop)
-        Me.pnlMiddle.Controls.Add(Me.splitMiddleBottom)
-        Me.pnlMiddle.Controls.Add(Me.pnlMiddleBottom)
-        Me.pnlMiddle.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMiddle.Location = New System.Drawing.Point(214, 4)
-        Me.pnlMiddle.Name = "pnlMiddle"
-        Me.pnlMiddle.Size = New System.Drawing.Size(477, 420)
-        Me.pnlMiddle.TabIndex = 13
-        '
-        'pnlMiddleTop
-        '
-        Me.pnlMiddleTop.Controls.Add(Me.pnlMiddleLeft)
-        Me.pnlMiddleTop.Controls.Add(Me.splitMiddleLeftRight)
-        Me.pnlMiddleTop.Controls.Add(Me.pnlMiddleRight)
-        Me.pnlMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMiddleTop.Location = New System.Drawing.Point(0, 0)
-        Me.pnlMiddleTop.Name = "pnlMiddleTop"
-        Me.pnlMiddleTop.Size = New System.Drawing.Size(477, 345)
-        Me.pnlMiddleTop.TabIndex = 0
-        '
-        'pnlMiddleLeft
-        '
-        Me.pnlMiddleLeft.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.pnlMiddleLeft.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMiddleLeft.Location = New System.Drawing.Point(0, 0)
-        Me.pnlMiddleLeft.Name = "pnlMiddleLeft"
-        Me.pnlMiddleLeft.Size = New System.Drawing.Size(358, 345)
-        Me.pnlMiddleLeft.TabIndex = 4
-        '
-        'splitMiddleLeftRight
-        '
-        Me.splitMiddleLeftRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.splitMiddleLeftRight.Location = New System.Drawing.Point(358, 0)
-        Me.splitMiddleLeftRight.Name = "splitMiddleLeftRight"
-        Me.splitMiddleLeftRight.Size = New System.Drawing.Size(4, 345)
-        Me.splitMiddleLeftRight.TabIndex = 6
-        Me.splitMiddleLeftRight.TabStop = False
-        '
-        'pnlMiddleRight
-        '
-        Me.pnlMiddleRight.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.pnlMiddleRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.pnlMiddleRight.Location = New System.Drawing.Point(362, 0)
-        Me.pnlMiddleRight.Name = "pnlMiddleRight"
-        Me.pnlMiddleRight.Size = New System.Drawing.Size(115, 345)
-        Me.pnlMiddleRight.TabIndex = 5
-        '
-        'splitMiddleBottom
-        '
-        Me.splitMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.splitMiddleBottom.Location = New System.Drawing.Point(0, 345)
-        Me.splitMiddleBottom.Name = "splitMiddleBottom"
-        Me.splitMiddleBottom.Size = New System.Drawing.Size(477, 4)
-        Me.splitMiddleBottom.TabIndex = 15
-        Me.splitMiddleBottom.TabStop = False
-        '
-        'pnlMiddleBottom
-        '
-        Me.pnlMiddleBottom.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.pnlMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlMiddleBottom.Location = New System.Drawing.Point(0, 349)
-        Me.pnlMiddleBottom.Name = "pnlMiddleBottom"
-        Me.pnlMiddleBottom.Size = New System.Drawing.Size(477, 71)
-        Me.pnlMiddleBottom.TabIndex = 12
-        '
-        'splitLeft
-        '
-        Me.splitLeft.Location = New System.Drawing.Point(210, 4)
-        Me.splitLeft.Name = "splitLeft"
-        Me.splitLeft.Size = New System.Drawing.Size(4, 420)
-        Me.splitLeft.TabIndex = 10
-        Me.splitLeft.TabStop = False
-        '
-        'pnlLeft
-        '
-        Me.pnlLeft.Controls.Add(Me.pnlLeftBottom)
-        Me.pnlLeft.Controls.Add(Me.splitLeftTopBottom)
-        Me.pnlLeft.Controls.Add(Me.pnlLeftTop)
-        Me.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left
-        Me.pnlLeft.Location = New System.Drawing.Point(4, 4)
-        Me.pnlLeft.Name = "pnlLeft"
-        Me.pnlLeft.Size = New System.Drawing.Size(206, 420)
-        Me.pnlLeft.TabIndex = 9
-        '
-        'pnlLeftBottom
-        '
-        Me.pnlLeftBottom.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.pnlLeftBottom.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlLeftBottom.Location = New System.Drawing.Point(0, 153)
-        Me.pnlLeftBottom.Name = "pnlLeftBottom"
-        Me.pnlLeftBottom.Size = New System.Drawing.Size(206, 267)
-        Me.pnlLeftBottom.TabIndex = 2
-        '
-        'splitLeftTopBottom
-        '
-        Me.splitLeftTopBottom.Dock = System.Windows.Forms.DockStyle.Top
-        Me.splitLeftTopBottom.Location = New System.Drawing.Point(0, 149)
-        Me.splitLeftTopBottom.Name = "splitLeftTopBottom"
-        Me.splitLeftTopBottom.Size = New System.Drawing.Size(206, 4)
-        Me.splitLeftTopBottom.TabIndex = 3
-        Me.splitLeftTopBottom.TabStop = False
-        '
-        'pnlLeftTop
-        '
-        Me.pnlLeftTop.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.pnlLeftTop.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlLeftTop.Location = New System.Drawing.Point(0, 0)
-        Me.pnlLeftTop.Name = "pnlLeftTop"
-        Me.pnlLeftTop.Size = New System.Drawing.Size(206, 149)
-        Me.pnlLeftTop.TabIndex = 1
-        '
-        'splitRight
-        '
-        Me.splitRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.splitRight.Location = New System.Drawing.Point(691, 4)
-        Me.splitRight.Name = "splitRight"
-        Me.splitRight.Size = New System.Drawing.Size(4, 420)
-        Me.splitRight.TabIndex = 14
-        Me.splitRight.TabStop = False
-        '
-        'pnlRight
-        '
-        Me.pnlRight.Controls.Add(Me.pnlRightBottom)
-        Me.pnlRight.Controls.Add(Me.splitRightTopBottom)
-        Me.pnlRight.Controls.Add(Me.pnlRightTop)
-        Me.pnlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.pnlRight.Location = New System.Drawing.Point(695, 4)
-        Me.pnlRight.Name = "pnlRight"
-        Me.pnlRight.Size = New System.Drawing.Size(200, 420)
-        Me.pnlRight.TabIndex = 11
-        '
-        'pnlRightBottom
-        '
-        Me.pnlRightBottom.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.pnlRightBottom.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlRightBottom.Location = New System.Drawing.Point(0, 156)
-        Me.pnlRightBottom.Name = "pnlRightBottom"
-        Me.pnlRightBottom.Size = New System.Drawing.Size(200, 264)
-        Me.pnlRightBottom.TabIndex = 1
-        '
-        'splitRightTopBottom
-        '
-        Me.splitRightTopBottom.Dock = System.Windows.Forms.DockStyle.Top
-        Me.splitRightTopBottom.Location = New System.Drawing.Point(0, 152)
-        Me.splitRightTopBottom.Name = "splitRightTopBottom"
-        Me.splitRightTopBottom.Size = New System.Drawing.Size(200, 4)
-        Me.splitRightTopBottom.TabIndex = 2
-        Me.splitRightTopBottom.TabStop = False
-        '
-        'pnlRightTop
-        '
-        Me.pnlRightTop.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.pnlRightTop.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlRightTop.Location = New System.Drawing.Point(0, 0)
-        Me.pnlRightTop.Name = "pnlRightTop"
-        Me.pnlRightTop.Size = New System.Drawing.Size(200, 152)
-        Me.pnlRightTop.TabIndex = 0
-        '
         'TabPage1
         '
         Me.TabPage1.Location = New System.Drawing.Point(4, 4)
@@ -531,45 +332,6 @@ Partial Class ApplicationForm
         Me.TabPage1.Size = New System.Drawing.Size(107, 148)
         Me.TabPage1.TabIndex = 2
         Me.TabPage1.Text = "TabPage1"
-        '
-        'StatusBar1
-        '
-        Me.StatusBar1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.StatusBar1.ForeColor = System.Drawing.Color.White
-        Me.StatusBar1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2, Me.ToolStripStatusLabel3})
-        Me.StatusBar1.Location = New System.Drawing.Point(0, 477)
-        Me.StatusBar1.Name = "StatusBar1"
-        Me.StatusBar1.Size = New System.Drawing.Size(899, 25)
-        Me.StatusBar1.TabIndex = 10
-        Me.StatusBar1.Text = "StatusBar1"
-        Me.StatusBar1.ToolBarAccentColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(143, Byte), Integer))
-        Me.StatusBar1.ToolBarBackColor = System.Drawing.Color.DimGray
-        Me.StatusBar1.ToolBarBorderColor = System.Drawing.Color.DarkSlateGray
-        Me.StatusBar1.ToolBarFontColor = System.Drawing.Color.White
-        Me.StatusBar1.ToolBarHighlightColor = System.Drawing.Color.LimeGreen
-        Me.StatusBar1.ToolBarShadowColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer))
-        '
-        'ToolStripStatusLabel1
-        '
-        Me.ToolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(123, 20)
-        Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
-        '
-        'ToolStripStatusLabel2
-        '
-        Me.ToolStripStatusLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
-        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
-        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(123, 20)
-        Me.ToolStripStatusLabel2.Text = "ToolStripStatusLabel2"
-        '
-        'ToolStripStatusLabel3
-        '
-        Me.ToolStripStatusLabel3.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedOuter
-        Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
-        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(119, 20)
-        Me.ToolStripStatusLabel3.Spring = True
-        Me.ToolStripStatusLabel3.Text = "ToolStripStatusLabel3"
         '
         'MenuBar1
         '
@@ -632,13 +394,61 @@ Partial Class ApplicationForm
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.ToolsToolStripMenuItem.Text = "Tools"
         '
+        'StatusBar1
+        '
+        Me.StatusBar1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.StatusBar1.ForeColor = System.Drawing.Color.White
+        Me.StatusBar1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2, Me.ToolStripStatusLabel3})
+        Me.StatusBar1.Location = New System.Drawing.Point(0, 477)
+        Me.StatusBar1.Name = "StatusBar1"
+        Me.StatusBar1.Size = New System.Drawing.Size(899, 25)
+        Me.StatusBar1.TabIndex = 10
+        Me.StatusBar1.Text = "StatusBar1"
+        Me.StatusBar1.ToolBarAccentColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(143, Byte), Integer))
+        Me.StatusBar1.ToolBarBackColor = System.Drawing.Color.DimGray
+        Me.StatusBar1.ToolBarBorderColor = System.Drawing.Color.DarkSlateGray
+        Me.StatusBar1.ToolBarFontColor = System.Drawing.Color.White
+        Me.StatusBar1.ToolBarHighlightColor = System.Drawing.Color.LimeGreen
+        Me.StatusBar1.ToolBarShadowColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer))
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(123, 20)
+        Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
+        '
+        'ToolStripStatusLabel2
+        '
+        Me.ToolStripStatusLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
+        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(123, 20)
+        Me.ToolStripStatusLabel2.Text = "ToolStripStatusLabel2"
+        '
+        'ToolStripStatusLabel3
+        '
+        Me.ToolStripStatusLabel3.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedOuter
+        Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
+        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(119, 20)
+        Me.ToolStripStatusLabel3.Spring = True
+        Me.ToolStripStatusLabel3.Text = "ToolStripStatusLabel3"
+        '
+        'DockManager
+        '
+        Me.DockManager.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DockManager.Location = New System.Drawing.Point(0, 49)
+        Me.DockManager.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DockManager.Name = "DockManager"
+        Me.DockManager.Size = New System.Drawing.Size(899, 428)
+        Me.DockManager.TabIndex = 12
+        '
         'ApplicationForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(899, 502)
-        Me.Controls.Add(Me.pnlMain)
+        Me.Controls.Add(Me.DockManager)
         Me.Controls.Add(Me.toolbar)
         Me.Controls.Add(Me.MenuBar1)
         Me.Controls.Add(Me.StatusBar1)
@@ -657,15 +467,10 @@ Partial Class ApplicationForm
         CType(Me.AncestryDirectorWatcher, System.ComponentModel.ISupportInitialize).EndInit()
         Me.toolbar.ResumeLayout(False)
         Me.toolbar.PerformLayout()
-        Me.pnlMain.ResumeLayout(False)
-        Me.pnlMiddle.ResumeLayout(False)
-        Me.pnlMiddleTop.ResumeLayout(False)
-        Me.pnlLeft.ResumeLayout(False)
-        Me.pnlRight.ResumeLayout(False)
-        Me.StatusBar1.ResumeLayout(False)
-        Me.StatusBar1.PerformLayout()
         Me.MenuBar1.ResumeLayout(False)
         Me.MenuBar1.PerformLayout()
+        Me.StatusBar1.ResumeLayout(False)
+        Me.StatusBar1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -697,24 +502,6 @@ Partial Class ApplicationForm
     Friend WithEvents mnuDockBottomMiddle As ToolStripMenuItem
     Friend WithEvents toolbar As Panel
     Friend WithEvents btnActions As ToolStripButton
-    Friend WithEvents pnlMain As Panel
-    Friend WithEvents pnlMiddle As Panel
-    Friend WithEvents pnlMiddleTop As Panel
-    Friend WithEvents pnlMiddleLeft As Panel
-    Friend WithEvents splitMiddleLeftRight As Splitter
-    Friend WithEvents pnlMiddleRight As Panel
-    Friend WithEvents splitMiddleBottom As Splitter
-    Friend WithEvents pnlMiddleBottom As Panel
-    Friend WithEvents splitLeft As Splitter
-    Friend WithEvents pnlLeft As Panel
-    Friend WithEvents pnlLeftBottom As Panel
-    Friend WithEvents splitLeftTopBottom As Splitter
-    Friend WithEvents pnlLeftTop As Panel
-    Friend WithEvents splitRight As Splitter
-    Friend WithEvents pnlRight As Panel
-    Friend WithEvents pnlRightBottom As Panel
-    Friend WithEvents splitRightTopBottom As Splitter
-    Friend WithEvents pnlRightTop As Panel
     Friend WithEvents btnCensus As ToolStripButton
     Friend WithEvents btnNotebook As ToolStripButton
     Friend WithEvents TabPage1 As TabPage
@@ -730,4 +517,5 @@ Partial Class ApplicationForm
     Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AncestryToolbarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DockManager As DockPanelManager
 End Class

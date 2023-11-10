@@ -22,58 +22,26 @@ Partial Class DockPanel
   'Do not modify it using the code editor.
   <System.Diagnostics.DebuggerStepThrough()>
   Private Sub InitializeComponent()
-    Me.pnlClient = New AncestryAssistant.DockBottomTabs()
+        Me.pnlMain = New AncestryAssistant.BordersPanel()
+        Me.pnlSearch = New AncestryAssistant.BordersPanel()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.pnlButtonContainerSearch = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnSearch = New AncestryAssistant.IconButton()
+        Me.pnlHeader = New AncestryAssistant.BordersPanel()
+        Me.lblCaption = New System.Windows.Forms.Label()
+        Me.pnlButtonContainerHeader = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnClose = New AncestryAssistant.IconButton()
+        Me.btnPinned = New AncestryAssistant.IconButton()
+        Me.btnContextMenu = New AncestryAssistant.IconButton()
+    Me.pnlClient = New DockTabControl()
     Me.TabPage1 = New System.Windows.Forms.TabPage()
-    Me.pnlMain = New AncestryAssistant.BordersPanel()
-    Me.pnlSearch = New AncestryAssistant.BordersPanel()
-    Me.txtSearch = New System.Windows.Forms.TextBox()
-    Me.pnlButtonContainerSearch = New System.Windows.Forms.TableLayoutPanel()
-    Me.btnSearch = New AncestryAssistant.IconButton()
-    Me.pnlHeader = New AncestryAssistant.BordersPanel()
-    Me.lblCaption = New System.Windows.Forms.Label()
-    Me.pnlButtonContainerHeader = New System.Windows.Forms.TableLayoutPanel()
-    Me.btnClose = New AncestryAssistant.IconButton()
-    Me.btnPinned = New AncestryAssistant.IconButton()
-    Me.btnContextMenu = New AncestryAssistant.IconButton()
-        Me.pnlClient.SuspendLayout()
         Me.pnlMain.SuspendLayout()
         Me.pnlSearch.SuspendLayout()
         Me.pnlButtonContainerSearch.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.pnlButtonContainerHeader.SuspendLayout()
+        Me.pnlClient.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'pnlClient
-        '
-        Me.pnlClient.Alignment = System.Windows.Forms.TabAlignment.Bottom
-        Me.pnlClient.BorderColor = System.Drawing.Color.DimGray
-        Me.pnlClient.BorderColorBottom = System.Drawing.Color.DimGray
-        Me.pnlClient.BorderColorLeft = System.Drawing.Color.DimGray
-        Me.pnlClient.BorderColorRight = System.Drawing.Color.DimGray
-        Me.pnlClient.BorderColorTop = System.Drawing.Color.DimGray
-        Me.pnlClient.BorderWidth = New System.Windows.Forms.Padding(1)
-        Me.pnlClient.Controls.Add(Me.TabPage1)
-        Me.pnlClient.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlClient.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed
-        Me.pnlClient.HighlightColor = System.Drawing.Color.Lime
-        Me.pnlClient.Location = New System.Drawing.Point(0, 42)
-        Me.pnlClient.Margin = New System.Windows.Forms.Padding(0)
-        Me.pnlClient.MinimumSize = New System.Drawing.Size(0, 197)
-        Me.pnlClient.Name = "pnlClient"
-        Me.pnlClient.Padding = New System.Drawing.Point(2, 2)
-        Me.pnlClient.PanelBackColor = System.Drawing.Color.Black
-        Me.pnlClient.SelectedIndex = 0
-        Me.pnlClient.ShowToolTips = True
-        Me.pnlClient.Size = New System.Drawing.Size(348, 310)
-        Me.pnlClient.TabIndex = 7
-        '
-        'TabPage1
-        '
-        Me.TabPage1.Location = New System.Drawing.Point(4, 4)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Size = New System.Drawing.Size(340, 283)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.UseVisualStyleBackColor = True
         '
         'pnlMain
         '
@@ -450,6 +418,29 @@ Partial Class DockPanel
         Me.btnContextMenu.ThemeComponentId = Nothing
         Me.btnContextMenu.ThemeStyle = ""
         '
+        'pnlClient
+        '
+        Me.pnlClient.Alignment = System.Windows.Forms.TabAlignment.Bottom
+        Me.pnlClient.Controls.Add(Me.TabPage1)
+        Me.pnlClient.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlClient.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed
+        Me.pnlClient.HotTrack = True
+        Me.pnlClient.Location = New System.Drawing.Point(0, 42)
+        Me.pnlClient.Margin = New System.Windows.Forms.Padding(0)
+        Me.pnlClient.Name = "pnlClient"
+        Me.pnlClient.SelectedIndex = 0
+        Me.pnlClient.Size = New System.Drawing.Size(348, 310)
+        Me.pnlClient.TabIndex = 6
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Location = New System.Drawing.Point(4, 4)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(340, 282)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
         'DockPanel
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -461,13 +452,13 @@ Partial Class DockPanel
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "DockPanel"
         Me.Size = New System.Drawing.Size(348, 352)
-        Me.pnlClient.ResumeLayout(False)
         Me.pnlMain.ResumeLayout(False)
         Me.pnlSearch.ResumeLayout(False)
         Me.pnlSearch.PerformLayout()
         Me.pnlButtonContainerSearch.ResumeLayout(False)
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlButtonContainerHeader.ResumeLayout(False)
+        Me.pnlClient.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -482,6 +473,6 @@ Partial Class DockPanel
   Friend WithEvents btnClose As IconButton
   Friend WithEvents btnPinned As IconButton
   Friend WithEvents btnContextMenu As IconButton
-  Friend WithEvents pnlClient As DockBottomTabs
+  Friend WithEvents pnlClient As DockTabControl
   Friend WithEvents TabPage1 As TabPage
 End Class

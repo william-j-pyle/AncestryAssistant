@@ -15,7 +15,6 @@ Public Class ApplicationForm
   Private Ancestors As AncestorCollection
   Private WithEvents AncestorAttributes As AncestorPanel
   Private WithEvents AncestorsList As AncestorsListPanel
-  Private WithEvents PanelMgr As PanelManager = PanelManager.GetInstance
 
 
   Private _AncestorId As String = String.Empty
@@ -48,60 +47,61 @@ Public Class ApplicationForm
 
   Private Sub ApplicationForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    ' Register All Panels
-    PanelManager.RegisterPanel(DockPanelLocation.ContainerLeftPanels, pnlLeft)
-    PanelManager.RegisterPanel(DockPanelLocation.LeftTop, pnlLeftTop, DockPanelType.Panel)
-    PanelManager.RegisterPanel(DockPanelLocation.LeftBottom, pnlLeftBottom, DockPanelType.Panel)
+    '' Register All Panels
+    'PanelManager.RegisterPanel(DockPanelLocation.ContainerLeftPanels, pnlLeft)
+    'PanelManager.RegisterPanel(DockPanelLocation.LeftTop, pnlLeftTop, DockPanelType.Panel)
+    'PanelManager.RegisterPanel(DockPanelLocation.LeftBottom, pnlLeftBottom, DockPanelType.Panel)
 
-    PanelManager.RegisterPanel(DockPanelLocation.ContainerRightPanels, pnlRight)
-    PanelManager.RegisterPanel(DockPanelLocation.RightTop, pnlRightTop, DockPanelType.Panel)
-    PanelManager.RegisterPanel(DockPanelLocation.RightBottom, pnlRightBottom, DockPanelType.Panel)
+    'PanelManager.RegisterPanel(DockPanelLocation.ContainerRightPanels, pnlRight)
+    'PanelManager.RegisterPanel(DockPanelLocation.RightTop, pnlRightTop, DockPanelType.Panel)
+    'PanelManager.RegisterPanel(DockPanelLocation.RightBottom, pnlRightBottom, DockPanelType.Panel)
 
-    PanelManager.RegisterPanel(DockPanelLocation.MiddleTopLeft, pnlMiddleLeft, DockPanelType.Tab)
-    PanelManager.RegisterPanel(DockPanelLocation.MiddleTopRight, pnlMiddleRight, DockPanelType.Tab)
-    PanelManager.RegisterPanel(DockPanelLocation.MiddleBottom, pnlMiddleBottom, DockPanelType.Panel)
+    'PanelManager.RegisterPanel(DockPanelLocation.MiddleTopLeft, pnlMiddleLeft, DockPanelType.Tab)
+    'PanelManager.RegisterPanel(DockPanelLocation.MiddleTopRight, pnlMiddleRight, DockPanelType.Tab)
+    'PanelManager.RegisterPanel(DockPanelLocation.MiddleBottom, pnlMiddleBottom, DockPanelType.Panel)
 
-    ' Register All Splitters
-    PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitLeftAndMiddle, splitLeft)
-    PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitLeftTopAndBottom, splitLeftTopBottom)
-    PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitRightAndMiddle, splitRight)
-    PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitRightTopAndBottom, splitRightTopBottom)
-    PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitMiddleTopLeftAndTopRight, splitMiddleLeftRight)
-    PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitMiddleTopAndBottom, splitMiddleBottom)
+    '' Register All Splitters
+    'PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitLeftAndMiddle, splitLeft)
+    'PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitLeftTopAndBottom, splitLeftTopBottom)
+    'PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitRightAndMiddle, splitRight)
+    'PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitRightTopAndBottom, splitRightTopBottom)
+    'PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitMiddleTopLeftAndTopRight, splitMiddleLeftRight)
+    'PanelManager.RegisterSplitter(DockPanelSplitterPlacement.SplitMiddleTopAndBottom, splitMiddleBottom)
 
     ' Load Saved Visibility and Sizes
-    PanelManager.SetPanelVisibility(DockPanelLocation.MiddleTopLeft, My.Settings.UI_ML_VIS)
-    PanelManager.SetPanelVisibility(DockPanelLocation.MiddleTopRight, My.Settings.UI_MR_VIS)
-    PanelManager.SetPanelVisibility(DockPanelLocation.MiddleBottom, My.Settings.UI_MB_VIS)
-    pnlMiddleRight.Width = My.Settings.UI_MR_WIDTH
-    pnlMiddleBottom.Height = My.Settings.UI_MB_HEIGHT
+    'PanelManager.SetPanelVisibility(DockPanelLocation.MiddleTopLeft, My.Settings.UI_ML_VIS)
+    'PanelManager.SetPanelVisibility(DockPanelLocation.MiddleTopRight, My.Settings.UI_MR_VIS)
+    'PanelManager.SetPanelVisibility(DockPanelLocation.MiddleBottom, My.Settings.UI_MB_VIS)
+    'pnlMiddleRight.Width = My.Settings.UI_MR_WIDTH
+    'pnlMiddleBottom.Height = My.Settings.UI_MB_HEIGHT
 
-    PanelManager.SetPanelVisibility(DockPanelLocation.LeftTop, My.Settings.UI_LT_VIS)
-    PanelManager.SetPanelVisibility(DockPanelLocation.LeftBottom, My.Settings.UI_LB_VIS)
-    pnlLeft.Width = My.Settings.UI_L_WIDTH
-    pnlLeftTop.Height = My.Settings.UI_LT_HEIGHT
+    'PanelManager.SetPanelVisibility(DockPanelLocation.LeftTop, My.Settings.UI_LT_VIS)
+    'PanelManager.SetPanelVisibility(DockPanelLocation.LeftBottom, My.Settings.UI_LB_VIS)
+    'pnlLeft.Width = My.Settings.UI_L_WIDTH
+    'pnlLeftTop.Height = My.Settings.UI_LT_HEIGHT
 
-    PanelManager.SetPanelVisibility(DockPanelLocation.RightTop, False) ' My.Settings.UI_RT_VIS)
-    PanelManager.SetPanelVisibility(DockPanelLocation.RightBottom, False) 'My.Settings.UI_RB_VIS)
-    pnlRight.Width = My.Settings.UI_R_WIDTH
-    pnlRightTop.Height = My.Settings.UI_RT_HEIGHT
+    'PanelManager.SetPanelVisibility(DockPanelLocation.RightTop, False) ' My.Settings.UI_RT_VIS)
+    'PanelManager.SetPanelVisibility(DockPanelLocation.RightBottom, False) 'My.Settings.UI_RB_VIS)
+    'pnlRight.Width = My.Settings.UI_R_WIDTH
+    'pnlRightTop.Height = My.Settings.UI_RT_HEIGHT
 
     AncestorsList = New AncestorsListPanel()
     AncestorsList.setAncestors(Ancestors)
-    PanelManager.AddItem(DockPanelLocation.LeftBottom, AncestorsList)
+    DockManager.AddItem(DockPanelLocation.LeftTop, AncestorsList)
+    'PanelManager.SetPanelVisibility(DockPanelLocation.LeftBottom, False)
 
     Ancestry = New AncestryWebViewer()
     Ancestry.AncestryTreeID = My.Settings.ANCESTRY_TREE_ID
     AddHandler Ancestry.ViewerBusy, AddressOf AncestryBrowserBusyChanged
     AddHandler Ancestry.UriTrackingGroupChanged, AddressOf AncestryURITrackingGroupChanged
     AddHandler Ancestry.DataDownload, AddressOf AncestryDataMessage
-    PanelManager.AddItem(DockPanelLocation.MiddleTopLeft, Ancestry)
+    DockManager.AddItem(DockPanelLocation.MiddleTopLeft, Ancestry)
 
     AncestorAttributes = New AncestorPanel()
-    PanelManager.AddItem(DockPanelLocation.LeftTop, AncestorAttributes)
+    DockManager.AddItem(DockPanelLocation.LeftTop, AncestorAttributes)
 
-    PanelManager.AddItem(DockPanelLocation.MiddleTopLeft, New ImageGallery())
-    'PanelManager.AddItem(DockPanelLocation.MiddleBottom, New CensusViewer())
+    DockManager.AddItem(DockPanelLocation.MiddleTopLeft, New ImageGallery())
+    DockManager.AddItem(DockPanelLocation.MiddleBottom, New CensusViewer())
   End Sub
 
 
@@ -433,21 +433,21 @@ Public Class ApplicationForm
 
 
   Private Sub SaveUIState()
-    My.Settings.UI_MR_WIDTH = pnlMiddleRight.Width
-    My.Settings.UI_MB_HEIGHT = pnlMiddleBottom.Height
-    My.Settings.UI_ML_VIS = pnlMiddleLeft.Visible
-    My.Settings.UI_MR_VIS = pnlMiddleRight.Visible
-    My.Settings.UI_MB_VIS = pnlMiddleBottom.Visible
+    'My.Settings.UI_MR_WIDTH = pnlMiddleRight.Width
+    'My.Settings.UI_MB_HEIGHT = pnlMiddleBottom.Height
+    'My.Settings.UI_ML_VIS = pnlMiddleLeft.Visible
+    'My.Settings.UI_MR_VIS = pnlMiddleRight.Visible
+    'My.Settings.UI_MB_VIS = pnlMiddleBottom.Visible
 
-    My.Settings.UI_L_WIDTH = pnlLeft.Width
-    My.Settings.UI_LT_HEIGHT = pnlLeftTop.Height
-    My.Settings.UI_LT_VIS = pnlLeftTop.Visible
-    My.Settings.UI_LB_VIS = pnlLeftBottom.Visible
+    'My.Settings.UI_L_WIDTH = pnlLeft.Width
+    'My.Settings.UI_LT_HEIGHT = pnlLeftTop.Height
+    'My.Settings.UI_LT_VIS = pnlLeftTop.Visible
+    'My.Settings.UI_LB_VIS = pnlLeftBottom.Visible
 
-    My.Settings.UI_R_WIDTH = pnlRight.Width
-    My.Settings.UI_RT_HEIGHT = pnlRightTop.Height
-    My.Settings.UI_RT_VIS = pnlRightTop.Visible
-    My.Settings.UI_RB_VIS = pnlRightBottom.Visible
+    'My.Settings.UI_R_WIDTH = pnlRight.Width
+    'My.Settings.UI_RT_HEIGHT = pnlRightTop.Height
+    'My.Settings.UI_RT_VIS = pnlRightTop.Visible
+    'My.Settings.UI_RB_VIS = pnlRightBottom.Visible
   End Sub
 
   Private Sub ApplicationForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -455,11 +455,11 @@ Public Class ApplicationForm
   End Sub
 
   Private Sub btnCensus_Click(sender As Object, e As EventArgs) Handles btnCensus.Click
-    PanelManager.SetPanelVisibility(DockPanelLocation.MiddleBottom, btnCensus.Checked)
+    'PanelManager.SetPanelVisibility(DockPanelLocation.MiddleBottom, btnCensus.Checked)
   End Sub
 
   Private Sub btnNotebook_Click(sender As Object, e As EventArgs) Handles btnNotebook.Click
-    PanelManager.SetPanelVisibility(DockPanelLocation.MiddleTopRight, btnNotebook.Checked)
+    'PanelManager.SetPanelVisibility(DockPanelLocation.MiddleTopRight, btnNotebook.Checked)
   End Sub
 
   Private Sub Ancestry_UriTrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
@@ -473,4 +473,5 @@ Public Class ApplicationForm
   Private Sub Ancestry_ViewerBusy(busy As Boolean)
 
   End Sub
+
 End Class

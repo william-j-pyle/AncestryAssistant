@@ -340,4 +340,9 @@ Public Class DockTopTabs
     AddHandler e.Control.GotFocus, AddressOf TabsGotFocus
   End Sub
 
+  Private Sub InitializeComponent()
+    SuspendLayout()
+    ResumeLayout(False)
+
+  End Sub
 End Class
