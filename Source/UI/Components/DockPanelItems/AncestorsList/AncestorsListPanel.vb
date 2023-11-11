@@ -1,7 +1,23 @@
 ﻿Imports AncestryAssistant.AncestorCollection
 
 Public Class AncestorsListPanel
+  Inherits System.Windows.Forms.UserControl
   Implements IDockPanelItem
+
+  <System.Diagnostics.DebuggerNonUserCode()>
+  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+    Try
+      If disposing AndAlso components IsNot Nothing Then
+        components.Dispose()
+      End If
+    Finally
+      MyBase.Dispose(disposing)
+    End Try
+  End Sub
+
+  Private theme As UITheme = UITheme.GetInstance
+  Private components As System.ComponentModel.IContainer
+  Private WithEvents AncestorsList As ListView
 
   Public Event AncestryNavigateRequest(AncestorID As String)
   Public Event AncestorIDChanged(AncestorID As String)
@@ -25,7 +41,39 @@ Public Class AncestorsListPanel
   End Property
 
   Public Sub New()
-    InitializeComponent()
+    AncestorsList = New System.Windows.Forms.ListView()
+    SuspendLayout()
+    '
+    'AncestorsList
+    '
+    AncestorsList.AutoArrange = False
+    AncestorsList.BackColor = theme.PanelBackColor
+    AncestorsList.BorderStyle = System.Windows.Forms.BorderStyle.None
+    AncestorsList.Dock = System.Windows.Forms.DockStyle.Fill
+    AncestorsList.ForeColor = theme.PanelFontColor
+    AncestorsList.FullRowSelect = True
+    AncestorsList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+    AncestorsList.HideSelection = False
+    AncestorsList.Location = New System.Drawing.Point(0, 0)
+    AncestorsList.MultiSelect = False
+    AncestorsList.Name = "AncestorsList"
+    AncestorsList.Size = New System.Drawing.Size(364, 351)
+    AncestorsList.TabIndex = 4
+    AncestorsList.UseCompatibleStateImageBehavior = False
+    AncestorsList.View = System.Windows.Forms.View.Details
+    '
+    'AncestorsListPanel
+    '
+    AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+    BackColor = theme.PanelBackColor
+    Controls.Add(AncestorsList)
+    Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    ForeColor = theme.PanelFontColor
+    Margin = New System.Windows.Forms.Padding(0)
+    Name = "AncestorsListPanel"
+    Size = New System.Drawing.Size(364, 351)
+    ResumeLayout(False)
+
     With AncestorsList
       .Tag = ""
       .Items.Clear()
@@ -75,12 +123,4 @@ Public Class AncestorsListPanel
     blockEvents = False
   End Sub
 
-
-  Private Sub JDockPanelHeader_HeaderCloseClicked()
-    RaiseEvent PanelCloseClicked(Me)
-  End Sub
-
-  Private Sub AncestorsList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AncestorsList.SelectedIndexChanged
-
-  End Sub
 End Class

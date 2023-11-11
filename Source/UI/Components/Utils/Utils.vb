@@ -100,30 +100,6 @@ Module Utils
     Next
   End Sub
 
-  Public Function colorBrightness(color As Color, brightness As Double) As Color
-    Dim brightnessChange As Integer = CInt(255 * brightness / 100)
-    Dim newRed As Integer = Math.Max(Math.Min(255, color.R + brightnessChange), 0)
-    Dim newGreen As Integer = Math.Max(Math.Min(255, color.G + brightnessChange), 0)
-    Dim newBlue As Integer = Math.Max(Math.Min(255, color.B + brightnessChange), 0)
-    Return Color.FromArgb(color.A, newRed, newGreen, newBlue)
-  End Function
 
-  Function ColorToGray(color As Color) As Color
-    Dim grayValue As Integer = CInt((0.299 * color.R) + (0.587 * color.G) + (0.114 * color.B))
-    Return Color.FromArgb(grayValue, grayValue, grayValue)
-  End Function
-
-  Function ColorToDisabled(color As Color) As Color
-    Dim grayValue As Integer = CInt((0.299 * color.R) + (0.587 * color.G) + (0.114 * color.B))
-    Return Color.FromArgb(150, grayValue, grayValue, grayValue)
-  End Function
-
-  Function ColorToShadow(color As Color) As Color
-    Return colorBrightness(color, -25)
-  End Function
-
-  Function ColorToAccent(color As Color) As Color
-    Return colorBrightness(color, 25)
-  End Function
 
 End Module

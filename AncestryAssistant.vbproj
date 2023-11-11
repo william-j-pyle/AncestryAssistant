@@ -314,14 +314,8 @@
     <Compile Include="Source\UI\Components\DockPanels\DockPanel.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\DockPanelItems\Ancestor\AncestorPanel.Designer.vb">
-      <DependentUpon>AncestorPanel.vb</DependentUpon>
-    </Compile>
     <Compile Include="Source\UI\Components\DockPanelItems\Ancestor\AncestorPanel.vb">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Source\UI\Components\DockPanelItems\AncestorsList\AncestorsListPanel.Designer.vb">
-      <DependentUpon>AncestorsListPanel.vb</DependentUpon>
     </Compile>
     <Compile Include="Source\UI\Components\DockPanelItems\AncestorsList\AncestorsListPanel.vb">
       <SubType>UserControl</SubType>
@@ -355,6 +349,7 @@
     <Compile Include="Source\UI\Components\ToolBar\ToolBar.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Source\UI\Components\ToolBar\ToolbarRender2.vb" />
     <Compile Include="Source\UI\Components\ToolBar\ToolBarRenderer.vb" />
     <Compile Include="Source\UI\Dialogs\SaveImageDetails.Designer.vb">
       <DependentUpon>SaveImageDetails.vb</DependentUpon>
@@ -384,10 +379,17 @@
     <Compile Include="Source\UI\Components\RibbonBar\RibbonGroup.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Source\UI\Theme\UITheme.vb" />
     <Compile Include="Test\frmButtonTestForm.Designer.vb">
       <DependentUpon>frmButtonTestForm.vb</DependentUpon>
     </Compile>
     <Compile Include="Test\frmButtonTestForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\frmTest.Designer.vb">
+      <DependentUpon>frmTest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Test\frmTest.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Test\frmTestDockPanel.Designer.vb">
@@ -483,12 +485,6 @@
     <EmbeddedResource Include="Source\UI\Components\DockPanels\DockPanel.resx">
       <DependentUpon>DockPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\UI\Components\DockPanelItems\Ancestor\AncestorPanel.resx">
-      <DependentUpon>AncestorPanel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\UI\Components\DockPanelItems\AncestorsList\AncestorsListPanel.resx">
-      <DependentUpon>AncestorsListPanel.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Source\UI\Components\DockPanels\DockPanelManager.resx">
       <DependentUpon>DockPanelManager.vb</DependentUpon>
     </EmbeddedResource>
@@ -500,6 +496,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmButtonTestForm.resx">
       <DependentUpon>frmButtonTestForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\frmTest.resx">
+      <DependentUpon>frmTest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmTestDockPanel.resx">
       <DependentUpon>frmTestDockPanel.vb</DependentUpon>

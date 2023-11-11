@@ -236,7 +236,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("48, 4")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0, 0")>  _
         Public Property TB_ANCESTRY_LOC() As Global.System.Drawing.Point
             Get
                 Return CType(Me("TB_ANCESTRY_LOC"),Global.System.Drawing.Point)

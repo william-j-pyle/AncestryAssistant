@@ -59,6 +59,7 @@ Partial Class frmColorPallet
         '
         'Label1
         '
+        Me.Label1.BackColor = System.Drawing.Color.LightGray
         Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label1.Location = New System.Drawing.Point(24, 21)
@@ -70,6 +71,7 @@ Partial Class frmColorPallet
         '
         'Label2
         '
+        Me.Label2.BackColor = System.Drawing.Color.LightGray
         Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label2.Location = New System.Drawing.Point(214, 21)
@@ -81,6 +83,7 @@ Partial Class frmColorPallet
         '
         'Label3
         '
+        Me.Label3.BackColor = System.Drawing.Color.LightGray
         Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label3.Location = New System.Drawing.Point(404, 21)
@@ -92,6 +95,7 @@ Partial Class frmColorPallet
         '
         'Label4
         '
+        Me.Label4.BackColor = System.Drawing.Color.LightGray
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label4.Location = New System.Drawing.Point(594, 21)
@@ -103,6 +107,7 @@ Partial Class frmColorPallet
         '
         'Label5
         '
+        Me.Label5.BackColor = System.Drawing.Color.LightGray
         Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label5.Location = New System.Drawing.Point(594, 71)
@@ -114,6 +119,7 @@ Partial Class frmColorPallet
         '
         'Label6
         '
+        Me.Label6.BackColor = System.Drawing.Color.LightGray
         Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label6.Location = New System.Drawing.Point(404, 71)
@@ -125,6 +131,7 @@ Partial Class frmColorPallet
         '
         'Label7
         '
+        Me.Label7.BackColor = System.Drawing.Color.LightGray
         Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label7.Location = New System.Drawing.Point(214, 71)
@@ -136,6 +143,7 @@ Partial Class frmColorPallet
         '
         'Label8
         '
+        Me.Label8.BackColor = System.Drawing.Color.LightGray
         Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label8.Location = New System.Drawing.Point(24, 71)
@@ -147,6 +155,7 @@ Partial Class frmColorPallet
         '
         'Label9
         '
+        Me.Label9.BackColor = System.Drawing.Color.LightGray
         Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label9.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label9.Location = New System.Drawing.Point(594, 171)
@@ -158,6 +167,7 @@ Partial Class frmColorPallet
         '
         'Label10
         '
+        Me.Label10.BackColor = System.Drawing.Color.LightGray
         Me.Label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label10.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label10.Location = New System.Drawing.Point(404, 171)
@@ -169,6 +179,7 @@ Partial Class frmColorPallet
         '
         'Label11
         '
+        Me.Label11.BackColor = System.Drawing.Color.LightGray
         Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label11.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label11.Location = New System.Drawing.Point(214, 171)
@@ -180,6 +191,7 @@ Partial Class frmColorPallet
         '
         'Label12
         '
+        Me.Label12.BackColor = System.Drawing.Color.LightGray
         Me.Label12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label12.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label12.Location = New System.Drawing.Point(24, 171)
@@ -191,6 +203,7 @@ Partial Class frmColorPallet
         '
         'Label13
         '
+        Me.Label13.BackColor = System.Drawing.Color.LightGray
         Me.Label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label13.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label13.Location = New System.Drawing.Point(594, 121)
@@ -202,6 +215,7 @@ Partial Class frmColorPallet
         '
         'Label14
         '
+        Me.Label14.BackColor = System.Drawing.Color.LightGray
         Me.Label14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label14.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label14.Location = New System.Drawing.Point(404, 121)
@@ -213,6 +227,7 @@ Partial Class frmColorPallet
         '
         'Label15
         '
+        Me.Label15.BackColor = System.Drawing.Color.LightGray
         Me.Label15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label15.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label15.Location = New System.Drawing.Point(214, 121)
@@ -224,6 +239,7 @@ Partial Class frmColorPallet
         '
         'Label16
         '
+        Me.Label16.BackColor = System.Drawing.Color.LightGray
         Me.Label16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label16.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label16.Location = New System.Drawing.Point(24, 121)
@@ -235,6 +251,7 @@ Partial Class frmColorPallet
         '
         'Label17
         '
+        Me.Label17.BackColor = System.Drawing.Color.LightGray
         Me.Label17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label17.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label17.Location = New System.Drawing.Point(594, 371)
@@ -246,6 +263,7 @@ Partial Class frmColorPallet
         '
         'Label18
         '
+        Me.Label18.BackColor = System.Drawing.Color.LightGray
         Me.Label18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label18.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label18.Location = New System.Drawing.Point(404, 371)
@@ -257,6 +275,7 @@ Partial Class frmColorPallet
         '
         'Label19
         '
+        Me.Label19.BackColor = System.Drawing.Color.LightGray
         Me.Label19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label19.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label19.Location = New System.Drawing.Point(214, 371)
@@ -268,6 +287,7 @@ Partial Class frmColorPallet
         '
         'Label20
         '
+        Me.Label20.BackColor = System.Drawing.Color.LightGray
         Me.Label20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label20.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label20.Location = New System.Drawing.Point(24, 371)
@@ -279,6 +299,7 @@ Partial Class frmColorPallet
         '
         'Label21
         '
+        Me.Label21.BackColor = System.Drawing.Color.LightGray
         Me.Label21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label21.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label21.Location = New System.Drawing.Point(594, 321)
@@ -290,6 +311,7 @@ Partial Class frmColorPallet
         '
         'Label22
         '
+        Me.Label22.BackColor = System.Drawing.Color.LightGray
         Me.Label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label22.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label22.Location = New System.Drawing.Point(404, 321)
@@ -301,6 +323,7 @@ Partial Class frmColorPallet
         '
         'Label23
         '
+        Me.Label23.BackColor = System.Drawing.Color.LightGray
         Me.Label23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label23.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label23.Location = New System.Drawing.Point(214, 321)
@@ -312,6 +335,7 @@ Partial Class frmColorPallet
         '
         'Label24
         '
+        Me.Label24.BackColor = System.Drawing.Color.LightGray
         Me.Label24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label24.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label24.Location = New System.Drawing.Point(24, 321)
@@ -323,6 +347,7 @@ Partial Class frmColorPallet
         '
         'Label25
         '
+        Me.Label25.BackColor = System.Drawing.Color.LightGray
         Me.Label25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label25.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label25.Location = New System.Drawing.Point(594, 271)
@@ -334,6 +359,7 @@ Partial Class frmColorPallet
         '
         'Label26
         '
+        Me.Label26.BackColor = System.Drawing.Color.LightGray
         Me.Label26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label26.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label26.Location = New System.Drawing.Point(404, 271)
@@ -345,6 +371,7 @@ Partial Class frmColorPallet
         '
         'Label27
         '
+        Me.Label27.BackColor = System.Drawing.Color.LightGray
         Me.Label27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label27.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label27.Location = New System.Drawing.Point(214, 271)
@@ -356,6 +383,7 @@ Partial Class frmColorPallet
         '
         'Label28
         '
+        Me.Label28.BackColor = System.Drawing.Color.LightGray
         Me.Label28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label28.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label28.Location = New System.Drawing.Point(24, 271)
@@ -367,6 +395,7 @@ Partial Class frmColorPallet
         '
         'Label29
         '
+        Me.Label29.BackColor = System.Drawing.Color.LightGray
         Me.Label29.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label29.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label29.Location = New System.Drawing.Point(594, 221)
@@ -378,6 +407,7 @@ Partial Class frmColorPallet
         '
         'Label30
         '
+        Me.Label30.BackColor = System.Drawing.Color.LightGray
         Me.Label30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label30.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label30.Location = New System.Drawing.Point(404, 221)
@@ -389,6 +419,7 @@ Partial Class frmColorPallet
         '
         'Label31
         '
+        Me.Label31.BackColor = System.Drawing.Color.LightGray
         Me.Label31.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label31.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label31.Location = New System.Drawing.Point(214, 221)
@@ -400,6 +431,7 @@ Partial Class frmColorPallet
         '
         'Label32
         '
+        Me.Label32.BackColor = System.Drawing.Color.LightGray
         Me.Label32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label32.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label32.Location = New System.Drawing.Point(24, 221)
@@ -411,6 +443,7 @@ Partial Class frmColorPallet
         '
         'Label33
         '
+        Me.Label33.BackColor = System.Drawing.Color.LightGray
         Me.Label33.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label33.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label33.Location = New System.Drawing.Point(24, 422)
@@ -424,6 +457,7 @@ Partial Class frmColorPallet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(800, 498)
         Me.Controls.Add(Me.Label33)
         Me.Controls.Add(Me.Label17)
@@ -458,9 +492,11 @@ Partial Class frmColorPallet
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmColorPallet"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "System Colors"
+        Me.TopMost = True
         Me.ResumeLayout(False)
 
     End Sub

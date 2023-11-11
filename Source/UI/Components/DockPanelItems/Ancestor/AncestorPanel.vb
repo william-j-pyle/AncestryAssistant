@@ -1,21 +1,31 @@
 ﻿Imports System.Text
 
 Public Class AncestorPanel
+  Inherits System.Windows.Forms.UserControl
   Implements IDockPanelItem
 
   Private Const SUBNODE_DELIMITER As String = vbTab
 
   Public Event PanelCloseClicked(sender As Object)
 
+  Private theme As UITheme = UITheme.GetInstance
   Private AttributeState As List(Of String)
   Private LastAttributeItem As TreeNode
+  Private components As System.ComponentModel.IContainer
+
+  Private WithEvents AncestorAttributesHeader As Panel
+  Private WithEvents AncestorColSplitter As Splitter
+  Private WithEvents ancestorAttributesCol2 As BordersPanel
+  Private WithEvents lblAncestorAttributesCol2 As Label
+  Private WithEvents ancestorAttributesCol1 As BordersPanel
+  Private WithEvents lblAncestorAttributesCol1 As Label
+  Private WithEvents AncestorAttributes As TreeView
 
   Public ReadOnly Property ItemCaption As String Implements IDockPanelItem.ItemCaption
     Get
       Return "Ancestor"
     End Get
   End Property
-
   Public Property ItemDockStyle As DockStyle Implements IDockPanelItem.ItemDockStyle
     Get
       Return Dock
@@ -25,11 +35,156 @@ Public Class AncestorPanel
     End Set
   End Property
 
+  <System.Diagnostics.DebuggerNonUserCode()>
+  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+    Try
+      If disposing AndAlso components IsNot Nothing Then
+        components.Dispose()
+      End If
+    Finally
+      MyBase.Dispose(disposing)
+    End Try
+  End Sub
+
   Public Sub New()
-    InitializeComponent()
+    AncestorAttributesHeader = New System.Windows.Forms.Panel()
+    AncestorColSplitter = New System.Windows.Forms.Splitter()
+    ancestorAttributesCol2 = New AncestryAssistant.BordersPanel()
+    lblAncestorAttributesCol2 = New System.Windows.Forms.Label()
+    ancestorAttributesCol1 = New AncestryAssistant.BordersPanel()
+    lblAncestorAttributesCol1 = New System.Windows.Forms.Label()
+    AncestorAttributes = New System.Windows.Forms.TreeView()
+    AncestorAttributesHeader.SuspendLayout()
+    ancestorAttributesCol2.SuspendLayout()
+    ancestorAttributesCol1.SuspendLayout()
+    SuspendLayout()
+    '
+    'AncestorAttributesHeader
+    '
+    AncestorAttributesHeader.BackColor = theme.PanelBorderColor
+    AncestorAttributesHeader.Controls.Add(AncestorColSplitter)
+    AncestorAttributesHeader.Controls.Add(ancestorAttributesCol2)
+    AncestorAttributesHeader.Controls.Add(ancestorAttributesCol1)
+    AncestorAttributesHeader.Dock = System.Windows.Forms.DockStyle.Top
+    AncestorAttributesHeader.Location = New System.Drawing.Point(0, 0)
+    AncestorAttributesHeader.MaximumSize = New System.Drawing.Size(0, 18)
+    AncestorAttributesHeader.MinimumSize = New System.Drawing.Size(0, 18)
+    AncestorAttributesHeader.Name = "AncestorAttributesHeader"
+    AncestorAttributesHeader.Size = New System.Drawing.Size(287, 18)
+    AncestorAttributesHeader.TabIndex = 4
+    AncestorAttributesHeader.Visible = False
+    '
+    'AncestorColSplitter
+    '
+    AncestorColSplitter.BackColor = theme.PanelAccentColor
+    AncestorColSplitter.Location = New System.Drawing.Point(150, 0)
+    AncestorColSplitter.Margin = New System.Windows.Forms.Padding(0)
+    AncestorColSplitter.Name = "AncestorColSplitter"
+    AncestorColSplitter.Size = New System.Drawing.Size(1, 18)
+    AncestorColSplitter.TabIndex = 1
+    AncestorColSplitter.TabStop = False
+    '
+    'ancestorAttributesCol2
+    '
+    ancestorAttributesCol2.BackColor = theme.PanelBorderColor
+    ancestorAttributesCol2.BorderColor = theme.PanelBackColor
+    ancestorAttributesCol2.BorderColorBottom = theme.PanelShadowColor
+    ancestorAttributesCol2.BorderColorLeft = theme.PanelAccentColor
+    ancestorAttributesCol2.BorderColorRight = theme.PanelShadowColor
+    ancestorAttributesCol2.BorderColorTop = theme.PanelShadowColor
+    ancestorAttributesCol2.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
+    ancestorAttributesCol2.Controls.Add(lblAncestorAttributesCol2)
+    ancestorAttributesCol2.CornerRadius = New System.Windows.Forms.Padding(0)
+    ancestorAttributesCol2.Dock = System.Windows.Forms.DockStyle.Fill
+    ancestorAttributesCol2.Location = New System.Drawing.Point(150, 0)
+    ancestorAttributesCol2.MinimumSize = New System.Drawing.Size(60, 0)
+    ancestorAttributesCol2.Name = "ancestorAttributesCol2"
+    ancestorAttributesCol2.Padding = New System.Windows.Forms.Padding(1)
+    ancestorAttributesCol2.Size = New System.Drawing.Size(137, 18)
+    ancestorAttributesCol2.TabIndex = 4
+    '
+    'lblAncestorAttributesCol2
+    '
+    lblAncestorAttributesCol2.BackColor = theme.PanelBorderColor
+    lblAncestorAttributesCol2.Dock = System.Windows.Forms.DockStyle.Fill
+    lblAncestorAttributesCol2.ForeColor = theme.PanelFontColor
+    lblAncestorAttributesCol2.Location = New System.Drawing.Point(1, 1)
+    lblAncestorAttributesCol2.Name = "lblAncestorAttributesCol2"
+    lblAncestorAttributesCol2.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
+    lblAncestorAttributesCol2.Size = New System.Drawing.Size(135, 16)
+    lblAncestorAttributesCol2.TabIndex = 0
+    lblAncestorAttributesCol2.Text = "Value"
+    lblAncestorAttributesCol2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'ancestorAttributesCol1
+    '
+    ancestorAttributesCol1.BackColor = theme.PanelBorderColor
+    ancestorAttributesCol1.BorderColor = theme.PanelBackColor
+    ancestorAttributesCol1.BorderColorBottom = theme.PanelBorderColor
+    ancestorAttributesCol1.BorderColorLeft = theme.PanelBorderColor
+    ancestorAttributesCol1.BorderColorRight = theme.PanelBorderColor
+    ancestorAttributesCol1.BorderColorTop = theme.PanelBorderColor
+    ancestorAttributesCol1.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
+    ancestorAttributesCol1.Controls.Add(lblAncestorAttributesCol1)
+    ancestorAttributesCol1.CornerRadius = New System.Windows.Forms.Padding(0)
+    ancestorAttributesCol1.Dock = System.Windows.Forms.DockStyle.Left
+    ancestorAttributesCol1.Location = New System.Drawing.Point(0, 0)
+    ancestorAttributesCol1.Margin = New System.Windows.Forms.Padding(0)
+    ancestorAttributesCol1.MinimumSize = New System.Drawing.Size(80, 0)
+    ancestorAttributesCol1.Name = "ancestorAttributesCol1"
+    ancestorAttributesCol1.Padding = New System.Windows.Forms.Padding(1)
+    ancestorAttributesCol1.Size = New System.Drawing.Size(150, 18)
+    ancestorAttributesCol1.TabIndex = 3
+    '
+    'lblAncestorAttributesCol1
+    '
+    lblAncestorAttributesCol1.BackColor = theme.PanelBackColor
+    lblAncestorAttributesCol1.Dock = System.Windows.Forms.DockStyle.Fill
+    lblAncestorAttributesCol1.ForeColor = theme.PanelFontColor
+    lblAncestorAttributesCol1.Location = New System.Drawing.Point(1, 1)
+    lblAncestorAttributesCol1.Name = "lblAncestorAttributesCol1"
+    lblAncestorAttributesCol1.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
+    lblAncestorAttributesCol1.Size = New System.Drawing.Size(148, 16)
+    lblAncestorAttributesCol1.TabIndex = 0
+    lblAncestorAttributesCol1.Text = "Attribute"
+    lblAncestorAttributesCol1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'AncestorAttributes
+    '
+    AncestorAttributes.BackColor = theme.PanelBackColor
+    AncestorAttributes.BorderStyle = System.Windows.Forms.BorderStyle.None
+    AncestorAttributes.Dock = System.Windows.Forms.DockStyle.Fill
+    AncestorAttributes.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText
+    AncestorAttributes.ForeColor = theme.PanelFontColor
+    AncestorAttributes.FullRowSelect = True
+    AncestorAttributes.HotTracking = True
+    AncestorAttributes.LineColor = theme.PanelBorderColor
+    AncestorAttributes.Location = New System.Drawing.Point(0, 18)
+    AncestorAttributes.Margin = New System.Windows.Forms.Padding(0)
+    AncestorAttributes.Name = "AncestorAttributes"
+    AncestorAttributes.ShowLines = False
+    AncestorAttributes.Size = New System.Drawing.Size(287, 290)
+    AncestorAttributes.TabIndex = 5
+    '
+    'AncestorPanel
+    '
+    AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+    BackColor = theme.PanelBackColor
+    Controls.Add(AncestorAttributes)
+    Controls.Add(AncestorAttributesHeader)
+    Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    ForeColor = theme.PanelBackColor
+    Margin = New System.Windows.Forms.Padding(0)
+    Name = "AncestorPanel"
+    Size = New System.Drawing.Size(287, 308)
+    AncestorAttributesHeader.ResumeLayout(False)
+    ancestorAttributesCol2.ResumeLayout(False)
+    ancestorAttributesCol1.ResumeLayout(False)
+    ResumeLayout(False)
+
     AncestorAttributes.DrawMode = TreeViewDrawMode.OwnerDrawText
-    AncestorAttributes.ForeColor = Color.WhiteSmoke
-    AncestorAttributes.LineColor = Color.DarkGray
+    AncestorAttributes.ForeColor = theme.PanelFontColor
+    AncestorAttributes.LineColor = theme.PanelBorderColor
   End Sub
 
 #Region "Attribute Node Support"
@@ -106,10 +261,10 @@ Public Class AncestorPanel
     ' Draw the first column
     Dim fnt As Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 
-    TextRenderer.DrawText(e.Graphics, txtA(0), fnt, boundsColumn1, Color.WhiteSmoke, TextFormatFlags.Left Or TextFormatFlags.EndEllipsis)
+    TextRenderer.DrawText(e.Graphics, txtA(0), fnt, boundsColumn1, theme.PanelFontColor, TextFormatFlags.Left Or TextFormatFlags.EndEllipsis)
 
     ' Draw the second column
-    TextRenderer.DrawText(e.Graphics, txtA(1), fnt, boundsColumn2, Color.WhiteSmoke, TextFormatFlags.Left)
+    TextRenderer.DrawText(e.Graphics, txtA(1), fnt, boundsColumn2, theme.PanelFontColor, TextFormatFlags.Left)
 
     ' Prevent default drawing of the node's text
     e.DrawDefault = False

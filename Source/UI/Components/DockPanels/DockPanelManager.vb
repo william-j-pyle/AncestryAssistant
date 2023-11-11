@@ -1,6 +1,5 @@
 ﻿Public Class DockPanelManager
 
-
   Public Sub New()
     InitializeComponent()
     If DesignMode Then

@@ -1,10 +1,14 @@
 ﻿Public Class DockPanel
 
+  Private theme As UITheme = UITheme.GetInstance
+
   Public Event PanelFocusChanged(sender As DockPanel, hasFocus As Boolean)
   Public Event PanelCloseRequested(sender As DockPanel)
 
   Public Event PanelTypeChanged(sender As DockPanel, newPanelType As DockPanelType)
   Public Event PanelLocationChanged(sender As DockPanel, newPanelLocation As DockPanelLocation)
+
+  Private WithEvents ctxMenu As ContextMenuStrip
 
 
 #Region "Properties"
@@ -37,6 +41,7 @@
       If _PanelType <> value Then
         _PanelType = value
         RaiseEvent PanelTypeChanged(Me, value)
+        LayoutPanel()
       End If
     End Set
   End Property
@@ -48,18 +53,18 @@
     End Get
     Set(value As Boolean)
       _PanelShowClose = value
-      Invalidate(True)
+      LayoutPanel()
     End Set
   End Property
 
   Private _PanelShowSearch As Boolean = True
   Public Property PanelShowSearch As Boolean
     Get
-      Return _PanelShowClose
+      Return _PanelShowSearch
     End Get
     Set(value As Boolean)
-      _PanelShowClose = value
-      Invalidate(True)
+      _PanelShowSearch = value
+      LayoutPanel()
     End Set
   End Property
 
@@ -70,7 +75,7 @@
     End Get
     Set(value As Boolean)
       _PanelShowPinned = value
-      Invalidate(True)
+      LayoutPanel()
     End Set
   End Property
 
@@ -81,7 +86,7 @@
     End Get
     Set(value As Boolean)
       _PanelShowContextMenu = value
-      Invalidate(True)
+      LayoutPanel()
     End Set
   End Property
 
@@ -106,71 +111,6 @@
     End Get
     Set(value As Boolean)
       _PanelIsPinned = value
-    End Set
-  End Property
-
-  Private _PanelBackColor As Color = Color.Black
-  Public Property PanelBackColor As Color
-    Get
-      Return _PanelBackColor
-    End Get
-    Set(value As Color)
-      _PanelBackColor = value
-      Invalidate(True)
-    End Set
-  End Property
-
-  Private _PanelBorderColor As Color = Color.DarkGray
-  Public Property PanelBorderColor As Color
-    Get
-      Return _PanelBorderColor
-    End Get
-    Set(value As Color)
-      _PanelBorderColor = value
-      Invalidate(True)
-    End Set
-  End Property
-
-  Private _PanelFontColor As Color = Color.WhiteSmoke
-  Public Property PanelFontColor As Color
-    Get
-      Return _PanelFontColor
-    End Get
-    Set(value As Color)
-      _PanelFontColor = value
-      Invalidate(True)
-    End Set
-  End Property
-
-  Private _PanelHighlightColor As Color = Color.Lime
-  Public Property PanelHighlightColor As Color
-    Get
-      Return _PanelHighlightColor
-    End Get
-    Set(value As Color)
-      _PanelHighlightColor = value
-      Invalidate(True)
-    End Set
-  End Property
-
-  Private _PanelShadowColor As Color = ColorToShadow(_PanelBorderColor)
-  Public Property PanelShadowColor As Color
-    Get
-      Return _PanelShadowColor
-    End Get
-    Set(value As Color)
-      _PanelShadowColor = value
-      Invalidate(True)
-    End Set
-  End Property
-
-  Private _PanelAccentColor As Color = ColorToAccent(_PanelBorderColor)
-  Public Property PanelAccentColor As Color
-    Get
-      Return _PanelAccentColor
-    End Get
-    Set(value As Color)
-      _PanelAccentColor = value
       Invalidate(True)
     End Set
   End Property
@@ -227,15 +167,20 @@
     End With
     pnlClient.TabPages.Add(item.ItemCaption, item.ItemCaption)
     With pnlClient.TabPages(item.ItemCaption)
-      .BackColor = PanelBackColor
+      .BackColor = theme.PanelBackColor
       .BorderStyle = BorderStyle.None
       .UseVisualStyleBackColor = False
-      .ForeColor = PanelFontColor
+      .ForeColor = theme.PanelFontColor
       .Controls.Add(CType(item, Control))
     End With
     RemoveBlankTabs()
     LayoutPanel()
     pnlClient.SelectTab(item.ItemCaption)
+    lblCaption.Text = item.ItemCaption
+  End Function
+
+  Public Function HasItem(key As String) As Boolean
+    Return pnlClient.TabPages.ContainsKey(key)
   End Function
 
   Public Function GetItem(key As String) As Control
@@ -307,23 +252,44 @@
 
 #End Region
 
+
+
+
   Public Sub New()
     InitializeComponent()
+    DoubleBuffered = True
+    ctxMenu = New ContextMenuStrip()
+    ctxMenu.DropShadowEnabled = True
     SetStyle(ControlStyles.DoubleBuffer Or ControlStyles.ResizeRedraw, True)
-    BackColor = PanelBackColor
-    ForeColor = PanelFontColor
+    BackColor = theme.PanelBackColor
+    ForeColor = theme.PanelFontColor
     With pnlClient
       .HotTrack = True
       .Margin = New System.Windows.Forms.Padding(0)
       .ShowToolTips = True
       .TabPages(0).Text = ""
-      .TabPages(0).BackColor = PanelBackColor
-      .TabPages(0).ForeColor = PanelFontColor
+      .TabPages(0).BackColor = theme.PanelBackColor
+      .TabPages(0).ForeColor = theme.PanelFontColor
     End With
     UpdateStyles()
     lblCaption.Text = ""
+    CaptureFocus(Me)
     LayoutPanel()
   End Sub
+
+
+  Private Sub CaptureFocus(ctl As Control)
+    Try
+      AddHandler ctl.GotFocus, AddressOf DockPanel_GotFocus
+      AddHandler ctl.MouseDown, AddressOf DockPanel_GotFocus
+    Catch ex As Exception
+    End Try
+    For Each childCtl As Control In ctl.Controls
+      CaptureFocus(childCtl)
+    Next
+  End Sub
+
+
 
   Private Sub LayoutPanel()
     'Prevent display of control when its empty
@@ -333,14 +299,14 @@
     End If
     'We have data so generate the interface
     Visible = True
+    With ctxMenu
+      .BackColor = theme.PanelBorderColor
+      .ForeColor = theme.PanelFontColor
+    End With
     With pnlClient
-      .TabAccentColor = PanelAccentColor
-      .TabBackColor = PanelBackColor
-      .TabBorderColor = PanelBorderColor
-      .TabFontColor = PanelFontColor
-      .TabHighlightColor = PanelHighlightColor
-      .TabShadowColor = PanelShadowColor
+      .TabShowClose = PanelShowClose
       .TabType = PanelType
+      .ShowHasFocus = PanelHasFocus
     End With
     Select Case PanelType
       Case DockPanelType.None
@@ -354,12 +320,21 @@
         pnlSearch.Visible = PanelShowSearch
         'Apply Main Panel Formatting and refresh
         With pnlMain
+          If PanelShowSearch Then
+            .MinimumSize = New Size(0, 42)
+            .MaximumSize = New Size(0, 42)
+            .Height = 42
+          Else
+            .MinimumSize = New Size(0, 22)
+            .MaximumSize = New Size(0, 22)
+            .Height = 22
+          End If
           .Visible = True
           If PanelHasFocus Then
-            .BorderColorTop = PanelHighlightColor
+            .BorderColorTop = theme.PanelHighlightColor
             .BorderWidth = New Padding(1, 3, 1, 1)
           Else
-            .BorderColorTop = PanelBorderColor
+            .BorderColorTop = theme.PanelBorderColor
             .BorderWidth = New Padding(1, 1, 1, 1)
           End If
           .Invalidate(True)
@@ -387,7 +362,11 @@
         'Apply Client Panel layout and sizing
         With pnlClient
           .Alignment = System.Windows.Forms.TabAlignment.Top
-          .Padding = New System.Drawing.Point(20, 2)
+          If PanelShowClose Then
+            .Padding = New System.Drawing.Point(20, 2)
+          Else
+            .Padding = New System.Drawing.Point(2, 2)
+          End If
           .Size = New Size(0, 0)
           .Dock = DockStyle.Fill
           .Invalidate(True)
@@ -418,6 +397,10 @@
 
   Private Sub btnPinned_Click(sender As Object, e As EventArgs) Handles btnPinned.Click
     PanelIsPinned = Not PanelIsPinned
+  End Sub
+
+  Private Sub lblCaption_Click(sender As Object, e As EventArgs) Handles lblCaption.Click
+
   End Sub
 
 #End Region

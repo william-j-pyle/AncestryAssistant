@@ -48,7 +48,7 @@
       <Value Profile="(Default)">200</Value>
     </Setting>
     <Setting Name="TB_ANCESTRY_LOC" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">48, 4</Value>
+      <Value Profile="(Default)">0, 0</Value>
     </Setting>
     <Setting Name="TB_WEB_LOC" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">24, 3</Value>

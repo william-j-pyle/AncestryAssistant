@@ -1,22 +1,16 @@
 ﻿Public Class MenuBarRenderer
   Inherits ToolStripRenderer
-
-  Public Property MenuBarBackColor As Color = Color.DarkGray
-  Public Property MenuBarFontColor As Color = Color.WhiteSmoke
-  Public Property MenuBarBorderColor As Color = Color.DarkSlateGray
-  Public Property MenuBarAccentColor As Color = ColorToAccent(MenuBarBorderColor)
-  Public Property MenuBarShadowColor As Color = ColorToShadow(MenuBarBorderColor)
-  Public Property MenuBarHighlightColor As Color = Color.LimeGreen
+  Private theme As UITheme = UITheme.GetInstance
 
   Public Sub New()
     MyBase.New()
   End Sub
 
   Private Sub ToolStripRenderer_RenderSeparator(sender As Object, e As ToolStripSeparatorRenderEventArgs) Handles Me.RenderSeparator
-    Using brush As SolidBrush = New SolidBrush(MenuBarAccentColor)
+    Using brush As SolidBrush = New SolidBrush(theme.PanelAccentColor)
       e.Graphics.FillRectangle(brush, 0 - 2, 0, e.Item.Width + 2, e.Item.Height)
     End Using
-    Using pen As Pen = New Pen(MenuBarShadowColor, 1)
+    Using pen As Pen = New Pen(theme.PanelShadowColor, 1)
       Dim y As Single = ((e.Item.ContentRectangle.Y + 1) / 2) + 1
       Dim x As Single = 26
       Dim w As Single = e.Item.Width - 30
@@ -60,7 +54,7 @@
     Using brush As SolidBrush = New SolidBrush(e.Item.BackColor)
       e.Graphics.FillRectangle(brush, e.Item.Bounds)
     End Using
-    e.Graphics.DrawRectangle(New Pen(MenuBarAccentColor, 1), e.Item.Bounds)
+    e.Graphics.DrawRectangle(New Pen(theme.PanelAccentColor, 1), e.Item.Bounds)
   End Sub
 
   'Private Sub MenuBarRenderer_RenderLabelBackground(sender As Object, e As ToolStripItemRenderEventArgs) Handles Me.RenderLabelBackground

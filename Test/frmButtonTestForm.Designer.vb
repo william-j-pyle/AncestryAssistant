@@ -143,8 +143,8 @@ Partial Class frmButtonTestForm
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnExportStyle = New System.Windows.Forms.Button()
         Me.btnImportStyle = New System.Windows.Forms.Button()
-    Me.preview = New AncestryAssistant.IconButton()
-    Me.previewPanel.SuspendLayout()
+        Me.preview = New AncestryAssistant.IconButton()
+        Me.previewPanel.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.tabButton.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -1446,8 +1446,8 @@ Partial Class frmButtonTestForm
         Me.preview.BorderRightSize = 0
         Me.preview.BorderTopColor = System.Drawing.SystemColors.ActiveBorder
         Me.preview.BorderTopSize = 0
-    Me.preview.btnState = AncestryAssistant.IconButton.IconButtonStateEnum.STANDARD
-    Me.preview.ButtonSize = AncestryAssistant.IconSizeEnum.Icon20x20
+        Me.preview.btnState = AncestryAssistant.IconButton.IconButtonStateEnum.STANDARD
+        Me.preview.ButtonSize = AncestryAssistant.IconSizeEnum.Icon20x20
         Me.preview.Checked = False
         Me.preview.CheckOnClick = False
         Me.preview.IconAncestry0 = AncestryAssistant.FontAncestryIconEnum.BLANK
@@ -1492,17 +1492,20 @@ Partial Class frmButtonTestForm
         Me.preview.Size = New System.Drawing.Size(20, 20)
         Me.preview.TabIndex = 3
         Me.preview.ThemeComponentId = Nothing
-        Me.preview.ThemeStyle = Nothing
+        Me.preview.ThemeStyle = ""
         '
         'frmButtonTestForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.previewPanel)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmButtonTestForm"
-        Me.Text = "frmButtonTestForm"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "IconButton Test/Configuration Utility"
         Me.previewPanel.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.tabButton.ResumeLayout(False)

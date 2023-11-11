@@ -5,6 +5,8 @@ Public Class ImageGallery
   Inherits AbstractViewer
   Implements IDockPanelItem
 
+  Private theme As UITheme = UITheme.GetInstance
+
   Friend WithEvents imgViewer As ListView
   Friend WithEvents imgViewerList As ImageList
   Friend WithEvents imgContainer As Panel
@@ -80,10 +82,10 @@ Public Class ImageGallery
     '
     'imgViewer
     '
-    imgViewer.BackColor = Color.Black
+    imgViewer.BackColor = theme.PanelBackColor
     imgViewer.BorderStyle = BorderStyle.None
     imgViewer.Font = New Font("Segoe UI Semibold", 9.0!, FontStyle.Bold)
-    imgViewer.ForeColor = Color.GhostWhite
+    imgViewer.ForeColor = theme.PanelFontColor
     imgViewer.HideSelection = False
     imgViewer.LargeImageList = imgViewerList
     imgViewer.Location = New Point(0, 144)
@@ -103,7 +105,7 @@ Public Class ImageGallery
     '
     'imgContainer
     '
-    imgContainer.BackColor = SystemColors.ControlDarkDark
+    imgContainer.BackColor = theme.PanelBackColor
     imgContainer.Controls.Add(imgBox)
     imgContainer.Location = New Point(257, 144)
     imgContainer.Margin = New Padding(0)
@@ -162,7 +164,7 @@ Public Class ImageGallery
     With btnBack
       .DisplayStyle = ToolStripItemDisplayStyle.Image
       .Image = Global.AncestryAssistant.My.Resources.Resources.BIG_LEFT_ICO20
-      .ImageTransparentColor = Color.Magenta
+      .ImageTransparentColor = Color.Transparent
       .Name = ""
       .Size = New Size(23, 22)
       .Text = "Back to Gallery"
@@ -172,7 +174,7 @@ Public Class ImageGallery
     '
     btnFlipV.DisplayStyle = ToolStripItemDisplayStyle.Image
     btnFlipV.Image = Global.AncestryAssistant.My.Resources.Resources.FLIP_HORIZONTAL_ICO20
-    btnFlipV.ImageTransparentColor = Color.Magenta
+    btnFlipV.ImageTransparentColor = Color.Transparent
     btnFlipV.Name = "btnFlipV"
     btnFlipV.Size = New Size(23, 22)
     btnFlipV.Text = "Flip Image Vertically"
@@ -181,14 +183,14 @@ Public Class ImageGallery
     '
     btnFlipH.DisplayStyle = ToolStripItemDisplayStyle.Image
     btnFlipH.Image = Global.AncestryAssistant.My.Resources.Resources.FLIP_VERTICAL_ICO20
-    btnFlipH.ImageTransparentColor = Color.Magenta
+    btnFlipH.ImageTransparentColor = Color.Transparent
     btnFlipH.Name = "btnFlipH"
     btnFlipH.Size = New Size(23, 22)
     btnFlipH.Text = "Flip Image Horizontally"
     '
     'lblCaption
     '
-    lblCaption.ForeColor = Color.Black
+    lblCaption.ForeColor = theme.PanelFontColor
     lblCaption.Name = "lblCaption"
     lblCaption.Size = New Size(87, 22)
     lblCaption.TextAlign = ContentAlignment.MiddleCenter
@@ -200,7 +202,7 @@ Public Class ImageGallery
     btnSizeHV.Alignment = ToolStripItemAlignment.Right
     btnSizeHV.DisplayStyle = ToolStripItemDisplayStyle.Image
     btnSizeHV.Image = Global.AncestryAssistant.My.Resources.Resources.MAXIMIZE_2_ICO20
-    btnSizeHV.ImageTransparentColor = Color.Magenta
+    btnSizeHV.ImageTransparentColor = Color.Transparent
     btnSizeHV.Name = "btnSizeHV"
     btnSizeHV.Size = New Size(23, 22)
     btnSizeHV.Text = "Fit Full Image"
@@ -210,7 +212,7 @@ Public Class ImageGallery
     btnSizeH.Alignment = ToolStripItemAlignment.Right
     btnSizeH.DisplayStyle = ToolStripItemDisplayStyle.Image
     btnSizeH.Image = Global.AncestryAssistant.My.Resources.Resources.pfeile_pfeile_horizontal
-    btnSizeH.ImageTransparentColor = Color.Magenta
+    btnSizeH.ImageTransparentColor = Color.Transparent
     btnSizeH.Name = "btnSizeH"
     btnSizeH.Size = New Size(23, 22)
     btnSizeH.Text = "Fit Image Width"
@@ -220,7 +222,7 @@ Public Class ImageGallery
     btnSizeV.Alignment = ToolStripItemAlignment.Right
     btnSizeV.DisplayStyle = ToolStripItemDisplayStyle.Image
     btnSizeV.Image = Global.AncestryAssistant.My.Resources.Resources.VERTICAL_ICO20
-    btnSizeV.ImageTransparentColor = Color.Magenta
+    btnSizeV.ImageTransparentColor = Color.Transparent
     btnSizeV.Name = "btnSizeV"
     btnSizeV.Size = New Size(23, 22)
     btnSizeV.Text = "Fit Image Height"
@@ -228,7 +230,7 @@ Public Class ImageGallery
     'lblZoom
     '
     lblZoom.Alignment = ToolStripItemAlignment.Right
-    lblZoom.ForeColor = Color.Black
+    lblZoom.ForeColor = theme.PanelFontColor
     lblZoom.Name = "lblZoom"
     lblZoom.Size = New Size(25, 22)
     lblZoom.Text = "100"

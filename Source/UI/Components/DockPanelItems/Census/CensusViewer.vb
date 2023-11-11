@@ -4,6 +4,8 @@ Public Class CensusViewer
   Inherits AbstractViewer
   Implements IDockPanelItem
 
+  Private theme As UITheme = UITheme.GetInstance
+
   Friend WithEvents ts As ToolStrip
   Friend WithEvents lblCaption As ToolStripLabel
   Private CensusData As Collection
@@ -43,7 +45,6 @@ Public Class CensusViewer
   End Sub
 
   Private Sub ResetViewer()
-    Debug.Print("ResetViewer")
     Dim idx As Integer = 0
     While idx < Controls.Count
       If TypeOf Controls.Item(idx) Is DataGridView Then
@@ -95,10 +96,8 @@ Public Class CensusViewer
 
   Private Sub showWorkSheet(censusYear As Integer)
     If xlsWorkbook.ContainsKey(censusYear) Then
-      Debug.Print("Active Worksheet")
       xlsActiveSheet = xlsWorkbook.Item(censusYear)
     Else
-      Debug.Print("New Worksheet")
       xlsActiveSheet = CreateWorkSheet(censusYear)
       Controls.Add(xlsActiveSheet)
     End If
@@ -114,7 +113,8 @@ Public Class CensusViewer
     '
     'ts
     '
-    ts.BackColor = SystemColors.ControlLight
+    ts.BackColor = theme.PanelBorderColor
+    ts.ForeColor = theme.PanelFontColor
     ts.GripStyle = ToolStripGripStyle.Hidden
     ts.Items.AddRange(New ToolStripItem() {lblCaption})
     ts.Location = New Point(0, 0)
@@ -128,13 +128,16 @@ Public Class CensusViewer
     '
     lblCaption.Name = "lblCaption"
     lblCaption.Size = New Size(87, 22)
+    lblCaption.BackColor = theme.PanelBorderColor
+    lblCaption.ForeColor = theme.PanelFontColor
     lblCaption.Text = "ToolStripLabel1"
     '
     'CensusViewer
     '
     AutoScaleDimensions = New SizeF(6.0!, 13.0!)
-    AutoScaleMode = AutoScaleMode.Font
-    BackColor = Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
+    AutoScaleMode = AutoScaleMode.None
+    BackColor = theme.PanelBackColor
+    ForeColor = theme.PanelFontColor
     Controls.Add(xlsActiveSheet)
     Controls.Add(ts)
     DoubleBuffered = True
@@ -182,20 +185,20 @@ Public Class CensusViewer
           item = New ToolStripButton(censusYear.ToString)
           If availableCensus.Contains(censusYear) Then
             item.CheckOnClick = True
-            item.ForeColor = Color.Black
+            item.ForeColor = theme.PanelFontColor
             item.ToolTipText = censusYear & " Census"
             item.Tag = Nothing
             AddHandler item.Click, AddressOf CensusSelect
           Else
             item.Enabled = False
-            item.ForeColor = Color.Red
+            item.ForeColor = theme.PanelFontColor 'Need to modify theme and code to allow for error condition
             item.ToolTipText = censusYear & " Census Unavailable"
           End If
           ts.Items.Add(item)
         Next
         If availableCensus.Count > 0 Then
           item = New ToolStripButton(UNIFIED_TEXT)
-          item.ForeColor = Color.Black
+          item.ForeColor = theme.PanelFontColor
           item.ToolTipText = "Unified view of all available Census Years"
           item.Tag = Nothing
           AddHandler item.Click, AddressOf CensusSelect
@@ -215,10 +218,10 @@ Public Class CensusViewer
     For Each btn As ToolStripButton In ts.Items
       If srcSender.Text.Equals(btn.Text) Then
         btn.Checked = True
-        btn.ForeColor = Color.DarkGreen
+        btn.ForeColor = theme.PanelFontColor
       Else
         btn.Checked = False
-        btn.ForeColor = Color.Black
+        btn.ForeColor = theme.PanelFontColor
       End If
     Next
     If srcSender.Text.Equals(UNIFIED_TEXT) Then
@@ -234,13 +237,13 @@ Public Class CensusViewer
       ' Check the value of the first column
       If xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value IsNot Nothing AndAlso xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value.ToString() = "P" Then
         ' Set the background color to green if col(0)="P"
-        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Green
+        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = theme.XLSHighlightColor
       ElseIf xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value IsNot Nothing AndAlso xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value.ToString() = "F" Then
         ' Set the background color to yellow if col(0)="F"
-        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Yellow
+        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = theme.XLSHighlightColor2
       Else
         ' Reset the background color for other values if needed
-        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = xlsActiveSheet.DefaultCellStyle.BackColor
+        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = theme.XLSBackColor
       End If
     End If
   End Sub

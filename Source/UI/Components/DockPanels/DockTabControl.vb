@@ -1,6 +1,8 @@
 ﻿Public Class DockTabControl
   Inherits TabControl
 
+  Private theme As UITheme = UITheme.GetInstance
+
   Public Sub New()
     SetStyle(ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.UserPaint Or ControlStyles.OptimizedDoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
     DrawMode = TabDrawMode.OwnerDrawFixed
@@ -13,13 +15,8 @@
 #Region "Properties"
 
   Public Property TabType As DockPanelType = DockPanelType.Tab
+  Public Property TabShowClose As Boolean = True
   Public Property ShowHasFocus As Boolean = False
-  Public Property TabBackColor As Color = Color.Black
-  Public Property TabBorderColor As Color = Color.DarkGray
-  Public Property TabFontColor As Color = Color.WhiteSmoke
-  Public Property TabHighlightColor As Color = Color.Lime
-  Public Property TabShadowColor As Color = ColorToShadow(TabBorderColor)
-  Public Property TabAccentColor As Color = ColorToAccent(TabBorderColor)
 
 #End Region
 
@@ -40,9 +37,10 @@
   Private Sub RenderTypeTabBottom(sender As Object, e As PaintEventArgs)
     Dim g As Graphics = e.Graphics
 
-    Using brush As SolidBrush = New SolidBrush(TabBackColor)
+    Using brush As SolidBrush = New SolidBrush(theme.TabBackColor)
       e.Graphics.FillRectangle(brush, ClientRectangle)
     End Using
+    If TabCount = 0 Then Exit Sub
 
     Dim l As Integer = Left
     Dim t As Integer = 0
@@ -55,7 +53,7 @@
     'b = GetTabRect(0).Top
     'End If
 
-    Dim borderPen As Pen = New Pen(TabBorderColor, 1)
+    Dim borderPen As Pen = New Pen(theme.TabBorderColor, 1)
 
     e.Graphics.DrawLine(borderPen, l, t, r, t)
     e.Graphics.DrawLine(borderPen, r, t, r, b)
@@ -73,15 +71,15 @@
         Dim textColor As Color
 
         ' Fill the background
-        Using brush As New SolidBrush(TabBackColor)
+        Using brush As New SolidBrush(theme.TabBackColor)
           g.FillRectangle(brush, tabBounds)
         End Using
 
         ' Set the text and background colors based on selected and unselected states
         If SelectedIndex = i Then
-          textColor = Color.White
+          textColor = theme.TabActiveFontColor
         Else
-          textColor = TabFontColor
+          textColor = theme.TabFontColor
         End If
 
         ' Draw the tab text
@@ -113,7 +111,7 @@
     Dim g As Graphics = e.Graphics
 
     'Pain the background
-    Using brush As SolidBrush = New SolidBrush(TabBackColor)
+    Using brush As SolidBrush = New SolidBrush(theme.TabBackColor)
       e.Graphics.FillRectangle(brush, ClientRectangle)
     End Using
     If TabCount = 0 Then Exit Sub
@@ -129,10 +127,14 @@
     Dim textColor As Color
     Dim tabColor As Color
     Dim stringFormat As New StringFormat()
-    stringFormat.Alignment = StringAlignment.Near
+    If TabShowClose Then
+      stringFormat.Alignment = StringAlignment.Near
+    Else
+      stringFormat.Alignment = StringAlignment.Center
+    End If
     stringFormat.LineAlignment = StringAlignment.Center
 
-    Dim PenBorder As Pen = New Pen(TabBorderColor, 1)
+    Dim PenBorder As Pen = New Pen(theme.TabBorderColor, 1)
 
     e.Graphics.DrawRectangle(PenBorder, l, t, r, b)
 
@@ -141,22 +143,22 @@
       tabOrigBounds = GetTabRect(i)
 
       'Erase current tab
-      Using brush As New SolidBrush(TabBackColor)
+      Using brush As New SolidBrush(theme.TabBackColor)
         g.FillRectangle(brush, tabOrigBounds)
       End Using
 
       ' Set the text and background colors based on selected and unselected states
       If SelectedIndex = i Then
-        textColor = TabFontColor
-        tabColor = TabBorderColor
+        textColor = theme.TabFontColor
+        tabColor = theme.TabBorderColor
         tabBounds = New Rectangle(tabOrigBounds.X, tabOrigBounds.Y + 1, tabOrigBounds.Width, tabOrigBounds.Height - 3)
       Else
-        tabColor = TabShadowColor
+        tabColor = theme.TabShadowColor
         tabBounds = New Rectangle(tabOrigBounds.X + 1, tabOrigBounds.Y + 2, tabOrigBounds.Width - 1, tabOrigBounds.Height - 4)
         If tabOrigBounds.Contains(PointToClient(MousePosition)) Then
-          textColor = TabFontColor
+          textColor = theme.TabFontColor
         Else
-          textColor = ColorToShadow(TabFontColor)
+          textColor = theme.ColorToShadow(theme.TabFontColor)
         End If
       End If
 
@@ -177,11 +179,11 @@
     Dim tabBarColor As Color
     Dim ctlBarColor As Color
     If ShowHasFocus Then
-      tabBarColor = TabHighlightColor
-      ctlBarColor = TabHighlightColor
+      tabBarColor = theme.TabHighlightColor
+      ctlBarColor = theme.TabHighlightColor
     Else
-      tabBarColor = TabAccentColor
-      ctlBarColor = TabShadowColor
+      tabBarColor = theme.TabAccentColor
+      ctlBarColor = theme.TabShadowColor
     End If
     e.Graphics.DrawLine(New Pen(tabBarColor, 2), tabBounds.X, tabBounds.Y, tabBounds.Right, tabBounds.Y)
     e.Graphics.DrawLine(New Pen(ctlBarColor, 2), l, tabBounds.Bottom - 1, r, tabBounds.Bottom - 1)

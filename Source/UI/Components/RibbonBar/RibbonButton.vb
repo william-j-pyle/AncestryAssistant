@@ -1,6 +1,7 @@
 ﻿Public Class RibbonButton
   Inherits UserControl
 
+  Private theme As UITheme = UITheme.GetInstance
   Private icoFont As Font
   Private components As System.ComponentModel.IContainer
   Friend WithEvents btn As Button
@@ -159,7 +160,7 @@
       If Enabled Then
         textBrush = New SolidBrush(ForeColor)
       Else
-        textBrush = New SolidBrush(ColorToDisabled(ForeColor))
+        textBrush = New SolidBrush(theme.ColorToDisabled(ForeColor))
       End If
       textSize = TextRenderer.MeasureText(Caption, Font)
       textAdj = 0
@@ -171,7 +172,7 @@
       If Enabled Then
         iconBrush = New SolidBrush(Layer1Color)
       Else
-        iconBrush = New SolidBrush(ColorToDisabled(Layer1Color))
+        iconBrush = New SolidBrush(theme.ColorToDisabled(Layer1Color))
       End If
       iconSize = TextRenderer.MeasureText(ChrW(Layer1Icon), icoFont)
       iconLocation = New Point(CInt(e.ClipRectangle.Left + 1 + ((e.ClipRectangle.Width - iconSize.Width) / 2)), CInt(e.ClipRectangle.Top + ((e.ClipRectangle.Height - iconSize.Height - textSize.Height - textAdj) / 2)))
@@ -182,7 +183,7 @@
       If Enabled Then
         iconBrush = New SolidBrush(Layer2Color)
       Else
-        iconBrush = New SolidBrush(ColorToDisabled(Layer2Color))
+        iconBrush = New SolidBrush(theme.ColorToDisabled(Layer2Color))
       End If
       iconSize = TextRenderer.MeasureText(ChrW(Layer2Icon), icoFont)
       iconLocation = New Point(CInt(e.ClipRectangle.Left + 1 + ((e.ClipRectangle.Width - iconSize.Width) / 2)), CInt(e.ClipRectangle.Top + ((e.ClipRectangle.Height - iconSize.Height - textSize.Height - textAdj) / 2)))
@@ -193,7 +194,7 @@
       If Enabled Then
         iconBrush = New SolidBrush(Layer3Color)
       Else
-        iconBrush = New SolidBrush(ColorToDisabled(Layer3Color))
+        iconBrush = New SolidBrush(theme.ColorToDisabled(Layer3Color))
       End If
       iconSize = TextRenderer.MeasureText(ChrW(Layer3Icon), icoFont)
       iconLocation = New Point(CInt(e.ClipRectangle.Left + 1 + ((e.ClipRectangle.Width - iconSize.Width) / 2)), CInt(e.ClipRectangle.Top + ((e.ClipRectangle.Height - iconSize.Height - textSize.Height - textAdj) / 2)))

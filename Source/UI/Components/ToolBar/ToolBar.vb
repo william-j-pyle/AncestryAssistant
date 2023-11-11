@@ -1,64 +1,34 @@
 ﻿Imports System.ComponentModel
 Public Class ToolBar
+  Inherits System.Windows.Forms.ToolStrip
+
+  <System.Diagnostics.DebuggerNonUserCode()>
+  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+    Try
+      If disposing AndAlso components IsNot Nothing Then
+        components.Dispose()
+      End If
+    Finally
+      MyBase.Dispose(disposing)
+    End Try
+  End Sub
+  Private components As System.ComponentModel.IContainer
+
+  Private theme As UITheme = UITheme.GetInstance
 
   Public Sub New()
     MyBase.New()
-    InitializeComponent()
+    components = New System.ComponentModel.Container()
+    Renderer = New ToolbarRenderer2()
+    'MyBase.BackColor = theme.PanelBackColor
+    'MyBase.ForeColor = theme.PanelFontColor
   End Sub
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
   Public Shadows Property BackColor As Color
 
-  Public Property ToolBarBackColor As Color
-    Get
-      Return CType(Renderer, ToolBarRenderer).ToolBarBackColor
-    End Get
-    Set(value As Color)
-      CType(Renderer, ToolBarRenderer).ToolBarBackColor = value
-      MyBase.BackColor = value
-    End Set
-  End Property
-  Public Property ToolBarFontColor As Color
-    Get
-      Return CType(Renderer, ToolBarRenderer).ToolBarFontColor
-    End Get
-    Set(value As Color)
-      CType(Renderer, ToolBarRenderer).ToolBarFontColor = value
-      ForeColor = value
-    End Set
-  End Property
-  Public Property ToolBarBorderColor As Color
-    Get
-      Return CType(Renderer, ToolBarRenderer).ToolBarBorderColor
-    End Get
-    Set(value As Color)
-      CType(Renderer, ToolBarRenderer).ToolBarBorderColor = value
-    End Set
-  End Property
-  Public Property ToolBarAccentColor As Color
-    Get
-      Return CType(Renderer, ToolBarRenderer).ToolBarAccentColor
-    End Get
-    Set(value As Color)
-      CType(Renderer, ToolBarRenderer).ToolBarAccentColor = value
-    End Set
-  End Property
-  Public Property ToolBarShadowColor As Color
-    Get
-      Return CType(Renderer, ToolBarRenderer).ToolBarShadowColor
-    End Get
-    Set(value As Color)
-      CType(Renderer, ToolBarRenderer).ToolBarShadowColor = value
-    End Set
-  End Property
-  Public Property ToolBarHighlightColor As Color
-    Get
-      Return CType(Renderer, ToolBarRenderer).ToolBarHighlightColor
-    End Get
-    Set(value As Color)
-      CType(Renderer, ToolBarRenderer).ToolBarHighlightColor = value
-    End Set
-  End Property
+  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+  Public Shadows Property RenderMode As ToolStripRenderMode
 
 
 End Class

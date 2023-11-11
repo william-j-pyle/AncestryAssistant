@@ -1,22 +1,17 @@
 ﻿Public Class StatusBarRenderer
   Inherits ToolStripRenderer
 
-  Public Property StatusBarBackColor As Color = Color.DarkGray
-  Public Property StatusBarFontColor As Color = Color.WhiteSmoke
-  Public Property StatusBarBorderColor As Color = Color.DarkSlateGray
-  Public Property StatusBarAccentColor As Color = ColorToAccent(StatusBarBorderColor)
-  Public Property StatusBarShadowColor As Color = ColorToShadow(StatusBarBorderColor)
-  Public Property StatusBarHighlightColor As Color = Color.LimeGreen
+  Private theme As UITheme = UITheme.GetInstance
 
   Public Sub New()
     MyBase.New()
   End Sub
 
   Private Sub ToolStripRenderer_RenderSeparator(sender As Object, e As ToolStripSeparatorRenderEventArgs) Handles Me.RenderSeparator
-    Using brush As SolidBrush = New SolidBrush(StatusBarAccentColor)
+    Using brush As SolidBrush = New SolidBrush(theme.PanelAccentColor)
       e.Graphics.FillRectangle(brush, 0 - 2, 0, e.Item.Width + 2, e.Item.Height)
     End Using
-    Using pen As Pen = New Pen(StatusBarShadowColor, 1)
+    Using pen As Pen = New Pen(theme.PanelShadowColor, 1)
       Dim y As Single = ((e.Item.ContentRectangle.Y + 1) / 2) + 1
       Dim x As Single = 26
       Dim w As Single = e.Item.Width - 30
@@ -60,7 +55,7 @@
     Using brush As SolidBrush = New SolidBrush(e.Item.BackColor)
       e.Graphics.FillRectangle(brush, e.Item.Bounds)
     End Using
-    e.Graphics.DrawRectangle(New Pen(StatusBarAccentColor, 1), e.Item.Bounds)
+    e.Graphics.DrawRectangle(New Pen(theme.PanelAccentColor, 1), e.Item.Bounds)
   End Sub
 
 

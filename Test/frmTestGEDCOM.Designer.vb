@@ -45,7 +45,7 @@ Partial Class frmTestGEDCOM
         Me.txtOutput.Multiline = True
         Me.txtOutput.Name = "txtOutput"
         Me.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtOutput.Size = New System.Drawing.Size(448, 192)
+        Me.txtOutput.Size = New System.Drawing.Size(671, 344)
         Me.txtOutput.TabIndex = 1
         '
         'btnSummary
@@ -61,12 +61,16 @@ Partial Class frmTestGEDCOM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(469, 241)
+        Me.BackColor = System.Drawing.Color.Black
+        Me.ClientSize = New System.Drawing.Size(692, 393)
         Me.Controls.Add(Me.btnSummary)
         Me.Controls.Add(Me.txtOutput)
         Me.Controls.Add(Me.btnGedCom)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmTestGEDCOM"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "GedCom Testing"
+        Me.TopMost = True
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
