@@ -124,6 +124,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
@@ -302,9 +305,6 @@
     </Compile>
     <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Objects\UriTracks.vb" />
     <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Objects\UriTrackingGroup.vb" />
-    <Compile Include="Source\UI\Components\DockPanels\DockPanelManager.Designer.vb">
-      <DependentUpon>DockPanelManager.vb</DependentUpon>
-    </Compile>
     <Compile Include="Source\UI\Components\DockPanels\DockPanelManager.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -351,6 +351,7 @@
     </Compile>
     <Compile Include="Source\UI\Components\ToolBar\ToolbarRender2.vb" />
     <Compile Include="Source\UI\Components\ToolBar\ToolBarRenderer.vb" />
+    <Compile Include="Source\UI\Components\Utils\ResizeDragHandler.vb" />
     <Compile Include="Source\UI\Dialogs\SaveImageDetails.Designer.vb">
       <DependentUpon>SaveImageDetails.vb</DependentUpon>
     </Compile>
@@ -477,6 +478,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Source\UI\Components\RibbonBar\ribbonHomeTab.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Source\UI\Components\DockPanelItems\AncestryBrowser\AncestryWebViewer.resx">
@@ -484,9 +486,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\UI\Components\DockPanels\DockPanel.resx">
       <DependentUpon>DockPanel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\UI\Components\DockPanels\DockPanelManager.resx">
-      <DependentUpon>DockPanelManager.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\UI\Dialogs\SaveImageDetails.resx">
       <DependentUpon>SaveImageDetails.vb</DependentUpon>
@@ -566,6 +565,7 @@
     <Folder Include="Documentation\assets\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppIcon.ico" />
     <Content Include="Config\face.xml" />
     <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\concrt140.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -68,7 +68,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("892, 546")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("700, 500")>  _
         Public Property MainForm_ClientSize() As Global.System.Drawing.size
             Get
                 Return CType(Me("MainForm_ClientSize"),Global.System.Drawing.size)
@@ -272,7 +272,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Segoe UI Semibold, 9pt, style=Bold")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 8.25pt")>  _
         Public Property APP_FONT() As Global.System.Drawing.Font
             Get
                 Return CType(Me("APP_FONT"),Global.System.Drawing.Font)

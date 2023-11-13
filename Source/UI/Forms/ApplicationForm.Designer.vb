@@ -21,457 +21,273 @@ Partial Class ApplicationForm
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
     Private Sub InitializeComponent()
-    Me.components = New System.ComponentModel.Container()
-    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ApplicationForm))
-    Me.imgViewerList = New System.Windows.Forms.ImageList(Me.components)
-    Me.imgList20 = New System.Windows.Forms.ImageList(Me.components)
-    Me.imgList32 = New System.Windows.Forms.ImageList(Me.components)
-    Me.mnuPanelDock = New System.Windows.Forms.ContextMenuStrip(Me.components)
-    Me.mnuDockTopLeft = New System.Windows.Forms.ToolStripMenuItem()
-    Me.mnuDockTopRight = New System.Windows.Forms.ToolStripMenuItem()
-    Me.mnuDockBottomLeft = New System.Windows.Forms.ToolStripMenuItem()
-    Me.mnuDockBottomMiddle = New System.Windows.Forms.ToolStripMenuItem()
-    Me.mnuDockBottomRight = New System.Windows.Forms.ToolStripMenuItem()
-    Me.tsAncestry = New AncestryAssistant.ToolBar()
-    Me.btnHomeTree = New System.Windows.Forms.ToolStripButton()
-    Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-    Me.btnViewPedigree = New System.Windows.Forms.ToolStripButton()
-    Me.btnViewTree = New System.Windows.Forms.ToolStripButton()
-    Me.btnViewFan = New System.Windows.Forms.ToolStripButton()
-    Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-    Me.btnPersonFact = New System.Windows.Forms.ToolStripButton()
-    Me.btnPersonHints = New System.Windows.Forms.ToolStripButton()
-    Me.btnPersonGallery = New System.Windows.Forms.ToolStripButton()
-    Me.btnPersonStory = New System.Windows.Forms.ToolStripButton()
-    Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-    Me.btnAncestor = New System.Windows.Forms.ToolStripButton()
-    Me.btnAncestors = New System.Windows.Forms.ToolStripButton()
-    Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-    Me.btnActions = New System.Windows.Forms.ToolStripButton()
-    Me.btnCensus = New System.Windows.Forms.ToolStripButton()
-    Me.btnNotebook = New System.Windows.Forms.ToolStripButton()
-    Me.AncestryDirectorWatcher = New System.IO.FileSystemWatcher()
-    Me.TabPage1 = New System.Windows.Forms.TabPage()
-    Me.MenuBar1 = New AncestryAssistant.MenuBar()
-    Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-    Me.PreferencesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-    Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
-    Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-    Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-    Me.AncestryToolbarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-    Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-    Me.StatusBar1 = New AncestryAssistant.ToolBar()
-    Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-    Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
-    Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
-    Me.DockManager = New AncestryAssistant.DockPanelManager()
-    Me.mnuPanelDock.SuspendLayout()
-    Me.tsAncestry.SuspendLayout()
-    CType(Me.AncestryDirectorWatcher, System.ComponentModel.ISupportInitialize).BeginInit()
-    Me.MenuBar1.SuspendLayout()
-    Me.StatusBar1.SuspendLayout()
-    Me.SuspendLayout()
-    '
-    'imgViewerList
-    '
-    Me.imgViewerList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
-    Me.imgViewerList.ImageSize = New System.Drawing.Size(128, 128)
-    Me.imgViewerList.TransparentColor = System.Drawing.Color.Transparent
-    '
-    'imgList20
-    '
-    Me.imgList20.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
-    Me.imgList20.ImageSize = New System.Drawing.Size(16, 16)
-    Me.imgList20.TransparentColor = System.Drawing.Color.Transparent
-    '
-    'imgList32
-    '
-    Me.imgList32.ImageStream = CType(resources.GetObject("imgList32.ImageStream"), System.Windows.Forms.ImageListStreamer)
-    Me.imgList32.TransparentColor = System.Drawing.Color.Transparent
-    Me.imgList32.Images.SetKeyName(0, "ico_32_Ancestry.png")
-    '
-    'mnuPanelDock
-    '
-    Me.mnuPanelDock.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDockTopLeft, Me.mnuDockTopRight, Me.mnuDockBottomLeft, Me.mnuDockBottomMiddle, Me.mnuDockBottomRight})
-    Me.mnuPanelDock.Name = "mnuPanelMove"
-    Me.mnuPanelDock.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-    Me.mnuPanelDock.Size = New System.Drawing.Size(185, 114)
-    '
-    'mnuDockTopLeft
-    '
-    Me.mnuDockTopLeft.Name = "mnuDockTopLeft"
-    Me.mnuDockTopLeft.Size = New System.Drawing.Size(184, 22)
-    Me.mnuDockTopLeft.Text = "Dock Top-Left"
-    '
-    'mnuDockTopRight
-    '
-    Me.mnuDockTopRight.Name = "mnuDockTopRight"
-    Me.mnuDockTopRight.Size = New System.Drawing.Size(184, 22)
-    Me.mnuDockTopRight.Text = "Dock Top-Right"
-    '
-    'mnuDockBottomLeft
-    '
-    Me.mnuDockBottomLeft.Name = "mnuDockBottomLeft"
-    Me.mnuDockBottomLeft.Size = New System.Drawing.Size(184, 22)
-    Me.mnuDockBottomLeft.Text = "Dock Bottom-Left"
-    '
-    'mnuDockBottomMiddle
-    '
-    Me.mnuDockBottomMiddle.Name = "mnuDockBottomMiddle"
-    Me.mnuDockBottomMiddle.Size = New System.Drawing.Size(184, 22)
-    Me.mnuDockBottomMiddle.Text = "Dock Bottom-Center"
-    '
-    'mnuDockBottomRight
-    '
-    Me.mnuDockBottomRight.Name = "mnuDockBottomRight"
-    Me.mnuDockBottomRight.Size = New System.Drawing.Size(184, 22)
-    Me.mnuDockBottomRight.Text = "Dock Bottom-Right"
-    '
-    'tsAncestry
-    '
-    Me.tsAncestry.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-    Me.tsAncestry.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnHomeTree, Me.ToolStripSeparator1, Me.btnViewPedigree, Me.btnViewTree, Me.btnViewFan, Me.ToolStripSeparator2, Me.btnPersonFact, Me.btnPersonHints, Me.btnPersonGallery, Me.btnPersonStory, Me.ToolStripSeparator3, Me.btnAncestor, Me.btnAncestors, Me.ToolStripSeparator4, Me.btnActions, Me.btnCensus, Me.btnNotebook})
-    Me.tsAncestry.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-    Me.tsAncestry.Location = New System.Drawing.Point(0, 24)
-    Me.tsAncestry.Name = "tsAncestry"
-    Me.tsAncestry.Padding = New System.Windows.Forms.Padding(4, 0, 1, 0)
-    Me.tsAncestry.Size = New System.Drawing.Size(899, 25)
-    Me.tsAncestry.TabIndex = 3
-    Me.tsAncestry.Text = "Ancestry"
-    '
-    'btnHomeTree
-    '
-    Me.btnHomeTree.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnHomeTree.Image = Global.AncestryAssistant.My.Resources.Resources.SEEDING_ICO20
-    Me.btnHomeTree.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnHomeTree.Name = "btnHomeTree"
-    Me.btnHomeTree.Size = New System.Drawing.Size(23, 22)
-    Me.btnHomeTree.ToolTipText = "Root Person - Tree View"
-    '
-    'ToolStripSeparator1
-    '
-    Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-    Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-    '
-    'btnViewPedigree
-    '
-    Me.btnViewPedigree.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnViewPedigree.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY_PEDIGREE_VIEW
-    Me.btnViewPedigree.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnViewPedigree.Name = "btnViewPedigree"
-    Me.btnViewPedigree.Size = New System.Drawing.Size(23, 22)
-    Me.btnViewPedigree.ToolTipText = "Active Ancestor - Pedigree View"
-    '
-    'btnViewTree
-    '
-    Me.btnViewTree.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnViewTree.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY_FAMILY_VIEW
-    Me.btnViewTree.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnViewTree.Name = "btnViewTree"
-    Me.btnViewTree.Size = New System.Drawing.Size(23, 22)
-    Me.btnViewTree.ToolTipText = "Active Ancestor - Tree View"
-    '
-    'btnViewFan
-    '
-    Me.btnViewFan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnViewFan.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY_FAN_VIEW
-    Me.btnViewFan.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnViewFan.Name = "btnViewFan"
-    Me.btnViewFan.Size = New System.Drawing.Size(23, 22)
-    Me.btnViewFan.ToolTipText = "Active Ancestor - Fan View"
-    '
-    'ToolStripSeparator2
-    '
-    Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-    Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
-    '
-    'btnPersonFact
-    '
-    Me.btnPersonFact.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnPersonFact.Image = Global.AncestryAssistant.My.Resources.Resources.USER_ICO20
-    Me.btnPersonFact.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnPersonFact.Name = "btnPersonFact"
-    Me.btnPersonFact.Size = New System.Drawing.Size(23, 22)
-    Me.btnPersonFact.ToolTipText = "Active Ancestor - Facts"
-    '
-    'btnPersonHints
-    '
-    Me.btnPersonHints.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnPersonHints.Image = Global.AncestryAssistant.My.Resources.Resources.LEAF_ICO20
-    Me.btnPersonHints.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnPersonHints.Name = "btnPersonHints"
-    Me.btnPersonHints.Size = New System.Drawing.Size(23, 22)
-    Me.btnPersonHints.ToolTipText = "Active Ancestor - Hints"
-    '
-    'btnPersonGallery
-    '
-    Me.btnPersonGallery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnPersonGallery.Image = Global.AncestryAssistant.My.Resources.Resources.PHOTO_ICO20
-    Me.btnPersonGallery.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnPersonGallery.Name = "btnPersonGallery"
-    Me.btnPersonGallery.Size = New System.Drawing.Size(23, 22)
-    Me.btnPersonGallery.ToolTipText = "Active Ancestor - Gallery"
-    '
-    'btnPersonStory
-    '
-    Me.btnPersonStory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnPersonStory.Image = Global.AncestryAssistant.My.Resources.Resources.BOOK_ICO20
-    Me.btnPersonStory.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnPersonStory.Name = "btnPersonStory"
-    Me.btnPersonStory.Size = New System.Drawing.Size(23, 22)
-    Me.btnPersonStory.ToolTipText = "Active Ancestor - Stories"
-    '
-    'ToolStripSeparator3
-    '
-    Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-    Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
-    '
-    'btnAncestor
-    '
-    Me.btnAncestor.Checked = Global.AncestryAssistant.My.MySettings.Default.MNU_ANCESTOR_CHECKED
-    Me.btnAncestor.CheckOnClick = True
-    Me.btnAncestor.CheckState = System.Windows.Forms.CheckState.Checked
-    Me.btnAncestor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnAncestor.Image = CType(resources.GetObject("btnAncestor.Image"), System.Drawing.Image)
-    Me.btnAncestor.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnAncestor.Name = "btnAncestor"
-    Me.btnAncestor.Size = New System.Drawing.Size(23, 22)
-    Me.btnAncestor.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
-    Me.btnAncestor.ToolTipText = "Ancestor Panel"
-    '
-    'btnAncestors
-    '
-    Me.btnAncestors.Checked = Global.AncestryAssistant.My.MySettings.Default.MNU_ANCESTORLIST_CHECKED
-    Me.btnAncestors.CheckOnClick = True
-    Me.btnAncestors.CheckState = System.Windows.Forms.CheckState.Checked
-    Me.btnAncestors.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnAncestors.Image = Global.AncestryAssistant.My.Resources.Resources.USERS_ICO20
-    Me.btnAncestors.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnAncestors.Name = "btnAncestors"
-    Me.btnAncestors.Size = New System.Drawing.Size(23, 22)
-    Me.btnAncestors.ToolTipText = "Ancestors Panel"
-    '
-    'ToolStripSeparator4
-    '
-    Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-    Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
-    '
-    'btnActions
-    '
-    Me.btnActions.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-    Me.btnActions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-    Me.btnActions.Image = CType(resources.GetObject("btnActions.Image"), System.Drawing.Image)
-    Me.btnActions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-    Me.btnActions.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnActions.Name = "btnActions"
-    Me.btnActions.Size = New System.Drawing.Size(23, 22)
-    Me.btnActions.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-    Me.btnActions.ToolTipText = "Download"
-    Me.btnActions.Visible = False
-    '
-    'btnCensus
-    '
-    Me.btnCensus.CheckOnClick = True
-    Me.btnCensus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnCensus.Image = Global.AncestryAssistant.My.Resources.Resources.ARCHIVE_ICO20
-    Me.btnCensus.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnCensus.Name = "btnCensus"
-    Me.btnCensus.Size = New System.Drawing.Size(23, 22)
-    Me.btnCensus.ToolTipText = "Census"
-    '
-    'btnNotebook
-    '
-    Me.btnNotebook.CheckOnClick = True
-    Me.btnNotebook.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnNotebook.Image = Global.AncestryAssistant.My.Resources.Resources.EDIT_ICO20
-    Me.btnNotebook.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnNotebook.Name = "btnNotebook"
-    Me.btnNotebook.Size = New System.Drawing.Size(23, 22)
-    Me.btnNotebook.ToolTipText = "Notebook"
-    '
-    'AncestryDirectorWatcher
-    '
-    Me.AncestryDirectorWatcher.EnableRaisingEvents = True
-    Me.AncestryDirectorWatcher.IncludeSubdirectories = True
-    Me.AncestryDirectorWatcher.Path = Global.AncestryAssistant.My.MySettings.Default.AncestorsPath
-    Me.AncestryDirectorWatcher.SynchronizingObject = Me
-    '
-    'TabPage1
-    '
-    Me.TabPage1.Location = New System.Drawing.Point(4, 4)
-    Me.TabPage1.Name = "TabPage1"
-    Me.TabPage1.Size = New System.Drawing.Size(107, 148)
-    Me.TabPage1.TabIndex = 2
-    Me.TabPage1.Text = "TabPage1"
-    '
-    'MenuBar1
-    '
-    Me.MenuBar1.ForeColor = System.Drawing.Color.WhiteSmoke
-    Me.MenuBar1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ViewToolStripMenuItem, Me.ToolsToolStripMenuItem})
-    Me.MenuBar1.Location = New System.Drawing.Point(0, 0)
-    Me.MenuBar1.Name = "MenuBar1"
-    Me.MenuBar1.Size = New System.Drawing.Size(899, 24)
-    Me.MenuBar1.TabIndex = 11
-    Me.MenuBar1.Text = "MenuBar1"
-    '
-    'FileToolStripMenuItem
-    '
-    Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PreferencesToolStripMenuItem, Me.ToolStripMenuItem1, Me.ExitToolStripMenuItem})
-    Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-    Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
-    Me.FileToolStripMenuItem.Text = "File"
-    '
-    'PreferencesToolStripMenuItem
-    '
-    Me.PreferencesToolStripMenuItem.Name = "PreferencesToolStripMenuItem"
-    Me.PreferencesToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
-    Me.PreferencesToolStripMenuItem.Text = "Preferences"
-    '
-    'ToolStripMenuItem1
-    '
-    Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-    Me.ToolStripMenuItem1.Size = New System.Drawing.Size(132, 6)
-    '
-    'ExitToolStripMenuItem
-    '
-    Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-    Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
-    Me.ExitToolStripMenuItem.Text = "Exit"
-    '
-    'ViewToolStripMenuItem
-    '
-    Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AncestryToolbarToolStripMenuItem})
-    Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-    Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
-    Me.ViewToolStripMenuItem.Text = "View"
-    '
-    'AncestryToolbarToolStripMenuItem
-    '
-    Me.AncestryToolbarToolStripMenuItem.Checked = Global.AncestryAssistant.My.MySettings.Default.ANCESTRY_SHOW_TOOLBAR
-    Me.AncestryToolbarToolStripMenuItem.CheckOnClick = True
-    Me.AncestryToolbarToolStripMenuItem.Name = "AncestryToolbarToolStripMenuItem"
-    Me.AncestryToolbarToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
-    Me.AncestryToolbarToolStripMenuItem.Text = "Ancestry Toolbar"
-    '
-    'ToolsToolStripMenuItem
-    '
-    Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-    Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
-    Me.ToolsToolStripMenuItem.Text = "Tools"
-    '
-    'StatusBar1
-    '
-    Me.StatusBar1.Dock = System.Windows.Forms.DockStyle.Bottom
-    Me.StatusBar1.ForeColor = System.Drawing.Color.White
-    Me.StatusBar1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2, Me.ToolStripStatusLabel3})
-    Me.StatusBar1.Location = New System.Drawing.Point(0, 477)
-    Me.StatusBar1.Name = "StatusBar1"
-    Me.StatusBar1.Size = New System.Drawing.Size(899, 25)
-    Me.StatusBar1.TabIndex = 10
-    Me.StatusBar1.Text = "StatusBar1"
-    '
-    'ToolStripStatusLabel1
-    '
-    Me.ToolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
-    Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-    Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(123, 20)
-    Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
-    '
-    'ToolStripStatusLabel2
-    '
-    Me.ToolStripStatusLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
-    Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
-    Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(123, 20)
-    Me.ToolStripStatusLabel2.Text = "ToolStripStatusLabel2"
-    '
-    'ToolStripStatusLabel3
-    '
-    Me.ToolStripStatusLabel3.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedOuter
-    Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
-    Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(119, 20)
-    Me.ToolStripStatusLabel3.Spring = True
-    Me.ToolStripStatusLabel3.Text = "ToolStripStatusLabel3"
-    '
-    'DockManager
-    '
-    Me.DockManager.Dock = System.Windows.Forms.DockStyle.Fill
-    Me.DockManager.Location = New System.Drawing.Point(0, 49)
-    Me.DockManager.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-    Me.DockManager.Name = "DockManager"
-    Me.DockManager.Size = New System.Drawing.Size(899, 428)
-    Me.DockManager.TabIndex = 12
-    '
-    'ApplicationForm
-    '
-    Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
-    Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
-    Me.ClientSize = New System.Drawing.Size(899, 502)
-    Me.Controls.Add(Me.DockManager)
-    Me.Controls.Add(Me.tsAncestry)
-    Me.Controls.Add(Me.MenuBar1)
-    Me.Controls.Add(Me.StatusBar1)
-    Me.DataBindings.Add(New System.Windows.Forms.Binding("ClientSize", Global.AncestryAssistant.My.MySettings.Default, "MainForm_ClientSize", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-    Me.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.AncestryAssistant.My.MySettings.Default, "APP_FONT", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-    Me.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.AncestryAssistant.My.MySettings.Default, "FORM_A_FG", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-    Me.DoubleBuffered = True
-    Me.Font = Global.AncestryAssistant.My.MySettings.Default.APP_FONT
-    Me.ForeColor = Global.AncestryAssistant.My.MySettings.Default.FORM_A_FG
-    Me.Margin = New System.Windows.Forms.Padding(0)
-    Me.Name = "ApplicationForm"
-    Me.Text = "Ancestry Assistant"
-    Me.mnuPanelDock.ResumeLayout(False)
-    Me.tsAncestry.ResumeLayout(False)
-    Me.tsAncestry.PerformLayout()
-    CType(Me.AncestryDirectorWatcher, System.ComponentModel.ISupportInitialize).EndInit()
-    Me.MenuBar1.ResumeLayout(False)
-    Me.MenuBar1.PerformLayout()
-    Me.StatusBar1.ResumeLayout(False)
-    Me.StatusBar1.PerformLayout()
-    Me.ResumeLayout(False)
-    Me.PerformLayout()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ApplicationForm))
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.FormBar = New System.Windows.Forms.Panel()
+        Me.AppTitleBar = New System.Windows.Forms.Panel()
+        Me.AppTitle = New System.Windows.Forms.Label()
+        Me.AppControlBox = New System.Windows.Forms.Panel()
+        Me.AppMinButton = New System.Windows.Forms.Button()
+        Me.AppMaxButton = New System.Windows.Forms.Button()
+        Me.AppCloseButton = New System.Windows.Forms.Button()
+        Me.AppIcon = New System.Windows.Forms.Panel()
+        Me.StatusBar = New System.Windows.Forms.Panel()
+        Me.RibbonBar = New AncestryAssistant.Ribbon()
+        Me.tabFile = New System.Windows.Forms.TabPage()
+        Me.tabHome = New System.Windows.Forms.TabPage()
+        Me.RibbonBar1 = New AncestryAssistant.RibbonBar()
+        Me.DockManager = New AncestryAssistant.DockPanelManager()
+        Me.FormBar.SuspendLayout()
+        Me.AppTitleBar.SuspendLayout()
+        Me.AppControlBox.SuspendLayout()
+        Me.RibbonBar.SuspendLayout()
+        Me.tabHome.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Location = New System.Drawing.Point(4, 4)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Size = New System.Drawing.Size(107, 148)
+        Me.TabPage1.TabIndex = 2
+        Me.TabPage1.Text = "TabPage1"
+        '
+        'FormBar
+        '
+        Me.FormBar.BackColor = System.Drawing.Color.Black
+        Me.FormBar.Controls.Add(Me.DockManager)
+        Me.FormBar.Controls.Add(Me.RibbonBar)
+        Me.FormBar.Controls.Add(Me.AppTitleBar)
+        Me.FormBar.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FormBar.Location = New System.Drawing.Point(0, 0)
+        Me.FormBar.Margin = New System.Windows.Forms.Padding(0)
+        Me.FormBar.Name = "FormBar"
+        Me.FormBar.Padding = New System.Windows.Forms.Padding(3)
+        Me.FormBar.Size = New System.Drawing.Size(771, 411)
+        Me.FormBar.TabIndex = 13
+        '
+        'AppTitleBar
+        '
+        Me.AppTitleBar.BackColor = System.Drawing.Color.Black
+        Me.AppTitleBar.Controls.Add(Me.AppTitle)
+        Me.AppTitleBar.Controls.Add(Me.AppControlBox)
+        Me.AppTitleBar.Controls.Add(Me.AppIcon)
+        Me.AppTitleBar.Dock = System.Windows.Forms.DockStyle.Top
+        Me.AppTitleBar.Location = New System.Drawing.Point(3, 3)
+        Me.AppTitleBar.Margin = New System.Windows.Forms.Padding(0)
+        Me.AppTitleBar.MaximumSize = New System.Drawing.Size(0, 28)
+        Me.AppTitleBar.MinimumSize = New System.Drawing.Size(0, 28)
+        Me.AppTitleBar.Name = "AppTitleBar"
+        Me.AppTitleBar.Size = New System.Drawing.Size(765, 28)
+        Me.AppTitleBar.TabIndex = 0
+        '
+        'AppTitle
+        '
+        Me.AppTitle.AutoEllipsis = True
+        Me.AppTitle.BackColor = System.Drawing.Color.Black
+        Me.AppTitle.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.AppTitle.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AppTitle.ForeColor = System.Drawing.Color.White
+        Me.AppTitle.Location = New System.Drawing.Point(27, 0)
+        Me.AppTitle.Name = "AppTitle"
+        Me.AppTitle.Padding = New System.Windows.Forms.Padding(9, 3, 0, 0)
+        Me.AppTitle.Size = New System.Drawing.Size(652, 28)
+        Me.AppTitle.TabIndex = 2
+        Me.AppTitle.Text = "ControlBarAppCaption"
+        '
+        'AppControlBox
+        '
+        Me.AppControlBox.Controls.Add(Me.AppMinButton)
+        Me.AppControlBox.Controls.Add(Me.AppMaxButton)
+        Me.AppControlBox.Controls.Add(Me.AppCloseButton)
+        Me.AppControlBox.Dock = System.Windows.Forms.DockStyle.Right
+        Me.AppControlBox.Location = New System.Drawing.Point(679, 0)
+        Me.AppControlBox.Margin = New System.Windows.Forms.Padding(0)
+        Me.AppControlBox.MaximumSize = New System.Drawing.Size(86, 22)
+        Me.AppControlBox.MinimumSize = New System.Drawing.Size(86, 22)
+        Me.AppControlBox.Name = "AppControlBox"
+        Me.AppControlBox.Size = New System.Drawing.Size(86, 22)
+        Me.AppControlBox.TabIndex = 1
+        '
+        'AppMinButton
+        '
+        Me.AppMinButton.Dock = System.Windows.Forms.DockStyle.Left
+        Me.AppMinButton.FlatAppearance.BorderSize = 0
+        Me.AppMinButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.AppMinButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
+        Me.AppMinButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.AppMinButton.Font = New System.Drawing.Font("Segoe Fluent Icons", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AppMinButton.ForeColor = System.Drawing.Color.White
+        Me.AppMinButton.Location = New System.Drawing.Point(0, 0)
+        Me.AppMinButton.Margin = New System.Windows.Forms.Padding(0, 0, 9, 0)
+        Me.AppMinButton.MaximumSize = New System.Drawing.Size(21, 22)
+        Me.AppMinButton.MinimumSize = New System.Drawing.Size(21, 22)
+        Me.AppMinButton.Name = "AppMinButton"
+        Me.AppMinButton.Size = New System.Drawing.Size(21, 22)
+        Me.AppMinButton.TabIndex = 2
+        Me.AppMinButton.Text = ""
+        Me.AppMinButton.UseVisualStyleBackColor = True
+        '
+        'AppMaxButton
+        '
+        Me.AppMaxButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.AppMaxButton.FlatAppearance.BorderSize = 0
+        Me.AppMaxButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.AppMaxButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
+        Me.AppMaxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.AppMaxButton.Font = New System.Drawing.Font("Segoe Fluent Icons", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AppMaxButton.ForeColor = System.Drawing.Color.White
+        Me.AppMaxButton.Location = New System.Drawing.Point(33, 0)
+        Me.AppMaxButton.Margin = New System.Windows.Forms.Padding(0, 0, 9, 0)
+        Me.AppMaxButton.MaximumSize = New System.Drawing.Size(21, 22)
+        Me.AppMaxButton.MinimumSize = New System.Drawing.Size(21, 22)
+        Me.AppMaxButton.Name = "AppMaxButton"
+        Me.AppMaxButton.Size = New System.Drawing.Size(21, 22)
+        Me.AppMaxButton.TabIndex = 1
+        Me.AppMaxButton.Text = ""
+        Me.AppMaxButton.UseVisualStyleBackColor = True
+        '
+        'AppCloseButton
+        '
+        Me.AppCloseButton.Dock = System.Windows.Forms.DockStyle.Right
+        Me.AppCloseButton.FlatAppearance.BorderSize = 0
+        Me.AppCloseButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.AppCloseButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
+        Me.AppCloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.AppCloseButton.Font = New System.Drawing.Font("Segoe Fluent Icons", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AppCloseButton.ForeColor = System.Drawing.Color.White
+        Me.AppCloseButton.Location = New System.Drawing.Point(65, 0)
+        Me.AppCloseButton.Margin = New System.Windows.Forms.Padding(0)
+        Me.AppCloseButton.MaximumSize = New System.Drawing.Size(21, 22)
+        Me.AppCloseButton.MinimumSize = New System.Drawing.Size(21, 22)
+        Me.AppCloseButton.Name = "AppCloseButton"
+        Me.AppCloseButton.Size = New System.Drawing.Size(21, 22)
+        Me.AppCloseButton.TabIndex = 0
+        Me.AppCloseButton.Text = ""
+        Me.AppCloseButton.UseVisualStyleBackColor = True
+        '
+        'AppIcon
+        '
+        Me.AppIcon.BackgroundImage = CType(resources.GetObject("AppIcon.BackgroundImage"), System.Drawing.Image)
+        Me.AppIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.AppIcon.Dock = System.Windows.Forms.DockStyle.Left
+        Me.AppIcon.Location = New System.Drawing.Point(0, 0)
+        Me.AppIcon.Margin = New System.Windows.Forms.Padding(0)
+        Me.AppIcon.MaximumSize = New System.Drawing.Size(27, 28)
+        Me.AppIcon.MinimumSize = New System.Drawing.Size(27, 28)
+        Me.AppIcon.Name = "AppIcon"
+        Me.AppIcon.Size = New System.Drawing.Size(27, 28)
+        Me.AppIcon.TabIndex = 0
+        '
+        'StatusBar
+        '
+        Me.StatusBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.StatusBar.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.StatusBar.Location = New System.Drawing.Point(0, 411)
+        Me.StatusBar.MaximumSize = New System.Drawing.Size(0, 24)
+        Me.StatusBar.MinimumSize = New System.Drawing.Size(0, 24)
+        Me.StatusBar.Name = "StatusBar"
+        Me.StatusBar.Size = New System.Drawing.Size(771, 24)
+        Me.StatusBar.TabIndex = 13
+        '
+        'RibbonBar
+        '
+        Me.RibbonBar.AllowDrop = True
+        Me.RibbonBar.Controls.Add(Me.tabFile)
+        Me.RibbonBar.Controls.Add(Me.tabHome)
+        Me.RibbonBar.Dock = System.Windows.Forms.DockStyle.Top
+        Me.RibbonBar.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RibbonBar.Location = New System.Drawing.Point(3, 31)
+        Me.RibbonBar.Margin = New System.Windows.Forms.Padding(0)
+        Me.RibbonBar.MaximumSize = New System.Drawing.Size(0, 137)
+        Me.RibbonBar.MinimumSize = New System.Drawing.Size(100, 137)
+        Me.RibbonBar.Name = "RibbonBar"
+        Me.RibbonBar.Padding = New System.Drawing.Point(0, 0)
+        Me.RibbonBar.SelectedIndex = 0
+        Me.RibbonBar.Size = New System.Drawing.Size(765, 137)
+        Me.RibbonBar.TabIndex = 1
+        '
+        'tabFile
+        '
+        Me.tabFile.BackColor = System.Drawing.Color.Black
+        Me.tabFile.Location = New System.Drawing.Point(4, 25)
+        Me.tabFile.Name = "tabFile"
+        Me.tabFile.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabFile.Size = New System.Drawing.Size(757, 108)
+        Me.tabFile.TabIndex = 0
+        Me.tabFile.Text = "File"
+        '
+        'tabHome
+        '
+        Me.tabHome.BackColor = System.Drawing.Color.Black
+        Me.tabHome.Controls.Add(Me.RibbonBar1)
+        Me.tabHome.Location = New System.Drawing.Point(4, 25)
+        Me.tabHome.Name = "tabHome"
+        Me.tabHome.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabHome.Size = New System.Drawing.Size(757, 108)
+        Me.tabHome.TabIndex = 1
+        Me.tabHome.Text = "Home"
+        '
+        'RibbonBar1
+        '
+        Me.RibbonBar1.AllowDrop = True
+        Me.RibbonBar1.BackColor = System.Drawing.Color.DimGray
+        Me.RibbonBar1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.RibbonBar1.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RibbonBar1.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.RibbonBar1.Location = New System.Drawing.Point(3, 3)
+        Me.RibbonBar1.Margin = New System.Windows.Forms.Padding(0)
+        Me.RibbonBar1.MaximumSize = New System.Drawing.Size(0, 100)
+        Me.RibbonBar1.MinimumSize = New System.Drawing.Size(100, 100)
+        Me.RibbonBar1.Name = "RibbonBar1"
+        Me.RibbonBar1.Padding = New System.Windows.Forms.Padding(16, 8, 16, 8)
+        Me.RibbonBar1.Size = New System.Drawing.Size(751, 100)
+        Me.RibbonBar1.TabIndex = 0
+        '
+        'DockManager
+        '
+        Me.DockManager.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DockManager.Location = New System.Drawing.Point(3, 168)
+        Me.DockManager.Name = "DockManager"
+        Me.DockManager.Size = New System.Drawing.Size(765, 240)
+        Me.DockManager.TabIndex = 12
+        '
+        'ApplicationForm
+        '
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+        Me.BackColor = System.Drawing.Color.Black
+        Me.ClientSize = New System.Drawing.Size(771, 435)
+        Me.Controls.Add(Me.FormBar)
+        Me.Controls.Add(Me.StatusBar)
+        Me.DoubleBuffered = True
+        Me.ForeColor = System.Drawing.Color.White
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(0)
+        Me.Name = "ApplicationForm"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
+        Me.Text = "Ancestry Assistant"
+        Me.FormBar.ResumeLayout(False)
+        Me.AppTitleBar.ResumeLayout(False)
+        Me.AppControlBox.ResumeLayout(False)
+        Me.RibbonBar.ResumeLayout(False)
+        Me.tabHome.ResumeLayout(False)
+        Me.ResumeLayout(False)
 
-  End Sub
-  Friend WithEvents imgList20 As ImageList
-    Friend WithEvents imgList32 As ImageList
-    Friend WithEvents imgViewerList As ImageList
-  Friend WithEvents tsAncestry As ToolBar
-  Friend WithEvents btnHomeTree As ToolStripButton
-    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
-    Friend WithEvents btnViewPedigree As ToolStripButton
-    Friend WithEvents btnViewTree As ToolStripButton
-    Friend WithEvents btnViewFan As ToolStripButton
-    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
-    Friend WithEvents btnPersonFact As ToolStripButton
-    Friend WithEvents btnPersonHints As ToolStripButton
-    Friend WithEvents btnPersonGallery As ToolStripButton
-    Friend WithEvents btnPersonStory As ToolStripButton
-    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
-    Friend WithEvents btnAncestor As ToolStripButton
-    Friend WithEvents btnAncestors As ToolStripButton
-    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
-    Friend WithEvents AncestryDirectorWatcher As IO.FileSystemWatcher
-    Friend WithEvents mnuPanelDock As ContextMenuStrip
-    Friend WithEvents mnuDockTopLeft As ToolStripMenuItem
-    Friend WithEvents mnuDockBottomLeft As ToolStripMenuItem
-    Friend WithEvents mnuDockTopRight As ToolStripMenuItem
-    Friend WithEvents mnuDockBottomRight As ToolStripMenuItem
-    Friend WithEvents mnuDockBottomMiddle As ToolStripMenuItem
-    Friend WithEvents btnActions As ToolStripButton
-    Friend WithEvents btnCensus As ToolStripButton
-    Friend WithEvents btnNotebook As ToolStripButton
+    End Sub
     Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents StatusBar1 As ToolBar
-    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
-    Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
-    Friend WithEvents ToolStripStatusLabel3 As ToolStripStatusLabel
-    Friend WithEvents MenuBar1 As MenuBar
-    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PreferencesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem1 As ToolStripSeparator
-    Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AncestryToolbarToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DockManager As DockPanelManager
+    Friend WithEvents FormBar As Panel
+    Friend WithEvents AppTitleBar As Panel
+    Friend WithEvents AppTitle As Label
+    Friend WithEvents AppControlBox As Panel
+    Friend WithEvents AppIcon As Panel
+    Friend WithEvents AppCloseButton As Button
+    Friend WithEvents AppMinButton As Button
+    Friend WithEvents AppMaxButton As Button
+    Friend WithEvents StatusBar As Panel
+    Friend WithEvents RibbonBar As Ribbon
+    Friend WithEvents tabFile As TabPage
+    Friend WithEvents tabHome As TabPage
+    Friend WithEvents RibbonBar1 As RibbonBar
 End Class

@@ -25,7 +25,7 @@
 
   ' Custom rendering for ToolStripButton
   Protected Overrides Sub OnRenderButtonBackground(e As ToolStripItemRenderEventArgs)
-    Debug.Print("OnRender: {0}", e.Item.GetType.ToString)
+    'Debug.Print("OnRender: {0}", e.Item.GetType.ToString)
     Dim button As ToolStripButton = TryCast(e.Item, ToolStripButton)
 
     If button IsNot Nothing Then
@@ -97,7 +97,7 @@
   End Function
 
   Private Sub ToolbarRenderer2_RenderToolStripBorder(sender As Object, e As ToolStripRenderEventArgs) Handles Me.RenderToolStripBorder
-    Debug.Print("ToolbarRenderer2_RenderToolStripBorder")
+    'Debug.Print("ToolbarRenderer2_RenderToolStripBorder")
 
   End Sub
 
@@ -110,57 +110,57 @@
   End Sub
 
   Private Sub ToolbarRenderer2_RenderStatusStripSizingGrip(sender As Object, e As ToolStripRenderEventArgs) Handles Me.RenderStatusStripSizingGrip
-    Debug.Print("ToolbarRenderer2_RenderStatusStripSizingGrip")
+    'Debug.Print("ToolbarRenderer2_RenderStatusStripSizingGrip")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderToolStripContentPanelBackground(sender As Object, e As ToolStripContentPanelRenderEventArgs) Handles Me.RenderToolStripContentPanelBackground
-    Debug.Print("ToolbarRenderer2_RenderToolStripContentPanelBackground")
+    'Debug.Print("ToolbarRenderer2_RenderToolStripContentPanelBackground")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderToolStripPanelBackground(sender As Object, e As ToolStripPanelRenderEventArgs) Handles Me.RenderToolStripPanelBackground
-    Debug.Print("ToolbarRenderer2_RenderToolStripPanelBackground")
+    'Debug.Print("ToolbarRenderer2_RenderToolStripPanelBackground")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderToolStripStatusLabelBackground(sender As Object, e As ToolStripItemRenderEventArgs) Handles Me.RenderToolStripStatusLabelBackground
-    Debug.Print("ToolbarRenderer2_RenderToolStripStatusLabelBackground")
+    'Debug.Print("ToolbarRenderer2_RenderToolStripStatusLabelBackground")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderSplitButtonBackground(sender As Object, e As ToolStripItemRenderEventArgs) Handles Me.RenderSplitButtonBackground
-    Debug.Print("ToolbarRenderer2_RenderSplitButtonBackground")
+    'Debug.Print("ToolbarRenderer2_RenderSplitButtonBackground")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderSeparator(sender As Object, e As ToolStripSeparatorRenderEventArgs) Handles Me.RenderSeparator
-    Debug.Print("ToolbarRenderer2_RenderSeparator")
+    'Debug.Print("ToolbarRenderer2_RenderSeparator")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderOverflowButtonBackground(sender As Object, e As ToolStripItemRenderEventArgs) Handles Me.RenderOverflowButtonBackground
-    Debug.Print("ToolbarRenderer2_RenderOverflowButtonBackground")
+    'Debug.Print("ToolbarRenderer2_RenderOverflowButtonBackground")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderMenuItemBackground(sender As Object, e As ToolStripItemRenderEventArgs) Handles Me.RenderMenuItemBackground
-    Debug.Print("ToolbarRenderer2_RenderMenuItemBackground")
+    'Debug.Print("ToolbarRenderer2_RenderMenuItemBackground")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderLabelBackground(sender As Object, e As ToolStripItemRenderEventArgs) Handles Me.RenderLabelBackground
-    Debug.Print("ToolbarRenderer2_RenderLabelBackground")
+    'Debug.Print("ToolbarRenderer2_RenderLabelBackground")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderItemText(sender As Object, e As ToolStripItemTextRenderEventArgs) Handles Me.RenderItemText
-    Debug.Print("ToolbarRenderer2_RenderItemText")
+    'Debug.Print("ToolbarRenderer2_RenderItemText")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderItemImage(sender As Object, e As ToolStripItemImageRenderEventArgs) Handles Me.RenderItemImage
-    Debug.Print("ToolbarRenderer2_RenderItemImage")
+    'Debug.Print("ToolbarRenderer2_RenderItemImage")
     Dim button As ToolStripButton = TryCast(e.Item, ToolStripButton)
     If button IsNot Nothing Then
       Dim image As Image = theme.ColorIcon(button.Image, theme.AppToolbarIconColor)
@@ -172,36 +172,36 @@
   End Sub
 
   Private Sub ToolbarRenderer2_RenderItemCheck(sender As Object, e As ToolStripItemImageRenderEventArgs) Handles Me.RenderItemCheck
-    Debug.Print("ToolbarRenderer2_RenderItemCheck")
+    'Debug.Print("ToolbarRenderer2_RenderItemCheck")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderItemBackground(sender As Object, e As ToolStripItemRenderEventArgs) Handles Me.RenderItemBackground
-    Debug.Print("ToolbarRenderer2_RenderItemBackground")
+    'Debug.Print("ToolbarRenderer2_RenderItemBackground")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderImageMargin(sender As Object, e As ToolStripRenderEventArgs) Handles Me.RenderImageMargin
-    Debug.Print("ToolbarRenderer2_RenderImageMargin")
+    'Debug.Print("ToolbarRenderer2_RenderImageMargin")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderGrip(sender As Object, e As ToolStripGripRenderEventArgs) Handles Me.RenderGrip
-    Debug.Print("ToolbarRenderer2_RenderGrip")
+    'Debug.Print("ToolbarRenderer2_RenderGrip")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderDropDownButtonBackground(sender As Object, e As ToolStripItemRenderEventArgs) Handles Me.RenderDropDownButtonBackground
-    Debug.Print("ToolbarRenderer2_RenderDropDownButtonBackground")
+    'Debug.Print("ToolbarRenderer2_RenderDropDownButtonBackground")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderButtonBackground(sender As Object, e As ToolStripItemRenderEventArgs) Handles Me.RenderButtonBackground
-    Debug.Print("ToolbarRenderer2_RenderButtonBackground")
+    'Debug.Print("ToolbarRenderer2_RenderButtonBackground")
 
   End Sub
 
   Private Sub ToolbarRenderer2_RenderArrow(sender As Object, e As ToolStripArrowRenderEventArgs) Handles Me.RenderArrow
-    Debug.Print("ToolbarRenderer2_RenderArrow")
+    'Debug.Print("ToolbarRenderer2_RenderArrow")
   End Sub
 End Class

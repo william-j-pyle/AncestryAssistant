@@ -1,5 +1,8 @@
 ﻿Public Class Ribbon
   Inherits TabControl
+
+  Private theme As UITheme = UITheme.GetInstance
+
   Private components As System.ComponentModel.IContainer
   Private Const TABHEIGHT As Integer = 20
   Private Const RIBBONTOP As Integer = TABHEIGHT + 1
@@ -40,83 +43,82 @@
   '  End Get
   'End Property
 
+  Private Sub RenderTypeTabTop(sender As Object, e As PaintEventArgs) Handles Me.Paint
+    Dim g As Graphics = e.Graphics
 
-
-  Private Sub JRibbon_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
-    'MyBase.OnPaint(e)
-    Dim path As New Drawing2D.GraphicsPath()
-    path.StartFigure()
-    'TOP LEFT CORNER
-    path.AddArc(New Rectangle(0, RIBBONTOP, RIBBONBORDER * 2, RIBBONBORDER * 2), 180, 90)
-    'TOP LINE
-    path.AddLine(RIBBONBORDER, RIBBONTOP, Width - RIBBONBORDER, RIBBONTOP)
-    'TOP RIGHT CORNER
-    path.AddArc(New Rectangle(Width - (RIBBONBORDER * 2), RIBBONTOP, RIBBONBORDER * 2, RIBBONBORDER * 2), -90, 90)
-    'RIGHT LINE
-    path.AddLine(Width, RIBBONBORDER + RIBBONTOP, Width, RIBBONTOP + RIBBONHEIGHT - RIBBONBORDER)
-    'BOTTOM RIGHT CORNER
-    path.AddArc(New Rectangle(Width - (RIBBONBORDER * 2), RIBBONTOP + RIBBONHEIGHT - (RIBBONBORDER * 2), RIBBONBORDER * 2, RIBBONBORDER * 2), 0, 90)
-    'BOTTOM LINE
-    path.AddLine(Width - RIBBONBORDER, RIBBONTOP + RIBBONHEIGHT, RIBBONBORDER, RIBBONTOP + RIBBONHEIGHT)
-    'BOTTOM LEFT CORNER
-    path.AddArc(New Rectangle(0, RIBBONTOP + RIBBONHEIGHT - (RIBBONBORDER * 2), RIBBONBORDER * 2, RIBBONBORDER * 2), 90, 90)
-    'LEFT LINE
-    path.AddLine(0, RIBBONTOP + RIBBONHEIGHT - RIBBONBORDER, 0, RIBBONTOP + RIBBONBORDER)
-    path.CloseFigure()
-    Region = New Region(path)
-    Using brush As SolidBrush = New SolidBrush(SystemColors.ControlLight)
+    'Pain the background
+    Using brush As SolidBrush = New SolidBrush(theme.TabBackColor)
       e.Graphics.FillRectangle(brush, ClientRectangle)
     End Using
-    For i As Integer = 0 To TabPages.Count - 1
-      Dim tabPage As TabPage = TabPages(i)
-      Dim tabBounds As Rectangle = GetTabRect(i)
-      Dim textColor As Color
+    If TabCount = 0 Then Exit Sub
 
-      ' Fill the background
-      'Using brush As New SolidBrush(PanelBackColor)
-      'g.FillRectangle(brush, tabBounds)
-      'End Using
+    Dim w As Integer = 1
+    Dim l As Integer = Left
+    Dim t As Integer = GetTabRect(0).Height + 2
+
+    Dim r As Integer = Right - 1
+    Dim b As Integer = Height - t - 1
+    Dim tabOrigBounds As Rectangle
+    Dim tabBounds As Rectangle
+    Dim textColor As Color
+    Dim tabColor As Color
+    Dim stringFormat As New StringFormat()
+    stringFormat.Alignment = StringAlignment.Center
+    stringFormat.LineAlignment = StringAlignment.Center
+
+    'Dim PenBorder As Pen = New Pen(theme.TabBorderColor, 1)
+
+    'e.Graphics.DrawRectangle(PenBorder, l, t, r, b)
+
+    'Add the tabs
+    For i As Integer = 0 To TabPages.Count - 1
+      tabOrigBounds = GetTabRect(i)
+
+      'Erase current tab
+      Using brush As New SolidBrush(theme.AppBackColor)
+        g.FillRectangle(brush, tabOrigBounds)
+      End Using
 
       ' Set the text and background colors based on selected and unselected states
-      If SelectedIndex = i Then
-        textColor = Color.White
-      Else
-        textColor = Color.LightGray
-      End If
+      'If SelectedIndex = i Then
+      textColor = theme.TabFontColor
+      tabColor = theme.TabBorderColor
+      tabBounds = New Rectangle(tabOrigBounds.X, tabOrigBounds.Y + 1, tabOrigBounds.Width, tabOrigBounds.Height - 3)
+      'Else
+      'tabColor = theme.TabShadowColor
+      'tabBounds = New Rectangle(tabOrigBounds.X + 1, tabOrigBounds.Y + 2, tabOrigBounds.Width - 1, tabOrigBounds.Height - 4)
+      'If tabOrigBounds.Contains(PointToClient(MousePosition)) Then
+      'textColor = theme.TabFontColor
+      'Else
+      'textColor = theme.ColorToShadow(theme.TabFontColor)
+      'End If
+      'End If
+
+      ' Fill the new tab
+      Using brush As New SolidBrush(theme.AppBackColor)
+        g.FillRectangle(brush, tabBounds)
+      End Using
 
       ' Draw the tab text
       Using brush As New SolidBrush(textColor)
-        Dim stringFormat As New StringFormat()
-        stringFormat.Alignment = StringAlignment.Center
-        stringFormat.LineAlignment = StringAlignment.Center
-        e.Graphics.DrawString(tabPage.Text, Font, brush, tabBounds, stringFormat)
+        g.DrawString(TabPages(i).Text, Font, brush, tabBounds, stringFormat)
       End Using
 
-      'Const ADJ = 2
-      'If BorderWidth.Bottom > 0 Then
-      'If SelectedIndex = i Then
-      'e.Graphics.DrawLine(PenBorderBottom, tabBounds.Left - ADJ, tabBounds.Top, tabBounds.Left - ADJ, tabBounds.Bottom)
-      'e.Graphics.DrawLine(PenBorderBottom, tabBounds.Right - ADJ, tabBounds.Top, tabBounds.Right - ADJ, tabBounds.Bottom)
-      'e.Graphics.DrawLine(PenBorderBottom, tabBounds.Left - ADJ, tabBounds.Bottom, tabBounds.Right - ADJ, tabBounds.Bottom)
-      'Else
-      'e.Graphics.DrawLine(PenBorderBottom, tabBounds.Left - ADJ, tabBounds.Top, tabBounds.Right - ADJ, tabBounds.Top)
-      'End If
-      'If i = TabPages.Count - 1 Then
-      'e.Graphics.DrawLine(PenBorderBottom, tabBounds.Right - ADJ, tabBounds.Top, r, tabBounds.Top)
-      'End If
-      'End If
+      If SelectedIndex = i Then
+        g.DrawLine(New Pen(theme.AppHighlightColor, 2), tabBounds.Left + 1, tabBounds.Bottom - 1, tabBounds.Right - 1, tabBounds.Bottom - 1)
+      End If
+
     Next
-    'Dim jPen As Pen = New Pen(SystemColors.ButtonShadow, 2)
-    'e.Graphics.DrawArc(jPen, New Rectangle(0, 0, 16, 16), 180, 90)
-    'e.Graphics.DrawArc(jPen, New Rectangle(Width - 16, 0, 16, 16), -90, 90)
-    'e.Graphics.DrawArc(jPen, New Rectangle(Width - 16, Height - 16, 16, 16), 0, 90)
-    'e.Graphics.DrawArc(jPen, New Rectangle(0, Height - 16, 16, 16), 90, 90)
-    'e.Graphics.DrawLine(jPen, 8, 0, Width - 8, 0)
-    'e.Graphics.DrawLine(jPen, Width, 8, Width, Height - 8)
-    'e.Graphics.DrawLine(jPen, Width - 8, Height, 8, Height)
-    'e.Graphics.DrawLine(jPen, 0, Height - 8, 0, 8)
+
+    'Draw Divider lines
+    'tabBounds = GetTabRect(SelectedIndex)
+    'Dim tabBarColor As Color
+    'Dim ctlBarColor As Color
+    'tabBarColor = theme.TabAccentColor
+    'ctlBarColor = theme.TabShadowColor
+    'e.Graphics.DrawLine(New Pen(tabBarColor, 2), tabBounds.X, tabBounds.Y, tabBounds.Right, tabBounds.Y)
+    'e.Graphics.DrawLine(New Pen(ctlBarColor, 2), l, tabBounds.Bottom - 1, r, tabBounds.Bottom - 1)
 
   End Sub
-
 
 End Class

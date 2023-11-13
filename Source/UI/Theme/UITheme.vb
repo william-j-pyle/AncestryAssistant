@@ -43,6 +43,11 @@
   Public ReadOnly Property AppToolbarFontColor As Color = AppFontColor
   Public ReadOnly Property AppToolbarIconColor As Color = Color.White
 
+  Public ReadOnly Property RibbonBackColor As Color = AppBorderColor
+  Public ReadOnly Property RibbonFontColor As Color = AppFontColor
+  Public ReadOnly Property RibbonBorderColor As Color = AppBorderColor
+  Public ReadOnly Property RibbonFont As Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+
   Private Sub New()
 
   End Sub

@@ -2,8 +2,6 @@
 Imports System.IO
 Imports AncestryAssistant.AncestorCollection
 
-
-
 #Const SHOW_DEBUG = True
 
 Public Class ApplicationForm
@@ -15,6 +13,7 @@ Public Class ApplicationForm
   Private Ancestors As AncestorCollection
   Private WithEvents AncestorAttributes As AncestorPanel
   Private WithEvents AncestorsList As AncestorsListPanel
+  Private WithEvents FormExtensions As ResizeDragHandler
 
 
   Private _AncestorId As String = String.Empty
@@ -39,9 +38,8 @@ Public Class ApplicationForm
 
   Public Sub New()
     InitializeComponent()
-    AncestryDirectorWatcher.EnableRaisingEvents = False
+    RibbonBar.SelectedIndex = 1
     Ancestors = New AncestorCollection(My.Settings.AncestorsPath)
-    AncestryDirectorWatcher.EnableRaisingEvents = False
   End Sub
 
 
@@ -99,9 +97,13 @@ Public Class ApplicationForm
 
     AncestorAttributes = New AncestorPanel()
     DockManager.AddItem(DockPanelLocation.LeftTop, AncestorAttributes)
-
     DockManager.AddItem(DockPanelLocation.MiddleTopLeft, New ImageGallery())
     DockManager.AddItem(DockPanelLocation.MiddleBottom, New CensusViewer())
+
+    DockManager.LoadSettings()
+
+    FormExtensions = New ResizeDragHandler(Me)
+    FormExtensions.SetDragControl(AppTitle)
   End Sub
 
 
@@ -146,7 +148,7 @@ Public Class ApplicationForm
   End Sub
 
   Private Sub AncestryToolbarToolStripMenuItem_Click(sender As Object, e As EventArgs)
-    Ancestry.ShowToolbar = AncestryToolbarToolStripMenuItem.Checked
+    'Ancestry.ShowToolbar = AncestryToolbarToolStripMenuItem.Checked
   End Sub
 
 #End Region
@@ -181,11 +183,11 @@ Public Class ApplicationForm
   End Sub
 
   Private Sub AncestryURITrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
-    If btnActions.Visible Then
-      If NewGroup <> OldGroup Then
-        btnActions.Visible = False
-      End If
-    End If
+    ' If btnActions.Visible Then
+    'If NewGroup <> OldGroup Then
+    'btnActions.Visible = False
+    'End If
+    'End If
   End Sub
 
   Private Const ANCESTOR_NEW As String = "Add Ancestor To Assistant"
@@ -220,38 +222,38 @@ Public Class ApplicationForm
       Case APIMessage.MT_PERSON
         If msg.MessageKey.Length > 3 Then
           If Not Ancestors.ContainsKey(msg.MessageKey) Then
-            With btnActions
-              .Tag = msg
-              .Text = ANCESTOR_NEW
-              '.Image = My.Resources.ANCESTOR_ADD_WHITE
-              .Enabled = True
-              .Visible = True
-            End With
+            'With btnActions
+            '  .Tag = msg
+            '  .Text = ANCESTOR_NEW
+            '  '.Image = My.Resources.ANCESTOR_ADD_WHITE
+            '  .Enabled = True
+            '  .Visible = True
+            'End With
           Else
             'If assistant ancestor is different, then change ancestors
             If Not AncestorId.Equals(msg.MessageKey) Then
               AncestorId = msg.MessageKey
             End If
             If Not Ancestors.Item(msg.MessageKey).AncestorMatchesMessage(msg) Then
-              With btnActions
-                .Tag = msg
-                .Text = ANCESTOR_UPDATED
-                '.Image = My.Resources.ANCESTOR_ADD_WHITE
-                .Enabled = True
-                .Visible = True
-              End With
+              'With btnActions
+              '  .Tag = msg
+              '  .Text = ANCESTOR_UPDATED
+              '  '.Image = My.Resources.ANCESTOR_ADD_WHITE
+              '  .Enabled = True
+              '  .Visible = True
+              'End With
             End If
           End If
         End If
       Case APIMessage.MT_PAGE
         If msg.PageKey.Equals("FINDAGRAVE_VIEWER_IMAGE") And (msg.GetValue("PAGEKEY").EndsWith("jpg") Or msg.GetValue("PAGEKEY").EndsWith("jepg")) Then
-          With btnActions
-            .Tag = msg
-            .Text = FINDAGRAVE_IMAGE
-            '.Image = My.Resources.ANCESTOR_ADD_WHITE
-            .Enabled = True
-            .Visible = True
-          End With
+          'With btnActions
+          '  .Tag = msg
+          '  .Text = FINDAGRAVE_IMAGE
+          '  '.Image = My.Resources.ANCESTOR_ADD_WHITE
+          '  .Enabled = True
+          '  .Visible = True
+          'End With
         End If
       Case APIMessage.MT_FINDAGRAVE
         Debug.Print("FindAGrave Handler")
@@ -277,107 +279,107 @@ Public Class ApplicationForm
           If Ancestors.ContainsKey(msg.MessageKey) Then
             Dim title As String = msg.GetValue("Title")
             If title.Contains("Census") Then
-              With btnActions
-                .Tag = msg
-                .Text = ANCESTOR_CENSUS
-                '.Image = My.Resources.ANCESTOR_ADD_WHITE
-                .Enabled = True
-                .Visible = True
-              End With
+              'With btnActions
+              '  .Tag = msg
+              '  .Text = ANCESTOR_CENSUS
+              '  '.Image = My.Resources.ANCESTOR_ADD_WHITE
+              '  .Enabled = True
+              '  .Visible = True
+              'End With
             Else
               If msg.PageKey = "ANCESTRY_VIEWER_IMAGE" Then
-                With btnActions
-                  .Tag = msg
-                  .Text = ANCESTOR_IMAGE
-                  '.Image = My.Resources.ANCESTOR_ADD_WHITE
-                  .Enabled = True
-                  .Visible = True
-                End With
+                'With btnActions
+                '  .Tag = msg
+                '  .Text = ANCESTOR_IMAGE
+                '  '.Image = My.Resources.ANCESTOR_ADD_WHITE
+                '  .Enabled = True
+                '  .Visible = True
+                'End With
               End If
             End If
           End If
         End If
       Case Else
-        btnActions.Visible = False
+        'btnActions.Visible = False
     End Select
   End Sub
 
 #End Region
 
 
-  Private Sub btnActions_Click(sender As Object, e As EventArgs) Handles btnActions.Click
-    btnActions.Visible = False
-    If btnActions.Tag Is Nothing Then Exit Sub
-    Dim msg As APIMessage = btnActions.Tag
-    Select Case btnActions.Text
-      Case ANCESTOR_NEW
-        If Not Ancestors.ContainsKey(msg.MessageKey) Then
-          If msg.MessageType = APIMessage.MT_PERSON Then
-            Dim ancestor As AncestorCollection.Ancestor = Ancestors.newAncestor(msg.MessageKey)
-            For Each fact As String In ancestor.AncestorFactList()
-              ancestor.Fact(fact) = msg.GetValue(fact)
-            Next
-            AncestorId = msg.MessageKey
-            RaiseEvent AncestorsUpdated()
-          End If
-        End If
-      Case ANCESTOR_UPDATED
-        Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(msg.MessageKey)
-        For Each fact As String In ancestor.AncestorFactDifferences(msg)
-          ancestor.Fact(fact) = msg.GetValue(fact)
-        Next
-        AncestorId = msg.MessageKey
-        RaiseEvent AncestorsUpdated()
-      Case ANCESTOR_CENSUS
-        Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(msg.MessageKey)
-        Dim imgFilename As String = ancestor.Census.addCensusData(msg)
-        AncestorId = msg.MessageKey
-        Ancestry.saveImageAs(imgFilename + ".jpg")
-        RaiseEvent AncestorsUpdated()
-      Case ANCESTOR_IMAGE
-        Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(msg.MessageKey)
-        Dim rslt As DialogResult
-        Dim dlg As New SaveImageDetails
-        dlg.InitDialog(msg)
-        rslt = dlg.ShowDialog()
-        If rslt = DialogResult.OK Then
-          Dim i_type As String = dlg.ImageType.ToUpper
-          Dim i_category As String = dlg.ImageCategory.ToUpper
-          Dim i_summary As String = dlg.Summary
-          Dim i_details As List(Of List(Of String)) = dlg.TableData
-          If i_type.Equals("") Then i_type = "PHOTO"
-          If i_category.Equals("") Then i_category = "OTHER"
-          Dim filename As String = i_type & "-" & i_category & "-" & StrConv(i_summary, VbStrConv.ProperCase).Replace(" ", "")
-          If filename.Length > 60 Then filename = filename.Substring(0, 60)
-          Dim imgFilename As String = uniqueFilename(ancestor.FullPath("Gallery\" + filename), {"aa", "jpg.txt", "jpg"})
-          File.WriteAllText(imgFilename + ".jpg.txt", dlg.Summary)
-          Dim aa As AAFile = New AAFile(imgFilename + ".aa", AAFileTypeEnum.LISTARRAY)
-          aa.setTableData(i_details)
-          aa.Save()
-          Ancestry.saveImageAs(imgFilename + ".jpg")
-        End If
-      Case FINDAGRAVE_IMAGE
-        Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
-        Dim rslt As DialogResult
-        Dim dlg As New SaveImageDetails
-        dlg.InitDialog(msg)
-        dlg.HidePayload()
-        rslt = dlg.ShowDialog()
-        If rslt = DialogResult.OK Then
-          Dim i_type As String = dlg.ImageType.ToUpper
-          Dim i_category As String = dlg.ImageCategory.ToUpper
-          Dim i_summary As String = dlg.Summary
-          If i_type.Equals("") Then i_type = "PHOTO"
-          If i_category.Equals("") Then i_category = "OTHER"
-          Dim filename As String = i_type & "-" & i_category & "-" & StrConv(i_summary, VbStrConv.ProperCase).Replace(" ", "")
-          If filename.Length > 60 Then filename = filename.Substring(0, 60)
-          Dim imgFilename As String = uniqueFilename(ancestor.FullPath("Gallery\" + filename), {"jpg.txt", "jpg"})
-          File.WriteAllText(imgFilename + ".jpg.txt", dlg.Summary)
-          Ancestry.saveImageAs(imgFilename + ".jpg")
-        End If
-      Case Else
+  Private Sub btnActions_Click(sender As Object, e As EventArgs)
+    'btnActions.Visible = False
+    'If btnActions.Tag Is Nothing Then Exit Sub
+    'Dim msg As APIMessage = btnActions.Tag
+    'Select Case btnActions.Text
+    '  Case ANCESTOR_NEW
+    '    If Not Ancestors.ContainsKey(msg.MessageKey) Then
+    '      If msg.MessageType = APIMessage.MT_PERSON Then
+    '        Dim ancestor As AncestorCollection.Ancestor = Ancestors.newAncestor(msg.MessageKey)
+    '        For Each fact As String In ancestor.AncestorFactList()
+    '          ancestor.Fact(fact) = msg.GetValue(fact)
+    '        Next
+    '        AncestorId = msg.MessageKey
+    '        RaiseEvent AncestorsUpdated()
+    '      End If
+    '    End If
+    '  Case ANCESTOR_UPDATED
+    '    Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(msg.MessageKey)
+    '    For Each fact As String In ancestor.AncestorFactDifferences(msg)
+    '      ancestor.Fact(fact) = msg.GetValue(fact)
+    '    Next
+    '    AncestorId = msg.MessageKey
+    '    RaiseEvent AncestorsUpdated()
+    '  Case ANCESTOR_CENSUS
+    '    Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(msg.MessageKey)
+    '    Dim imgFilename As String = ancestor.Census.addCensusData(msg)
+    '    AncestorId = msg.MessageKey
+    '    Ancestry.saveImageAs(imgFilename + ".jpg")
+    '    RaiseEvent AncestorsUpdated()
+    '  Case ANCESTOR_IMAGE
+    '    Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(msg.MessageKey)
+    '    Dim rslt As DialogResult
+    '    Dim dlg As New SaveImageDetails
+    '    dlg.InitDialog(msg)
+    '    rslt = dlg.ShowDialog()
+    '    If rslt = DialogResult.OK Then
+    '      Dim i_type As String = dlg.ImageType.ToUpper
+    '      Dim i_category As String = dlg.ImageCategory.ToUpper
+    '      Dim i_summary As String = dlg.Summary
+    '      Dim i_details As List(Of List(Of String)) = dlg.TableData
+    '      If i_type.Equals("") Then i_type = "PHOTO"
+    '      If i_category.Equals("") Then i_category = "OTHER"
+    '      Dim filename As String = i_type & "-" & i_category & "-" & StrConv(i_summary, VbStrConv.ProperCase).Replace(" ", "")
+    '      If filename.Length > 60 Then filename = filename.Substring(0, 60)
+    '      Dim imgFilename As String = uniqueFilename(ancestor.FullPath("Gallery\" + filename), {"aa", "jpg.txt", "jpg"})
+    '      File.WriteAllText(imgFilename + ".jpg.txt", dlg.Summary)
+    '      Dim aa As AAFile = New AAFile(imgFilename + ".aa", AAFileTypeEnum.LISTARRAY)
+    '      aa.setTableData(i_details)
+    '      aa.Save()
+    '      Ancestry.saveImageAs(imgFilename + ".jpg")
+    '    End If
+    '  Case FINDAGRAVE_IMAGE
+    '    Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
+    '    Dim rslt As DialogResult
+    '    Dim dlg As New SaveImageDetails
+    '    dlg.InitDialog(msg)
+    '    dlg.HidePayload()
+    '    rslt = dlg.ShowDialog()
+    '    If rslt = DialogResult.OK Then
+    '      Dim i_type As String = dlg.ImageType.ToUpper
+    '      Dim i_category As String = dlg.ImageCategory.ToUpper
+    '      Dim i_summary As String = dlg.Summary
+    '      If i_type.Equals("") Then i_type = "PHOTO"
+    '      If i_category.Equals("") Then i_category = "OTHER"
+    '      Dim filename As String = i_type & "-" & i_category & "-" & StrConv(i_summary, VbStrConv.ProperCase).Replace(" ", "")
+    '      If filename.Length > 60 Then filename = filename.Substring(0, 60)
+    '      Dim imgFilename As String = uniqueFilename(ancestor.FullPath("Gallery\" + filename), {"jpg.txt", "jpg"})
+    '      File.WriteAllText(imgFilename + ".jpg.txt", dlg.Summary)
+    '      Ancestry.saveImageAs(imgFilename + ".jpg")
+    '    End If
+    '  Case Else
 
-    End Select
+    'End Select
 
   End Sub
 
@@ -408,27 +410,13 @@ Public Class ApplicationForm
 
 
   Private Sub AncestorAttributes_PanelCloseClicked(sender As Object)
-    btnAncestor.Checked = False
+    'btnAncestor.Checked = False
   End Sub
 
   Private Sub AncestorsList_PanelCloseClicked(sender As Object)
-    btnAncestors.Checked = False
+    'btnAncestors.Checked = False
   End Sub
 
-  Private Sub AncestryDirectorWatcher_Changed_1(sender As Object, e As FileSystemEventArgs) Handles AncestryDirectorWatcher.Changed
-    Logger.log(Logger.LOG_TYPE.INFO, "FILEWATCHER(Changed')=" & e.FullPath)
-
-  End Sub
-
-  Private Sub AncestryDirectorWatcher_Deleted(sender As Object, e As FileSystemEventArgs) Handles AncestryDirectorWatcher.Deleted
-    Logger.log(Logger.LOG_TYPE.INFO, "FILEWATCHER(Deleted')=" & e.FullPath)
-
-  End Sub
-
-  Private Sub AncestryDirectorWatcher_Error(sender As Object, e As ErrorEventArgs) Handles AncestryDirectorWatcher.[Error]
-    Logger.log(Logger.LOG_TYPE.INFO, "FILEWATCHER([Error]')=" & e.GetException.Message)
-
-  End Sub
 
 
 
@@ -454,11 +442,11 @@ Public Class ApplicationForm
     SaveUIState()
   End Sub
 
-  Private Sub btnCensus_Click(sender As Object, e As EventArgs) Handles btnCensus.Click
+  Private Sub btnCensus_Click(sender As Object, e As EventArgs)
     'PanelManager.SetPanelVisibility(DockPanelLocation.MiddleBottom, btnCensus.Checked)
   End Sub
 
-  Private Sub btnNotebook_Click(sender As Object, e As EventArgs) Handles btnNotebook.Click
+  Private Sub btnNotebook_Click(sender As Object, e As EventArgs)
     'PanelManager.SetPanelVisibility(DockPanelLocation.MiddleTopRight, btnNotebook.Checked)
   End Sub
 
@@ -473,5 +461,173 @@ Public Class ApplicationForm
   Private Sub Ancestry_ViewerBusy(busy As Boolean)
 
   End Sub
+
+  Private Sub AppCloseButton_Click(sender As Object, e As EventArgs) Handles AppCloseButton.Click
+    Close()
+  End Sub
+
+  Private Sub AppMinButton_Click(sender As Object, e As EventArgs) Handles AppMinButton.Click
+    WindowState = FormWindowState.Minimized
+  End Sub
+
+  Private Sub AppMaxButton_Click(sender As Object, e As EventArgs) Handles AppMaxButton.Click, AppTitle.DoubleClick
+    If WindowState = FormWindowState.Normal Then
+      WindowState = FormWindowState.Maximized
+    ElseIf WindowState = FormWindowState.Maximized Then
+      WindowState = FormWindowState.Normal
+    End If
+  End Sub
+
+
+
+  Private Const WM_NCHITTEST As Integer = &H84
+  Private Const HTCLIENT As Integer = &H1
+  Private Const HTCAPTION As Integer = &H2
+  Private Const HTLEFT As Integer = &HA
+  Private Const HTRIGHT As Integer = &HB
+  Private Const HTTOP As Integer = &HC
+  Private Const HTTOPLEFT As Integer = &HD
+  Private Const HTTOPRIGHT As Integer = &HE
+  Private Const HTBOTTOM As Integer = &HF
+  Private Const HTBOTTOMLEFT As Integer = &H10
+  Private Const HTBOTTOMRIGHT As Integer = &H11
+
+  Private Const RESIZE_HANDLE_SIZE As Integer = 4
+  Private isResizing As Boolean = False
+  Private resizeDir As ResizeDirection
+
+  Private Enum ResizeDirection
+    None
+    Left
+    Right
+    Top
+    Bottom
+    TopLeft
+    TopRight
+    BottomLeft
+    BottomRight
+  End Enum
+
+  Protected Overrides Sub WndProc(ByRef m As Message)
+    MyBase.WndProc(m)
+
+    If m.Msg = WM_NCHITTEST AndAlso m.Result.ToInt32() = HTCLIENT Then
+      Dim clientPoint As Point = PointToClient(New Point(m.LParam.ToInt32()))
+      If clientPoint.X <= RESIZE_HANDLE_SIZE Then
+        If clientPoint.Y <= RESIZE_HANDLE_SIZE Then
+          m.Result = New IntPtr(HTTOPLEFT)
+        ElseIf clientPoint.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE Then
+          m.Result = New IntPtr(HTBOTTOMLEFT)
+        Else
+          m.Result = New IntPtr(HTLEFT)
+        End If
+      ElseIf clientPoint.X >= ClientSize.Width - RESIZE_HANDLE_SIZE Then
+        If clientPoint.Y <= RESIZE_HANDLE_SIZE Then
+          m.Result = New IntPtr(HTTOPRIGHT)
+        ElseIf clientPoint.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE Then
+          m.Result = New IntPtr(HTBOTTOMRIGHT)
+        Else
+          m.Result = New IntPtr(HTRIGHT)
+        End If
+      ElseIf clientPoint.Y <= RESIZE_HANDLE_SIZE Then
+        m.Result = New IntPtr(HTTOP)
+      ElseIf clientPoint.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE Then
+        m.Result = New IntPtr(HTBOTTOM)
+      End If
+    End If
+  End Sub
+
+  Private Sub CustomForm_MouseDown(sender As Object, e As MouseEventArgs) Handles FormBar.MouseDown
+    Debug.Print("MouseDown")
+    If e.Button = MouseButtons.Left Then
+      If resizeDir <> ResizeDirection.None Then
+        Debug.Print("Resizing")
+        isResizing = True
+      End If
+    End If
+  End Sub
+
+  Private Sub CustomForm_MouseMove(sender As Object, e As MouseEventArgs) Handles FormBar.MouseMove
+    If isResizing Then
+      Debug.Print("MouseMove: Resizing")
+      Select Case resizeDir
+        Case ResizeDirection.Left
+          Width = Right - e.X
+          Left = e.X
+        Case ResizeDirection.Right
+          Width = e.X
+        Case ResizeDirection.Top
+          Height = Bottom - e.Y
+          Top = e.Y
+        Case ResizeDirection.Bottom
+          Height = e.Y
+        Case ResizeDirection.TopLeft
+          Width = Right - e.X
+          Left = e.X
+          Height = Bottom - e.Y
+          Top = e.Y
+        Case ResizeDirection.TopRight
+          Width = e.X
+          Height = Bottom - e.Y
+          Top = e.Y
+        Case ResizeDirection.BottomLeft
+          Width = Right - e.X
+          Left = e.X
+          Height = e.Y
+        Case ResizeDirection.BottomRight
+          Width = e.X
+          Height = e.Y
+      End Select
+    Else
+      SetResizeCursor(e.Location)
+    End If
+  End Sub
+
+  Private Sub CustomForm_MouseUp(sender As Object, e As MouseEventArgs) Handles FormBar.MouseUp
+    isResizing = False
+  End Sub
+
+  Private Sub SetResizeCursor(point As Point)
+    Dim resizeDir As ResizeDirection = GetResizeDirection(point)
+    Select Case resizeDir
+      Case ResizeDirection.Left, ResizeDirection.Right
+        Cursor = Cursors.SizeWE
+      Case ResizeDirection.Top, ResizeDirection.Bottom
+        Cursor = Cursors.SizeNS
+      Case ResizeDirection.TopLeft, ResizeDirection.BottomRight
+        Cursor = Cursors.SizeNWSE
+      Case ResizeDirection.TopRight, ResizeDirection.BottomLeft
+        Cursor = Cursors.SizeNESW
+      Case Else
+        Cursor = Cursors.Default
+    End Select
+  End Sub
+
+  Private Function GetResizeDirection(point As Point) As ResizeDirection
+    If point.X <= RESIZE_HANDLE_SIZE Then
+      If point.Y <= RESIZE_HANDLE_SIZE Then
+        Return ResizeDirection.TopLeft
+      ElseIf point.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE Then
+        Return ResizeDirection.BottomLeft
+      Else
+        Return ResizeDirection.Left
+      End If
+    ElseIf point.X >= ClientSize.Width - RESIZE_HANDLE_SIZE Then
+      If point.Y <= RESIZE_HANDLE_SIZE Then
+        Return ResizeDirection.TopRight
+      ElseIf point.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE Then
+        Return ResizeDirection.BottomRight
+      Else
+        Return ResizeDirection.Right
+      End If
+    ElseIf point.Y <= RESIZE_HANDLE_SIZE Then
+      Return ResizeDirection.Top
+    ElseIf point.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE Then
+      Return ResizeDirection.Bottom
+    Else
+      Return ResizeDirection.None
+    End If
+  End Function
+
 
 End Class

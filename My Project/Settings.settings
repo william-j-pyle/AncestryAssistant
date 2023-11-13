@@ -6,7 +6,7 @@
       <Value Profile="(Default)">D:\Geneology\Ancestors\</Value>
     </Setting>
     <Setting Name="MainForm_ClientSize" Type="System.Drawing.size" Scope="User">
-      <Value Profile="(Default)">892, 546</Value>
+      <Value Profile="(Default)">700, 500</Value>
     </Setting>
     <Setting Name="MainSplitter" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">239</Value>
@@ -57,7 +57,7 @@
       <Value Profile="(Default)">242, 24</Value>
     </Setting>
     <Setting Name="APP_FONT" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">Segoe UI Semibold, 9pt, style=Bold</Value>
+      <Value Profile="(Default)">Microsoft Sans Serif, 8.25pt</Value>
     </Setting>
     <Setting Name="FORM_A_FG" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">ControlText</Value>

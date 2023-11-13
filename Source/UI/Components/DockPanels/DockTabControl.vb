@@ -26,10 +26,10 @@
   Private Sub RenderTabClient(sender As Object, e As PaintEventArgs) Handles Me.Paint
     Select Case TabType
       Case DockPanelType.Tab
-        Debug.Print("Render Tab")
+        'Debug.Print("Render Tab")
         RenderTypeTabTop(sender, e)
       Case DockPanelType.Panel
-        Debug.Print("Render Panel")
+        'Debug.Print("Render Panel")
         RenderTypeTabBottom(sender, e)
     End Select
   End Sub
@@ -47,7 +47,7 @@
     Dim r As Integer = Right - 1
     Dim b As Integer = GetTabRect(0).Top
 
-    Debug.Print("l={0}, t={1}, r={2}, b={3}, height={4}, tabrec.top={5}, tabrec.height={6}, ca.top={7}, ca.height={8}", l, t, r, b, Height, GetTabRect(0).Top, GetTabRect(0).Height, ClientRectangle.Top, ClientRectangle.Height)
+    'Debug.Print("l={0}, t={1}, r={2}, b={3}, height={4}, tabrec.top={5}, tabrec.height={6}, ca.top={7}, ca.height={8}", l, t, r, b, Height, GetTabRect(0).Top, GetTabRect(0).Height, ClientRectangle.Top, ClientRectangle.Height)
 
     'If TabCount > 1 Then
     'b = GetTabRect(0).Top
