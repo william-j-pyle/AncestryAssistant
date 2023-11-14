@@ -291,67 +291,66 @@
     <Compile Include="Source\Objects\Ancestor\AncestorAbstract.vb" />
     <Compile Include="Source\Objects\Ancestor\AncestorCollection.vb" />
     <Compile Include="Source\Objects\AncestryAssistantFile\AAFile.vb" />
-    <Compile Include="Source\UI\Components\DockPanelItems\Census\Objects\ACensus.vb" />
-    <Compile Include="Source\UI\Components\DockPanelItems\Gallery\Objects\AGallery.vb" />
-    <Compile Include="Source\UI\Components\DockPanelItems\Notebook\Objects\ANotebook.vb" />
-    <Compile Include="Source\UI\Components\DockPanelItems\Sources\Objects\ASource.vb" />
-    <Compile Include="Source\UI\Components\DockPanelItems\Timeline\Objects\ATimeline.vb" />
+    <Compile Include="Source\Objects\AncestryAssistantFile\ACensus.vb" />
+    <Compile Include="Source\Objects\AncestryAssistantFile\AGallery.vb" />
+    <Compile Include="Source\Objects\AncestryAssistantFile\ANotebook.vb" />
+    <Compile Include="Source\Objects\AncestryAssistantFile\ASource.vb" />
+    <Compile Include="Source\Objects\AncestryAssistantFile\ATimeline.vb" />
     <Compile Include="Source\Objects\AncestryAssistantFile\Enums\AAFileTypeEnum.vb" />
-    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\AncestryWebViewer.Designer.vb">
-      <DependentUpon>AncestryWebViewer.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\AncestryWebViewer.vb">
+    <Compile Include="Source\UI\DockPanels\DockPanelItems\WebBrowserPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Objects\UriTracks.vb" />
-    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Objects\UriTrackingGroup.vb" />
-    <Compile Include="Source\UI\Components\DockPanels\DockPanelManager.vb">
+    <Compile Include="Source\Objects\URITracks\UriTracks.vb" />
+    <Compile Include="Source\Objects\URITracks\UriTrackingGroup.vb" />
+    <Compile Include="Source\UI\DockPanels\DockPanelManager.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\DockPanels\DockPanel.Designer.vb">
+    <Compile Include="Source\UI\DockPanels\DockPanel.Designer.vb">
       <DependentUpon>DockPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\UI\Components\DockPanels\DockPanel.vb">
+    <Compile Include="Source\UI\DockPanels\DockPanel.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\DockPanelItems\Ancestor\AncestorPanel.vb">
+    <Compile Include="Source\UI\DockPanels\DockPanelItems\AncestorPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\DockPanelItems\AncestorsList\AncestorsListPanel.vb">
+    <Compile Include="Source\UI\DockPanels\DockPanelItems\AncestorListPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\DockPanels\DockTabControl.vb">
+    <Compile Include="Source\UI\DockPanels\DockTabControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\DockPanels\IDockPanelItem.vb" />
-    <Compile Include="Source\UI\Components\MenuBar\MenuBarRenderer.vb" />
-    <Compile Include="Source\UI\Components\MenuBar\MenuBar.Designer.vb">
+    <Compile Include="Source\UI\DockPanels\DockPanelItems\IDockPanelItem.vb" />
+    <Compile Include="Source\UI\DockPanels\DockToolBarConfig.vb" />
+    <Compile Include="Source\UI\Components\Renderers\MenuBarRenderer.vb" />
+    <Compile Include="Source\UI\Components\MenuBar.Designer.vb">
       <DependentUpon>MenuBar.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\UI\Components\MenuBar\MenuBar.vb">
+    <Compile Include="Source\UI\Components\MenuBar.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Enums\DockPanelLocation.vb" />
     <Compile Include="Source\Objects\GedcomFile\Primatives\Individual.vb" />
-    <Compile Include="Source\UI\Components\Panel\BordersPanel.vb">
+    <Compile Include="Source\UI\Components\BordersPanel.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\StatusBar\StatusBar.Designer.vb">
+    <Compile Include="Source\UI\RibbonBar\RibbonBarTabConfig.vb" />
+    <Compile Include="Source\UI\Components\StatusBar.Designer.vb">
       <DependentUpon>StatusBar.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\UI\Components\StatusBar\StatusBar.vb">
+    <Compile Include="Source\UI\Components\StatusBar.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\StatusBar\StatusBarRenderer.vb" />
-    <Compile Include="Source\UI\Components\ToolBar\ToolBar.Designer.vb">
+    <Compile Include="Source\UI\Components\Renderers\StatusBarRenderer.vb" />
+    <Compile Include="Source\UI\Components\ToolBar.Designer.vb">
       <DependentUpon>ToolBar.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\UI\Components\ToolBar\ToolBar.vb">
+    <Compile Include="Source\UI\Components\ToolBar.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\ToolBar\ToolbarRender2.vb" />
-    <Compile Include="Source\UI\Components\ToolBar\ToolBarRenderer.vb" />
-    <Compile Include="Source\UI\Components\Utils\ResizeDragHandler.vb" />
+    <Compile Include="Source\UI\Components\Renderers\ToolbarRender2.vb" />
+    <Compile Include="Source\UI\Components\Renderers\ToolBarRenderer.vb" />
+    <Compile Include="Source\UI\Forms\Helpers\ResizeDragHandler.vb" />
     <Compile Include="Source\UI\Dialogs\SaveImageDetails.Designer.vb">
       <DependentUpon>SaveImageDetails.vb</DependentUpon>
     </Compile>
@@ -365,20 +364,26 @@
     <Compile Include="Source\UI\Forms\ApplicationForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\Button\IconButton.vb">
+    <Compile Include="Source\UI\Components\IconButton.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\RibbonBar\RibbonBar.vb">
+    <Compile Include="Source\UI\RibbonBar\RibbonBarTab.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\RibbonBar\RibbonButton.vb">
+    <Compile Include="Source\UI\RibbonBar\RibbonButton.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\RibbonBar\Ribbon.vb">
+    <Compile Include="Source\UI\RibbonBar\RibbonBar.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\RibbonBar\RibbonGroup.vb">
+    <Compile Include="Source\UI\RibbonBar\RibbonBarTabGroup.vb">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Source\UI\Forms\Helpers\SplashForm.Designer.vb">
+      <DependentUpon>SplashForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\UI\Forms\Helpers\SplashForm.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\UI\Theme\UITheme.vb" />
     <Compile Include="Test\frmButtonTestForm.Designer.vb">
@@ -417,10 +422,7 @@
     <Compile Include="Test\frmTestGEDCOM.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\DockPanelItems\ViewerAbstract.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Source\UI\Components\DockPanelItems\Census\CensusViewer.vb">
+    <Compile Include="Source\UI\DockPanels\DockPanelItems\CensusPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Test\frmTestSplitters.Designer.vb">
@@ -432,10 +434,10 @@
     <Compile Include="Source\Objects\GedcomFile\File\FileLineEntry.vb" />
     <Compile Include="Source\Objects\GedcomFile\Primatives\GedDate.vb" />
     <None Include="Source\Objects\GedcomFile\File\PlaceNormalized.vb" />
-    <Compile Include="Source\UI\Components\DockPanelItems\Gallery\ImageGallery.vb">
+    <Compile Include="Source\UI\DockPanels\DockPanelItems\ImageGalleryPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\UI\Components\DockPanelItems\Notebook\NotebookViewer.vb">
+    <Compile Include="Source\UI\DockPanels\DockPanelItems\NotebookPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Objects\GedcomFile\Gedcom.vb" />
@@ -457,16 +459,16 @@
     <Compile Include="Source\Objects\GedcomFile\Tags\SourceRefTag.vb" />
     <Compile Include="Source\Objects\GedcomFile\Tags\SourceTag.vb" />
     <Compile Include="Source\Objects\GedcomFile\Primatives\GedName.vb" />
-    <Compile Include="Source\UI\Components\Utils\Logger.vb" />
+    <Compile Include="Source\Utils\Logger.vb" />
     <Compile Include="Source\Enums\FontAncestryIconEnum.vb" />
     <Compile Include="Source\Enums\FontSegoeFluentIconsEnum.vb" />
     <Compile Include="Source\Enums\IconSizeEnum.vb" />
     <Compile Include="Source\Enums\RibbonButtonSizeEnum.vb" />
-    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Enums\CaptureTypeEnum.vb" />
-    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Enums\DataTypeEnum.vb" />
-    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Enums\UriTrackingGroupEnum.vb" />
-    <Compile Include="Source\UI\Components\Utils\Utils.vb" />
-    <Compile Include="Source\UI\Components\DockPanelItems\AncestryBrowser\Objects\APIMessage.vb" />
+    <Compile Include="Source\Enums\CaptureTypeEnum.vb" />
+    <Compile Include="Source\Enums\DataTypeEnum.vb" />
+    <Compile Include="Source\Enums\UriTrackingGroupEnum.vb" />
+    <Compile Include="Source\Utils\Utils.vb" />
+    <Compile Include="Source\Objects\APIMessage.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -478,13 +480,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Source\UI\Components\RibbonBar\ribbonHomeTab.json" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Source\UI\Components\DockPanelItems\AncestryBrowser\AncestryWebViewer.resx">
-      <DependentUpon>AncestryWebViewer.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\UI\Components\DockPanels\DockPanel.resx">
+    <EmbeddedResource Include="Source\UI\DockPanels\DockPanel.resx">
       <DependentUpon>DockPanel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\UI\Dialogs\SaveImageDetails.resx">
@@ -492,6 +490,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\UI\Forms\ApplicationForm.resx">
       <DependentUpon>ApplicationForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\UI\Forms\Helpers\SplashForm.resx">
+      <DependentUpon>SplashForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmButtonTestForm.resx">
       <DependentUpon>frmButtonTestForm.vb</DependentUpon>

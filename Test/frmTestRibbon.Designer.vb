@@ -22,10 +22,10 @@ Partial Class frmTestRibbon
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.Ribbon1 = New AncestryAssistant.Ribbon()
+        Me.Ribbon1 = New AncestryAssistant.RibbonBar()
         Me.mnuFile = New System.Windows.Forms.TabPage()
         Me.tabHome = New System.Windows.Forms.TabPage()
-        Me.RibbonBar1 = New AncestryAssistant.RibbonBar()
+        Me.RibbonBar1 = New AncestryAssistant.RibbonBarTab()
         Me.Ribbon1.SuspendLayout()
         Me.tabHome.SuspendLayout()
         Me.SuspendLayout()
@@ -104,9 +104,9 @@ Partial Class frmTestRibbon
     Friend WithEvents JButton1 As RibbonButton
     Friend WithEvents JButton2 As RibbonButton
     Friend WithEvents JButton3 As RibbonButton
-    Friend WithEvents JRibbon1 As Ribbon
-    Friend WithEvents Ribbon1 As Ribbon
+    Friend WithEvents JRibbon1 As RibbonBar
+    Friend WithEvents Ribbon1 As RibbonBar
     Friend WithEvents mnuFile As TabPage
     Friend WithEvents tabHome As TabPage
-    Friend WithEvents RibbonBar1 As RibbonBar
+    Friend WithEvents RibbonBar1 As RibbonBarTab
 End Class

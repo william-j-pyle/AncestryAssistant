@@ -1,15 +1,22 @@
 ﻿Public Class UITheme
   Private Shared instance As UITheme = Nothing
 
-  Public ReadOnly Property AppBackColor As Color = Color.Black
-  Public ReadOnly Property AppBorderColor As Color = Color.DarkGray
+  Public ReadOnly Property AppBackColor As Color = Color.FromArgb(255, 10, 10, 10)
+  Public ReadOnly Property AppBorderColor As Color = Color.FromArgb(255, 41, 41, 41)
   Public ReadOnly Property AppFontColor As Color = Color.WhiteSmoke
+  Public ReadOnly Property AppFontDarkColor As Color = Color.Black
   Public ReadOnly Property AppActiveFontColor As Color = Color.White
-  Public ReadOnly Property AppHighlightColor As Color = Color.Lime
+  Public ReadOnly Property AppHighlightColor As Color = Color.FromArgb(255, 146, 228, 146)
   Public ReadOnly Property AppShadowColor As Color = colorBrightness(AppBorderColor, -15)
-  Public ReadOnly Property AppShadowColor2 As Color = colorBrightness(AppBorderColor, -25)
-  Public ReadOnly Property AppAccentColor As Color = colorBrightness(AppBorderColor, 15)
-  Public ReadOnly Property AppAccentColor2 As Color = colorBrightness(AppBorderColor, 25)
+  Public ReadOnly Property AppShadow2Color As Color = ColorBrightness(AppBorderColor, -25)
+  Public ReadOnly Property AppAccentColor As Color = Color.FromArgb(255, 102, 102, 102)
+  Public ReadOnly Property AppAccent2Color As Color = ColorBrightness(AppBorderColor, 25)
+
+  Public ReadOnly Property AppControlBoxBackColor As Color = AppBackColor
+  Public ReadOnly Property AppControlBoxFontColor As Color = AppFontColor
+  Public ReadOnly Property AppControlBoxFont As Font = New System.Drawing.Font("Segoe Fluent Icons", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+
+  Public ReadOnly Property AppTitleFontColor As Color = AppFontColor
 
   Public ReadOnly Property TabBackColor As Color = AppBackColor
   Public ReadOnly Property TabBorderColor As Color = AppBorderColor
@@ -17,9 +24,9 @@
   Public ReadOnly Property TabActiveFontColor As Color = AppActiveFontColor
   Public ReadOnly Property TabHighlightColor As Color = AppHighlightColor
   Public ReadOnly Property TabShadowColor As Color = AppShadowColor
-  Public ReadOnly Property TabShadowColor2 As Color = AppShadowColor2
+  Public ReadOnly Property TabShadowColor2 As Color = AppShadow2Color
   Public ReadOnly Property TabAccentColor As Color = AppAccentColor
-  Public ReadOnly Property TabAccentColor2 As Color = AppAccentColor2
+  Public ReadOnly Property TabAccentColor2 As Color = AppAccent2Color
 
   Public ReadOnly Property PanelBackColor As Color = AppBackColor
   Public ReadOnly Property PanelBorderColor As Color = AppBorderColor
@@ -27,9 +34,9 @@
   Public ReadOnly Property PanelActiveFontColor As Color = AppActiveFontColor
   Public ReadOnly Property PanelHighlightColor As Color = AppHighlightColor
   Public ReadOnly Property PanelShadowColor As Color = AppShadowColor
-  Public ReadOnly Property PanelShadowColor2 As Color = AppShadowColor2
+  Public ReadOnly Property PanelShadowColor2 As Color = AppShadow2Color
   Public ReadOnly Property PanelAccentColor As Color = AppAccentColor
-  Public ReadOnly Property PanelAccentColor2 As Color = AppAccentColor2
+  Public ReadOnly Property PanelAccentColor2 As Color = AppAccent2Color
 
   Public ReadOnly Property XLSBackColor As Color = Color.White
   Public ReadOnly Property XLSHighlightColor As Color = Color.Green
@@ -39,14 +46,20 @@
   Public ReadOnly Property AppToolbarBackColor As Color = AppBackColor
   Public ReadOnly Property AppToolbarButtonColor As Color = AppBackColor
   Public ReadOnly Property AppToolbarButtonHoverColor As Color = AppShadowColor
-  Public ReadOnly Property AppToolbarButtonPressedColor As Color = AppShadowColor2
+  Public ReadOnly Property AppToolbarButtonPressedColor As Color = AppShadow2Color
   Public ReadOnly Property AppToolbarFontColor As Color = AppFontColor
   Public ReadOnly Property AppToolbarIconColor As Color = Color.White
 
-  Public ReadOnly Property RibbonBackColor As Color = AppBorderColor
-  Public ReadOnly Property RibbonFontColor As Color = AppFontColor
-  Public ReadOnly Property RibbonBorderColor As Color = AppBorderColor
-  Public ReadOnly Property RibbonFont As Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+  Public ReadOnly Property StatusBarBackColor As Color = Color.FromArgb(255, 20, 20, 20)
+  Public ReadOnly Property StatusBarFontColor As Color = AppFontDarkColor
+
+  Public ReadOnly Property RibbonBarBackColor As Color = AppBorderColor
+  Public ReadOnly Property RibbonBarFontColor As Color = AppFontColor
+  Public ReadOnly Property RibbonBarBorderColor As Color = AppBorderColor
+  Public ReadOnly Property AppFont As Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+  Public ReadOnly Property RibbonBarFont As Font = AppFont
+  Public ReadOnly Property AppIconsFont As Font = New System.Drawing.Font("Segoe Fluent Icons", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+  Public ReadOnly Property AppTitleFont As Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 
   Private Sub New()
 

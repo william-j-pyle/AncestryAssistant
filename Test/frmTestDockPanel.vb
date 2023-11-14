@@ -12,7 +12,7 @@
       Case "Notebook"
         ctl = New NotebookViewer
       Case "Gallery"
-        ctl = New ImageGallery
+        ctl = New ImageGalleryPanelItem
       Case "Census"
         ctl = New CensusViewer
     End Select

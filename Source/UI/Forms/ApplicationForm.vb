@@ -9,6 +9,7 @@ Public Class ApplicationForm
   Public Event ActiveAncestorChanged()
   Public Event AncestorsUpdated()
 
+  Private theme As UITheme = UITheme.GetInstance
   Private WithEvents Ancestry As AncestryWebViewer
   Private Ancestors As AncestorCollection
   Private WithEvents AncestorAttributes As AncestorPanel
@@ -97,15 +98,54 @@ Public Class ApplicationForm
 
     AncestorAttributes = New AncestorPanel()
     DockManager.AddItem(DockPanelLocation.LeftTop, AncestorAttributes)
-    DockManager.AddItem(DockPanelLocation.MiddleTopLeft, New ImageGallery())
+    DockManager.AddItem(DockPanelLocation.MiddleTopLeft, New ImageGalleryPanelItem())
     DockManager.AddItem(DockPanelLocation.MiddleBottom, New CensusViewer())
 
     DockManager.LoadSettings()
 
     FormExtensions = New ResizeDragHandler(Me)
     FormExtensions.SetDragControl(AppTitle)
+
+    ApplyTheme()
   End Sub
 
+  Private Sub ApplyTheme()
+    AppIcon.BackColor = theme.AppBackColor
+    AppControlBox.BackColor = theme.AppBackColor
+    AppTitle.BackColor = theme.AppBackColor
+    AppTitle.ForeColor = theme.AppFontColor
+    AppCloseButton.FlatAppearance.MouseDownBackColor = theme.AppAccentColor
+    AppCloseButton.FlatAppearance.MouseOverBackColor = theme.AppAccent2Color
+    AppCloseButton.ForeColor = theme.AppFontColor
+    AppMaxButton.FlatAppearance.MouseDownBackColor = theme.AppAccentColor
+    AppMaxButton.FlatAppearance.MouseOverBackColor = theme.AppAccent2Color
+    AppMaxButton.ForeColor = theme.AppFontColor
+    AppMinButton.FlatAppearance.MouseDownBackColor = theme.AppAccentColor
+    AppMinButton.FlatAppearance.MouseOverBackColor = theme.AppAccent2Color
+    AppMinButton.ForeColor = theme.AppFontColor
+    AppTitle.BackColor = theme.AppBackColor
+    AppTitle.ForeColor = theme.AppFontColor
+    AppTitleBar.BackColor = theme.AppBackColor
+    BackColor = theme.AppBackColor
+    ForeColor = theme.AppFontColor
+    FormBar.BackColor = theme.AppBackColor
+    RibbonBar.BackColor = theme.AppBackColor
+    RibbonBarTabHome.BackColor = theme.RibbonBarBackColor
+    RibbonBarTabHome.ForeColor = theme.RibbonBarFontColor
+    StatusBar.BackColor = theme.StatusBarBackColor
+    StatusBar.ForeColor = theme.StatusBarFontColor
+    AppCloseButton.Font = theme.AppIconsFont
+    AppMaxButton.Font = theme.AppIconsFont
+    AppMinButton.Font = theme.AppIconsFont
+    AppTitle.Font = theme.AppTitleFont
+    RibbonBar.Font = theme.RibbonBarFont
+    FormBar.BackColor = theme.AppBackColor
+    FormBar.ForeColor = theme.AppFontColor
+    For Each tb As TabPage In RibbonBar.TabPages
+      tb.BackColor = theme.AppBackColor
+      tb.ForeColor = theme.AppFontColor
+    Next
+  End Sub
 
 #End Region
 
@@ -478,156 +518,6 @@ Public Class ApplicationForm
     End If
   End Sub
 
-
-
-  Private Const WM_NCHITTEST As Integer = &H84
-  Private Const HTCLIENT As Integer = &H1
-  Private Const HTCAPTION As Integer = &H2
-  Private Const HTLEFT As Integer = &HA
-  Private Const HTRIGHT As Integer = &HB
-  Private Const HTTOP As Integer = &HC
-  Private Const HTTOPLEFT As Integer = &HD
-  Private Const HTTOPRIGHT As Integer = &HE
-  Private Const HTBOTTOM As Integer = &HF
-  Private Const HTBOTTOMLEFT As Integer = &H10
-  Private Const HTBOTTOMRIGHT As Integer = &H11
-
-  Private Const RESIZE_HANDLE_SIZE As Integer = 4
-  Private isResizing As Boolean = False
-  Private resizeDir As ResizeDirection
-
-  Private Enum ResizeDirection
-    None
-    Left
-    Right
-    Top
-    Bottom
-    TopLeft
-    TopRight
-    BottomLeft
-    BottomRight
-  End Enum
-
-  Protected Overrides Sub WndProc(ByRef m As Message)
-    MyBase.WndProc(m)
-
-    If m.Msg = WM_NCHITTEST AndAlso m.Result.ToInt32() = HTCLIENT Then
-      Dim clientPoint As Point = PointToClient(New Point(m.LParam.ToInt32()))
-      If clientPoint.X <= RESIZE_HANDLE_SIZE Then
-        If clientPoint.Y <= RESIZE_HANDLE_SIZE Then
-          m.Result = New IntPtr(HTTOPLEFT)
-        ElseIf clientPoint.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE Then
-          m.Result = New IntPtr(HTBOTTOMLEFT)
-        Else
-          m.Result = New IntPtr(HTLEFT)
-        End If
-      ElseIf clientPoint.X >= ClientSize.Width - RESIZE_HANDLE_SIZE Then
-        If clientPoint.Y <= RESIZE_HANDLE_SIZE Then
-          m.Result = New IntPtr(HTTOPRIGHT)
-        ElseIf clientPoint.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE Then
-          m.Result = New IntPtr(HTBOTTOMRIGHT)
-        Else
-          m.Result = New IntPtr(HTRIGHT)
-        End If
-      ElseIf clientPoint.Y <= RESIZE_HANDLE_SIZE Then
-        m.Result = New IntPtr(HTTOP)
-      ElseIf clientPoint.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE Then
-        m.Result = New IntPtr(HTBOTTOM)
-      End If
-    End If
-  End Sub
-
-  Private Sub CustomForm_MouseDown(sender As Object, e As MouseEventArgs) Handles FormBar.MouseDown
-    Debug.Print("MouseDown")
-    If e.Button = MouseButtons.Left Then
-      If resizeDir <> ResizeDirection.None Then
-        Debug.Print("Resizing")
-        isResizing = True
-      End If
-    End If
-  End Sub
-
-  Private Sub CustomForm_MouseMove(sender As Object, e As MouseEventArgs) Handles FormBar.MouseMove
-    If isResizing Then
-      Debug.Print("MouseMove: Resizing")
-      Select Case resizeDir
-        Case ResizeDirection.Left
-          Width = Right - e.X
-          Left = e.X
-        Case ResizeDirection.Right
-          Width = e.X
-        Case ResizeDirection.Top
-          Height = Bottom - e.Y
-          Top = e.Y
-        Case ResizeDirection.Bottom
-          Height = e.Y
-        Case ResizeDirection.TopLeft
-          Width = Right - e.X
-          Left = e.X
-          Height = Bottom - e.Y
-          Top = e.Y
-        Case ResizeDirection.TopRight
-          Width = e.X
-          Height = Bottom - e.Y
-          Top = e.Y
-        Case ResizeDirection.BottomLeft
-          Width = Right - e.X
-          Left = e.X
-          Height = e.Y
-        Case ResizeDirection.BottomRight
-          Width = e.X
-          Height = e.Y
-      End Select
-    Else
-      SetResizeCursor(e.Location)
-    End If
-  End Sub
-
-  Private Sub CustomForm_MouseUp(sender As Object, e As MouseEventArgs) Handles FormBar.MouseUp
-    isResizing = False
-  End Sub
-
-  Private Sub SetResizeCursor(point As Point)
-    Dim resizeDir As ResizeDirection = GetResizeDirection(point)
-    Select Case resizeDir
-      Case ResizeDirection.Left, ResizeDirection.Right
-        Cursor = Cursors.SizeWE
-      Case ResizeDirection.Top, ResizeDirection.Bottom
-        Cursor = Cursors.SizeNS
-      Case ResizeDirection.TopLeft, ResizeDirection.BottomRight
-        Cursor = Cursors.SizeNWSE
-      Case ResizeDirection.TopRight, ResizeDirection.BottomLeft
-        Cursor = Cursors.SizeNESW
-      Case Else
-        Cursor = Cursors.Default
-    End Select
-  End Sub
-
-  Private Function GetResizeDirection(point As Point) As ResizeDirection
-    If point.X <= RESIZE_HANDLE_SIZE Then
-      If point.Y <= RESIZE_HANDLE_SIZE Then
-        Return ResizeDirection.TopLeft
-      ElseIf point.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE Then
-        Return ResizeDirection.BottomLeft
-      Else
-        Return ResizeDirection.Left
-      End If
-    ElseIf point.X >= ClientSize.Width - RESIZE_HANDLE_SIZE Then
-      If point.Y <= RESIZE_HANDLE_SIZE Then
-        Return ResizeDirection.TopRight
-      ElseIf point.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE Then
-        Return ResizeDirection.BottomRight
-      Else
-        Return ResizeDirection.Right
-      End If
-    ElseIf point.Y <= RESIZE_HANDLE_SIZE Then
-      Return ResizeDirection.Top
-    ElseIf point.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE Then
-      Return ResizeDirection.Bottom
-    Else
-      Return ResizeDirection.None
-    End If
-  End Function
 
 
 End Class
