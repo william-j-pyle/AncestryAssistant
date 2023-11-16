@@ -1,5 +1,6 @@
 ﻿Public Class Individual
-  Private ged As Gedcom
+
+#Region "Public Constructors"
 
   Public Sub New(gedData As Gedcom, ancestryId As String)
     ged = gedData
@@ -9,5 +10,12 @@
     ged = gedData
   End Sub
 
+#End Region
+
+#Region "Fields"
+
+  Private ged As Gedcom
+
+#End Region
 
 End Class

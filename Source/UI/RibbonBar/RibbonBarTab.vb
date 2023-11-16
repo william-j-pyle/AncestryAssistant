@@ -1,16 +1,15 @@
 ﻿Public Class RibbonBarTab
   Inherits Panel
 
-  Private theme As UITheme = UITheme.GetInstance
-  Private components As System.ComponentModel.IContainer
+#Region "Public Constructors"
 
   Public Sub New()
     SetStyle(ControlStyles.UserPaint Or ControlStyles.ContainerControl Or ControlStyles.FixedHeight Or ControlStyles.SupportsTransparentBackColor Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
     SuspendLayout()
     AllowDrop = True
-    BackColor = theme.RibbonBarBackColor
-    Font = theme.RibbonBarFont
-    ForeColor = theme.RibbonBarFontColor
+    BackColor = My.Theme.RibbonBarBackColor
+    Font = My.Theme.RibbonBarFont
+    ForeColor = My.Theme.RibbonBarFontColor
     Margin = New System.Windows.Forms.Padding(0)
     MaximumSize = New System.Drawing.Size(0, 100)
     MinimumSize = New System.Drawing.Size(100, 100)
@@ -20,24 +19,9 @@
     ResumeLayout(False)
   End Sub
 
-  <System.Diagnostics.DebuggerNonUserCode()>
-  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-    Try
-      If disposing AndAlso components IsNot Nothing Then
-        components.Dispose()
-      End If
-    Finally
-      MyBase.Dispose(disposing)
-    End Try
-  End Sub
+#End Region
 
-  'Protected Overrides ReadOnly Property CreateParams As CreateParams
-  '  Get
-  '    Dim cp As CreateParams = MyBase.CreateParams
-  '    cp.Style = cp.Style Or &H2000000 ' WS_CLIPCHILDREN
-  '    Return cp
-  '  End Get
-  'End Property
+#Region "Private Methods"
 
   Private Sub JRibbon_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
     Dim h As Integer = Height - 1
@@ -47,8 +31,6 @@
 
     Dim g As Graphics = e.Graphics
     g.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
-
 
     Dim path As New Drawing2D.GraphicsPath()
     path.StartFigure()
@@ -63,12 +45,12 @@
     path.CloseFigure()
 
     Region = New Region(path)
-    Using brush As SolidBrush = New SolidBrush(theme.RibbonBarBackColor)
+    Using brush As New SolidBrush(My.Theme.RibbonBarBackColor)
       g.FillRectangle(brush, ClientRectangle)
     End Using
 
     If bWidth > 0 Then
-      Dim jPen As Pen = New Pen(theme.RibbonBarBorderColor, bWidth)
+      Dim jPen As New Pen(My.Theme.RibbonBarBorderColor, bWidth)
       g.DrawPath(jPen, path)
     End If
     'e.Graphics.DrawArc(jPen2, New Rectangle(0, 0, 16, 16), 180, 90)
@@ -82,5 +64,34 @@
 
   End Sub
 
+#End Region
 
+#Region "Protected Methods"
+
+  <System.Diagnostics.DebuggerNonUserCode()>
+  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+    Try
+      If disposing AndAlso components IsNot Nothing Then
+        components.Dispose()
+      End If
+    Finally
+      MyBase.Dispose(disposing)
+    End Try
+  End Sub
+
+#End Region
+
+#Region "Fields"
+
+  Private components As System.ComponentModel.IContainer
+
+#End Region
+
+  'Protected Overrides ReadOnly Property CreateParams As CreateParams
+  '  Get
+  '    Dim cp As CreateParams = MyBase.CreateParams
+  '    cp.Style = cp.Style Or &H2000000 ' WS_CLIPCHILDREN
+  '    Return cp
+  '  End Get
+  'End Property
 End Class

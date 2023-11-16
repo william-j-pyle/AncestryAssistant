@@ -1,20 +1,30 @@
 Public Class SourceTag
   Inherits AbstractTag
-  Public Const GEDCOM_TAG = "SOUR"
+
+#Region "Properties"
+
+  ' Attributes
+  Public Property apID As String
+
+  Public Property author As String
+  Public Property note As String
+  Public Property publishDate As GedDate
+  Public Property publisher As String
+  Public Property publishPlace As String
+  Public Property repositoryID As String
+  Public Property title As String
+
+#End Region
+
+#Region "Public Constructors"
 
   Public Sub New(data As Gedcom)
     MyBase.New(data, GEDCOM_TAG, True)
   End Sub
 
-  ' Attributes
-  Public Property apID As String
-  Public Property author As String
-  Public Property note As String
-  Public Property publisher As String
-  Public Property publishDate As GedDate
-  Public Property publishPlace As String
-  Public Property repositoryID As String
-  Public Property title As String
+#End Region
+
+#Region "Public Methods"
 
   Public Overrides Function processTag(key As String) As Boolean
     Select Case key
@@ -50,5 +60,12 @@ Public Class SourceTag
     Return True
   End Function
 
+#End Region
 
-End class
+#Region "Fields"
+
+  Public Const GEDCOM_TAG As String = "SOUR"
+
+#End Region
+
+End Class

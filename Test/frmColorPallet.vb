@@ -1,4 +1,7 @@
 ﻿Public Class frmColorPallet
+
+#Region "Private Methods"
+
   Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     SetupLabel(Label1, SystemColors.ActiveBorder)
     SetupLabel(Label2, SystemColors.ActiveCaption)
@@ -44,4 +47,7 @@
       ctl.ForeColor = Color.White
     End If
   End Sub
+
+#End Region
+
 End Class

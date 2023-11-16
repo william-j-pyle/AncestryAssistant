@@ -1,29 +1,44 @@
 ﻿Public Interface IDockPanelItem
 
+#Region "Events"
+
+  Event AncestorAssigned()
+
+  Event AncestorUpdated()
+
+  Event PanelItemGotFocus(sender As Object, e As EventArgs)
+
+#End Region
+
+#Region "Properties"
+
   ReadOnly Property ItemCaption As String
-
-  ReadOnly Property ItemSupportsSearch As Boolean
-  Sub ApplySearch(criteria As String)
-  Sub ClearSearch()
-
-  ReadOnly Property ItemSupportsClose As Boolean
-  ReadOnly Property ItemSupportsMove As Boolean
-
-  ReadOnly Property ItemHasRibbonBar As Boolean
-  Function GetRibbonBarConfig() As RibbonBarTabConfig
-  ReadOnly Property ShowRibbonOnFocus As String
-
-  ReadOnly Property ItemHasToolBar As Boolean
-  Function GetDockToolBarConfig() As DockToolBarConfig
 
   Property ItemDockPanelLocation As DockPanelLocation
   Property ItemHasFocus As Boolean
+  ReadOnly Property ItemHasRibbonBar As Boolean
+  ReadOnly Property ItemHasToolBar As Boolean
+  ReadOnly Property ItemSupportsClose As Boolean
+  ReadOnly Property ItemSupportsMove As Boolean
+  ReadOnly Property ItemSupportsSearch As Boolean
+  ReadOnly Property ShowRibbonOnFocus As String
 
-  Event PanelItemGotFocus(sender As Object, e As EventArgs)
-  Event AncestorAssigned()
-  Event AncestorUpdated()
+#End Region
+
+#Region "Public Methods"
+
+  Sub ApplySearch(criteria As String)
+
+  Sub ClearSearch()
+
+  Function GetDockToolBarConfig() As DockToolBarConfig
+
+  Function GetRibbonBarConfig() As RibbonBarTabConfig
+
+  Sub RefreshAncestor()
 
   Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor)
-  Sub RefreshAncestor()
+
+#End Region
 
 End Interface

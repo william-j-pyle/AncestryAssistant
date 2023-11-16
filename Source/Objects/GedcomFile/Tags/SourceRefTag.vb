@@ -1,15 +1,28 @@
 Public Class SourceRefTag
   Inherits AbstractTag
 
+#Region "Properties"
+
+  ' Attributes
+  Public Property apID As String
+
+  Public Property page As String
+
+  Public Property text As String
+
+  Public Property www As String
+
+#End Region
+
+#Region "Public Constructors"
+
   Public Sub New(data As Gedcom, ownerID As String)
     MyBase.New(data, "SOUR", False, ownerID)
   End Sub
 
-  ' Attributes
-  Public Property apID As String
-  Public Property text As String
-  Public Property www As String
-  Public Property page As String
+#End Region
+
+#Region "Public Methods"
 
   Public Overrides Function processTag(key As String) As Boolean
     Select Case key
@@ -32,4 +45,6 @@ Public Class SourceRefTag
     Return True
   End Function
 
-End class
+#End Region
+
+End Class

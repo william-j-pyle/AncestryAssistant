@@ -3,19 +3,13 @@
 Public Class AncestorCollection
   Inherits Dictionary(Of String, Ancestor)
 
+#Region "Events"
+
   Public Event RepositoryPathChanged(NewPath As String)
 
-  Public Class Ancestor
-    Inherits AncestorAbstract
+#End Region
 
-    Friend Sub New(AncestorPath As String)
-      LoadAncestor(AncestorPath)
-    End Sub
-
-  End Class
-
-  'Private AncestorEntries As Dictionary(Of String, Ancestor)
-  Private _RepositoryPath As String = ""
+#Region "Properties"
 
   Public Property RepositoryPath As String
     Get
@@ -34,47 +28,17 @@ Public Class AncestorCollection
     End Set
   End Property
 
+#End Region
+
+#Region "Public Constructors"
+
   Public Sub New(AncestorsRepositoryPath As String)
     RepositoryPath = AncestorsRepositoryPath
   End Sub
 
-  Public Function newAncestor(AncestryID As String) As Ancestor
-    If ContainsKey(AncestryID) Then
-      Return Item(AncestryID)
-    End If
-    Dim AncestorPath As String = RepositoryPath + AncestryID + "\"
-    Directory.CreateDirectory(AncestorPath)
-    Add(AncestryID, New Ancestor(AncestorPath))
-    Return Item(AncestryID)
-  End Function
+#End Region
 
-  Public Function hasAncestor(AncestryID As String) As Boolean
-    Return ContainsKey(AncestryID)
-  End Function
-
-  Public Sub RefreshAncestor(AncestryID As String)
-    If ContainsKey(AncestryID) Then
-      Item(AncestryID).Refresh()
-    End If
-  End Sub
-
-  Private Sub LoadRepository()
-    Dim myAncestor As Ancestor
-    For Each ancestorPath As String In Directory.GetDirectories(RepositoryPath)
-      Try
-        myAncestor = New Ancestor(ancestorPath)
-        Debug.Print("Adding: " & myAncestor.ID)
-        Add(myAncestor.ID, myAncestor)
-      Catch ex As InvalidDataException
-        Debug.Print("Invalid Repository Entry: " + ancestorPath)
-      End Try
-    Next
-  End Sub
-
-  Protected Overrides Sub Finalize()
-    EndPathMonitoring()
-    MyBase.Finalize()
-  End Sub
+#Region "Private Methods"
 
   Private Sub AncestorsRepositoryPathChanged(NewPath As String) Handles Me.RepositoryPathChanged
     ' Setup Path Monitoring
@@ -90,5 +54,77 @@ Public Class AncestorCollection
   Private Sub EndPathMonitoring()
 
   End Sub
+
+  Private Sub LoadRepository()
+    Dim myAncestor As Ancestor
+    For Each ancestorPath As String In Directory.GetDirectories(RepositoryPath)
+      Try
+        myAncestor = New Ancestor(ancestorPath)
+        Debug.Print("Adding: " & myAncestor.ID)
+        Add(myAncestor.ID, myAncestor)
+      Catch ex As InvalidDataException
+        Debug.Print("Invalid Repository Entry: " + ancestorPath)
+      End Try
+    Next
+  End Sub
+
+#End Region
+
+#Region "Public Methods"
+
+  Public Function hasAncestor(AncestryID As String) As Boolean
+    Return ContainsKey(AncestryID)
+  End Function
+
+  Public Function newAncestor(AncestryID As String) As Ancestor
+    If ContainsKey(AncestryID) Then
+      Return Item(AncestryID)
+    End If
+    Dim AncestorPath As String = RepositoryPath + AncestryID + "\"
+    Directory.CreateDirectory(AncestorPath)
+    Add(AncestryID, New Ancestor(AncestorPath))
+    Return Item(AncestryID)
+  End Function
+
+  Public Sub RefreshAncestor(AncestryID As String)
+    If ContainsKey(AncestryID) Then
+      Item(AncestryID).Refresh()
+    End If
+  End Sub
+
+#End Region
+
+#Region "Protected Destructors"
+
+  Protected Overrides Sub Finalize()
+    EndPathMonitoring()
+    MyBase.Finalize()
+  End Sub
+
+#End Region
+
+#Region "Classes"
+
+  Public Class Ancestor
+    Inherits AncestorAbstract
+
+#Region "Internal Constructors"
+
+    Friend Sub New(AncestorPath As String)
+      LoadAncestor(AncestorPath)
+    End Sub
+
+#End Region
+
+  End Class
+
+#End Region
+
+#Region "Fields"
+
+  'Private AncestorEntries As Dictionary(Of String, Ancestor)
+  Private _RepositoryPath As String = ""
+
+#End Region
 
 End Class

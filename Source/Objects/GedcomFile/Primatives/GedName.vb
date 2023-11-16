@@ -1,5 +1,11 @@
 ﻿Public Class GedName
 
+#Region "Properties"
+
+  Public Property AKA As String = String.Empty
+
+  Public Property Given As String = String.Empty
+
   Public Property Name As String
     Get
       If SurName.Equals(String.Empty) Then Return String.Empty
@@ -35,10 +41,13 @@
     End Set
   End Property
 
-  Public Property SurName As String = String.Empty
-  Public Property Given As String = String.Empty
   Public Property Suffix As String = String.Empty
-  Public Property AKA As String = String.Empty
+
+  Public Property SurName As String = String.Empty
+
+#End Region
+
+#Region "Public Constructors"
 
   Public Sub New(newFullName As String)
     Name = newFullName
@@ -55,6 +64,6 @@
     Suffix = newSuffix
   End Sub
 
-
+#End Region
 
 End Class

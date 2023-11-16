@@ -1,20 +1,10 @@
 Public Class IndividualTag
   Inherits AbstractTag
-  Public Const GEDCOM_TAG = "INDI"
 
-  Public Sub New(data As Gedcom)
-    MyBase.New(data, GEDCOM_TAG, True)
-  End Sub
+#Region "Properties"
 
-  ' Attributes
-
-  Public Property note As String
-
-  Public Property universalID As String
   Public Property familySearchID As String
-
-  Private _surname As String = String.Empty
-  Private _given As String = String.Empty
+  ' Attributes
   Public ReadOnly Property FullName As String
     Get
       If _surname Is Nothing Or _surname = "" Then
@@ -29,6 +19,7 @@ Public Class IndividualTag
       Return (_given + " " + _surname).Trim
     End Get
   End Property
+
   Public ReadOnly Property GivenName As String
     Get
       If _surname Is Nothing Or _surname = "" Then
@@ -43,6 +34,8 @@ Public Class IndividualTag
       Return _given
     End Get
   End Property
+
+  Public Property note As String
   Public ReadOnly Property SurName As String
     Get
       If _surname Is Nothing Or _surname = "" Then
@@ -57,6 +50,20 @@ Public Class IndividualTag
       Return _surname
     End Get
   End Property
+
+  Public Property universalID As String
+
+#End Region
+
+#Region "Public Constructors"
+
+  Public Sub New(data As Gedcom)
+    MyBase.New(data, GEDCOM_TAG, True)
+  End Sub
+
+#End Region
+
+#Region "Public Methods"
 
   Public Overrides Function processTag(key As String) As Boolean
     Select Case key
@@ -115,5 +122,15 @@ Public Class IndividualTag
     End Select
     Return True
   End Function
+
+#End Region
+
+#Region "Fields"
+
+  Private _given As String = String.Empty
+  Private _surname As String = String.Empty
+  Public Const GEDCOM_TAG As String = "INDI"
+
+#End Region
 
 End Class

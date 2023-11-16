@@ -1,18 +1,82 @@
 ﻿Imports System.Globalization
 
 Public Class GedDate
-  Private sSourceDateString As String = ""
-  Private dResultDate As Date
-  Private sCleanDateString As String = ""
-  Private sFormat As String = ""
 
-  Public Sub New(dateString As String)
-    SourceDateString = dateString
-  End Sub
+#Region "Properties"
 
-  Public Sub New()
-    'Nothing to see here...
-  End Sub
+  Public ReadOnly Property DateFormat As String
+    Get
+      Return sFormat
+    End Get
+  End Property
+
+  Public ReadOnly Property Day As Integer
+    Get
+      If bValid And bDay Then
+        Return dResultDate.Day
+      Else
+        Return 0
+      End If
+    End Get
+  End Property
+
+  Public ReadOnly Property HasDay As Boolean
+    Get
+      Return bDay
+    End Get
+  End Property
+
+  Public ReadOnly Property HasMonth As Boolean
+    Get
+      Return bMonth
+    End Get
+  End Property
+
+  Public ReadOnly Property HasYear As Boolean
+    Get
+      Return bYear
+    End Get
+  End Property
+
+  Public ReadOnly Property IsAbout As Boolean
+    Get
+      Return bAbout
+    End Get
+  End Property
+
+  Public ReadOnly Property IsAfter As Boolean
+    Get
+      Return bAfter
+    End Get
+  End Property
+
+  Public ReadOnly Property IsBefore As Boolean
+    Get
+      Return bBefore
+    End Get
+  End Property
+
+  Public ReadOnly Property IsRange As Boolean
+    Get
+      Return bRange
+    End Get
+  End Property
+
+  Public ReadOnly Property IsValid As Boolean
+    Get
+      Return bValid
+    End Get
+  End Property
+
+  Public ReadOnly Property Month As Integer
+    Get
+      If bValid And bMonth Then
+        Return dResultDate.Month
+      Else
+        Return 0
+      End If
+    End Get
+  End Property
 
   Public Property SourceDateString As String
     Get
@@ -34,95 +98,21 @@ Public Class GedDate
     End Get
   End Property
 
-  Public ReadOnly Property Month As Integer
-    Get
-      If bValid And bMonth Then
-        Return dResultDate.Month
-      Else
-        Return 0
-      End If
-    End Get
-  End Property
+#End Region
 
-  Public ReadOnly Property Day As Integer
-    Get
-      If bValid And bDay Then
-        Return dResultDate.Day
-      Else
-        Return 0
-      End If
-    End Get
-  End Property
+#Region "Public Constructors"
 
-  Public ReadOnly Property DateFormat As String
-    Get
-      Return sFormat
-    End Get
-  End Property
+  Public Sub New(dateString As String)
+    SourceDateString = dateString
+  End Sub
 
-  Private bRange As Boolean = False
+  Public Sub New()
+    'Nothing to see here...
+  End Sub
 
-  Public ReadOnly Property IsRange As Boolean
-    Get
-      Return bRange
-    End Get
-  End Property
+#End Region
 
-  Private bAbout As Boolean = False
-
-  Public ReadOnly Property IsAbout As Boolean
-    Get
-      Return bAbout
-    End Get
-  End Property
-
-  Private bBefore As Boolean = False
-
-  Public ReadOnly Property IsBefore As Boolean
-    Get
-      Return bBefore
-    End Get
-  End Property
-
-  Private bAfter As Boolean = False
-
-  Public ReadOnly Property IsAfter As Boolean
-    Get
-      Return bAfter
-    End Get
-  End Property
-
-  Private bYear As Boolean = False
-
-  Public ReadOnly Property HasYear As Boolean
-    Get
-      Return bYear
-    End Get
-  End Property
-
-  Private bMonth As Boolean = False
-
-  Public ReadOnly Property HasMonth As Boolean
-    Get
-      Return bMonth
-    End Get
-  End Property
-
-  Private bDay As Boolean = False
-
-  Public ReadOnly Property HasDay As Boolean
-    Get
-      Return bDay
-    End Get
-  End Property
-
-  Private bValid As Boolean = False
-
-  Public ReadOnly Property IsValid As Boolean
-    Get
-      Return bValid
-    End Get
-  End Property
+#Region "Private Methods"
 
   Private Sub Initialize()
     sSourceDateString = ""
@@ -182,7 +172,7 @@ Public Class GedDate
     End If
     Dim parsedDate As Date
     Dim format As String = "d MMM yyyy"
-    If DateTime.TryParseExact(workingDate, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
+    If Date.TryParseExact(workingDate, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
       bDay = True
       bMonth = True
       bYear = True
@@ -192,7 +182,7 @@ Public Class GedDate
       Return True
     End If
     format = "d MMMM yyyy"
-    If DateTime.TryParseExact(workingDate, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
+    If Date.TryParseExact(workingDate, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
       bDay = True
       bMonth = True
       bYear = True
@@ -202,7 +192,7 @@ Public Class GedDate
       Return True
     End If
     format = "MMM yyyy"
-    If DateTime.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
+    If Date.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
       bDay = False
       bMonth = True
       bYear = True
@@ -212,7 +202,7 @@ Public Class GedDate
       Return True
     End If
     format = "MMMM yyyy"
-    If DateTime.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
+    If Date.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
       bDay = False
       bMonth = True
       bYear = True
@@ -222,7 +212,7 @@ Public Class GedDate
       Return True
     End If
     format = "M-d-yyyy"
-    If DateTime.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
+    If Date.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
       bDay = True
       bMonth = True
       bYear = True
@@ -233,7 +223,7 @@ Public Class GedDate
 
     End If
     format = "yyyy-M-d"
-    If DateTime.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
+    If Date.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
       bDay = True
       bMonth = True
       bYear = True
@@ -244,7 +234,7 @@ Public Class GedDate
 
     End If
     format = "M/d/yyyy"
-    If DateTime.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
+    If Date.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
       bDay = True
       bMonth = True
       bYear = True
@@ -255,7 +245,7 @@ Public Class GedDate
 
     End If
     format = "MM/d/yyyy"
-    If DateTime.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
+    If Date.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
       bDay = True
       bMonth = True
       bYear = True
@@ -266,7 +256,7 @@ Public Class GedDate
 
     End If
     format = "M/dd/yyyy"
-    If DateTime.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
+    If Date.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
       bDay = True
       bMonth = True
       bYear = True
@@ -277,7 +267,7 @@ Public Class GedDate
 
     End If
     format = "MM/dd/yyyy"
-    If DateTime.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
+    If Date.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
       bDay = True
       bMonth = True
       bYear = True
@@ -288,7 +278,7 @@ Public Class GedDate
 
     End If
     format = "MMM d yyyy"
-    If DateTime.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
+    If Date.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
       bDay = True
       bMonth = True
       bYear = True
@@ -298,7 +288,7 @@ Public Class GedDate
       Return True
     End If
     format = "MMMM d yyyy"
-    If DateTime.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
+    If Date.TryParseExact(DateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, parsedDate) Then
       bDay = True
       bMonth = True
       bYear = True
@@ -309,6 +299,32 @@ Public Class GedDate
     End If
     bValid = False
     Return False
+  End Function
+
+#End Region
+
+#Region "Public Methods"
+
+  Public Function toAssistantDate() As String
+    Dim rtnString As String = ""
+    If IsValid Then
+      If bYear And Not bDay And Not bMonth Then
+        rtnString = sCleanDateString
+      Else
+        rtnString += dResultDate.Year.ToString()
+        If bMonth Then
+          rtnString += "-" + dResultDate.Month.ToString.PadLeft(2, "0")
+        Else
+          rtnString += "-00"
+        End If
+        If bDay Then
+          rtnString += "-" + dResultDate.Day.ToString.PadLeft(2, "0")
+        Else
+          rtnString += "-00"
+        End If
+      End If
+    End If
+    Return rtnString
   End Function
 
   Public Function toDate() As Date
@@ -359,26 +375,23 @@ Public Class GedDate
     Return rtnString
   End Function
 
-  Public Function toAssistantDate() As String
-    Dim rtnString As String = ""
-    If IsValid Then
-      If bYear And Not bDay And Not bMonth Then
-        rtnString = sCleanDateString
-      Else
-        rtnString += dResultDate.Year.ToString()
-        If bMonth Then
-          rtnString += "-" + dResultDate.Month.ToString.PadLeft(2, "0")
-        Else
-          rtnString += "-00"
-        End If
-        If bDay Then
-          rtnString += "-" + dResultDate.Day.ToString.PadLeft(2, "0")
-        Else
-          rtnString += "-00"
-        End If
-      End If
-    End If
-    Return rtnString
-  End Function
+#End Region
+
+#Region "Fields"
+
+  Private bAbout As Boolean = False
+  Private bAfter As Boolean = False
+  Private bBefore As Boolean = False
+  Private bDay As Boolean = False
+  Private bMonth As Boolean = False
+  Private bRange As Boolean = False
+  Private bValid As Boolean = False
+  Private bYear As Boolean = False
+  Private dResultDate As Date
+  Private sCleanDateString As String = ""
+  Private sFormat As String = ""
+  Private sSourceDateString As String = ""
+
+#End Region
 
 End Class

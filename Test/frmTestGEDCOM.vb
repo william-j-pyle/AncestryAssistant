@@ -2,13 +2,7 @@
 
 Public Class frmTestGEDCOM
 
-  Private Const filename As String = "D:\Geneology\Data\gedcom\Ancestry-20231105-Jason and Dorinda Pyle Family.ged"
-
-  Private ged As Gedcom
-
-  Private Sub Form3_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-  End Sub
+#Region "Private Methods"
 
   Private Sub btnGedCom_Click(sender As Object, e As EventArgs) Handles btnGedCom.Click
     txtOutput.Text = "Loading:  " + filename + vbCrLf
@@ -17,7 +11,7 @@ Public Class frmTestGEDCOM
   End Sub
 
   Private Sub btnSummary_Click(sender As Object, e As EventArgs) Handles btnSummary.Click
-    Dim sb As StringBuilder = New StringBuilder()
+    Dim sb As New StringBuilder()
     sb.AppendFormat("Header.fileName:  {0}", ged.header.fileName).AppendLine()
     sb.AppendFormat("Header.personCount:  {0}", ged.header.personCount).AppendLine()
     sb.AppendFormat("Header.familyCount:  {0}", ged.header.familyCount).AppendLine()
@@ -29,4 +23,19 @@ Public Class frmTestGEDCOM
     Next
     txtOutput.Text = sb.ToString
   End Sub
+
+  Private Sub Form3_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+  End Sub
+
+#End Region
+
+#Region "Fields"
+
+  Private Const filename As String = "D:\Geneology\Data\gedcom\Ancestry-20231105-Jason and Dorinda Pyle Family.ged"
+
+  Private ged As Gedcom
+
+#End Region
+
 End Class

@@ -4,36 +4,33 @@ Public Class AncestorPanel
   Inherits System.Windows.Forms.UserControl
   Implements IDockPanelItem
 
-  Private Const EN_ITEMCAPTION As String = "Ancestor"
+#Region "Events"
 
+  Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
 
-  Private Const SUBNODE_DELIMITER As String = vbTab
+  Public Event AncestorUpdated() Implements IDockPanelItem.AncestorUpdated
 
   Public Event PanelCloseClicked(sender As Object)
-  Public Event PanelItemGotFocus(sender As Object, e As EventArgs) Implements IDockPanelItem.PanelItemGotFocus
-  Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
-  Public Event AncestorUpdated() Implements IDockPanelItem.AncestorUpdated
-  Private theme As UITheme = UITheme.GetInstance
-  Private AttributeState As List(Of String)
-  Private LastAttributeItem As TreeNode
 
-  Private WithEvents AncestorAttributesHeader As Panel
-  Private WithEvents AncestorColSplitter As Splitter
-  Private WithEvents ancestorAttributesCol2 As BordersPanel
-  Private WithEvents lblAncestorAttributesCol2 As Label
-  Private WithEvents ancestorAttributesCol1 As BordersPanel
-  Private WithEvents lblAncestorAttributesCol1 As Label
-  Private WithEvents AncestorAttributes As TreeView
+  Public Event PanelItemGotFocus(sender As Object, e As EventArgs) Implements IDockPanelItem.PanelItemGotFocus
+
+#End Region
+
+#Region "Properties"
 
   Public ReadOnly Property ItemCaption As String = EN_ITEMCAPTION Implements IDockPanelItem.ItemCaption
-  Public ReadOnly Property ItemSupportsSearch As Boolean = False Implements IDockPanelItem.ItemSupportsSearch
-  Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
-  Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
-  Public ReadOnly Property ItemHasRibbonBar As Boolean = False Implements IDockPanelItem.ItemHasRibbonBar
-  Public ReadOnly Property ShowRibbonOnFocus As String = String.Empty Implements IDockPanelItem.ShowRibbonOnFocus
-  Public ReadOnly Property ItemHasToolBar As Boolean = False Implements IDockPanelItem.ItemHasToolBar
   Public Property ItemDockPanelLocation As DockPanelLocation Implements IDockPanelItem.ItemDockPanelLocation
   Public Property ItemHasFocus As Boolean = False Implements IDockPanelItem.ItemHasFocus
+  Public ReadOnly Property ItemHasRibbonBar As Boolean = False Implements IDockPanelItem.ItemHasRibbonBar
+  Public ReadOnly Property ItemHasToolBar As Boolean = False Implements IDockPanelItem.ItemHasToolBar
+  Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
+  Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
+  Public ReadOnly Property ItemSupportsSearch As Boolean = False Implements IDockPanelItem.ItemSupportsSearch
+  Public ReadOnly Property ShowRibbonOnFocus As String = String.Empty Implements IDockPanelItem.ShowRibbonOnFocus
+
+#End Region
+
+#Region "Public Constructors"
 
   Public Sub New()
     AncestorAttributesHeader = New System.Windows.Forms.Panel()
@@ -50,7 +47,7 @@ Public Class AncestorPanel
     '
     'AncestorAttributesHeader
     '
-    AncestorAttributesHeader.BackColor = theme.PanelBorderColor
+    AncestorAttributesHeader.BackColor = My.Theme.PanelBorderColor
     AncestorAttributesHeader.Controls.Add(AncestorColSplitter)
     AncestorAttributesHeader.Controls.Add(ancestorAttributesCol2)
     AncestorAttributesHeader.Controls.Add(ancestorAttributesCol1)
@@ -65,7 +62,7 @@ Public Class AncestorPanel
     '
     'AncestorColSplitter
     '
-    AncestorColSplitter.BackColor = theme.PanelAccentColor
+    AncestorColSplitter.BackColor = My.Theme.PanelAccentColor
     AncestorColSplitter.Location = New System.Drawing.Point(150, 0)
     AncestorColSplitter.Margin = New System.Windows.Forms.Padding(0)
     AncestorColSplitter.Name = "AncestorColSplitter"
@@ -75,12 +72,12 @@ Public Class AncestorPanel
     '
     'ancestorAttributesCol2
     '
-    ancestorAttributesCol2.BackColor = theme.PanelBorderColor
-    ancestorAttributesCol2.BorderColor = theme.PanelBackColor
-    ancestorAttributesCol2.BorderColorBottom = theme.PanelShadowColor
-    ancestorAttributesCol2.BorderColorLeft = theme.PanelAccentColor
-    ancestorAttributesCol2.BorderColorRight = theme.PanelShadowColor
-    ancestorAttributesCol2.BorderColorTop = theme.PanelShadowColor
+    ancestorAttributesCol2.BackColor = My.Theme.PanelBorderColor
+    ancestorAttributesCol2.BorderColor = My.Theme.PanelBackColor
+    ancestorAttributesCol2.BorderColorBottom = My.Theme.PanelShadowColor
+    ancestorAttributesCol2.BorderColorLeft = My.Theme.PanelAccentColor
+    ancestorAttributesCol2.BorderColorRight = My.Theme.PanelShadowColor
+    ancestorAttributesCol2.BorderColorTop = My.Theme.PanelShadowColor
     ancestorAttributesCol2.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
     ancestorAttributesCol2.Controls.Add(lblAncestorAttributesCol2)
     ancestorAttributesCol2.CornerRadius = New System.Windows.Forms.Padding(0)
@@ -94,9 +91,9 @@ Public Class AncestorPanel
     '
     'lblAncestorAttributesCol2
     '
-    lblAncestorAttributesCol2.BackColor = theme.PanelBorderColor
+    lblAncestorAttributesCol2.BackColor = My.Theme.PanelBorderColor
     lblAncestorAttributesCol2.Dock = System.Windows.Forms.DockStyle.Fill
-    lblAncestorAttributesCol2.ForeColor = theme.PanelFontColor
+    lblAncestorAttributesCol2.ForeColor = My.Theme.PanelFontColor
     lblAncestorAttributesCol2.Location = New System.Drawing.Point(1, 1)
     lblAncestorAttributesCol2.Name = "lblAncestorAttributesCol2"
     lblAncestorAttributesCol2.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
@@ -107,12 +104,12 @@ Public Class AncestorPanel
     '
     'ancestorAttributesCol1
     '
-    ancestorAttributesCol1.BackColor = theme.PanelBorderColor
-    ancestorAttributesCol1.BorderColor = theme.PanelBackColor
-    ancestorAttributesCol1.BorderColorBottom = theme.PanelBorderColor
-    ancestorAttributesCol1.BorderColorLeft = theme.PanelBorderColor
-    ancestorAttributesCol1.BorderColorRight = theme.PanelBorderColor
-    ancestorAttributesCol1.BorderColorTop = theme.PanelBorderColor
+    ancestorAttributesCol1.BackColor = My.Theme.PanelBorderColor
+    ancestorAttributesCol1.BorderColor = My.Theme.PanelBackColor
+    ancestorAttributesCol1.BorderColorBottom = My.Theme.PanelBorderColor
+    ancestorAttributesCol1.BorderColorLeft = My.Theme.PanelBorderColor
+    ancestorAttributesCol1.BorderColorRight = My.Theme.PanelBorderColor
+    ancestorAttributesCol1.BorderColorTop = My.Theme.PanelBorderColor
     ancestorAttributesCol1.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
     ancestorAttributesCol1.Controls.Add(lblAncestorAttributesCol1)
     ancestorAttributesCol1.CornerRadius = New System.Windows.Forms.Padding(0)
@@ -127,9 +124,9 @@ Public Class AncestorPanel
     '
     'lblAncestorAttributesCol1
     '
-    lblAncestorAttributesCol1.BackColor = theme.PanelBackColor
+    lblAncestorAttributesCol1.BackColor = My.Theme.PanelBackColor
     lblAncestorAttributesCol1.Dock = System.Windows.Forms.DockStyle.Fill
-    lblAncestorAttributesCol1.ForeColor = theme.PanelFontColor
+    lblAncestorAttributesCol1.ForeColor = My.Theme.PanelFontColor
     lblAncestorAttributesCol1.Location = New System.Drawing.Point(1, 1)
     lblAncestorAttributesCol1.Name = "lblAncestorAttributesCol1"
     lblAncestorAttributesCol1.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
@@ -140,14 +137,14 @@ Public Class AncestorPanel
     '
     'AncestorAttributes
     '
-    AncestorAttributes.BackColor = theme.PanelBackColor
+    AncestorAttributes.BackColor = My.Theme.PanelBackColor
     AncestorAttributes.BorderStyle = System.Windows.Forms.BorderStyle.None
     AncestorAttributes.Dock = System.Windows.Forms.DockStyle.Fill
     AncestorAttributes.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText
-    AncestorAttributes.ForeColor = theme.PanelFontColor
+    AncestorAttributes.ForeColor = My.Theme.PanelFontColor
     AncestorAttributes.FullRowSelect = True
     AncestorAttributes.HotTracking = True
-    AncestorAttributes.LineColor = theme.PanelBorderColor
+    AncestorAttributes.LineColor = My.Theme.PanelBorderColor
     AncestorAttributes.Location = New System.Drawing.Point(0, 18)
     AncestorAttributes.Margin = New System.Windows.Forms.Padding(0)
     AncestorAttributes.Name = "AncestorAttributes"
@@ -158,11 +155,11 @@ Public Class AncestorPanel
     'AncestorPanel
     '
     AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-    BackColor = theme.PanelBackColor
+    BackColor = My.Theme.PanelBackColor
     Controls.Add(AncestorAttributes)
     Controls.Add(AncestorAttributesHeader)
     Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    ForeColor = theme.PanelBackColor
+    ForeColor = My.Theme.PanelBackColor
     Margin = New System.Windows.Forms.Padding(0)
     Name = "AncestorPanel"
     Size = New System.Drawing.Size(287, 308)
@@ -173,28 +170,63 @@ Public Class AncestorPanel
     ResumeLayout(False)
 
     AncestorAttributes.DrawMode = TreeViewDrawMode.OwnerDrawText
-    AncestorAttributes.ForeColor = theme.PanelFontColor
-    AncestorAttributes.LineColor = theme.PanelBorderColor
+    AncestorAttributes.ForeColor = My.Theme.PanelFontColor
+    AncestorAttributes.LineColor = My.Theme.PanelBorderColor
+    CaptureFocus(Me)
   End Sub
 
-#Region "Attribute Node Support"
+#End Region
 
-  Private Function customNode(ParamArray subNodes() As String) As String
-    Dim sb As StringBuilder = New StringBuilder
-    For Each node As String In subNodes
-      If sb.Length > 0 Then sb.Append(SUBNODE_DELIMITER)
-      sb.Append(node)
-    Next
-    Return sb.ToString
-  End Function
+#Region "Private Methods"
 
-  Private Function HaveOrMissing(haveIt As Boolean) As String
-    If haveIt Then
-      Return "Have"
-    Else
-      Return "Missing"
-    End If
-  End Function
+  Private Sub AddAttributeItem(Key As String, Text As String, Optional ImageKey As String = "", Optional SelectedImageKey As String = "")
+    LastAttributeItem = AncestorAttributes.Nodes.Add(Key, Text, ImageKey, SelectedImageKey)
+    LastAttributeItem.Tag = Key
+  End Sub
+
+  Private Sub AddSubAttributeItem(Key As String, Text As String, Optional ImageKey As String = "", Optional SelectedImageKey As String = "")
+    Dim item As TreeNode
+    item = LastAttributeItem.Nodes.Add(Key, Text, ImageKey, SelectedImageKey)
+    item.Tag = Key
+  End Sub
+
+  Private Sub AncestorAttributes_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles AncestorAttributes.AfterSelect
+
+  End Sub
+
+  Private Sub AncestorAttributes_DrawNode(sender As Object, e As DrawTreeNodeEventArgs) Handles AncestorAttributes.DrawNode
+    ' Get the current node
+    Dim node As TreeNode = e.Node
+
+    ' Define the bounds for the first column
+    Dim boundsColumn1 As New Rectangle(e.Bounds.Left, e.Bounds.Top, lblAncestorAttributesCol1.Width, e.Bounds.Height) ' Adjust width as needed
+    ' Define the bounds for the second column
+    'boundsColumn1.Right
+    Dim boundsColumn2 As New Rectangle(lblAncestorAttributesCol1.Width + 2, e.Bounds.Top, AncestorAttributes.Width, e.Bounds.Height) ' Adjust width as needed
+
+    Dim txt As String = node.Text & SUBNODE_DELIMITER & SUBNODE_DELIMITER
+    Dim txtA() As String = txt.Split(SUBNODE_DELIMITER)
+
+    ' Draw the first column
+    Dim fnt As New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+
+    TextRenderer.DrawText(e.Graphics, txtA(0), fnt, boundsColumn1, My.Theme.PanelFontColor, TextFormatFlags.Left Or TextFormatFlags.EndEllipsis)
+
+    ' Draw the second column
+    TextRenderer.DrawText(e.Graphics, txtA(1), fnt, boundsColumn2, My.Theme.PanelFontColor, TextFormatFlags.Left)
+
+    ' Prevent default drawing of the node's text
+    e.DrawDefault = False
+  End Sub
+
+  Private Sub AncestorColSplitter_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles AncestorColSplitter.SplitterMoved
+    ancestorAttributesCol1.Width = AncestorColSplitter.Tag
+    AncestorAttributes.Refresh()
+  End Sub
+
+  Private Sub AncestorColSplitter_SplitterMoving(sender As Object, e As SplitterEventArgs) Handles AncestorColSplitter.SplitterMoving
+    AncestorColSplitter.Tag = e.X
+  End Sub
 
   Private Sub CaptureAttributeState()
     ' Save the current expanded state
@@ -211,6 +243,46 @@ Public Class AncestorPanel
     Next
   End Sub
 
+  Private Sub CaptureFocus(ctl As Control)
+    Try
+      AddHandler ctl.GotFocus, AddressOf DockPanelItem_GotFocus
+      AddHandler ctl.MouseDown, AddressOf DockPanelItem_GotFocus
+    Catch ex As Exception
+    End Try
+    For Each childCtl As Control In ctl.Controls
+      CaptureFocus(childCtl)
+    Next
+  End Sub
+
+  Private Function customNode(ParamArray subNodes() As String) As String
+    Dim sb As New StringBuilder
+    For Each node As String In subNodes
+      If sb.Length > 0 Then sb.Append(SUBNODE_DELIMITER)
+      sb.Append(node)
+    Next
+    Return sb.ToString
+  End Function
+
+  Private Sub DockPanelItem_GotFocus(sender As Object, e As EventArgs)
+    RaiseEvent PanelItemGotFocus(sender, e)
+  End Sub
+
+  Private Function HaveOrMissing(haveIt As Boolean) As String
+    If haveIt Then
+      Return "Have"
+    Else
+      Return "Missing"
+    End If
+  End Function
+
+  Private Sub IDockPanelItem_SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
+    Throw New NotImplementedException()
+  End Sub
+
+  Private Sub JDockPanelHeader1_HeaderCloseClicked()
+    RaiseEvent PanelCloseClicked(Me)
+  End Sub
+
   Private Sub RestoreAttributeState()
     For Each i As TreeNode In AncestorAttributes.Nodes
       If AttributeState.Contains(i.Tag) Then
@@ -224,43 +296,45 @@ Public Class AncestorPanel
     Next
   End Sub
 
-  Private Sub AddAttributeItem(Key As String, Text As String, Optional ImageKey As String = "", Optional SelectedImageKey As String = "")
-    LastAttributeItem = AncestorAttributes.Nodes.Add(Key, Text, ImageKey, SelectedImageKey)
-    LastAttributeItem.Tag = Key
-  End Sub
+#End Region
 
-  Private Sub AddSubAttributeItem(Key As String, Text As String, Optional ImageKey As String = "", Optional SelectedImageKey As String = "")
-    Dim item As TreeNode
-    item = LastAttributeItem.Nodes.Add(Key, Text, ImageKey, SelectedImageKey)
-    item.Tag = Key
-  End Sub
+#Region "Protected Methods"
 
-  Private Sub AncestorAttributes_DrawNode(sender As Object, e As DrawTreeNodeEventArgs) Handles AncestorAttributes.DrawNode
-    ' Get the current node
-    Dim node As TreeNode = e.Node
-
-    ' Define the bounds for the first column
-    Dim boundsColumn1 As Rectangle = New Rectangle(e.Bounds.Left, e.Bounds.Top, lblAncestorAttributesCol1.Width, e.Bounds.Height) ' Adjust width as needed
-    ' Define the bounds for the second column
-    'boundsColumn1.Right
-    Dim boundsColumn2 As Rectangle = New Rectangle(lblAncestorAttributesCol1.Width + 2, e.Bounds.Top, AncestorAttributes.Width, e.Bounds.Height) ' Adjust width as needed
-
-    Dim txt As String = node.Text & SUBNODE_DELIMITER & SUBNODE_DELIMITER
-    Dim txtA() As String = txt.Split(SUBNODE_DELIMITER)
-
-    ' Draw the first column
-    Dim fnt As Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-
-    TextRenderer.DrawText(e.Graphics, txtA(0), fnt, boundsColumn1, theme.PanelFontColor, TextFormatFlags.Left Or TextFormatFlags.EndEllipsis)
-
-    ' Draw the second column
-    TextRenderer.DrawText(e.Graphics, txtA(1), fnt, boundsColumn2, theme.PanelFontColor, TextFormatFlags.Left)
-
-    ' Prevent default drawing of the node's text
-    e.DrawDefault = False
+  'UserControl overrides dispose to clean up the component list.
+  <System.Diagnostics.DebuggerNonUserCode()>
+  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+    Try
+      If disposing AndAlso components IsNot Nothing Then
+        components.Dispose()
+      End If
+    Finally
+      MyBase.Dispose(disposing)
+    End Try
   End Sub
 
 #End Region
+
+#Region "Public Methods"
+
+  Public Sub ApplySearch(criteria As String) Implements IDockPanelItem.ApplySearch
+    Throw New NotImplementedException()
+  End Sub
+
+  Public Sub ClearSearch() Implements IDockPanelItem.ClearSearch
+    Throw New NotImplementedException()
+  End Sub
+
+  Public Function GetDockToolBarConfig() As DockToolBarConfig Implements IDockPanelItem.GetDockToolBarConfig
+    Throw New NotImplementedException()
+  End Function
+
+  Public Function GetRibbonBarConfig() As RibbonBarTabConfig Implements IDockPanelItem.GetRibbonBarConfig
+    Throw New NotImplementedException()
+  End Function
+
+  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
+    Throw New NotImplementedException()
+  End Sub
 
   Public Sub SetAncestor(ancestor As AncestorCollection.Ancestor)
     CaptureAttributeState()
@@ -302,65 +376,29 @@ Public Class AncestorPanel
       AddSubAttributeItem("FindAGraveID", customNode("FindAGrave.com", ancestor.Fact("FindAGraveID")))
     End If
 
-
     RestoreAttributeState()
   End Sub
 
-  Private Sub AncestorColSplitter_SplitterMoving(sender As Object, e As SplitterEventArgs) Handles AncestorColSplitter.SplitterMoving
-    AncestorColSplitter.Tag = e.X
-  End Sub
+#End Region
 
-  Private Sub AncestorColSplitter_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles AncestorColSplitter.SplitterMoved
-    ancestorAttributesCol1.Width = AncestorColSplitter.Tag
-    AncestorAttributes.Refresh()
-  End Sub
+#Region "Fields"
 
-  Private Sub JDockPanelHeader1_HeaderCloseClicked()
-    RaiseEvent PanelCloseClicked(Me)
-  End Sub
+  Private WithEvents AncestorAttributes As TreeView
+  Private WithEvents ancestorAttributesCol1 As BordersPanel
+  Private WithEvents ancestorAttributesCol2 As BordersPanel
+  Private WithEvents AncestorAttributesHeader As Panel
+  Private WithEvents AncestorColSplitter As Splitter
+  Private WithEvents lblAncestorAttributesCol1 As Label
+  Private WithEvents lblAncestorAttributesCol2 As Label
+  Private Const EN_ITEMCAPTION As String = "Ancestor"
 
-  Private Sub AncestorAttributes_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles AncestorAttributes.AfterSelect
+  Private Const SUBNODE_DELIMITER As String = vbTab
 
-  End Sub
+  Private AttributeState As List(Of String)
 
-  Public Function GetRibbonBarConfig() As RibbonBarTabConfig Implements IDockPanelItem.GetRibbonBarConfig
-    Throw New NotImplementedException()
-  End Function
-
-  Public Function GetDockToolBarConfig() As DockToolBarConfig Implements IDockPanelItem.GetDockToolBarConfig
-    Throw New NotImplementedException()
-  End Function
-
-  Private Sub IDockPanelItem_SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Sub ApplySearch(criteria As String) Implements IDockPanelItem.ApplySearch
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Sub ClearSearch() Implements IDockPanelItem.ClearSearch
-    Throw New NotImplementedException()
-  End Sub
-
-
-#Region "Component Helper"
-  'UserControl overrides dispose to clean up the component list.
-  <System.Diagnostics.DebuggerNonUserCode()>
-  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-    Try
-      If disposing AndAlso components IsNot Nothing Then
-        components.Dispose()
-      End If
-    Finally
-      MyBase.Dispose(disposing)
-    End Try
-  End Sub
   Private components As System.ComponentModel.IContainer
+  Private LastAttributeItem As TreeNode
+
 #End Region
 
 End Class

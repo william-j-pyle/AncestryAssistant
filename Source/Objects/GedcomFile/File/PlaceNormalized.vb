@@ -7,24 +7,24 @@ import java.util.Properties
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 
-public class PlaceNormalized {
-    public static final Logger logger = LogManager.getLogger(PlaceNormalized.class)
-    private Properties countries
-    private Properties states
-    private Properties counties
-    private Properties cities
+Public Class PlaceNormalized {
+    Public Static final Logger logger = LogManager.getLogger(PlaceNormalized.Class)
+    Private Properties countries
+    Private Properties states
+    Private Properties counties
+    Private Properties cities
 
-    public PlaceNormalized() {
+    Public PlaceNormalized() {
         countries=loadTable("Countries")
         states=loadTable("States")
         counties=loadTable("Counties")
         cities=loadTable("Cities")
     }
 
-    private Properties loadTable(String name){
-        Properties properties = new Properties()
-            try (InputStream inputStream = getClass().getResourceAsStream("/"+name+".properties")) {
-                if (inputStream <> null) {
+    Private Properties loadTable(String name){
+        Properties properties = New Properties()
+  Try (InputStream inputStream = getClass().getResourceAsStream("/"+name+".properties")) {
+                If (inputStream <> null) {
                     properties.load(inputStream)
                 } else {
                     logger.error("Unable to load properties file: {}", getClass().getSimpleName()+".properties" )
@@ -34,100 +34,99 @@ public class PlaceNormalized {
                 logger.error(e,e)
                 System.exit(1)
             }
-            return properties
+            Return properties
     }
 
-    private static final int RTN_TYPE=0
-    private static final int RTN_XTRA=1
-    private static final int RTN_CITY=2
-    private static final int RTN_COUNTY=3
-    private static final int RTN_STATE=4
-    private static final int RTN_COUNTRY=5
+    Private Static final int RTN_TYPE=0
+    Private Static final int RTN_XTRA=1
+    Private Static final int RTN_CITY=2
+    Private Static final int RTN_COUNTY=3
+    Private Static final int RTN_STATE=4
+    Private Static final int RTN_COUNTRY=5
 
-    public String normalize(String field) {
+    Public String normalize(String field) {
         String[] rtn={"T","","","","",""}
         field=field.replace(":"," ")
         String[] sp = field.split(",")
-        boolean scrubbed=false
-        for(int i=sp.length-1i>=0i--){
+        Boolean scrubbed = False
+        For (int i= sp.length - 1I >= 0I - -){
             scrubbed=false
             key as String=scrubToKey(sp[i])
-            if(rtn[RTN_COUNTRY].isEmpty() and !scrubbed) {
-                String tmp = countries.getProperty(sp[i].trim().toUpperCase().replace(" ","_"))
-                if(tmp<>null) {
-                    rtn[RTN_COUNTRY]=tmp
+            If (rtn[RTN_COUNTRY].isEmpty() And !scrubbed) {
+                String tmp = countries.getProperty(sp[i].trim().toUpperCase().replace(" ", "_"))
+                If (tmp <> null) {
+                    rtn[RTN_COUNTRY] = tmp
                     scrubbed=true
-                    rtn[RTN_TYPE]="P"
+                    rtn[RTN_TYPE] = "P"
                 }
             }
-            if(rtn[RTN_STATE].isEmpty() and !scrubbed) {
-                String tmp=null
-                if(rtn[RTN_COUNTRY].isEmpty())
+            If (rtn[RTN_STATE].isEmpty() And !scrubbed) {
+                String tmp = null
+                If (rtn[RTN_COUNTRY].isEmpty())
                     tmp = states.getProperty(key)
-                else
+                Else
                     tmp = states.getProperty(key+"."+rtn[RTN_COUNTRY].toUpperCase().replace(" ","_"))
-                if(tmp<>null) {
-                    rtn[RTN_STATE]=tmp
+                If (tmp <> null) {
+                    rtn[RTN_STATE] = tmp
                     scrubbed=true
-                    rtn[RTN_TYPE]="P"
+                    rtn[RTN_TYPE] = "P"
                 }
             }
-            if(rtn[RTN_COUNTY].isEmpty() and !scrubbed) {
-                String tmp=null
-                if(!rtn[RTN_STATE].isEmpty()) {
+            If (rtn[RTN_COUNTY].isEmpty() And !scrubbed) {
+                String tmp = null
+                If (!rtn[RTN_STATE].isEmpty()) {
                     tmp = counties.getProperty(key+"."+rtn[RTN_STATE].toUpperCase().replace(" ","_"))
-                    if(tmp=null)
+                    If (tmp = null)
                         tmp = counties.getProperty(key+"_COUNTY."+rtn[RTN_STATE].toUpperCase().replace(" ","_"))
                 }
-                if(tmp<>null) {
-                    rtn[RTN_COUNTY]=tmp
+                If (tmp <> null) {
+                    rtn[RTN_COUNTY] = tmp
                     scrubbed=true
-                    rtn[RTN_TYPE]="P"
+                    rtn[RTN_TYPE] = "P"
                 }
             }
-            if(rtn[RTN_CITY].isEmpty() and !scrubbed) {
-                String tmp=null
-                if(!rtn[RTN_STATE].isEmpty())
+            If (rtn[RTN_CITY].isEmpty() And !scrubbed) {
+                String tmp = null
+                If (!rtn[RTN_STATE].isEmpty())
                     tmp = cities.getProperty(key+"."+rtn[RTN_STATE].toUpperCase().replace(" ","_"))
-                if(tmp<>null) {
-                    rtn[RTN_CITY]=tmp
+                If (tmp <> null) {
+                    rtn[RTN_CITY] = tmp
                     scrubbed=true
-                    rtn[RTN_TYPE]="P"
+                    rtn[RTN_TYPE] = "P"
                 }
-                if(tmp=null and rtn[RTN_TYPE].equals("P")) {
-                    rtn[RTN_CITY]=sp[i]
+                If (tmp = null And rtn[RTN_TYPE].equals("P")) {
+                    rtn[RTN_CITY] = sp[i]
                     scrubbed=true
 
-                }                
+                }
             }
-            if(!rtn[RTN_CITY].isEmpty() and !scrubbed){
-                rtn[RTN_XTRA]=rtn[RTN_XTRA]+sp[i]+" "
+            If (!rtn[RTN_CITY].isEmpty() And !scrubbed){
+                rtn[RTN_XTRA] = rtn[RTN_XTRA]+sp[i]+" "
             }
 
         }
-        rtn[RTN_XTRA]=rtn[RTN_XTRA].trim()
-        if(rtn[RTN_TYPE].equals("T"))
-            rtn[RTN_XTRA]=field
-        return String.join(":",rtn)
+        rtn[RTN_XTRA] = rtn[RTN_XTRA].trim()
+        If (rtn[RTN_TYPE].equals("T"))
+            rtn[RTN_XTRA] = field
+  Return String.join(":", rtn)
     }
 
-    private String scrubToKey(String field){
-        String rtn=field.trim().toUpperCase().replace(" ","_").replace(".","")
-        if(rtn.endsWith("_CO"))
+    Private String scrubToKey(String field){
+        String rtn = field.trim().toUpperCase().replace(" ", "_").replace(".", "")
+        If (rtn.endsWith("_CO"))
             rtn=rtn.substring(0,rtn.length()-3)+"_COUNTY"
-        if(rtn.endsWith("_CNTY"))
+        If (rtn.endsWith("_CNTY"))
             rtn=rtn.substring(0,rtn.length()-5)+"_COUNTY"
-        return rtn
+        Return rtn
     }
 
-
-    public String noCaseReplace(String src, String find, String replace){
-        String rtn=src
-        int o =src.toUpperCase().indexOf(find.toUpperCase()) 
-        if(o<>-1) {
+    Public String noCaseReplace(String src, String find, String replace){
+        String rtn = src
+        int o = src.toUpperCase().indexOf(find.toUpperCase())
+  If (o <> -1) {
             rtn=src.substring(0, o)+replace+src.substring(o+find.length())
         }
-        return rtn
+        Return rtn
     }
-    
+
 }

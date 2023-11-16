@@ -4,51 +4,133 @@ Public Class CensusViewer
   Inherits UserControl
   Implements IDockPanelItem
 
-  Private Const EN_ITEMCAPTION As String = "Census"
+#Region "Events"
 
-  Const UNIFIED_TEXT As String = "Unified"
-
-  Private theme As UITheme = UITheme.GetInstance
-  Private Ancestor As AncestorCollection.Ancestor
-
-  Private WithEvents ts As ToolStrip
-  Private WithEvents xlsActiveSheet As DataGridView
-
-  Private CensusData As Collection
-  Private CensusFileList As Collection
-  Private AvailableYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
-  Private xlsWorkbook As Dictionary(Of Integer, DataGridView)
-
-  Public Event PanelItemGotFocus(sender As Object, e As EventArgs) Implements IDockPanelItem.PanelItemGotFocus
   Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
+
   Public Event AncestorUpdated() Implements IDockPanelItem.AncestorUpdated
 
+  Public Event PanelItemGotFocus(sender As Object, e As EventArgs) Implements IDockPanelItem.PanelItemGotFocus
+
+#End Region
+
+#Region "Properties"
+
   Public ReadOnly Property ItemCaption As String = UNIFIED_TEXT Implements IDockPanelItem.ItemCaption
-  Public ReadOnly Property ItemSupportsSearch As Boolean = True Implements IDockPanelItem.ItemSupportsSearch
-  Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
-  Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
-  Public ReadOnly Property ItemHasRibbonBar As Boolean = True Implements IDockPanelItem.ItemHasRibbonBar
-  Public ReadOnly Property ShowRibbonOnFocus As String = UNIFIED_TEXT Implements IDockPanelItem.ShowRibbonOnFocus
-  Public ReadOnly Property ItemHasToolBar As Boolean = True Implements IDockPanelItem.ItemHasToolBar
   Public Property ItemDockPanelLocation As DockPanelLocation Implements IDockPanelItem.ItemDockPanelLocation
   Public Property ItemHasFocus As Boolean = False Implements IDockPanelItem.ItemHasFocus
+  Public ReadOnly Property ItemHasRibbonBar As Boolean = True Implements IDockPanelItem.ItemHasRibbonBar
+  Public ReadOnly Property ItemHasToolBar As Boolean = True Implements IDockPanelItem.ItemHasToolBar
+  Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
+  Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
+  Public ReadOnly Property ItemSupportsSearch As Boolean = True Implements IDockPanelItem.ItemSupportsSearch
+  Public ReadOnly Property ShowRibbonOnFocus As String = UNIFIED_TEXT Implements IDockPanelItem.ShowRibbonOnFocus
 
-  Private Sub ResetViewer()
-    Dim idx As Integer = 0
-    While idx < Controls.Count
-      If TypeOf Controls.Item(idx) Is DataGridView Then
-        Controls.RemoveAt(idx)
+#End Region
+
+#Region "Public Constructors"
+
+  Public Sub New()
+    ts = New ToolStrip()
+    ts.SuspendLayout()
+    SuspendLayout()
+    '
+    'ts
+    '
+    ts.BackColor = My.Theme.PanelBorderColor
+    ts.ForeColor = My.Theme.PanelFontColor
+    ts.GripStyle = ToolStripGripStyle.Hidden
+    ts.Location = New Point(0, 0)
+    ts.Name = "ts"
+    ts.RenderMode = ToolStripRenderMode.System
+    ts.Size = New Size(439, 25)
+    ts.TabIndex = 3
+    ts.Text = "ToolStrip1"
+    '
+    'CensusViewer
+    '
+    AutoScaleDimensions = New SizeF(6.0!, 13.0!)
+    AutoScaleMode = AutoScaleMode.None
+    BackColor = My.Theme.PanelBackColor
+    ForeColor = My.Theme.PanelFontColor
+    Controls.Add(xlsActiveSheet)
+    Controls.Add(ts)
+    DoubleBuffered = True
+    Font = New Font("Segoe UI", 8.25!, FontStyle.Regular, GraphicsUnit.Point, CType(0, Byte))
+    Name = "CensusViewer"
+    Size = New Size(439, 150)
+    ts.ResumeLayout(False)
+    ts.PerformLayout()
+    ResumeLayout(False)
+    PerformLayout()
+
+    Dock = DockStyle.Fill
+
+    CaptureFocus(Me)
+  End Sub
+
+#End Region
+
+#Region "Private Methods"
+
+  Private Sub AddCensusFile(CensusYear As String, Filename As String)
+    Debug.Print(CensusYear, Filename)
+    'CensusFileList.Add(Filename, CensusYear)
+    'For Each btn As ToolStripItem In tsCensus.Items
+    'If btn.Text.Equals(CensusYear) Then
+    'btn.Visible = True
+    'End If
+    'Next
+  End Sub
+
+  Private Sub addRemapData(CensusYear As Integer, BaseKey As Integer, CensusHeader As String, Optional CustomHandler As String = "")
+    Debug.Print(CensusYear, BaseKey, CensusHeader, CustomHandler)
+  End Sub
+
+  Private Sub addUnifiedData(CensusOrder As Integer, BaseKey As Integer, CensusHeader As String)
+    Debug.Print(CensusOrder, BaseKey, CensusHeader)
+  End Sub
+
+  Private Sub CaptureFocus(ctl As Control)
+    Try
+      AddHandler ctl.GotFocus, AddressOf DockPanelItem_GotFocus
+      AddHandler ctl.MouseDown, AddressOf DockPanelItem_GotFocus
+    Catch ex As Exception
+    End Try
+    For Each childCtl As Control In ctl.Controls
+      CaptureFocus(childCtl)
+    Next
+  End Sub
+
+  Private Sub CensusSelect(sender As Object, e As EventArgs)
+    If TypeOf sender IsNot ToolStripButton Then Exit Sub
+    Dim srcSender As ToolStripButton = DirectCast(sender, ToolStripButton)
+    For Each btn As ToolStripButton In ts.Items
+      If srcSender.Text.Equals(btn.Text) Then
+        btn.Checked = True
+        btn.ForeColor = My.Theme.PanelFontColor
       Else
-        idx += 1
+        btn.Checked = False
+        btn.ForeColor = My.Theme.PanelFontColor
       End If
-    End While
-    ts.Items.Clear()
-    xlsActiveSheet = Nothing
-    xlsWorkbook = New Dictionary(Of Integer, DataGridView)
+    Next
+    If srcSender.Text.Equals(UNIFIED_TEXT) Then
+      'TODO
+    Else
+      showWorkSheet(CInt(srcSender.Text))
+    End If
+  End Sub
+
+  Private Sub CensusViewer_AncestorAssigned() Handles Me.AncestorAssigned
+    LoadCensus()
+  End Sub
+
+  Private Sub CensusViewer_AncestorUpdated() Handles Me.AncestorUpdated
+    LoadCensus()
   End Sub
 
   Private Function CreateWorkSheet(censusYear As Integer) As DataGridView
-    Dim tmpWorkSheet As DataGridView = New DataGridView
+    Dim tmpWorkSheet As New DataGridView
     CType(tmpWorkSheet, System.ComponentModel.ISupportInitialize).BeginInit()
     With tmpWorkSheet
       .AllowUserToAddRows = False
@@ -69,9 +151,10 @@ Public Class CensusViewer
     Dim i As Integer
     'Add Header to table
     For Each columnName As String In aa.getHeaders
-      Dim column As New DataGridViewTextBoxColumn()
-      column.DataPropertyName = columnName
-      column.HeaderText = columnName
+      Dim column As New DataGridViewTextBoxColumn With {
+        .DataPropertyName = columnName,
+        .HeaderText = columnName
+      }
       tmpWorkSheet.Columns.Add(column)
     Next
     'Add Data to table
@@ -83,148 +166,25 @@ Public Class CensusViewer
     Return tmpWorkSheet
   End Function
 
-  Private Sub showWorkSheet(censusYear As Integer)
-    If xlsWorkbook.ContainsKey(censusYear) Then
-      xlsActiveSheet = xlsWorkbook.Item(censusYear)
-    Else
-      xlsActiveSheet = CreateWorkSheet(censusYear)
-      Controls.Add(xlsActiveSheet)
-    End If
-    xlsActiveSheet.BringToFront()
-  End Sub
-
-
-  Public Sub New()
-    ts = New ToolStrip()
-    ts.SuspendLayout()
-    SuspendLayout()
-    '
-    'ts
-    '
-    ts.BackColor = theme.PanelBorderColor
-    ts.ForeColor = theme.PanelFontColor
-    ts.GripStyle = ToolStripGripStyle.Hidden
-    ts.Location = New Point(0, 0)
-    ts.Name = "ts"
-    ts.RenderMode = ToolStripRenderMode.System
-    ts.Size = New Size(439, 25)
-    ts.TabIndex = 3
-    ts.Text = "ToolStrip1"
-    '
-    'CensusViewer
-    '
-    AutoScaleDimensions = New SizeF(6.0!, 13.0!)
-    AutoScaleMode = AutoScaleMode.None
-    BackColor = theme.PanelBackColor
-    ForeColor = theme.PanelFontColor
-    Controls.Add(xlsActiveSheet)
-    Controls.Add(ts)
-    DoubleBuffered = True
-    Font = New Font("Segoe UI", 8.25!, FontStyle.Regular, GraphicsUnit.Point, CType(0, Byte))
-    Name = "CensusViewer"
-    Size = New Size(439, 150)
-    ts.ResumeLayout(False)
-    ts.PerformLayout()
-    ResumeLayout(False)
-    PerformLayout()
-
-    Dock = DockStyle.Fill
-
-  End Sub
-
-  Private Sub CensusViewer_AncestorAssigned() Handles Me.AncestorAssigned
-    LoadCensus()
-  End Sub
-
-  Private Sub CensusViewer_AncestorUpdated() Handles Me.AncestorUpdated
-    LoadCensus()
-  End Sub
-
-
-  Private Sub LoadCensus()
-    ResetViewer()
-    If Ancestor Is Nothing Then Exit Sub
-    Dim item As ToolStripButton
-    Dim expectedCensus As List(Of Integer) = Ancestor.Census.ExpectedYears
-    Dim availableCensus As List(Of Integer) = Ancestor.Census.AvailableYears
-    If expectedCensus.Count > 0 Then
-      For Each censusYear As Integer In expectedCensus
-        item = New ToolStripButton(censusYear.ToString)
-        If availableCensus.Contains(censusYear) Then
-          item.CheckOnClick = True
-          item.ForeColor = theme.PanelFontColor
-          item.ToolTipText = censusYear & " Census"
-          item.Tag = Nothing
-          AddHandler item.Click, AddressOf CensusSelect
-        Else
-          item.Enabled = False
-          item.ForeColor = theme.PanelFontColor 'Need to modify theme and code to allow for error condition
-          item.ToolTipText = censusYear & " Census Unavailable"
-        End If
-        ts.Items.Add(item)
-      Next
-      If availableCensus.Count > 0 Then
-        item = New ToolStripButton(UNIFIED_TEXT)
-        item.ForeColor = theme.PanelFontColor
-        item.ToolTipText = "Unified view of all available Census Years"
-        item.Tag = Nothing
-        AddHandler item.Click, AddressOf CensusSelect
-        ts.Items.Add(item)
-      End If
-    End If
-  End Sub
-
-  Private Sub CensusSelect(sender As Object, e As EventArgs)
-    If Not TypeOf sender Is ToolStripButton Then Exit Sub
-    Dim srcSender As ToolStripButton = DirectCast(sender, ToolStripButton)
-    For Each btn As ToolStripButton In ts.Items
-      If srcSender.Text.Equals(btn.Text) Then
-        btn.Checked = True
-        btn.ForeColor = theme.PanelFontColor
-      Else
-        btn.Checked = False
-        btn.ForeColor = theme.PanelFontColor
-      End If
-    Next
-    If srcSender.Text.Equals(UNIFIED_TEXT) Then
-      'TODO
-    Else
-      showWorkSheet(CInt(srcSender.Text))
-    End If
-  End Sub
-
   Private Sub DataGridView1_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles xlsActiveSheet.CellFormatting
     ' Check if the current column is the first column (index 0) and the row is not a header row
     If e.ColumnIndex = 0 AndAlso e.RowIndex >= 0 Then
       ' Check the value of the first column
       If xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value IsNot Nothing AndAlso xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value.ToString() = "P" Then
         ' Set the background color to green if col(0)="P"
-        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = theme.XLSHighlightColor
+        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = My.Theme.XLSHighlightColor
       ElseIf xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value IsNot Nothing AndAlso xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value.ToString() = "F" Then
         ' Set the background color to yellow if col(0)="F"
-        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = theme.XLSHighlightColor2
+        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = My.Theme.XLSHighlightColor2
       Else
         ' Reset the background color for other values if needed
-        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = theme.XLSBackColor
+        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = My.Theme.XLSBackColor
       End If
     End If
   End Sub
 
-  Private Sub AddCensusFile(CensusYear As String, Filename As String)
-    Debug.Print(CensusYear, Filename)
-    'CensusFileList.Add(Filename, CensusYear)
-    'For Each btn As ToolStripItem In tsCensus.Items
-    'If btn.Text.Equals(CensusYear) Then
-    'btn.Visible = True
-    'End If
-    'Next
-  End Sub
-
-  Private Sub ShowCensus(CensusYear As String)
-    Debug.Print("ShowCensus: " + CensusYear)
-    If CensusFileList.Contains(CensusYear) Then
-      LoadFile(CensusFileList.Item(CensusYear))
-    End If
+  Private Sub DockPanelItem_GotFocus(sender As Object, e As EventArgs)
+    RaiseEvent PanelItemGotFocus(sender, e)
   End Sub
 
   Private Function GetData(csvFilePath As String) As ArrayList
@@ -232,7 +192,7 @@ Public Class CensusViewer
       Return CensusData.Item(csvFilePath)
     End If
     Dim lines As String() = File.ReadAllLines(csvFilePath)
-    Dim data As ArrayList = New ArrayList()
+    Dim data As New ArrayList()
     For i As Integer = 0 To lines.Length - 1
       Dim fields As String() = lines(i).Split(","c)
       For j As Integer = 0 To fields.Length - 1
@@ -244,34 +204,8 @@ Public Class CensusViewer
     Return data
   End Function
 
-  Private Sub LoadFile(csvFilePath As String)
-    Dim lines As ArrayList = GetData(csvFilePath)
-    xlsActiveSheet.Columns.Clear()
-    xlsActiveSheet.Rows.Clear()
-    xlsActiveSheet.SuspendLayout()
-    Dim i As Integer = 0
-    For Each data() As String In lines
-      If i = 0 Then
-        For Each column As String In data
-          xlsActiveSheet.Columns.Add(column, column)
-        Next
-      Else
-        xlsActiveSheet.Rows.Add(data)
-      End If
-      i += 1
-    Next
-    xlsActiveSheet.ResumeLayout(False)
-    xlsActiveSheet.PerformLayout()
-  End Sub
-
-#Region "Unified Census Code"
-
-  Private Sub ShowUnified()
-    Debug.Print("Show Unified")
-  End Sub
-
   Private Sub GetUnifiedData()
-    Dim rtn As ArrayList = New ArrayList()
+    Dim rtn As New ArrayList()
     Dim data As ArrayList
 
     'Add Header to rtn
@@ -281,14 +215,6 @@ Public Class CensusViewer
         data = GetData(CensusFileList.Item(dt.ToString).ToString)
       End If
     Next
-  End Sub
-
-  Private Sub addRemapData(CensusYear As Integer, BaseKey As Integer, CensusHeader As String, Optional CustomHandler As String = "")
-    Debug.Print(CensusYear, BaseKey, CensusHeader, CustomHandler)
-  End Sub
-
-  Private Sub addUnifiedData(CensusOrder As Integer, BaseKey As Integer, CensusHeader As String)
-    Debug.Print(CensusOrder, BaseKey, CensusHeader)
   End Sub
 
   Private Sub InitializeRemapData()
@@ -640,34 +566,99 @@ Public Class CensusViewer
 
   End Sub
 
-  Public Function GetRibbonBarConfig() As RibbonBarTabConfig Implements IDockPanelItem.GetRibbonBarConfig
-    Throw New NotImplementedException()
-  End Function
-
-  Public Function GetDockToolBarConfig() As DockToolBarConfig Implements IDockPanelItem.GetDockToolBarConfig
-    Throw New NotImplementedException()
-  End Function
-
-  Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
-    Throw New NotImplementedException()
+  Private Sub LoadCensus()
+    ResetViewer()
+    If Ancestor Is Nothing Then Exit Sub
+    Dim item As ToolStripButton
+    Dim expectedCensus As List(Of Integer) = Ancestor.Census.ExpectedYears
+    Dim availableCensus As List(Of Integer) = Ancestor.Census.AvailableYears
+    If expectedCensus.Count > 0 Then
+      For Each censusYear As Integer In expectedCensus
+        item = New ToolStripButton(censusYear.ToString)
+        If availableCensus.Contains(censusYear) Then
+          item.CheckOnClick = True
+          item.ForeColor = My.Theme.PanelFontColor
+          item.ToolTipText = censusYear & " Census"
+          item.Tag = Nothing
+          AddHandler item.Click, AddressOf CensusSelect
+        Else
+          item.Enabled = False
+          item.ForeColor = My.Theme.PanelFontColor 'Need to modify theme and code to allow for error condition
+          item.ToolTipText = censusYear & " Census Unavailable"
+        End If
+        ts.Items.Add(item)
+      Next
+      If availableCensus.Count > 0 Then
+        item = New ToolStripButton(UNIFIED_TEXT) With {
+          .ForeColor = My.Theme.PanelFontColor,
+          .ToolTipText = "Unified view of all available Census Years",
+          .Tag = Nothing
+        }
+        AddHandler item.Click, AddressOf CensusSelect
+        ts.Items.Add(item)
+      End If
+    End If
   End Sub
 
-  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
-    Throw New NotImplementedException()
+  Private Sub LoadFile(csvFilePath As String)
+    Dim lines As ArrayList = GetData(csvFilePath)
+    xlsActiveSheet.Columns.Clear()
+    xlsActiveSheet.Rows.Clear()
+    xlsActiveSheet.SuspendLayout()
+    Dim i As Integer = 0
+    For Each data() As String In lines
+      If i = 0 Then
+        For Each column As String In data
+          xlsActiveSheet.Columns.Add(column, column)
+        Next
+      Else
+        xlsActiveSheet.Rows.Add(data)
+      End If
+      i += 1
+    Next
+    xlsActiveSheet.ResumeLayout(False)
+    xlsActiveSheet.PerformLayout()
   End Sub
 
-  Public Sub ApplySearch(criteria As String) Implements IDockPanelItem.ApplySearch
-    Throw New NotImplementedException()
+  Private Sub ResetViewer()
+    Dim idx As Integer = 0
+    While idx < Controls.Count
+      If TypeOf Controls.Item(idx) Is DataGridView Then
+        Controls.RemoveAt(idx)
+      Else
+        idx += 1
+      End If
+    End While
+    ts.Items.Clear()
+    xlsActiveSheet = Nothing
+    xlsWorkbook = New Dictionary(Of Integer, DataGridView)
   End Sub
 
-  Public Sub ClearSearch() Implements IDockPanelItem.ClearSearch
-    Throw New NotImplementedException()
+  Private Sub ShowCensus(CensusYear As String)
+    Debug.Print("ShowCensus: " + CensusYear)
+    If CensusFileList.Contains(CensusYear) Then
+      LoadFile(CensusFileList.Item(CensusYear))
+    End If
+  End Sub
+
+  Private Sub ShowUnified()
+    Debug.Print("Show Unified")
+  End Sub
+
+  Private Sub showWorkSheet(censusYear As Integer)
+    If xlsWorkbook.ContainsKey(censusYear) Then
+      xlsActiveSheet = xlsWorkbook.Item(censusYear)
+    Else
+      xlsActiveSheet = CreateWorkSheet(censusYear)
+      Controls.Add(xlsActiveSheet)
+    End If
+    xlsActiveSheet.BringToFront()
   End Sub
 
 #End Region
 
+#Region "Protected Methods"
 
-#Region "Component Helper"
   'UserControl overrides dispose to clean up the component list.
   <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
@@ -679,8 +670,52 @@ Public Class CensusViewer
       MyBase.Dispose(disposing)
     End Try
   End Sub
-  Private components As System.ComponentModel.IContainer
+
 #End Region
 
+#Region "Public Methods"
+
+  Public Sub ApplySearch(criteria As String) Implements IDockPanelItem.ApplySearch
+    Throw New NotImplementedException()
+  End Sub
+
+  Public Sub ClearSearch() Implements IDockPanelItem.ClearSearch
+    Throw New NotImplementedException()
+  End Sub
+
+  Public Function GetDockToolBarConfig() As DockToolBarConfig Implements IDockPanelItem.GetDockToolBarConfig
+    Throw New NotImplementedException()
+  End Function
+
+  Public Function GetRibbonBarConfig() As RibbonBarTabConfig Implements IDockPanelItem.GetRibbonBarConfig
+    Throw New NotImplementedException()
+  End Function
+
+  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
+    Throw New NotImplementedException()
+  End Sub
+
+  Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
+    Throw New NotImplementedException()
+  End Sub
+
+#End Region
+
+#Region "Fields"
+
+  Private WithEvents ts As ToolStrip
+  Private WithEvents xlsActiveSheet As DataGridView
+  Private Const EN_ITEMCAPTION As String = "Census"
+
+  Const UNIFIED_TEXT As String = "Unified"
+
+  Private Ancestor As AncestorCollection.Ancestor
+  Private AvailableYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
+  Private CensusData As Collection
+  Private CensusFileList As Collection
+  Private components As System.ComponentModel.IContainer
+  Private xlsWorkbook As Dictionary(Of Integer, DataGridView)
+
+#End Region
 
 End Class

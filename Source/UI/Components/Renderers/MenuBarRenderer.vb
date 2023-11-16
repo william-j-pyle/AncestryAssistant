@@ -1,16 +1,28 @@
 ﻿Public Class MenuBarRenderer
   Inherits ToolStripRenderer
-  Private theme As UITheme = UITheme.GetInstance
+
+#Region "Public Constructors"
 
   Public Sub New()
     MyBase.New()
   End Sub
 
+#End Region
+
+#Region "Private Methods"
+
+  Private Sub MenuBarRenderer_RenderItemBackground(sender As Object, e As ToolStripItemRenderEventArgs) Handles Me.RenderItemBackground
+    Using brush As New SolidBrush(e.Item.BackColor)
+      e.Graphics.FillRectangle(brush, e.Item.Bounds)
+    End Using
+    e.Graphics.DrawRectangle(New Pen(My.Theme.PanelAccentColor, 1), e.Item.Bounds)
+  End Sub
+
   Private Sub ToolStripRenderer_RenderSeparator(sender As Object, e As ToolStripSeparatorRenderEventArgs) Handles Me.RenderSeparator
-    Using brush As SolidBrush = New SolidBrush(theme.PanelAccentColor)
+    Using brush As New SolidBrush(My.Theme.PanelAccentColor)
       e.Graphics.FillRectangle(brush, 0 - 2, 0, e.Item.Width + 2, e.Item.Height)
     End Using
-    Using pen As Pen = New Pen(theme.PanelShadowColor, 1)
+    Using pen As New Pen(My.Theme.PanelShadowColor, 1)
       Dim y As Single = ((e.Item.ContentRectangle.Y + 1) / 2) + 1
       Dim x As Single = 26
       Dim w As Single = e.Item.Width - 30
@@ -18,7 +30,7 @@
     End Using
   End Sub
 
-
+#End Region
 
   'Private Sub ToolStripRenderer_RenderToolStripBorder(sender As Object, e As ToolStripRenderEventArgs) Handles Me.RenderToolStripBorder
 
@@ -48,15 +60,6 @@
   '    End Using
   '  End If
   'End Sub
-
-
-  Private Sub MenuBarRenderer_RenderItemBackground(sender As Object, e As ToolStripItemRenderEventArgs) Handles Me.RenderItemBackground
-    Using brush As SolidBrush = New SolidBrush(e.Item.BackColor)
-      e.Graphics.FillRectangle(brush, e.Item.Bounds)
-    End Using
-    e.Graphics.DrawRectangle(New Pen(theme.PanelAccentColor, 1), e.Item.Bounds)
-  End Sub
-
   'Private Sub MenuBarRenderer_RenderLabelBackground(sender As Object, e As ToolStripItemRenderEventArgs) Handles Me.RenderLabelBackground
   '  Debug.Print("MenuBarRenderer_RenderLabelBackground: {0}", e.Item.Bounds.ToString)
 
@@ -76,8 +79,6 @@
   '  Debug.Print("MenuBarRenderer_RenderToolStripBorder: {0}", e.AffectedBounds.ToString)
 
   'End Sub
-
-
 
   'Private Sub MenuBarRenderer_RenderToolStripStatusLabelBackground(sender As Object, e As ToolStripItemRenderEventArgs) Handles Me.RenderToolStripStatusLabelBackground
   '  Debug.Print("MenuBarRenderer_RenderToolStripBackground: {0}", e.Item.Bounds.ToString)

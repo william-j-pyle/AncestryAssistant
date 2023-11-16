@@ -4,64 +4,37 @@ Public Class NotebookViewer
   Inherits UserControl
   Implements IDockPanelItem
 
-  Private Const EN_ITEMCAPTION As String = "Notebook"
+#Region "Events"
 
-
-  Friend WithEvents TxtBody As RichTextBox
-  Friend WithEvents tsSections As ToolStrip
-  Friend WithEvents BtnAddSection As ToolStripButton
-  Friend WithEvents PnlHeader As Panel
-  Friend WithEvents PnlHeaderStretch As BordersPanel
-  Friend WithEvents TxtHeader As TextBox
-  Friend WithEvents PnlBody As Panel
-  Friend WithEvents LblStretch As Label
-  Friend WithEvents SplitSectionsPage As SplitContainer
-  Friend WithEvents TreeSectionPages As TreeView
-  Friend WithEvents tsPage As ToolStrip
-  Friend WithEvents ToolStripButton10 As ToolStripButton
-  Friend WithEvents BtnAddPage As ToolStripButton
-  Friend WithEvents imgSection As ImageList
-  Friend WithEvents ToolStripButton1 As ToolStripButton
-  Friend WithEvents ToolStripButton2 As ToolStripButton
-  Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
-  Friend WithEvents ToolStripButton3 As ToolStripButton
-  Friend WithEvents ToolStripButton4 As ToolStripButton
-  Friend WithEvents ToolStripButton5 As ToolStripButton
-  Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
-  Friend WithEvents ToolStripSplitButton1 As ToolStripSplitButton
-  Friend WithEvents BtnH1 As ToolStripMenuItem
-  Friend WithEvents BtnH2 As ToolStripMenuItem
-  Friend WithEvents BtnH3 As ToolStripMenuItem
-  Friend WithEvents BtnH4 As ToolStripMenuItem
-
-  Public Event PanelItemGotFocus(sender As Object, e As EventArgs) Implements IDockPanelItem.PanelItemGotFocus
   Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
+
   Public Event AncestorUpdated() Implements IDockPanelItem.AncestorUpdated
 
+  Public Event PanelItemGotFocus(sender As Object, e As EventArgs) Implements IDockPanelItem.PanelItemGotFocus
+
+#End Region
+
+#Region "Properties"
+
   Public ReadOnly Property ItemCaption As String = EN_ITEMCAPTION Implements IDockPanelItem.ItemCaption
-  Public ReadOnly Property ItemSupportsSearch As Boolean = True Implements IDockPanelItem.ItemSupportsSearch
-  Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
-  Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
-  Public ReadOnly Property ItemHasRibbonBar As Boolean = True Implements IDockPanelItem.ItemHasRibbonBar
-  Public ReadOnly Property ShowRibbonOnFocus As String = EN_ITEMCAPTION Implements IDockPanelItem.ShowRibbonOnFocus
-  Public ReadOnly Property ItemHasToolBar As Boolean = False Implements IDockPanelItem.ItemHasToolBar
   Public Property ItemDockPanelLocation As DockPanelLocation Implements IDockPanelItem.ItemDockPanelLocation
   Public Property ItemHasFocus As Boolean = False Implements IDockPanelItem.ItemHasFocus
+  Public ReadOnly Property ItemHasRibbonBar As Boolean = True Implements IDockPanelItem.ItemHasRibbonBar
+  Public ReadOnly Property ItemHasToolBar As Boolean = False Implements IDockPanelItem.ItemHasToolBar
+  Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
+  Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
+  Public ReadOnly Property ItemSupportsSearch As Boolean = True Implements IDockPanelItem.ItemSupportsSearch
+  Public ReadOnly Property ShowRibbonOnFocus As String = EN_ITEMCAPTION Implements IDockPanelItem.ShowRibbonOnFocus
 
-  Private Sub NotebookViewer_AncestorAssigned() Handles Me.AncestorAssigned
+#End Region
 
-  End Sub
-
-  Private Sub NotebookViewer_AncestorUpdated() Handles Me.AncestorUpdated
-
-  End Sub
-
+#Region "Public Constructors"
 
   Public Sub New()
     components = New Container()
-    Dim TreeNode1 As TreeNode = New TreeNode("My First Page")
-    Dim TreeNode2 As TreeNode = New TreeNode("Welcome Section", New TreeNode() {TreeNode1})
-    Dim TreeNode3 As TreeNode = New TreeNode("Last, First - YYYY", New TreeNode() {TreeNode2})
+    Dim TreeNode1 As New TreeNode("My First Page")
+    Dim TreeNode2 As New TreeNode("Welcome Section", New TreeNode() {TreeNode1})
+    Dim TreeNode3 As New TreeNode("Last, First - YYYY", New TreeNode() {TreeNode2})
     SplitSectionsPage = New SplitContainer()
     TreeSectionPages = New TreeView()
     imgSection = New ImageList(components)
@@ -428,39 +401,44 @@ Public Class NotebookViewer
     tsPage.PerformLayout()
     ResumeLayout(False)
 
+    CaptureFocus(Me)
   End Sub
 
+#End Region
+
+#Region "Private Methods"
+
+  Private Sub CaptureFocus(ctl As Control)
+    Try
+      AddHandler ctl.GotFocus, AddressOf DockPanelItem_GotFocus
+      AddHandler ctl.MouseDown, AddressOf DockPanelItem_GotFocus
+    Catch ex As Exception
+    End Try
+    For Each childCtl As Control In ctl.Controls
+      CaptureFocus(childCtl)
+    Next
+  End Sub
+
+  Private Sub DockPanelItem_GotFocus(sender As Object, e As EventArgs)
+    RaiseEvent PanelItemGotFocus(sender, e)
+  End Sub
+
+  Private Sub NotebookViewer_AncestorAssigned() Handles Me.AncestorAssigned
+
+  End Sub
+
+  Private Sub NotebookViewer_AncestorUpdated() Handles Me.AncestorUpdated
+
+  End Sub
 
   Private Sub txtNotebookPageTitle_TextChanged(sender As Object, e As EventArgs) Handles TxtHeader.TextChanged
     LblStretch.Text = TxtHeader.Text
   End Sub
 
-  Public Function GetRibbonBarConfig() As RibbonBarTabConfig Implements IDockPanelItem.GetRibbonBarConfig
-    Throw New NotImplementedException()
-  End Function
+#End Region
 
-  Public Function GetDockToolBarConfig() As DockToolBarConfig Implements IDockPanelItem.GetDockToolBarConfig
-    Throw New NotImplementedException()
-  End Function
+#Region "Protected Methods"
 
-  Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Sub ApplySearch(criteria As String) Implements IDockPanelItem.ApplySearch
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Sub ClearSearch() Implements IDockPanelItem.ClearSearch
-    Throw New NotImplementedException()
-  End Sub
-
-
-#Region "Component Helper"
   'UserControl overrides dispose to clean up the component list.
   <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
@@ -472,7 +450,68 @@ Public Class NotebookViewer
       MyBase.Dispose(disposing)
     End Try
   End Sub
+
+#End Region
+
+#Region "Public Methods"
+
+  Public Sub ApplySearch(criteria As String) Implements IDockPanelItem.ApplySearch
+    Throw New NotImplementedException()
+  End Sub
+
+  Public Sub ClearSearch() Implements IDockPanelItem.ClearSearch
+    Throw New NotImplementedException()
+  End Sub
+
+  Public Function GetDockToolBarConfig() As DockToolBarConfig Implements IDockPanelItem.GetDockToolBarConfig
+    Throw New NotImplementedException()
+  End Function
+
+  Public Function GetRibbonBarConfig() As RibbonBarTabConfig Implements IDockPanelItem.GetRibbonBarConfig
+    Throw New NotImplementedException()
+  End Function
+
+  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
+    Throw New NotImplementedException()
+  End Sub
+
+  Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
+    Throw New NotImplementedException()
+  End Sub
+
+#End Region
+
+#Region "Fields"
+
+  Friend WithEvents BtnAddPage As ToolStripButton
+  Friend WithEvents BtnAddSection As ToolStripButton
+  Friend WithEvents BtnH1 As ToolStripMenuItem
+  Friend WithEvents BtnH2 As ToolStripMenuItem
+  Friend WithEvents BtnH3 As ToolStripMenuItem
+  Friend WithEvents BtnH4 As ToolStripMenuItem
+  Friend WithEvents imgSection As ImageList
+  Friend WithEvents LblStretch As Label
+  Friend WithEvents PnlBody As Panel
+  Friend WithEvents PnlHeader As Panel
+  Friend WithEvents PnlHeaderStretch As BordersPanel
+  Friend WithEvents SplitSectionsPage As SplitContainer
+  Friend WithEvents ToolStripButton1 As ToolStripButton
+  Friend WithEvents ToolStripButton10 As ToolStripButton
+  Friend WithEvents ToolStripButton2 As ToolStripButton
+  Friend WithEvents ToolStripButton3 As ToolStripButton
+  Friend WithEvents ToolStripButton4 As ToolStripButton
+  Friend WithEvents ToolStripButton5 As ToolStripButton
+  Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+  Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+  Friend WithEvents ToolStripSplitButton1 As ToolStripSplitButton
+  Friend WithEvents TreeSectionPages As TreeView
+  Friend WithEvents tsPage As ToolStrip
+  Friend WithEvents tsSections As ToolStrip
+  Friend WithEvents TxtBody As RichTextBox
+  Friend WithEvents TxtHeader As TextBox
+  Private Const EN_ITEMCAPTION As String = "Notebook"
   Private components As System.ComponentModel.IContainer
+
 #End Region
 
 End Class

@@ -12,32 +12,113 @@ Public Class AncestryWebViewer
   Inherits System.Windows.Forms.UserControl
   Implements IDockPanelItem
 
-  Private Const EN_ITEMCAPTION As String = "Ancestry.com"
+#Region "Events"
 
-  ' Web Interface
-  Private WithEvents web As WebView2
-  Private WithEvents CoreWeb As CoreWebView2
-  Private WithEvents CoreWebDownload As CoreWebView2DownloadOperation
-  ' Tool Strip
-  Private WithEvents tsWeb As ToolStrip
-  Private WithEvents btnHome As ToolStripButton
-  Private WithEvents txtHref As ToolStripTextBox
-  Private WithEvents btnBack As ToolStripButton
-  Private WithEvents btnReload As ToolStripButton
-
-  ' Tracking
-  Private isReady As Boolean = False
-  Private sameImageAsFilename As String = ""
-  Private UriTrackingGroupDecoder As UriTrackingGroup = New UriTrackingGroup()
-
-  ' Public Events
-  Public Event UriTrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
-  Public Event DataDownload(data As APIMessage)
-  Public Event AncestorChanged(AncestorID As String)
-  Public Event ViewerBusy(busy As Boolean)
-  Public Event PanelItemGotFocus(sender As Object, e As EventArgs) Implements IDockPanelItem.PanelItemGotFocus
   Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
+
+  Public Event AncestorChanged(NewAncestorID As String)
+
   Public Event AncestorUpdated() Implements IDockPanelItem.AncestorUpdated
+
+  Public Event DataDownload(data As APIMessage)
+
+  Public Event PanelItemGotFocus(sender As Object, e As EventArgs) Implements IDockPanelItem.PanelItemGotFocus
+
+  Public Event UriTrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
+
+  Public Event ViewerBusy(busy As Boolean)
+
+#End Region
+
+#Region "Properties"
+
+  Public Property AncestorID As String
+    Get
+      Return _AncestorID
+    End Get
+    Set(value As String)
+      If Not value.Equals(_AncestorID) Then
+        _AncestorID = value
+        RaiseEvent AncestorChanged(value)
+      End If
+    End Set
+  End Property
+
+  Public Property AncestryPage As String = ""
+  Public Property AncestryTreeID As String = ""
+  Public Property BlockedWebDomains As String() = {"adsafe", "syndication", "facebook", "doubleclick", "tiktok", "pinterest", "adservice", "ad-delivery", "adspsp", "adsystem", "adnxs", "securepubads"}
+  Public Property BlockWebTracking As Boolean = False
+
+  Public Property HREF As String
+    Get
+      Return URL.AbsoluteUri
+    End Get
+    Set(value As String)
+      URL = New Uri(value)
+    End Set
+  End Property
+
+  Public ReadOnly Property ItemCaption As String = EN_ITEMCAPTION Implements IDockPanelItem.ItemCaption
+  Public Property ItemDockPanelLocation As DockPanelLocation Implements IDockPanelItem.ItemDockPanelLocation
+  Public Property ItemHasFocus As Boolean = False Implements IDockPanelItem.ItemHasFocus
+  Public ReadOnly Property ItemHasRibbonBar As Boolean = False Implements IDockPanelItem.ItemHasRibbonBar
+  Public ReadOnly Property ItemHasToolBar As Boolean = False Implements IDockPanelItem.ItemHasToolBar
+  Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
+  Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
+  Public ReadOnly Property ItemSupportsSearch As Boolean = False Implements IDockPanelItem.ItemSupportsSearch
+
+  Public ReadOnly Property MessageSyncKey As Integer
+    Get
+      _MsgSyncKey += 1
+      If _MsgSyncKey > 999 Then _MsgSyncKey = 1
+      Return _MsgSyncKey
+    End Get
+  End Property
+
+  Public ReadOnly Property ShowRibbonOnFocus As String = String.Empty Implements IDockPanelItem.ShowRibbonOnFocus
+
+  Public Property ShowToolbar As Boolean
+    Get
+      Return _ShowToolbar
+    End Get
+    Set(value As Boolean)
+      _ShowToolbar = value
+      tsWeb.Visible = value
+    End Set
+  End Property
+
+  Public Property UriTrackingGroup As UriTrackingGroupEnum
+    Get
+      Return _UriTrackingGroup
+    End Get
+    Set(value As UriTrackingGroupEnum)
+      If value <> _UriTrackingGroup Then
+        Logger.log(Logger.LOG_TYPE.INFO, "UriTrackingGroup Changed {New:" & value.ToString & ", Old:" & _UriTrackingGroup.ToString & "}")
+        Dim oldValue As UriTrackingGroupEnum = _UriTrackingGroup
+        _UriTrackingGroup = value
+        RaiseEvent UriTrackingGroupChanged(value, oldValue)
+      End If
+    End Set
+  End Property
+
+  <Browsable(False)>
+  Public Property URL As Uri
+    Get
+      Return _URL
+    End Get
+    Set(value As Uri)
+      _URL = value
+      If isReady And value IsNot Nothing Then
+        If value.OriginalString.Length > 0 Then
+          web.Source = value
+        End If
+      End If
+    End Set
+  End Property
+
+#End Region
+
+#Region "Public Constructors"
 
   Public Sub New()
     web = New Microsoft.Web.WebView2.WinForms.WebView2()
@@ -53,9 +134,9 @@ Public Class AncestryWebViewer
     'web
     '
     web.AllowExternalDrop = True
-    web.BackColor = System.Drawing.Color.White
+    web.BackColor = My.Theme.PanelBackColor
     web.CreationProperties = Nothing
-    web.DefaultBackgroundColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
+    web.DefaultBackgroundColor = My.Theme.PanelBackColor
     web.Dock = System.Windows.Forms.DockStyle.Fill
     web.Location = New System.Drawing.Point(0, 25)
     web.Margin = New System.Windows.Forms.Padding(0)
@@ -82,8 +163,7 @@ Public Class AncestryWebViewer
     'btnBack
     '
     btnBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    btnBack.Image = Global.AncestryAssistant.My.Resources.Resources.LEFT_ICO20
-    btnBack.ImageTransparentColor = System.Drawing.Color.Magenta
+    btnBack.Image = My.Theme.ImageButtonBack
     btnBack.Name = "btnBack"
     btnBack.Size = New System.Drawing.Size(23, 22)
     btnBack.Text = "ToolStripButton2"
@@ -134,191 +214,125 @@ Public Class AncestryWebViewer
     ResumeLayout(False)
     PerformLayout()
     web.EnsureCoreWebView2Async()
+    CaptureFocus(Me)
   End Sub
 
+#End Region
 
-#Region "Viewer - Public Properties"
+#Region "Private Methods"
 
-  Public Property BlockWebTracking As Boolean = False
+  Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+    web.GoBack()
+  End Sub
 
-  Public Property BlockedWebDomains As String() = {"adsafe", "syndication", "facebook", "doubleclick", "tiktok", "pinterest", "adservice", "ad-delivery", "adspsp", "adsystem", "adnxs", "securepubads"}
+  Private Sub btnHome_Click_1(sender As Object, e As EventArgs) Handles btnHome.Click
+    NavigateTo(UriTrackingGroupEnum.ANCESTRY_HOME)
+  End Sub
 
-  Public ReadOnly Property AncestryBaseURL As String = "https://www.ancestry.com/"
+  Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
+    web.Reload()
+  End Sub
 
-  Public Property AncestryTreeID As String = ""
+  Private Sub CaptureFocus(ctl As Control)
+    Try
+      AddHandler ctl.GotFocus, AddressOf DockPanelItem_GotFocus
+      AddHandler ctl.MouseDown, AddressOf DockPanelItem_GotFocus
+    Catch ex As Exception
+    End Try
+    For Each childCtl As Control In ctl.Controls
+      CaptureFocus(childCtl)
+    Next
+  End Sub
 
-  Private _UriTrackingGroup As UriTrackingGroupEnum = UriTrackingGroupEnum.ANCESTRY
-  Public Property UriTrackingGroup As UriTrackingGroupEnum
-    Get
-      Return _UriTrackingGroup
-    End Get
-    Set(value As UriTrackingGroupEnum)
-      If value <> _UriTrackingGroup Then
-        Logger.log(Logger.LOG_TYPE.INFO, "UriTrackingGroup Changed {New:" & value.ToString & ", Old:" & _UriTrackingGroup.ToString & "}")
-        Dim oldValue As UriTrackingGroupEnum = _UriTrackingGroup
-        _UriTrackingGroup = value
-        RaiseEvent UriTrackingGroupChanged(value, oldValue)
-      End If
-    End Set
-  End Property
+  ' When the browser detects a file is being downloaded me routine will fire, we Capture the DownloadOperation object
+  ' and monitor its events for completion of the download, then fire an event about the download
+  Private Sub CoreWeb_DownloadStarting(sender As Object, e As CoreWebView2DownloadStartingEventArgs) Handles CoreWeb.DownloadStarting
+    CoreWebDownload = e.DownloadOperation
+  End Sub
 
-  Private _MsgSyncKey As Integer = 0
-  Public ReadOnly Property MessageSyncKey As Integer
-    Get
-      _MsgSyncKey += 1
-      If _MsgSyncKey > 999 Then _MsgSyncKey = 1
-      Return _MsgSyncKey
-    End Get
-  End Property
-
-  Private _ShowToolbar As Boolean = False
-  Public Property ShowToolbar As Boolean
-    Get
-      Return _ShowToolbar
-    End Get
-    Set(value As Boolean)
-      _ShowToolbar = value
-      tsWeb.Visible = value
-    End Set
-  End Property
-
-  Private _AncestorID As String = ""
-
-  Public Property AncestorID As String
-    Get
-      Return _AncestorID
-    End Get
-    Set(value As String)
-      If Not value.Equals(_AncestorID) Then
-        _AncestorID = value
-        RaiseEvent AncestorChanged(value)
-      End If
-    End Set
-  End Property
-
-  Public Property AncestryPage As String = ""
-
-  Private _URL As Uri = New Uri(AncestryBaseURL)
-  <Browsable(False)>
-  Public Property URL As Uri
-    Get
-      Return _URL
-    End Get
-    Set(value As Uri)
-      _URL = value
-      If isReady And value IsNot Nothing Then
-        If value.OriginalString.Length > 0 Then
-          web.Source = value
+  ' If enabled, me routine will cancel every request to various tracking sites
+  Private Sub CoreWeb_FrameNavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles CoreWeb.FrameNavigationStarting
+    If BlockWebTracking Then
+      For Each partialDomain As String In BlockedWebDomains
+        If e.Uri.ToLower.Contains(partialDomain.ToLower) Then
+          'Debug.Print("BLOCKED:  " + e.Uri)
+          e.Cancel = True
+          Exit Sub
         End If
-      End If
-    End Set
-  End Property
-
-  Public Property HREF As String
-    Get
-      Return URL.AbsoluteUri
-    End Get
-    Set(value As String)
-      URL = New Uri(value)
-    End Set
-  End Property
-
-  Public ReadOnly Property ItemCaption As String = EN_ITEMCAPTION Implements IDockPanelItem.ItemCaption
-  Public ReadOnly Property ItemSupportsSearch As Boolean = False Implements IDockPanelItem.ItemSupportsSearch
-  Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
-  Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
-  Public ReadOnly Property ItemHasRibbonBar As Boolean = False Implements IDockPanelItem.ItemHasRibbonBar
-  Public ReadOnly Property ShowRibbonOnFocus As String = String.Empty Implements IDockPanelItem.ShowRibbonOnFocus
-  Public ReadOnly Property ItemHasToolBar As Boolean = False Implements IDockPanelItem.ItemHasToolBar
-  Public Property ItemDockPanelLocation As DockPanelLocation Implements IDockPanelItem.ItemDockPanelLocation
-  Public Property ItemHasFocus As Boolean = False Implements IDockPanelItem.ItemHasFocus
-
-#End Region
-
-#Region "Viewer - Public Methods"
-
-  ' ==========================
-  ' = Public Methods
-  ' ==========================
-  Public Sub NavigateTo(target As UriTrackingGroupEnum, Optional customParam As String = "")
-    Dim rtn As String = AncestryBaseURL
-    Select Case target
-      Case UriTrackingGroupEnum.CUSTOM
-        rtn = customParam
-      Case UriTrackingGroupEnum.ANCESTRY
-      Case UriTrackingGroupEnum.ANCESTRY_OVERVIEW_TREE
-        rtn += "family-tree/tree/{TREEID}/recent"
-      Case UriTrackingGroupEnum.ANCESTRY_TREEVIEW_FAMILY
-        rtn += "family-tree/tree/{TREEID}/family/pedigree?cfpid=0"
-      Case UriTrackingGroupEnum.ANCESTRY_TREEVIEW_PERSON
-        rtn += "family-tree/tree/{TREEID}/family/familyview{CFID}"
-      Case UriTrackingGroupEnum.ANCESTRY_PEDIGREEVIEW_PERSON
-        rtn += "family-tree/tree/{TREEID}/family/pedigree{CFID}"
-      Case UriTrackingGroupEnum.ANCESTRY_FANVIEW_PERSON
-        rtn += "family-tree/tree/{TREEID}/family/fanview{CFID}"
-      Case UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON
-        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/facts"
-      Case UriTrackingGroupEnum.ANCESTRY_STORY_PERSON
-        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/story"
-      Case UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON
-        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/gallery?galleryPage=1&tab=0"
-      Case UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON
-        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/hints"
-      Case Else
-    End Select
-    ' Replace Variables with ID's
-    rtn = rtn.Replace("{TREEID}", AncestryTreeID)
-    rtn = rtn.Replace("{CFID}", "?cfpid={PERSONID}")
-    If target <> UriTrackingGroupEnum.CUSTOM And customParam.Length > 0 Then
-      'TODO activeAncestor.Reset()
-      rtn = rtn.Replace("{PERSONID}", customParam)
-    Else
-      rtn = rtn.Replace("{PERSONID}", AncestorID)
+      Next
     End If
-    ' Perform Navigation
-    HREF = rtn
   End Sub
 
-#End Region
+  Private Sub CoreWeb_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles CoreWeb.NavigationCompleted
+    _URL = web.Source
+  End Sub
 
-#Region "JavaScript API"
+  Private Sub CoreWeb_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles CoreWeb.NavigationStarting
+    If BlockWebTracking Then
+      For Each partialDomain As String In BlockedWebDomains
+        If e.Uri.ToLower.Contains(partialDomain.ToLower) Then
+          e.Cancel = True
+          Exit Sub
+        End If
+      Next
+    End If
+  End Sub
 
-  ' ==========================
-  ' = JSAPI Related Functions
-  ' ==========================
+  ' If the result of the current navigation attempts to open a new window me routine will fire, mark the navigation
+  ' event as handled, then passes the url back to the original browser window
+  Private Sub CoreWeb_NewWindowRequested(sender As Object, e As CoreWebView2NewWindowRequestedEventArgs) Handles CoreWeb.NewWindowRequested
+    e.Handled = True
+    HREF = e.Uri
+  End Sub
 
-  'Private Function JSAPI_Capture(captureType As AncestryCaptureType)
-  '  Select Case captureType
-  '    Case AncestryCaptureType.ANCESTOR
-  '      If AncestryPage.Equals("Facts") Then
-  '        JSAPI_Execute("window.AncestryAssistant.captureFacts();")
-  '        Return True
-  '      End If
-  '    Case AncestryCaptureType.CENSUS
-  '      If AncestryPage.Equals("Census") Then
-  '        JSAPI_Execute("window.AncestryAssistant.captureCensus();")
-  '        Return True
-  '      End If
-  '    Case AncestryCaptureType.CENSUS_IMAGE
-  '      If AncestryPage.Equals("Census") Then
-  '        JSAPI_Execute("window.AncestryAssistant.downloadImage();")
-  '        Return True
-  '      End If
-  '    Case AncestryCaptureType.GALLERY_IMAGE
-  '    Case AncestryCaptureType.IMAGE
-  '      Dim src As String = web.Source.AbsoluteUri
-  '      If src.EndsWith("jpg") Or src.EndsWith("jpeg") Then
-  '        Dim fromPage As String = ""
-  '        Dim fname As String = My.Computer.FileSystem.GetTempFileName & ".jpg"
-  '        If src.Contains("findagrave") Then
-  '          fromPage = "FindAGrave"
-  '        End If
-  '        My.Computer.Network.DownloadFile(src, fname)
-  '        'TODO RaiseEvent ImageDownload(fromPage, fname)
-  '      End If
-  '  End Select
-  '  Return False
-  'End Function
+  Private Sub CoreWebDownload_StateChanged(sender As Object, e As Object) Handles CoreWebDownload.StateChanged
+    If CoreWebDownload.State = CoreWebView2DownloadState.Completed And CoreWeb.IsDefaultDownloadDialogOpen Then
+      CoreWeb.CloseDefaultDownloadDialog()
+      JSAPI_Execute("document.body.click();")
+      If sameImageAsFilename.Length = 0 Then
+        Dim msg As New APIMessage With {
+          .MessageType = APIMessage.MT_SAVEAS,
+          .MessageKey = AncestorID
+        }
+        Dim payload As New List(Of List(Of String))
+        Dim row As New List(Of String) From {
+          "fileName"
+        }
+        payload.Add(row)
+        row = New List(Of String) From {
+          CoreWebDownload.ResultFilePath()
+        }
+        payload.Add(row)
+        msg.Payload = payload
+        RaiseEvent DataDownload(msg)
+      Else
+        If System.IO.File.Exists(sameImageAsFilename) Then
+          System.IO.File.Delete(sameImageAsFilename)
+        End If
+        System.IO.File.Move(CoreWebDownload.ResultFilePath(), sameImageAsFilename)
+        Dim msg As New APIMessage With {
+          .MessageType = APIMessage.MT_IMGDOWNLOAD,
+          .MessageKey = AncestorID
+        }
+        Dim payload As New List(Of List(Of String))
+        Dim row As New List(Of String) From {
+          "fileName"
+        }
+        payload.Add(row)
+        row = New List(Of String) From {
+          sameImageAsFilename
+        }
+        payload.Add(row)
+        msg.Payload = payload
+        RaiseEvent DataDownload(msg)
+        sameImageAsFilename = ""
+      End If
+    End If
+  End Sub
+
+  Private Sub DockPanelItem_GotFocus(sender As Object, e As EventArgs)
+    RaiseEvent PanelItemGotFocus(sender, e)
+  End Sub
 
   Private Async Sub JSAPI_Execute(script As String)
     Await web.CoreWebView2.ExecuteScriptAsync(script)
@@ -365,23 +379,13 @@ Public Class AncestryWebViewer
     RaiseEvent DataDownload(msg)
   End Sub
 
-  Public Sub saveImageAs(filename As String)
-    Dim src As String = web.Source.AbsoluteUri
-    If src.EndsWith("jpg") Or src.EndsWith("jpeg") Then
-      My.Computer.Network.DownloadFile(src, filename)
-    Else
-      sameImageAsFilename = filename
-      JSAPI_Execute("ancestryAssistant.getImage();")
-    End If
+  Private Sub tsWeb_Resize(sender As Object, e As EventArgs) Handles tsWeb.Resize
+    txtHref.Width = tsWeb.Bounds.Width - btnHome.Bounds.Right - 46
   End Sub
 
-#End Region
-
-#Region "Viewer - Browser Event Handlers"
-
-  ' ==========================
-  ' = Web Event Handlers
-  ' ==========================
+  Private Sub txtHref_Enter(sender As Object, e As EventArgs) Handles txtHref.Enter
+    NavigateTo(UriTrackingGroupEnum.CUSTOM, txtHref.Text)
+  End Sub
 
   Private Sub web_CoreWebView2InitializationCompleted(sender As Object, e As CoreWebView2InitializationCompletedEventArgs) Handles web.CoreWebView2InitializationCompleted
     CoreWeb = web.CoreWebView2
@@ -421,163 +425,25 @@ Public Class AncestryWebViewer
     End If
   End Sub
 
-  Private Sub web_SourceChanged(sender As Object, e As CoreWebView2SourceChangedEventArgs) Handles web.SourceChanged
-    Debug.Print("web_SourceChanged")
-    JSAPI_Execute("ancestryAssistant.getPage();")
-    txtHref.Text = web.Source.AbsoluteUri
+  Private Sub web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles web.NavigationCompleted
+    Debug.Print("web_NavigationCompleted")
+    RaiseEvent ViewerBusy(False)
   End Sub
 
   Private Sub web_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles web.NavigationStarting
     RaiseEvent ViewerBusy(True)
   End Sub
 
-  Private Sub web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles web.NavigationCompleted
-    Debug.Print("web_NavigationCompleted")
-    RaiseEvent ViewerBusy(False)
-  End Sub
-
-  ' ==========================
-  ' = CoreWeb Event Handlers
-  ' ==========================
-
-  Private Sub CoreWeb_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles CoreWeb.NavigationStarting
-    If BlockWebTracking Then
-      For Each partialDomain As String In BlockedWebDomains
-        If e.Uri.ToLower.Contains(partialDomain.ToLower) Then
-          e.Cancel = True
-          Exit Sub
-        End If
-      Next
-    End If
-  End Sub
-
-  ' If enabled, me routine will cancel every request to various tracking sites
-  Private Sub CoreWeb_FrameNavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles CoreWeb.FrameNavigationStarting
-    If BlockWebTracking Then
-      For Each partialDomain As String In BlockedWebDomains
-        If e.Uri.ToLower.Contains(partialDomain.ToLower) Then
-          'Debug.Print("BLOCKED:  " + e.Uri)
-          e.Cancel = True
-          Exit Sub
-        End If
-      Next
-    End If
-  End Sub
-
-  Private Sub CoreWeb_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles CoreWeb.NavigationCompleted
-    _URL = web.Source
-  End Sub
-
-  ' If the result of the current navigation attempts to open a new window
-  ' me routine will fire, mark the navigation event as handled,
-  ' then passes the url back to the original browser window
-  Private Sub CoreWeb_NewWindowRequested(sender As Object, e As CoreWebView2NewWindowRequestedEventArgs) Handles CoreWeb.NewWindowRequested
-    e.Handled = True
-    HREF = e.Uri
-  End Sub
-
-
-  Private Sub CoreWebDownload_StateChanged(sender As Object, e As Object) Handles CoreWebDownload.StateChanged
-    If CoreWebDownload.State = CoreWebView2DownloadState.Completed And CoreWeb.IsDefaultDownloadDialogOpen Then
-      CoreWeb.CloseDefaultDownloadDialog()
-      JSAPI_Execute("document.body.click();")
-      If sameImageAsFilename.Length = 0 Then
-        Dim msg As APIMessage = New APIMessage()
-        msg.MessageType = APIMessage.MT_SAVEAS
-        msg.MessageKey = AncestorID
-        Dim payload As New List(Of List(Of String))
-        Dim row As New List(Of String)
-        row.Add("fileName")
-        payload.Add(row)
-        row = New List(Of String)
-        row.Add(CoreWebDownload.ResultFilePath())
-        payload.Add(row)
-        msg.Payload = payload
-        RaiseEvent DataDownload(msg)
-      Else
-        If System.IO.File.Exists(sameImageAsFilename) Then
-          System.IO.File.Delete(sameImageAsFilename)
-        End If
-        System.IO.File.Move(CoreWebDownload.ResultFilePath(), sameImageAsFilename)
-        Dim msg As APIMessage = New APIMessage()
-        msg.MessageType = APIMessage.MT_IMGDOWNLOAD
-        msg.MessageKey = AncestorID
-        Dim payload As New List(Of List(Of String))
-        Dim row As New List(Of String)
-        row.Add("fileName")
-        payload.Add(row)
-        row = New List(Of String)
-        row.Add(sameImageAsFilename)
-        payload.Add(row)
-        msg.Payload = payload
-        RaiseEvent DataDownload(msg)
-        sameImageAsFilename = ""
-      End If
-    End If
-  End Sub
-
-  ' When the browser detects a file is being downloaded
-  ' me routine will fire, we Capture the DownloadOperation object and monitor its events
-  ' for completion of the download, then fire an event about the download
-  Private Sub CoreWeb_DownloadStarting(sender As Object, e As CoreWebView2DownloadStartingEventArgs) Handles CoreWeb.DownloadStarting
-    CoreWebDownload = e.DownloadOperation
+  Private Sub web_SourceChanged(sender As Object, e As CoreWebView2SourceChangedEventArgs) Handles web.SourceChanged
+    Debug.Print("web_SourceChanged")
+    JSAPI_Execute("ancestryAssistant.getPage();")
+    txtHref.Text = web.Source.AbsoluteUri
   End Sub
 
 #End Region
 
-#Region "Viewer - Menu "
+#Region "Protected Methods"
 
-  ' ==========================
-  ' = Menubar Event Handlers
-  ' ==========================
-
-  Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-    web.GoBack()
-  End Sub
-
-  Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
-    web.Reload()
-  End Sub
-
-  Private Sub btnHome_Click_1(sender As Object, e As EventArgs) Handles btnHome.Click
-    NavigateTo(UriTrackingGroupEnum.ANCESTRY_HOME)
-  End Sub
-
-  Private Sub tsWeb_Resize(sender As Object, e As EventArgs) Handles tsWeb.Resize
-    txtHref.Width = tsWeb.Bounds.Width - btnHome.Bounds.Right - 46
-  End Sub
-
-  Private Sub txtHref_Enter(sender As Object, e As EventArgs) Handles txtHref.Enter
-    NavigateTo(UriTrackingGroupEnum.CUSTOM, txtHref.Text)
-  End Sub
-
-  Public Function GetRibbonBarConfig() As RibbonBarTabConfig Implements IDockPanelItem.GetRibbonBarConfig
-    Throw New NotImplementedException()
-  End Function
-
-  Public Function GetDockToolBarConfig() As DockToolBarConfig Implements IDockPanelItem.GetDockToolBarConfig
-    Throw New NotImplementedException()
-  End Function
-
-  Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Sub ApplySearch(criteria As String) Implements IDockPanelItem.ApplySearch
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Sub ClearSearch() Implements IDockPanelItem.ClearSearch
-    Throw New NotImplementedException()
-  End Sub
-
-#End Region
-
-#Region "Component Helper"
   'UserControl overrides dispose to clean up the component list.
   <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
@@ -589,7 +455,123 @@ Public Class AncestryWebViewer
       MyBase.Dispose(disposing)
     End Try
   End Sub
+
+#End Region
+
+#Region "Public Methods"
+
+  Public Sub ApplySearch(criteria As String) Implements IDockPanelItem.ApplySearch
+    Throw New NotImplementedException()
+  End Sub
+
+  Public Sub ClearSearch() Implements IDockPanelItem.ClearSearch
+    Throw New NotImplementedException()
+  End Sub
+
+  Public Function GetDockToolBarConfig() As DockToolBarConfig Implements IDockPanelItem.GetDockToolBarConfig
+    Throw New NotImplementedException()
+  End Function
+
+  Public Function GetRibbonBarConfig() As RibbonBarTabConfig Implements IDockPanelItem.GetRibbonBarConfig
+    Throw New NotImplementedException()
+  End Function
+
+  Public Sub NavigateTo(target As UriTrackingGroupEnum, Optional customParam As String = "")
+    Dim rtn As String = AncestryBaseURL
+    Select Case target
+      Case UriTrackingGroupEnum.CUSTOM
+        rtn = customParam
+      Case UriTrackingGroupEnum.ANCESTRY
+      Case UriTrackingGroupEnum.ANCESTRY_OVERVIEW_TREE
+        rtn += "family-tree/tree/{TREEID}/recent"
+      Case UriTrackingGroupEnum.ANCESTRY_TREEVIEW_FAMILY
+        rtn += "family-tree/tree/{TREEID}/family/pedigree?cfpid=0"
+      Case UriTrackingGroupEnum.ANCESTRY_TREEVIEW_PERSON
+        rtn += "family-tree/tree/{TREEID}/family/familyview{CFID}"
+      Case UriTrackingGroupEnum.ANCESTRY_PEDIGREEVIEW_PERSON
+        rtn += "family-tree/tree/{TREEID}/family/pedigree{CFID}"
+      Case UriTrackingGroupEnum.ANCESTRY_FANVIEW_PERSON
+        rtn += "family-tree/tree/{TREEID}/family/fanview{CFID}"
+      Case UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON
+        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/facts"
+      Case UriTrackingGroupEnum.ANCESTRY_STORY_PERSON
+        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/story"
+      Case UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON
+        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/gallery?galleryPage=1&tab=0"
+      Case UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON
+        rtn += "family-tree/person/tree/{TREEID}/person/{PERSONID}/hints"
+      Case Else
+    End Select
+    ' Replace Variables with ID's
+    rtn = rtn.Replace("{TREEID}", AncestryTreeID)
+    rtn = rtn.Replace("{CFID}", "?cfpid={PERSONID}")
+    If target <> UriTrackingGroupEnum.CUSTOM And customParam.Length > 0 Then
+      'TODO activeAncestor.Reset()
+      rtn = rtn.Replace("{PERSONID}", customParam)
+    Else
+      rtn = rtn.Replace("{PERSONID}", AncestorID)
+    End If
+    ' Perform Navigation
+    HREF = rtn
+  End Sub
+
+  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
+    Throw New NotImplementedException()
+  End Sub
+
+  Public Sub saveImageAs(filename As String)
+    Dim src As String = web.Source.AbsoluteUri
+    If src.EndsWith("jpg") Or src.EndsWith("jpeg") Then
+      My.Computer.Network.DownloadFile(src, filename)
+    Else
+      sameImageAsFilename = filename
+      JSAPI_Execute("ancestryAssistant.getImage();")
+    End If
+  End Sub
+
+  Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
+    Throw New NotImplementedException()
+  End Sub
+
+#End Region
+
+#Region "Fields"
+
+  Private WithEvents btnBack As ToolStripButton
+  Private WithEvents btnHome As ToolStripButton
+  Private WithEvents btnReload As ToolStripButton
+  Private WithEvents CoreWeb As CoreWebView2
+  Private WithEvents CoreWebDownload As CoreWebView2DownloadOperation
+
+  ' Tool Strip
+  Private WithEvents tsWeb As ToolStrip
+
+  Private WithEvents txtHref As ToolStripTextBox
+
+  ' Web Interface
+  Private WithEvents web As WebView2
+
+  Private Const AncestryBaseURL As String = "https://www.ancestry.com/"
+  Private Const EN_ITEMCAPTION As String = "Ancestry.com"
+
+  Private _AncestorID As String = ""
+
+  Private _MsgSyncKey As Integer = 0
+
+  Private _ShowToolbar As Boolean = False
+
+  Private _UriTrackingGroup As UriTrackingGroupEnum = UriTrackingGroupEnum.ANCESTRY
+
+  Private _URL As New Uri(AncestryBaseURL)
+
   Private components As System.ComponentModel.IContainer
+
+  ' Tracking
+  Private isReady As Boolean = False
+
+  Private sameImageAsFilename As String = ""
+  Private UriTrackingGroupDecoder As New UriTrackingGroup()
+
 #End Region
 
 End Class

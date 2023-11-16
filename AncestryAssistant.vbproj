@@ -17,6 +17,9 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
+    <Version>1.2023.1116.250</Version>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -29,7 +32,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -45,6 +47,9 @@
     </NoWarn>
     <WarningsAsErrors>
     </WarningsAsErrors>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -286,8 +291,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Source\App\Extensions\MySettings.vb" />
     <Compile Include="Source\Enums\DockPanelSplitterPlacement.vb" />
     <Compile Include="Source\Enums\DockPanelType.vb" />
+    <Compile Include="Source\Enums\ResizeEventType.vb" />
     <Compile Include="Source\Objects\Ancestor\AncestorAbstract.vb" />
     <Compile Include="Source\Objects\Ancestor\AncestorCollection.vb" />
     <Compile Include="Source\Objects\AncestryAssistantFile\AAFile.vb" />
@@ -296,7 +303,7 @@
     <Compile Include="Source\Objects\AncestryAssistantFile\ANotebook.vb" />
     <Compile Include="Source\Objects\AncestryAssistantFile\ASource.vb" />
     <Compile Include="Source\Objects\AncestryAssistantFile\ATimeline.vb" />
-    <Compile Include="Source\Objects\AncestryAssistantFile\Enums\AAFileTypeEnum.vb" />
+    <Compile Include="Source\Enums\AAFileTypeEnum.vb" />
     <Compile Include="Source\UI\DockPanels\DockPanelItems\WebBrowserPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -304,9 +311,6 @@
     <Compile Include="Source\Objects\URITracks\UriTrackingGroup.vb" />
     <Compile Include="Source\UI\DockPanels\DockPanelManager.vb">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Source\UI\DockPanels\DockPanel.Designer.vb">
-      <DependentUpon>DockPanel.vb</DependentUpon>
     </Compile>
     <Compile Include="Source\UI\DockPanels\DockPanel.vb">
       <SubType>UserControl</SubType>
@@ -334,6 +338,12 @@
     <Compile Include="Source\UI\Components\BordersPanel.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Source\UI\RibbonBar\RibbonBarFileTab.Designer.vb">
+      <DependentUpon>RibbonBarFileTab.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\UI\RibbonBar\RibbonBarFileTab.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Source\UI\RibbonBar\RibbonBarTabConfig.vb" />
     <Compile Include="Source\UI\Components\StatusBar.Designer.vb">
       <DependentUpon>StatusBar.vb</DependentUpon>
@@ -350,18 +360,18 @@
     </Compile>
     <Compile Include="Source\UI\Components\Renderers\ToolbarRender2.vb" />
     <Compile Include="Source\UI\Components\Renderers\ToolBarRenderer.vb" />
-    <Compile Include="Source\UI\Forms\Helpers\ResizeDragHandler.vb" />
-    <Compile Include="Source\UI\Dialogs\SaveImageDetails.Designer.vb">
-      <DependentUpon>SaveImageDetails.vb</DependentUpon>
+    <Compile Include="Source\App\Extensions\ResizeDragHandler.vb" />
+    <Compile Include="Source\UI\Dialogs\SaveImageDialog.Designer.vb">
+      <DependentUpon>SaveImageDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\UI\Dialogs\SaveImageDetails.vb">
+    <Compile Include="Source\UI\Dialogs\SaveImageDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\UI\Forms\ApplicationEvents.vb" />
-    <Compile Include="Source\UI\Forms\ApplicationForm.Designer.vb">
-      <DependentUpon>ApplicationForm.vb</DependentUpon>
+    <Compile Include="Source\App\Extensions\MyApplication.vb" />
+    <Compile Include="Source\App\AssistantAppForm.Designer.vb">
+      <DependentUpon>AssistantAppForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\UI\Forms\ApplicationForm.vb">
+    <Compile Include="Source\App\AssistantAppForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\UI\Components\IconButton.vb">
@@ -379,13 +389,13 @@
     <Compile Include="Source\UI\RibbonBar\RibbonBarTabGroup.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\UI\Forms\Helpers\SplashForm.Designer.vb">
-      <DependentUpon>SplashForm.vb</DependentUpon>
+    <Compile Include="Source\App\AssistantAppSplash.Designer.vb">
+      <DependentUpon>AssistantAppSplash.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\UI\Forms\Helpers\SplashForm.vb">
+    <Compile Include="Source\App\AssistantAppSplash.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\UI\Theme\UITheme.vb" />
+    <Compile Include="Source\App\Extensions\MyTheme.vb" />
     <Compile Include="Test\frmButtonTestForm.Designer.vb">
       <DependentUpon>frmButtonTestForm.vb</DependentUpon>
     </Compile>
@@ -404,12 +414,6 @@
     <Compile Include="Test\frmTestDockPanel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Test\frmTestRibbon.Designer.vb">
-      <DependentUpon>frmTestRibbon.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmTestRibbon.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Test\frmColorPallet.Designer.vb">
       <DependentUpon>frmColorPallet.vb</DependentUpon>
     </Compile>
@@ -425,6 +429,12 @@
     <Compile Include="Source\UI\DockPanels\DockPanelItems\CensusPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Test\frmTestRibbon.Designer.vb">
+      <DependentUpon>frmTestRibbon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Test\frmTestRibbon.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Test\frmTestSplitters.Designer.vb">
       <DependentUpon>frmTestSplitters.vb</DependentUpon>
     </Compile>
@@ -433,6 +443,12 @@
     </Compile>
     <Compile Include="Source\Objects\GedcomFile\File\FileLineEntry.vb" />
     <Compile Include="Source\Objects\GedcomFile\Primatives\GedDate.vb" />
+    <Compile Include="Test\frmVBFixer.Designer.vb">
+      <DependentUpon>frmVBFixer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Test\frmVBFixer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <None Include="Source\Objects\GedcomFile\File\PlaceNormalized.vb" />
     <Compile Include="Source\UI\DockPanels\DockPanelItems\ImageGalleryPanelItem.vb">
       <SubType>UserControl</SubType>
@@ -482,17 +498,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Source\UI\DockPanels\DockPanel.resx">
-      <DependentUpon>DockPanel.vb</DependentUpon>
+    <EmbeddedResource Include="Source\UI\Dialogs\SaveImageDialog.resx">
+      <DependentUpon>SaveImageDialog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\UI\Dialogs\SaveImageDetails.resx">
-      <DependentUpon>SaveImageDetails.vb</DependentUpon>
+    <EmbeddedResource Include="Source\App\AssistantAppForm.resx">
+      <DependentUpon>AssistantAppForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\UI\Forms\ApplicationForm.resx">
-      <DependentUpon>ApplicationForm.vb</DependentUpon>
+    <EmbeddedResource Include="Source\App\AssistantAppSplash.resx">
+      <DependentUpon>AssistantAppSplash.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\UI\Forms\Helpers\SplashForm.resx">
-      <DependentUpon>SplashForm.vb</DependentUpon>
+    <EmbeddedResource Include="Source\UI\RibbonBar\RibbonBarFileTab.resx">
+      <DependentUpon>RibbonBarFileTab.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmButtonTestForm.resx">
       <DependentUpon>frmButtonTestForm.vb</DependentUpon>
@@ -502,9 +518,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmTestDockPanel.resx">
       <DependentUpon>frmTestDockPanel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmTestRibbon.resx">
-      <DependentUpon>frmTestRibbon.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmColorPallet.resx">
       <DependentUpon>frmColorPallet.vb</DependentUpon>
@@ -518,8 +531,14 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Test\frmTestRibbon.resx">
+      <DependentUpon>frmTestRibbon.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Test\frmTestSplitters.resx">
       <DependentUpon>frmTestSplitters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\frmVBFixer.resx">
+      <DependentUpon>frmVBFixer.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -537,8 +556,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="Config\App.config" />
-    <None Include="Config\packages.config" />
     <None Include="Documentation\Components.md" />
     <None Include="Documentation\Theme.md" />
   </ItemGroup>
@@ -561,52 +578,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\x64\Debug\runtimes\win-x64\native\" />
-    <Folder Include="Config\runtimes\win-x64\native\" />
     <Folder Include="Documentation\assets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
-    <Content Include="Config\face.xml" />
-    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\concrt140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AdditionalFiles>
-    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\cvextern.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AdditionalFiles>
-    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\msvcp140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AdditionalFiles>
-    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\msvcp140_1.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AdditionalFiles>
-    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\msvcp140_2.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AdditionalFiles>
-    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\msvcp140_atomic_wait.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AdditionalFiles>
-    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\msvcp140_codecvt_ids.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AdditionalFiles>
-    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\opencv_videoio_ffmpeg481_64.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AdditionalFiles>
-    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\vcruntime140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AdditionalFiles>
-    <AdditionalFiles Include="bin\Debug\runtimes\win-x64\native\vcruntime140_1.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AdditionalFiles>
-    <Content Include="Config\runtimes\win-x86\native\concrt140.dll" />
-    <Content Include="Config\runtimes\win-x86\native\cvextern.dll" />
-    <Content Include="Config\runtimes\win-x86\native\msvcp140.dll" />
-    <Content Include="Config\runtimes\win-x86\native\msvcp140_1.dll" />
-    <Content Include="Config\runtimes\win-x86\native\msvcp140_2.dll" />
-    <Content Include="Config\runtimes\win-x86\native\msvcp140_atomic_wait.dll" />
-    <Content Include="Config\runtimes\win-x86\native\msvcp140_codecvt_ids.dll" />
-    <Content Include="Config\runtimes\win-x86\native\opencv_videoio_ffmpeg481.dll" />
-    <Content Include="Config\runtimes\win-x86\native\vcruntime140.dll" />
     <Content Include="Resources\adobe\Assets.psd" />
     <Content Include="Resources\adobe\Panel.psd" />
     <None Include="Resources\interaktionen-copy.png" />

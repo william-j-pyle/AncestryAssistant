@@ -3,20 +3,7 @@ Imports System.Text
 
 Public Class AAFile
 
-  Const FIELD_SEPERATOR_CODE As Integer = 175
-
-  Private _IsDirty As Boolean = False
-
-  Public ReadOnly Property IsDirty As Boolean
-    Get
-      Return _IsDirty
-    End Get
-  End Property
-
-  Public Property CanSave As Boolean = True
-
-
-  Private sAAFileName As String = ""
+#Region "Properties"
 
   Public Property AAFileName As String
     Get
@@ -28,8 +15,6 @@ Public Class AAFile
     End Set
   End Property
 
-  Private iAAFileType As AAFileTypeEnum = AAFileTypeEnum.UNDEFINED
-
   Public Property AAFileType As AAFileTypeEnum
     Get
       Return iAAFileType
@@ -39,6 +24,13 @@ Public Class AAFile
         iAAFileType = value
       End If
     End Set
+  End Property
+
+  Public Property CanSave As Boolean = True
+  Public ReadOnly Property ColumnNames As String()
+    Get
+      Return aValueHeaders
+    End Get
   End Property
 
   Public ReadOnly Property Count As Integer
@@ -59,6 +51,16 @@ Public Class AAFile
     End Get
   End Property
 
+  Public ReadOnly Property IsDirty As Boolean
+    Get
+      Return _IsDirty
+    End Get
+  End Property
+
+#End Region
+
+#Region "Public Constructors"
+
   Public Sub New()
     Initialize()
   End Sub
@@ -68,6 +70,10 @@ Public Class AAFile
     AAFileName = FileName
   End Sub
 
+#End Region
+
+#Region "Private Methods"
+
   Private Sub Initialize()
     aValueHeaders = {}
     aValues = New ArrayList()
@@ -75,96 +81,6 @@ Public Class AAFile
     dKeyValuePair = New Dictionary(Of String, String)
     _IsDirty = False
   End Sub
-
-
-  Private aValueHeaders() As String = {}
-  Public ReadOnly Property ColumnNames As String()
-    Get
-      Return aValueHeaders
-    End Get
-  End Property
-
-
-  Public Function getHeaders() As String()
-    Return aValueHeaders
-  End Function
-
-  Public Sub setHeaders(headers() As String)
-    aValueHeaders = headers
-    _IsDirty = True
-  End Sub
-
-  Private aValues As ArrayList = New ArrayList()
-
-  Public Function getValues() As ArrayList
-    Return aValues
-  End Function
-
-  Public Sub setValues(values As ArrayList)
-    aValues = values
-    _IsDirty = True
-  End Sub
-
-  Public Function getTableData() As ArrayList
-    Dim data As ArrayList = New ArrayList
-    data.Add(aValueHeaders)
-    data.AddRange(aValues)
-    Return data
-  End Function
-
-  Public Sub setTableData(table As List(Of List(Of String)))
-    If table.Count > 0 Then
-      aValueHeaders = table.Item(0).ToArray()
-      aValues.Clear()
-      For i As Integer = 1 To table.Count - 1
-        aValues.Add(table.Item(i).ToArray())
-      Next
-      _IsDirty = True
-    End If
-  End Sub
-
-
-  Public Sub setTableData(table As ArrayList)
-    aValueHeaders = table.Item(0)
-    aValues.Clear()
-    For i As Integer = 1 To table.Count - 1
-      aValues.Add(table.Item(i))
-    Next
-    _IsDirty = True
-  End Sub
-
-  Private sSingleValue As String = ""
-  Private dKeyValuePair As Dictionary(Of String, String) = New Dictionary(Of String, String)
-
-  Public Property Value(Optional key As String = "") As String
-    Get
-      Select Case AAFileType
-        Case AAFileTypeEnum.KEYVALUEPAIRS ' Key/Value Pairs
-          If dKeyValuePair.ContainsKey(key) Then
-            Return dKeyValuePair.Item(key)
-          Else
-            Return String.Empty
-          End If
-        Case AAFileTypeEnum.SINGLEVALUE ' Single Value
-          Return sSingleValue
-      End Select
-      Return String.Empty
-    End Get
-    Set(value As String)
-      Select Case AAFileType
-        Case AAFileTypeEnum.KEYVALUEPAIRS ' Key/Value Pairs
-          If dKeyValuePair.ContainsKey(key) Then
-            dKeyValuePair.Item(key) = value
-          Else
-            dKeyValuePair.Add(key, value)
-          End If
-        Case AAFileTypeEnum.SINGLEVALUE ' Single Value
-          sSingleValue = value
-      End Select
-      _IsDirty = True
-    End Set
-  End Property
-
 
   Private Sub Load()
     Initialize()
@@ -183,7 +99,7 @@ Public Class AAFile
             Next
             _IsDirty = False
           Case AAFileTypeEnum.SINGLEVALUE ' Single Value
-            Dim sb As StringBuilder = New StringBuilder()
+            Dim sb As New StringBuilder()
             If lines.Length > 1 Then
               sb.Append(lines(1))
               For l As Integer = 2 To lines.Length - 1
@@ -206,13 +122,33 @@ Public Class AAFile
     End If
   End Sub
 
+#End Region
+
+#Region "Public Methods"
+
+  Public Function getHeaders() As String()
+    Return aValueHeaders
+  End Function
+
+  Public Function getTableData() As ArrayList
+    Dim data As New ArrayList From {
+      aValueHeaders
+    }
+    data.AddRange(aValues)
+    Return data
+  End Function
+
+  Public Function getValues() As ArrayList
+    Return aValues
+  End Function
+
   Public Sub Save()
     If Not CanSave Then Exit Sub
     If AAFileName.Length = 0 Or AAFileType < 0 Then
       Throw New FormatException("Both Filename and FileType must be set to perform a save")
       Exit Sub
     End If
-    Dim sb As StringBuilder = New StringBuilder
+    Dim sb As New StringBuilder
     sb.Append(AAFileType)
     Select Case AAFileType
       Case AAFileTypeEnum.KEYVALUEPAIRS
@@ -246,5 +182,90 @@ Public Class AAFile
     File.WriteAllText(AAFileName, sb.ToString)
     _IsDirty = False
   End Sub
+
+  Public Sub setHeaders(headers() As String)
+    aValueHeaders = headers
+    _IsDirty = True
+  End Sub
+
+  Public Sub setTableData(table As List(Of List(Of String)))
+    If table.Count > 0 Then
+      aValueHeaders = table.Item(0).ToArray()
+      aValues.Clear()
+      For i As Integer = 1 To table.Count - 1
+        aValues.Add(table.Item(i).ToArray())
+      Next
+      _IsDirty = True
+    End If
+  End Sub
+
+  Public Sub setTableData(table As ArrayList)
+    aValueHeaders = table.Item(0)
+    aValues.Clear()
+    For i As Integer = 1 To table.Count - 1
+      aValues.Add(table.Item(i))
+    Next
+    _IsDirty = True
+  End Sub
+
+  Public Sub setValues(values As ArrayList)
+    aValues = values
+    _IsDirty = True
+  End Sub
+
+#End Region
+
+#Region "Indexers"
+
+  Public Property Value(Optional key As String = "") As String
+    Get
+      Select Case AAFileType
+        Case AAFileTypeEnum.KEYVALUEPAIRS ' Key/Value Pairs
+          If dKeyValuePair.ContainsKey(key) Then
+            Return dKeyValuePair.Item(key)
+          Else
+            Return String.Empty
+          End If
+        Case AAFileTypeEnum.SINGLEVALUE ' Single Value
+          Return sSingleValue
+      End Select
+      Return String.Empty
+    End Get
+    Set(value As String)
+      Select Case AAFileType
+        Case AAFileTypeEnum.KEYVALUEPAIRS ' Key/Value Pairs
+          If dKeyValuePair.ContainsKey(key) Then
+            dKeyValuePair.Item(key) = value
+          Else
+            dKeyValuePair.Add(key, value)
+          End If
+        Case AAFileTypeEnum.SINGLEVALUE ' Single Value
+          sSingleValue = value
+      End Select
+      _IsDirty = True
+    End Set
+  End Property
+
+#End Region
+
+#Region "Fields"
+
+  Const FIELD_SEPERATOR_CODE As Integer = 175
+
+  Private _IsDirty As Boolean = False
+
+  Private aValueHeaders() As String = {}
+
+  Private aValues As New ArrayList()
+
+  Private dKeyValuePair As New Dictionary(Of String, String)
+
+  Private iAAFileType As AAFileTypeEnum = AAFileTypeEnum.UNDEFINED
+
+  Private sAAFileName As String = ""
+
+  Private sSingleValue As String = ""
+
+#End Region
 
 End Class

@@ -4,19 +4,22 @@ Imports System.IO
 <DefaultPropertyAttribute("ID")>
 Public MustInherit Class AncestorAbstract
 
-  Private facts As AAFile
-  Private parents As AAFile
-  Private marriages() As String
-  Private children As AAFile
-  Private siblings As AAFile
-  Private sources As ASource
-  Private events As ATimeline
-  Private oCensus As ACensus
-  Private gallery As AGallery
-  Private notebook As ANotebook
-  Public ReadOnly Property IsValid As Boolean = False
+#Region "Properties"
 
-  Private sID As String = ""
+  Public Property AncestorPath As String
+    Get
+      Return sAncestorPath
+    End Get
+    Set(value As String)
+      If Not value.EndsWith("\") Then value += "\"
+      If Not Directory.Exists(value) Then
+        Throw New DirectoryNotFoundException("Ancestor Path not found")
+      End If
+      sAncestorPath = value
+      Dim p() As String = value.Split("\"c)
+      ID = p(UBound(p) - 1)
+    End Set
+  End Property
 
   Public ReadOnly Property Census As ACensus
     Get
@@ -24,48 +27,13 @@ Public MustInherit Class AncestorAbstract
     End Get
   End Property
 
-  Public Property ID As String
-    Get
-      Return sID
-    End Get
-    Set(value As String)
-      sID = ""
-      If IsNumeric(value) Then
-        sID = value.Trim
-      End If
-      If sID = "" Then
-        Throw New InvalidDataException("ID is invalid")
-      End If
-    End Set
-  End Property
-
-  Public Property Surname As String
-    Get
-      Return facts.Value("SURNAME")
-    End Get
-    Set(value As String)
-      facts.Value("SURNAME") = value
-      facts.Save()
-    End Set
-  End Property
-
-  Public Property Givenname As String
-    Get
-      Return facts.Value("GIVENNAME")
-    End Get
-    Set(value As String)
-      facts.Value("GIVENNAME") = value
-      facts.Save()
-    End Set
-  End Property
-
   Public Property FullName As String
     Get
       Return New GedName(facts.Value("SURNAME"), facts.Value("GIVENNAME"), facts.Value("SUFFIX")).Name
     End Get
     Set(value As String)
-      Dim gName As GedName = New GedName(value)
-      Surname = gName.Surname
+      Dim gName As New GedName(value)
+      Surname = gName.SurName
       Givenname = gName.Given
       facts.Value("SUFFIX") = gName.Suffix
       facts.Save()
@@ -84,6 +52,65 @@ Public MustInherit Class AncestorAbstract
     End Get
   End Property
 
+  Public Property Givenname As String
+    Get
+      Return facts.Value("GIVENNAME")
+    End Get
+    Set(value As String)
+      facts.Value("GIVENNAME") = value
+      facts.Save()
+    End Set
+  End Property
+
+  Public ReadOnly Property HasCensus As Boolean
+    Get
+      Return oCensus.length > 0
+    End Get
+  End Property
+
+  Public ReadOnly Property HasFamily As Boolean = False
+  Public ReadOnly Property HasImages As Boolean
+    Get
+      Return gallery.length > 0
+    End Get
+  End Property
+
+  Public ReadOnly Property HasNotes As Boolean = False
+  Public ReadOnly Property HasProfileImage As Boolean = False
+  Public ReadOnly Property HasSources As Boolean
+    Get
+      Return sources.length > 0
+    End Get
+  End Property
+
+  Public ReadOnly Property HasTimeline As Boolean
+    Get
+      Return events.length > 0
+    End Get
+  End Property
+
+  Public Property ID As String
+    Get
+      Return sID
+    End Get
+    Set(value As String)
+      sID = ""
+      If IsNumeric(value) Then
+        sID = value.Trim
+      End If
+      If sID = "" Then
+        Throw New InvalidDataException("ID is invalid")
+      End If
+    End Set
+  End Property
+
+  Public ReadOnly Property IsDeathDateExpected As Boolean
+    Get
+      Return (2023 - GedBirthDate.Year) > 90
+    End Get
+  End Property
+
+  Public ReadOnly Property IsValid As Boolean = False
   Public ReadOnly Property LifeSpan As String
     Get
       Dim birth As Integer = GedBirthDate.Year
@@ -101,101 +128,19 @@ Public MustInherit Class AncestorAbstract
     End Get
   End Property
 
-  Public ReadOnly Property IsDeathDateExpected As Boolean
+  Public Property Surname As String
     Get
-      Return (2023 - GedBirthDate.Year) > 90
-    End Get
-  End Property
-
-
-
-  Public Property Fact(factKey As String) As String
-    Get
-      Select Case factKey.ToUpper
-        Case "FULLNAME"
-          Return FullName
-        Case "GIVENNAME"
-          Return Givenname
-        Case "SURNAME"
-          Return Surname
-        Case Else
-          Return facts.Value(factKey.ToUpper)
-      End Select
+      Return facts.Value("SURNAME")
     End Get
     Set(value As String)
-      Select Case factKey.ToUpper
-        Case "FULLNAME"
-          FullName = value
-        Case "GIVENNAME"
-          Givenname = value
-        Case "SURNAME"
-          Surname = value
-        Case Else
-          facts.Value(factKey.ToUpper) = value
-          facts.Save()
-      End Select
+      facts.Value("SURNAME") = value
+      facts.Save()
     End Set
   End Property
 
-  Private sAncestorPath As String = ""
+#End Region
 
-  Public Property AncestorPath As String
-    Get
-      Return sAncestorPath
-    End Get
-    Set(value As String)
-      If Not value.EndsWith("\") Then value += "\"
-      If Not Directory.Exists(value) Then
-        Throw New DirectoryNotFoundException("Ancestor Path not found")
-      End If
-      sAncestorPath = value
-      Dim p() As String = value.Split("\"c)
-      ID = p(UBound(p) - 1)
-    End Set
-  End Property
-
-  Public ReadOnly Property HasProfileImage As Boolean = False
-
-  Public ReadOnly Property HasImages As Boolean
-    Get
-      Return gallery.length > 0
-    End Get
-  End Property
-
-  Public ReadOnly Property HasNotes As Boolean = False
-
-  Public ReadOnly Property HasFamily As Boolean = False
-
-  Public ReadOnly Property HasSources As Boolean
-    Get
-      Return sources.length > 0
-    End Get
-  End Property
-
-  Public ReadOnly Property HasCensus As Boolean
-    Get
-      Return oCensus.length > 0
-    End Get
-  End Property
-
-  Public ReadOnly Property HasTimeline As Boolean
-    Get
-      Return events.length > 0
-    End Get
-  End Property
-
-  Public Sub Refresh()
-    LoadAncestor()
-  End Sub
-
-  Friend Sub LoadAncestor(MyAncestorPath As String)
-    AncestorPath = MyAncestorPath
-    LoadAncestor()
-  End Sub
-
-  Public Function FullPath(FileOrDirName As String) As String
-    Return AncestorPath + FileOrDirName
-  End Function
+#Region "Private Methods"
 
   Private Sub LoadAncestor()
     facts = New AAFile(FullPath("facts.aa"))
@@ -228,14 +173,21 @@ Public MustInherit Class AncestorAbstract
 
   End Sub
 
-  Public Function AncestorFactList() As List(Of String)
-    Dim rtn As List(Of String) = New List(Of String)
-    rtn.AddRange({"givenname", "surname", "suffix", "birthPlace", "birthDate", "deathPlace", "deathDate", "gender", "photo"})
-    Return rtn
-  End Function
+#End Region
+
+#Region "Internal Methods"
+
+  Friend Sub LoadAncestor(MyAncestorPath As String)
+    AncestorPath = MyAncestorPath
+    LoadAncestor()
+  End Sub
+
+#End Region
+
+#Region "Public Methods"
 
   Public Function AncestorFactDifferences(msg As APIMessage) As List(Of String)
-    Dim rtn As List(Of String) = New List(Of String)
+    Dim rtn As New List(Of String)
     For Each factkey As String In AncestorFactList()
       If Not Fact(factkey).Equals(msg.GetValue(factkey)) Then
         Debug.Print("Fact Difference: " + factkey)
@@ -245,9 +197,73 @@ Public MustInherit Class AncestorAbstract
     Return rtn
   End Function
 
+  Public Function AncestorFactList() As List(Of String)
+    Dim rtn As New List(Of String)
+    rtn.AddRange({"givenname", "surname", "suffix", "birthPlace", "birthDate", "deathPlace", "deathDate", "gender", "photo"})
+    Return rtn
+  End Function
 
   Public Function AncestorMatchesMessage(msg As APIMessage) As Boolean
     Return AncestorFactDifferences(msg).Count = 0
   End Function
+
+  Public Function FullPath(FileOrDirName As String) As String
+    Return AncestorPath + FileOrDirName
+  End Function
+
+  Public Sub Refresh()
+    LoadAncestor()
+  End Sub
+
+#End Region
+
+#Region "Indexers"
+
+  Public Property Fact(factKey As String) As String
+    Get
+      Select Case factKey.ToUpper
+        Case "FULLNAME"
+          Return FullName
+        Case "GIVENNAME"
+          Return Givenname
+        Case "SURNAME"
+          Return Surname
+        Case Else
+          Return facts.Value(factKey.ToUpper)
+      End Select
+    End Get
+    Set(value As String)
+      Select Case factKey.ToUpper
+        Case "FULLNAME"
+          FullName = value
+        Case "GIVENNAME"
+          Givenname = value
+        Case "SURNAME"
+          Surname = value
+        Case Else
+          facts.Value(factKey.ToUpper) = value
+          facts.Save()
+      End Select
+    End Set
+  End Property
+
+#End Region
+
+#Region "Fields"
+
+  Private children As AAFile
+  Private events As ATimeline
+  Private facts As AAFile
+  Private gallery As AGallery
+  Private marriages() As String
+  Private notebook As ANotebook
+  Private oCensus As ACensus
+  Private parents As AAFile
+  Private sAncestorPath As String = ""
+  Private siblings As AAFile
+  Private sID As String = ""
+  Private sources As ASource
+
+#End Region
 
 End Class

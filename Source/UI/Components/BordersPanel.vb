@@ -3,12 +3,69 @@
 Public Class BordersPanel
   Inherits Panel
 
-  Public Sub New()
-    SetStyle(ControlStyles.UserPaint Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
-  End Sub
+#Region "Properties"
 
-  <Browsable(True), Category("JControl"), Description("Width in pixels of the border around the control")>
-  Dim _BorderWidth As Padding = New Padding(0)
+  Public Property BorderColor As Color
+    Get
+      Return _BorderColor
+    End Get
+    Set(value As Color)
+      _BorderColor = value
+      _BorderColorTop = value
+      _BorderColorLeft = value
+      _BorderColorRight = value
+      _BorderColorBottom = value
+      Invalidate()
+    End Set
+  End Property
+
+  Public Property BorderColorBottom As Color
+    Get
+      Return _BorderColorBottom
+    End Get
+    Set(value As Color)
+      _BorderColorBottom = value
+      _BorderColor = Color.Transparent
+      Invalidate()
+    End Set
+  End Property
+
+  Public Property BorderColorLeft As Color
+    Get
+      Return _BorderColorLeft
+    End Get
+    Set(value As Color)
+      _BorderColorLeft = value
+      _BorderColor = Color.Transparent
+      Invalidate()
+    End Set
+  End Property
+
+  Public Property BorderColorRight As Color
+    Get
+      Return _BorderColorRight
+    End Get
+    Set(value As Color)
+      _BorderColorRight = value
+      _BorderColor = Color.Transparent
+      Invalidate()
+    End Set
+  End Property
+
+  Public Property BorderColorTop As Color
+    Get
+      Return _BorderColorTop
+    End Get
+    Set(value As Color)
+      _BorderColorTop = value
+      _BorderColor = Color.Transparent
+      Invalidate()
+    End Set
+  End Property
+
+  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+  Public Shadows Property BorderStyle As BorderStyle
+
   Public Property BorderWidth As Padding
     Get
       Return _BorderWidth
@@ -27,68 +84,6 @@ Public Class BordersPanel
     End Set
   End Property
 
-  <Browsable(True), Category("JControl"), Description("Color of the border around the control")>
-  Dim _BorderColor As Color = Color.Transparent
-  Public Property BorderColor As Color
-    Get
-      Return _BorderColor
-    End Get
-    Set(value As Color)
-      _BorderColor = value
-      _BorderColorTop = value
-      _BorderColorLeft = value
-      _BorderColorRight = value
-      _BorderColorBottom = value
-      Invalidate()
-    End Set
-  End Property
-  Dim _BorderColorTop As Color = Color.Transparent
-  Public Property BorderColorTop As Color
-    Get
-      Return _BorderColorTop
-    End Get
-    Set(value As Color)
-      _BorderColorTop = value
-      _BorderColor = Color.Transparent
-      Invalidate()
-    End Set
-  End Property
-  Dim _BorderColorLeft As Color = Color.Transparent
-  Public Property BorderColorLeft As Color
-    Get
-      Return _BorderColorLeft
-    End Get
-    Set(value As Color)
-      _BorderColorLeft = value
-      _BorderColor = Color.Transparent
-      Invalidate()
-    End Set
-  End Property
-  Dim _BorderColorRight As Color = Color.Transparent
-  Public Property BorderColorRight As Color
-    Get
-      Return _BorderColorRight
-    End Get
-    Set(value As Color)
-      _BorderColorRight = value
-      _BorderColor = Color.Transparent
-      Invalidate()
-    End Set
-  End Property
-  Dim _BorderColorBottom As Color = Color.Transparent
-  Public Property BorderColorBottom As Color
-    Get
-      Return _BorderColorBottom
-    End Get
-    Set(value As Color)
-      _BorderColorBottom = value
-      _BorderColor = Color.Transparent
-      Invalidate()
-    End Set
-  End Property
-
-  <Browsable(True), Category("JControl"), Description("Sets the number of pixels for the Corner radius. Valid 0 to Min(Height,Width)/2")>
-  Private _CornerRadius As Padding = New Padding(0)
   Public Property CornerRadius As Padding
     Get
       Return _CornerRadius
@@ -108,8 +103,17 @@ Public Class BordersPanel
     End Set
   End Property
 
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-  Public Shadows Property BorderStyle As BorderStyle
+#End Region
+
+#Region "Public Constructors"
+
+  Public Sub New()
+    SetStyle(ControlStyles.UserPaint Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
+  End Sub
+
+#End Region
+
+#Region "Private Methods"
 
   Private Sub BordersPanel_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
     'MyBase.OnPaint(e)
@@ -144,16 +148,16 @@ Public Class BordersPanel
       path.AddLine(0, Height - CornerRadiusBottomLeft, 0, CornerRadiusTopLeft)
       path.CloseFigure()
       Region = New Region(path)
-      Using brush As SolidBrush = New SolidBrush(BackColor)
+      Using brush As New SolidBrush(BackColor)
         e.Graphics.FillRectangle(brush, ClientRectangle)
       End Using
     End If
 
     If BorderWidth.All <> 0 Then
-      Dim jPenLeft As Pen = New Pen(BorderColorLeft, BorderWidth.Left * 2)
-      Dim jPenTop As Pen = New Pen(BorderColorTop, BorderWidth.Top * 2)
-      Dim jPenRight As Pen = New Pen(BorderColorRight, BorderWidth.Right * 2)
-      Dim jPenBottom As Pen = New Pen(BorderColorBottom, BorderWidth.Bottom * 2)
+      Dim jPenLeft As New Pen(BorderColorLeft, BorderWidth.Left * 2)
+      Dim jPenTop As New Pen(BorderColorTop, BorderWidth.Top * 2)
+      Dim jPenRight As New Pen(BorderColorRight, BorderWidth.Right * 2)
+      Dim jPenBottom As New Pen(BorderColorBottom, BorderWidth.Bottom * 2)
       If CornerRadius.All <> 0 Then
         If BorderWidth.Top > 0 And CornerRadiusTopLeft > 0 Then
           e.Graphics.DrawArc(jPenTop, New Rectangle(0, 0, CornerRadiusTopLeft * 2, CornerRadiusTopLeft * 2), 180, 90)
@@ -183,4 +187,28 @@ Public Class BordersPanel
     End If
 
   End Sub
+
+#End Region
+
+#Region "Fields"
+
+  <Browsable(True), Category("JControl"), Description("Color of the border around the control")>
+  Dim _BorderColor As Color = Color.Transparent
+
+  Dim _BorderColorBottom As Color = Color.Transparent
+
+  Dim _BorderColorLeft As Color = Color.Transparent
+
+  Dim _BorderColorRight As Color = Color.Transparent
+
+  Dim _BorderColorTop As Color = Color.Transparent
+
+  <Browsable(True), Category("JControl"), Description("Width in pixels of the border around the control")>
+  Dim _BorderWidth As New Padding(0)
+
+  <Browsable(True), Category("JControl"), Description("Sets the number of pixels for the Corner radius. Valid 0 to Min(Height,Width)/2")>
+  Private _CornerRadius As New Padding(0)
+
+#End Region
+
 End Class

@@ -1,6 +1,5 @@
 ﻿''' <summary>
-''' To visually review the fonts use the following website
-''' https://learn.microsoft.com/en-us/windows/apps/design/style/segoe-fluent-icons-font
+'''     To visually review the fonts use the following website https://learn.microsoft.com/en-us/windows/apps/design/style/segoe-fluent-icons-font
 ''' </summary>
 Public Enum FontSegoeFluentIconsEnum
   Blank = 0

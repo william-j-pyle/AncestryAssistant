@@ -1,12 +1,24 @@
 ﻿Public Class UriTracks
-  Public ReadOnly Property UriTrackingGroup As UriTrackingGroupEnum
+
+#Region "Properties"
+
   Public ReadOnly Property PageDataElements As String()
+
+  Public ReadOnly Property UriTrackingGroup As UriTrackingGroupEnum
+
+#End Region
+
+#Region "Public Constructors"
 
   Public Sub New(trackingGroup As UriTrackingGroupEnum, pageData() As String)
     UriTrackingGroup = trackingGroup
 
     PageDataElements = pageData
   End Sub
+
+#End Region
+
+#Region "Public Methods"
 
   Public Function Matches(pPageData() As String) As Boolean
     Dim uPageData() As String = PageDataElements
@@ -20,4 +32,7 @@
     Next
     Return True
   End Function
+
+#End Region
+
 End Class

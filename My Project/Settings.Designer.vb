@@ -80,162 +80,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("239")>  _
-        Public Property MainSplitter() As Integer
-            Get
-                Return CType(Me("MainSplitter"),Integer)
-            End Get
-            Set
-                Me("MainSplitter") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property MainSplitter_Panel1Collapsed() As Boolean
-            Get
-                Return CType(Me("MainSplitter_Panel1Collapsed"),Boolean)
-            End Get
-            Set
-                Me("MainSplitter_Panel1Collapsed") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property MainSplitter_Panel2Collapsed() As Boolean
-            Get
-                Return CType(Me("MainSplitter_Panel2Collapsed"),Boolean)
-            End Get
-            Set
-                Me("MainSplitter_Panel2Collapsed") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property SideSplitter_Panel1Collapsed() As Boolean
-            Get
-                Return CType(Me("SideSplitter_Panel1Collapsed"),Boolean)
-            End Get
-            Set
-                Me("SideSplitter_Panel1Collapsed") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property SideSplitter_Panel2Collapsed() As Boolean
-            Get
-                Return CType(Me("SideSplitter_Panel2Collapsed"),Boolean)
-            End Get
-            Set
-                Me("SideSplitter_Panel2Collapsed") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("188")>  _
-        Public Property SideSplitter() As Integer
-            Get
-                Return CType(Me("SideSplitter"),Integer)
-            End Get
-            Set
-                Me("SideSplitter") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property SideSplitter_Panel1Visible() As Boolean
-            Get
-                Return CType(Me("SideSplitter_Panel1Visible"),Boolean)
-            End Get
-            Set
-                Me("SideSplitter_Panel1Visible") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property SideSplitter_Panel2Visible() As Boolean
-            Get
-                Return CType(Me("SideSplitter_Panel2Visible"),Boolean)
-            End Get
-            Set
-                Me("SideSplitter_Panel2Visible") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("175")>  _
-        Public Property Ancestor_Name_Width() As Integer
-            Get
-                Return CType(Me("Ancestor_Name_Width"),Integer)
-            End Get
-            Set
-                Me("Ancestor_Name_Width") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("175")>  _
-        Public Property Ancestor_Death_Width() As Integer
-            Get
-                Return CType(Me("Ancestor_Death_Width"),Integer)
-            End Get
-            Set
-                Me("Ancestor_Death_Width") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("60")>  _
-        Public Property Ancestor_Birth_Width() As Integer
-            Get
-                Return CType(Me("Ancestor_Birth_Width"),Integer)
-            End Get
-            Set
-                Me("Ancestor_Birth_Width") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("75")>  _
-        Public Property Ancestor_Task_Item() As Integer
-            Get
-                Return CType(Me("Ancestor_Task_Item"),Integer)
-            End Get
-            Set
-                Me("Ancestor_Task_Item") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("200")>  _
-        Public Property Ancestor_Task_Comments() As Integer
-            Get
-                Return CType(Me("Ancestor_Task_Comments"),Integer)
-            End Get
-            Set
-                Me("Ancestor_Task_Comments") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("0, 0")>  _
         Public Property TB_ANCESTRY_LOC() As Global.System.Drawing.Point
             Get
@@ -267,30 +111,6 @@ Namespace My
             End Get
             Set
                 Me("TB_RESEARCH_LOC") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 8.25pt")>  _
-        Public Property APP_FONT() As Global.System.Drawing.Font
-            Get
-                Return CType(Me("APP_FONT"),Global.System.Drawing.Font)
-            End Get
-            Set
-                Me("APP_FONT") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("ControlText")>  _
-        Public Property FORM_A_FG() As Global.System.Drawing.Color
-            Get
-                Return CType(Me("FORM_A_FG"),Global.System.Drawing.Color)
-            End Get
-            Set
-                Me("FORM_A_FG") = value
             End Set
         End Property
         
@@ -572,7 +392,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
         Public Property UI_MB_VIS() As Boolean
             Get
                 Return CType(Me("UI_MB_VIS"),Boolean)
@@ -747,6 +567,18 @@ Namespace My
             End Get
             Set
                 Me("ANCESTRY_TREE_ID") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("424, 322")>  _
+        Public Property APP_CLIENTSIZE() As Global.System.Drawing.Size
+            Get
+                Return CType(Me("APP_CLIENTSIZE"),Global.System.Drawing.Size)
+            End Get
+            Set
+                Me("APP_CLIENTSIZE") = value
             End Set
         End Property
     End Class

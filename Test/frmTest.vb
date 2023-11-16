@@ -1,6 +1,6 @@
 ﻿Public Class frmTest
 
-  Private frm As Form
+#Region "Private Methods"
 
   Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
     If frm IsNot Nothing Then
@@ -38,12 +38,6 @@
     frm.Show()
   End Sub
 
-
-
-  Private Sub TextBox1_GotFocus(sender As Object, e As EventArgs) Handles TextBox1.GotFocus, TextBox2.GotFocus, TextBox3.GotFocus, TextBox4.GotFocus, TextBox5.GotFocus
-    PictureBox1.Select()
-  End Sub
-
   Private Sub PictureBox5_Click(sender As Object, e As EventArgs) Handles PictureBox5.Click
     If frm IsNot Nothing Then
       frm.Close()
@@ -52,4 +46,17 @@
     frm = New frmTestGEDCOM
     frm.Show()
   End Sub
+
+  Private Sub TextBox1_GotFocus(sender As Object, e As EventArgs) Handles TextBox1.GotFocus, TextBox2.GotFocus, TextBox3.GotFocus, TextBox4.GotFocus, TextBox5.GotFocus
+    PictureBox1.Select()
+  End Sub
+
+#End Region
+
+#Region "Fields"
+
+  Private frm As Form
+
+#End Region
+
 End Class

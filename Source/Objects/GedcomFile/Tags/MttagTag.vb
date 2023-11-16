@@ -1,15 +1,23 @@
 Public Class MttagTag
   Inherits AbstractTag
-  Public Const GEDCOM_TAG = "_MTTAG"
 
+#Region "Properties"
+
+  Public Property rin As String
+  ' Attributes
+  Public Property tagName As String
+
+#End Region
+
+#Region "Public Constructors"
 
   Public Sub New(data As Gedcom)
     MyBase.New(data, GEDCOM_TAG, True)
   End Sub
 
-  ' Attributes
-  Public Property tagName As String
-  Public Property rin As String
+#End Region
+
+#Region "Public Methods"
 
   Public Overrides Function processTag(key As String) As Boolean
     Select Case key
@@ -28,4 +36,12 @@ Public Class MttagTag
     Return True
   End Function
 
-End class
+#End Region
+
+#Region "Fields"
+
+  Public Const GEDCOM_TAG As String = "_MTTAG"
+
+#End Region
+
+End Class

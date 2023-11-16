@@ -66,11 +66,10 @@ ancestryAssistant.getState = function () {
 	}
 };
 
-
 ancestryAssistant.getPage = function () {
 	console.log("getPage");
 	if (typeof (window.page_name) == 'undefined' && location.host=='www.ancestry.com')  {
-		setTimeout(() => {ancestryAssistant.getPage();}, 2000); 
+		setTimeout(() => {ancestryAssistant.getPage();}, 2000);
 		return;
 	}
 	console.log("getPage:Running");
@@ -84,7 +83,6 @@ ancestryAssistant.getPage = function () {
 	}
 	this.postMessage(this.MessageTypes.MT_PAGE, '', rows);
 };
-
 
 ancestryAssistant.getTableData = function (personId) {
 	var pid = personId;
@@ -128,7 +126,6 @@ ancestryAssistant.getTableData = function (personId) {
 	}
 	this.postMessage(this.MessageTypes.MT_TABLEDATA, pid, rows);
 };
-
 
 ancestryAssistant.getImage = function () {
 	//Trigger the download

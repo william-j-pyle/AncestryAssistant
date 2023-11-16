@@ -1,6 +1,23 @@
 Public Class EventTag
   Inherits AbstractTag
 
+#Region "Properties"
+
+  Public Property eventDate As GedDate
+
+  ' Attributes
+  Public Property eventType As String
+
+  Public Property note As String
+
+  Public Property placeID As String
+
+  Public Property text As String
+
+#End Region
+
+#Region "Public Constructors"
+
   Public Sub New(data As Gedcom, ownerID As String, eventType As String)
     MyBase.New(data, "EVNT", False, ownerID, eventType)
   End Sub
@@ -9,12 +26,9 @@ Public Class EventTag
     MyBase.New(data, "EVNT", False, ownerID)
   End Sub
 
-  ' Attributes
-  Public Property eventType As String
-  Public Property eventDate As GedDate
-  Public Property placeID As String
-  Public Property note As String
-  Public Property text As String
+#End Region
+
+#Region "Public Methods"
 
   Public Overrides Sub generateID()
     ID = data.createID(GedTagEnum.TYPE_EVENT)
@@ -51,5 +65,6 @@ Public Class EventTag
     Return True
   End Function
 
+#End Region
 
-End class
+End Class

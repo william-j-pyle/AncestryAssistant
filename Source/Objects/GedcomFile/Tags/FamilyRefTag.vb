@@ -1,12 +1,22 @@
 Public Class FamilyRefTag
   Inherits AbstractTag
 
+#Region "Properties"
+
+  ' Attributes
+  Public Property familyType As String
+
+#End Region
+
+#Region "Public Constructors"
+
   Public Sub New(data As Gedcom, ownerID As String)
     MyBase.New(data, data.tag(), False, ownerID)
   End Sub
 
-  ' Attributes
-  Public Property familyType As String
+#End Region
+
+#Region "Public Methods"
 
   Public Overrides Function processTag(key As String) As Boolean
     Select Case key
@@ -24,4 +34,6 @@ Public Class FamilyRefTag
     Return True
   End Function
 
-End class
+#End Region
+
+End Class
