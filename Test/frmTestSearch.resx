@@ -117,21 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ANCESTRY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ico_20_ancestry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="FlatSearchBox1.ImageCancelSearch" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABhSURBVDhP5dAxDsAgDENR7n/fzG0XkEk+KKIdQB3egDEe
+        KGb2KT1cQO9TPV+cnUf54YOe3qd6Wqy6wgT2QvA4YzArvA/BAD4mGIJ9B+tfKeo1GAo/8JNBj3oNhm9g
+        uM7KDTLEwGlqSB4aAAAAAElFTkSuQmCC
+</value>
   </data>
-  <data name="ANCESTRY_PEDIGREE_VIEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ico_20_black__117.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FlatSearchBox1.ImageDropDown" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE/SURBVDhPrdShTgNBFIXhiiYQQFQgCCEoBA+BKwLBm2BI
+        isC1BtcEqnkYgsITBAkgUAj0Ji1t2p6f3LOZtmO6XfFlZ87MvTu727RRFEWtsqFsSV8+ZShTmcWYbCC7
+        slK7EsiVTMKfnMie0JAxmdevZaE+nezIh/g06RqWM+bs/ZJmZAsNeZRcs5bcCfmtlMWRUfPtzAsdYaEt
+        bAKNevIj95G9hFNxQzftkhEeRnBBIEfyJmx8kANxMae7kd+Y4zyu9Dhm43MEjMHJ3uVJyPkgbsiVpozB
+        R3Id81cGI7mMEDwmj0jho7CRU3PltG7GOz8T1zEeM3ABY07HO/Njen0ZN6MBe910X2YucLFP57mlzdKc
+        ZvzUtmNeNqxNerdaZMNNZMNNZMM1+YP8SxfMP+RKsmEF5SHSMP0XqSwbVlc05v/K6GVcNxanAAAAAElF
+        TkSuQmCC
+</value>
   </data>
-  <data name="ANCESTRY_FAMILY_VIEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ico_20_black__118.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AssistantAPI" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\javascript\AssistantAPI.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-    <comment>Javascript API loaded into webview for easy control</comment>
-  </data>
-  <data name="ANCESTRY_FAN_VIEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ico_20_black_fan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FlatSearchBox1.ImageSearch" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACGSURBVDhPrc5RCsAwCAPQHWX3v5/fG8gsIUQtsx8PNDrX
+        y8yOkuGEDDc8gs94cdc6wD2GFXxJ4LnXGFbSA9xjWFEHmM/ahQ/3qSi6A0cOMpynouAPuj4VRbwC4SL3
+        KRkK6gfMZ7hUWR90PYaVeAXiudcYZm6RjQ4q8UrkM14ck+GEDP+z6wWixMCJ5hzXkAAAAABJRU5ErkJg
+        gg==
+</value>
   </data>
 </root>

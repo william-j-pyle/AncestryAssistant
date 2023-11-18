@@ -156,7 +156,7 @@
     ApplyLayout()
   End Sub
 
-  Private Function getPanelItem(key As String) As IDockPanelItem
+  Private Function GetPanelItem(key As String) As IDockPanelItem
     Dim ctl As IDockPanelItem = Nothing
     Select Case key
       Case "Ancestor"
