@@ -71,36 +71,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property ANCESTRY_FAMILY_VIEW() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("ANCESTRY_FAMILY_VIEW", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property ANCESTRY_FAN_VIEW() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("ANCESTRY_FAN_VIEW", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property ANCESTRY_PEDIGREE_VIEW() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("ANCESTRY_PEDIGREE_VIEW", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to if (typeof ancestryAssistant === &apos;undefined&apos;)
         '''	ancestryAssistant = {};
         '''
