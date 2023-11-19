@@ -1,6 +1,12 @@
 Public Class HeaderTag
   Inherits AbstractTag
 
+#Region "Fields"
+
+  Public Const GEDCOM_TAG As String = "HEAD"
+
+#End Region
+
 #Region "Properties"
 
   Public Property anTreeName As String
@@ -36,13 +42,13 @@ Public Class HeaderTag
       Case "HEAD.SUBM"
       Case "HEAD.CHAR"
       Case "HEAD.DATE"
-        createDate = data.getDate()
+        createDate = data.GetDate()
       Case "HEAD.DATE.TIME"
       Case "HEAD.GEDC"
       Case "HEAD.GEDC.FORM"
-        gedcFormat = data.getString()
+        gedcFormat = data.GetString()
       Case "HEAD.GEDC.VERS"
-        gedcVersion = data.getString()
+        gedcVersion = data.GetString()
       Case "HEAD.SOUR"
       Case "HEAD.SOUR.NAME"
       Case "HEAD.SOUR.VERS"
@@ -52,23 +58,17 @@ Public Class HeaderTag
       Case "HEAD.SOUR.CORP.ADDR"
       Case "HEAD.SOUR.CORP.ADDR.CONT"
       Case "HEAD.SOUR._TREE"
-        anTreeName = data.getString()
+        anTreeName = data.GetString()
       Case "HEAD.SOUR._TREE._ENV"
       Case "HEAD.SOUR._TREE.NOTE"
-        note = data.getString()
+        note = data.GetString()
       Case "HEAD.SOUR._TREE.RIN"
-        rin = data.getString()
+        rin = data.GetString()
       Case Else
         Return False
     End Select
     Return True
   End Function
-
-#End Region
-
-#Region "Fields"
-
-  Public Const GEDCOM_TAG As String = "HEAD"
 
 #End Region
 

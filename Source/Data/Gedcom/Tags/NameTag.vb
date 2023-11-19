@@ -39,11 +39,11 @@ Public Class NameTag
     Select Case key
       Case "NAME"
       Case "NAME.GIVN"
-        given = data.getString()
+        given = data.GetString()
       Case "NAME.NSFX"
-        suffix = data.getString()
+        suffix = data.GetString()
       Case "NAME.SURN"
-        surname = data.getString()
+        surname = data.GetString()
       Case "NAME.SOUR"
         data.NewSourceRefTag(ID)
       Case Else

@@ -4,6 +4,34 @@ Public Class AncestorPanel
   Inherits System.Windows.Forms.UserControl
   Implements IDockPanelItem
 
+#Region "Fields"
+
+  Private WithEvents AncestorAttributes As TreeView
+
+  Private WithEvents ancestorAttributesCol1 As FlatPanel
+
+  Private WithEvents ancestorAttributesCol2 As FlatPanel
+
+  Private WithEvents AncestorAttributesHeader As Panel
+
+  Private WithEvents AncestorColSplitter As Splitter
+
+  Private WithEvents lblAncestorAttributesCol1 As Label
+
+  Private WithEvents lblAncestorAttributesCol2 As Label
+
+  Private Const EN_ITEMCAPTION As String = "Ancestor"
+
+  Private Const SUBNODE_DELIMITER As String = vbTab
+
+  Private AttributeState As List(Of String)
+
+  Private components As System.ComponentModel.IContainer
+
+  Private LastAttributeItem As TreeNode
+
+#End Region
+
 #Region "Events"
 
   Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
@@ -378,26 +406,6 @@ Public Class AncestorPanel
 
     RestoreAttributeState()
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private WithEvents AncestorAttributes As TreeView
-  Private WithEvents ancestorAttributesCol1 As FlatPanel
-  Private WithEvents ancestorAttributesCol2 As FlatPanel
-  Private WithEvents AncestorAttributesHeader As Panel
-  Private WithEvents AncestorColSplitter As Splitter
-  Private WithEvents lblAncestorAttributesCol1 As Label
-  Private WithEvents lblAncestorAttributesCol2 As Label
-  Private Const EN_ITEMCAPTION As String = "Ancestor"
-
-  Private Const SUBNODE_DELIMITER As String = vbTab
-
-  Private AttributeState As List(Of String)
-
-  Private components As System.ComponentModel.IContainer
-  Private LastAttributeItem As TreeNode
 
 #End Region
 

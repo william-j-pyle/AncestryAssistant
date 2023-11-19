@@ -34,10 +34,10 @@ Public Class FactTag
   Public Overrides Function processTag(key As String) As Boolean
     Select Case key
       Case "FACT.TYPE"
-        factType = data.getString()
+        factType = data.GetString()
       'Case "FACT.NOTE"
       Case "FACT"
-        text = data.getString()
+        text = data.GetString()
       Case "FACT.SOUR"
         data.NewSourceRefTag(ID)
       Case Else

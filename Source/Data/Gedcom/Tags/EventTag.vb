@@ -41,9 +41,9 @@ Public Class EventTag
     Select Case key
       Case "EVNT"
       Case "EVNT.TYPE"
-        eventType = data.getString()
+        eventType = data.GetString()
       Case "EVNT.DATE"
-        eventDate = data.getDate()
+        eventDate = data.GetDate()
       Case "EVNT.PLAC"
         Dim tmp As PlaceTag = data.NewPlaceTag(ID)
         If tmp Is Nothing Then
@@ -52,9 +52,9 @@ Public Class EventTag
           placeID = tmp.ID
         End If
       Case "EVNT.NOTE"
-        note = data.getString()
+        note = data.GetString()
       Case "EVNT.DATA"
-        text = data.getString()
+        text = data.GetString()
       Case "EVNT.SOUR"
         data.NewSourceRefTag(ID)
       Case "EVNT.OBJE"

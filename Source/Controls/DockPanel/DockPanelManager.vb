@@ -1,6 +1,62 @@
 ﻿Public Class DockPanelManager
   Inherits System.Windows.Forms.UserControl
 
+#Region "Fields"
+
+  Private WithEvents DockLeftBottom As DockPanel
+
+  Private WithEvents DockLeftTop As DockPanel
+
+  Private WithEvents DockMiddleBottom As DockPanel
+
+  Private WithEvents DockMiddleLeftTop As DockPanel
+
+  Private WithEvents DockMiddleTopRight As DockPanel
+
+  Private WithEvents DockRightBottom As DockPanel
+
+  Private WithEvents DockRightTop As DockPanel
+
+  Private WithEvents pnlLeft As Panel
+
+  Private WithEvents pnlLeftBottom As Panel
+
+  Private WithEvents pnlLeftTop As Panel
+
+  Private WithEvents pnlMain As Panel
+
+  Private WithEvents pnlMiddle As Panel
+
+  Private WithEvents pnlMiddleBottom As Panel
+
+  Private WithEvents pnlMiddleLeft As Panel
+
+  Private WithEvents pnlMiddleRight As Panel
+
+  Private WithEvents pnlMiddleTop As Panel
+
+  Private WithEvents pnlRight As Panel
+
+  Private WithEvents pnlRightBottom As Panel
+
+  Private WithEvents pnlRightTop As Panel
+
+  Private WithEvents splitLeft As Splitter
+
+  Private WithEvents splitLeftTopBottom As Splitter
+
+  Private WithEvents splitMiddleBottom As Splitter
+
+  Private WithEvents splitMiddleLeftRight As Splitter
+
+  Private WithEvents splitRight As Splitter
+
+  Private WithEvents splitRightTopBottom As Splitter
+
+  Private components As System.ComponentModel.IContainer
+
+#End Region
+
 #Region "Public Constructors"
 
   Public Sub New()
@@ -493,7 +549,7 @@
 #Region "Public Methods"
 
   Public Function AddItem(dockLocation As DockPanelLocation, panelItem As IDockPanelItem) As IDockPanelItem
-    Dim dockPnl As DockPanel = getDockPanel(dockLocation)
+    Dim dockPnl As DockPanel = GetDockPanel(dockLocation)
     If dockPnl IsNot Nothing Then
       dockPnl.AddItem(panelItem)
       Return panelItem
@@ -523,22 +579,22 @@
     pnlRightTop.Height = My.Settings.UI_RT_HEIGHT
 
     'Hide blank panels
-    If getDockPanel(DockPanelLocation.LeftTop).Visible = False Then
+    If GetDockPanel(DockPanelLocation.LeftTop).Visible = False Then
       SetPanelVisibility(DockPanelLocation.LeftTop, False)
     End If
-    If getDockPanel(DockPanelLocation.LeftBottom).Visible = False Then
+    If GetDockPanel(DockPanelLocation.LeftBottom).Visible = False Then
       SetPanelVisibility(DockPanelLocation.LeftBottom, False)
     End If
-    If getDockPanel(DockPanelLocation.MiddleTopRight).Visible = False Then
+    If GetDockPanel(DockPanelLocation.MiddleTopRight).Visible = False Then
       SetPanelVisibility(DockPanelLocation.MiddleTopRight, False)
     End If
-    If getDockPanel(DockPanelLocation.MiddleBottom).Visible = False Then
+    If GetDockPanel(DockPanelLocation.MiddleBottom).Visible = False Then
       SetPanelVisibility(DockPanelLocation.MiddleBottom, False)
     End If
-    If getDockPanel(DockPanelLocation.RightBottom).Visible = False Then
+    If GetDockPanel(DockPanelLocation.RightBottom).Visible = False Then
       SetPanelVisibility(DockPanelLocation.RightBottom, False)
     End If
-    If getDockPanel(DockPanelLocation.RightTop).Visible = False Then
+    If GetDockPanel(DockPanelLocation.RightTop).Visible = False Then
       SetPanelVisibility(DockPanelLocation.RightTop, False)
     End If
   End Sub
@@ -563,13 +619,13 @@
   End Sub
 
   Public Sub SelectItemTab(dockLocation As DockPanelLocation, tabIndex As Integer)
-    Dim dockPnl As DockPanel = getDockPanel(dockLocation)
+    Dim dockPnl As DockPanel = GetDockPanel(dockLocation)
     If dockPnl Is Nothing Then Exit Sub
     dockPnl.SelectItem(tabIndex)
   End Sub
 
   Public Sub SelectItemTab(dockLocation As DockPanelLocation, key As String)
-    Dim dockPnl As DockPanel = getDockPanel(dockLocation)
+    Dim dockPnl As DockPanel = GetDockPanel(dockLocation)
     If dockPnl Is Nothing Then Exit Sub
     dockPnl.SelectItem(key)
   End Sub
@@ -608,62 +664,6 @@
   Public Sub ShowPanel(panelType As DockPanelLocation)
     SetPanelVisibility(panelType, True)
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private WithEvents DockLeftBottom As DockPanel
-
-  Private WithEvents DockLeftTop As DockPanel
-
-  Private WithEvents DockMiddleBottom As DockPanel
-
-  Private WithEvents DockMiddleLeftTop As DockPanel
-
-  Private WithEvents DockMiddleTopRight As DockPanel
-
-  Private WithEvents DockRightBottom As DockPanel
-
-  Private WithEvents DockRightTop As DockPanel
-
-  Private WithEvents pnlLeft As Panel
-
-  Private WithEvents pnlLeftBottom As Panel
-
-  Private WithEvents pnlLeftTop As Panel
-
-  Private WithEvents pnlMain As Panel
-
-  Private WithEvents pnlMiddle As Panel
-
-  Private WithEvents pnlMiddleBottom As Panel
-
-  Private WithEvents pnlMiddleLeft As Panel
-
-  Private WithEvents pnlMiddleRight As Panel
-
-  Private WithEvents pnlMiddleTop As Panel
-
-  Private WithEvents pnlRight As Panel
-
-  Private WithEvents pnlRightBottom As Panel
-
-  Private WithEvents pnlRightTop As Panel
-
-  Private WithEvents splitLeft As Splitter
-
-  Private WithEvents splitLeftTopBottom As Splitter
-
-  Private WithEvents splitMiddleBottom As Splitter
-
-  Private WithEvents splitMiddleLeftRight As Splitter
-
-  Private WithEvents splitRight As Splitter
-
-  Private WithEvents splitRightTopBottom As Splitter
-
-  Private components As System.ComponentModel.IContainer
 
 #End Region
 

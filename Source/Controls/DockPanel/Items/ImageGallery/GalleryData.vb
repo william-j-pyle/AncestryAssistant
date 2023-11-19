@@ -2,6 +2,13 @@
 
 Public Class AGallery
 
+#Region "Fields"
+
+  Private dataEntries As List(Of String)
+  Private recordLocations() As String
+
+#End Region
+
 #Region "Properties"
 
   Public ReadOnly Property length As Integer
@@ -36,13 +43,6 @@ Public Class AGallery
       dataEntries.AddRange(Directory.GetFiles(Loc, "*.jpg"))
     Next
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private dataEntries As List(Of String)
-  Private recordLocations() As String
 
 #End Region
 

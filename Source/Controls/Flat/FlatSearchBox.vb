@@ -6,11 +6,29 @@
 Public Class FlatSearchBox
   Inherits System.Windows.Forms.UserControl
 
+#Region "Fields"
+
+  Private WithEvents btnDropdown As Button
+
+  Private WithEvents btnSearch As Button
+
+  Private WithEvents txtSearch As TextBox
+
+  Private _BlockLostFocus As Boolean = False
+
+  Private _ShowDropDown As Boolean = True
+
+  Private _State As SearchState
+
+  Private components As System.ComponentModel.IContainer
+
+  Private pnlContainer As Panel
+
+#End Region
+
 #Region "Events"
 
-  Public Event CancelSearch()
-
-  Public Event Search(criteria As String)
+  Public Event SearchEvent As FlatSearchEventHandler
 
 #End Region
 
@@ -54,7 +72,6 @@ Public Class FlatSearchBox
     End Get
     Set(value As SearchState)
       _State = value
-      Debug.Print("State:  {0}", value)
       Select Case _State
         Case SearchState.NoFocusNoSearch
           txtSearch.ForeColor = ForeColor
@@ -169,14 +186,13 @@ Public Class FlatSearchBox
 #Region "Private Methods"
 
   Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
-    Debug.Print("btnSearch_Click")
     If State = SearchState.FocusNoSearch And txtSearch.Text.Length > 0 Then
-      RaiseEvent Search(txtSearch.Text)
+      RaiseEvent SearchEvent(Me, New FlatSearchEventArgs(txtSearch.Text))
       State = SearchState.FocusSearch
       Exit Sub
     End If
     If State = SearchState.FocusSearch Then
-      RaiseEvent CancelSearch()
+      RaiseEvent SearchEvent(Me, New FlatSearchEventArgs(True))
       txtSearch.Text = ""
       State = SearchState.NoFocusNoSearch
     End If
@@ -184,33 +200,32 @@ Public Class FlatSearchBox
   End Sub
 
   Private Sub btnSearch_GotFocus(sender As Object, e As EventArgs) Handles btnSearch.GotFocus
-    Debug.Print("btnSearch_GotFocus")
     If BlockLostFocus And Not State = SearchState.FocusSearch Then
       txtSearch.Focus()
     End If
   End Sub
 
   Private Sub btnSearch_LostFocus(sender As Object, e As EventArgs) Handles btnSearch.LostFocus
-    Debug.Print("btnSearch_LostFocus")
+    'Debug.Print("btnSearch_LostFocus")
   End Sub
 
   Private Sub btnSearch_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSearch.MouseDown
-    Debug.Print("btnSearch_MouseDown")
+    'Debug.Print("btnSearch_MouseDown")
   End Sub
 
   Private Sub btnSearch_MouseEnter(sender As Object, e As EventArgs) Handles btnSearch.MouseEnter
-    Debug.Print("Block Lost Focus")
+    'Debug.Print("Block Lost Focus")
     BlockLostFocus = True
   End Sub
 
   Private Sub btnSearch_MouseLeave(sender As Object, e As EventArgs) Handles btnSearch.MouseLeave
-    Debug.Print("Allow Lost Focus")
+    'Debug.Print("Allow Lost Focus")
     BlockLostFocus = False
   End Sub
 
   Private Sub txtSearch_GotFocus(sender As Object, e As EventArgs) Handles txtSearch.GotFocus
     If BlockLostFocus Then Exit Sub
-    Debug.Print("txtSearch_GotFocus")
+    'Debug.Print("txtSearch_GotFocus")
     Select Case State
       Case SearchState.NoFocusNoSearch
         State = SearchState.FocusNoSearch
@@ -220,13 +235,13 @@ Public Class FlatSearchBox
   End Sub
 
   Private Sub txtSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearch.KeyDown
-    Debug.Print("txtSearch_KeyDown")
+    'Debug.Print("txtSearch_KeyDown")
     If e.KeyCode = Keys.Enter And txtSearch.Text.Length > 0 Then
-      RaiseEvent Search(txtSearch.Text)
+      RaiseEvent SearchEvent(Me, New FlatSearchEventArgs(txtSearch.Text))
       State = SearchState.FocusSearch
     ElseIf e.KeyCode = Keys.Escape Then
       If State = SearchState.NoFocusSearch Or State = SearchState.FocusSearch Then
-        RaiseEvent CancelSearch()
+        RaiseEvent SearchEvent(Me, New FlatSearchEventArgs(True))
         State = SearchState.FocusNoSearch
       End If
       txtSearch.Text = ""
@@ -235,7 +250,7 @@ Public Class FlatSearchBox
 
   Private Sub txtSearch_LostFocus(sender As Object, e As EventArgs) Handles txtSearch.LostFocus
     If BlockLostFocus Then Exit Sub
-    Debug.Print("txtSearch_LostFocus")
+    'Debug.Print("txtSearch_LostFocus")
     Select Case State
       Case SearchState.NoFocusNoSearch
         State = SearchState.NoFocusNoSearch
@@ -271,19 +286,6 @@ Public Class FlatSearchBox
     FocusNoSearch
     FocusSearch
   End Enum
-
-#End Region
-
-#Region "Fields"
-
-  Friend WithEvents btnDropdown As Button
-  Friend WithEvents btnSearch As Button
-  Friend WithEvents txtSearch As TextBox
-  Private _BlockLostFocus As Boolean = False
-  Private _ShowDropDown As Boolean = True
-  Private _State As SearchState
-  Private components As System.ComponentModel.IContainer
-  Friend pnlContainer As Panel
 
 #End Region
 

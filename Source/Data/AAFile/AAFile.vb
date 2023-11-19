@@ -3,6 +3,19 @@ Imports System.Text
 
 Public Class AAFile
 
+#Region "Fields"
+
+  Const FIELD_SEPERATOR_CODE As Integer = 175
+  Private _IsDirty As Boolean = False
+  Private aValueHeaders() As String = {}
+  Private aValues As New ArrayList()
+  Private dKeyValuePair As New Dictionary(Of String, String)
+  Private iAAFileType As AAFileTypeEnum = AAFileTypeEnum.UNDEFINED
+  Private sAAFileName As String = ""
+  Private sSingleValue As String = ""
+
+#End Region
+
 #Region "Properties"
 
   Public Property AAFileName As String
@@ -245,26 +258,6 @@ Public Class AAFile
       _IsDirty = True
     End Set
   End Property
-
-#End Region
-
-#Region "Fields"
-
-  Const FIELD_SEPERATOR_CODE As Integer = 175
-
-  Private _IsDirty As Boolean = False
-
-  Private aValueHeaders() As String = {}
-
-  Private aValues As New ArrayList()
-
-  Private dKeyValuePair As New Dictionary(Of String, String)
-
-  Private iAAFileType As AAFileTypeEnum = AAFileTypeEnum.UNDEFINED
-
-  Private sAAFileName As String = ""
-
-  Private sSingleValue As String = ""
 
 #End Region
 

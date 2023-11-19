@@ -4,6 +4,23 @@ Imports System.IO
 <DefaultPropertyAttribute("ID")>
 Public MustInherit Class AncestorAbstract
 
+#Region "Fields"
+
+  Private children As AAFile
+  Private events As TimelineData
+  Private facts As AAFile
+  Private gallery As AGallery
+  Private marriages() As String
+  Private notebook As ANotebook
+  Private oCensus As ACensus
+  Private parents As AAFile
+  Private sAncestorPath As String = ""
+  Private siblings As AAFile
+  Private sID As String = ""
+  Private sources As SourceData
+
+#End Region
+
 #Region "Properties"
 
   Public Property AncestorPath As String
@@ -190,7 +207,6 @@ Public MustInherit Class AncestorAbstract
     Dim rtn As New List(Of String)
     For Each factkey As String In AncestorFactList()
       If Not Fact(factkey).Equals(msg.GetValue(factkey)) Then
-        Debug.Print("Fact Difference: " + factkey)
         rtn.Add(factkey)
       End If
     Next
@@ -246,23 +262,6 @@ Public MustInherit Class AncestorAbstract
       End Select
     End Set
   End Property
-
-#End Region
-
-#Region "Fields"
-
-  Private children As AAFile
-  Private events As TimelineData
-  Private facts As AAFile
-  Private gallery As AGallery
-  Private marriages() As String
-  Private notebook As ANotebook
-  Private oCensus As ACensus
-  Private parents As AAFile
-  Private sAncestorPath As String = ""
-  Private siblings As AAFile
-  Private sID As String = ""
-  Private sources As SourceData
 
 #End Region
 

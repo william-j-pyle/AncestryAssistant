@@ -1,5 +1,13 @@
 ﻿Public Class RibbonBarFileTab
 
+#Region "Fields"
+
+  Private items As Dictionary(Of String, FlatPanel)
+
+  Private selectedKey As String = ""
+
+#End Region
+
 #Region "Events"
 
   Public Event FileTabButtonClicked(key As String)
@@ -105,13 +113,6 @@
       End If
     Next
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private items As Dictionary(Of String, FlatPanel)
-  Private selectedKey As String = ""
 
 #End Region
 

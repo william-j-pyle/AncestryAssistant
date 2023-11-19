@@ -2,6 +2,14 @@
 
 Public Class ACensus
 
+#Region "Fields"
+
+  Private ancestor As AncestorCollection.Ancestor
+  Private censusYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
+  Private dataEntries() As String
+
+#End Region
+
 #Region "Properties"
 
   Public ReadOnly Property AvailableYears As List(Of Integer)
@@ -81,7 +89,7 @@ Public Class ACensus
     Dim page As String = msg.GetValue("PageNbr")
     Dim filename As String = RecordsBasePath + "census-" + year + "-" + page
     Dim afile As New AAFile(filename + ".aa", AAFileTypeEnum.LISTARRAY)
-    afile.setTableData(msg.Payload)
+    afile.SetTableData(msg.Payload)
     afile.Save()
     Refresh()
     Return filename
@@ -97,9 +105,9 @@ Public Class ACensus
         Else
           aaRtn.CanSave = False
           aaTmp = New AAFile(entry)
-          Dim rVal As ArrayList = aaRtn.getValues()
-          rVal.AddRange(aaTmp.getValues)
-          aaRtn.setValues(rVal)
+          Dim rVal As ArrayList = aaRtn.GetValues()
+          rVal.AddRange(aaTmp.GetValues)
+          aaRtn.SetValues(rVal)
         End If
       End If
     Next
@@ -109,15 +117,6 @@ Public Class ACensus
   Public Sub Refresh()
     Initialize()
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private ancestor As AncestorCollection.Ancestor
-
-  Private censusYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
-  Private dataEntries() As String
 
 #End Region
 

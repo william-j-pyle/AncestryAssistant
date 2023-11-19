@@ -2,6 +2,12 @@
 
 Public Class frmButtonTestForm
 
+#Region "Fields"
+
+  Private Const iconSize As Integer = 32
+
+#End Region
+
 #Region "Private Methods"
 
   Private Sub btnExportStyle_Click(sender As Object, e As EventArgs) Handles btnExportStyle.Click
@@ -210,7 +216,6 @@ Public Class frmButtonTestForm
 
   Private Sub dumpControls(ctl As Control)
     For Each mctl As Control In ctl.Controls
-      Debug.Print(mctl.Name & vbTab & mctl.GetType().ToString)
       If mctl.Controls.Count > 0 Then dumpControls(mctl)
     Next
   End Sub
@@ -330,8 +335,6 @@ Public Class frmButtonTestForm
         For Each eitem As FontSegoeFluentIconsEnum In elist
           Dim name As String = [Enum].GetName(GetType(FontSegoeFluentIconsEnum), eitem)
           Dim value As Integer = CInt(eitem)
-          'Debug.Print($"Name: {name}, Value: {value}")
-
           Dim btn As New Button()
           With btn
             .BackColor = Color.LightGray
@@ -356,7 +359,6 @@ Public Class frmButtonTestForm
         For Each eitem As FontAncestryIconEnum In elist
           Dim name As String = [Enum].GetName(GetType(FontAncestryIconEnum), eitem)
           Dim value As Integer = CInt(eitem)
-          'Debug.Print($"Name: {name}, Value: {value}")
           Dim btn As New Button()
           With btn
             .BackColor = Color.LightGray
@@ -600,12 +602,6 @@ Public Class frmButtonTestForm
 #End Region
 
   End Class
-
-#End Region
-
-#Region "Fields"
-
-  Private Const iconSize As Integer = 32
 
 #End Region
 

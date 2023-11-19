@@ -2,6 +2,12 @@
 
 Public Class Logger
 
+#Region "Fields"
+
+  Private Const LOG_FILENAME As String = "D:\Geneology\Logs\APIMessages.txt"
+
+#End Region
+
 #Region "Private Constructors"
 
   Private Sub New()
@@ -41,12 +47,6 @@ Public Class Logger
     ERR
     DEBUG
   End Enum
-
-#End Region
-
-#Region "Fields"
-
-  Private Const LOG_FILENAME As String = "D:\Geneology\Logs\APIMessages.txt"
 
 #End Region
 

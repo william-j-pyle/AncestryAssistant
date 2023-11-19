@@ -1,5 +1,11 @@
 ﻿Public Class frmTest
 
+#Region "Fields"
+
+  Private frm As Form
+
+#End Region
+
 #Region "Private Methods"
 
   Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
@@ -50,12 +56,6 @@
   Private Sub TextBox1_GotFocus(sender As Object, e As EventArgs) Handles TextBox1.GotFocus, TextBox2.GotFocus, TextBox3.GotFocus, TextBox4.GotFocus, TextBox5.GotFocus
     PictureBox1.Select()
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private frm As Form
 
 #End Region
 

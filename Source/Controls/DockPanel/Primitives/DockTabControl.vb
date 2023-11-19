@@ -1,6 +1,12 @@
 ﻿Public Class DockTabControl
   Inherits TabControl
 
+#Region "Fields"
+
+  Private closeTarget As Rectangle
+
+#End Region
+
 #Region "Events"
 
   Public Event btnClose_Click(sender As Object, e As EventArgs)
@@ -43,10 +49,8 @@
     Select Case TabType
       Case DockPanelType.Tab
         closeTarget = New Rectangle
-        'Debug.Print("Render Tab")
         RenderTypeTabTop(sender, e)
       Case DockPanelType.Panel
-        'Debug.Print("Render Panel")
         RenderTypeTabBottom(sender, e)
     End Select
   End Sub
@@ -64,19 +68,11 @@
     Dim r As Integer = Right - 1
     Dim b As Integer = GetTabRect(0).Top
 
-    'Debug.Print("l={0}, t={1}, r={2}, b={3}, height={4}, tabrec.top={5}, tabrec.height={6}, ca.top={7}, ca.height={8}", l, t, r, b, Height, GetTabRect(0).Top, GetTabRect(0).Height, ClientRectangle.Top, ClientRectangle.Height)
-
-    'If TabCount > 1 Then
-    'b = GetTabRect(0).Top
-    'End If
-
     Dim borderPen As New Pen(My.Theme.TabBorderColor, 1)
 
     e.Graphics.DrawLine(borderPen, l, t, r, t)
     e.Graphics.DrawLine(borderPen, r, t, r, b)
-    'If TabCount < 2 Then
     e.Graphics.DrawLine(borderPen, l, b, r, b)
-    'End If
     e.Graphics.DrawLine(borderPen, l, t, l, b)
 
     If TabCount > 1 Then
@@ -226,12 +222,6 @@
     e.Graphics.DrawLine(New Pen(ctlBarColor, 2), l, tabBounds.Bottom - 1, r, tabBounds.Bottom - 1)
 
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private closeTarget As Rectangle
 
 #End Region
 

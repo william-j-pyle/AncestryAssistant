@@ -3,6 +3,21 @@
 Public Class FlatPanel
   Inherits Panel
 
+#Region "Fields"
+
+  <Browsable(True), Category("JControl"), Description("Color of the border around the control")>
+  Dim _BorderColor As Color = Color.Transparent
+  Dim _BorderColorBottom As Color = Color.Transparent
+  Dim _BorderColorLeft As Color = Color.Transparent
+  Dim _BorderColorRight As Color = Color.Transparent
+  Dim _BorderColorTop As Color = Color.Transparent
+  <Browsable(True), Category("JControl"), Description("Width in pixels of the border around the control")>
+  Dim _BorderWidth As New Padding(0)
+  <Browsable(True), Category("JControl"), Description("Sets the number of pixels for the Corner radius. Valid 0 to Min(Height,Width)/2")>
+  Private _CornerRadius As New Padding(0)
+
+#End Region
+
 #Region "Properties"
 
   Public Property BorderColor As Color
@@ -187,27 +202,6 @@ Public Class FlatPanel
     End If
 
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  <Browsable(True), Category("JControl"), Description("Color of the border around the control")>
-  Dim _BorderColor As Color = Color.Transparent
-
-  Dim _BorderColorBottom As Color = Color.Transparent
-
-  Dim _BorderColorLeft As Color = Color.Transparent
-
-  Dim _BorderColorRight As Color = Color.Transparent
-
-  Dim _BorderColorTop As Color = Color.Transparent
-
-  <Browsable(True), Category("JControl"), Description("Width in pixels of the border around the control")>
-  Dim _BorderWidth As New Padding(0)
-
-  <Browsable(True), Category("JControl"), Description("Sets the number of pixels for the Corner radius. Valid 0 to Min(Height,Width)/2")>
-  Private _CornerRadius As New Padding(0)
 
 #End Region
 

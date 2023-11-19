@@ -2,6 +2,19 @@
 
 Public Class APIMessage
 
+#Region "Fields"
+
+  Public Const MT_ACCOUNT As String = "account"
+  Public Const MT_FINDAGRAVE As String = "findagrave"
+  Public Const MT_IMGDOWNLOAD As String = "imageDownload"
+  Public Const MT_PAGE As String = "page"
+  Public Const MT_PERSON As String = "person"
+  Public Const MT_SAVEAS As String = "imageSaveAs"
+  Public Const MT_TABLEDATA As String = "tabledata"
+  Public Const MT_TREES As String = "trees"
+
+#End Region
+
 #Region "Properties"
 
   Public Property MessageKey As String
@@ -71,19 +84,6 @@ Public Class APIMessage
     End If
     Return 0
   End Function
-
-#End Region
-
-#Region "Fields"
-
-  Public Const MT_ACCOUNT As String = "account"
-  Public Const MT_FINDAGRAVE As String = "findagrave"
-  Public Const MT_IMGDOWNLOAD As String = "imageDownload"
-  Public Const MT_PAGE As String = "page"
-  Public Const MT_PERSON As String = "person"
-  Public Const MT_SAVEAS As String = "imageSaveAs"
-  Public Const MT_TABLEDATA As String = "tabledata"
-  Public Const MT_TREES As String = "trees"
 
 #End Region
 

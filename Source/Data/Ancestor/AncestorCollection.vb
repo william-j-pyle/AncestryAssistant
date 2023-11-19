@@ -3,6 +3,13 @@
 Public Class AncestorCollection
   Inherits Dictionary(Of String, Ancestor)
 
+#Region "Fields"
+
+  'Private AncestorEntries As Dictionary(Of String, Ancestor)
+  Private _RepositoryPath As String = ""
+
+#End Region
+
 #Region "Events"
 
   Public Event RepositoryPathChanged(NewPath As String)
@@ -60,7 +67,6 @@ Public Class AncestorCollection
     For Each ancestorPath As String In Directory.GetDirectories(RepositoryPath)
       Try
         myAncestor = New Ancestor(ancestorPath)
-        Debug.Print("Adding: " & myAncestor.ID)
         Add(myAncestor.ID, myAncestor)
       Catch ex As InvalidDataException
         Debug.Print("Invalid Repository Entry: " + ancestorPath)
@@ -117,13 +123,6 @@ Public Class AncestorCollection
 #End Region
 
   End Class
-
-#End Region
-
-#Region "Fields"
-
-  'Private AncestorEntries As Dictionary(Of String, Ancestor)
-  Private _RepositoryPath As String = ""
 
 #End Region
 

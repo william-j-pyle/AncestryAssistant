@@ -4,6 +4,66 @@ Public Class NotebookViewer
   Inherits UserControl
   Implements IDockPanelItem
 
+#Region "Fields"
+
+  Friend WithEvents BtnAddPage As ToolStripButton
+
+  Friend WithEvents BtnAddSection As ToolStripButton
+
+  Friend WithEvents BtnH1 As ToolStripMenuItem
+
+  Friend WithEvents BtnH2 As ToolStripMenuItem
+
+  Friend WithEvents BtnH3 As ToolStripMenuItem
+
+  Friend WithEvents BtnH4 As ToolStripMenuItem
+
+  Friend WithEvents imgSection As ImageList
+
+  Friend WithEvents LblStretch As Label
+
+  Friend WithEvents PnlBody As Panel
+
+  Friend WithEvents PnlHeader As Panel
+
+  Friend WithEvents PnlHeaderStretch As FlatPanel
+
+  Friend WithEvents SplitSectionsPage As SplitContainer
+
+  Friend WithEvents ToolStripButton1 As ToolStripButton
+
+  Friend WithEvents ToolStripButton10 As ToolStripButton
+
+  Friend WithEvents ToolStripButton2 As ToolStripButton
+
+  Friend WithEvents ToolStripButton3 As ToolStripButton
+
+  Friend WithEvents ToolStripButton4 As ToolStripButton
+
+  Friend WithEvents ToolStripButton5 As ToolStripButton
+
+  Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+
+  Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+
+  Friend WithEvents ToolStripSplitButton1 As ToolStripSplitButton
+
+  Friend WithEvents TreeSectionPages As TreeView
+
+  Friend WithEvents tsPage As ToolStrip
+
+  Friend WithEvents tsSections As ToolStrip
+
+  Friend WithEvents TxtBody As RichTextBox
+
+  Friend WithEvents TxtHeader As TextBox
+
+  Private Const EN_ITEMCAPTION As String = "Notebook"
+
+  Private components As System.ComponentModel.IContainer
+
+#End Region
+
 #Region "Events"
 
   Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
@@ -478,39 +538,6 @@ Public Class NotebookViewer
   Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
     Throw New NotImplementedException()
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Friend WithEvents BtnAddPage As ToolStripButton
-  Friend WithEvents BtnAddSection As ToolStripButton
-  Friend WithEvents BtnH1 As ToolStripMenuItem
-  Friend WithEvents BtnH2 As ToolStripMenuItem
-  Friend WithEvents BtnH3 As ToolStripMenuItem
-  Friend WithEvents BtnH4 As ToolStripMenuItem
-  Friend WithEvents imgSection As ImageList
-  Friend WithEvents LblStretch As Label
-  Friend WithEvents PnlBody As Panel
-  Friend WithEvents PnlHeader As Panel
-  Friend WithEvents PnlHeaderStretch As FlatPanel
-  Friend WithEvents SplitSectionsPage As SplitContainer
-  Friend WithEvents ToolStripButton1 As ToolStripButton
-  Friend WithEvents ToolStripButton10 As ToolStripButton
-  Friend WithEvents ToolStripButton2 As ToolStripButton
-  Friend WithEvents ToolStripButton3 As ToolStripButton
-  Friend WithEvents ToolStripButton4 As ToolStripButton
-  Friend WithEvents ToolStripButton5 As ToolStripButton
-  Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
-  Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
-  Friend WithEvents ToolStripSplitButton1 As ToolStripSplitButton
-  Friend WithEvents TreeSectionPages As TreeView
-  Friend WithEvents tsPage As ToolStrip
-  Friend WithEvents tsSections As ToolStrip
-  Friend WithEvents TxtBody As RichTextBox
-  Friend WithEvents TxtHeader As TextBox
-  Private Const EN_ITEMCAPTION As String = "Notebook"
-  Private components As System.ComponentModel.IContainer
 
 #End Region
 

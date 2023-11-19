@@ -2,6 +2,12 @@
 
 Public Class SourceData
 
+#Region "Fields"
+
+  Private dataEntries() As String
+
+#End Region
+
 #Region "Properties"
 
   Public ReadOnly Property length As Integer
@@ -32,12 +38,6 @@ Public Class SourceData
     End If
     dataEntries = Directory.GetFiles(RecordsBasePath, "*.aa")
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private dataEntries() As String
 
 #End Region
 

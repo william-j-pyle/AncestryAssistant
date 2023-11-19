@@ -2,6 +2,28 @@ Imports System.Text
 
 Public Class Gedcom
 
+#Region "Fields"
+
+  Private fileData As List(Of FileLineEntry)
+  Private fileIndex As Integer
+  Public events As List(Of EventTag)
+  Public facts As List(Of FactTag)
+  Public family As List(Of FamilyTag)
+  Public familyref As List(Of FamilyRefTag)
+  Public header As HeaderTag
+  Public media As List(Of MediaTag)
+  Public mediaRefs As List(Of MediaRefTag)
+  Public names As List(Of NameTag)
+  Public people As List(Of IndividualTag)
+  Public places As List(Of PlaceTag)
+  Public repositories As List(Of RepositoryTag)
+  Public sourceRefs As List(Of SourceRefTag)
+  Public sources As List(Of SourceTag)
+  Public tagrefs As List(Of MttagRefTag)
+  Public tags As List(Of MttagTag)
+
+#End Region
+
 #Region "Properties"
 
   Public ReadOnly Property data() As String
@@ -339,7 +361,7 @@ Public Class Gedcom
   End Function
 
   Public Function GetOwnerType(ownerID As String) As String
-    Return getTagTypeName(getOwnerTagType(ownerID))
+    Return GetTagTypeName(GetOwnerTagType(ownerID))
   End Function
 
   Public Function GetString() As String
@@ -486,28 +508,6 @@ Public Class Gedcom
   Public Function rewind() As Boolean
     Return setIndex(0)
   End Function
-
-#End Region
-
-#Region "Fields"
-
-  Private fileData As List(Of FileLineEntry)
-  Private fileIndex As Integer
-  Public events As List(Of EventTag)
-  Public facts As List(Of FactTag)
-  Public family As List(Of FamilyTag)
-  Public familyref As List(Of FamilyRefTag)
-  Public header As HeaderTag
-  Public media As List(Of MediaTag)
-  Public mediaRefs As List(Of MediaRefTag)
-  Public names As List(Of NameTag)
-  Public people As List(Of IndividualTag)
-  Public places As List(Of PlaceTag)
-  Public repositories As List(Of RepositoryTag)
-  Public sourceRefs As List(Of SourceRefTag)
-  Public sources As List(Of SourceTag)
-  Public tagrefs As List(Of MttagRefTag)
-  Public tags As List(Of MttagTag)
 
 #End Region
 

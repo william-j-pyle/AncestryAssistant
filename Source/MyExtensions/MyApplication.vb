@@ -23,7 +23,7 @@ Namespace My
 
     ''' <summary>
     '''     Shutdown: Raised after all application forms are closed. me event is not raised if the application
-    '''               terminates abnormally.
+    '''     terminates abnormally.
     ''' </summary>
     ''' <param name="sender">
     ''' </param>

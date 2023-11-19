@@ -3,6 +3,12 @@
 Public Class FlatToolBar
   Inherits System.Windows.Forms.ToolStrip
 
+#Region "Fields"
+
+  Private components As System.ComponentModel.IContainer
+
+#End Region
+
 #Region "Properties"
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
@@ -177,12 +183,6 @@ Public Class FlatToolBar
 #End Region
 
   End Class
-
-#End Region
-
-#Region "Fields"
-
-  Private components As System.ComponentModel.IContainer
 
 #End Region
 

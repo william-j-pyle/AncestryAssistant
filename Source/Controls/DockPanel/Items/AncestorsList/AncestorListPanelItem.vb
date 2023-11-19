@@ -4,6 +4,22 @@ Public Class AncestorsListPanel
   Inherits System.Windows.Forms.UserControl
   Implements IDockPanelItem
 
+#Region "Fields"
+
+  Private WithEvents AncestorsList As FlatListView
+
+  Private Const EN_ITEMCAPTION As String = "Ancestors List"
+
+  Private Ancestors As AncestorCollection
+
+  Private blockEvents As Boolean = False
+
+  Private components As System.ComponentModel.IContainer
+
+  Private SelectedAncestorID As String = String.Empty
+
+#End Region
+
 #Region "Events"
 
   Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
@@ -203,18 +219,6 @@ Public Class AncestorsListPanel
     PopulateList()
     SetSelectedAncestor()
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private WithEvents AncestorsList As FlatListView
-  Private Const EN_ITEMCAPTION As String = "Ancestors List"
-
-  Private Ancestors As AncestorCollection
-  Private blockEvents As Boolean = False
-  Private components As System.ComponentModel.IContainer
-  Private SelectedAncestorID As String = String.Empty
 
 #End Region
 

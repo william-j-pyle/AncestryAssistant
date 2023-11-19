@@ -6,6 +6,32 @@ Imports AncestryAssistant.AncestorCollection
 
 Public Class AssistantAppForm
 
+#Region "Fields"
+
+  Private WithEvents AncestorAttributes As AncestorPanel
+
+  Private WithEvents AncestorsList As AncestorsListPanel
+
+  Private WithEvents Ancestry As AncestryWebViewer
+
+  Private WithEvents FormExtensions As ResizeDragHandler
+
+  Private WithEvents RibbonFileTab As RibbonBarFileTab
+
+  Private Const ANCESTOR_CENSUS As String = "Download Census Data"
+
+  Private Const ANCESTOR_NEW As String = "Add Ancestor To Assistant"
+
+  Private Const ANCESTOR_UPDATED As String = "Apply Ancestor Changes To Assistant"
+
+  Private Const FINDAGRAVE_IMAGE As String = "Download FindAGrave Image"
+
+  Private _AncestorId As String = String.Empty
+
+  Private Ancestors As AncestorCollection
+
+#End Region
+
 #Region "Events"
 
   Public Event ActiveAncestorChanged()
@@ -145,7 +171,6 @@ Public Class AssistantAppForm
           'End With
         End If
       Case APIMessage.MT_FINDAGRAVE
-        Debug.Print("FindAGrave Handler")
         If Ancestors.ContainsKey(AncestorId) Then
           Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
           'If ancestor.Surname.ToLower.Equals(msg.GetValue("lastName").ToLower) Then
@@ -212,7 +237,7 @@ Public Class AssistantAppForm
   Private Sub ApplicationForm_ActiveAncestorChanged() Handles Me.ActiveAncestorChanged
     Logger.log(Logger.LOG_TYPE.INFO, "ApplicationForm_ActiveAncestorChanged")
     Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
-    AncestorsList.setActiveAncestor(AncestorId)
+    AncestorsList.SetActiveAncestor(AncestorId)
     AncestorAttributes.SetAncestor(ancestor)
     'imgGallery.SetAncestor(ancestor)
     'CensusViewer1.SetAncestor(ancestor)
@@ -221,7 +246,7 @@ Public Class AssistantAppForm
 
   Private Sub ApplicationForm_AncestorsUpdated() Handles Me.AncestorsUpdated
     Logger.log(Logger.LOG_TYPE.INFO, "ApplicationForm_AncestorsUpdated")
-    AncestorsList.setAncestors(Ancestors, AncestorId)
+    AncestorsList.SetAncestors(Ancestors, AncestorId)
   End Sub
 
   ' ==========================
@@ -232,7 +257,7 @@ Public Class AssistantAppForm
 
   Private Sub ApplicationForm_Load(sender As Object, e As EventArgs) Handles Me.Load
     AncestorsList = New AncestorsListPanel()
-    AncestorsList.setAncestors(Ancestors)
+    AncestorsList.SetAncestors(Ancestors)
     DockManager.AddItem(DockPanelLocation.LeftTop, AncestorsList)
     'PanelManager.SetPanelVisibility(DockPanelLocation.LeftBottom, False)
 
@@ -457,22 +482,6 @@ Public Class AssistantAppForm
     DockManager.SaveSettings()
     My.Settings.APP_CLIENTSIZE = Size
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private WithEvents AncestorAttributes As AncestorPanel
-  Private WithEvents AncestorsList As AncestorsListPanel
-  Private WithEvents Ancestry As AncestryWebViewer
-  Private WithEvents FormExtensions As ResizeDragHandler
-  Private WithEvents RibbonFileTab As RibbonBarFileTab
-  Private Const ANCESTOR_CENSUS As String = "Download Census Data"
-  Private Const ANCESTOR_NEW As String = "Add Ancestor To Assistant"
-  Private Const ANCESTOR_UPDATED As String = "Apply Ancestor Changes To Assistant"
-  Private Const FINDAGRAVE_IMAGE As String = "Download FindAGrave Image"
-  Private _AncestorId As String = String.Empty
-  Private Ancestors As AncestorCollection
 
 #End Region
 

@@ -12,6 +12,51 @@ Public Class AncestryWebViewer
   Inherits System.Windows.Forms.UserControl
   Implements IDockPanelItem
 
+#Region "Fields"
+
+  Private WithEvents btnBack As ToolStripButton
+
+  Private WithEvents btnHome As ToolStripButton
+
+  Private WithEvents btnReload As ToolStripButton
+
+  Private WithEvents CoreWeb As CoreWebView2
+
+  Private WithEvents CoreWebDownload As CoreWebView2DownloadOperation
+
+  ' Tool Strip
+  Private WithEvents tsWeb As FlatToolBar
+
+  Private WithEvents txtHref As ToolStripTextBox
+
+  ' Web Interface
+  Private WithEvents web As WebView2
+
+  Private Const AncestryBaseURL As String = "https://www.ancestry.com/"
+
+  Private Const EN_ITEMCAPTION As String = "Ancestry.com"
+
+  Private _AncestorID As String = ""
+
+  Private _MsgSyncKey As Integer = 0
+
+  Private _ShowToolbar As Boolean = False
+
+  Private _UriTrackingGroup As UriTrackingGroupEnum = UriTrackingGroupEnum.ANCESTRY
+
+  Private _URL As New Uri(AncestryBaseURL)
+
+  Private components As System.ComponentModel.IContainer
+
+  ' Tracking
+  Private isReady As Boolean = False
+
+  Private sameImageAsFilename As String = ""
+
+  Private UriTrackingGroupDecoder As New UriTrackingGroup()
+
+#End Region
+
 #Region "Events"
 
   Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
@@ -532,45 +577,6 @@ Public Class AncestryWebViewer
   Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
     Throw New NotImplementedException()
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private WithEvents btnBack As ToolStripButton
-  Private WithEvents btnHome As ToolStripButton
-  Private WithEvents btnReload As ToolStripButton
-  Private WithEvents CoreWeb As CoreWebView2
-  Private WithEvents CoreWebDownload As CoreWebView2DownloadOperation
-
-  ' Tool Strip
-  Private WithEvents tsWeb As FlatToolBar
-
-  Private WithEvents txtHref As ToolStripTextBox
-
-  ' Web Interface
-  Private WithEvents web As WebView2
-
-  Private Const AncestryBaseURL As String = "https://www.ancestry.com/"
-  Private Const EN_ITEMCAPTION As String = "Ancestry.com"
-
-  Private _AncestorID As String = ""
-
-  Private _MsgSyncKey As Integer = 0
-
-  Private _ShowToolbar As Boolean = False
-
-  Private _UriTrackingGroup As UriTrackingGroupEnum = UriTrackingGroupEnum.ANCESTRY
-
-  Private _URL As New Uri(AncestryBaseURL)
-
-  Private components As System.ComponentModel.IContainer
-
-  ' Tracking
-  Private isReady As Boolean = False
-
-  Private sameImageAsFilename As String = ""
-  Private UriTrackingGroupDecoder As New UriTrackingGroup()
 
 #End Region
 

@@ -2,6 +2,12 @@
 
 Public Class TimelineData
 
+#Region "Fields"
+
+  Private dataEntries() As String
+
+#End Region
+
 #Region "Properties"
 
   Public ReadOnly Property length As Integer
@@ -33,12 +39,6 @@ Public Class TimelineData
     dataEntries = Directory.GetFiles(RecordsBasePath, "*.aa")
 
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private dataEntries() As String
 
 #End Region
 

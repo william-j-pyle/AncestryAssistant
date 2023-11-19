@@ -5,6 +5,59 @@ Public Class ImageGalleryPanelItem
   Inherits UserControl
   Implements IDockPanelItem
 
+#Region "Fields"
+
+  Friend WithEvents btnBack As ToolStripButton
+
+  Friend WithEvents btnFlipH As ToolStripButton
+
+  Friend WithEvents btnFlipV As ToolStripButton
+
+  Friend WithEvents btnSizeH As ToolStripButton
+
+  Friend WithEvents btnSizeHV As ToolStripButton
+
+  Friend WithEvents btnSizeV As ToolStripButton
+
+  Friend WithEvents imgBox As PictureBox
+
+  Friend WithEvents imgContainer As Panel
+
+  Friend WithEvents imgViewer As ListView
+
+  Friend WithEvents imgViewerList As ImageList
+
+  Friend WithEvents lblCaption As ToolStripLabel
+
+  Friend WithEvents lblZoom As ToolStripLabel
+
+  Friend WithEvents slider As TrackBar
+
+  Friend WithEvents sliderHost As ToolStripControlHost
+
+  Friend WithEvents toolStripSeparator As ToolStripSeparator
+
+  Friend WithEvents ts As FlatToolBar
+
+  Private Const EN_ITEMCAPTION As String = "Image Gallery"
+
+  Private components As System.ComponentModel.IContainer
+
+  Private MouseSmoothingFactor As Double = 0.1
+
+  ' Tracking
+  Private panningActive As Boolean = False
+
+  Private PanningEnabled As Boolean = True
+
+  Private smoothedMousePosition As Point
+
+  Private zoomActive As Boolean = False
+
+  Friend Ancestor As AncestorCollection.Ancestor
+
+#End Region
+
 #Region "Events"
 
   Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
@@ -480,38 +533,6 @@ Public Class ImageGalleryPanelItem
   Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
     Throw New NotImplementedException()
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Friend WithEvents btnBack As ToolStripButton
-  Friend WithEvents btnFlipH As ToolStripButton
-  Friend WithEvents btnFlipV As ToolStripButton
-  Friend WithEvents btnSizeH As ToolStripButton
-  Friend WithEvents btnSizeHV As ToolStripButton
-  Friend WithEvents btnSizeV As ToolStripButton
-  Friend WithEvents imgBox As PictureBox
-  Friend WithEvents imgContainer As Panel
-  Friend WithEvents imgViewer As ListView
-  Friend WithEvents imgViewerList As ImageList
-  Friend WithEvents lblCaption As ToolStripLabel
-  Friend WithEvents lblZoom As ToolStripLabel
-  Friend WithEvents slider As TrackBar
-  Friend WithEvents sliderHost As ToolStripControlHost
-  Friend WithEvents toolStripSeparator As ToolStripSeparator
-  Friend WithEvents ts As FlatToolBar
-  Private Const EN_ITEMCAPTION As String = "Image Gallery"
-  Private components As System.ComponentModel.IContainer
-  Private MouseSmoothingFactor As Double = 0.1
-
-  ' Tracking
-  Private panningActive As Boolean = False
-
-  Private PanningEnabled As Boolean = True
-  Private smoothedMousePosition As Point
-  Private zoomActive As Boolean = False
-  Friend Ancestor As AncestorCollection.Ancestor
 
 #End Region
 

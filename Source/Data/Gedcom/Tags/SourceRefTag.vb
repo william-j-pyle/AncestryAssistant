@@ -29,14 +29,14 @@ Public Class SourceRefTag
       Case "SOUR"
         ID = data.createID(GedTagEnum.TYPE_SOURCE_REF, data.refKey())
       Case "SOUR._APID"
-        apID = data.getString()
+        apID = data.GetString()
       Case "SOUR.DATA"
       Case "SOUR.DATA.TEXT"
-        text = data.getString()
+        text = data.GetString()
       Case "SOUR.DATA.WWW"
-        www = data.getString()
+        www = data.GetString()
       Case "SOUR.PAGE"
-        page = data.getString()
+        page = data.GetString()
       Case "SOUR.OBJE"
         data.NewMediaRefTag(ID)
       Case Else

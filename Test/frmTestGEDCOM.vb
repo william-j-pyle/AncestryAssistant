@@ -2,6 +2,14 @@
 
 Public Class frmTestGEDCOM
 
+#Region "Fields"
+
+  Private Const filename As String = "D:\Geneology\Data\gedcom\Ancestry-20231105-Jason and Dorinda Pyle Family.ged"
+
+  Private ged As Gedcom
+
+#End Region
+
 #Region "Private Methods"
 
   Private Sub btnGedCom_Click(sender As Object, e As EventArgs) Handles btnGedCom.Click
@@ -27,14 +35,6 @@ Public Class frmTestGEDCOM
   Private Sub Form3_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private Const filename As String = "D:\Geneology\Data\gedcom\Ancestry-20231105-Jason and Dorinda Pyle Family.ged"
-
-  Private ged As Gedcom
 
 #End Region
 

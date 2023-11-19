@@ -1,5 +1,16 @@
 Public MustInherit Class AbstractTag
 
+#Region "Fields"
+
+  Public isRootTag As Boolean
+  Public keyTagBase As String
+  Public lvlTagBase As Integer
+  Public realTag As String
+  Public rootTag As String
+  Public tagStarted As Boolean
+
+#End Region
+
 #Region "Properties"
 
   Public Property data As Gedcom
@@ -73,8 +84,6 @@ Public MustInherit Class AbstractTag
         data.addObject(Me)
         tagStarted = True
       End If
-      'Debug.Print("LINE:  " & data.getIndex)
-      'Debug.Print("processTag [activeKey={0}]", activeKey)
       If Not processTag(activeKey) Then
         Debug.Print("MISSED_TAG: [key={0}, data.key={1}]", activeKey, data.key())
       End If
@@ -96,17 +105,6 @@ Public MustInherit Class AbstractTag
   Public Function wasTagProcessed() As Boolean
     Return tagStarted
   End Function
-
-#End Region
-
-#Region "Fields"
-
-  Public isRootTag As Boolean
-  Public keyTagBase As String
-  Public lvlTagBase As Integer
-  Public realTag As String
-  Public rootTag As String
-  Public tagStarted As Boolean
 
 #End Region
 

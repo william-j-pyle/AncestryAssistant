@@ -1,5 +1,37 @@
 ﻿Public Class ResizeDragHandler
 
+#Region "Fields"
+
+  Private WithEvents frm As Form
+
+  Private ReadOnly ResizeHandleSize As Integer = 4
+
+  Private capturedControls As ArrayList
+
+  Private DragControl As Control
+
+  Private FormInitialHeight As Integer
+
+  Private FormInitialWidth As Integer
+
+  Private FormInitialX As Integer
+
+  Private FormInitialY As Integer
+
+  Private FormResizeHeightFlag As Integer
+
+  Private FormResizeWidthFlag As Integer
+
+  Private IsFormDragging As Boolean
+
+  Private IsFormResizing As Boolean
+
+  Private MouseX As Integer
+
+  Private MouseY As Integer
+
+#End Region
+
 #Region "Public Constructors"
 
   Public Sub New(targetForm As Form, targetResizeHandleSize As Integer)
@@ -235,25 +267,6 @@
     AddHandler DragControl.MouseUp, AddressOf FormDragging_MouseUp
     AddHandler DragControl.MouseMove, AddressOf FormDragging_MouseMove
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private WithEvents frm As Form
-  Private ReadOnly ResizeHandleSize As Integer = 4
-  Private capturedControls As ArrayList
-  Private DragControl As Control
-  Private FormInitialHeight As Integer
-  Private FormInitialWidth As Integer
-  Private FormInitialX As Integer
-  Private FormInitialY As Integer
-  Private FormResizeHeightFlag As Integer
-  Private FormResizeWidthFlag As Integer
-  Private IsFormDragging As Boolean
-  Private IsFormResizing As Boolean
-  Private MouseX As Integer
-  Private MouseY As Integer
 
 #End Region
 

@@ -1,6 +1,36 @@
 ﻿Public Class RibbonButton
   Inherits UserControl
 
+#Region "Fields"
+
+  Private WithEvents btn As Button
+
+  Private _Caption As String = String.Empty
+
+  Private _IconFontStyle As FontStyle = FontStyle.Regular
+
+  Private _IconSize As IconSizeEnum = IconSizeEnum.Icon32x32
+
+  Private _Layer1Color As Color = Color.Black
+
+  Private _Layer1Icon As FontSegoeFluentIconsEnum
+
+  Private _Layer2Color As Color = Color.Black
+
+  Private _Layer2Icon As FontSegoeFluentIconsEnum
+
+  Private _Layer3Color As Color = Color.Black
+
+  Private _Layer3Icon As FontSegoeFluentIconsEnum
+
+  Private _RibbonButtonSize As RibbonButtonSizeEnum = RibbonButtonSizeEnum.LargeButton
+
+  Private components As System.ComponentModel.IContainer
+
+  Private icoFont As Font
+
+#End Region
+
 #Region "Events"
 
   Public Event SettingsChanged()
@@ -132,7 +162,7 @@
     Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Margin = New System.Windows.Forms.Padding(0)
     Name = "JButton"
-    setSizing()
+    SetSizing()
     ResumeLayout(False)
   End Sub
 
@@ -244,24 +274,6 @@
       MyBase.Dispose(disposing)
     End Try
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private WithEvents btn As Button
-  Private _Caption As String = String.Empty
-  Private _IconFontStyle As FontStyle = FontStyle.Regular
-  Private _IconSize As IconSizeEnum = IconSizeEnum.Icon32x32
-  Private _Layer1Color As Color = Color.Black
-  Private _Layer1Icon As FontSegoeFluentIconsEnum
-  Private _Layer2Color As Color = Color.Black
-  Private _Layer2Icon As FontSegoeFluentIconsEnum
-  Private _Layer3Color As Color = Color.Black
-  Private _Layer3Icon As FontSegoeFluentIconsEnum
-  Private _RibbonButtonSize As RibbonButtonSizeEnum = RibbonButtonSizeEnum.LargeButton
-  Private components As System.ComponentModel.IContainer
-  Private icoFont As Font
 
 #End Region
 

@@ -3,6 +3,13 @@
 Public Class FlatStatusBar
   Inherits System.Windows.Forms.StatusStrip
 
+#Region "Fields"
+
+  'Required by the Windows Form Designer
+  Private components As System.ComponentModel.IContainer
+
+#End Region
+
 #Region "Properties"
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
@@ -165,13 +172,6 @@ Public Class FlatStatusBar
 #End Region
 
   End Class
-
-#End Region
-
-#Region "Fields"
-
-  'Required by the Windows Form Designer
-  Private components As System.ComponentModel.IContainer
 
 #End Region
 

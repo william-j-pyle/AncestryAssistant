@@ -1,6 +1,12 @@
 ﻿Public Class RibbonBarTab
   Inherits Panel
 
+#Region "Fields"
+
+  Private components As System.ComponentModel.IContainer
+
+#End Region
+
 #Region "Public Constructors"
 
   Public Sub New()
@@ -78,12 +84,6 @@
       MyBase.Dispose(disposing)
     End Try
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private components As System.ComponentModel.IContainer
 
 #End Region
 

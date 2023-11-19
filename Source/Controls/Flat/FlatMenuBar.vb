@@ -3,6 +3,13 @@
 Public Class FlatMenuBar
   Inherits System.Windows.Forms.MenuStrip
 
+#Region "Fields"
+
+  'Required by the Windows Form Designer
+  Private components As System.ComponentModel.IContainer
+
+#End Region
+
 #Region "Properties"
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
@@ -177,13 +184,6 @@ Public Class FlatMenuBar
 #End Region
 
   End Class
-
-#End Region
-
-#Region "Fields"
-
-  'Required by the Windows Form Designer
-  Private components As System.ComponentModel.IContainer
 
 #End Region
 

@@ -1,5 +1,11 @@
 ﻿Public Class frmTestDockPanel
 
+#Region "Fields"
+
+  Private cnt As Integer = 0
+
+#End Region
+
 #Region "Private Methods"
 
   Private Sub ApplyLayout()
@@ -18,13 +24,13 @@
   End Sub
 
   Private Sub btnAddL_Click(sender As Object, e As EventArgs) Handles btnAddL.Click
-    DockPanel1.AddItem(getPanelItem(cmbPanelList.Text))
+    DockPanel1.AddItem(GetPanelItem(cmbPanelList.Text))
     ApplyLayout()
 
   End Sub
 
   Private Sub btnAddR_Click(sender As Object, e As EventArgs) Handles btnAddR.Click
-    DockPanel2.AddItem(getPanelItem(cmbPanelList.Text))
+    DockPanel2.AddItem(GetPanelItem(cmbPanelList.Text))
     ApplyLayout()
   End Sub
 
@@ -174,12 +180,6 @@
     End Select
     Return ctl
   End Function
-
-#End Region
-
-#Region "Fields"
-
-  Private cnt As Integer = 0
 
 #End Region
 

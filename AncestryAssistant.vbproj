@@ -19,7 +19,7 @@
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2023.1118.317</Version>
+    <Version>1.2023.1119.524</Version>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -298,6 +298,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Source\Controls\Flat\EventHandlers\FlatSearchEventHandler.vb" />
+    <Compile Include="Source\Controls\Flat\FlatLabel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Flat\FlatTextBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Source\MyExtensions\MySettings.vb" />
     <Compile Include="Source\Controls\DockPanel\DockPanelType.vb" />
     <Compile Include="Source\Forms\Helpers\ResizeEventType.vb" />
@@ -407,12 +414,6 @@
     <Compile Include="Test\frmTest.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Test\frmTestCensus.Designer.vb">
-      <DependentUpon>frmTestCensus.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmTestCensus.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Test\frmTestDockPanel.Designer.vb">
       <DependentUpon>frmTestDockPanel.vb</DependentUpon>
     </Compile>
@@ -423,6 +424,12 @@
       <DependentUpon>frmColorPallet.vb</DependentUpon>
     </Compile>
     <Compile Include="Test\frmColorPallet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\frmTestFlatControls.Designer.vb">
+      <DependentUpon>frmTestFlatControls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Test\frmTestFlatControls.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Test\frmTestGEDCOM.Designer.vb">
@@ -454,12 +461,6 @@
     </Compile>
     <Compile Include="Source\Data\Gedcom\File\FileLineEntry.vb" />
     <Compile Include="Source\Data\Gedcom\Primatives\GedDate.vb" />
-    <Compile Include="Test\frmVBFixer.Designer.vb">
-      <DependentUpon>frmVBFixer.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmVBFixer.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <None Include="Source\Data\Gedcom\File\PlaceNormalized.vb" />
     <Compile Include="Source\Controls\DockPanel\Items\ImageGallery\ImageGalleryPanelItem.vb">
       <SubType>UserControl</SubType>
@@ -525,14 +526,14 @@
     <EmbeddedResource Include="Test\frmTest.resx">
       <DependentUpon>frmTest.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmTestCensus.resx">
-      <DependentUpon>frmTestCensus.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Test\frmTestDockPanel.resx">
       <DependentUpon>frmTestDockPanel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmColorPallet.resx">
       <DependentUpon>frmColorPallet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\frmTestFlatControls.resx">
+      <DependentUpon>frmTestFlatControls.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmTestGEDCOM.resx">
       <DependentUpon>frmTestGEDCOM.vb</DependentUpon>
@@ -551,9 +552,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmTestSplitters.resx">
       <DependentUpon>frmTestSplitters.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmVBFixer.resx">
-      <DependentUpon>frmVBFixer.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

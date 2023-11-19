@@ -1,6 +1,86 @@
 ﻿Public Class IconButton
   Inherits UserControl
 
+#Region "Fields"
+
+  'Back Color
+  Private _BackColor As Color = SystemColors.ControlLight
+
+  'Border Color Bottom
+  Private _BorderBottomColor As Color = SystemColors.ActiveBorder
+
+  'Border Size Bottom
+  Private _BorderBottomSize As Integer = 0
+
+  'Border Color Left
+  Private _BorderLeftColor As Color = SystemColors.ActiveBorder
+
+  'Border Size Left
+  Private _BorderLeftSize As Integer = 0
+
+  'Border Color Right
+  Private _BorderRightColor As Color = SystemColors.ActiveBorder
+
+  'Border Size Right
+  Private _BorderRightSize As Integer = 0
+
+  'Border Color Top
+  Private _BorderTopColor As Color = SystemColors.ActiveBorder
+
+  'Border Size Top
+  Private _BorderTopSize As Integer = 0
+
+  Private _btnState As IconButtonStateEnum = IconButtonStateEnum.STANDARD
+
+  'Button Size
+  Private _ButtonSize As IconSizeEnum = IconSizeEnum.Icon20x20
+
+  'Checked
+  Private _Checked As Boolean = False
+
+  'AncestryIcon Layer 0
+  Private _IconAncestry0 As FontAncestryIconEnum = FontAncestryIconEnum.BLANK
+
+  'AncestryIcon ForeColor
+  Private _IconAncestry0_Forecolor As Color = SystemColors.ControlText
+
+  'AncestryIcon Size
+  Private _IconAncestry0_Size As IconSizeEnum = IconSizeEnum.Icon20x20
+
+  'AncestryIcon Layer 0
+  Private _IconAncestry1 As FontAncestryIconEnum = FontAncestryIconEnum.BLANK
+
+  'AncestryIcon ForeColor
+  Private _IconAncestry1_Forecolor As Color = SystemColors.ControlText
+
+  'AncestryIcon Size
+  Private _IconAncestry1_Size As IconSizeEnum = IconSizeEnum.Icon20x20
+
+  'SegoeIcon Layer 0
+  Private _IconSegoe0 As FontSegoeFluentIconsEnum = FontSegoeFluentIconsEnum.Blank
+
+  'SegoeIcon ForeColor
+  Private _IconSegoe0_Forecolor As Color = SystemColors.ControlText
+
+  'SegoeIcon Size
+  Private _IconSegoe0_Size As IconSizeEnum = IconSizeEnum.Icon20x20
+
+  'SegoeIcon Layer 0
+  Private _IconSegoe1 As FontSegoeFluentIconsEnum = FontSegoeFluentIconsEnum.Blank
+
+  'SegoeIcon ForeColor
+  Private _IconSegoe1_Forecolor As Color = SystemColors.ControlText
+
+  'SegoeIcon Size
+  Private _IconSegoe1_Size As IconSizeEnum = IconSizeEnum.Icon20x20
+
+  'Show Borders
+  Private _ShowBorder As Boolean = False
+
+  Private components As System.ComponentModel.IContainer
+
+#End Region
+
 #Region "Events"
 
   'On Checked
@@ -614,86 +694,6 @@
     CHECKED
     PRESSED
   End Enum
-
-#End Region
-
-#Region "Fields"
-
-  'Back Color
-  Private _BackColor As Color = SystemColors.ControlLight
-
-  'Border Color Bottom
-  Private _BorderBottomColor As Color = SystemColors.ActiveBorder
-
-  'Border Size Bottom
-  Private _BorderBottomSize As Integer = 0
-
-  'Border Color Left
-  Private _BorderLeftColor As Color = SystemColors.ActiveBorder
-
-  'Border Size Left
-  Private _BorderLeftSize As Integer = 0
-
-  'Border Color Right
-  Private _BorderRightColor As Color = SystemColors.ActiveBorder
-
-  'Border Size Right
-  Private _BorderRightSize As Integer = 0
-
-  'Border Color Top
-  Private _BorderTopColor As Color = SystemColors.ActiveBorder
-
-  'Border Size Top
-  Private _BorderTopSize As Integer = 0
-
-  Private _btnState As IconButtonStateEnum = IconButtonStateEnum.STANDARD
-
-  'Button Size
-  Private _ButtonSize As IconSizeEnum = IconSizeEnum.Icon20x20
-
-  'Checked
-  Private _Checked As Boolean = False
-
-  'AncestryIcon Layer 0
-  Private _IconAncestry0 As FontAncestryIconEnum = FontAncestryIconEnum.BLANK
-
-  'AncestryIcon ForeColor
-  Private _IconAncestry0_Forecolor As Color = SystemColors.ControlText
-
-  'AncestryIcon Size
-  Private _IconAncestry0_Size As IconSizeEnum = IconSizeEnum.Icon20x20
-
-  'AncestryIcon Layer 0
-  Private _IconAncestry1 As FontAncestryIconEnum = FontAncestryIconEnum.BLANK
-
-  'AncestryIcon ForeColor
-  Private _IconAncestry1_Forecolor As Color = SystemColors.ControlText
-
-  'AncestryIcon Size
-  Private _IconAncestry1_Size As IconSizeEnum = IconSizeEnum.Icon20x20
-
-  'SegoeIcon Layer 0
-  Private _IconSegoe0 As FontSegoeFluentIconsEnum = FontSegoeFluentIconsEnum.Blank
-
-  'SegoeIcon ForeColor
-  Private _IconSegoe0_Forecolor As Color = SystemColors.ControlText
-
-  'SegoeIcon Size
-  Private _IconSegoe0_Size As IconSizeEnum = IconSizeEnum.Icon20x20
-
-  'SegoeIcon Layer 0
-  Private _IconSegoe1 As FontSegoeFluentIconsEnum = FontSegoeFluentIconsEnum.Blank
-
-  'SegoeIcon ForeColor
-  Private _IconSegoe1_Forecolor As Color = SystemColors.ControlText
-
-  'SegoeIcon Size
-  Private _IconSegoe1_Size As IconSizeEnum = IconSizeEnum.Icon20x20
-
-  'Show Borders
-  Private _ShowBorder As Boolean = False
-
-  Private components As System.ComponentModel.IContainer
 
 #End Region
 

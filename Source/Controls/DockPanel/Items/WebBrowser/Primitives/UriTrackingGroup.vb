@@ -1,5 +1,11 @@
 ﻿Public Class UriTrackingGroup
 
+#Region "Fields"
+
+  Private UriTrackerConfig As List(Of UriTracks)
+
+#End Region
+
 #Region "Public Constructors"
 
   Public Sub New()
@@ -45,12 +51,6 @@
     Next
     Return UriTrackingGroupEnum.CUSTOM
   End Function
-
-#End Region
-
-#Region "Fields"
-
-  Private UriTrackerConfig As List(Of UriTracks)
 
 #End Region
 

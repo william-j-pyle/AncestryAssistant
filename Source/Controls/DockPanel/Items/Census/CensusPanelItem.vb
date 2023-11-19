@@ -4,6 +4,30 @@ Public Class CensusViewer
   Inherits UserControl
   Implements IDockPanelItem
 
+#Region "Fields"
+
+  Private WithEvents ts As FlatToolBar
+
+  Private WithEvents xlsActiveSheet As DataGridView
+
+  Private Const EN_ITEMCAPTION As String = "Census"
+
+  Const UNIFIED_TEXT As String = "Unified"
+
+  Private Ancestor As AncestorCollection.Ancestor
+
+  Private AvailableYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
+
+  Private CensusData As Collection
+
+  Private CensusFileList As Collection
+
+  Private components As System.ComponentModel.IContainer
+
+  Private xlsWorkbook As Dictionary(Of Integer, DataGridView)
+
+#End Region
+
 #Region "Events"
 
   Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
@@ -628,7 +652,6 @@ Public Class CensusViewer
   End Sub
 
   Private Sub ShowCensus(CensusYear As String)
-    Debug.Print("ShowCensus: " + CensusYear)
     If CensusFileList.Contains(CensusYear) Then
       LoadFile(CensusFileList.Item(CensusYear))
     End If
@@ -691,23 +714,6 @@ Public Class CensusViewer
   Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
     Throw New NotImplementedException()
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private WithEvents ts As FlatToolBar
-  Private WithEvents xlsActiveSheet As DataGridView
-  Private Const EN_ITEMCAPTION As String = "Census"
-
-  Const UNIFIED_TEXT As String = "Unified"
-
-  Private Ancestor As AncestorCollection.Ancestor
-  Private AvailableYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
-  Private CensusData As Collection
-  Private CensusFileList As Collection
-  Private components As System.ComponentModel.IContainer
-  Private xlsWorkbook As Dictionary(Of Integer, DataGridView)
 
 #End Region
 

@@ -1,6 +1,12 @@
 Public Class MediaTag
   Inherits AbstractTag
 
+#Region "Fields"
+
+  Public Const GEDCOM_TAG As String = "OBJE"
+
+#End Region
+
 #Region "Properties"
 
   ' Attributes
@@ -46,54 +52,54 @@ Public Class MediaTag
       Case "OBJE"
         ID = data.createID(GedTagEnum.TYPE_MEDIA, data.refKey())
       Case "OBJE._ATL"
-        atl = data.getString()
+        atl = data.GetString()
       Case "OBJE._CLON"
       Case "OBJE._CLON._DATE"
-        clonDate = data.getDate()
+        clonDate = data.GetDate()
       Case "OBJE._CLON._OID"
-        clonOID = data.getString()
+        clonOID = data.GetString()
       Case "OBJE._CLON._PID"
-        clonPID = data.getString()
+        clonPID = data.GetString()
       Case "OBJE._CLON._TID"
-        clonTID = data.getString()
+        clonTID = data.GetString()
       Case "OBJE._CLON._USER"
       Case "OBJE._CLON._USER._ENCR"
       Case "OBJE._CREA"
-        createDate = data.getDate()
+        createDate = data.GetDate()
       Case "OBJE._DSCR"
-        description = data.getString()
+        description = data.GetString()
       Case "OBJE._META"
-        metadata = data.getString()
+        metadata = data.GetString()
       Case "OBJE._MSER"
       Case "OBJE._MSER._LKID"
-        mserLKID = data.getString()
+        mserLKID = data.GetString()
       Case "OBJE._MSER._PARM"
-        mserParam = data.getString()
+        mserParam = data.GetString()
       Case "OBJE._ORIG"
-        origin = data.getString()
+        origin = data.GetString()
       Case "OBJE._ORIG._URL"
-        originUrl = data.getString()
+        originUrl = data.GetString()
       Case "OBJE._USER"
       Case "OBJE._USER._ENCR"
       Case "OBJE.DATE"
-        MediaDate = data.getDate()
+        MediaDate = data.GetDate()
       Case "OBJE.FILE"
       Case "OBJE.FILE.FORM"
-        fileFormat = data.getString()
+        fileFormat = data.GetString()
       Case "OBJE.FILE.FORM._HGHT"
-        fileHeight = data.getInt()
+        fileHeight = data.GetInt()
       Case "OBJE.FILE.FORM._MTYPE"
-        fileMediaType = data.getString()
+        fileMediaType = data.GetString()
       Case "OBJE.FILE.FORM._SIZE"
-        fileSize = data.getInt()
+        fileSize = data.GetInt()
       Case "OBJE.FILE.FORM._STYPE"
-        fileStandardType = data.getString()
+        fileStandardType = data.GetString()
       Case "OBJE.FILE.FORM._WDTH"
-        fileWidth = data.getInt()
+        fileWidth = data.GetInt()
       Case "OBJE.FILE.FORM.TYPE"
-        fileType = data.getString()
+        fileType = data.GetString()
       Case "OBJE.FILE.TITL"
-        fileTitle = data.getString()
+        fileTitle = data.GetString()
       Case "OBJE.PLAC"
         Dim tmp As PlaceTag
         tmp = data.NewPlaceTag(ID)
@@ -103,19 +109,13 @@ Public Class MediaTag
           placeID = tmp.ID
         End If
       Case "OBJE.RIN"
-        rin = data.getString()
+        rin = data.GetString()
       Case Else
         Return False
     End Select
     Return True
 
   End Function
-
-#End Region
-
-#Region "Fields"
-
-  Public Const GEDCOM_TAG As String = "OBJE"
 
 #End Region
 

@@ -1,6 +1,20 @@
 ﻿Public Class RibbonBar
   Inherits TabControl
 
+#Region "Fields"
+
+  Private Const RIBBONBORDER As Integer = 8
+
+  Private Const RIBBONHEIGHT As Integer = 100
+
+  Private Const RIBBONTOP As Integer = TABHEIGHT + 1
+
+  Private Const TABHEIGHT As Integer = 20
+
+  Private components As System.ComponentModel.IContainer
+
+#End Region
+
 #Region "Public Constructors"
 
   Public Sub New()
@@ -146,16 +160,6 @@
       MyBase.Dispose(disposing)
     End Try
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private Const RIBBONBORDER As Integer = 8
-  Private Const RIBBONHEIGHT As Integer = 100
-  Private Const RIBBONTOP As Integer = TABHEIGHT + 1
-  Private Const TABHEIGHT As Integer = 20
-  Private components As System.ComponentModel.IContainer
 
 #End Region
 

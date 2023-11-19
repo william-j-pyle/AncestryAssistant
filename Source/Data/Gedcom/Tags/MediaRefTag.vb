@@ -33,15 +33,15 @@ Public Class MediaRefTag
       Case "OBJE._CROP"
       Case "OBJE._CROP._TYPE"
       Case "OBJE._CROP._HGHT"
-        cropHeight = data.getInt()
+        cropHeight = data.GetInt()
       Case "OBJE._CROP._LEFT"
-        cropLeft = data.getInt()
+        cropLeft = data.GetInt()
       Case "OBJE._CROP._TOP"
-        cropTop = data.getInt()
+        cropTop = data.GetInt()
       Case "OBJE._CROP._WDTH"
-        cropWidth = data.getInt()
+        cropWidth = data.GetInt()
       Case "OBJE._PRIM"
-        isPrimary = data.getString().Equals("Y")
+        isPrimary = data.GetString().Equals("Y")
       Case "OBJE.SOUR"
         data.NewSourceRefTag(ID)
       Case "OBJE.OBJE"

@@ -2,6 +2,23 @@
 
 Public Class GedDate
 
+#Region "Fields"
+
+  Private bAbout As Boolean = False
+  Private bAfter As Boolean = False
+  Private bBefore As Boolean = False
+  Private bDay As Boolean = False
+  Private bMonth As Boolean = False
+  Private bRange As Boolean = False
+  Private bValid As Boolean = False
+  Private bYear As Boolean = False
+  Private dResultDate As Date
+  Private sCleanDateString As String = ""
+  Private sFormat As String = ""
+  Private sSourceDateString As String = ""
+
+#End Region
+
 #Region "Properties"
 
   Public ReadOnly Property DateFormat As String
@@ -374,23 +391,6 @@ Public Class GedDate
     End If
     Return rtnString
   End Function
-
-#End Region
-
-#Region "Fields"
-
-  Private bAbout As Boolean = False
-  Private bAfter As Boolean = False
-  Private bBefore As Boolean = False
-  Private bDay As Boolean = False
-  Private bMonth As Boolean = False
-  Private bRange As Boolean = False
-  Private bValid As Boolean = False
-  Private bYear As Boolean = False
-  Private dResultDate As Date
-  Private sCleanDateString As String = ""
-  Private sFormat As String = ""
-  Private sSourceDateString As String = ""
 
 #End Region
 

@@ -2,6 +2,22 @@
 
 Public Class ANotebook
 
+#Region "Fields"
+
+  Private Const NOTE_PAGES_CONFIG As String = "anote_pages.aa"
+
+  Private Const NOTE_SECTION_CONFIG As String = "anote_sections.aa"
+
+  Private pages As AAFile
+
+  Private sActivePage As String = ""
+
+  Private sActiveSection As String = ""
+
+  Private sections As AAFile
+
+#End Region
+
 #Region "Events"
 
   Public Event PageChanged(PageName As String)
@@ -156,22 +172,6 @@ Public Class ANotebook
     'Debug.Print("RenameSection({0},{1})", OldSectionName, NewSectionName)
 
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private Const NOTE_PAGES_CONFIG As String = "anote_pages.aa"
-
-  Private Const NOTE_SECTION_CONFIG As String = "anote_sections.aa"
-
-  Private pages As AAFile
-
-  Private sActivePage As String = ""
-
-  Private sActiveSection As String = ""
-
-  Private sections As AAFile
 
 #End Region
 

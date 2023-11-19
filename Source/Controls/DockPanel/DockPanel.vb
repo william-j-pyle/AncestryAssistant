@@ -1,6 +1,56 @@
 ﻿Public Class DockPanel
   Inherits System.Windows.Forms.UserControl
 
+#Region "Fields"
+
+  Private WithEvents btnClose As IconButton
+
+  Private WithEvents btnContextMenu As IconButton
+
+  Private WithEvents btnPinned As IconButton
+
+  Private WithEvents btnSearch As IconButton
+
+  Private WithEvents ctxMenu As ContextMenuStrip
+
+  Private WithEvents lblCaption As Label
+
+  Private WithEvents pnlButtonContainerHeader As TableLayoutPanel
+
+  Private WithEvents pnlButtonContainerSearch As TableLayoutPanel
+
+  Private WithEvents pnlClient As DockTabControl
+
+  Private WithEvents pnlHeader As FlatPanel
+
+  Private WithEvents pnlMain As FlatPanel
+
+  Private WithEvents pnlSearch As FlatPanel
+
+  Private WithEvents TabPage1 As TabPage
+
+  Private WithEvents txtSearch As TextBox
+
+  Private _PanelHasFocus As Boolean = True
+
+  Private _PanelIsPinned As Boolean = True
+
+  Private _PanelLocation As DockPanelLocation = DockPanelLocation.Floating
+
+  Private _PanelShowClose As Boolean = True
+
+  Private _PanelShowContextMenu As Boolean = True
+
+  Private _PanelShowPinned As Boolean = False
+
+  Private _PanelShowSearch As Boolean = True
+
+  Private _PanelType As DockPanelType = DockPanelType.Panel
+
+  Private components As System.ComponentModel.IContainer
+
+#End Region
+
 #Region "Events"
 
   Public Event PanelCloseRequested(sender As DockPanel)
@@ -670,7 +720,6 @@
   End Function
 
   Private Sub LayoutPanel()
-    Debug.Print("LayoutPanel: {0}", Name)
     'Prevent display of control when its empty
     If Not hasTabs() Then
       Visible = False
@@ -922,35 +971,6 @@
       SetPanelState()
     End If
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private WithEvents btnClose As IconButton
-  Private WithEvents btnContextMenu As IconButton
-  Private WithEvents btnPinned As IconButton
-  Private WithEvents btnSearch As IconButton
-  Private WithEvents ctxMenu As ContextMenuStrip
-  Private WithEvents lblCaption As Label
-  Private WithEvents pnlButtonContainerHeader As TableLayoutPanel
-  Private WithEvents pnlButtonContainerSearch As TableLayoutPanel
-  Private WithEvents pnlClient As DockTabControl
-  Private WithEvents pnlHeader As FlatPanel
-  Private WithEvents pnlMain As FlatPanel
-  Private WithEvents pnlSearch As FlatPanel
-  Private WithEvents TabPage1 As TabPage
-  Private WithEvents txtSearch As TextBox
-
-  Private _PanelHasFocus As Boolean = True
-  Private _PanelIsPinned As Boolean = True
-  Private _PanelLocation As DockPanelLocation = DockPanelLocation.Floating
-  Private _PanelShowClose As Boolean = True
-  Private _PanelShowContextMenu As Boolean = True
-  Private _PanelShowPinned As Boolean = False
-  Private _PanelShowSearch As Boolean = True
-  Private _PanelType As DockPanelType = DockPanelType.Panel
-  Private components As System.ComponentModel.IContainer
 
 #End Region
 

@@ -1,6 +1,12 @@
 Public Class FamilyTag
   Inherits AbstractTag
 
+#Region "Fields"
+
+  Public Const GEDCOM_TAG As String = "FAM"
+
+#End Region
+
 #Region "Properties"
 
   Public Property childIDs As List(Of String)
@@ -36,7 +42,7 @@ Public Class FamilyTag
         End If
         childIDs.Add(data.createID(GedTagEnum.TYPE_INDIVIDUAL, data.refKey()))
       Case "FAM._SREL"
-        parentRelationship = data.getString()
+        parentRelationship = data.GetString()
       Case "FAM.DIV"
       Case "FAM.MARR"
         data.NewEventTag(ID, data.tag())
@@ -51,12 +57,6 @@ Public Class FamilyTag
     End Select
     Return True
   End Function
-
-#End Region
-
-#Region "Fields"
-
-  Public Const GEDCOM_TAG As String = "FAM"
 
 #End Region
 

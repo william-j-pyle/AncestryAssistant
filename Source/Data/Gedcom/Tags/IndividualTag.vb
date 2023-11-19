@@ -1,6 +1,14 @@
 Public Class IndividualTag
   Inherits AbstractTag
 
+#Region "Fields"
+
+  Private _given As String = String.Empty
+  Private _surname As String = String.Empty
+  Public Const GEDCOM_TAG As String = "INDI"
+
+#End Region
+
 #Region "Properties"
 
   Public Property familySearchID As String
@@ -70,7 +78,7 @@ Public Class IndividualTag
       Case "INDI"
         ID = data.createID(GedTagEnum.TYPE_INDIVIDUAL, data.refKey())
       Case "INDI.NOTE"
-        note = data.getString()
+        note = data.GetString()
       Case "INDI.SEX"
         data.NewFactTag(ID, "SEX")
       Case "INDI.FAMS"
@@ -82,9 +90,9 @@ Public Class IndividualTag
       Case "INDI.NAME"
         data.NewNameTag(ID)
       Case "INDI.UID"
-        universalID = data.getString()
+        universalID = data.GetString()
       Case "INDI._FSID"
-        familySearchID = data.getString()
+        familySearchID = data.GetString()
       Case "INDI._DEG"
         data.NewEventTag(ID, data.tag())
       Case "INDI._MILT"
@@ -122,14 +130,6 @@ Public Class IndividualTag
     End Select
     Return True
   End Function
-
-#End Region
-
-#Region "Fields"
-
-  Private _given As String = String.Empty
-  Private _surname As String = String.Empty
-  Public Const GEDCOM_TAG As String = "INDI"
 
 #End Region
 

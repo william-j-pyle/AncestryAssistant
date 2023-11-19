@@ -1,6 +1,16 @@
 ﻿Public Class RibbonGroup
   Inherits TableLayoutPanel
 
+#Region "Fields"
+
+  Private _Caption As String = "RibbonGroup"
+  Private CaptionFont As New System.Drawing.Font("Segoe UI Semibold", 10, FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
+  'Required by the Windows Form Designer
+  Private components As System.ComponentModel.IContainer
+  Private IconFont As New System.Drawing.Font("Segoe Fluent Icons", 10, FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
+
+#End Region
+
 #Region "Properties"
 
   Public Property Caption As String
@@ -104,18 +114,6 @@
       MyBase.Dispose(disposing)
     End Try
   End Sub
-
-#End Region
-
-#Region "Fields"
-
-  Private _Caption As String = "RibbonGroup"
-  Private CaptionFont As New System.Drawing.Font("Segoe UI Semibold", 10, FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
-
-  'Required by the Windows Form Designer
-  Private components As System.ComponentModel.IContainer
-
-  Private IconFont As New System.Drawing.Font("Segoe Fluent Icons", 10, FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
 
 #End Region
 
