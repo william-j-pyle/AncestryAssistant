@@ -19,7 +19,7 @@
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2023.1119.524</Version>
+    <Version>1.2023.1120.144</Version>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -298,54 +298,56 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Source\Controls\Flat\EventHandlers\FlatSearchEventHandler.vb" />
+    <Compile Include="Source\EventHandlers\FlatSearchEventHandler.vb" />
     <Compile Include="Source\Controls\Flat\FlatLabel.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Controls\Flat\FlatTextBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Source\Helpers\TestClass.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Source\MyExtensions\MySettings.vb" />
-    <Compile Include="Source\Controls\DockPanel\DockPanelType.vb" />
-    <Compile Include="Source\Forms\Helpers\ResizeEventType.vb" />
+    <Compile Include="Source\Enums\DockPanelType.vb" />
+    <Compile Include="Source\Enums\ResizeEventType.vb" />
     <Compile Include="Source\Data\Ancestor\AncestorAbstract.vb" />
     <Compile Include="Source\Data\Ancestor\AncestorCollection.vb" />
     <Compile Include="Source\Data\AAFile\AAFile.vb" />
-    <Compile Include="Source\Controls\DockPanel\Items\Census\CensusData.vb" />
-    <Compile Include="Source\Controls\DockPanel\Items\ImageGallery\GalleryData.vb" />
-    <Compile Include="Source\Controls\DockPanel\Items\Notebook\NotebookData.vb" />
-    <Compile Include="Source\Controls\DockPanel\Items\Source\SourceData.vb" />
-    <Compile Include="Source\Controls\DockPanel\Items\Timeline\TimelineData.vb" />
+    <Compile Include="Source\Data\CensusData.vb" />
+    <Compile Include="Source\Data\GalleryData.vb" />
+    <Compile Include="Source\Data\NotebookData.vb" />
+    <Compile Include="Source\Data\SourceData.vb" />
+    <Compile Include="Source\Data\TimelineData.vb" />
     <Compile Include="Source\Data\AAFile\AAFileTypeEnum.vb" />
     <Compile Include="Source\Controls\Flat\FlatListView.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\Items\WebBrowser\WebBrowserPanelItem.vb">
+    <Compile Include="Source\Controls\DockPanel\PanelItems\WebBrowserPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\Items\WebBrowser\Primitives\UriTracks.vb" />
-    <Compile Include="Source\Controls\DockPanel\Items\WebBrowser\Primitives\UriTrackingGroup.vb" />
+    <Compile Include="Source\Helpers\UriTracking.vb" />
     <Compile Include="Source\Controls\DockPanel\DockPanelManager.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Controls\DockPanel\DockPanel.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\Items\Ancestor\AncestorPanelItem.vb">
+    <Compile Include="Source\Controls\DockPanel\PanelItems\AncestorPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\Items\AncestorsList\AncestorListPanelItem.vb">
+    <Compile Include="Source\Controls\DockPanel\PanelItems\AncestorListPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\Primitives\DockTabControl.vb">
+    <Compile Include="Source\Controls\Flat\FlatTabControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\Items\IDockPanelItem.vb" />
-    <Compile Include="Source\Controls\DockPanel\Primitives\DockToolBarConfig.vb" />
+    <Compile Include="Source\Controls\DockPanel\IDockPanelItem.vb" />
+    <Compile Include="Source\Data\Config\DockToolBarConfig.vb" />
     <Compile Include="Source\Controls\Flat\FlatMenuBar.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\DockPanelLocation.vb" />
+    <Compile Include="Source\Enums\DockPanelLocation.vb" />
     <Compile Include="Source\Data\Gedcom\Primatives\Individual.vb" />
     <Compile Include="Source\Controls\Flat\FlatPanel.vb">
       <SubType>Component</SubType>
@@ -356,14 +358,14 @@
     <Compile Include="Source\Controls\Ribbon\RibbonBarFileTab.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonBarTabConfig.vb" />
+    <Compile Include="Source\Data\Config\RibbonBarTabConfig.vb" />
     <Compile Include="Source\Controls\Flat\FlatStatusBar.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Controls\Flat\FlatToolBar.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Forms\Helpers\ResizeDragHandler.vb" />
+    <Compile Include="Source\Helpers\ResizeDragHandler.vb" />
     <Compile Include="Source\Forms\DialogImageSave.Designer.vb">
       <DependentUpon>DialogImageSave.vb</DependentUpon>
     </Compile>
@@ -389,7 +391,7 @@
     <Compile Include="Source\Controls\Ribbon\RibbonBar.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonBarTabGroup.vb">
+    <Compile Include="Source\Controls\Ribbon\RibbonGroup.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Forms\FormSplash.Designer.vb">
@@ -438,7 +440,7 @@
     <Compile Include="Test\frmTestGEDCOM.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\Items\Census\CensusPanelItem.vb">
+    <Compile Include="Source\Controls\DockPanel\PanelItems\CensusPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Test\frmTestRibbon.Designer.vb">
@@ -462,10 +464,10 @@
     <Compile Include="Source\Data\Gedcom\File\FileLineEntry.vb" />
     <Compile Include="Source\Data\Gedcom\Primatives\GedDate.vb" />
     <None Include="Source\Data\Gedcom\File\PlaceNormalized.vb" />
-    <Compile Include="Source\Controls\DockPanel\Items\ImageGallery\ImageGalleryPanelItem.vb">
+    <Compile Include="Source\Controls\DockPanel\PanelItems\ImageGalleryPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\Items\Notebook\NotebookPanelItem.vb">
+    <Compile Include="Source\Controls\DockPanel\PanelItems\NotebookPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Data\Gedcom\Gedcom.vb" />
@@ -488,13 +490,13 @@
     <Compile Include="Source\Data\Gedcom\Tags\SourceTag.vb" />
     <Compile Include="Source\Data\Gedcom\Primatives\GedName.vb" />
     <Compile Include="Source\MyExtensions\Logger.vb" />
-    <Compile Include="Source\Controls\Flat\Enum\FontAncestryIconEnum.vb" />
-    <Compile Include="Source\Controls\Flat\Enum\FontSegoeFluentIconsEnum.vb" />
-    <Compile Include="Source\Controls\Flat\Enum\IconSizeEnum.vb" />
-    <Compile Include="Source\Controls\Ribbon\RibbonButtonSizeEnum.vb" />
-    <Compile Include="Source\Controls\DockPanel\Items\WebBrowser\Primitives\UriTrackingGroupEnum.vb" />
+    <Compile Include="Source\Enums\FontAncestryIconEnum.vb" />
+    <Compile Include="Source\Enums\FontSegoeFluentIconsEnum.vb" />
+    <Compile Include="Source\Enums\IconSizeEnum.vb" />
+    <Compile Include="Source\Enums\RibbonButtonSizeEnum.vb" />
+    <Compile Include="Source\Enums\UriTrackingGroupEnum.vb" />
     <Compile Include="Source\MyExtensions\Utils.vb" />
-    <Compile Include="Source\Controls\DockPanel\Items\WebBrowser\APIMessage.vb" />
+    <Compile Include="Source\Data\APIMessage.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -593,6 +595,7 @@
   <ItemGroup>
     <Folder Include="Documentation\assets\" />
     <Folder Include="Source\Data\SQLite\" />
+    <Folder Include="Source\Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />

@@ -53,7 +53,7 @@ Public Class AncestryWebViewer
 
   Private sameImageAsFilename As String = ""
 
-  Private UriTrackingGroupDecoder As New UriTrackingGroup()
+  Private UriTrackingGroupDecoder As New UriTracking()
 
 #End Region
 

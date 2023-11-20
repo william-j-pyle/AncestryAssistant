@@ -1,26 +1,45 @@
-﻿Public Class RibbonBar
+﻿Imports System.ComponentModel
+
+Public Class RibbonBar
   Inherits TabControl
 
 #Region "Fields"
 
   Private Const RIBBONBORDER As Integer = 8
-
   Private Const RIBBONHEIGHT As Integer = 100
-
   Private Const RIBBONTOP As Integer = TABHEIGHT + 1
-
   Private Const TABHEIGHT As Integer = 20
 
+  Private ByKey As New Dictionary(Of String, RibbonBarTab)
   Private components As System.ComponentModel.IContainer
+
+#End Region
+
+#Region "Properties"
+
+  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)>
+  Private Shadows ReadOnly Property TabPages As TabPageCollection
+    Get
+      Return MyBase.TabPages
+    End Get
+  End Property
+  Public Property HighlightColor As Color = My.Theme.AppHighlightColor
+  Public Property RibbonAccentColor As Color = My.Theme.RibbonBarBorderColor
+  Public Property RibbonBackColor As Color = My.Theme.RibbonBarBackColor
+  Public Property RibbonForeColor As Color = My.Theme.RibbonBarFontColor
+  Public Property RibbonShadowColor As Color = My.Theme.RibbonBarBorderColor
 
 #End Region
 
 #Region "Public Constructors"
 
   Public Sub New()
+    MyBase.New
     SetStyle(ControlStyles.UserPaint Or ControlStyles.ContainerControl Or ControlStyles.FixedHeight Or ControlStyles.SupportsTransparentBackColor Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
+    UpdateStyles()
     SuspendLayout()
-    AllowDrop = True
+    AllowDrop = False
+    DrawMode = TabDrawMode.OwnerDrawFixed
     BackColor = My.Theme.AppBackColor
     Font = My.Theme.AppFont
     Margin = New System.Windows.Forms.Padding(0)
@@ -29,8 +48,10 @@
     Name = "JRibbon"
     'Padding = New System.Windows.Forms.Padding(16, 8, 16, 8)
     Dock = DockStyle.Top
-    ResumeLayout(False)
     TabPages.Clear()
+    AddFileTab()
+    ResumeLayout(False)
+    PerformLayout()
   End Sub
 
 #End Region
@@ -40,30 +61,12 @@
   Private Sub AddFileTab()
     Dim tab As TabPage
     tab = New TabPage("File") With {
-      .Name = "File",
+      .Name = "file",
       .BackColor = My.Theme.AppBackColor,
       .ForeColor = My.Theme.AppFontColor,
       .Font = My.Theme.AppFont
     }
     'tab.Controls.Add(rb)
-    TabPages.Add(tab)
-  End Sub
-
-  Private Sub AddRibbonTab(text As String)
-    Dim tab As TabPage
-    tab = New TabPage(text) With {
-      .Name = text.Replace(" ", ""),
-      .BackColor = My.Theme.AppBackColor,
-      .ForeColor = My.Theme.AppFontColor,
-      .Font = My.Theme.AppFont
-    }
-    Dim rb As New RibbonBarTab()
-    With rb
-      .Dock = DockStyle.Fill
-      .BackColor = My.Theme.AppBackColor
-      .ForeColor = My.Theme.AppFontColor
-    End With
-    tab.Controls.Add(rb)
     TabPages.Add(tab)
   End Sub
 
@@ -146,6 +149,10 @@
 
   End Sub
 
+  Private Function ToKey(text As String) As String
+    Return text.ToLower.Trim.Replace(" ", "")
+  End Function
+
 #End Region
 
 #Region "Protected Methods"
@@ -160,6 +167,40 @@
       MyBase.Dispose(disposing)
     End Try
   End Sub
+
+#End Region
+
+#Region "Public Methods"
+
+  Public Function AddGroup(RibbonKey As String, GroupText As String, Optional Key As String = "") As RibbonGroup
+    Dim rb As RibbonBarTab = Nothing
+    If Not ByKey.TryGetValue(ToKey(RibbonKey), rb) Then Return Nothing
+    Dim rg As New RibbonGroup(GroupText) With {
+      .BackColor = rb.BackColor,
+      .ForeColor = rb.ForeColor
+    }
+    rb.Controls.Add(rg)
+    Return rg
+  End Function
+
+  Public Function AddRibbonTab(TabText As String, Optional Key As String = "") As TabPage
+    If Key.Equals("") Then Key = ToKey(TabText)
+    Dim Tab As New TabPage(TabText) With {
+      .Name = Key,
+      .BackColor = My.Theme.AppBackColor,
+      .ForeColor = My.Theme.AppFontColor,
+      .Font = My.Theme.AppFont
+    }
+    Dim rb As New RibbonBarTab() With {
+      .Dock = DockStyle.Fill,
+      .BackColor = My.Theme.AppBackColor,
+      .ForeColor = My.Theme.AppFontColor
+    }
+    Tab.Controls.Add(rb)
+    Controls.Add(Tab)
+    ByKey.Add(Key, rb)
+    Return Tab
+  End Function
 
 #End Region
 

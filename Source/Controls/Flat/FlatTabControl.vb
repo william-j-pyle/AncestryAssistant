@@ -1,4 +1,4 @@
-﻿Public Class DockTabControl
+﻿Public Class FlatTabControl
   Inherits TabControl
 
 #Region "Fields"

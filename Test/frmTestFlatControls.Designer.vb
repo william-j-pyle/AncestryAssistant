@@ -45,6 +45,7 @@ Partial Class frmTestFlatControls
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.prop = New System.Windows.Forms.PropertyGrid()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.tabs.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -70,6 +71,7 @@ Partial Class frmTestFlatControls
         Me.tabs.Controls.Add(Me.TabPage3)
         Me.tabs.Controls.Add(Me.TabPage4)
         Me.tabs.Controls.Add(Me.TabPage5)
+        Me.tabs.Controls.Add(Me.TabPage6)
         Me.tabs.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabs.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tabs.HotTrack = True
@@ -154,7 +156,6 @@ Partial Class frmTestFlatControls
         Me.FlatLabel1.Location = New System.Drawing.Point(41, 29)
         Me.FlatLabel1.Margin = New System.Windows.Forms.Padding(0)
         Me.FlatLabel1.Name = "FlatLabel1"
-        Me.FlatLabel1.Padding = New System.Windows.Forms.Padding(0)
         Me.FlatLabel1.Size = New System.Drawing.Size(199, 31)
         Me.FlatLabel1.TabIndex = 0
         '
@@ -328,6 +329,16 @@ Partial Class frmTestFlatControls
         Me.SplitContainer1.SplitterDistance = 606
         Me.SplitContainer1.TabIndex = 5
         '
+        'TabPage6
+        '
+        Me.TabPage6.Location = New System.Drawing.Point(4, 24)
+        Me.TabPage6.Name = "TabPage6"
+        Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage6.Size = New System.Drawing.Size(598, 478)
+        Me.TabPage6.TabIndex = 5
+        Me.TabPage6.Text = "TabPage6"
+        Me.TabPage6.UseVisualStyleBackColor = True
+        '
         'frmTestFlatControls
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -380,4 +391,5 @@ Partial Class frmTestFlatControls
     Friend WithEvents Panel2 As Panel
     Friend WithEvents SplitContainer2 As SplitContainer
     Friend WithEvents FlatLabel1 As FlatLabel
+    Friend WithEvents TabPage6 As TabPage
 End Class

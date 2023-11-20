@@ -27,9 +27,10 @@
 
 #Region "Public Constructors"
 
-  Public Sub New()
+  Public Sub New(GroupText As String)
     SetStyle(ControlStyles.UserPaint Or ControlStyles.ContainerControl Or ControlStyles.FixedHeight Or ControlStyles.SupportsTransparentBackColor Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
     SuspendLayout()
+    _Caption = GroupText
     MaximumSize = New System.Drawing.Size(0, 0)
     MinimumSize = New System.Drawing.Size(100, 0)
     Padding = New Padding(0)
@@ -45,11 +46,11 @@
 #Region "Private Methods"
 
   Private Sub JRibbonGroup_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
-    Using brush As New SolidBrush(SystemColors.ControlLight)
+    Using brush As New SolidBrush(BackColor)
       e.Graphics.FillRectangle(brush, ClientRectangle)
     End Using
 
-    Dim jPen As New Pen(SystemColors.ButtonShadow, 2)
+    Dim jPen As New Pen(My.Theme.RibbonBarBorderColor, 2)
     e.Graphics.DrawLine(jPen, Width, 16, Width, Height - 16)
 
     Dim textBrush As Brush = New SolidBrush(ForeColor)

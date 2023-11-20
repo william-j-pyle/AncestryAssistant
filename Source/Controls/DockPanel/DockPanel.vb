@@ -19,7 +19,7 @@
 
   Private WithEvents pnlButtonContainerSearch As TableLayoutPanel
 
-  Private WithEvents pnlClient As DockTabControl
+  Private WithEvents pnlClient As FlatTabControl
 
   Private WithEvents pnlHeader As FlatPanel
 
@@ -204,7 +204,7 @@
     btnClose = New AncestryAssistant.IconButton()
     btnPinned = New AncestryAssistant.IconButton()
     btnContextMenu = New AncestryAssistant.IconButton()
-    pnlClient = New AncestryAssistant.DockTabControl()
+    pnlClient = New AncestryAssistant.FlatTabControl()
     TabPage1 = New System.Windows.Forms.TabPage()
     pnlMain.SuspendLayout()
     pnlSearch.SuspendLayout()
