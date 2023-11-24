@@ -89,5 +89,46 @@ Namespace My.Resources
                 Return ResourceManager.GetString("AssistantAPI", resourceCulture)
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to {
+        '''  &quot;bars&quot;: [
+        '''    {
+        '''      &quot;name&quot;: &quot;Notebook&quot;,
+        '''      &quot;id&quot;: 100,
+        '''      &quot;visible&quot;: true,
+        '''      &quot;enabled&quot;: true,
+        '''      &quot;showpage&quot;: false,
+        '''      &quot;usesgroups&quot;: [
+        '''        {
+        '''          &quot;id&quot;: 1
+        '''        }
+        '''      ]
+        '''    }
+        '''  ],
+        '''  &quot;groups&quot;: [
+        '''    {
+        '''      &quot;name&quot;: &quot;Clipboard&quot;,
+        '''      &quot;id&quot;: 1,
+        '''      &quot;visible&quot;: true,
+        '''      &quot;enabled&quot;: true,
+        '''      &quot;showpanel&quot;: false,
+        '''      &quot;usesitems&quot;: [
+        '''        {
+        '''          &quot;id&quot;: 1
+        '''        }
+        '''      ]
+        '''    }
+        '''  ],
+        '''  &quot;items&quot;: [
+        '''    {
+        '''      &quot;name&quot;: &quot;Paste&quot;,
+        '''      &quot;id&quot;: 1 [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property Ribbon() As String
+            Get
+                Return ResourceManager.GetString("Ribbon", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace

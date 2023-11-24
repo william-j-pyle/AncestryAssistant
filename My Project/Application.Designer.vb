@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.AncestryAssistant.frmTestRibbon
+            Me.MainForm = Global.AncestryAssistant.AssistantAppForm
         End Sub
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _

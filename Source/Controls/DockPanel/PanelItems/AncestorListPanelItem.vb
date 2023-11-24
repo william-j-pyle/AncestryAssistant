@@ -79,6 +79,7 @@ Public Class AncestorsListPanel
 
       .Columns.Add("Name", CInt(.ClientSize.Width / 2))
       .Columns.Add("Lifespan", CInt(.ClientSize.Width / 2))
+      .Columns.Add("", CInt(.ClientSize.Width / 2))
     End With
     AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
     BackColor = My.Theme.PanelBackColor

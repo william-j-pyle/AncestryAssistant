@@ -39,6 +39,9 @@
 
 #Region "Properties"
 
+  Public Property AppBackColor As Color = My.Theme.AppBackColor
+  Public Property AppForeColor As Color = My.Theme.AppFontColor
+  Public Property AppHighlightColor As Color = My.Theme.AppHighlightColor
   Public Property Caption As String
     Get
       Return _Caption
@@ -48,7 +51,6 @@
       RaiseEvent SettingsChanged()
     End Set
   End Property
-
   Public Property IconFontStyle As FontStyle
     Get
       Return _IconFontStyle
@@ -58,7 +60,6 @@
       RaiseEvent SettingsChanged()
     End Set
   End Property
-
   Public Property IconSize As IconSizeEnum
     Get
       Return _IconSize
@@ -68,7 +69,7 @@
       RaiseEvent SettingsChanged()
     End Set
   End Property
-
+  Public ReadOnly Property Id As String = ""
   Public Property Layer1Color As Color
     Get
       Return _Layer1Color
@@ -78,7 +79,6 @@
       RaiseEvent SettingsChanged()
     End Set
   End Property
-
   Public Property Layer1Icon As FontSegoeFluentIconsEnum
     Get
       Return _Layer1Icon
@@ -88,7 +88,6 @@
       RaiseEvent SettingsChanged()
     End Set
   End Property
-
   Public Property Layer2Color As Color
     Get
       Return _Layer2Color
@@ -98,7 +97,6 @@
       RaiseEvent SettingsChanged()
     End Set
   End Property
-
   Public Property Layer2Icon As FontSegoeFluentIconsEnum
     Get
       Return _Layer2Icon
@@ -108,7 +106,6 @@
       RaiseEvent SettingsChanged()
     End Set
   End Property
-
   Public Property Layer3Color As Color
     Get
       Return _Layer3Color
@@ -118,7 +115,6 @@
       RaiseEvent SettingsChanged()
     End Set
   End Property
-
   Public Property Layer3Icon As FontSegoeFluentIconsEnum
     Get
       Return _Layer3Icon
@@ -128,7 +124,8 @@
       RaiseEvent SettingsChanged()
     End Set
   End Property
-
+  Public Property RibbonAccentColor As Color = My.Theme.RibbonAccentColor
+  Public Property RibbonBackColor As Color = My.Theme.RibbonBackColor
   Public Property RibbonButtonSize As RibbonButtonSizeEnum
     Get
       Return _RibbonButtonSize
@@ -138,6 +135,8 @@
       RaiseEvent SettingsChanged()
     End Set
   End Property
+  Public Property RibbonForeColor As Color = My.Theme.RibbonForeColor
+  Public Property RibbonShadowColor As Color = My.Theme.RibbonShadowColor
 
 #End Region
 

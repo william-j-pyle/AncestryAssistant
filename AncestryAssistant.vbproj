@@ -19,7 +19,7 @@
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2023.1120.144</Version>
+    <Version>1.2023.1124.1151</Version>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -298,6 +298,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Source\Controls\Flat\IFlatItem.vb" />
+    <Compile Include="Source\Controls\Ribbon\IRibbonItem.vb" />
+    <Compile Include="Source\Controls\Ribbon\RibbonConfig.vb" />
+    <Compile Include="Source\Controls\Ribbon\RibbonItemButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItemType.vb" />
     <Compile Include="Source\EventHandlers\FlatSearchEventHandler.vb" />
     <Compile Include="Source\Controls\Flat\FlatLabel.vb">
       <SubType>UserControl</SubType>
@@ -305,10 +312,7 @@
     <Compile Include="Source\Controls\Flat\FlatTextBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Helpers\TestClass.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Source\MyExtensions\MySettings.vb" />
+    <Compile Include="Source\Extensions\MySettings.vb" />
     <Compile Include="Source\Enums\DockPanelType.vb" />
     <Compile Include="Source\Enums\ResizeEventType.vb" />
     <Compile Include="Source\Data\Ancestor\AncestorAbstract.vb" />
@@ -326,7 +330,6 @@
     <Compile Include="Source\Controls\DockPanel\PanelItems\WebBrowserPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Helpers\UriTracking.vb" />
     <Compile Include="Source\Controls\DockPanel\DockPanelManager.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -352,10 +355,10 @@
     <Compile Include="Source\Controls\Flat\FlatPanel.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonBarFileTab.Designer.vb">
-      <DependentUpon>RibbonBarFileTab.vb</DependentUpon>
+    <Compile Include="Source\Controls\Ribbon\RibbonPage.Designer.vb">
+      <DependentUpon>RibbonPage.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonBarFileTab.vb">
+    <Compile Include="Source\Controls\Ribbon\RibbonPage.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Data\Config\RibbonBarTabConfig.vb" />
@@ -365,14 +368,14 @@
     <Compile Include="Source\Controls\Flat\FlatToolBar.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Helpers\ResizeDragHandler.vb" />
-    <Compile Include="Source\Forms\DialogImageSave.Designer.vb">
+    <Compile Include="Source\Forms\Helpers\ResizeDragHandler.vb" />
+    <Compile Include="Source\Dialogs\DialogImageSave.Designer.vb">
       <DependentUpon>DialogImageSave.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\DialogImageSave.vb">
+    <Compile Include="Source\Dialogs\DialogImageSave.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\MyExtensions\MyApplication.vb" />
+    <Compile Include="Source\Extensions\MyApplication.vb" />
     <Compile Include="Source\Forms\FormMain.Designer.vb">
       <DependentUpon>FormMain.vb</DependentUpon>
     </Compile>
@@ -382,13 +385,13 @@
     <Compile Include="Source\Controls\Flat\FlatButton.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonBarTab.vb">
+    <Compile Include="Source\Controls\Ribbon\RibbonBar.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Controls\Ribbon\RibbonButton.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonBar.vb">
+    <Compile Include="Source\Controls\Ribbon\Ribbon.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Controls\Ribbon\RibbonGroup.vb">
@@ -400,9 +403,15 @@
     <Compile Include="Source\Forms\FormSplash.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\MyExtensions\MyTheme.vb" />
+    <Compile Include="Source\Extensions\MyTheme.vb" />
     <Compile Include="Source\Controls\Flat\FlatSearchBox.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Test\frmIconMaker.Designer.vb">
+      <DependentUpon>frmIconMaker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Test\frmIconMaker.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Test\frmButtonTestForm.Designer.vb">
       <DependentUpon>frmButtonTestForm.vb</DependentUpon>
@@ -434,6 +443,12 @@
     <Compile Include="Test\frmTestFlatControls.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Test\frmTestFlatList.Designer.vb">
+      <DependentUpon>frmTestFlatList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Test\frmTestFlatList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Test\frmTestGEDCOM.Designer.vb">
       <DependentUpon>frmTestGEDCOM.vb</DependentUpon>
     </Compile>
@@ -463,6 +478,8 @@
     </Compile>
     <Compile Include="Source\Data\Gedcom\File\FileLineEntry.vb" />
     <Compile Include="Source\Data\Gedcom\Primatives\GedDate.vb" />
+    <None Include="Resources\ribbon\Ribbon.json" />
+    <None Include="Source\Controls\Ribbon\Ribbon.cd" />
     <None Include="Source\Data\Gedcom\File\PlaceNormalized.vb" />
     <Compile Include="Source\Controls\DockPanel\PanelItems\ImageGalleryPanelItem.vb">
       <SubType>UserControl</SubType>
@@ -489,13 +506,13 @@
     <Compile Include="Source\Data\Gedcom\Tags\SourceRefTag.vb" />
     <Compile Include="Source\Data\Gedcom\Tags\SourceTag.vb" />
     <Compile Include="Source\Data\Gedcom\Primatives\GedName.vb" />
-    <Compile Include="Source\MyExtensions\Logger.vb" />
+    <Compile Include="Source\Extensions\Logger.vb" />
     <Compile Include="Source\Enums\FontAncestryIconEnum.vb" />
     <Compile Include="Source\Enums\FontSegoeFluentIconsEnum.vb" />
     <Compile Include="Source\Enums\IconSizeEnum.vb" />
     <Compile Include="Source\Enums\RibbonButtonSizeEnum.vb" />
     <Compile Include="Source\Enums\UriTrackingGroupEnum.vb" />
-    <Compile Include="Source\MyExtensions\Utils.vb" />
+    <Compile Include="Source\Extensions\Utils.vb" />
     <Compile Include="Source\Data\APIMessage.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -510,7 +527,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Source\Forms\DialogImageSave.resx">
+    <EmbeddedResource Include="Source\Dialogs\DialogImageSave.resx">
       <DependentUpon>DialogImageSave.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\FormMain.resx">
@@ -519,8 +536,11 @@
     <EmbeddedResource Include="Source\Forms\FormSplash.resx">
       <DependentUpon>FormSplash.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Controls\Ribbon\RibbonBarFileTab.resx">
-      <DependentUpon>RibbonBarFileTab.vb</DependentUpon>
+    <EmbeddedResource Include="Source\Controls\Ribbon\RibbonPage.resx">
+      <DependentUpon>RibbonPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\frmIconMaker.resx">
+      <DependentUpon>frmIconMaker.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmButtonTestForm.resx">
       <DependentUpon>frmButtonTestForm.vb</DependentUpon>
@@ -536,6 +556,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmTestFlatControls.resx">
       <DependentUpon>frmTestFlatControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\frmTestFlatList.resx">
+      <DependentUpon>frmTestFlatList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmTestGEDCOM.resx">
       <DependentUpon>frmTestGEDCOM.vb</DependentUpon>

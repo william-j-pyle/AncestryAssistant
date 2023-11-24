@@ -1,4 +1,4 @@
-﻿Public Class RibbonBarFileTab
+﻿Public Class RibbonPage
 
 #Region "Fields"
 
@@ -18,6 +18,14 @@
 
 #Region "Properties"
 
+  Public Property AppBackColor As Color = My.Theme.AppBackColor
+  Public Property AppForeColor As Color = My.Theme.AppFontColor
+  Public Property AppHighlightColor As Color = My.Theme.AppHighlightColor
+  Public ReadOnly Property Id As String = ""
+  Public Property RibbonAccentColor As Color = My.Theme.RibbonAccentColor
+  Public Property RibbonBackColor As Color = My.Theme.RibbonBackColor
+  Public Property RibbonForeColor As Color = My.Theme.RibbonForeColor
+  Public Property RibbonShadowColor As Color = My.Theme.RibbonShadowColor
   Public Property SelectedItemKey As String
     Get
       Return selectedKey

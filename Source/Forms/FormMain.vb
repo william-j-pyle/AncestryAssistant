@@ -16,7 +16,7 @@ Public Class AssistantAppForm
 
   Private WithEvents FormExtensions As ResizeDragHandler
 
-  Private WithEvents RibbonFileTab As RibbonBarFileTab
+  Private WithEvents RibbonFileTab As RibbonPage
 
   Private Const ANCESTOR_CENSUS As String = "Download Census Data"
 
@@ -60,11 +60,12 @@ Public Class AssistantAppForm
 
   Public Sub New()
     InitializeComponent()
-    RibbonFileTab = New RibbonBarFileTab With {
+    RibbonFileTab = New RibbonPage With {
       .Visible = False
     }
     Controls.Add(RibbonFileTab)
     RibbonFileTab.BringToFront()
+    RibbonBar.LoadConfig(My.Resources.Ribbon)
     RibbonBar.SelectedIndex = 1
     Ancestors = New AncestorCollection(My.Settings.AncestorsPath)
   End Sub
@@ -302,22 +303,14 @@ Public Class AssistantAppForm
     BackColor = My.Theme.AppBackColor
     ForeColor = My.Theme.AppFontColor
     FormBar.BackColor = My.Theme.AppBackColor
-    RibbonBar.BackColor = My.Theme.AppBackColor
-    RibbonBarTabHome.BackColor = My.Theme.RibbonBarBackColor
-    RibbonBarTabHome.ForeColor = My.Theme.RibbonBarFontColor
     StatusBar.BackColor = My.Theme.StatusBarBackColor
     StatusBar.ForeColor = My.Theme.StatusBarFontColor
     AppCloseButton.Font = My.Theme.AppIconsFont
     AppMaxButton.Font = My.Theme.AppIconsFont
     AppMinButton.Font = My.Theme.AppIconsFont
     AppTitle.Font = My.Theme.AppTitleFont
-    RibbonBar.Font = My.Theme.RibbonBarFont
     FormBar.BackColor = My.Theme.AppBackColor
     FormBar.ForeColor = My.Theme.AppFontColor
-    For Each tb As TabPage In RibbonBar.TabPages
-      tb.BackColor = My.Theme.AppBackColor
-      tb.ForeColor = My.Theme.AppFontColor
-    Next
   End Sub
 
   Private Sub AppMaxButton_Click(sender As Object, e As EventArgs) Handles AppMaxButton.Click, AppTitle.DoubleClick

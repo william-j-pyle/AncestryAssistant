@@ -3,41 +3,60 @@
 
 #Region "Fields"
 
-  Private _Caption As String = "RibbonGroup"
+  Private _MinimumWidth As Integer = 0
+  Private _TextSize As New Size(0, 0)
   Private CaptionFont As New System.Drawing.Font("Segoe UI Semibold", 10, FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
-  'Required by the Windows Form Designer
-  Private components As System.ComponentModel.IContainer
   Private IconFont As New System.Drawing.Font("Segoe Fluent Icons", 10, FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
 
 #End Region
 
 #Region "Properties"
 
-  Public Property Caption As String
+  Public Property AppBackColor As Color = My.Theme.AppBackColor
+  Public Property AppForeColor As Color = My.Theme.AppFontColor
+  Public Property AppHighlightColor As Color = My.Theme.AppHighlightColor
+  Public ReadOnly Property Id As String = ""
+  Public ReadOnly Property MinimumWidth As Integer
     Get
-      Return _Caption
+      If _MinimumWidth = 0 Then
+        calcMinimumWidth()
+      End If
+      Return _MinimumWidth
     End Get
-    Set(value As String)
-      _Caption = value
-      Refresh()
-    End Set
+  End Property
+  Public Property RibbonAccentColor As Color = My.Theme.RibbonAccentColor
+  Public Property RibbonBackColor As Color = My.Theme.RibbonBackColor
+  Public Property RibbonForeColor As Color = My.Theme.RibbonForeColor
+  Public Property RibbonShadowColor As Color = My.Theme.RibbonShadowColor
+
+  Public ReadOnly Property TextSize As Size
+    Get
+      If _TextSize.IsEmpty Then
+        calcTextSize()
+      End If
+      Return _TextSize
+    End Get
   End Property
 
 #End Region
 
 #Region "Public Constructors"
 
-  Public Sub New(GroupText As String)
+  Public Sub New(GroupId As String, GroupText As String)
     SetStyle(ControlStyles.UserPaint Or ControlStyles.ContainerControl Or ControlStyles.FixedHeight Or ControlStyles.SupportsTransparentBackColor Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
     SuspendLayout()
-    _Caption = GroupText
-    MaximumSize = New System.Drawing.Size(0, 0)
-    MinimumSize = New System.Drawing.Size(100, 0)
-    Padding = New Padding(0)
+    Name = "GRP__" + GroupId
+    _Id = GroupId
+    Text = GroupText
+    BackColor = RibbonBackColor
+    ForeColor = RibbonForeColor
+    Padding = New Padding(8, 0, 0, 0)
     Margin = New Padding(0)
-    Name = "JRibbonGroup"
     Dock = System.Windows.Forms.DockStyle.Left
     GrowStyle = TableLayoutPanelGrowStyle.FixedSize
+    MaximumSize = New System.Drawing.Size(0, 0)
+    MinimumSize = New System.Drawing.Size(MinimumWidth, 0)
+    Width = MinimumWidth
     ResumeLayout(False)
   End Sub
 
@@ -45,31 +64,62 @@
 
 #Region "Private Methods"
 
-  Private Sub JRibbonGroup_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
-    Using brush As New SolidBrush(BackColor)
+  Private Sub addGridColumns(Optional colCount As Integer = 1)
+    For i As Integer = 1 To colCount
+      ColumnCount += 1
+      ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, RibbonConfig.GRID_HEIGHTWIDTH))
+    Next
+  End Sub
+
+  Private Sub calcMinimumWidth()
+    _MinimumWidth = Math.Max(TextSize.Width + 50, ColumnCount * RibbonConfig.GRID_HEIGHTWIDTH)
+  End Sub
+
+  Private Sub calcTextSize()
+    _TextSize = TextRenderer.MeasureText(Text, CaptionFont)
+  End Sub
+
+  Private Sub forceResize()
+    calcMinimumWidth()
+    MinimumSize = New System.Drawing.Size(MinimumWidth, 0)
+    Size = New Size(MinimumWidth, Height)
+  End Sub
+
+  Private Sub initGrid(colCount As Integer)
+    ColumnStyles.Clear()
+    RowStyles.Clear()
+    addGridColumns()
+    Me.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single
+    RowCount = 4
+    RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, RibbonConfig.GRID_HEIGHTWIDTH))
+    RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, RibbonConfig.GRID_HEIGHTWIDTH))
+    RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, RibbonConfig.GRID_HEIGHTWIDTH))
+    RowStyles.Add(New System.Windows.Forms.RowStyle())
+  End Sub
+
+  Private Sub RenderControl(sender As Object, e As PaintEventArgs) Handles Me.Paint
+    'Clear Group Client Area
+    Using brush As New SolidBrush(RibbonBackColor)
       e.Graphics.FillRectangle(brush, ClientRectangle)
     End Using
 
-    Dim jPen As New Pen(My.Theme.RibbonBarBorderColor, 2)
-    e.Graphics.DrawLine(jPen, Width, 16, Width, Height - 16)
+    'Draw the seperator bar at the end of the group
+    Dim jPen As New Pen(Color.FromArgb(100, RibbonForeColor), 1)
+    e.Graphics.DrawLine(jPen, Width - 1, 0, Width - 1, Height - 5)
 
-    Dim textBrush As Brush = New SolidBrush(ForeColor)
-    Dim textSize As Size = TextRenderer.MeasureText(Caption, Font)
-    Dim textLocation As New Point(e.ClipRectangle.Left + 1 + ((e.ClipRectangle.Width - textSize.Width) / 2), e.ClipRectangle.Bottom - textSize.Height)
+    'Draw the group caption
+    Dim textBrush As Brush = New SolidBrush(RibbonForeColor)
+    Dim textLocation As New Point(e.ClipRectangle.Left + 1 + ((e.ClipRectangle.Width - TextSize.Width) / 2), e.ClipRectangle.Bottom - TextSize.Height - 4)
+    e.Graphics.DrawString(Text, CaptionFont, textBrush, textLocation)
 
-    e.Graphics.DrawString(Caption, Font, textBrush, textLocation)
-
-    ' Draw the Exapand Icon ------- | | \ | \ | ----
-    Dim t As Integer = textLocation.Y + 2
+    ' Draw the Exapand Icon
+    Dim t As Integer = textLocation.Y + 5
     Dim l As Integer = Width - 12
-    Dim w As Integer = 8
-    Dim h As Integer = 8
 
-    Dim tColor As Color = Color.FromArgb(180, ForeColor)
-    jPen = New Pen(tColor, 2)
+    jPen = New Pen(RibbonAccentColor, 2)
     e.Graphics.DrawLine(jPen, l + 3, t + 3, l + 7, t + 7)
 
-    jPen = New Pen(ForeColor, 1)
+    jPen = New Pen(RibbonForeColor, 1)
     e.Graphics.DrawLine(jPen, l, t, l, t + 6)
     e.Graphics.DrawLine(jPen, l, t, l + 6, t)
     e.Graphics.DrawLine(jPen, l + 7, t + 3, l + 7, t + 7)
@@ -78,42 +128,26 @@
 
   End Sub
 
-  Private Sub RibbonGroup_ControlAdded(sender As Object, e As ControlEventArgs) Handles Me.ControlAdded
-    If Controls.Count = 1 Then
-      With Me
-        .ColumnStyles.Clear()
-        .RowStyles.Clear()
-        .ColumnCount = 6
-        .ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        .ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        .ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        .ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        .ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        .ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        .RowCount = 4
-        .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        .RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        .RowStyles.Add(New System.Windows.Forms.RowStyle())
-      End With
-    End If
-
-  End Sub
-
 #End Region
 
-#Region "Protected Methods"
+#Region "Public Methods"
 
-  'UserControl overrides dispose to clean up the component list.
-  <System.Diagnostics.DebuggerNonUserCode()>
-  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-    Try
-      If disposing AndAlso components IsNot Nothing Then
-        components.Dispose()
-      End If
-    Finally
-      MyBase.Dispose(disposing)
-    End Try
+  Public Sub AddItem(Id As String, RibbonItem As IRibbonItem)
+    Debug.Print("AddItem({0})[Loc.X={1}, Loc.Y={2}, Width={3}, Height={4}]", Id, RibbonItem.GridLocation.X, RibbonItem.GridLocation.Y, RibbonItem.GridSize.Width, RibbonItem.GridSize.Height)
+    If Controls.Count = 0 Then
+      initGrid(RibbonItem.GridSize.Width)
+    End If
+    If ColumnCount < RibbonItem.GridLocation.X + RibbonItem.GridSize.Width Then
+      addGridColumns(RibbonItem.GridLocation.X + RibbonItem.GridSize.Width - ColumnCount)
+    End If
+    If RibbonItem.GridSize.Width > 1 Then
+      SetColumnSpan(RibbonItem, RibbonItem.GridSize.Width)
+    End If
+    If RibbonItem.GridSize.Height > 1 Then
+      SetRowSpan(RibbonItem, RibbonItem.GridSize.Height)
+    End If
+    Controls.Add(RibbonItem, RibbonItem.GridLocation.X - 1, RibbonItem.GridLocation.Y - 1)
+    forceResize()
   End Sub
 
 #End Region

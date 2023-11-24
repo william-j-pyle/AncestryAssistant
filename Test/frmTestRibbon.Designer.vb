@@ -23,9 +23,8 @@ Partial Class frmTestRibbon
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.bar = New AncestryAssistant.RibbonBar()
-    Me.bar.SuspendLayout()
-    Me.SuspendLayout()
+        Me.bar = New AncestryAssistant.Ribbon()
+        Me.SuspendLayout()
         '
         'Button1
         '
@@ -40,22 +39,28 @@ Partial Class frmTestRibbon
         'bar
         '
         Me.bar.AllowDrop = True
-    Me.bar.Dock = System.Windows.Forms.DockStyle.Top
-    Me.bar.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed
+        Me.bar.AppBackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
+        Me.bar.AppForeColor = System.Drawing.Color.WhiteSmoke
+        Me.bar.AppHighlightColor = System.Drawing.Color.Lime
+        Me.bar.Dock = System.Windows.Forms.DockStyle.Top
+        Me.bar.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed
         Me.bar.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.bar.Location = New System.Drawing.Point(0, 0)
         Me.bar.Margin = New System.Windows.Forms.Padding(0)
         Me.bar.MaximumSize = New System.Drawing.Size(0, 137)
         Me.bar.MinimumSize = New System.Drawing.Size(100, 137)
         Me.bar.Name = "bar"
+        Me.bar.RibbonAccentColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.bar.RibbonBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(41, Byte), Integer))
+        Me.bar.RibbonForeColor = System.Drawing.Color.WhiteSmoke
+        Me.bar.RibbonShadowColor = System.Drawing.Color.FromArgb(CType(CType(102, Byte), Integer), CType(CType(102, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.bar.SelectedIndex = 0
         Me.bar.Size = New System.Drawing.Size(985, 137)
         Me.bar.TabIndex = 0
-
-    '
-    'frmTestRibbon
-    '
-    Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        '
+        'frmTestRibbon
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(985, 533)
@@ -66,11 +71,10 @@ Partial Class frmTestRibbon
         Me.Name = "frmTestRibbon"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmTestRibbon"
-        Me.bar.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
-  Friend WithEvents bar As RibbonBar
-  Friend WithEvents Button1 As Button
+    Friend WithEvents bar As Ribbon
+    Friend WithEvents Button1 As Button
 End Class

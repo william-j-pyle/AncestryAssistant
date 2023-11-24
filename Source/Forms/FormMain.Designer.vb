@@ -24,10 +24,9 @@ Partial Class AssistantAppForm
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AssistantAppForm))
         Me.FormBar = New System.Windows.Forms.Panel()
         Me.DockManager = New AncestryAssistant.DockPanelManager()
-        Me.RibbonBar = New AncestryAssistant.RibbonBar()
+        Me.RibbonBar = New AncestryAssistant.Ribbon()
         Me.tabFile = New System.Windows.Forms.TabPage()
         Me.tabHome = New System.Windows.Forms.TabPage()
-        Me.RibbonBarTabHome = New AncestryAssistant.RibbonBarTab()
         Me.AppTitleBar = New System.Windows.Forms.Panel()
         Me.AppTitle = New System.Windows.Forms.Label()
         Me.AppControlBox = New System.Windows.Forms.Panel()
@@ -67,9 +66,11 @@ Partial Class AssistantAppForm
         'RibbonBar
         '
         Me.RibbonBar.AllowDrop = True
-        Me.RibbonBar.Controls.Add(Me.tabFile)
-        Me.RibbonBar.Controls.Add(Me.tabHome)
-        Me.RibbonBar.Dock = System.Windows.Forms.DockStyle.Top
+        Me.RibbonBar.AppBackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
+        Me.RibbonBar.AppForeColor = System.Drawing.Color.WhiteSmoke
+        Me.RibbonBar.AppHighlightColor = System.Drawing.Color.Lime
+    Me.RibbonBar.Dock = System.Windows.Forms.DockStyle.Top
+    Me.RibbonBar.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed
         Me.RibbonBar.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RibbonBar.Location = New System.Drawing.Point(3, 31)
         Me.RibbonBar.Margin = New System.Windows.Forms.Padding(0)
@@ -77,49 +78,17 @@ Partial Class AssistantAppForm
         Me.RibbonBar.MinimumSize = New System.Drawing.Size(100, 137)
         Me.RibbonBar.Name = "RibbonBar"
         Me.RibbonBar.Padding = New System.Drawing.Point(0, 0)
+        Me.RibbonBar.RibbonAccentColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.RibbonBar.RibbonBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(41, Byte), Integer))
+        Me.RibbonBar.RibbonForeColor = System.Drawing.Color.WhiteSmoke
+        Me.RibbonBar.RibbonShadowColor = System.Drawing.Color.FromArgb(CType(CType(102, Byte), Integer), CType(CType(102, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.RibbonBar.SelectedIndex = 0
         Me.RibbonBar.Size = New System.Drawing.Size(768, 137)
         Me.RibbonBar.TabIndex = 1
-        '
-        'tabFile
-        '
-        Me.tabFile.Location = New System.Drawing.Point(4, 25)
-        Me.tabFile.Name = "tabFile"
-        Me.tabFile.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabFile.Size = New System.Drawing.Size(760, 108)
-        Me.tabFile.TabIndex = 0
-        Me.tabFile.Text = "File"
-        '
-        'tabHome
-        '
-        Me.tabHome.BackColor = System.Drawing.Color.Blue
-        Me.tabHome.Controls.Add(Me.RibbonBarTabHome)
-        Me.tabHome.Location = New System.Drawing.Point(4, 25)
-        Me.tabHome.Name = "tabHome"
-        Me.tabHome.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabHome.Size = New System.Drawing.Size(92, 108)
-        Me.tabHome.TabIndex = 1
-        Me.tabHome.Text = "Home"
-        '
-        'RibbonBarTabHome
-        '
-        Me.RibbonBarTabHome.AllowDrop = True
-        Me.RibbonBarTabHome.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(41, Byte), Integer))
-        Me.RibbonBarTabHome.Dock = System.Windows.Forms.DockStyle.Top
-        Me.RibbonBarTabHome.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RibbonBarTabHome.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.RibbonBarTabHome.Location = New System.Drawing.Point(3, 3)
-        Me.RibbonBarTabHome.Margin = New System.Windows.Forms.Padding(0)
-        Me.RibbonBarTabHome.MaximumSize = New System.Drawing.Size(0, 100)
-        Me.RibbonBarTabHome.MinimumSize = New System.Drawing.Size(100, 100)
-        Me.RibbonBarTabHome.Name = "RibbonBarTabHome"
-        Me.RibbonBarTabHome.Padding = New System.Windows.Forms.Padding(16, 8, 16, 8)
-        Me.RibbonBarTabHome.Size = New System.Drawing.Size(100, 100)
-        Me.RibbonBarTabHome.TabIndex = 0
-        '
-        'AppTitleBar
-        '
-        Me.AppTitleBar.Controls.Add(Me.AppTitle)
+    '
+    'AppTitleBar
+    '
+    Me.AppTitleBar.Controls.Add(Me.AppTitle)
         Me.AppTitleBar.Controls.Add(Me.AppControlBox)
         Me.AppTitleBar.Controls.Add(Me.AppIcon)
         Me.AppTitleBar.Dock = System.Windows.Forms.DockStyle.Top
@@ -258,8 +227,8 @@ Partial Class AssistantAppForm
     Friend WithEvents AppMinButton As Button
     Friend WithEvents AppMaxButton As Button
     Friend WithEvents StatusBar As Panel
-    Friend WithEvents RibbonBar As RibbonBar
+    Friend WithEvents RibbonBar As Ribbon
     Friend WithEvents tabFile As TabPage
     Friend WithEvents tabHome As TabPage
-    Friend WithEvents RibbonBarTabHome As RibbonBarTab
+    Friend WithEvents RibbonBarTabHome As RibbonBar
 End Class

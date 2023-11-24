@@ -71,14 +71,11 @@
 
     Public ReadOnly Property PanelShadowColor2 As Color = AppShadow2Color
 
-    Public ReadOnly Property RibbonBarBackColor As Color = AppBorderColor
-
-    Public ReadOnly Property RibbonBarBorderColor As Color = AppBorderColor
-
+    Public ReadOnly Property RibbonAccentColor As Color = AppAccent2Color
+    Public ReadOnly Property RibbonBackColor As Color = AppBorderColor
     Public ReadOnly Property RibbonBarFont As Font = AppFont
-
-    Public ReadOnly Property RibbonBarFontColor As Color = AppFontColor
-
+    Public ReadOnly Property RibbonForeColor As Color = AppFontColor
+    Public ReadOnly Property RibbonShadowColor As Color = AppAccentColor
     Public ReadOnly Property StatusBarBackColor As Color = Color.FromArgb(255, 20, 20, 20)
 
     Public ReadOnly Property StatusBarFontColor As Color = AppFontDarkColor

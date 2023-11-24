@@ -1,214 +1,93 @@
-﻿Imports System.ComponentModel
-
-Public Class RibbonBar
-  Inherits TabControl
-
-#Region "Fields"
-
-  Private Const RIBBONBORDER As Integer = 8
-  Private Const RIBBONHEIGHT As Integer = 100
-  Private Const RIBBONTOP As Integer = TABHEIGHT + 1
-  Private Const TABHEIGHT As Integer = 20
-
-  Private ByKey As New Dictionary(Of String, RibbonBarTab)
-  Private components As System.ComponentModel.IContainer
-
-#End Region
+﻿Public Class RibbonBar
+  Inherits Panel
 
 #Region "Properties"
 
-  <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)>
-  Private Shadows ReadOnly Property TabPages As TabPageCollection
-    Get
-      Return MyBase.TabPages
-    End Get
-  End Property
-  Public Property HighlightColor As Color = My.Theme.AppHighlightColor
-  Public Property RibbonAccentColor As Color = My.Theme.RibbonBarBorderColor
-  Public Property RibbonBackColor As Color = My.Theme.RibbonBarBackColor
-  Public Property RibbonForeColor As Color = My.Theme.RibbonBarFontColor
-  Public Property RibbonShadowColor As Color = My.Theme.RibbonBarBorderColor
+  Public Property AppBackColor As Color = My.Theme.AppBackColor
+  Public Property AppForeColor As Color = My.Theme.AppFontColor
+  Public Property AppHighlightColor As Color = My.Theme.AppHighlightColor
+  Public ReadOnly Property Id As String = ""
+  Public Property RibbonAccentColor As Color = My.Theme.RibbonAccentColor
+  Public Property RibbonBackColor As Color = My.Theme.RibbonBackColor
+  Public Property RibbonForeColor As Color = My.Theme.RibbonForeColor
+  Public Property RibbonShadowColor As Color = My.Theme.RibbonShadowColor
 
 #End Region
 
 #Region "Public Constructors"
 
-  Public Sub New()
-    MyBase.New
+  Public Sub New(Id As String)
     SetStyle(ControlStyles.UserPaint Or ControlStyles.ContainerControl Or ControlStyles.FixedHeight Or ControlStyles.SupportsTransparentBackColor Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
-    UpdateStyles()
     SuspendLayout()
-    AllowDrop = False
-    DrawMode = TabDrawMode.OwnerDrawFixed
-    BackColor = My.Theme.AppBackColor
-    Font = My.Theme.AppFont
+    Name = "BAR__" + Id
+    _Id = Id
+    AllowDrop = True
+    BackColor = RibbonBackColor
+    Font = My.Theme.RibbonBarFont
+    ForeColor = RibbonForeColor
     Margin = New System.Windows.Forms.Padding(0)
-    MaximumSize = New System.Drawing.Size(0, RIBBONHEIGHT + RIBBONTOP + (2 * RIBBONBORDER))
-    MinimumSize = New System.Drawing.Size(100, RIBBONHEIGHT + RIBBONTOP + (2 * RIBBONBORDER))
-    Name = "JRibbon"
-    'Padding = New System.Windows.Forms.Padding(16, 8, 16, 8)
+    MaximumSize = New System.Drawing.Size(0, RibbonConfig.RIBBON_BARHEIGHT)
+    MinimumSize = New System.Drawing.Size(100, RibbonConfig.RIBBON_BARHEIGHT)
+    Padding = New System.Windows.Forms.Padding(4 * 2, 4, 4 * 2, 4)
     Dock = DockStyle.Top
-    TabPages.Clear()
-    AddFileTab()
     ResumeLayout(False)
-    PerformLayout()
   End Sub
 
 #End Region
 
 #Region "Private Methods"
 
-  Private Sub AddFileTab()
-    Dim tab As TabPage
-    tab = New TabPage("File") With {
-      .Name = "file",
-      .BackColor = My.Theme.AppBackColor,
-      .ForeColor = My.Theme.AppFontColor,
-      .Font = My.Theme.AppFont
-    }
-    'tab.Controls.Add(rb)
-    TabPages.Add(tab)
-  End Sub
+  Private Sub RenderControl(sender As Object, e As PaintEventArgs) Handles Me.Paint
+    Dim h As Integer = Height - 1
+    Dim w As Integer = Width - 1
+    Dim bWidth As Integer = 0
+    Dim bArc As Integer = 10
 
-  Private Sub RenderTypeTabTop(sender As Object, e As PaintEventArgs) Handles Me.Paint
     Dim g As Graphics = e.Graphics
+    g.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
 
-    'Pain the background
-    Using brush As New SolidBrush(My.Theme.AppBackColor)
-      e.Graphics.FillRectangle(brush, ClientRectangle)
+    Dim path As New Drawing2D.GraphicsPath()
+    path.StartFigure()
+    path.AddArc(New Rectangle(0, 0, bArc * 2, bArc * 2), 180, 90)
+    path.AddLine(bArc, 0, w - bArc, 0)
+    path.AddArc(New Rectangle(w - (bArc * 2), 0, bArc * 2, bArc * 2), -90, 90)
+    path.AddLine(w, bArc, w, h - bArc)
+    path.AddArc(New Rectangle(w - (bArc * 2), h - (bArc * 2), bArc * 2, bArc * 2), 0, 90)
+    path.AddLine(w - bArc, h, bArc, h)
+    path.AddArc(New Rectangle(0, h - (bArc * 2), bArc * 2, bArc * 2), 90, 90)
+    path.AddLine(0, h - bArc, 0, bArc)
+    path.CloseFigure()
+
+    Region = New Region(path)
+    Using brush As New SolidBrush(RibbonBackColor)
+      g.FillRectangle(brush, ClientRectangle)
     End Using
-    If TabCount = 0 Then Exit Sub
 
-    Dim w As Integer = 1
-    Dim l As Integer = Left
-    Dim t As Integer = GetTabRect(0).Height + 2
+    If bWidth > 0 Then
+      Dim jPen As New Pen(RibbonShadowColor, bWidth)
+      g.DrawPath(jPen, path)
+    End If
 
-    Dim r As Integer = Right - 1
-    Dim b As Integer = Height - t - 1
-    Dim tabOrigBounds As Rectangle
-    Dim tabBounds As Rectangle
-    Dim textColor As Color
-    Dim tabColor As Color
-    Dim stringFormat As New StringFormat With {
-      .Alignment = StringAlignment.Center,
-      .LineAlignment = StringAlignment.Center
-    }
-
-    'Dim PenBorder As Pen = New Pen(My.Theme.TabBorderColor, 1)
-
-    'e.Graphics.DrawRectangle(PenBorder, l, t, r, b)
-
-    'Add the tabs
-    For i As Integer = 0 To TabPages.Count - 1
-      tabOrigBounds = GetTabRect(i)
-
-      'Erase current tab
-      Using brush As New SolidBrush(My.Theme.AppBackColor)
-        g.FillRectangle(brush, tabOrigBounds)
-      End Using
-
-      ' Set the text and background colors based on selected and unselected states
-      'If SelectedIndex = i Then
-      textColor = My.Theme.AppFontColor
-      tabColor = My.Theme.AppBackColor
-      tabBounds = New Rectangle(tabOrigBounds.X, tabOrigBounds.Y + 1, tabOrigBounds.Width, tabOrigBounds.Height - 3)
-      'Else
-      'tabColor = My.Theme.TabShadowColor
-      'tabBounds = New Rectangle(tabOrigBounds.X + 1, tabOrigBounds.Y + 2, tabOrigBounds.Width - 1, tabOrigBounds.Height - 4)
-      'If tabOrigBounds.Contains(PointToClient(MousePosition)) Then
-      'textColor = My.Theme.TabFontColor
-      'Else
-      'textColor = My.Theme.ColorToShadow(My.Theme.TabFontColor)
-      'End If
-      'End If
-
-      ' Fill the new tab
-      Using brush As New SolidBrush(My.Theme.AppBackColor)
-        g.FillRectangle(brush, tabBounds)
-      End Using
-
-      ' Draw the tab text
-      Using brush As New SolidBrush(textColor)
-        g.DrawString(TabPages(i).Text, Font, brush, tabBounds, stringFormat)
-      End Using
-
-      If SelectedIndex = i Then
-        g.DrawLine(New Pen(My.Theme.AppHighlightColor, 2), tabBounds.Left + 1, tabBounds.Bottom - 1, tabBounds.Right - 1, tabBounds.Bottom - 1)
-      End If
-
-    Next
-
-    'Draw Divider lines
-    'tabBounds = GetTabRect(SelectedIndex)
-    'Dim tabBarColor As Color
-    'Dim ctlBarColor As Color
-    'tabBarColor = My.Theme.TabAccentColor
-    'ctlBarColor = My.Theme.TabShadowColor
-    'e.Graphics.DrawLine(New Pen(tabBarColor, 2), tabBounds.X, tabBounds.Y, tabBounds.Right, tabBounds.Y)
-    'e.Graphics.DrawLine(New Pen(ctlBarColor, 2), l, tabBounds.Bottom - 1, r, tabBounds.Bottom - 1)
-
-  End Sub
-
-  Private Function ToKey(text As String) As String
-    Return text.ToLower.Trim.Replace(" ", "")
-  End Function
-
-#End Region
-
-#Region "Protected Methods"
-
-  <System.Diagnostics.DebuggerNonUserCode()>
-  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-    Try
-      If disposing AndAlso components IsNot Nothing Then
-        components.Dispose()
-      End If
-    Finally
-      MyBase.Dispose(disposing)
-    End Try
   End Sub
 
 #End Region
 
 #Region "Public Methods"
 
-  Public Function AddGroup(RibbonKey As String, GroupText As String, Optional Key As String = "") As RibbonGroup
-    Dim rb As RibbonBarTab = Nothing
-    If Not ByKey.TryGetValue(ToKey(RibbonKey), rb) Then Return Nothing
-    Dim rg As New RibbonGroup(GroupText) With {
-      .BackColor = rb.BackColor,
-      .ForeColor = rb.ForeColor
+  Public Function AddGroup(GroupId As String, Text As String) As RibbonGroup
+    Dim rg As New RibbonGroup(GroupId, Text) With {
+      .AppBackColor = AppBackColor,
+    .AppForeColor = AppForeColor,
+    .AppHighlightColor = AppHighlightColor,
+    .RibbonAccentColor = RibbonAccentColor,
+    .RibbonBackColor = RibbonBackColor,
+    .RibbonForeColor = RibbonForeColor,
+    .RibbonShadowColor = RibbonShadowColor
     }
-    rb.Controls.Add(rg)
+    Controls.Add(rg)
     Return rg
-  End Function
-
-  Public Function AddRibbonTab(TabText As String, Optional Key As String = "") As TabPage
-    If Key.Equals("") Then Key = ToKey(TabText)
-    Dim Tab As New TabPage(TabText) With {
-      .Name = Key,
-      .BackColor = My.Theme.AppBackColor,
-      .ForeColor = My.Theme.AppFontColor,
-      .Font = My.Theme.AppFont
-    }
-    Dim rb As New RibbonBarTab() With {
-      .Dock = DockStyle.Fill,
-      .BackColor = My.Theme.AppBackColor,
-      .ForeColor = My.Theme.AppFontColor
-    }
-    Tab.Controls.Add(rb)
-    Controls.Add(Tab)
-    ByKey.Add(Key, rb)
-    Return Tab
   End Function
 
 #End Region
 
-  'Protected Overrides ReadOnly Property CreateParams As CreateParams
-  '  Get
-  '    Dim cp As CreateParams = MyBase.CreateParams
-  '    cp.Style = cp.Style Or &H2000000 ' WS_CLIPCHILDREN
-  '    Return cp
-  '  End Get
-  'End Property
 End Class
