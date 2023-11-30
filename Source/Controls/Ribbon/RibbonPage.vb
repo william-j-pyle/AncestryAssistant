@@ -70,7 +70,7 @@
 
 #Region "Private Methods"
 
-  Private Sub btnFileTabBack_ButtonClick(sender As Object, e As EventArgs) Handles btnFileTabBack.ButtonClick
+  Private Sub btnFileTabBack_ButtonClick(sender As Object, e As EventArgs) Handles btnFileTabBack.Click
     Visible = False
   End Sub
 

@@ -428,7 +428,7 @@ Public Class frmButtonTestForm
     chkChecked.Checked = preview.Checked
   End Sub
 
-  Private Sub preview_ButtonStateChanged(state As IconButton.IconButtonStateEnum) Handles preview.ButtonStateChanged
+  Private Sub preview_ButtonStateChanged(state As OLDFlatButton.IconButtonStateEnum) Handles preview.ButtonStateChanged
     Dim i As Integer = ListBox1.Items.Add(state.ToString)
     ListBox1.SelectedIndex = i
   End Sub

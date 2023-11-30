@@ -29,8 +29,8 @@ Partial Class RibbonPage
         Me.BordersPanel8 = New AncestryAssistant.FlatPanel()
         Me.BordersPanel10 = New AncestryAssistant.FlatPanel()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.btnFileTabBack = New AncestryAssistant.IconButton()
-        Me.BordersPanel1 = New AncestryAssistant.FlatPanel()
+    Me.btnFileTabBack = New AncestryAssistant.FlatIconButton()
+    Me.BordersPanel1 = New AncestryAssistant.FlatPanel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BordersPanel7 = New AncestryAssistant.FlatPanel()
         Me.BordersPanel6 = New AncestryAssistant.FlatPanel()
@@ -179,71 +179,19 @@ Partial Class RibbonPage
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Account"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'btnFileTabBack
-        '
-        Me.btnFileTabBack.BackClickColor = System.Drawing.Color.FromArgb(CType(CType(160, Byte), Integer), CType(CType(160, Byte), Integer), CType(CType(160, Byte), Integer))
-        Me.btnFileTabBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.btnFileTabBack.BackHoverColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.btnFileTabBack.BorderBottomColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-        Me.btnFileTabBack.BorderBottomSize = 0
-        Me.btnFileTabBack.BorderLeftColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-        Me.btnFileTabBack.BorderLeftSize = 0
-        Me.btnFileTabBack.BorderRightColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-        Me.btnFileTabBack.BorderRightSize = 0
-        Me.btnFileTabBack.BorderTopColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-        Me.btnFileTabBack.BorderTopSize = 0
-        Me.btnFileTabBack.btnState = AncestryAssistant.IconButton.IconButtonStateEnum.STANDARD
-        Me.btnFileTabBack.ButtonSize = AncestryAssistant.IconSizeEnum.Icon48x48
-        Me.btnFileTabBack.Checked = False
-        Me.btnFileTabBack.CheckOnClick = False
-        Me.btnFileTabBack.IconAncestry0 = AncestryAssistant.FontAncestryIconEnum.BLANK
-        Me.btnFileTabBack.IconAncestry0_AdjH = 0
-        Me.btnFileTabBack.IconAncestry0_AdjV = 0
-        Me.btnFileTabBack.IconAncestry0_Bold = False
-        Me.btnFileTabBack.IconAncestry0_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.btnFileTabBack.IconAncestry0_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.btnFileTabBack.IconAncestry0_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-        Me.btnFileTabBack.IconAncestry0_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-        Me.btnFileTabBack.IconAncestry1 = AncestryAssistant.FontAncestryIconEnum.BLANK
-        Me.btnFileTabBack.IconAncestry1_AdjH = 0
-        Me.btnFileTabBack.IconAncestry1_AdjV = 0
-        Me.btnFileTabBack.IconAncestry1_Bold = False
-        Me.btnFileTabBack.IconAncestry1_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.btnFileTabBack.IconAncestry1_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.btnFileTabBack.IconAncestry1_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-        Me.btnFileTabBack.IconAncestry1_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-        Me.btnFileTabBack.IconSegoe0 = AncestryAssistant.FontSegoeFluentIconsEnum.PageLeft
-        Me.btnFileTabBack.IconSegoe0_AdjH = 0
-        Me.btnFileTabBack.IconSegoe0_AdjV = 0
-        Me.btnFileTabBack.IconSegoe0_Bold = False
-        Me.btnFileTabBack.IconSegoe0_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.btnFileTabBack.IconSegoe0_Forecolor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnFileTabBack.IconSegoe0_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-        Me.btnFileTabBack.IconSegoe0_Size = AncestryAssistant.IconSizeEnum.Icon32x32
-        Me.btnFileTabBack.IconSegoe1 = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-        Me.btnFileTabBack.IconSegoe1_AdjH = 0
-        Me.btnFileTabBack.IconSegoe1_AdjV = 0
-        Me.btnFileTabBack.IconSegoe1_Bold = False
-        Me.btnFileTabBack.IconSegoe1_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.btnFileTabBack.IconSegoe1_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.btnFileTabBack.IconSegoe1_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-        Me.btnFileTabBack.IconSegoe1_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-        Me.btnFileTabBack.Location = New System.Drawing.Point(3, 3)
-        Me.btnFileTabBack.MaximumSize = New System.Drawing.Size(48, 48)
+    '
+    'btnFileTabBack
+    '
+    Me.btnFileTabBack.Icon = My.Resources.filepage_back
+    Me.btnFileTabBack.Location = New System.Drawing.Point(3, 3)
+    Me.btnFileTabBack.MaximumSize = New System.Drawing.Size(48, 48)
         Me.btnFileTabBack.MinimumSize = New System.Drawing.Size(48, 48)
         Me.btnFileTabBack.Name = "btnFileTabBack"
-        Me.btnFileTabBack.ShowBorder = False
-        Me.btnFileTabBack.ShowClick = False
-        Me.btnFileTabBack.ShowHover = False
-        Me.btnFileTabBack.Size = New System.Drawing.Size(48, 48)
-        Me.btnFileTabBack.TabIndex = 0
-        Me.btnFileTabBack.ThemeComponentId = Nothing
-        Me.btnFileTabBack.ThemeStyle = ""
-        '
-        'BordersPanel1
-        '
-        Me.BordersPanel1.BorderColor = System.Drawing.Color.Transparent
+    Me.btnFileTabBack.Size = New System.Drawing.Size(48, 48)
+    '
+    'BordersPanel1
+    '
+    Me.BordersPanel1.BorderColor = System.Drawing.Color.Transparent
         Me.BordersPanel1.BorderColorBottom = System.Drawing.Color.Lime
         Me.BordersPanel1.BorderColorLeft = System.Drawing.Color.Lime
         Me.BordersPanel1.BorderColorRight = System.Drawing.Color.Lime
@@ -478,8 +426,8 @@ Partial Class RibbonPage
     Friend WithEvents BordersPanel8 As FlatPanel
     Friend WithEvents BordersPanel10 As FlatPanel
     Friend WithEvents Label7 As Label
-    Friend WithEvents btnFileTabBack As IconButton
-    Friend WithEvents BordersPanel1 As FlatPanel
+  Friend WithEvents btnFileTabBack As FlatIconButton
+  Friend WithEvents BordersPanel1 As FlatPanel
     Friend WithEvents Label1 As Label
     Friend WithEvents BordersPanel7 As FlatPanel
     Friend WithEvents BordersPanel6 As FlatPanel

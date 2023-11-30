@@ -22,51 +22,42 @@ Partial Class frmTestRibbon
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.bar = New AncestryAssistant.Ribbon()
+        Me.pnlContainer = New System.Windows.Forms.Panel()
+        Me.btnAddBar = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'Button1
+        'pnlContainer
         '
-        Me.Button1.BackColor = System.Drawing.Color.IndianRed
-        Me.Button1.Location = New System.Drawing.Point(116, 259)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.pnlContainer.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlContainer.Location = New System.Drawing.Point(0, 0)
+        Me.pnlContainer.Margin = New System.Windows.Forms.Padding(0)
+        Me.pnlContainer.MaximumSize = New System.Drawing.Size(0, 130)
+        Me.pnlContainer.MinimumSize = New System.Drawing.Size(0, 130)
+        Me.pnlContainer.Name = "pnlContainer"
+        Me.pnlContainer.Padding = New System.Windows.Forms.Padding(4)
+        Me.pnlContainer.Size = New System.Drawing.Size(658, 130)
+        Me.pnlContainer.TabIndex = 2
         '
-        'bar
+        'btnAddBar
         '
-        Me.bar.AllowDrop = True
-        Me.bar.AppBackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
-        Me.bar.AppForeColor = System.Drawing.Color.WhiteSmoke
-        Me.bar.AppHighlightColor = System.Drawing.Color.Lime
-        Me.bar.Dock = System.Windows.Forms.DockStyle.Top
-        Me.bar.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed
-        Me.bar.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bar.Location = New System.Drawing.Point(0, 0)
-        Me.bar.Margin = New System.Windows.Forms.Padding(0)
-        Me.bar.MaximumSize = New System.Drawing.Size(0, 137)
-        Me.bar.MinimumSize = New System.Drawing.Size(100, 137)
-        Me.bar.Name = "bar"
-        Me.bar.RibbonAccentColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.bar.RibbonBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(41, Byte), Integer))
-        Me.bar.RibbonForeColor = System.Drawing.Color.WhiteSmoke
-        Me.bar.RibbonShadowColor = System.Drawing.Color.FromArgb(CType(CType(102, Byte), Integer), CType(CType(102, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.bar.SelectedIndex = 0
-        Me.bar.Size = New System.Drawing.Size(985, 137)
-        Me.bar.TabIndex = 0
+        Me.btnAddBar.BackColor = System.Drawing.Color.White
+        Me.btnAddBar.ForeColor = System.Drawing.Color.Black
+        Me.btnAddBar.Location = New System.Drawing.Point(20, 142)
+        Me.btnAddBar.Name = "btnAddBar"
+        Me.btnAddBar.Size = New System.Drawing.Size(199, 23)
+        Me.btnAddBar.TabIndex = 9
+        Me.btnAddBar.Text = "Add Bar"
+        Me.btnAddBar.UseVisualStyleBackColor = False
         '
         'frmTestRibbon
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.Black
-        Me.ClientSize = New System.Drawing.Size(985, 533)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.bar)
-        Me.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.BackColor = System.Drawing.Color.DarkGray
+        Me.ClientSize = New System.Drawing.Size(658, 180)
+        Me.Controls.Add(Me.btnAddBar)
+        Me.Controls.Add(Me.pnlContainer)
+        Me.ForeColor = System.Drawing.Color.Black
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmTestRibbon"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -74,7 +65,6 @@ Partial Class frmTestRibbon
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents bar As Ribbon
-    Friend WithEvents Button1 As Button
+    Friend WithEvents pnlContainer As Panel
+    Friend WithEvents btnAddBar As Button
 End Class

@@ -19,7 +19,7 @@
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2023.1124.1151</Version>
+    <Version>1.2023.1130.103</Version>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -298,13 +298,60 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Source\Controls\Flat\IFlatItem.vb" />
-    <Compile Include="Source\Controls\Ribbon\IRibbonItem.vb" />
-    <Compile Include="Source\Controls\Ribbon\RibbonConfig.vb" />
-    <Compile Include="Source\Controls\Ribbon\RibbonItemButton.vb">
+    <Compile Include="Source\Controls\Flat\FlatIconButton.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonItemType.vb" />
+    <Compile Include="Source\Controls\Flat\IFlatItem.vb" />
+    <Compile Include="Source\Controls\Ribbon\RibbonConfig.vb" />
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIButton.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIListBoxColor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIListBoxFontColor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIListBoxFontSize.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIListBoxFont.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RISeperator.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIImage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIImageIcon.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RILabel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RICheckBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIListView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIListBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIButtonDrownDown.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIButtonSplit.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItem.Designer.vb">
+      <DependentUpon>RibbonItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Controls\Ribbon\RibbonItem.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\Enums\RibbonItemType.vb" />
     <Compile Include="Source\EventHandlers\FlatSearchEventHandler.vb" />
     <Compile Include="Source\Controls\Flat\FlatLabel.vb">
       <SubType>UserControl</SubType>
@@ -382,14 +429,8 @@
     <Compile Include="Source\Forms\FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Flat\FlatButton.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Source\Controls\Ribbon\RibbonBar.vb">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonButton.vb">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Controls\Ribbon\Ribbon.vb">
       <SubType>Component</SubType>
@@ -411,18 +452,6 @@
       <DependentUpon>frmIconMaker.vb</DependentUpon>
     </Compile>
     <Compile Include="Test\frmIconMaker.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Test\frmButtonTestForm.Designer.vb">
-      <DependentUpon>frmButtonTestForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmButtonTestForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Test\frmTest.Designer.vb">
-      <DependentUpon>frmTest.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmTest.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Test\frmTestDockPanel.Designer.vb">
@@ -458,12 +487,6 @@
     <Compile Include="Source\Controls\DockPanel\PanelItems\CensusPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Test\frmTestRibbon.Designer.vb">
-      <DependentUpon>frmTestRibbon.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmTestRibbon.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Test\frmTestSearch.Designer.vb">
       <DependentUpon>frmTestSearch.vb</DependentUpon>
     </Compile>
@@ -479,7 +502,6 @@
     <Compile Include="Source\Data\Gedcom\File\FileLineEntry.vb" />
     <Compile Include="Source\Data\Gedcom\Primatives\GedDate.vb" />
     <None Include="Resources\ribbon\Ribbon.json" />
-    <None Include="Source\Controls\Ribbon\Ribbon.cd" />
     <None Include="Source\Data\Gedcom\File\PlaceNormalized.vb" />
     <Compile Include="Source\Controls\DockPanel\PanelItems\ImageGalleryPanelItem.vb">
       <SubType>UserControl</SubType>
@@ -527,6 +549,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Source\Controls\Ribbon\RibbonItem.resx">
+      <DependentUpon>RibbonItem.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Source\Dialogs\DialogImageSave.resx">
       <DependentUpon>DialogImageSave.vb</DependentUpon>
     </EmbeddedResource>
@@ -541,12 +566,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmIconMaker.resx">
       <DependentUpon>frmIconMaker.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmButtonTestForm.resx">
-      <DependentUpon>frmButtonTestForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmTest.resx">
-      <DependentUpon>frmTest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmTestDockPanel.resx">
       <DependentUpon>frmTestDockPanel.vb</DependentUpon>
@@ -568,9 +587,6 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmTestRibbon.resx">
-      <DependentUpon>frmTestRibbon.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\frmTestSearch.resx">
       <DependentUpon>frmTestSearch.vb</DependentUpon>
@@ -617,11 +633,51 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Documentation\assets\" />
+    <Folder Include="Source\Controls\Ribbon\RibbonPageItems\" />
     <Folder Include="Source\Data\SQLite\" />
     <Folder Include="Source\Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <None Include="Resources\image\newspaper-logo.png" />
+    <None Include="Resources\image\ancestry-view-fan.png" />
+    <None Include="Resources\image\ancestry-view-pedigree.png" />
+    <None Include="Resources\image\ancestry-view-tree.png" />
+    <None Include="Resources\image\familysearch-logo.png" />
+    <None Include="Resources\image\fold3-logo.png" />
+    <None Include="Resources\image\findagrave-logo.png" />
+    <None Include="Resources\image\ancestry-dna.png" />
+    <None Include="Resources\image\event-birth.png" />
+    <None Include="Resources\image\event-death.png" />
+    <None Include="Resources\image\event-marriage.png" />
+    <None Include="Resources\image\ancestry-logo.png" />
+    <None Include="Resources\image\panel-unpinned.png" />
+    <None Include="Resources\image\filepage-open.png" />
+    <None Include="Resources\image\filepage-new.png" />
+    <None Include="Resources\image\filepage-home.png" />
+    <None Include="Resources\image\filepage-back.png" />
+    <None Include="Resources\image\panel-sort-desc.png" />
+    <None Include="Resources\image\panel-sort-asc.png" />
+    <None Include="Resources\image\panel-search.png" />
+    <None Include="Resources\image\panel-pin.png" />
+    <None Include="Resources\image\panel-menu.png" />
+    <None Include="Resources\image\panel-close.png" />
+    <None Include="Resources\image\header-filtered.png" />
+    <None Include="Resources\image\Header-Background-Pattern.png" />
+    <None Include="Resources\image\Form-Restore.png" />
+    <None Include="Resources\image\Form-Minimize.png" />
+    <None Include="Resources\image\Form-Close.png" />
+    <None Include="Resources\image\Notebook-NewPage-Large.png" />
+    <None Include="Resources\image\Font-Underline.png" />
+    <None Include="Resources\image\Font-Size-Increase.png" />
+    <None Include="Resources\image\Font-Size-Decrease.png" />
+    <None Include="Resources\image\Font-Italic.png" />
+    <None Include="Resources\image\Font-Color-Small.png" />
+    <None Include="Resources\image\Font-Bold.png" />
+    <None Include="Resources\image\Ribbon_SplitDD.png" />
+    <None Include="Resources\image\Clipboard-Cut-Small.png" />
+    <None Include="Resources\image\Clipboard-Copy-Small.png" />
+    <None Include="Resources\image\Clipboard-Paste-Large.png" />
     <None Include="Resources\image\ALERT_CIRCLE_ICO20.png" />
     <Content Include="Resources\ico\AppIcon.ico" />
   </ItemGroup>

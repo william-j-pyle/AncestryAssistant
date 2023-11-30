@@ -3,13 +3,13 @@
 
 #Region "Fields"
 
-  Private WithEvents btnClose As IconButton
+  Private WithEvents btnClose As FlatIconButton
 
-  Private WithEvents btnContextMenu As IconButton
+  Private WithEvents btnContextMenu As FlatIconButton
 
-  Private WithEvents btnPinned As IconButton
+  Private WithEvents btnPinned As FlatIconButton
 
-  Private WithEvents btnSearch As IconButton
+  Private WithEvents btnSearch As FlatIconButton
 
   Private WithEvents ctxMenu As ContextMenuStrip
 
@@ -41,7 +41,7 @@
 
   Private _PanelShowContextMenu As Boolean = True
 
-  Private _PanelShowPinned As Boolean = False
+  Private _PanelShowPinned As Boolean = True
 
   Private _PanelShowSearch As Boolean = True
 
@@ -197,13 +197,13 @@
     pnlSearch = New AncestryAssistant.FlatPanel()
     txtSearch = New System.Windows.Forms.TextBox()
     pnlButtonContainerSearch = New System.Windows.Forms.TableLayoutPanel()
-    btnSearch = New AncestryAssistant.IconButton()
+    btnSearch = New AncestryAssistant.FlatIconButton()
     pnlHeader = New AncestryAssistant.FlatPanel()
     lblCaption = New System.Windows.Forms.Label()
     pnlButtonContainerHeader = New System.Windows.Forms.TableLayoutPanel()
-    btnClose = New AncestryAssistant.IconButton()
-    btnPinned = New AncestryAssistant.IconButton()
-    btnContextMenu = New AncestryAssistant.IconButton()
+    btnClose = New AncestryAssistant.FlatIconButton()
+    btnPinned = New AncestryAssistant.FlatIconButton()
+    btnContextMenu = New AncestryAssistant.FlatIconButton()
     pnlClient = New AncestryAssistant.FlatTabControl()
     TabPage1 = New System.Windows.Forms.TabPage()
     pnlMain.SuspendLayout()
@@ -291,65 +291,15 @@
     '
     'btnSearch
     '
-    btnSearch.BackClickColor = System.Drawing.Color.Silver
     btnSearch.BackColor = My.Theme.PanelBackColor
-    btnSearch.BackHoverColor = System.Drawing.Color.DarkGray
-    btnSearch.BorderBottomColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnSearch.BorderBottomSize = 0
-    btnSearch.BorderLeftColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnSearch.BorderLeftSize = 0
-    btnSearch.BorderRightColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnSearch.BorderRightSize = 0
-    btnSearch.BorderTopColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnSearch.BorderTopSize = 0
-    btnSearch.btnState = AncestryAssistant.IconButton.IconButtonStateEnum.STANDARD
-    btnSearch.ButtonSize = AncestryAssistant.IconSizeEnum.Icon16x16
-    btnSearch.Checked = False
-    btnSearch.CheckOnClick = False
-    btnSearch.IconAncestry0 = AncestryAssistant.FontAncestryIconEnum.BLANK
-    btnSearch.IconAncestry0_AdjH = 0
-    btnSearch.IconAncestry0_AdjV = 0
-    btnSearch.IconAncestry0_Bold = False
-    btnSearch.IconAncestry0_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnSearch.IconAncestry0_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-    btnSearch.IconAncestry0_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnSearch.IconAncestry0_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-    btnSearch.IconAncestry1 = AncestryAssistant.FontAncestryIconEnum.BLANK
-    btnSearch.IconAncestry1_AdjH = 0
-    btnSearch.IconAncestry1_AdjV = 0
-    btnSearch.IconAncestry1_Bold = False
-    btnSearch.IconAncestry1_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnSearch.IconAncestry1_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-    btnSearch.IconAncestry1_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnSearch.IconAncestry1_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-    btnSearch.IconSegoe0 = AncestryAssistant.FontSegoeFluentIconsEnum.SearchMedium
-    btnSearch.IconSegoe0_AdjH = 0
-    btnSearch.IconSegoe0_AdjV = 0
-    btnSearch.IconSegoe0_Bold = False
-    btnSearch.IconSegoe0_DisabledForeColor = System.Drawing.Color.Gainsboro
-    btnSearch.IconSegoe0_Forecolor = System.Drawing.Color.WhiteSmoke
-    btnSearch.IconSegoe0_HoverForeColor = System.Drawing.Color.White
-    btnSearch.IconSegoe0_Size = AncestryAssistant.IconSizeEnum.Icon12x12
-    btnSearch.IconSegoe1 = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-    btnSearch.IconSegoe1_AdjH = 0
-    btnSearch.IconSegoe1_AdjV = 0
-    btnSearch.IconSegoe1_Bold = False
-    btnSearch.IconSegoe1_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnSearch.IconSegoe1_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-    btnSearch.IconSegoe1_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnSearch.IconSegoe1_Size = AncestryAssistant.IconSizeEnum.Icon20x20
+    btnSearch.Icon = My.Resources.panel_search
     btnSearch.Location = New System.Drawing.Point(4, 0)
     btnSearch.Margin = New System.Windows.Forms.Padding(4, 0, 0, 0)
     btnSearch.MaximumSize = New System.Drawing.Size(16, 16)
     btnSearch.MinimumSize = New System.Drawing.Size(16, 16)
     btnSearch.Name = "btnSearch"
-    btnSearch.ShowBorder = False
-    btnSearch.ShowClick = True
-    btnSearch.ShowHover = True
     btnSearch.Size = New System.Drawing.Size(16, 16)
     btnSearch.TabIndex = 0
-    btnSearch.ThemeComponentId = Nothing
-    btnSearch.ThemeStyle = ""
     '
     'pnlHeader
     '
@@ -405,189 +355,33 @@
     '
     'btnClose
     '
-    btnClose.BackClickColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-    btnClose.BackColor = My.Theme.PanelBackColor
-    btnClose.BackHoverColor = System.Drawing.Color.FromArgb(CType(CType(160, Byte), Integer), CType(CType(160, Byte), Integer), CType(CType(160, Byte), Integer))
-    btnClose.BorderBottomColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnClose.BorderBottomSize = 0
-    btnClose.BorderLeftColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnClose.BorderLeftSize = 0
-    btnClose.BorderRightColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnClose.BorderRightSize = 0
-    btnClose.BorderTopColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnClose.BorderTopSize = 0
-    btnClose.btnState = AncestryAssistant.IconButton.IconButtonStateEnum.STANDARD
-    btnClose.ButtonSize = AncestryAssistant.IconSizeEnum.Icon16x16
-    btnClose.Checked = False
-    btnClose.CheckOnClick = False
-    btnClose.IconAncestry0 = AncestryAssistant.FontAncestryIconEnum.BLANK
-    btnClose.IconAncestry0_AdjH = 0
-    btnClose.IconAncestry0_AdjV = 0
-    btnClose.IconAncestry0_Bold = False
-    btnClose.IconAncestry0_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnClose.IconAncestry0_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-    btnClose.IconAncestry0_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnClose.IconAncestry0_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-    btnClose.IconAncestry1 = AncestryAssistant.FontAncestryIconEnum.BLANK
-    btnClose.IconAncestry1_AdjH = 0
-    btnClose.IconAncestry1_AdjV = 0
-    btnClose.IconAncestry1_Bold = False
-    btnClose.IconAncestry1_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnClose.IconAncestry1_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-    btnClose.IconAncestry1_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnClose.IconAncestry1_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-    btnClose.IconSegoe0 = AncestryAssistant.FontSegoeFluentIconsEnum.CalculatorMultiply
-    btnClose.IconSegoe0_AdjH = 0
-    btnClose.IconSegoe0_AdjV = 0
-    btnClose.IconSegoe0_Bold = False
-    btnClose.IconSegoe0_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnClose.IconSegoe0_Forecolor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-    btnClose.IconSegoe0_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnClose.IconSegoe0_Size = AncestryAssistant.IconSizeEnum.Icon12x12
-    btnClose.IconSegoe1 = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-    btnClose.IconSegoe1_AdjH = 0
-    btnClose.IconSegoe1_AdjV = 0
-    btnClose.IconSegoe1_Bold = False
-    btnClose.IconSegoe1_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnClose.IconSegoe1_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-    btnClose.IconSegoe1_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnClose.IconSegoe1_Size = AncestryAssistant.IconSizeEnum.Icon20x20
+    btnClose.Icon = My.Resources.panel_header_close
     btnClose.Location = New System.Drawing.Point(40, 1)
     btnClose.Margin = New System.Windows.Forms.Padding(0, 1, 0, 0)
     btnClose.MaximumSize = New System.Drawing.Size(16, 16)
     btnClose.MinimumSize = New System.Drawing.Size(16, 16)
     btnClose.Name = "btnClose"
-    btnClose.ShowBorder = False
-    btnClose.ShowClick = True
-    btnClose.ShowHover = True
     btnClose.Size = New System.Drawing.Size(16, 16)
-    btnClose.TabIndex = 0
-    btnClose.ThemeComponentId = Nothing
-    btnClose.ThemeStyle = ""
     '
     'btnPinned
     '
-    btnPinned.BackClickColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-    btnPinned.BackColor = My.Theme.PanelBackColor
-    btnPinned.BackHoverColor = System.Drawing.Color.FromArgb(CType(CType(160, Byte), Integer), CType(CType(160, Byte), Integer), CType(CType(160, Byte), Integer))
-    btnPinned.BorderBottomColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnPinned.BorderBottomSize = 0
-    btnPinned.BorderLeftColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnPinned.BorderLeftSize = 0
-    btnPinned.BorderRightColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnPinned.BorderRightSize = 0
-    btnPinned.BorderTopColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnPinned.BorderTopSize = 0
-    btnPinned.btnState = AncestryAssistant.IconButton.IconButtonStateEnum.STANDARD
-    btnPinned.ButtonSize = AncestryAssistant.IconSizeEnum.Icon16x16
-    btnPinned.Checked = False
-    btnPinned.CheckOnClick = False
-    btnPinned.IconAncestry0 = AncestryAssistant.FontAncestryIconEnum.BLANK
-    btnPinned.IconAncestry0_AdjH = 0
-    btnPinned.IconAncestry0_AdjV = 0
-    btnPinned.IconAncestry0_Bold = False
-    btnPinned.IconAncestry0_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnPinned.IconAncestry0_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-    btnPinned.IconAncestry0_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnPinned.IconAncestry0_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-    btnPinned.IconAncestry1 = AncestryAssistant.FontAncestryIconEnum.BLANK
-    btnPinned.IconAncestry1_AdjH = 0
-    btnPinned.IconAncestry1_AdjV = 0
-    btnPinned.IconAncestry1_Bold = False
-    btnPinned.IconAncestry1_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnPinned.IconAncestry1_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-    btnPinned.IconAncestry1_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnPinned.IconAncestry1_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-    btnPinned.IconSegoe0 = AncestryAssistant.FontSegoeFluentIconsEnum.Pinned
-    btnPinned.IconSegoe0_AdjH = 0
-    btnPinned.IconSegoe0_AdjV = 0
-    btnPinned.IconSegoe0_Bold = False
-    btnPinned.IconSegoe0_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnPinned.IconSegoe0_Forecolor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-    btnPinned.IconSegoe0_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnPinned.IconSegoe0_Size = AncestryAssistant.IconSizeEnum.Icon12x12
-    btnPinned.IconSegoe1 = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-    btnPinned.IconSegoe1_AdjH = 0
-    btnPinned.IconSegoe1_AdjV = 0
-    btnPinned.IconSegoe1_Bold = False
-    btnPinned.IconSegoe1_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnPinned.IconSegoe1_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-    btnPinned.IconSegoe1_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnPinned.IconSegoe1_Size = AncestryAssistant.IconSizeEnum.Icon20x20
+    btnPinned.Icon = My.Resources.panel_header_pin
     btnPinned.Location = New System.Drawing.Point(20, 1)
     btnPinned.Margin = New System.Windows.Forms.Padding(0, 1, 0, 0)
     btnPinned.MaximumSize = New System.Drawing.Size(16, 16)
     btnPinned.MinimumSize = New System.Drawing.Size(16, 16)
     btnPinned.Name = "btnPinned"
-    btnPinned.ShowBorder = False
-    btnPinned.ShowClick = True
-    btnPinned.ShowHover = True
     btnPinned.Size = New System.Drawing.Size(16, 16)
-    btnPinned.TabIndex = 1
-    btnPinned.ThemeComponentId = Nothing
-    btnPinned.ThemeStyle = ""
     '
     'btnContextMenu
     '
-    btnContextMenu.BackClickColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-    btnContextMenu.BackColor = My.Theme.PanelBackColor
-    btnContextMenu.BackHoverColor = System.Drawing.Color.FromArgb(CType(CType(160, Byte), Integer), CType(CType(160, Byte), Integer), CType(CType(160, Byte), Integer))
-    btnContextMenu.BorderBottomColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnContextMenu.BorderBottomSize = 0
-    btnContextMenu.BorderLeftColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnContextMenu.BorderLeftSize = 0
-    btnContextMenu.BorderRightColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnContextMenu.BorderRightSize = 0
-    btnContextMenu.BorderTopColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
-    btnContextMenu.BorderTopSize = 0
-    btnContextMenu.btnState = AncestryAssistant.IconButton.IconButtonStateEnum.STANDARD
-    btnContextMenu.ButtonSize = AncestryAssistant.IconSizeEnum.Icon16x16
-    btnContextMenu.Checked = False
-    btnContextMenu.CheckOnClick = False
-    btnContextMenu.IconAncestry0 = AncestryAssistant.FontAncestryIconEnum.BLANK
-    btnContextMenu.IconAncestry0_AdjH = 0
-    btnContextMenu.IconAncestry0_AdjV = 0
-    btnContextMenu.IconAncestry0_Bold = False
-    btnContextMenu.IconAncestry0_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnContextMenu.IconAncestry0_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-    btnContextMenu.IconAncestry0_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnContextMenu.IconAncestry0_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-    btnContextMenu.IconAncestry1 = AncestryAssistant.FontAncestryIconEnum.BLANK
-    btnContextMenu.IconAncestry1_AdjH = 0
-    btnContextMenu.IconAncestry1_AdjV = 0
-    btnContextMenu.IconAncestry1_Bold = False
-    btnContextMenu.IconAncestry1_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnContextMenu.IconAncestry1_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-    btnContextMenu.IconAncestry1_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnContextMenu.IconAncestry1_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-    btnContextMenu.IconSegoe0 = AncestryAssistant.FontSegoeFluentIconsEnum.CaretSolidDown
-    btnContextMenu.IconSegoe0_AdjH = 0
-    btnContextMenu.IconSegoe0_AdjV = 0
-    btnContextMenu.IconSegoe0_Bold = False
-    btnContextMenu.IconSegoe0_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnContextMenu.IconSegoe0_Forecolor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-    btnContextMenu.IconSegoe0_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnContextMenu.IconSegoe0_Size = AncestryAssistant.IconSizeEnum.Icon8x8
-    btnContextMenu.IconSegoe1 = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-    btnContextMenu.IconSegoe1_AdjH = 0
-    btnContextMenu.IconSegoe1_AdjV = 0
-    btnContextMenu.IconSegoe1_Bold = False
-    btnContextMenu.IconSegoe1_DisabledForeColor = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(105, Byte), Integer))
-    btnContextMenu.IconSegoe1_Forecolor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-    btnContextMenu.IconSegoe1_HoverForeColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-    btnContextMenu.IconSegoe1_Size = AncestryAssistant.IconSizeEnum.Icon20x20
+    btnContextMenu.Icon = My.Resources.panel_header_menu
     btnContextMenu.Location = New System.Drawing.Point(0, 1)
     btnContextMenu.Margin = New System.Windows.Forms.Padding(0, 1, 0, 0)
     btnContextMenu.MaximumSize = New System.Drawing.Size(16, 16)
     btnContextMenu.MinimumSize = New System.Drawing.Size(16, 16)
     btnContextMenu.Name = "btnContextMenu"
-    btnContextMenu.ShowBorder = False
-    btnContextMenu.ShowClick = True
-    btnContextMenu.ShowHover = True
     btnContextMenu.Size = New System.Drawing.Size(16, 16)
-    btnContextMenu.TabIndex = 2
-    btnContextMenu.ThemeComponentId = Nothing
-    btnContextMenu.ThemeStyle = ""
     '
     'pnlClient
     '
@@ -645,7 +439,6 @@
     txtSearch.BackColor = My.Theme.PanelBorderColor
     btnSearch.BackColor = My.Theme.PanelBorderColor
     txtSearch.ForeColor = My.Theme.PanelShadowColor
-    btnSearch.Tag = btnSearch.IconSegoe0
     BackColor = My.Theme.PanelBackColor
     ForeColor = My.Theme.PanelFontColor
     With pnlClient
@@ -683,15 +476,15 @@
   End Sub
 
   Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
-    If txtSearch.Text.Equals("Search") And btnSearch.IconSegoe0 = btnSearch.Tag Then Exit Sub
-    If btnSearch.IconSegoe0 = btnClose.IconSegoe0 Then
+    If txtSearch.Text.Equals("Search") Then Exit Sub
+    If btnSearch.Icon.Equals(btnClose.Icon) Then
       PanelSelectedItem.ClearSearch()
-      btnSearch.IconSegoe0 = btnSearch.Tag
+      btnSearch.Icon = My.Resources.panel_search
       txtSearch.Text = "Search"
       txtSearch.ForeColor = My.Theme.PanelShadowColor
     Else
       PanelSelectedItem.ApplySearch(txtSearch.Text)
-      btnSearch.IconSegoe0 = btnClose.IconSegoe0
+      btnSearch.Icon = btnClose.Icon
     End If
   End Sub
 
@@ -857,10 +650,10 @@
     If e.KeyCode = Keys.Enter Then
       e.Handled = True
       PanelSelectedItem.ApplySearch(txtSearch.Text)
-      btnSearch.IconSegoe0 = btnClose.IconSegoe0
+      btnSearch.Icon = btnClose.Icon
     ElseIf e.KeyCode = Keys.Escape Then
       PanelSelectedItem.ClearSearch()
-      btnSearch.IconSegoe0 = btnSearch.Tag
+      btnSearch.Icon = My.Resources.panel_search
       txtSearch.Text = "Search"
       txtSearch.ForeColor = My.Theme.PanelShadowColor
       pnlClient.Focus()

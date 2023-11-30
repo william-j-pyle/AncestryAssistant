@@ -2,45 +2,38 @@
   "bars": [
     {
       "name": "File",
+      "text": "File",
       "id": 0,
       "visible": true,
       "enabled": true,
       "showpage": true,
-      "usesgroups": []
+      "groups": []
     },
     {
-      "name": "Notebook",
-      "id": 100,
-      "visible": true,
-      "enabled": true,
-      "showpage": false,
-      "usesgroups": [
+      "name": "Ancestor",
+      "text": "Ancestor",
+      "id": 200,
+      "groups": [
         {
-          "id": 1
+          "id": 2
         }
       ]
     },
     {
-      "name": "Other",
-      "id": 200,
-      "visible": true,
-      "enabled": true,
-      "showpage": false,
-      "usesgroups": [
-        {
-          "id": 1
-        }
+      "name": "Testing",
+      "text": "Testing",
+      "id": 100,
+      "groups": [
+        { "id": 3 }
       ]
     }
   ],
   "groups": [
     {
       "name": "Clipboard",
+      "text": "Clipboard",
       "id": 1,
-      "visible": true,
-      "enabled": true,
-      "showpanel": false,
-      "usesitems": [
+      "items": [
         {
           "id": 1
         },
@@ -51,63 +44,251 @@
           "id": 3
         }
       ]
+    },
+    {
+      "name": "Ancestor",
+      "text": "Ancestor",
+      "id": 2,
+      "showpanel": true,
+      "items": [
+        { "id": 4 }
+      ]
+    },
+    {
+      "name": "Testing",
+      "text": "Testing",
+      "id": 3,
+      "items": [
+        { "id": 10 },
+        { "id": 11 },
+        { "id": 12 },
+        { "id": 13 },
+        { "id": 14 },
+        { "id": 15 },
+        { "id": 16 },
+        { "id": 17 },
+        { "id": 18 },
+        { "id": 19 },
+        { "id": 20 },
+        { "id": 21 },
+        { "id": 22 },
+        { "id": 23 }
+      ]
     }
   ],
   "items": [
     {
       "name": "Paste",
       "id": 1,
-      "visible": true,
-      "enabled": true,
-      "itemtype": 1,
-      "icon": "clipboard_paste",
-      "grid": {
-        "location": {
-          "x": 1,
-          "y": 1
-        },
-        "size": {
-          "width": 2,
-          "height": 3
+      "itemtype": 10,
+      "attributes": [
+        {
+          "attribute": "icon",
+          "value": "clipboard-paste"
         }
-      }
+      ],
+
+      "col": 1,
+      "row": 1,
+      "colspan": 2,
+      "rowspan": 3
     },
     {
       "name": "Cut",
       "id": 2,
-      "visible": true,
-      "enabled": true,
-      "itemtype": 1,
-      "icon": "clipboard_cut",
-      "grid": {
-        "location": {
-          "x": 3,
-          "y": 1
-        },
-        "size": {
-          "width": 1,
-          "height": 1
+      "itemtype": 10,
+      "icon": "clipboard-cut",
+      "attributes": [
+        {
+          "attribute": "icon",
+          "value": "clipboard-cut"
         }
-      }
+      ],
+
+      "col": 3,
+      "row": 1,
+      "colspan": 1,
+      "rowspan": 1
     },
     {
       "name": "Copy",
       "id": 3,
-      "visible": true,
-      "enabled": true,
-      "itemtype": 1,
-      "icon": "clipboard_copy",
-      "grid": {
-        "location": {
-          "x": 3,
-          "y": 2
-        },
-        "size": {
-          "width": 1,
-          "height": 1
+      "itemtype": 10,
+      "attributes": [
+        {
+          "attribute": "icon",
+          "value": "clipboard-copy"
         }
-      }
+      ],
+      "col": 3,
+      "row": 2,
+      "colspan": 1,
+      "rowspan": 1
+    },
+    {
+      "name": "Ancestor",
+      "id": 4,
+      "itemtype": 30,
+      "attributes": [
+        {
+          "attribute": "imageFilename",
+          "value": "D:\\Geneology\\Ancestors\\42135902201\\Gallery\\PHOTO-PROFILE-AliceAllen.jpg"
+        }
+      ],
+      "col": 1,
+      "row": 1,
+      "colspan": 3,
+      "rowspan": 3
+    },
+    {
+      "name": "RIButton",
+      "id": 10,
+      "itemtype": 10,
+      "attributes": [
+        {
+          "attribute": "icon",
+          "value": "ancestry_logo"
+        }
+      ],
+      "col": 1,
+      "row": 1,
+      "colspan": 1,
+      "rowspan": 1
+    },
+    {
+      "name": "RIButtonDropDown",
+      "id": 11,
+      "itemtype": 11,
+      "attributes": [],
+      "col": 2,
+      "row": 1,
+      "colspan": 1,
+      "rowspan": 1
+    },
+    {
+      "name": "RIButtonSplit",
+      "id": 12,
+      "itemtype": 12,
+      "attributes": [],
+      "col": 3,
+      "row": 1,
+      "colspan": 1,
+      "rowspan": 1
+    },
+    {
+      "name": "RICheckBox",
+      "id": 13,
+      "itemtype": 20,
+      "attributes": [],
+      "col": 1,
+      "row": 2,
+      "colspan": 3,
+      "rowspan": 1
+    },
+    {
+      "name": "RIImage",
+      "id": 14,
+      "itemtype": 30,
+      "attributes": [],
+      "col": 4,
+      "row": 1,
+      "colspan": 3,
+      "rowspan": 3
+    },
+    {
+      "name": "RIImageIcon",
+      "id": 15,
+      "itemtype": 31,
+      "attributes": [],
+      "col": 7,
+      "row": 1,
+      "colspan": 3,
+      "rowspan": 3
+    },
+    {
+      "name": "RILabel",
+      "id": 16,
+      "itemtype": 40,
+      "attributes": [
+        {
+          "attribute": "text",
+          "value": "Jazco"
+        }
+      ],
+      "col": 10,
+      "row": 1,
+      "colspan": 3,
+      "rowspan": 1
+    },
+    {
+      "name": "RIListBox",
+      "id": 17,
+      "itemtype": 50,
+      "attributes": [],
+      "col": 10,
+      "row": 2,
+      "colspan": 3,
+      "rowspan": 1
+    },
+    {
+      "name": "RIListBoxColor",
+      "id": 18,
+      "itemtype": 51,
+      "attributes": [],
+      "col": 10,
+      "row": 3,
+      "colspan": 3,
+      "rowspan": 1
+    },
+    {
+      "name": "RIListBoxFont",
+      "id": 19,
+      "itemtype": 52,
+      "attributes": [],
+      "col": 13,
+      "row": 1,
+      "colspan": 3,
+      "rowspan": 1
+    },
+    {
+      "name": "RIListBoxFontColor",
+      "id": 20,
+      "itemtype": 53,
+      "attributes": [],
+      "col": 13,
+      "row": 2,
+      "colspan": 1,
+      "rowspan": 1
+    },
+    {
+      "name": "RIListBoxFontSize",
+      "id": 21,
+      "itemtype": 54,
+      "attributes": [],
+      "col": 14,
+      "row": 2,
+      "colspan": 2,
+      "rowspan": 1
+    },
+    {
+      "name": "RIListView",
+      "id": 22,
+      "itemtype": 60,
+      "attributes": [],
+      "col": 16,
+      "row": 1,
+      "colspan": 12,
+      "rowspan": 3
+    },
+    {
+      "name": "RISeperator",
+      "id": 23,
+      "itemtype": 90,
+      "attributes": [],
+      "col": 13,
+      "row": 3,
+      "colspan": 1,
+      "rowspan": 1
     }
-
   ]
 }

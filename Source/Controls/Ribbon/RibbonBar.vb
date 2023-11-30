@@ -1,12 +1,18 @@
 ﻿Public Class RibbonBar
   Inherits Panel
 
+#Region "Fields"
+
+  Protected Friend WithEvents RibbonCntl As Ribbon
+
+#End Region
+
 #Region "Properties"
 
   Public Property AppBackColor As Color = My.Theme.AppBackColor
   Public Property AppForeColor As Color = My.Theme.AppFontColor
   Public Property AppHighlightColor As Color = My.Theme.AppHighlightColor
-  Public ReadOnly Property Id As String = ""
+  Public Property BarId As Integer
   Public Property RibbonAccentColor As Color = My.Theme.RibbonAccentColor
   Public Property RibbonBackColor As Color = My.Theme.RibbonBackColor
   Public Property RibbonForeColor As Color = My.Theme.RibbonForeColor
@@ -16,18 +22,23 @@
 
 #Region "Public Constructors"
 
-  Public Sub New(Id As String)
+  Public Sub New()
+    Me.New(Nothing, "RibbonBar", 1)
+  End Sub
+
+  Public Sub New(oRibbon As Ribbon, sName As String, iBarId As Integer)
     SetStyle(ControlStyles.UserPaint Or ControlStyles.ContainerControl Or ControlStyles.FixedHeight Or ControlStyles.SupportsTransparentBackColor Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
     SuspendLayout()
-    Name = "BAR__" + Id
-    _Id = Id
+    RibbonCntl = oRibbon
+    Name = sName
+    BarId = iBarId
     AllowDrop = True
     BackColor = RibbonBackColor
     Font = My.Theme.RibbonBarFont
     ForeColor = RibbonForeColor
     Margin = New System.Windows.Forms.Padding(0)
-    MaximumSize = New System.Drawing.Size(0, RibbonConfig.RIBBON_BARHEIGHT)
-    MinimumSize = New System.Drawing.Size(100, RibbonConfig.RIBBON_BARHEIGHT)
+    MaximumSize = New System.Drawing.Size(0, RibbonConfig.RIBBON_BAR_HEIGHT)
+    MinimumSize = New System.Drawing.Size(100, RibbonConfig.RIBBON_BAR_HEIGHT)
     Padding = New System.Windows.Forms.Padding(4 * 2, 4, 4 * 2, 4)
     Dock = DockStyle.Top
     ResumeLayout(False)
@@ -70,12 +81,20 @@
 
   End Sub
 
+  Private Sub RibbonBar_ParentChanged(sender As Object, e As EventArgs) Handles Me.ParentChanged
+    If RibbonCntl Is Nothing And TypeOf Parent Is Ribbon Then
+      RibbonCntl = Parent
+      BarId = Parent.Controls.Count
+      If Name = "RibbonBar" Then Name += BarId.ToString
+    End If
+  End Sub
+
 #End Region
 
 #Region "Public Methods"
 
-  Public Function AddGroup(GroupId As String, Text As String) As RibbonGroup
-    Dim rg As New RibbonGroup(GroupId, Text) With {
+  Public Function AddGroup(sName As String, sCaption As String, iBarId As Integer, iGroupId As Integer) As RibbonGroup
+    Dim rg As New RibbonGroup(RibbonCntl, sName, sCaption, iBarId, iGroupId) With {
       .AppBackColor = AppBackColor,
     .AppForeColor = AppForeColor,
     .AppHighlightColor = AppHighlightColor,
@@ -85,6 +104,7 @@
     .RibbonShadowColor = RibbonShadowColor
     }
     Controls.Add(rg)
+    RibbonCntl.RegisterGroup(rg)
     Return rg
   End Function
 

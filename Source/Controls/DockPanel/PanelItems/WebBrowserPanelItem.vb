@@ -376,6 +376,8 @@ Public Class AncestryWebViewer
   End Sub
 
   Private Sub DockPanelItem_GotFocus(sender As Object, e As EventArgs)
+    Debug.Print("DockPanelItem_GotFocus")
+
     RaiseEvent PanelItemGotFocus(sender, e)
   End Sub
 
@@ -468,6 +470,20 @@ Public Class AncestryWebViewer
         web.Source = URL
       End If
     End If
+  End Sub
+
+  Private Sub web_GotFocus(sender As Object, e As EventArgs) Handles web.GotFocus
+    Debug.Print("web_GotFocus")
+
+  End Sub
+
+  Private Sub web_LostFocus(sender As Object, e As EventArgs) Handles web.LostFocus
+    Debug.Print("Web_LostFocus")
+  End Sub
+
+  Private Sub web_MouseDown(sender As Object, e As MouseEventArgs) Handles web.MouseDown
+    Debug.Print("web_MouseDown")
+
   End Sub
 
   Private Sub web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles web.NavigationCompleted

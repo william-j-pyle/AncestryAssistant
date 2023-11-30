@@ -137,22 +137,19 @@ Public Class AncestorsListPanel
     RaiseEvent PanelItemGotFocus(sender, e)
   End Sub
 
-  Private Sub PopulateList(Optional filter As String = "")
+  Private Sub PopulateList()
     If Ancestors Is Nothing Then Exit Sub
     Dim item As ListViewItem
     blockEvents = True
-    filter = filter.ToUpper
     With AncestorsList
       .Tag = ""
       .Items.Clear()
       For Each ancestor As AncestorCollection.Ancestor In Ancestors.Values
-        If filter.Equals("") Or ancestor.FullName.ToUpper.Contains(filter) Or ancestor.LifeSpan.Contains(filter) Then
-          item = .Items.Add(ancestor.FullName)
-          item.SubItems.Add(ancestor.LifeSpan)
-          item.Tag = ancestor.ID
-          If SelectedAncestorID.Equals(ancestor.ID) Then
-            item.Selected = True
-          End If
+        item = .Items.Add(ancestor.FullName)
+        item.SubItems.Add(ancestor.LifeSpan)
+        item.Tag = ancestor.ID
+        If SelectedAncestorID.Equals(ancestor.ID) Then
+          item.Selected = True
         End If
       Next
     End With
@@ -162,7 +159,11 @@ Public Class AncestorsListPanel
   Private Sub SetSelectedAncestor()
     blockEvents = True
     For Each item As ListViewItem In AncestorsList.Items
-      item.Selected = item.Tag.Equals(SelectedAncestorID)
+      If item IsNot Nothing Then
+        If item.Tag IsNot Nothing Then
+          item.Selected = item.Tag.Equals(SelectedAncestorID)
+        End If
+      End If
     Next
     blockEvents = False
   End Sub
@@ -188,11 +189,11 @@ Public Class AncestorsListPanel
 #Region "Public Methods"
 
   Public Sub ApplySearch(criteria As String) Implements IDockPanelItem.ApplySearch
-    PopulateList(criteria)
+    AncestorsList.Filter(criteria)
   End Sub
 
   Public Sub ClearSearch() Implements IDockPanelItem.ClearSearch
-    PopulateList()
+    AncestorsList.ClearFilter()
   End Sub
 
   Public Function GetDockToolBarConfig() As DockToolBarConfig Implements IDockPanelItem.GetDockToolBarConfig

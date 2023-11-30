@@ -16,8 +16,11 @@
 #Region "Properties"
 
   Public Property ShowHasFocus As Boolean = False
+  Public Property TabCloseIcon As Image = My.Resources.panel_header_close
+  Public Property TabPinnedIcon As Image = My.Resources.panel_header_pin
   Public Property TabShowClose As Boolean = True
   Public Property TabType As DockPanelType = DockPanelType.Tab
+  Public Property TabUnPinnedIcon As Image = My.Resources.panel_header_unpinned
 
 #End Region
 

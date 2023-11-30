@@ -4,12 +4,6 @@ Imports Newtonsoft.Json
 Public Class Ribbon
   Inherits TabControl
 
-#Region "Fields"
-
-  Private BarIds As New Dictionary(Of String, RibbonBar)
-
-#End Region
-
 #Region "Properties"
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)>
@@ -41,8 +35,8 @@ Public Class Ribbon
     BackColor = AppBackColor
     Font = My.Theme.AppFont
     Margin = New System.Windows.Forms.Padding(0)
-    MaximumSize = New System.Drawing.Size(0, 1 + RibbonConfig.RIBBON_BARHEIGHT + RibbonConfig.RIBBON_TABHEIGHT + (2 * 8))
-    MinimumSize = New System.Drawing.Size(100, 1 + RibbonConfig.RIBBON_BARHEIGHT + RibbonConfig.RIBBON_TABHEIGHT + (2 * 8))
+    MaximumSize = New System.Drawing.Size(0, 1 + RibbonConfig.RIBBON_BAR_HEIGHT + RibbonConfig.RIBBON_TAB_HEIGHT + (2 * 8))
+    MinimumSize = New System.Drawing.Size(100, 1 + RibbonConfig.RIBBON_BAR_HEIGHT + RibbonConfig.RIBBON_TAB_HEIGHT + (2 * 8))
     Name = "Ribbon"
     'Padding = New System.Windows.Forms.Padding(16, 8, 16, 8)
     Dock = DockStyle.Top
@@ -113,15 +107,15 @@ Public Class Ribbon
 
 #Region "Public Methods"
 
-  Public Function AddBar(BarId As String, Text As String) As AncestryAssistant.RibbonBar
-    Dim Tab As New TabPage(Text) With {
-      .Name = "TAB__" + BarId,
-      .Tag = BarId,
+  Public Function AddBar(sName As String, sCaption As String, iBarId As Integer) As AncestryAssistant.RibbonBar
+    Dim Tab As New TabPage(sCaption) With {
+      .Name = sName,
+      .Tag = iBarId,
       .BackColor = AppBackColor,
       .ForeColor = AppForeColor,
     .Font = My.Theme.AppFont
     }
-    Dim Bar As New RibbonBar(BarId) With {
+    Dim Bar As New RibbonBar(Me, sName, iBarId) With {
       .Dock = DockStyle.Fill,
   .AppBackColor = AppBackColor,
     .AppForeColor = AppForeColor,
@@ -133,7 +127,7 @@ Public Class Ribbon
     }
     Tab.Controls.Add(Bar)
     Controls.Add(Tab)
-    BarIds.Add(BarId, Bar)
+    RegisterBar(Bar)
     Return Bar
   End Function
 
@@ -145,51 +139,215 @@ Public Class Ribbon
       .ForeColor = AppForeColor,
       .Font = My.Theme.AppFont
     }
-    'Dim Bar As New RibbonPage() With {
-    '     .AppBackColor = AppBackColor,
-    '.AppForeColor = AppForeColor,
-    '.AppHighlightColor = AppHighlightColor,
-    '.RibbonAccentColor = RibbonAccentColor,
-    '.RibbonBackColor = RibbonBackColor,
-    '.RibbonForeColor = RibbonForeColor,
-    '.RibbonShadowColor = RibbonShadowColor
-    '}
-    'Tab.Controls.Add(Bar)
     Controls.Add(Tab)
   End Sub
 
   Public Sub LoadConfig(jsonConfig As String)
     Dim cfg As RibbonConfig = JsonConvert.DeserializeObject(Of RibbonConfig)(jsonConfig)
-    Debug.Print("LoadConfig")
     For Each Bar As RibbonConfig.Bar In cfg.bars
-      Debug.Print("LoadConfig.AddBar({0})", Bar.name)
-      Dim rBar As RibbonBar = AddBar(Bar.id.ToString, Bar.name)
-      For Each refGrp As RibbonConfig.Group In Bar.usesgroups
+      Dim rBar As RibbonBar = AddBar(Bar.name, Bar.text, Bar.id)
+      For Each refGrp As RibbonConfig.Group In Bar.groups
         Dim Grp As RibbonConfig.Group = cfg.GetGroup(refGrp)
-        Debug.Print("LoadConfig.AddBar({0}).AddGroup({1})", Bar.name, Grp.name)
-        Dim rBarGrp As RibbonGroup = rBar.AddGroup(Grp.id.ToString, Grp.name)
-        For Each refItem As RibbonConfig.Item In Grp.usesitems
+        Dim rBarGrp As RibbonGroup = rBar.AddGroup(Grp.name, Grp.text, Bar.id, Grp.id)
+        For Each refItem As RibbonConfig.Item In Grp.items
           Dim Item As RibbonConfig.Item = cfg.GetItem(refItem)
-          Dim rBarGrpItem As IRibbonItem = Nothing
+          Dim rBarGrpItem As RibbonItem = Nothing
           Select Case Item.itemtype
-            Case RibbonItemType.Button_Large
-              rBarGrpItem = New RibbonItemButton(Item.id.ToString, Item.name) With {
-                .GridLocation = Item.grid.location.Point,
-                .GridSize = Item.grid.size.Size
+            Case RibbonItemType.RIButton
+              '.Image = Item.getIcon
+              rBarGrpItem = New RIButton() With {
+              .Name = Item.name,
+              .Text = Item.text,
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan,
+                .Image = Item.getIcon()
               }
-            Case RibbonItemType.Button_Small
-              rBarGrpItem = New RibbonItemButton(Item.id.ToString, Item.name) With {
-                .GridLocation = Item.grid.location.Point,
-                .GridSize = Item.grid.size.Size
+            Case RibbonItemType.RIButtonDropDown
+              rBarGrpItem = New RIButtonDropDown() With {
+              .Name = Item.name,
+              .Text = Item.text,
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan
+              }
+            Case RibbonItemType.RIButtonSplit
+              rBarGrpItem = New RIButtonSplit() With {
+              .Name = Item.name,
+              .Text = Item.text,
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan
+              }
+            Case RibbonItemType.RIListBox
+              rBarGrpItem = New RIListBox() With {
+              .Name = Item.name,
+              .Text = Item.text,
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan
+              }
+            Case RibbonItemType.RIListView
+              rBarGrpItem = New RIListView() With {
+              .Name = Item.name,
+              .Text = Item.text,
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan
+              }
+            Case RibbonItemType.RICheckBox
+              rBarGrpItem = New RICheckBox() With {
+              .Name = Item.name,
+              .Text = Item.text,
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan
+              }
+            Case RibbonItemType.RILabel
+              rBarGrpItem = New RILabel() With {
+              .Name = Item.name,
+              .Text = Item.getAttribute("text"),
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan
+              }
+            Case RibbonItemType.RIImageIcon
+              rBarGrpItem = New RIImageIcon() With {
+              .Name = Item.name,
+              .Text = Item.text,
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan
+              }
+            Case RibbonItemType.RIImage
+              rBarGrpItem = New RIImage() With {
+              .Name = Item.name,
+              .Text = Item.text,
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan
+              }
+              'Dim ri As New RIImage(Item.name, Bar.id, Grp.id, Item.id) With {
+              '  .Grid = New RibbonGroup.Grid(Item.grid.location.Point, Item.grid.size.Size)
+              '}
+              'ri.LoadImage(Item.getAttribute("imageFilename"))
+              'rBarGrpItem = ri
+            Case RibbonItemType.RISeperator
+              rBarGrpItem = New RISeperator() With {
+              .Name = Item.name,
+              .Text = Item.text,
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan
+              }
+            Case RibbonItemType.RIListBoxFont
+              rBarGrpItem = New RIListBoxFont() With {
+              .Name = Item.name,
+              .Text = Item.text,
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan
+              }
+            Case RibbonItemType.RIListBoxFontSize
+              rBarGrpItem = New RIListBoxFontSize() With {
+              .Name = Item.name,
+              .Text = Item.text,
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan
+              }
+            Case RibbonItemType.RIListBoxFontColor
+              rBarGrpItem = New RIListBoxFontColor() With {
+              .Name = Item.name,
+              .Text = Item.text,
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan
+              }
+            Case RibbonItemType.RIListBoxColor
+              rBarGrpItem = New RIListBoxColor() With {
+              .Name = Item.name,
+              .Text = Item.text,
+              .BarId = rBar.BarId,
+              .GroupId = rBarGrp.GroupId,
+              .ItemId = Item.id,
+              .Col = Item.col,
+                .Row = Item.row,
+                .ColSpan = Item.colspan,
+                .RowSpan = Item.rowspan
               }
           End Select
           If rBarGrpItem IsNot Nothing Then
             Debug.Print("LoadConfig.AddBar({0}).AddGroup({1}).AddItem({2})", Bar.name, Grp.name, Item.name)
-            rBarGrp.AddItem(Item.id, rBarGrpItem)
+            rBarGrp.AddItem(rBarGrpItem)
           End If
         Next
       Next
     Next
+  End Sub
+
+  Public Sub RegisterBar(bar As RibbonBar)
+
+  End Sub
+
+  Public Sub RegisterGroup(group As RibbonGroup)
+
+  End Sub
+
+  Public Sub RegisterItem(item As RibbonItem)
+
   End Sub
 
 #End Region

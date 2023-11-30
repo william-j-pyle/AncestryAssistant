@@ -2,11 +2,14 @@
 
 #Region "Fields"
 
-  Public Const GRID_HEIGHTWIDTH As Integer = 24
-
-  Public Const RIBBON_BARHEIGHT As Integer = 100
-
-  Public Const RIBBON_TABHEIGHT As Integer = 20
+  Public Const GROUP_COL_SPACING As Integer = 2
+  Public Const GROUP_COL_WIDTH As Integer = 24
+  Public Const GROUP_LEFT_SPACING As Integer = 4
+  Public Const GROUP_ROW_HEIGHT As Integer = 24
+  Public Const GROUP_ROW_SPACING As Integer = 0
+  Public Const GROUP_TOP_SPACING As Integer = 4
+  Public Const RIBBON_BAR_HEIGHT As Integer = 100
+  Public Const RIBBON_TAB_HEIGHT As Integer = 20
 
 #End Region
 
@@ -22,7 +25,7 @@
 
 #Region "Public Methods"
 
-  Public Function GetGroup(id As String) As Group
+  Public Function GetGroup(id As Integer) As Group
     For Each grp As Group In groups
       If grp.id = id Then Return grp
     Next
@@ -33,7 +36,7 @@
     Return GetGroup(refGroup.id)
   End Function
 
-  Public Function GetItem(id As String) As Item
+  Public Function GetItem(id As Integer) As Item
     For Each itm As Item In items
       If itm.id = id Then Return itm
     Next
@@ -48,103 +51,44 @@
 
 #Region "Classes"
 
+  Public Class AttributeValuePair
+
+#Region "Properties"
+
+    Public Property Attribute As String
+    Public Property Value As String
+
+#End Region
+
+  End Class
+
   Public Class Bar
 
 #Region "Properties"
 
-    Public Property enabled As Boolean
-    Public Property id As String
+    Public Property enabled As Boolean = True
+    Public Property groups As List(Of Group)
+    Public Property id As Integer
     Public Property name As String
-    Public Property showpage As Boolean
-    Public Property usesgroups As List(Of Group)
-    Public Property visible As Boolean
-
-#End Region
-
-  End Class
-
-  Public Class Grid
-
-#Region "Properties"
-
-    Public Property location As GridLocation
-    Public Property size As GridSize
-
-#End Region
-
-  End Class
-
-  ''' <summary>
-  '''     The Row/Column location of the item with the parent group
-  ''' </summary>
-  Public Class GridLocation
-
-#Region "Properties"
-
-    Public ReadOnly Property Point As Point
-      Get
-        Return New Point(x, y)
-      End Get
-    End Property
-    ''' <summary>
-    '''     Column location within the Ribbon Group. 1-n. Group will add columns to match the request.
-    ''' </summary>
-    Public Property x As Integer
-    ''' <summary>
-    '''     Row location within a Group. 1-3. Locations outside the available range will result in the item not being displayed.
-    ''' </summary>
-    Public Property y As Integer
-
-#End Region
-
-  End Class
-
-  Public Class GridSize
-
-#Region "Properties"
-
-    Public Property height As Integer
-    Public ReadOnly Property Size As Size
-      Get
-        Return New Size(width, height)
-      End Get
-    End Property
-    Public Property width As Integer
+    Public Property showpage As Boolean = False
+    Public Property text As String = ""
+    Public Property visible As Boolean = True
 
 #End Region
 
   End Class
 
   Public Class Group
-    Implements ICloneable
 
 #Region "Properties"
 
-    Public Property enabled As Boolean = Nothing
-    Public Property id As String = Nothing
-    Public Property name As String = Nothing
-    Public Property showpanel As Boolean = Nothing
-    Public Property usesitems As List(Of Item) = Nothing
-    Public Property visible As Boolean = Nothing
-
-#End Region
-
-#Region "Public Methods"
-
-    Public Function Clone() As Object Implements ICloneable.Clone
-      Return New [Group] With {
-    .enabled = enabled,
-    .id = id,
-    .name = name,
-    .showpanel = showpanel,
-    .usesitems = usesitems,
-    .visible = visible
-    }
-    End Function
-
-    Public Overrides Function ToString() As String
-      Return MyBase.ToString()
-    End Function
+    Public Property enabled As Boolean = True
+    Public Property id As Integer
+    Public Property items As List(Of Item)
+    Public Property name As String
+    Public Property showpanel As Boolean = False
+    Public Property text As String = ""
+    Public Property visible As Boolean = True
 
 #End Region
 
@@ -154,13 +98,34 @@
 
 #Region "Properties"
 
-    Public Property enabled As Boolean
-    Public Property grid As Grid
-    Public Property icon As String
-    Public Property id As String
+    Public Property attributes As List(Of AttributeValuePair)
+    Public Property col As Double
+    Public Property colspan As Double
+    Public Property enabled As Boolean = True
+    Public Property id As Integer
     Public Property itemtype As RibbonItemType
-    Public Property name As String
-    Public Property visible As Boolean
+    Public Property name As String = ""
+    Public Property row As Double
+    Public Property rowspan As Double
+    Public Property text As String = ""
+    Public Property visible As Boolean = True
+
+#End Region
+
+#Region "Public Methods"
+
+    Public Function getAttribute(attributeName As String) As String
+      For Each kv As AttributeValuePair In attributes
+        If kv.Attribute.Equals(attributeName) Then
+          Return kv.Value
+        End If
+      Next
+      Return String.Empty
+    End Function
+
+    Public Function getIcon() As Image
+      Return My.Resources.ResourceManager.GetObject(getAttribute("icon"))
+    End Function
 
 #End Region
 

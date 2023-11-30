@@ -4,8 +4,8 @@ Public Class frmTestSearch
 
 #Region "Private Methods"
 
-  Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-    Button2.BackgroundImage = ConvertSvgToBitmap("D:\Images\images\svg\Paste.svg")
+  Private Sub Button1_Click(sender As Object, e As EventArgs)
+    ' Button2.BackgroundImage = ConvertSvgToBitmap("D:\Images\images\svg\Paste.svg")
   End Sub
 
   Private Function ConvertSvgToBitmap(svgFilePath As String) As Bitmap

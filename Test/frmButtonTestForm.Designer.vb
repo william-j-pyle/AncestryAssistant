@@ -29,8 +29,8 @@ Partial Class frmButtonTestForm
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.PreviewBackground = New System.Windows.Forms.ComboBox()
-        Me.preview = New AncestryAssistant.IconButton()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
+    Me.preview = New AncestryAssistant.FlatIconButton()
+    Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tabButton = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.chkShowClick = New System.Windows.Forms.CheckBox()
@@ -255,68 +255,15 @@ Partial Class frmButtonTestForm
         Me.preview.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.preview.BackClickColor = System.Drawing.SystemColors.ControlDark
-        Me.preview.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.preview.BackHoverColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.preview.BorderBottomColor = System.Drawing.SystemColors.ActiveBorder
-        Me.preview.BorderBottomSize = 0
-        Me.preview.BorderLeftColor = System.Drawing.SystemColors.ActiveBorder
-        Me.preview.BorderLeftSize = 0
-        Me.preview.BorderRightColor = System.Drawing.SystemColors.ActiveBorder
-        Me.preview.BorderRightSize = 0
-        Me.preview.BorderTopColor = System.Drawing.SystemColors.ActiveBorder
-        Me.preview.BorderTopSize = 0
-        Me.preview.btnState = AncestryAssistant.IconButton.IconButtonStateEnum.STANDARD
-        Me.preview.ButtonSize = AncestryAssistant.IconSizeEnum.Icon20x20
-        Me.preview.Checked = False
-        Me.preview.CheckOnClick = False
-        Me.preview.IconAncestry0 = AncestryAssistant.FontAncestryIconEnum.BLANK
-        Me.preview.IconAncestry0_AdjH = 0
-        Me.preview.IconAncestry0_AdjV = 0
-        Me.preview.IconAncestry0_Bold = False
-        Me.preview.IconAncestry0_DisabledForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.preview.IconAncestry0_Forecolor = System.Drawing.SystemColors.ControlText
-        Me.preview.IconAncestry0_HoverForeColor = System.Drawing.SystemColors.ControlLight
-        Me.preview.IconAncestry0_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-        Me.preview.IconAncestry1 = AncestryAssistant.FontAncestryIconEnum.BLANK
-        Me.preview.IconAncestry1_AdjH = 0
-        Me.preview.IconAncestry1_AdjV = 0
-        Me.preview.IconAncestry1_Bold = False
-        Me.preview.IconAncestry1_DisabledForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.preview.IconAncestry1_Forecolor = System.Drawing.SystemColors.ControlText
-        Me.preview.IconAncestry1_HoverForeColor = System.Drawing.SystemColors.ControlLight
-        Me.preview.IconAncestry1_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-        Me.preview.IconSegoe0 = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-        Me.preview.IconSegoe0_AdjH = 0
-        Me.preview.IconSegoe0_AdjV = 0
-        Me.preview.IconSegoe0_Bold = False
-        Me.preview.IconSegoe0_DisabledForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.preview.IconSegoe0_Forecolor = System.Drawing.SystemColors.ControlText
-        Me.preview.IconSegoe0_HoverForeColor = System.Drawing.SystemColors.ControlLight
-        Me.preview.IconSegoe0_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-        Me.preview.IconSegoe1 = AncestryAssistant.FontSegoeFluentIconsEnum.Blank
-        Me.preview.IconSegoe1_AdjH = 0
-        Me.preview.IconSegoe1_AdjV = 0
-        Me.preview.IconSegoe1_Bold = False
-        Me.preview.IconSegoe1_DisabledForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.preview.IconSegoe1_Forecolor = System.Drawing.SystemColors.ControlText
-        Me.preview.IconSegoe1_HoverForeColor = System.Drawing.SystemColors.ControlLight
-        Me.preview.IconSegoe1_Size = AncestryAssistant.IconSizeEnum.Icon20x20
-        Me.preview.Location = New System.Drawing.Point(89, 50)
-        Me.preview.MaximumSize = New System.Drawing.Size(20, 20)
+    Me.preview.Location = New System.Drawing.Point(89, 50)
+    Me.preview.MaximumSize = New System.Drawing.Size(20, 20)
         Me.preview.MinimumSize = New System.Drawing.Size(20, 20)
         Me.preview.Name = "preview"
-        Me.preview.ShowBorder = False
-        Me.preview.ShowClick = False
-        Me.preview.ShowHover = False
-        Me.preview.Size = New System.Drawing.Size(20, 20)
-        Me.preview.TabIndex = 3
-        Me.preview.ThemeComponentId = Nothing
-        Me.preview.ThemeStyle = ""
-        '
-        'TabControl1
-        '
-        Me.TabControl1.Controls.Add(Me.tabButton)
+    Me.preview.Size = New System.Drawing.Size(20, 20)
+    '
+    'TabControl1
+    '
+    Me.TabControl1.Controls.Add(Me.tabButton)
         Me.TabControl1.Controls.Add(Me.tabBorders)
         Me.TabControl1.Controls.Add(Me.tabIcon)
         Me.TabControl1.Controls.Add(Me.tabStyle)
@@ -1547,7 +1494,7 @@ Partial Class frmButtonTestForm
     End Sub
 
     Friend WithEvents iconPanel As FlowLayoutPanel
-  Friend WithEvents preview As IconButton
+  Friend WithEvents preview As FlatIconButton
   Friend WithEvents btnSize As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents previewPanel As Panel

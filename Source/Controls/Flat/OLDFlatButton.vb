@@ -1,4 +1,4 @@
-﻿Public Class IconButton
+﻿Public Class OLDFlatButton
   Inherits UserControl
 
 #Region "Fields"

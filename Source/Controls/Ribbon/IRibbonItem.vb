@@ -5,9 +5,9 @@
   Property AppBackColor As Color
   Property AppForeColor As Color
   Property AppHighlightColor As Color
-  Property GridLocation As Point
-  Property GridSize As Size
-  ReadOnly Property Id As String
+  Property BarId As Integer
+  Property GroupId As Integer
+  Property ItemId As Integer
   Property RibbonAccentColor As Color
   Property RibbonBackColor As Color
   Property RibbonForeColor As Color

@@ -22,8 +22,8 @@
       frm.Close()
       frm = Nothing
     End If
-    frm = New frmButtonTestForm
-    frm.Show()
+    'frm = New frmButtonTestForm
+    'frm.Show()
   End Sub
 
   Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
