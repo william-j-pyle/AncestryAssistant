@@ -19,7 +19,7 @@
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2023.1206.1729</Version>
+    <Version>1.2023.1207.11</Version>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -370,11 +370,11 @@
     <Compile Include="Source\Data\Ancestor\AncestorAbstract.vb" />
     <Compile Include="Source\Data\Ancestor\AncestorCollection.vb" />
     <Compile Include="Source\Data\AAFile\AAFile.vb" />
-    <Compile Include="Source\Data\CensusData.vb" />
-    <Compile Include="Source\Data\GalleryData.vb" />
-    <Compile Include="Source\Data\NotebookData.vb" />
-    <Compile Include="Source\Data\SourceData.vb" />
-    <Compile Include="Source\Data\TimelineData.vb" />
+    <Compile Include="Source\Data\Ancestor\DataTypes\CensusData.vb" />
+    <Compile Include="Source\Data\Ancestor\DataTypes\GalleryData.vb" />
+    <Compile Include="Source\Data\Ancestor\DataTypes\NotebookData.vb" />
+    <Compile Include="Source\Data\Ancestor\DataTypes\SourceData.vb" />
+    <Compile Include="Source\Data\Ancestor\DataTypes\TimelineData.vb" />
     <Compile Include="Source\Data\AAFile\AAFileTypeEnum.vb" />
     <Compile Include="Source\Controls\Flat\FlatListView.vb">
       <SubType>Component</SubType>
@@ -453,50 +453,8 @@
     <Compile Include="Source\Controls\Flat\FlatSearchBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Test\frmIconMaker.Designer.vb">
-      <DependentUpon>frmIconMaker.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmIconMaker.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Test\frmTestDockPanel.Designer.vb">
-      <DependentUpon>frmTestDockPanel.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmTestDockPanel.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Test\frmColorPallet.Designer.vb">
-      <DependentUpon>frmColorPallet.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmColorPallet.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Test\frmTestFlatControls.Designer.vb">
-      <DependentUpon>frmTestFlatControls.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmTestFlatControls.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Test\frmTestFlatList.Designer.vb">
-      <DependentUpon>frmTestFlatList.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmTestFlatList.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Test\frmTestGEDCOM.Designer.vb">
-      <DependentUpon>frmTestGEDCOM.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmTestGEDCOM.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Source\Controls\DockPanel\PanelItems\CensusPanelItem.vb">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Test\frmTestSplitters.Designer.vb">
-      <DependentUpon>frmTestSplitters.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmTestSplitters.vb">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Data\Gedcom\File\FileLineEntry.vb" />
     <Compile Include="Source\Data\Gedcom\Primatives\GedDate.vb" />
@@ -563,32 +521,11 @@
     <EmbeddedResource Include="Source\Controls\Ribbon\RibbonPage.resx">
       <DependentUpon>RibbonPage.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmIconMaker.resx">
-      <DependentUpon>frmIconMaker.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmTestDockPanel.resx">
-      <DependentUpon>frmTestDockPanel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmColorPallet.resx">
-      <DependentUpon>frmColorPallet.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmTestFlatControls.resx">
-      <DependentUpon>frmTestFlatControls.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmTestFlatList.resx">
-      <DependentUpon>frmTestFlatList.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmTestGEDCOM.resx">
-      <DependentUpon>frmTestGEDCOM.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmTestSplitters.resx">
-      <DependentUpon>frmTestSplitters.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
