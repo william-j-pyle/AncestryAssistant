@@ -5,6 +5,7 @@ Public Class AncestorCollection
 
 #Region "Fields"
 
+  Private _ActiveAncestorID As String = ""
   'Private AncestorEntries As Dictionary(Of String, Ancestor)
   Private _RepositoryPath As String = ""
 
@@ -12,12 +13,41 @@ Public Class AncestorCollection
 
 #Region "Events"
 
+  Public Event ActiveAncestorChanged(ancestorId As String)
+
+  Public Event AncestorsChanged()
+
   Public Event RepositoryPathChanged(NewPath As String)
 
 #End Region
 
 #Region "Properties"
 
+  Public ReadOnly Property ActiveAncestor As Ancestor
+    Get
+      If Len(ActiveAncestorID) > 0 Then
+        Return Item(ActiveAncestorID)
+      Else
+        Return Nothing
+      End If
+    End Get
+  End Property
+  Public Property ActiveAncestorID As String
+    Get
+      Return _ActiveAncestorID
+    End Get
+    Set(value As String)
+      If Not _ActiveAncestorID.Equals(value) Then
+        _ActiveAncestorID = value
+        RaiseEvent ActiveAncestorChanged(value)
+      End If
+    End Set
+  End Property
+  Public ReadOnly Property HasActiveAncestor As Boolean
+    Get
+      Return Len(ActiveAncestorID) > 1
+    End Get
+  End Property
   Public Property RepositoryPath As String
     Get
       Return _RepositoryPath
@@ -68,6 +98,7 @@ Public Class AncestorCollection
       Try
         myAncestor = New Ancestor(ancestorPath)
         Add(myAncestor.ID, myAncestor)
+        RaiseEvent AncestorsChanged()
       Catch ex As InvalidDataException
         Debug.Print("Invalid Repository Entry: " + ancestorPath)
       End Try
@@ -95,6 +126,7 @@ Public Class AncestorCollection
   Public Sub RefreshAncestor(AncestryID As String)
     If ContainsKey(AncestryID) Then
       Item(AncestryID).Refresh()
+      RaiseEvent AncestorsChanged()
     End If
   End Sub
 

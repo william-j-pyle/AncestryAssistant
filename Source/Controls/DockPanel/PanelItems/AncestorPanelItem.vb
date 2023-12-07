@@ -7,23 +7,17 @@ Public Class AncestorPanel
 #Region "Fields"
 
   Private WithEvents AncestorAttributes As TreeView
-
   Private WithEvents ancestorAttributesCol1 As FlatPanel
-
   Private WithEvents ancestorAttributesCol2 As FlatPanel
-
   Private WithEvents AncestorAttributesHeader As Panel
-
   Private WithEvents AncestorColSplitter As Splitter
+  Private WithEvents Ancestors As AncestorCollection
 
   Private WithEvents lblAncestorAttributesCol1 As Label
-
   Private WithEvents lblAncestorAttributesCol2 As Label
-
   Private Const EN_ITEMCAPTION As String = "Ancestor"
-
   Private Const SUBNODE_DELIMITER As String = vbTab
-
+  Private ActiveAncestorID As String = String.Empty
   Private AttributeState As List(Of String)
 
   Private components As System.ComponentModel.IContainer
@@ -54,13 +48,15 @@ Public Class AncestorPanel
   Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
   Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
   Public ReadOnly Property ItemSupportsSearch As Boolean = False Implements IDockPanelItem.ItemSupportsSearch
+  Public ReadOnly Property Key As String Implements IDockPanelItem.Key
   Public ReadOnly Property ShowRibbonOnFocus As String = String.Empty Implements IDockPanelItem.ShowRibbonOnFocus
 
 #End Region
 
 #Region "Public Constructors"
 
-  Public Sub New()
+  Public Sub New(itemKey As String)
+    Key = itemKey
     AncestorAttributesHeader = New System.Windows.Forms.Panel()
     AncestorColSplitter = New System.Windows.Forms.Splitter()
     ancestorAttributesCol2 = New AncestryAssistant.FlatPanel()
@@ -256,6 +252,14 @@ Public Class AncestorPanel
     AncestorColSplitter.Tag = e.X
   End Sub
 
+  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
+    UpdateUI()
+  End Sub
+
+  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
+    UpdateUI()
+  End Sub
+
   Private Sub CaptureAttributeState()
     ' Save the current expanded state
     AttributeState = New List(Of String)
@@ -302,10 +306,6 @@ Public Class AncestorPanel
       Return "Missing"
     End If
   End Function
-
-  Private Sub IDockPanelItem_SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
-    Throw New NotImplementedException()
-  End Sub
 
   Private Sub JDockPanelHeader1_HeaderCloseClicked()
     RaiseEvent PanelCloseClicked(Me)
@@ -360,11 +360,15 @@ Public Class AncestorPanel
     Throw New NotImplementedException()
   End Function
 
-  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
-    Throw New NotImplementedException()
+  Public Sub SetAncestors(ancestorsObj As AncestorCollection) Implements IDockPanelItem.SetAncestors
+    Ancestors = ancestorsObj
+    UpdateUI()
   End Sub
 
-  Public Sub SetAncestor(ancestor As AncestorCollection.Ancestor)
+  Public Sub UpdateUI()
+    If Ancestors Is Nothing Then Exit Sub
+    If Not Ancestors.HasActiveAncestor Then Exit Sub
+    Dim ancestor As AncestorCollection.Ancestor = Ancestors.ActiveAncestor
     CaptureAttributeState()
     AncestorAttributes.Nodes.Clear()
 

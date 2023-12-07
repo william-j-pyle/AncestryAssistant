@@ -104,7 +104,7 @@
     .RibbonShadowColor = RibbonShadowColor
     }
     Controls.Add(rg)
-    RibbonCntl.RegisterGroup(rg)
+    rg.BringToFront()
     Return rg
   End Function
 

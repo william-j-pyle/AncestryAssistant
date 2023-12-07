@@ -91,6 +91,10 @@
 
   End Sub
 
+  Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+    My.Settings.Reset()
+  End Sub
+
   Private Sub trackButton(key As String, ctl() As Control)
     For Each c As Control In ctl
       If TypeOf c Is Label Then

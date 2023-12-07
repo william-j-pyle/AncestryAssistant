@@ -166,17 +166,17 @@
     Dim ctl As IDockPanelItem = Nothing
     Select Case key
       Case "Ancestor"
-        ctl = New AncestorPanel
+        ctl = New AncestorPanel("X")
       Case "Ancestors List"
-        ctl = New AncestorsListPanel
+        ctl = New AncestorsListPanel("X")
       Case "Ancestry.com"
-        ctl = New AncestryWebViewer
+        ctl = New AncestryWebViewer("X")
       Case "Notebook"
-        ctl = New NotebookViewer
+        ctl = New NotebookViewer("X")
       Case "Gallery"
-        ctl = New ImageGalleryPanelItem
+        ctl = New ImageGalleryPanelItem("X")
       Case "Census"
-        ctl = New CensusViewer
+        ctl = New CensusViewer("X")
     End Select
     Return ctl
   End Function

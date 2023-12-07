@@ -4,6 +4,20 @@ Imports Newtonsoft.Json
 Public Class Ribbon
   Inherits TabControl
 
+#Region "Fields"
+
+  Private RegistryBar As New Dictionary(Of String, RibbonBar)
+  Private RegistryGroup As New Dictionary(Of String, RibbonGroup)
+  Public RegistryItem As New Dictionary(Of String, RibbonItem)
+
+#End Region
+
+#Region "Events"
+
+  Public Event RibbonAction(action As RibbonEventType, value As Object, barId As Integer, groupId As Integer, itemId As Integer)
+
+#End Region
+
 #Region "Properties"
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)>
@@ -103,6 +117,10 @@ Public Class Ribbon
 
   End Sub
 
+  Private Sub RibbonItemAction(sender As RibbonItem, action As RibbonEventType, value As Object)
+    RaiseEvent RibbonAction(action, value, sender.BarId, sender.GroupId, sender.ItemId)
+  End Sub
+
 #End Region
 
 #Region "Public Methods"
@@ -127,7 +145,6 @@ Public Class Ribbon
     }
     Tab.Controls.Add(Bar)
     Controls.Add(Tab)
-    RegisterBar(Bar)
     Return Bar
   End Function
 
@@ -142,196 +159,77 @@ Public Class Ribbon
     Controls.Add(Tab)
   End Sub
 
+  Public Function GetBar(barId As Integer) As RibbonBar
+    Return RegistryBar.Item("B" & barId)
+  End Function
+
+  Public Function GetGroup(barId As Integer, groupId As Integer) As RibbonGroup
+    Return RegistryGroup.Item("B" & barId & ".G" & groupId)
+  End Function
+
+  Public Function GetItem(barId As Integer, groupId As Integer, itemId As Integer) As RibbonItem
+    Return RegistryItem.Item("B" & barId & ".G" & groupId & ".I" & itemId)
+  End Function
+
   Public Sub LoadConfig(jsonConfig As String)
     Dim cfg As RibbonConfig = JsonConvert.DeserializeObject(Of RibbonConfig)(jsonConfig)
     For Each Bar As RibbonConfig.Bar In cfg.bars
       Dim rBar As RibbonBar = AddBar(Bar.name, Bar.text, Bar.id)
+      RegisterBar(rBar)
       For Each refGrp As RibbonConfig.Group In Bar.groups
         Dim Grp As RibbonConfig.Group = cfg.GetGroup(refGrp)
         Dim rBarGrp As RibbonGroup = rBar.AddGroup(Grp.name, Grp.text, Bar.id, Grp.id)
+        RegisterGroup(rBarGrp)
         For Each refItem As RibbonConfig.Item In Grp.items
           Dim Item As RibbonConfig.Item = cfg.GetItem(refItem)
           Dim rBarGrpItem As RibbonItem = Nothing
-          Select Case Item.itemtype
+          Select Case Item.ribbonitemtype
             Case RibbonItemType.RIButton
-              '.Image = Item.getIcon
-              rBarGrpItem = New RIButton() With {
-              .Name = Item.name,
-              .Text = Item.text,
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan,
-                .Image = Item.getIcon()
-              }
+              rBarGrpItem = New RIButton()
             Case RibbonItemType.RIButtonDropDown
-              rBarGrpItem = New RIButtonDropDown() With {
-              .Name = Item.name,
-              .Text = Item.text,
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan
-              }
+              rBarGrpItem = New RIButtonDropDown()
             Case RibbonItemType.RIButtonSplit
-              rBarGrpItem = New RIButtonSplit() With {
-              .Name = Item.name,
-              .Text = Item.text,
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan
-              }
-            Case RibbonItemType.RIListBox
-              rBarGrpItem = New RIListBox() With {
-              .Name = Item.name,
-              .Text = Item.text,
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan
-              }
+              rBarGrpItem = New RIButtonSplit()
+            Case RibbonItemType.RIComboBox
+              rBarGrpItem = New RIComboBox()
             Case RibbonItemType.RIListView
-              rBarGrpItem = New RIListView() With {
-              .Name = Item.name,
-              .Text = Item.text,
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan
-              }
+              rBarGrpItem = New RIListView()
             Case RibbonItemType.RICheckBox
-              rBarGrpItem = New RICheckBox() With {
-              .Name = Item.name,
-              .Text = Item.text,
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan
-              }
+              rBarGrpItem = New RICheckBox()
             Case RibbonItemType.RILabel
-              rBarGrpItem = New RILabel() With {
-              .Name = Item.name,
-              .Text = Item.getAttribute("text"),
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan
-              }
-            Case RibbonItemType.RIImageIcon
-              rBarGrpItem = New RIImageIcon() With {
-              .Name = Item.name,
-              .Text = Item.text,
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan
-              }
+              rBarGrpItem = New RILabel()
             Case RibbonItemType.RIImage
-              rBarGrpItem = New RIImage() With {
-              .Name = Item.name,
-              .Text = Item.text,
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan
-              }
-              'Dim ri As New RIImage(Item.name, Bar.id, Grp.id, Item.id) With {
-              '  .Grid = New RibbonGroup.Grid(Item.grid.location.Point, Item.grid.size.Size)
-              '}
-              'ri.LoadImage(Item.getAttribute("imageFilename"))
-              'rBarGrpItem = ri
+              rBarGrpItem = New RIImage()
             Case RibbonItemType.RISeperator
-              rBarGrpItem = New RISeperator() With {
-              .Name = Item.name,
-              .Text = Item.text,
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan
-              }
-            Case RibbonItemType.RIListBoxFont
-              rBarGrpItem = New RIListBoxFont() With {
-              .Name = Item.name,
-              .Text = Item.text,
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan
-              }
-            Case RibbonItemType.RIListBoxFontSize
-              rBarGrpItem = New RIListBoxFontSize() With {
-              .Name = Item.name,
-              .Text = Item.text,
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan
-              }
-            Case RibbonItemType.RIListBoxFontColor
-              rBarGrpItem = New RIListBoxFontColor() With {
-              .Name = Item.name,
-              .Text = Item.text,
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan
-              }
-            Case RibbonItemType.RIListBoxColor
-              rBarGrpItem = New RIListBoxColor() With {
-              .Name = Item.name,
-              .Text = Item.text,
-              .BarId = rBar.BarId,
-              .GroupId = rBarGrp.GroupId,
-              .ItemId = Item.id,
-              .Col = Item.col,
-                .Row = Item.row,
-                .ColSpan = Item.colspan,
-                .RowSpan = Item.rowspan
-              }
+              rBarGrpItem = New RISeperator()
+            Case RibbonItemType.RIComboBoxFont
+              rBarGrpItem = New RIComboBoxFont()
+            Case RibbonItemType.RIComboBoxFontSize
+              rBarGrpItem = New RIComboBoxFontSize()
+            Case RibbonItemType.RIComboBoxFontColor
+              rBarGrpItem = New RIComboBoxFontColor()
+            Case RibbonItemType.RIComboBoxColor
+              rBarGrpItem = New RIListBoxColor()
           End Select
           If rBarGrpItem IsNot Nothing Then
-            Debug.Print("LoadConfig.AddBar({0}).AddGroup({1}).AddItem({2})", Bar.name, Grp.name, Item.name)
+            With rBarGrpItem
+              .Ribbon = Me
+              .Name = Item.name
+              .BarId = rBar.BarId
+              .GroupId = rBarGrp.GroupId
+              .ItemId = Item.id
+              .Col = Item.col
+              .Row = Item.row
+              .ColSpan = Item.colspan
+              .RowSpan = Item.rowspan
+            End With
+            For Each attr As RibbonConfig.AttributeValuePair In Item.attributes
+              rBarGrpItem.SetAttribute(attr.Attribute, attr.Value)
+            Next
+            'Debug.Print("LoadConfig.AddBar({0}).AddGroup({1}).AddItem({2})", Bar.name, Grp.name, Item.name)
             rBarGrp.AddItem(rBarGrpItem)
+            RegisterItem(rBarGrpItem)
+            AddHandler rBarGrpItem.RibbonItemAction, AddressOf RibbonItemAction
           End If
         Next
       Next
@@ -339,15 +237,15 @@ Public Class Ribbon
   End Sub
 
   Public Sub RegisterBar(bar As RibbonBar)
-
+    RegistryBar.Add("B" & bar.BarId, bar)
   End Sub
 
   Public Sub RegisterGroup(group As RibbonGroup)
-
+    RegistryGroup.Add("B" & group.BarId & ".G" & group.GroupId, group)
   End Sub
 
   Public Sub RegisterItem(item As RibbonItem)
-
+    RegistryItem.Add("B" & item.BarId & ".G" & item.GroupId & ".I" & item.ItemId, item)
   End Sub
 
 #End Region

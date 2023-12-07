@@ -1,94 +1,84 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmTestFlatList
-  Inherits System.Windows.Forms.Form
+    Inherits System.Windows.Forms.Form
 
-  'Form overrides dispose to clean up the component list.
-  <System.Diagnostics.DebuggerNonUserCode()> _
-  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-    Try
-      If disposing AndAlso components IsNot Nothing Then
-        components.Dispose()
-      End If
-    Finally
-      MyBase.Dispose(disposing)
-    End Try
-  End Sub
-
-  'Required by the Windows Form Designer
-  Private components As System.ComponentModel.IContainer
-
-  'NOTE: The following procedure is required by the Windows Form Designer
-  'It can be modified using the Windows Form Designer.  
-  'Do not modify it using the code editor.
-  <System.Diagnostics.DebuggerStepThrough()> _
-  Private Sub InitializeComponent()
-    Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Row 1", "Column2"}, -1)
-    Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Row 2", "Column 2"}, -1)
-    Me.Panel1 = New System.Windows.Forms.Panel()
-    Me.FlatListView1 = New AncestryAssistant.FlatListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Panel1.SuspendLayout()
-        Me.SuspendLayout()
-        '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.FlatListView1)
-        Me.Panel1.Location = New System.Drawing.Point(111, 55)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(278, 324)
-        Me.Panel1.TabIndex = 0
-        '
-        'FlatListView1
-        '
-        Me.FlatListView1.Activation = System.Windows.Forms.ItemActivation.OneClick
-        Me.FlatListView1.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
-        Me.FlatListView1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.FlatListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
-        Me.FlatListView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlatListView1.FlatAccentColor = System.Drawing.Color.FromArgb(CType(CType(102, Byte), Integer), CType(CType(102, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.FlatListView1.FlatBackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
-        Me.FlatListView1.FlatBorderColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(41, Byte), Integer))
-        Me.FlatListView1.FlatForeColor = System.Drawing.Color.WhiteSmoke
-        Me.FlatListView1.FlatHighlightColor = System.Drawing.Color.Lime
-        Me.FlatListView1.FlatShadowColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer))
-        Me.FlatListView1.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.FlatListView1.FullRowSelect = True
-        Me.FlatListView1.HideSelection = False
-        Me.FlatListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2})
-        Me.FlatListView1.Location = New System.Drawing.Point(0, 0)
-        Me.FlatListView1.Margin = New System.Windows.Forms.Padding(0)
-        Me.FlatListView1.Name = "FlatListView1"
-        Me.FlatListView1.OwnerDraw = True
-        Me.FlatListView1.ShowItemToolTips = True
-        Me.FlatListView1.Size = New System.Drawing.Size(278, 324)
-        Me.FlatListView1.TabIndex = 0
-        Me.FlatListView1.UseCompatibleStateImageBehavior = False
-        Me.FlatListView1.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader1
-        '
-        Me.ColumnHeader1.Width = 121
-        '
-        'ColumnHeader2
-        '
-        Me.ColumnHeader2.Width = 157
-        '
-        'frmTestFlatList
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 534)
-        Me.Controls.Add(Me.Panel1)
-        Me.Name = "frmTestFlatList"
-        Me.Text = "frmTestFlatList"
-        Me.Panel1.ResumeLayout(False)
-        Me.ResumeLayout(False)
-
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()>
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
     End Sub
 
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents FlatListView1 As FlatListView
-    Friend WithEvents ColumnHeader1 As ColumnHeader
-    Friend WithEvents ColumnHeader2 As ColumnHeader
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()>
+    Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.FlatPanel1 = New AncestryAssistant.FlatPanel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+    Me.FlatPanel1.SuspendLayout()
+    CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.SuspendLayout()
+    '
+    'NotifyIcon1
+    '
+    Me.NotifyIcon1.Text = "NotifyIcon1"
+        Me.NotifyIcon1.Visible = True
+        '
+        'FlatPanel1
+        '
+        Me.FlatPanel1.BorderColor = System.Drawing.Color.Transparent
+        Me.FlatPanel1.BorderColorBottom = System.Drawing.Color.DarkGray
+        Me.FlatPanel1.BorderColorLeft = System.Drawing.Color.DarkGray
+        Me.FlatPanel1.BorderColorRight = System.Drawing.Color.DarkGray
+        Me.FlatPanel1.BorderColorTop = System.Drawing.Color.DarkGray
+        Me.FlatPanel1.BorderWidth = New System.Windows.Forms.Padding(1)
+        Me.FlatPanel1.Controls.Add(Me.PictureBox1)
+        Me.FlatPanel1.CornerRadius = New System.Windows.Forms.Padding(5)
+        Me.FlatPanel1.Location = New System.Drawing.Point(370, 200)
+        Me.FlatPanel1.Name = "FlatPanel1"
+        Me.FlatPanel1.Size = New System.Drawing.Size(273, 19)
+        Me.FlatPanel1.TabIndex = 1
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.AncestryAssistant.My.Resources.Resources.panel_header_menu
+        Me.PictureBox1.Location = New System.Drawing.Point(254, 1)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(16, 18)
+        Me.PictureBox1.TabIndex = 2
+        Me.PictureBox1.TabStop = False
+
+    '
+    'frmTestFlatList
+    '
+    Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
+        Me.ClientSize = New System.Drawing.Size(1016, 534)
+        Me.Controls.Add(Me.FlatPanel1)
+        Me.ForeColor = System.Drawing.Color.White
+        Me.Name = "frmTestFlatList"
+        Me.Text = "frmTestFlatList"
+        Me.FlatPanel1.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+    Me.ResumeLayout(False)
+
+  End Sub
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents NotifyIcon1 As NotifyIcon
+    Friend WithEvents FlatPanel1 As FlatPanel
+    Friend WithEvents PictureBox1 As PictureBox
+
 End Class

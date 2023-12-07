@@ -6,6 +6,8 @@ Public Class NotebookViewer
 
 #Region "Fields"
 
+  Private WithEvents Ancestors As AncestorCollection
+
   Friend WithEvents BtnAddPage As ToolStripButton
 
   Friend WithEvents BtnAddSection As ToolStripButton
@@ -84,13 +86,15 @@ Public Class NotebookViewer
   Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
   Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
   Public ReadOnly Property ItemSupportsSearch As Boolean = True Implements IDockPanelItem.ItemSupportsSearch
+  Public ReadOnly Property Key As String Implements IDockPanelItem.Key
   Public ReadOnly Property ShowRibbonOnFocus As String = EN_ITEMCAPTION Implements IDockPanelItem.ShowRibbonOnFocus
 
 #End Region
 
 #Region "Public Constructors"
 
-  Public Sub New()
+  Public Sub New(itemKey As String)
+    Key = itemKey
     components = New Container()
     Dim TreeNode1 As New TreeNode("My First Page")
     Dim TreeNode2 As New TreeNode("Welcome Section", New TreeNode() {TreeNode1})
@@ -197,11 +201,9 @@ Public Class NotebookViewer
     'tsSections
     '
     tsSections.CanOverflow = False
-    tsSections.DataBindings.Add(New Binding("Location", Global.AncestryAssistant.My.MySettings.Default, "TB_WEB_LOC", True, DataSourceUpdateMode.OnPropertyChanged))
     tsSections.GripStyle = ToolStripGripStyle.Hidden
     tsSections.Items.AddRange(New ToolStripItem() {BtnAddSection, BtnAddPage})
     tsSections.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow
-    tsSections.Location = Global.AncestryAssistant.My.MySettings.Default.TB_WEB_LOC
     tsSections.Name = "tsSections"
     tsSections.Padding = New Padding(4, 0, 16, 0)
     tsSections.RenderMode = ToolStripRenderMode.System
@@ -310,11 +312,9 @@ Public Class NotebookViewer
     'tsPage
     '
     tsPage.CanOverflow = False
-    tsPage.DataBindings.Add(New Binding("Location", Global.AncestryAssistant.My.MySettings.Default, "TB_WEB_LOC", True, DataSourceUpdateMode.OnPropertyChanged))
     tsPage.GripStyle = ToolStripGripStyle.Hidden
     tsPage.Items.AddRange(New ToolStripItem() {ToolStripButton10, ToolStripButton1, ToolStripButton2, ToolStripSeparator1, ToolStripButton3, ToolStripButton4, ToolStripButton5, ToolStripSeparator2, ToolStripSplitButton1})
     tsPage.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow
-    tsPage.Location = Global.AncestryAssistant.My.MySettings.Default.TB_WEB_LOC
     tsPage.Name = "tsPage"
     tsPage.Padding = New Padding(4, 0, 16, 0)
     tsPage.RenderMode = ToolStripRenderMode.System
@@ -468,6 +468,14 @@ Public Class NotebookViewer
 
 #Region "Private Methods"
 
+  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
+
+  End Sub
+
+  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
+
+  End Sub
+
   Private Sub CaptureFocus(ctl As Control)
     Try
       AddHandler ctl.GotFocus, AddressOf DockPanelItem_GotFocus
@@ -531,12 +539,8 @@ Public Class NotebookViewer
     Throw New NotImplementedException()
   End Function
 
-  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
-    Throw New NotImplementedException()
+  Public Sub SetAncestors(ancestorsObj As AncestorCollection) Implements IDockPanelItem.SetAncestors
+    Ancestors = ancestorsObj
   End Sub
 
 #End Region

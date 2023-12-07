@@ -6,6 +6,7 @@ Public Class CensusViewer
 
 #Region "Fields"
 
+  Private WithEvents Ancestors As AncestorCollection
   Private WithEvents ts As FlatToolBar
 
   Private WithEvents xlsActiveSheet As DataGridView
@@ -15,7 +16,6 @@ Public Class CensusViewer
   Const UNIFIED_TEXT As String = "Unified"
 
   Private Ancestor As AncestorCollection.Ancestor
-
   Private AvailableYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
 
   Private CensusData As Collection
@@ -48,13 +48,15 @@ Public Class CensusViewer
   Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
   Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
   Public ReadOnly Property ItemSupportsSearch As Boolean = True Implements IDockPanelItem.ItemSupportsSearch
+  Public ReadOnly Property Key As String Implements IDockPanelItem.Key
   Public ReadOnly Property ShowRibbonOnFocus As String = UNIFIED_TEXT Implements IDockPanelItem.ShowRibbonOnFocus
 
 #End Region
 
 #Region "Public Constructors"
 
-  Public Sub New()
+  Public Sub New(itemKey As String)
+    Key = itemKey
     ts = New FlatToolBar()
     SuspendLayout()
     With ts
@@ -108,6 +110,14 @@ Public Class CensusViewer
     Debug.Print(CensusOrder, BaseKey, CensusHeader)
   End Sub
 
+  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
+    UpdateUI()
+  End Sub
+
+  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
+    UpdateUI()
+  End Sub
+
   Private Sub CaptureFocus(ctl As Control)
     Try
       AddHandler ctl.GotFocus, AddressOf DockPanelItem_GotFocus
@@ -136,14 +146,6 @@ Public Class CensusViewer
     Else
       showWorkSheet(CInt(srcSender.Text))
     End If
-  End Sub
-
-  Private Sub CensusViewer_AncestorAssigned() Handles Me.AncestorAssigned
-    LoadCensus()
-  End Sub
-
-  Private Sub CensusViewer_AncestorUpdated() Handles Me.AncestorUpdated
-    LoadCensus()
   End Sub
 
   Private Function CreateWorkSheet(censusYear As Integer) As DataGridView
@@ -583,40 +585,6 @@ Public Class CensusViewer
 
   End Sub
 
-  Private Sub LoadCensus()
-    ResetViewer()
-    If Ancestor Is Nothing Then Exit Sub
-    Dim item As ToolStripButton
-    Dim expectedCensus As List(Of Integer) = Ancestor.Census.ExpectedYears
-    Dim availableCensus As List(Of Integer) = Ancestor.Census.AvailableYears
-    If expectedCensus.Count > 0 Then
-      For Each censusYear As Integer In expectedCensus
-        item = New ToolStripButton(censusYear.ToString)
-        If availableCensus.Contains(censusYear) Then
-          item.CheckOnClick = True
-          item.ForeColor = My.Theme.PanelFontColor
-          item.ToolTipText = censusYear & " Census"
-          item.Tag = Nothing
-          AddHandler item.Click, AddressOf CensusSelect
-        Else
-          item.Enabled = False
-          item.ForeColor = My.Theme.PanelFontColor 'Need to modify theme and code to allow for error condition
-          item.ToolTipText = censusYear & " Census Unavailable"
-        End If
-        ts.Items.Add(item)
-      Next
-      If availableCensus.Count > 0 Then
-        item = New ToolStripButton(UNIFIED_TEXT) With {
-          .ForeColor = My.Theme.PanelFontColor,
-          .ToolTipText = "Unified view of all available Census Years",
-          .Tag = Nothing
-        }
-        AddHandler item.Click, AddressOf CensusSelect
-        ts.Items.Add(item)
-      End If
-    End If
-  End Sub
-
   Private Sub LoadFile(csvFilePath As String)
     Dim lines As ArrayList = GetData(csvFilePath)
     xlsActiveSheet.Columns.Clear()
@@ -671,6 +639,42 @@ Public Class CensusViewer
     xlsActiveSheet.BringToFront()
   End Sub
 
+  Private Sub UpdateUI()
+    ResetViewer()
+    If Ancestors Is Nothing Then Exit Sub
+    If Not Ancestors.HasActiveAncestor Then Exit Sub
+    Ancestor = Ancestors.ActiveAncestor
+    Dim item As ToolStripButton
+    Dim expectedCensus As List(Of Integer) = Ancestor.Census.ExpectedYears
+    Dim availableCensus As List(Of Integer) = Ancestor.Census.AvailableYears
+    If expectedCensus.Count > 0 Then
+      For Each censusYear As Integer In expectedCensus
+        item = New ToolStripButton(censusYear.ToString)
+        If availableCensus.Contains(censusYear) Then
+          item.CheckOnClick = True
+          item.ForeColor = My.Theme.PanelFontColor
+          item.ToolTipText = censusYear & " Census"
+          item.Tag = Nothing
+          AddHandler item.Click, AddressOf CensusSelect
+        Else
+          item.Enabled = False
+          item.ForeColor = My.Theme.PanelFontColor 'Need to modify theme and code to allow for error condition
+          item.ToolTipText = censusYear & " Census Unavailable"
+        End If
+        ts.Items.Add(item)
+      Next
+      If availableCensus.Count > 0 Then
+        item = New ToolStripButton(UNIFIED_TEXT) With {
+          .ForeColor = My.Theme.PanelFontColor,
+          .ToolTipText = "Unified view of all available Census Years",
+          .Tag = Nothing
+        }
+        AddHandler item.Click, AddressOf CensusSelect
+        ts.Items.Add(item)
+      End If
+    End If
+  End Sub
+
 #End Region
 
 #Region "Protected Methods"
@@ -707,12 +711,9 @@ Public Class CensusViewer
     Throw New NotImplementedException()
   End Function
 
-  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
-    Throw New NotImplementedException()
+  Public Sub SetAncestors(ancestorsObj As AncestorCollection) Implements IDockPanelItem.SetAncestors
+    Ancestors = ancestorsObj
+    UpdateUI()
   End Sub
 
 #End Region

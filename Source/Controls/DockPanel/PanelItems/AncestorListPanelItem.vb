@@ -6,17 +6,14 @@ Public Class AncestorsListPanel
 
 #Region "Fields"
 
+  Private WithEvents Ancestors As AncestorCollection
   Private WithEvents AncestorsList As FlatListView
 
   Private Const EN_ITEMCAPTION As String = "Ancestors List"
-
-  Private Ancestors As AncestorCollection
-
+  Private ActiveAncestorID As String = String.Empty
   Private blockEvents As Boolean = False
 
   Private components As System.ComponentModel.IContainer
-
-  Private SelectedAncestorID As String = String.Empty
 
 #End Region
 
@@ -46,13 +43,15 @@ Public Class AncestorsListPanel
   Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
   Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
   Public ReadOnly Property ItemSupportsSearch As Boolean = True Implements IDockPanelItem.ItemSupportsSearch
+  Public ReadOnly Property Key As String Implements IDockPanelItem.Key
   Public ReadOnly Property ShowRibbonOnFocus As String = String.Empty Implements IDockPanelItem.ShowRibbonOnFocus
 
 #End Region
 
 #Region "Public Constructors"
 
-  Public Sub New()
+  Public Sub New(itemKey As String)
+    Key = itemKey
     AncestorsList = New FlatListView()
     SuspendLayout()
     With AncestorsList
@@ -99,17 +98,24 @@ Public Class AncestorsListPanel
 
 #Region "Private Methods"
 
+  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
+    UpdateUI(False)
+  End Sub
+
+  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
+    UpdateUI()
+  End Sub
+
   Private Sub AncestorsList_DoubleClick(sender As Object, e As EventArgs) Handles AncestorsList.DoubleClick
-    SelectedAncestorID = AncestorsList.SelectedItems.Item(0).Tag.ToString
-    If Not SelectedAncestorID.Equals("") Then
-      RaiseEvent AncestryNavigateRequest(SelectedAncestorID)
+    ActiveAncestorID = AncestorsList.SelectedItems.Item(0).Tag.ToString
+    If Not ActiveAncestorID.Equals("") Then
+      RaiseEvent AncestryNavigateRequest(ActiveAncestorID)
     End If
   End Sub
 
   Private Sub AncestorsList_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles AncestorsList.ItemSelectionChanged
     If e.IsSelected And Not blockEvents Then
-      SelectedAncestorID = e.Item.Tag.ToString
-      RaiseEvent AncestorIDChanged(SelectedAncestorID)
+      Ancestors.ActiveAncestorID = e.Item.Tag.ToString
     End If
   End Sub
 
@@ -137,34 +143,30 @@ Public Class AncestorsListPanel
     RaiseEvent PanelItemGotFocus(sender, e)
   End Sub
 
-  Private Sub PopulateList()
+  Private Sub UpdateUI(Optional reload As Boolean = True)
     If Ancestors Is Nothing Then Exit Sub
-    Dim item As ListViewItem
     blockEvents = True
-    With AncestorsList
-      .Tag = ""
-      .Items.Clear()
-      For Each ancestor As AncestorCollection.Ancestor In Ancestors.Values
-        item = .Items.Add(ancestor.FullName)
-        item.SubItems.Add(ancestor.LifeSpan)
-        item.Tag = ancestor.ID
-        If SelectedAncestorID.Equals(ancestor.ID) Then
-          item.Selected = True
+    If reload Then
+      With AncestorsList
+        .Tag = ""
+        .Items.Clear()
+        For Each ancestor As AncestorCollection.Ancestor In Ancestors.Values
+          Dim item As ListViewItem
+          item = .Items.Add(ancestor.FullName)
+          item.SubItems.Add(ancestor.LifeSpan)
+          item.Tag = ancestor.ID
+        Next
+      End With
+    End If
+    If Ancestors.HasActiveAncestor Then
+      For Each item As ListViewItem In AncestorsList.Items
+        If item IsNot Nothing Then
+          If item.Tag IsNot Nothing Then
+            item.Selected = item.Tag.Equals(Ancestors.ActiveAncestorID)
+          End If
         End If
       Next
-    End With
-    blockEvents = False
-  End Sub
-
-  Private Sub SetSelectedAncestor()
-    blockEvents = True
-    For Each item As ListViewItem In AncestorsList.Items
-      If item IsNot Nothing Then
-        If item.Tag IsNot Nothing Then
-          item.Selected = item.Tag.Equals(SelectedAncestorID)
-        End If
-      End If
-    Next
+    End If
     blockEvents = False
   End Sub
 
@@ -204,22 +206,9 @@ Public Class AncestorsListPanel
     Return Nothing
   End Function
 
-  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
-  End Sub
-
-  Public Sub SetActiveAncestor(ActiveAncestorID As String)
-    SelectedAncestorID = ActiveAncestorID
-    SetSelectedAncestor()
-  End Sub
-
-  Public Sub SetAncestor(activeAncestor As Ancestor) Implements IDockPanelItem.SetAncestor
-  End Sub
-
-  Public Sub SetAncestors(AncestorsObj As AncestorCollection, Optional ActiveAncestorID As String = "")
+  Public Sub SetAncestors(AncestorsObj As AncestorCollection) Implements IDockPanelItem.SetAncestors
     Ancestors = AncestorsObj
-    SelectedAncestorID = ActiveAncestorID
-    PopulateList()
-    SetSelectedAncestor()
+    UpdateUI()
   End Sub
 
 #End Region

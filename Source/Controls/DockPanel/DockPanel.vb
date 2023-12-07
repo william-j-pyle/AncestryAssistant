@@ -4,23 +4,15 @@
 #Region "Fields"
 
   Private WithEvents btnClose As FlatIconButton
-
   Private WithEvents btnContextMenu As FlatIconButton
-
   Private WithEvents btnPinned As FlatIconButton
-
   Private WithEvents btnSearch As FlatIconButton
-
   Private WithEvents ctxMenu As ContextMenuStrip
-
   Private WithEvents lblCaption As Label
-
   Private WithEvents pnlButtonContainerHeader As TableLayoutPanel
-
   Private WithEvents pnlButtonContainerSearch As TableLayoutPanel
-
   Private WithEvents pnlClient As FlatTabControl
-
+  Private WithEvents pnlContextMenu As FlatContextMenu
   Private WithEvents pnlHeader As FlatPanel
 
   Private WithEvents pnlMain As FlatPanel
@@ -56,6 +48,10 @@
   Public Event PanelCloseRequested(sender As DockPanel)
 
   Public Event PanelFocusChanged(sender As DockPanel, hasFocus As Boolean)
+
+  Public Event PanelItemClosed(sender As IDockPanelItem)
+
+  Public Event PanelItemLocationChangeRequested(sender As IDockPanelItem, newPanelLocation As DockPanelLocation)
 
   Public Event PanelLocationChanged(sender As DockPanel, newPanelLocation As DockPanelLocation)
 
@@ -312,6 +308,8 @@
     pnlHeader.Controls.Add(lblCaption)
     pnlHeader.Controls.Add(pnlButtonContainerHeader)
     pnlHeader.CornerRadius = New System.Windows.Forms.Padding(0)
+    pnlHeader.BackgroundImage = My.Resources.panel_header_bgpattern
+    pnlHeader.BackgroundImageLayout = ImageLayout.None
     pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
     pnlHeader.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     pnlHeader.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
@@ -326,7 +324,8 @@
     '
     'lblCaption
     '
-    lblCaption.Dock = System.Windows.Forms.DockStyle.Fill
+    lblCaption.Dock = System.Windows.Forms.DockStyle.Left
+    lblCaption.AutoSize = True
     lblCaption.Location = New System.Drawing.Point(1, 0)
     lblCaption.Name = "lblCaption"
     lblCaption.Padding = New System.Windows.Forms.Padding(3, 3, 0, 0)
@@ -344,6 +343,7 @@
     pnlButtonContainerHeader.Controls.Add(btnClose, 2, 0)
     pnlButtonContainerHeader.Controls.Add(btnPinned, 1, 0)
     pnlButtonContainerHeader.Controls.Add(btnContextMenu, 0, 0)
+    pnlButtonContainerHeader.BackColor = pnlHeader.BackColor
     pnlButtonContainerHeader.Dock = System.Windows.Forms.DockStyle.Right
     pnlButtonContainerHeader.Location = New System.Drawing.Point(285, 0)
     pnlButtonContainerHeader.Margin = New System.Windows.Forms.Padding(0)
@@ -449,6 +449,7 @@
       .TabPages(0).BackColor = My.Theme.PanelBackColor
       .TabPages(0).ForeColor = My.Theme.PanelFontColor
     End With
+    CreatePanelContextMenu()
     UpdateStyles()
     lblCaption.Text = ""
     CaptureFocus(Me)
@@ -469,6 +470,10 @@
 
   Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click, pnlClient.btnClose_Click
     RemoveItem(PanelSelectedIndex)
+  End Sub
+
+  Private Sub btnContextMenu_MouseDown(sender As Object, e As MouseEventArgs) Handles btnContextMenu.MouseDown
+    pnlContextMenu.Show(btnContextMenu, New Point(0, btnContextMenu.Height))
   End Sub
 
   Private Sub btnPinned_Click(sender As Object, e As EventArgs) Handles btnPinned.Click
@@ -499,6 +504,30 @@
     For Each childCtl As Control In ctl.Controls
       CaptureFocus(childCtl)
     Next
+  End Sub
+
+  Private Sub CreatePanelContextMenu()
+    Dim item As System.Windows.Forms.ToolStripMenuItem
+
+    pnlContextMenu = New AncestryAssistant.FlatContextMenu() With {
+    .Name = "pnlContextMenu"
+    }
+
+    pnlContextMenu.AddMenuItem("MnuDockFloat", "Float", enabled:=False)
+
+    item = pnlContextMenu.AddMenuItem("MnuDock", "Dock")
+    pnlContextMenu.AddMenuItem(item, "MnuDockLeftTop", "Top Left")
+    pnlContextMenu.AddMenuItem(item, "MnuDockLeftBottom", "Bottom Left")
+    pnlContextMenu.AddMenuItem(item, "MnuDockRightTop", "Top Right")
+    pnlContextMenu.AddMenuItem(item, "MnuDockRightBottom", "Bottom Right")
+    pnlContextMenu.AddMenuItem(item, "MnuDockMiddleBottom", "Middle Bottom")
+    pnlContextMenu.AddSeperator(item)
+    pnlContextMenu.AddMenuItem(item, "MnuDockTabbed", "As Tabbed Document")
+
+    pnlContextMenu.AddSeperator()
+
+    pnlContextMenu.AddMenuItem("MnuDockClose", "Close")
+
   End Sub
 
   Private Sub DockPanel_GotFocus(sender As Object, e As EventArgs) Handles Me.GotFocus
@@ -552,9 +581,11 @@
           End If
           .Visible = True
           If PanelHasFocus Then
+            pnlHeader.BackgroundImageLayout = ImageLayout.Tile
             .BorderColorTop = My.Theme.PanelHighlightColor
             .BorderWidth = New Padding(1, 3, 1, 1)
           Else
+            pnlHeader.BackgroundImageLayout = ImageLayout.None
             .BorderColorTop = My.Theme.PanelBorderColor
             .BorderWidth = New Padding(1, 1, 1, 1)
           End If
@@ -596,10 +627,6 @@
     End Select
   End Sub
 
-  Private Sub lblCaption_Click(sender As Object, e As EventArgs) Handles lblCaption.Click
-
-  End Sub
-
   Private Sub pnlClient_Selected(sender As Object, e As TabControlEventArgs) Handles pnlClient.Selected
     SetPanelState()
   End Sub
@@ -608,8 +635,23 @@
     lblCaption.Text = pnlClient.SelectedTab.Text
   End Sub
 
-  Private Sub pnlClient_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles pnlClient.Selecting
-
+  Private Sub pnlContextMenu_ContextItemClicked(item As ToolStripMenuItem) Handles pnlContextMenu.ContextItemClicked
+    Select Case item.Name
+      Case "MnuDockClose"
+        RemoveItem(PanelSelectedIndex)
+      Case "MnuDockLeftTop"
+        RaiseEvent PanelItemLocationChangeRequested(GetItem(PanelSelectedIndex), DockPanelLocation.LeftTop)
+      Case "MnuDockLeftBottom"
+        RaiseEvent PanelItemLocationChangeRequested(GetItem(PanelSelectedIndex), DockPanelLocation.LeftBottom)
+      Case "MnuDockRightTop"
+        RaiseEvent PanelItemLocationChangeRequested(GetItem(PanelSelectedIndex), DockPanelLocation.RightTop)
+      Case "MnuDockRightBottom"
+        RaiseEvent PanelItemLocationChangeRequested(GetItem(PanelSelectedIndex), DockPanelLocation.RightBottom)
+      Case "MnuDockMiddleBottom"
+        RaiseEvent PanelItemLocationChangeRequested(GetItem(PanelSelectedIndex), DockPanelLocation.MiddleBottom)
+      Case "MnuDockTabbed"
+        RaiseEvent PanelItemLocationChangeRequested(GetItem(PanelSelectedIndex), DockPanelLocation.MiddleTopLeft)
+    End Select
   End Sub
 
   Private Sub ReLayoutRequired(sender As Object, e As EventArgs) Handles Me.SizeChanged, Me.Load
@@ -687,8 +729,10 @@
 #Region "Public Methods"
 
   Public Function AddItem(item As IDockPanelItem) As Integer
-    pnlClient.TabPages.Add(item.ItemCaption, item.ItemCaption)
-    With pnlClient.TabPages(item.ItemCaption)
+    item.ItemDockPanelLocation = PanelLocation
+    pnlClient.TabPages.Add(item.Key, item.ItemCaption)
+    With pnlClient.TabPages(item.Key)
+      .Name = item.Key
       .Padding = New Padding(0)
       .Margin = New Padding(0)
       .BackColor = My.Theme.PanelBackColor
@@ -700,7 +744,7 @@
     AddHandler item.PanelItemGotFocus, AddressOf DockPanel_GotFocus
     RemoveBlankTabs()
     LayoutPanel()
-    pnlClient.SelectTab(item.ItemCaption)
+    pnlClient.SelectTab(item.Key)
     lblCaption.Text = item.ItemCaption
     SetPanelState()
   End Function
@@ -739,6 +783,7 @@
     If ctl Is Nothing Then
       Return Nothing
     End If
+    RaiseEvent PanelItemClosed(ctl)
     AddPlaceholderTab()
     pnlClient.TabPages.RemoveAt(index)
     If hasTabs() Then

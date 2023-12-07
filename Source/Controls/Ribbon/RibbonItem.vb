@@ -1,6 +1,6 @@
 ﻿Imports System.ComponentModel
 
-Public Class RibbonItem
+Public MustInherit Class RibbonItem
 
 #Region "Fields"
 
@@ -17,6 +17,8 @@ Public Class RibbonItem
 
 #Region "Events"
 
+  Public Event RibbonItemAction(sender As RibbonItem, eventType As RibbonEventType, value As Object)
+
   Public Event RibbonItemLocationChanged(sender As Object, e As EventArgs)
 
   Public Event RibbonItemSizeChanged(sender As Object, e As EventArgs)
@@ -32,6 +34,7 @@ Public Class RibbonItem
   Public Property AppHighlightColor As Color = My.Theme.AppHighlightColor
 
   Public Property BarId As Integer
+
   Public Property Col As Double
     Get
       Return _Col
@@ -45,6 +48,7 @@ Public Class RibbonItem
       End If
     End Set
   End Property
+
   Public Property ColSpan As Double
     Get
       Return _ColSpan
@@ -59,12 +63,28 @@ Public Class RibbonItem
       End If
     End Set
   End Property
+
   Public Property GroupId As Integer
+
   Public Property ItemId As Integer
+
+  Public Property Ribbon As Ribbon
+    Get
+      Return RibbonCntl
+    End Get
+    Set(value As Ribbon)
+      RibbonCntl = value
+    End Set
+  End Property
+
   Public Property RibbonAccentColor As Color = My.Theme.RibbonAccentColor
+
   Public Property RibbonBackColor As Color = My.Theme.RibbonBackColor
+
   Public Property RibbonForeColor As Color = My.Theme.RibbonForeColor
+
   Public Property RibbonShadowColor As Color = My.Theme.RibbonShadowColor
+
   Public Property Row As Double
     Get
       Return _Row
@@ -77,6 +97,7 @@ Public Class RibbonItem
       End If
     End Set
   End Property
+
   Public Property RowSpan As Double
     Get
       Return _RowSpan
@@ -89,6 +110,7 @@ Public Class RibbonItem
       End If
     End Set
   End Property
+
   Public Overrides Property Text As String
     Get
       Return _Text
@@ -98,6 +120,7 @@ Public Class RibbonItem
       OnTextChanged(New EventArgs)
     End Set
   End Property
+
   Public Property TextAlign As ContentAlignment = ContentAlignment.BottomCenter
 
   Public Property TextImageRelation As TextImageRelation = TextImageRelation.ImageAboveText
@@ -119,7 +142,7 @@ Public Class RibbonItem
     BarId = iBarId
     GroupId = iGroupId
     Font = CaptionFont
-    BorderStyle = BorderStyle.FixedSingle
+    BorderStyle = BorderStyle.None
     BackColor = RibbonBackColor
     ForeColor = RibbonForeColor
     Padding = New Padding(0)
@@ -166,6 +189,53 @@ Public Class RibbonItem
   Private Sub RibbonItem_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
     ApplyConstraints()
   End Sub
+
+#End Region
+
+#Region "Public Methods"
+
+  Public Function AlignStringToEnum(alignString As String) As ContentAlignment
+    Dim align As ContentAlignment
+    Select Case alignString.ToLower
+      Case ContentAlignment.TopCenter.ToString.ToLower
+        align = ContentAlignment.TopCenter
+      Case ContentAlignment.TopLeft.ToString.ToLower
+        align = ContentAlignment.TopLeft
+      Case ContentAlignment.TopRight.ToString.ToLower
+        align = ContentAlignment.TopRight
+
+      Case ContentAlignment.MiddleCenter.ToString.ToLower
+        align = ContentAlignment.MiddleCenter
+      Case ContentAlignment.MiddleLeft.ToString.ToLower
+        align = ContentAlignment.MiddleLeft
+      Case ContentAlignment.MiddleRight.ToString.ToLower
+        align = ContentAlignment.MiddleRight
+
+      Case ContentAlignment.BottomCenter.ToString.ToLower
+        align = ContentAlignment.BottomCenter
+      Case ContentAlignment.BottomLeft.ToString.ToLower
+        align = ContentAlignment.BottomLeft
+      Case ContentAlignment.BottomRight.ToString.ToLower
+        align = ContentAlignment.BottomRight
+      Case Else
+        align = ContentAlignment.MiddleLeft
+    End Select
+    Return align
+  End Function
+
+  Public Function ImageFromFile(fileName As String) As Image
+    Return Image.FromFile(fileName)
+  End Function
+
+  Public Function ImageFromResource(resourceName As String) As Image
+    Return My.Resources.ResourceManager.GetObject(resourceName)
+  End Function
+
+  Public Sub OnRibbonItemAction(eventType As RibbonEventType, value As Object)
+    RaiseEvent RibbonItemAction(Me, eventType, value)
+  End Sub
+
+  Public MustOverride Sub SetAttribute(attributeName As String, attributeValue As String)
 
 #End Region
 

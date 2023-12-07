@@ -12,15 +12,6 @@
     End Set
   End Property
 
-  Public Overrides Property Text As String
-    Get
-      Return String.Empty
-    End Get
-    Set(value As String)
-      'NOOP
-    End Set
-  End Property
-
 #End Region
 
 #Region "Public Constructors"
@@ -38,6 +29,9 @@
     ForeColor = My.Theme.PanelFontColor
     FlatStyle = FlatStyle.Flat
     ImageAlign = ContentAlignment.MiddleCenter
+    TextAlign = ContentAlignment.BottomCenter
+    Font = My.Theme.RibbonButtonFont
+    Text = ""
   End Sub
 
 #End Region

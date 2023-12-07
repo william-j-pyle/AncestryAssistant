@@ -93,6 +93,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property ancestry_logo_lg() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ancestry_logo_lg", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property ancestry_view_fan() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("ancestry_view_fan", resourceCulture)
@@ -137,6 +147,16 @@ Namespace My.Resources
         Friend ReadOnly Property AssistantAPI() As String
             Get
                 Return ResourceManager.GetString("AssistantAPI", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property census_lg() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("census_lg", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         
@@ -253,6 +273,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property familysearch_logo_lg() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("familysearch_logo_lg", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property filepage_back() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("filepage_back", resourceCulture)
@@ -303,9 +333,29 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property findagrave_logo_lg() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("findagrave_logo_lg", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property fold3_logo() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("fold3_logo", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property fold3_logo_lg() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("fold3_logo_lg", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -403,9 +453,49 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property gallery_lg() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("gallery_lg", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property missing_profile() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("missing_profile", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property newspaper_logo() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("newspaper_logo", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property newspaper_logo_lg() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("newspaper_logo_lg", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property notebook_lg() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("notebook_lg", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -485,31 +575,32 @@ Namespace My.Resources
         '''  &quot;bars&quot;: [
         '''    {
         '''      &quot;name&quot;: &quot;File&quot;,
+        '''      &quot;text&quot;: &quot;File&quot;,
         '''      &quot;id&quot;: 0,
         '''      &quot;visible&quot;: true,
         '''      &quot;enabled&quot;: true,
         '''      &quot;showpage&quot;: true,
-        '''      &quot;usesgroups&quot;: []
-        '''    },
-        '''    {
-        '''      &quot;name&quot;: &quot;Notebook&quot;,
-        '''      &quot;id&quot;: 100,
-        '''      &quot;visible&quot;: true,
-        '''      &quot;enabled&quot;: true,
-        '''      &quot;showpage&quot;: false,
-        '''      &quot;usesgroups&quot;: [
-        '''        {
-        '''          &quot;id&quot;: 1
-        '''        }
-        '''      ]
+        '''      &quot;groups&quot;: []
         '''    },
         '''    {
         '''      &quot;name&quot;: &quot;Ancestor&quot;,
+        '''      &quot;text&quot;: &quot;Ancestor&quot;,
         '''      &quot;id&quot;: 200,
-        '''      &quot;visible&quot;: true,
-        '''      &quot;enabled&quot;: true,
-        '''      &quot;showpage&quot;: false,
-        '''      &quot;usesg [rest of string was truncated]&quot;;.
+        '''      &quot;groups&quot;: [
+        '''        {
+        '''          &quot;id&quot;: 2
+        '''        },
+        '''        { &quot;id&quot;: 3 },
+        '''        { &quot;id&quot;: 4 },
+        '''        { &quot;id&quot;: 5 }
+        '''      ]
+        '''    }
+        '''    //,
+        '''    //{
+        '''    //  &quot;name&quot;: &quot;Testing&quot;,
+        '''    //  &quot;text&quot;: &quot;Testing&quot;,
+        '''    //  &quot;id&quot;: 100,
+        '''    //  &quot;gr [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Ribbon() As String
             Get

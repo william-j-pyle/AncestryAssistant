@@ -19,7 +19,7 @@
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2023.1130.103</Version>
+    <Version>1.2023.1206.1729</Version>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -298,7 +298,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Source\Controls\DockPanel\DockItemRegistryEntry.vb" />
+    <Compile Include="Source\Controls\Flat\FlatComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Source\Controls\Flat\FlatIconButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Flat\FlatContextMenu.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Controls\Flat\IFlatItem.vb" />
@@ -306,25 +313,22 @@
     <Compile Include="Source\Controls\Ribbon\RibbonItems\RIButton.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIListBoxColor.vb">
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIComboBoxColor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIListBoxFontColor.vb">
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIComboBoxFontColor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIListBoxFontSize.vb">
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIComboBoxFontSize.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIListBoxFont.vb">
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIComboBoxFont.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Controls\Ribbon\RibbonItems\RISeperator.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Controls\Ribbon\RibbonItems\RIImage.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIImageIcon.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Controls\Ribbon\RibbonItems\RILabel.vb">
@@ -336,7 +340,7 @@
     <Compile Include="Source\Controls\Ribbon\RibbonItems\RIListView.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIListBox.vb">
+    <Compile Include="Source\Controls\Ribbon\RibbonItems\RIComboBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Controls\Ribbon\RibbonItems\RIButtonDrownDown.vb">
@@ -351,6 +355,7 @@
     <Compile Include="Source\Controls\Ribbon\RibbonItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Source\Enums\RibbonEventType.vb" />
     <Compile Include="Source\Enums\RibbonItemType.vb" />
     <Compile Include="Source\EventHandlers\FlatSearchEventHandler.vb" />
     <Compile Include="Source\Controls\Flat\FlatLabel.vb">
@@ -487,12 +492,6 @@
     <Compile Include="Source\Controls\DockPanel\PanelItems\CensusPanelItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Test\frmTestSearch.Designer.vb">
-      <DependentUpon>frmTestSearch.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test\frmTestSearch.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Test\frmTestSplitters.Designer.vb">
       <DependentUpon>frmTestSplitters.vb</DependentUpon>
     </Compile>
@@ -588,9 +587,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Test\frmTestSearch.resx">
-      <DependentUpon>frmTestSearch.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Test\frmTestSplitters.resx">
       <DependentUpon>frmTestSplitters.vb</DependentUpon>
     </EmbeddedResource>
@@ -639,6 +635,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <None Include="Resources\image\missing-profile.png" />
+    <None Include="Resources\image\notebook-lg.png" />
+    <None Include="Resources\image\gallery-lg.png" />
+    <None Include="Resources\image\census-lg.png" />
+    <None Include="Resources\image\findagrave-logo-lg.png" />
+    <None Include="Resources\image\newspaper-logo-lg.png" />
+    <None Include="Resources\image\familysearch-logo-lg.png" />
+    <None Include="Resources\image\ancestry-logo-lg.png" />
+    <None Include="Resources\image\fold3-logo-lg.png" />
     <None Include="Resources\image\newspaper-logo.png" />
     <None Include="Resources\image\ancestry-view-fan.png" />
     <None Include="Resources\image\ancestry-view-pedigree.png" />

@@ -140,7 +140,8 @@ Public Class FlatListView
   End Sub
 
   Private Sub FlatListView_ClientSizeChanged(sender As Object, e As EventArgs) Handles Me.ClientSizeChanged
-    Debug.Print("ClientSizeChanged=[width={0}, height={1}", Width, Height)
+
+    'Debug.Print("ClientSizeChanged=[width={0}, height={1}", Width, Height)
   End Sub
 
   Private Sub FlatListView_ColumnWidthChanged(sender As Object, e As ColumnWidthChangedEventArgs) Handles Me.ColumnWidthChanged

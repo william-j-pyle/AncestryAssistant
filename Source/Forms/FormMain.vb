@@ -8,10 +8,7 @@ Public Class AssistantAppForm
 
 #Region "Fields"
 
-  Private WithEvents AncestorAttributes As AncestorPanel
-
-  Private WithEvents AncestorsList As AncestorsListPanel
-
+  Private WithEvents Ancestors As AncestorCollection
   Private WithEvents Ancestry As AncestryWebViewer
 
   Private WithEvents FormExtensions As ResizeDragHandler
@@ -26,10 +23,6 @@ Public Class AssistantAppForm
 
   Private Const FINDAGRAVE_IMAGE As String = "Download FindAGrave Image"
 
-  Private _AncestorId As String = String.Empty
-
-  Private Ancestors As AncestorCollection
-
 #End Region
 
 #Region "Events"
@@ -37,22 +30,6 @@ Public Class AssistantAppForm
   Public Event ActiveAncestorChanged()
 
   Public Event AncestorsUpdated()
-
-#End Region
-
-#Region "Properties"
-
-  Property AncestorId As String
-    Get
-      Return _AncestorId
-    End Get
-    Set(value As String)
-      If Ancestors.ContainsKey(value) Then
-        _AncestorId = value
-        RaiseEvent ActiveAncestorChanged()
-      End If
-    End Set
-  End Property
 
 #End Region
 
@@ -74,34 +51,10 @@ Public Class AssistantAppForm
 
 #Region "Private Methods"
 
-  Private Sub AncestorAttributes_PanelCloseClicked(sender As Object)
-    'btnAncestor.Checked = False
-  End Sub
-
-  Private Sub AncestorsList_AncestorIDChanged(SelectedAncestorID As String) Handles AncestorsList.AncestorIDChanged
-    Logger.log(Logger.LOG_TYPE.INFO, "AncestorsList_AncestorIDChanged")
-    AncestorId = SelectedAncestorID
-  End Sub
-
-  Private Sub AncestorsList_AncestryNavigateRequest(SelectedAncestorID As String) Handles AncestorsList.AncestryNavigateRequest
-    AncestorId = SelectedAncestorID
-    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON, SelectedAncestorID)
-  End Sub
-
-  Private Sub AncestorsList_PanelCloseClicked(sender As Object)
-    'btnAncestors.Checked = False
-  End Sub
-
-  Private Sub Ancestry_AncestryData(data As APIMessage)
-
-  End Sub
-
-  Private Sub Ancestry_UriTrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
-
-  End Sub
-
-  Private Sub Ancestry_ViewerBusy(busy As Boolean)
-
+  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
+    Dim ancestor As AncestorCollection.Ancestor = Ancestors.ActiveAncestor
+    RibbonBar.GetItem(200, 2, 7).SetAttribute("text", ancestor.GedBirthDate.toAssistantDate)
+    RibbonBar.GetItem(200, 2, 8).SetAttribute("text", ancestor.GedDeathDate.toAssistantDate)
   End Sub
 
   Private Sub AncestryBrowserBusyChanged(busy As Boolean)
@@ -113,10 +66,10 @@ Public Class AssistantAppForm
   End Sub
 
   Private Sub AncestryDataMessage(msg As APIMessage)
+    Dim ancestor As AncestorCollection.Ancestor = Ancestors.ActiveAncestor
     Logger.log(Logger.LOG_TYPE.ERR, msg.ToString)
     Select Case msg.MessageType
       Case APIMessage.MT_SAVEAS
-        Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
         Dim rslt As DialogResult
         Dim dlg As New SaveImageDialog
         dlg.InitDialog(msg)
@@ -147,8 +100,8 @@ Public Class AssistantAppForm
             'End With
           Else
             'If assistant ancestor is different, then change ancestors
-            If Not AncestorId.Equals(msg.MessageKey) Then
-              AncestorId = msg.MessageKey
+            If Not Ancestors.ActiveAncestorID.Equals(msg.MessageKey) Then
+              Ancestors.ActiveAncestorID = msg.MessageKey
             End If
             If Not Ancestors.Item(msg.MessageKey).AncestorMatchesMessage(msg) Then
               'With btnActions
@@ -172,8 +125,7 @@ Public Class AssistantAppForm
           'End With
         End If
       Case APIMessage.MT_FINDAGRAVE
-        If Ancestors.ContainsKey(AncestorId) Then
-          Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
+        If Ancestors.HasActiveAncestor Then
           'If ancestor.Surname.ToLower.Equals(msg.GetValue("lastName").ToLower) Then
           If ancestor.GedDeathDate.Year = CInt(msg.GetValue("deathYear")) Then
             If ancestor.Fact("cemeteryName").Equals("") Then
@@ -219,6 +171,10 @@ Public Class AssistantAppForm
     End Select
   End Sub
 
+  Private Sub AncestryNavigateRequest(SelectedAncestorID As String)
+    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON, Ancestors.ActiveAncestorID)
+  End Sub
+
   Private Sub AncestryToolbarToolStripMenuItem_Click(sender As Object, e As EventArgs)
     'Ancestry.ShowToolbar = AncestryToolbarToolStripMenuItem.Checked
   End Sub
@@ -235,52 +191,25 @@ Public Class AssistantAppForm
     Close()
   End Sub
 
-  Private Sub ApplicationForm_ActiveAncestorChanged() Handles Me.ActiveAncestorChanged
-    Logger.log(Logger.LOG_TYPE.INFO, "ApplicationForm_ActiveAncestorChanged")
-    Dim ancestor As AncestorCollection.Ancestor = Ancestors.Item(AncestorId)
-    AncestorsList.SetActiveAncestor(AncestorId)
-    AncestorAttributes.SetAncestor(ancestor)
-    'imgGallery.SetAncestor(ancestor)
-    'CensusViewer1.SetAncestor(ancestor)
-    'NotebookViewer1.SetAncestor(ancestor)
-  End Sub
-
-  Private Sub ApplicationForm_AncestorsUpdated() Handles Me.AncestorsUpdated
-    Logger.log(Logger.LOG_TYPE.INFO, "ApplicationForm_AncestorsUpdated")
-    AncestorsList.SetAncestors(Ancestors, AncestorId)
-  End Sub
-
   ' ==========================
   ' = App Form - Event Handlers ==========================
   Private Sub ApplicationForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-    SaveSettings()
+    If WindowState <> FormWindowState.Normal Then
+      WindowState = FormWindowState.Normal
+    End If
+    SettingsSave()
   End Sub
 
   Private Sub ApplicationForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-    AncestorsList = New AncestorsListPanel()
-    AncestorsList.SetAncestors(Ancestors)
-    DockManager.AddItem(DockPanelLocation.LeftTop, AncestorsList)
-    'PanelManager.SetPanelVisibility(DockPanelLocation.LeftBottom, False)
-
-    Ancestry = New AncestryWebViewer With {
-      .AncestryTreeID = My.Settings.ANCESTRY_TREE_ID
-    }
-    AddHandler Ancestry.ViewerBusy, AddressOf AncestryBrowserBusyChanged
-    AddHandler Ancestry.UriTrackingGroupChanged, AddressOf AncestryURITrackingGroupChanged
-    AddHandler Ancestry.DataDownload, AddressOf AncestryDataMessage
-    DockManager.AddItem(DockPanelLocation.MiddleTopLeft, Ancestry)
-
-    AncestorAttributes = New AncestorPanel()
-    DockManager.AddItem(DockPanelLocation.LeftTop, AncestorAttributes)
-    DockManager.AddItem(DockPanelLocation.MiddleTopLeft, New ImageGalleryPanelItem())
-    DockManager.AddItem(DockPanelLocation.MiddleBottom, New CensusViewer())
-
-    DockManager.SelectItemTab(DockPanelLocation.LeftTop, 0)
-    DockManager.SelectItemTab(DockPanelLocation.MiddleTopLeft, 0)
-    DockManager.SetPanelFocus(DockPanelLocation.MiddleTopLeft, True)
     FormExtensions = New ResizeDragHandler(Me)
     FormExtensions.SetDragControl(AppTitle)
-    LoadSettings()
+    DockManager.RegisterDockItem(Register_AncestorsList())
+    DockManager.RegisterDockItem(Register_AncestorViewer())
+    DockManager.RegisterDockItem(Register_Census())
+    DockManager.RegisterDockItem(Register_Gallery())
+    DockManager.RegisterDockItem(Register_Notebook())
+    DockManager.RegisterDockItem(Register_WebBrowser())
+    SettingsLoad()
   End Sub
 
   Private Sub ApplyTheme()
@@ -405,16 +334,15 @@ Public Class AssistantAppForm
     'PanelManager.SetPanelVisibility(DockPanelLocation.MiddleBottom, btnCensus.Checked)
   End Sub
 
-  ' Private Sub btnFileTabBack_MouseDown(sender As Object, e As MouseEventArgs)
-  '   FilePanel.Visible = False
-  'End Sub
-
   ' ==========================
   ' = App Toolbar - Event Handlers ==========================
   Private Sub btnHomeTree_Click(sender As Object, e As EventArgs)
     Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_OVERVIEW_TREE)
   End Sub
 
+  ' Private Sub btnFileTabBack_MouseDown(sender As Object, e As MouseEventArgs)
+  '   FilePanel.Visible = False
+  'End Sub
   Private Sub btnNotebook_Click(sender As Object, e As EventArgs)
     'PanelManager.SetPanelVisibility(DockPanelLocation.MiddleTopRight, btnNotebook.Checked)
   End Sub
@@ -448,14 +376,98 @@ Public Class AssistantAppForm
   End Sub
 
   Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs)
-    My.Settings.Save()
+    SettingsSave()
     Close()
   End Sub
 
-  Private Sub LoadSettings()
-    ApplyTheme()
-    DockManager.LoadSettings()
-    Size = My.Settings.APP_CLIENTSIZE
+  Private Function Register_AncestorsList() As DockItemRegistryEntry
+    Dim tmp As New AncestorsListPanel("DOCK_ANCESTORSLIST")
+    tmp.SetAncestors(Ancestors)
+    AddHandler tmp.AncestryNavigateRequest, AddressOf AncestryNavigateRequest
+    Dim item As New DockItemRegistryEntry With {
+      .key = tmp.Key,
+      .control = tmp,
+      .defaultLocation = DockPanelLocation.LeftTop,
+      .currentLocation = DockPanelLocation.Tray
+    }
+    Return item
+  End Function
+
+  Private Function Register_AncestorViewer() As DockItemRegistryEntry
+    Dim tmp As New AncestorPanel("DOCK_ANCESTORATTRIBUTES")
+    tmp.SetAncestors(Ancestors)
+    Dim item As New DockItemRegistryEntry With {
+      .key = tmp.Key,
+      .control = tmp,
+      .defaultLocation = DockPanelLocation.LeftBottom,
+      .currentLocation = DockPanelLocation.Tray
+    }
+    Return item
+  End Function
+
+  Private Function Register_Census() As DockItemRegistryEntry
+    Dim tmp As New CensusViewer("DOCK_CENSUS")
+    tmp.SetAncestors(Ancestors)
+    Dim item As New DockItemRegistryEntry With {
+      .key = tmp.Key,
+      .control = tmp,
+      .defaultLocation = DockPanelLocation.MiddleBottom,
+      .currentLocation = DockPanelLocation.Tray
+    }
+    Return item
+  End Function
+
+  Private Function Register_Gallery() As DockItemRegistryEntry
+    Dim tmp As New ImageGalleryPanelItem("DOCK_GALLERY")
+    tmp.SetAncestors(Ancestors)
+    Dim item As New DockItemRegistryEntry With {
+      .key = tmp.Key,
+      .control = tmp,
+      .defaultLocation = DockPanelLocation.MiddleTopLeft,
+      .currentLocation = DockPanelLocation.Tray
+    }
+    Return item
+  End Function
+
+  Private Function Register_Notebook() As DockItemRegistryEntry
+    Dim tmp As New NotebookViewer("DOCK_NOTEBOOK")
+    tmp.SetAncestors(Ancestors)
+    Dim item As New DockItemRegistryEntry With {
+      .key = tmp.Key,
+      .control = tmp,
+      .defaultLocation = DockPanelLocation.MiddleTopLeft,
+      .currentLocation = DockPanelLocation.Tray
+    }
+    Return item
+  End Function
+
+  Private Function Register_WebBrowser() As DockItemRegistryEntry
+    Ancestry = New AncestryWebViewer("DOCK_WEBBROWSER") With {
+      .AncestryTreeID = My.Settings.ANCESTRY_TREE_ID
+    }
+    AddHandler Ancestry.ViewerBusy, AddressOf AncestryBrowserBusyChanged
+    AddHandler Ancestry.UriTrackingGroupChanged, AddressOf AncestryURITrackingGroupChanged
+    AddHandler Ancestry.DataDownload, AddressOf AncestryDataMessage
+    Dim item As New DockItemRegistryEntry With {
+      .key = Ancestry.Key,
+      .control = Ancestry,
+      .defaultLocation = DockPanelLocation.MiddleTopLeft,
+      .currentLocation = DockPanelLocation.Tray
+    }
+    Return item
+  End Function
+
+  Private Sub RibbonBar_RibbonAction(action As RibbonEventType, value As Object, barId As Integer, groupId As Integer, itemId As Integer) Handles RibbonBar.RibbonAction
+    Debug.Print("RibbonAction: {0}={1}    [{2}]", action.ToString, value, RibbonKey(barId, groupId, itemId))
+
+    Select Case RibbonKey(barId, groupId, itemId)
+      Case "B200.G5.I17" 'Census
+        DockManager.ShowRegisteredItem("DOCK_CENSUS")
+      Case "B200.G5.I18" 'Gallery
+        DockManager.ShowRegisteredItem("DOCK_GALLERY")
+      Case "B200.G5.I19" 'Notebook
+        DockManager.ShowRegisteredItem("DOCK_NOTEBOOK")
+    End Select
   End Sub
 
   Private Sub RibbonBar_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles RibbonBar.Selecting
@@ -471,9 +483,22 @@ Public Class AssistantAppForm
     End If
   End Sub
 
-  Private Sub SaveSettings()
-    DockManager.SaveSettings()
+  Private Function RibbonKey(barId As Integer, groupId As Integer, itemId As Integer) As String
+    If itemId > 0 Then Return "B" & barId & ".G" & groupId & ".I" & itemId
+    If groupId > 0 Then Return "B" & barId & ".G" & groupId
+    Return "B" & barId
+  End Function
+
+  Private Sub SettingsLoad()
+    ApplyTheme()
+    DockManager.SettingsLoad()
+    Size = My.Settings.APP_CLIENTSIZE
+  End Sub
+
+  Private Sub SettingsSave()
+    DockManager.SettingsSave()
     My.Settings.APP_CLIENTSIZE = Size
+    My.Settings.Save()
   End Sub
 
 #End Region

@@ -7,6 +7,8 @@ Public Class ImageGalleryPanelItem
 
 #Region "Fields"
 
+  Private WithEvents Ancestors As AncestorCollection
+
   Friend WithEvents btnBack As ToolStripButton
 
   Friend WithEvents btnFlipH As ToolStripButton
@@ -60,6 +62,8 @@ Public Class ImageGalleryPanelItem
 
 #Region "Events"
 
+  Private Event UpdateUI()
+
   Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
 
   Public Event AncestorUpdated() Implements IDockPanelItem.AncestorUpdated
@@ -78,13 +82,15 @@ Public Class ImageGalleryPanelItem
   Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
   Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
   Public ReadOnly Property ItemSupportsSearch As Boolean = False Implements IDockPanelItem.ItemSupportsSearch
+  Public ReadOnly Property Key As String Implements IDockPanelItem.Key
   Public ReadOnly Property ShowRibbonOnFocus As String = EN_ITEMCAPTION Implements IDockPanelItem.ShowRibbonOnFocus
 
 #End Region
 
 #Region "Public Constructors"
 
-  Public Sub New()
+  Public Sub New(itemKey As String)
+    Key = itemKey
     components = New Container()
     imgViewer = New ListView()
     imgViewerList = New ImageList(components)
@@ -294,6 +300,14 @@ Public Class ImageGalleryPanelItem
 
 #Region "Private Methods"
 
+  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
+    RaiseEvent UpdateUI()
+  End Sub
+
+  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
+    RaiseEvent UpdateUI()
+  End Sub
+
   Private Sub btnFlipH_Click(sender As Object, e As EventArgs) Handles btnFlipH.Click
     imgBox.Image.RotateFlip(RotateFlipType.RotateNoneFlipY)
     imgBox.Invalidate()
@@ -373,16 +387,12 @@ Public Class ImageGalleryPanelItem
     Return paddedImage
   End Function
 
-  Private Async Sub ImageGallery_AncestorAssigned() Handles Me.AncestorAssigned
+  Private Async Sub ImageGallery_UpdateUI() Handles Me.UpdateUI
+    If Ancestors Is Nothing Then Exit Sub
     imgViewer.Items.Clear()
     imgViewerList.Images.Clear()
-    Await ReloadGalleryAsync()
-    ShowGallery()
-  End Sub
-
-  Private Async Sub ImageGallery_AncestorUpdated() Handles Me.AncestorUpdated
-    imgViewer.Items.Clear()
-    imgViewerList.Images.Clear()
+    If Not Ancestors.HasActiveAncestor Then Exit Sub
+    Ancestor = Ancestors.ActiveAncestor
     Await ReloadGalleryAsync()
     ShowGallery()
   End Sub
@@ -434,14 +444,23 @@ Public Class ImageGalleryPanelItem
   End Sub
 
   Private Sub LoadGalleryImage(caption As String, filename As String)
-    BeginInvoke(Sub()
-                  Dim maxSize As Integer = imgViewerList.ImageSize.Height
-                  Dim img As Image = GetImageThumbnail(Image.FromFile(filename), maxSize)
-                  Dim key As String = (imgViewerList.Images.Count + 1).ToString
-                  imgViewerList.Images.Add(key, img)
-                  Dim newItem As ListViewItem = imgViewer.Items.Add(caption, key)
-                  newItem.Tag = filename
-                End Sub)
+    If InvokeRequired Then
+      BeginInvoke(Sub()
+                    Dim maxSize As Integer = imgViewerList.ImageSize.Height
+                    Dim img As Image = GetImageThumbnail(Image.FromFile(filename), maxSize)
+                    Dim key As String = (imgViewerList.Images.Count + 1).ToString
+                    imgViewerList.Images.Add(key, img)
+                    Dim newItem As ListViewItem = imgViewer.Items.Add(caption, key)
+                    newItem.Tag = filename
+                  End Sub)
+    Else
+      Dim maxSize As Integer = imgViewerList.ImageSize.Height
+      Dim img As Image = GetImageThumbnail(Image.FromFile(filename), maxSize)
+      Dim key As String = (imgViewerList.Images.Count + 1).ToString
+      imgViewerList.Images.Add(key, img)
+      Dim newItem As ListViewItem = imgViewer.Items.Add(caption, key)
+      newItem.Tag = filename
+    End If
   End Sub
 
   Private Async Function ReloadGalleryAsync() As Task
@@ -526,12 +545,9 @@ Public Class ImageGalleryPanelItem
     Throw New NotImplementedException()
   End Function
 
-  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
-    Throw New NotImplementedException()
+  Public Sub SetAncestors(ancestorsObj As AncestorCollection) Implements IDockPanelItem.SetAncestors
+    Ancestors = ancestorsObj
+    RaiseEvent UpdateUI()
   End Sub
 
 #End Region

@@ -3,7 +3,7 @@
 
 #Region "Fields"
 
-  Private WithEvents btn As FlatIconButton
+  Private WithEvents ctl As FlatIconButton
 
 #End Region
 
@@ -11,10 +11,10 @@
 
   Public Property Image As Image
     Get
-      Return btn.Image
+      Return ctl.Image
     End Get
     Set(value As Image)
-      btn.Image = value
+      ctl.Image = value
     End Set
   End Property
 
@@ -23,13 +23,42 @@
 #Region "Public Constructors"
 
   Public Sub New()
-    btn = New FlatIconButton With {
+    ctl = New FlatIconButton With {
       .Dock = DockStyle.Fill,
       .BackColor = BackColor,
-      .Font = Font,
+      .Font = My.Theme.RibbonButtonFont,
       .ForeColor = ForeColor
     }
-    Controls.Add(btn)
+    Controls.Add(ctl)
+  End Sub
+
+#End Region
+
+#Region "Private Methods"
+
+  Private Sub ctl_Click(sender As Object, e As EventArgs) Handles ctl.Click
+    OnRibbonItemAction(RibbonEventType.ButtonClick, True)
+  End Sub
+
+#End Region
+
+#Region "Public Methods"
+
+  Public Overrides Sub SetAttribute(attributeName As String, attributeValue As String)
+    Select Case attributeName.ToLower
+      Case "ImageFromFile".ToLower
+        Image = ImageFromFile(attributeValue)
+      Case "ImageFromResource".ToLower
+        Image = ImageFromResource(attributeValue)
+      Case "text"
+        ctl.Text = attributeValue
+      Case "caption"
+        ctl.Text = attributeValue
+      Case "textalign"
+        ctl.TextAlign = AlignStringToEnum(attributeValue)
+      Case Else
+        Debug.Print("Unhandled Attribute: {0}={1}", attributeName, attributeValue)
+    End Select
   End Sub
 
 #End Region

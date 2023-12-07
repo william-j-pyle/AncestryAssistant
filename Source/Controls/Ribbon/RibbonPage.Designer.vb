@@ -29,8 +29,8 @@ Partial Class RibbonPage
         Me.BordersPanel8 = New AncestryAssistant.FlatPanel()
         Me.BordersPanel10 = New AncestryAssistant.FlatPanel()
         Me.Label7 = New System.Windows.Forms.Label()
-    Me.btnFileTabBack = New AncestryAssistant.FlatIconButton()
-    Me.BordersPanel1 = New AncestryAssistant.FlatPanel()
+        Me.btnFileTabBack = New AncestryAssistant.FlatIconButton()
+        Me.BordersPanel1 = New AncestryAssistant.FlatPanel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BordersPanel7 = New AncestryAssistant.FlatPanel()
         Me.BordersPanel6 = New AncestryAssistant.FlatPanel()
@@ -179,19 +179,25 @@ Partial Class RibbonPage
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Account"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-    '
-    'btnFileTabBack
-    '
-    Me.btnFileTabBack.Icon = My.Resources.filepage_back
-    Me.btnFileTabBack.Location = New System.Drawing.Point(3, 3)
-    Me.btnFileTabBack.MaximumSize = New System.Drawing.Size(48, 48)
+        '
+        'btnFileTabBack
+        '
+        Me.btnFileTabBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer))
+        Me.btnFileTabBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnFileTabBack.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.btnFileTabBack.Icon = Global.AncestryAssistant.My.Resources.Resources.filepage_back
+        Me.btnFileTabBack.Image = Global.AncestryAssistant.My.Resources.Resources.filepage_back
+        Me.btnFileTabBack.Location = New System.Drawing.Point(3, 3)
+        Me.btnFileTabBack.MaximumSize = New System.Drawing.Size(48, 48)
         Me.btnFileTabBack.MinimumSize = New System.Drawing.Size(48, 48)
         Me.btnFileTabBack.Name = "btnFileTabBack"
-    Me.btnFileTabBack.Size = New System.Drawing.Size(48, 48)
-    '
-    'BordersPanel1
-    '
-    Me.BordersPanel1.BorderColor = System.Drawing.Color.Transparent
+        Me.btnFileTabBack.Size = New System.Drawing.Size(48, 48)
+        Me.btnFileTabBack.TabIndex = 11
+        Me.btnFileTabBack.UseVisualStyleBackColor = False
+        '
+        'BordersPanel1
+        '
+        Me.BordersPanel1.BorderColor = System.Drawing.Color.Transparent
         Me.BordersPanel1.BorderColorBottom = System.Drawing.Color.Lime
         Me.BordersPanel1.BorderColorLeft = System.Drawing.Color.Lime
         Me.BordersPanel1.BorderColorRight = System.Drawing.Color.Lime
@@ -397,14 +403,14 @@ Partial Class RibbonPage
         Me.Label4.Text = "Share"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'RibbonBarFileTab
+        'RibbonPage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.Controls.Add(Me.TableLayoutPanel2)
         Me.ForeColor = System.Drawing.Color.White
-        Me.Name = "RibbonBarFileTab"
+        Me.Name = "RibbonPage"
         Me.Size = New System.Drawing.Size(613, 470)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.BordersPanel9.ResumeLayout(False)

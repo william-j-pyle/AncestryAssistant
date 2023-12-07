@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.7.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.8.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -80,186 +80,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0, 0")>  _
-        Public Property TB_ANCESTRY_LOC() As Global.System.Drawing.Point
-            Get
-                Return CType(Me("TB_ANCESTRY_LOC"),Global.System.Drawing.Point)
-            End Get
-            Set
-                Me("TB_ANCESTRY_LOC") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("24, 3")>  _
-        Public Property TB_WEB_LOC() As Global.System.Drawing.Point
-            Get
-                Return CType(Me("TB_WEB_LOC"),Global.System.Drawing.Point)
-            End Get
-            Set
-                Me("TB_WEB_LOC") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("242, 24")>  _
-        Public Property TB_RESEARCH_LOC() As Global.System.Drawing.Point
-            Get
-                Return CType(Me("TB_RESEARCH_LOC"),Global.System.Drawing.Point)
-            End Get
-            Set
-                Me("TB_RESEARCH_LOC") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("661")>  _
-        Public Property SPLIT_LM_R_DISTANCE() As Integer
-            Get
-                Return CType(Me("SPLIT_LM_R_DISTANCE"),Integer)
-            End Get
-            Set
-                Me("SPLIT_LM_R_DISTANCE") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property SPLIT_LM_R_P1_COLLAPSED() As Boolean
-            Get
-                Return CType(Me("SPLIT_LM_R_P1_COLLAPSED"),Boolean)
-            End Get
-            Set
-                Me("SPLIT_LM_R_P1_COLLAPSED") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property SPLIT_LM_R_P2_COLLAPSED() As Boolean
-            Get
-                Return CType(Me("SPLIT_LM_R_P2_COLLAPSED"),Boolean)
-            End Get
-            Set
-                Me("SPLIT_LM_R_P2_COLLAPSED") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("297")>  _
-        Public Property SPLIT_L_M_DISTANCE() As Integer
-            Get
-                Return CType(Me("SPLIT_L_M_DISTANCE"),Integer)
-            End Get
-            Set
-                Me("SPLIT_L_M_DISTANCE") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property SPLIT_L_M_P1_COLLAPSED() As Boolean
-            Get
-                Return CType(Me("SPLIT_L_M_P1_COLLAPSED"),Boolean)
-            End Get
-            Set
-                Me("SPLIT_L_M_P1_COLLAPSED") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property SPLIT_L_M_P2_COLLAPSED() As Boolean
-            Get
-                Return CType(Me("SPLIT_L_M_P2_COLLAPSED"),Boolean)
-            End Get
-            Set
-                Me("SPLIT_L_M_P2_COLLAPSED") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("242")>  _
-        Public Property SPLIT_L_DISTANCE() As Integer
-            Get
-                Return CType(Me("SPLIT_L_DISTANCE"),Integer)
-            End Get
-            Set
-                Me("SPLIT_L_DISTANCE") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property SPLIT_L_P1_COLLAPSED() As Boolean
-            Get
-                Return CType(Me("SPLIT_L_P1_COLLAPSED"),Boolean)
-            End Get
-            Set
-                Me("SPLIT_L_P1_COLLAPSED") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property SPLIT_L_P2_COLLAPSED() As Boolean
-            Get
-                Return CType(Me("SPLIT_L_P2_COLLAPSED"),Boolean)
-            End Get
-            Set
-                Me("SPLIT_L_P2_COLLAPSED") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("241")>  _
-        Public Property SPLIT_R_DISTANCE() As Integer
-            Get
-                Return CType(Me("SPLIT_R_DISTANCE"),Integer)
-            End Get
-            Set
-                Me("SPLIT_R_DISTANCE") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property SPLIT_R_P1_COLLAPSED() As Boolean
-            Get
-                Return CType(Me("SPLIT_R_P1_COLLAPSED"),Boolean)
-            End Get
-            Set
-                Me("SPLIT_R_P1_COLLAPSED") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property SPLIT_R_P2_COLLAPSED() As Boolean
-            Get
-                Return CType(Me("SPLIT_R_P2_COLLAPSED"),Boolean)
-            End Get
-            Set
-                Me("SPLIT_R_P2_COLLAPSED") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property ANCESTRY_SHOW_TOOLBAR() As Boolean
             Get
@@ -267,30 +87,6 @@ Namespace My
             End Get
             Set
                 Me("ANCESTRY_SHOW_TOOLBAR") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property MNU_ANCESTOR_CHECKED() As Boolean
-            Get
-                Return CType(Me("MNU_ANCESTOR_CHECKED"),Boolean)
-            End Get
-            Set
-                Me("MNU_ANCESTOR_CHECKED") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property MNU_ANCESTORLIST_CHECKED() As Boolean
-            Get
-                Return CType(Me("MNU_ANCESTORLIST_CHECKED"),Boolean)
-            End Get
-            Set
-                Me("MNU_ANCESTORLIST_CHECKED") = value
             End Set
         End Property
         
@@ -368,7 +164,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
         Public Property UI_MR_VIS() As Boolean
             Get
                 Return CType(Me("UI_MR_VIS"),Boolean)
@@ -464,7 +260,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
         Public Property UI_RT_VIS() As Boolean
             Get
                 Return CType(Me("UI_RT_VIS"),Boolean)
@@ -476,7 +272,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
         Public Property UI_RB_VIS() As Boolean
             Get
                 Return CType(Me("UI_RB_VIS"),Boolean)
@@ -579,6 +375,78 @@ Namespace My
             End Get
             Set
                 Me("APP_CLIENTSIZE") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("2")>  _
+        Public Property DOCK_WEBBROWSER_LOC() As Integer
+            Get
+                Return CType(Me("DOCK_WEBBROWSER_LOC"),Integer)
+            End Get
+            Set
+                Me("DOCK_WEBBROWSER_LOC") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property DOCK_ANCESTORSLIST_LOC() As Integer
+            Get
+                Return CType(Me("DOCK_ANCESTORSLIST_LOC"),Integer)
+            End Get
+            Set
+                Me("DOCK_ANCESTORSLIST_LOC") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property DOCK_ANCESTORATTRIBUTES_LOC() As Integer
+            Get
+                Return CType(Me("DOCK_ANCESTORATTRIBUTES_LOC"),Integer)
+            End Get
+            Set
+                Me("DOCK_ANCESTORATTRIBUTES_LOC") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("98")>  _
+        Public Property DOCK_CENSUS_LOC() As Integer
+            Get
+                Return CType(Me("DOCK_CENSUS_LOC"),Integer)
+            End Get
+            Set
+                Me("DOCK_CENSUS_LOC") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("98")>  _
+        Public Property DOCK_GALLERY_LOC() As Integer
+            Get
+                Return CType(Me("DOCK_GALLERY_LOC"),Integer)
+            End Get
+            Set
+                Me("DOCK_GALLERY_LOC") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("98")>  _
+        Public Property DOCK_NOTEBOOK_LOC() As Integer
+            Get
+                Return CType(Me("DOCK_NOTEBOOK_LOC"),Integer)
+            End Get
+            Set
+                Me("DOCK_NOTEBOOK_LOC") = value
             End Set
         End Property
     End Class

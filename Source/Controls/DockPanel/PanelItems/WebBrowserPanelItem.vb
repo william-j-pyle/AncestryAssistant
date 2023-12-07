@@ -14,6 +14,8 @@ Public Class AncestryWebViewer
 
 #Region "Fields"
 
+  Private WithEvents ancestors As AncestorCollection
+
   Private WithEvents btnBack As ToolStripButton
 
   Private WithEvents btnHome As ToolStripButton
@@ -112,6 +114,7 @@ Public Class AncestryWebViewer
   Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
   Public ReadOnly Property ItemSupportsSearch As Boolean = False Implements IDockPanelItem.ItemSupportsSearch
 
+  Public ReadOnly Property Key As String Implements IDockPanelItem.Key
   Public ReadOnly Property MessageSyncKey As Integer
     Get
       _MsgSyncKey += 1
@@ -165,7 +168,8 @@ Public Class AncestryWebViewer
 
 #Region "Public Constructors"
 
-  Public Sub New()
+  Public Sub New(itemKey As String)
+    Key = itemKey
     web = New Microsoft.Web.WebView2.WinForms.WebView2()
     tsWeb = New FlatToolBar()
     btnBack = New System.Windows.Forms.ToolStripButton()
@@ -193,11 +197,9 @@ Public Class AncestryWebViewer
     'tsWeb
     '
     tsWeb.CanOverflow = False
-    tsWeb.DataBindings.Add(New System.Windows.Forms.Binding("Location", Global.AncestryAssistant.My.MySettings.Default, "TB_WEB_LOC", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
     tsWeb.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
     tsWeb.Items.AddRange(New System.Windows.Forms.ToolStripItem() {btnBack, btnReload, btnHome, txtHref})
     tsWeb.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-    tsWeb.Location = Global.AncestryAssistant.My.MySettings.Default.TB_WEB_LOC
     tsWeb.Name = "tsWeb"
     tsWeb.Padding = New System.Windows.Forms.Padding(4, 0, 16, 0)
     tsWeb.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -576,10 +578,6 @@ Public Class AncestryWebViewer
     HREF = rtn
   End Sub
 
-  Public Sub RefreshAncestor() Implements IDockPanelItem.RefreshAncestor
-    Throw New NotImplementedException()
-  End Sub
-
   Public Sub saveImageAs(filename As String)
     Dim src As String = web.Source.AbsoluteUri
     If src.EndsWith("jpg") Or src.EndsWith("jpeg") Then
@@ -590,8 +588,8 @@ Public Class AncestryWebViewer
     End If
   End Sub
 
-  Public Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor) Implements IDockPanelItem.SetAncestor
-    Throw New NotImplementedException()
+  Public Sub SetAncestors(ancestorsObj As AncestorCollection) Implements IDockPanelItem.SetAncestors
+    ancestors = ancestorsObj
   End Sub
 
 #End Region

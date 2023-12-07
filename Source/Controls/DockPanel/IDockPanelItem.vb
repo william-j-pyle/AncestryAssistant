@@ -13,7 +13,6 @@
 #Region "Properties"
 
   ReadOnly Property ItemCaption As String
-
   Property ItemDockPanelLocation As DockPanelLocation
   Property ItemHasFocus As Boolean
   ReadOnly Property ItemHasRibbonBar As Boolean
@@ -21,6 +20,7 @@
   ReadOnly Property ItemSupportsClose As Boolean
   ReadOnly Property ItemSupportsMove As Boolean
   ReadOnly Property ItemSupportsSearch As Boolean
+  ReadOnly Property Key As String
   ReadOnly Property ShowRibbonOnFocus As String
 
 #End Region
@@ -35,9 +35,7 @@
 
   Function GetRibbonBarConfig() As RibbonBarTabConfig
 
-  Sub RefreshAncestor()
-
-  Sub SetAncestor(activeAncestor As AncestorCollection.Ancestor)
+  Sub SetAncestors(ancestors As AncestorCollection)
 
 #End Region
 

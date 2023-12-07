@@ -44,7 +44,27 @@
   End Function
 
   Public Function GetItem(refItem As Item) As Item
-    Return GetItem(refItem.id)
+    Dim itm As Item = GetItem(refItem.id)
+    If refItem.col > 0 Then itm.col = refItem.col
+    If refItem.colspan > 0 Then itm.colspan = refItem.colspan
+    If refItem.row > 0 Then itm.row = refItem.row
+    If refItem.rowspan > 0 Then itm.rowspan = refItem.rowspan
+    If Len(refItem.name) > 0 Then itm.name = refItem.name
+    If refItem.attributes IsNot Nothing Then
+      For Each rAvp As AttributeValuePair In refItem.attributes
+        Dim add As Boolean = True
+        For Each avp As AttributeValuePair In itm.attributes
+          If rAvp.Attribute.Equals(avp.Attribute) Then
+            add = False
+            avp.Value = rAvp.Value
+          End If
+        Next
+        If add Then
+          itm.attributes.Add(rAvp)
+        End If
+      Next
+    End If
+    Return itm
   End Function
 
 #End Region
@@ -103,11 +123,22 @@
     Public Property colspan As Double
     Public Property enabled As Boolean = True
     Public Property id As Integer
-    Public Property itemtype As RibbonItemType
+    Public Property itemtype As String
+      Get
+        Return ribbonitemtype.ToString
+      End Get
+      Set(value As String)
+        If Val(value) > 0 Then
+          ribbonitemtype = CInt(value)
+        Else
+          ribbonitemtype = DirectCast([Enum].Parse(GetType(RibbonItemType), value), RibbonItemType)
+        End If
+      End Set
+    End Property
     Public Property name As String = ""
+    Public Property ribbonitemtype As RibbonItemType
     Public Property row As Double
     Public Property rowspan As Double
-    Public Property text As String = ""
     Public Property visible As Boolean = True
 
 #End Region
