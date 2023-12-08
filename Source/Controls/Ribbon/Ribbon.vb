@@ -125,6 +125,12 @@ Public Class Ribbon
 
 #Region "Public Methods"
 
+  Public Shared Function RibbonKey(barId As Integer, Optional groupId As Integer = 0, Optional itemId As Integer = 0) As String
+    If itemId > 0 Then Return "B" & barId & ".G" & groupId & ".I" & itemId
+    If groupId > 0 Then Return "B" & barId & ".G" & groupId
+    Return "B" & barId
+  End Function
+
   Public Function AddBar(sName As String, sCaption As String, iBarId As Integer) As AncestryAssistant.RibbonBar
     Dim Tab As New TabPage(sCaption) With {
       .Name = sName,
@@ -159,16 +165,48 @@ Public Class Ribbon
     Controls.Add(Tab)
   End Sub
 
+  Public Sub DisableGroup(groupKey As String)
+    SetGroupItemsAttribute(groupKey, "enabled", False)
+  End Sub
+
+  Public Sub EnableGroup(groupKey As String)
+    SetGroupItemsAttribute(groupKey, "enabled", True)
+  End Sub
+
   Public Function GetBar(barId As Integer) As RibbonBar
-    Return RegistryBar.Item("B" & barId)
+    Return GetBar(RibbonKey(barId))
+  End Function
+
+  Public Function GetBar(key As String) As RibbonBar
+    Return RegistryBar.Item(key)
   End Function
 
   Public Function GetGroup(barId As Integer, groupId As Integer) As RibbonGroup
-    Return RegistryGroup.Item("B" & barId & ".G" & groupId)
+    Return GetGroup(RibbonKey(barId, groupId))
+  End Function
+
+  Public Function GetGroup(key As String) As RibbonGroup
+    Return RegistryGroup.Item(key)
   End Function
 
   Public Function GetItem(barId As Integer, groupId As Integer, itemId As Integer) As RibbonItem
-    Return RegistryItem.Item("B" & barId & ".G" & groupId & ".I" & itemId)
+    Return GetItem(RibbonKey(barId, groupId, itemId))
+  End Function
+
+  Public Function GetItem(key As String) As RibbonItem
+    Try
+      Return RegistryItem.Item(key)
+    Catch ex As Exception
+      Return Nothing
+    End Try
+  End Function
+
+  Public Function getItemAttribute(key As String, attribute As String) As Object
+    Try
+      Return GetItem(key).GetAttribute(attribute)
+    Catch ex As Exception
+      Return Nothing
+    End Try
   End Function
 
   Public Sub LoadConfig(jsonConfig As String)
@@ -237,15 +275,27 @@ Public Class Ribbon
   End Sub
 
   Public Sub RegisterBar(bar As RibbonBar)
-    RegistryBar.Add("B" & bar.BarId, bar)
+    RegistryBar.Add(RibbonKey(bar.BarId), bar)
   End Sub
 
   Public Sub RegisterGroup(group As RibbonGroup)
-    RegistryGroup.Add("B" & group.BarId & ".G" & group.GroupId, group)
+    RegistryGroup.Add(RibbonKey(group.BarId, group.GroupId), group)
   End Sub
 
   Public Sub RegisterItem(item As RibbonItem)
-    RegistryItem.Add("B" & item.BarId & ".G" & item.GroupId & ".I" & item.ItemId, item)
+    RegistryItem.Add(RibbonKey(item.BarId, item.GroupId, item.ItemId), item)
+  End Sub
+
+  Public Sub SetGroupItemsAttribute(groupKey As String, attribute As String, value As Object)
+    For Each Itemkey As String In RegistryItem.Keys
+      If Itemkey.StartsWith(groupKey + ".") Then
+        setItemAttribute(Itemkey, attribute, value)
+      End If
+    Next
+  End Sub
+
+  Public Sub setItemAttribute(key As String, attribute As String, value As Object)
+    GetItem(key).SetAttribute(attribute, value)
   End Sub
 
 #End Region

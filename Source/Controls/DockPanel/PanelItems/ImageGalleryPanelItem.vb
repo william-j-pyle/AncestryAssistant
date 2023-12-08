@@ -74,6 +74,7 @@ Public Class ImageGalleryPanelItem
 
 #Region "Properties"
 
+  Public Property ItemAwake As Boolean = False Implements IDockPanelItem.ItemAwake
   Public ReadOnly Property ItemCaption As String = EN_ITEMCAPTION Implements IDockPanelItem.ItemCaption
   Public Property ItemDockPanelLocation As DockPanelLocation Implements IDockPanelItem.ItemDockPanelLocation
   Public Property ItemHasFocus As Boolean = False Implements IDockPanelItem.ItemHasFocus

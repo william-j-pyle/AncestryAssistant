@@ -12,6 +12,7 @@
 
 #Region "Properties"
 
+  Property ItemAwake As Boolean
   ReadOnly Property ItemCaption As String
   Property ItemDockPanelLocation As DockPanelLocation
   Property ItemHasFocus As Boolean

@@ -192,36 +192,35 @@ Public MustInherit Class RibbonItem
 
 #End Region
 
+  'Public Function AlignStringToEnum(alignString As String) As ContentAlignment
+  '  Dim align As ContentAlignment
+  '  Select Case alignString.ToLower
+  '    Case ContentAlignment.TopCenter.ToString.ToLower
+  '      align = ContentAlignment.TopCenter
+  '    Case ContentAlignment.TopLeft.ToString.ToLower
+  '      align = ContentAlignment.TopLeft
+  '    Case ContentAlignment.TopRight.ToString.ToLower
+  '      align = ContentAlignment.TopRight
+
+  ' Case ContentAlignment.MiddleCenter.ToString.ToLower align = ContentAlignment.MiddleCenter Case
+  ' ContentAlignment.MiddleLeft.ToString.ToLower align = ContentAlignment.MiddleLeft Case
+  ' ContentAlignment.MiddleRight.ToString.ToLower align = ContentAlignment.MiddleRight
+
+  '    Case ContentAlignment.BottomCenter.ToString.ToLower
+  '      align = ContentAlignment.BottomCenter
+  '    Case ContentAlignment.BottomLeft.ToString.ToLower
+  '      align = ContentAlignment.BottomLeft
+  '    Case ContentAlignment.BottomRight.ToString.ToLower
+  '      align = ContentAlignment.BottomRight
+  '    Case Else
+  '      align = ContentAlignment.MiddleLeft
+  '  End Select
+  '  Return align
+  'End Function
+
 #Region "Public Methods"
 
-  Public Function AlignStringToEnum(alignString As String) As ContentAlignment
-    Dim align As ContentAlignment
-    Select Case alignString.ToLower
-      Case ContentAlignment.TopCenter.ToString.ToLower
-        align = ContentAlignment.TopCenter
-      Case ContentAlignment.TopLeft.ToString.ToLower
-        align = ContentAlignment.TopLeft
-      Case ContentAlignment.TopRight.ToString.ToLower
-        align = ContentAlignment.TopRight
-
-      Case ContentAlignment.MiddleCenter.ToString.ToLower
-        align = ContentAlignment.MiddleCenter
-      Case ContentAlignment.MiddleLeft.ToString.ToLower
-        align = ContentAlignment.MiddleLeft
-      Case ContentAlignment.MiddleRight.ToString.ToLower
-        align = ContentAlignment.MiddleRight
-
-      Case ContentAlignment.BottomCenter.ToString.ToLower
-        align = ContentAlignment.BottomCenter
-      Case ContentAlignment.BottomLeft.ToString.ToLower
-        align = ContentAlignment.BottomLeft
-      Case ContentAlignment.BottomRight.ToString.ToLower
-        align = ContentAlignment.BottomRight
-      Case Else
-        align = ContentAlignment.MiddleLeft
-    End Select
-    Return align
-  End Function
+  Public MustOverride Function GetAttribute(attributeName As String) As Object
 
   Public Function ImageFromFile(fileName As String) As Image
     Return Image.FromFile(fileName)
@@ -235,7 +234,7 @@ Public MustInherit Class RibbonItem
     RaiseEvent RibbonItemAction(Me, eventType, value)
   End Sub
 
-  Public MustOverride Sub SetAttribute(attributeName As String, attributeValue As String)
+  Public MustOverride Sub SetAttribute(attributeName As String, attributeValue As Object)
 
 #End Region
 

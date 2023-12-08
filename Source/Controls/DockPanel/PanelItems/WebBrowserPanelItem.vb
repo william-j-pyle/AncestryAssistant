@@ -105,6 +105,7 @@ Public Class AncestryWebViewer
     End Set
   End Property
 
+  Public Property ItemAwake As Boolean = True Implements IDockPanelItem.ItemAwake
   Public ReadOnly Property ItemCaption As String = EN_ITEMCAPTION Implements IDockPanelItem.ItemCaption
   Public Property ItemDockPanelLocation As DockPanelLocation Implements IDockPanelItem.ItemDockPanelLocation
   Public Property ItemHasFocus As Boolean = False Implements IDockPanelItem.ItemHasFocus
@@ -572,7 +573,7 @@ Public Class AncestryWebViewer
       'TODO activeAncestor.Reset()
       rtn = rtn.Replace("{PERSONID}", customParam)
     Else
-      rtn = rtn.Replace("{PERSONID}", AncestorID)
+      rtn = rtn.Replace("{PERSONID}", ancestors.ActiveAncestorID)
     End If
     ' Perform Navigation
     HREF = rtn

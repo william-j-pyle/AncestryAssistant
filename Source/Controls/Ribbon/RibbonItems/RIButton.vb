@@ -44,18 +44,40 @@
 
 #Region "Public Methods"
 
-  Public Overrides Sub SetAttribute(attributeName As String, attributeValue As String)
+  Public Overrides Function GetAttribute(attributeName As String) As Object
+    Select Case attributeName.ToLower
+      Case "Image".ToLower
+        Return Image
+      Case "text"
+        Return ctl.Text
+      Case "caption"
+        Return ctl.Text
+      Case "textalign"
+        Return ctl.TextAlign
+      Case "enabled"
+        Return ctl.Enabled
+      Case Else
+        Debug.Print("Unhandled Attribute Requested: {0}", attributeName)
+    End Select
+    Return Nothing
+  End Function
+
+  Public Overrides Sub SetAttribute(attributeName As String, attributeValue As Object)
     Select Case attributeName.ToLower
       Case "ImageFromFile".ToLower
-        Image = ImageFromFile(attributeValue)
+        Image = ImageFromFile(CType(attributeValue, String))
       Case "ImageFromResource".ToLower
-        Image = ImageFromResource(attributeValue)
+        Image = ImageFromResource(CType(attributeValue, String))
+      Case "Image".ToLower
+        Image = CType(attributeValue, Image)
       Case "text"
-        ctl.Text = attributeValue
+        ctl.Text = CType(attributeValue, String)
       Case "caption"
-        ctl.Text = attributeValue
+        ctl.Text = CType(attributeValue, String)
       Case "textalign"
-        ctl.TextAlign = AlignStringToEnum(attributeValue)
+        ctl.TextAlign = CType(attributeValue, ContentAlignment)
+      Case "enabled"
+        ctl.Enabled = CType(attributeValue, Boolean)
       Case Else
         Debug.Print("Unhandled Attribute: {0}={1}", attributeName, attributeValue)
     End Select

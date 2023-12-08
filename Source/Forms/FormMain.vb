@@ -53,8 +53,14 @@ Public Class AssistantAppForm
 
   Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
     Dim ancestor As AncestorCollection.Ancestor = Ancestors.ActiveAncestor
-    RibbonBar.GetItem(200, 2, 7).SetAttribute("text", ancestor.GedBirthDate.toAssistantDate)
-    RibbonBar.GetItem(200, 2, 8).SetAttribute("text", ancestor.GedDeathDate.toAssistantDate)
+
+    RibbonBar.setItemAttribute(Ribbon.RibbonKey(200, 2, 7), "text", ancestor.GedBirthDate.toAssistantDate)
+    RibbonBar.setItemAttribute(Ribbon.RibbonKey(200, 2, 8), "text", ancestor.GedDeathDate.toAssistantDate)
+    RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 2))
+    RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 3))
+    RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 4))
+    RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 5))
+
   End Sub
 
   Private Sub AncestryBrowserBusyChanged(busy As Boolean)
@@ -340,41 +346,6 @@ Public Class AssistantAppForm
     Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_OVERVIEW_TREE)
   End Sub
 
-  ' Private Sub btnFileTabBack_MouseDown(sender As Object, e As MouseEventArgs)
-  '   FilePanel.Visible = False
-  'End Sub
-  Private Sub btnNotebook_Click(sender As Object, e As EventArgs)
-    'PanelManager.SetPanelVisibility(DockPanelLocation.MiddleTopRight, btnNotebook.Checked)
-  End Sub
-
-  Private Sub btnPersonFact_Click(sender As Object, e As EventArgs)
-    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON)
-  End Sub
-
-  Private Sub btnPersonGallery_Click(sender As Object, e As EventArgs)
-    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON)
-  End Sub
-
-  Private Sub btnPersonHints_Click(sender As Object, e As EventArgs)
-    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON)
-  End Sub
-
-  Private Sub btnPersonStory_Click(sender As Object, e As EventArgs)
-    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_STORY_PERSON)
-  End Sub
-
-  Private Sub btnViewFan_Click(sender As Object, e As EventArgs)
-    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FANVIEW_PERSON)
-  End Sub
-
-  Private Sub btnViewPedigree_Click(sender As Object, e As EventArgs)
-    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_PEDIGREEVIEW_PERSON)
-  End Sub
-
-  Private Sub btnViewTree_Click(sender As Object, e As EventArgs)
-    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_TREEVIEW_PERSON)
-  End Sub
-
   Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs)
     SettingsSave()
     Close()
@@ -445,6 +416,7 @@ Public Class AssistantAppForm
     Ancestry = New AncestryWebViewer("DOCK_WEBBROWSER") With {
       .AncestryTreeID = My.Settings.ANCESTRY_TREE_ID
     }
+    Ancestry.SetAncestors(Ancestors)
     AddHandler Ancestry.ViewerBusy, AddressOf AncestryBrowserBusyChanged
     AddHandler Ancestry.UriTrackingGroupChanged, AddressOf AncestryURITrackingGroupChanged
     AddHandler Ancestry.DataDownload, AddressOf AncestryDataMessage
@@ -458,15 +430,36 @@ Public Class AssistantAppForm
   End Function
 
   Private Sub RibbonBar_RibbonAction(action As RibbonEventType, value As Object, barId As Integer, groupId As Integer, itemId As Integer) Handles RibbonBar.RibbonAction
-    Debug.Print("RibbonAction: {0}={1}    [{2}]", action.ToString, value, RibbonKey(barId, groupId, itemId))
+    Debug.Print("RibbonAction: {0}={1}    [{2}]", action.ToString, value, Ribbon.RibbonKey(barId, groupId, itemId))
 
-    Select Case RibbonKey(barId, groupId, itemId)
+    Select Case Ribbon.RibbonKey(barId, groupId, itemId)
       Case "B200.G5.I17" 'Census
         DockManager.ShowRegisteredItem("DOCK_CENSUS")
       Case "B200.G5.I18" 'Gallery
         DockManager.ShowRegisteredItem("DOCK_GALLERY")
       Case "B200.G5.I19" 'Notebook
         DockManager.ShowRegisteredItem("DOCK_NOTEBOOK")
+      Case "B200.G3.I9" 'Facts
+        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON)
+        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+      Case "ASSIGN" 'Ancestry Person Gallery
+        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON)
+        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+      Case "ASSIGN" 'Ancestry Person Hints
+        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON)
+        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+      Case "ASSIGN" 'Ancestry Person Story
+        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_STORY_PERSON)
+        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+      Case "B200.G3.I12" 'Ancestry Person Fan
+        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FANVIEW_PERSON)
+        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+      Case "B200.G3.I11" 'Ancestry Person Pedigree
+        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_PEDIGREEVIEW_PERSON)
+        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+      Case "B200.G3.I10" 'Ancestry Person Tree
+        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_TREEVIEW_PERSON)
+        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
     End Select
   End Sub
 
@@ -483,16 +476,24 @@ Public Class AssistantAppForm
     End If
   End Sub
 
-  Private Function RibbonKey(barId As Integer, groupId As Integer, itemId As Integer) As String
-    If itemId > 0 Then Return "B" & barId & ".G" & groupId & ".I" & itemId
-    If groupId > 0 Then Return "B" & barId & ".G" & groupId
-    Return "B" & barId
-  End Function
-
   Private Sub SettingsLoad()
     ApplyTheme()
     DockManager.SettingsLoad()
     Size = My.Settings.APP_CLIENTSIZE
+    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 2))
+    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 3))
+    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 4))
+    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 5))
+    'Case "B200.G5.I18" 'Gallery
+    'Case "B200.G5.I19" 'Notebook
+    'Case "B200.G3.I9" 'Facts
+    'Case "ASSIGN" 'Ancestry Person Gallery
+    'Case "ASSIGN" 'Ancestry Person Hints
+    'Case "ASSIGN" 'Ancestry Person Story
+    'Case "B200.G3.I12" 'Ancestry Person Fan
+    'Case "B200.G3.I11" 'Ancestry Person Pedigree
+    'Case "B200.G3.I10" 'Ancestry Person Tree
+
   End Sub
 
   Private Sub SettingsSave()

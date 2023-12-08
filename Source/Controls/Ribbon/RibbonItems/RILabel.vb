@@ -42,7 +42,11 @@
 
 #Region "Public Methods"
 
-  Public Overrides Sub SetAttribute(attributeName As String, attributeValue As String)
+  Public Overrides Function GetAttribute(attributeName As String) As Object
+    Throw New NotImplementedException()
+  End Function
+
+  Public Overrides Sub SetAttribute(attributeName As String, attributeValue As Object)
     Select Case attributeName.ToLower
       Case "ImageFromResource".ToLower
         Dim img As Image = My.Resources.ResourceManager.GetObject(attributeValue)
@@ -59,16 +63,17 @@
         Debug.Print("ImageFromResource:  Img.test=[{0}]", ctl.Text)
 
       Case "imagealign"
-        ctl.ImageAlign = AlignStringToEnum(attributeValue)
+        ctl.ImageAlign = CType(attributeValue, ContentAlignment)
       Case "text"
         If textImageOffset > 0 Then
           ctl.Text = " ".PadLeft(textImageOffset, " "c) + attributeValue
         Else
           ctl.Text = attributeValue
         End If
-
+      Case "enabled"
+        ctl.Enabled = CType(attributeValue, Boolean)
       Case "textalign"
-        ctl.TextAlign = AlignStringToEnum(attributeValue)
+        ctl.TextAlign = CType(attributeValue, ContentAlignment)
       Case Else
         Debug.Print("Unhandled Attribute: {0}={1}", attributeName, attributeValue)
     End Select
