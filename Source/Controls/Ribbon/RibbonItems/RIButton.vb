@@ -44,42 +44,42 @@
 
 #Region "Public Methods"
 
-  Public Overrides Function GetAttribute(attributeName As String) As Object
-    Select Case attributeName.ToLower
-      Case "Image".ToLower
+  Public Overrides Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
+    Select Case ItemAttribute
+      Case RibbonItemAttribute.Image
         Return Image
-      Case "text"
+      Case RibbonItemAttribute.Text
         Return ctl.Text
-      Case "caption"
+      Case RibbonItemAttribute.Caption
         Return ctl.Text
-      Case "textalign"
+      Case RibbonItemAttribute.TextAlign
         Return ctl.TextAlign
-      Case "enabled"
+      Case RibbonItemAttribute.Enabled
         Return ctl.Enabled
       Case Else
-        Debug.Print("Unhandled Attribute Requested: {0}", attributeName)
+        Debug.Print("Unhandled Attribute Requested: {0}", ItemAttribute.ToString)
     End Select
     Return Nothing
   End Function
 
-  Public Overrides Sub SetAttribute(attributeName As String, attributeValue As Object)
-    Select Case attributeName.ToLower
-      Case "ImageFromFile".ToLower
+  Public Overrides Sub SetAttribute(ItemAttribute As RibbonItemAttribute, attributeValue As Object)
+    Select Case ItemAttribute
+      Case RibbonItemAttribute.ImageFromFile
         Image = ImageFromFile(CType(attributeValue, String))
-      Case "ImageFromResource".ToLower
+      Case RibbonItemAttribute.ImageFromResource
         Image = ImageFromResource(CType(attributeValue, String))
-      Case "Image".ToLower
+      Case RibbonItemAttribute.Image
         Image = CType(attributeValue, Image)
-      Case "text"
+      Case RibbonItemAttribute.Text
         ctl.Text = CType(attributeValue, String)
-      Case "caption"
+      Case RibbonItemAttribute.Caption
         ctl.Text = CType(attributeValue, String)
-      Case "textalign"
+      Case RibbonItemAttribute.TextAlign
         ctl.TextAlign = CType(attributeValue, ContentAlignment)
-      Case "enabled"
+      Case RibbonItemAttribute.Enabled
         ctl.Enabled = CType(attributeValue, Boolean)
       Case Else
-        Debug.Print("Unhandled Attribute: {0}={1}", attributeName, attributeValue)
+        Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select
   End Sub
 

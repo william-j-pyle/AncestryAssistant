@@ -21,6 +21,27 @@
         { "id": 4 },
         { "id": 5 }
       ]
+    },
+    {
+      "name": "Notebook",
+      "text": "Notebook",
+      "id": 300,
+      "visible": false,
+      "groups": [ { "id": 1 } ]
+    },
+    {
+      "name": "Census",
+      "text": "Census",
+      "id": 400,
+      "visible": false,
+      "groups": []
+    },
+    {
+      "name": "Gallery",
+      "text": "Gallery",
+      "id": 500,
+      "visible": false,
+      "groups": []
     }
     //,
     //{
@@ -173,7 +194,7 @@
       "itemtype": 10,
       "attributes": [
         {
-          "attribute": "icon",
+          "attribute": "ImageFromResource",
           "value": "clipboard-paste"
         }
       ],
@@ -187,10 +208,9 @@
       "name": "Cut",
       "id": 2,
       "itemtype": 10,
-      "icon": "clipboard-cut",
       "attributes": [
         {
-          "attribute": "icon",
+          "attribute": "ImageFromResource",
           "value": "clipboard-cut"
         }
       ],

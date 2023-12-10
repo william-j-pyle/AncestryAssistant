@@ -220,7 +220,7 @@ Public MustInherit Class RibbonItem
 
 #Region "Public Methods"
 
-  Public MustOverride Function GetAttribute(attributeName As String) As Object
+  Public MustOverride Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
 
   Public Function ImageFromFile(fileName As String) As Image
     Return Image.FromFile(fileName)
@@ -234,7 +234,7 @@ Public MustInherit Class RibbonItem
     RaiseEvent RibbonItemAction(Me, eventType, value)
   End Sub
 
-  Public MustOverride Sub SetAttribute(attributeName As String, attributeValue As Object)
+  Public MustOverride Sub SetAttribute(ItemAttribute As RibbonItemAttribute, attributeValue As Object)
 
 #End Region
 

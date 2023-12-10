@@ -380,7 +380,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("2")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
         Public Property DOCK_WEBBROWSER_LOC() As Integer
             Get
                 Return CType(Me("DOCK_WEBBROWSER_LOC"),Integer)
@@ -392,7 +392,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
         Public Property DOCK_ANCESTORSLIST_LOC() As Integer
             Get
                 Return CType(Me("DOCK_ANCESTORSLIST_LOC"),Integer)
@@ -404,7 +404,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("6")>  _
         Public Property DOCK_ANCESTORATTRIBUTES_LOC() As Integer
             Get
                 Return CType(Me("DOCK_ANCESTORATTRIBUTES_LOC"),Integer)
@@ -416,7 +416,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("98")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
         Public Property DOCK_CENSUS_LOC() As Integer
             Get
                 Return CType(Me("DOCK_CENSUS_LOC"),Integer)
@@ -428,7 +428,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("98")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
         Public Property DOCK_GALLERY_LOC() As Integer
             Get
                 Return CType(Me("DOCK_GALLERY_LOC"),Integer)
@@ -440,7 +440,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("98")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
         Public Property DOCK_NOTEBOOK_LOC() As Integer
             Get
                 Return CType(Me("DOCK_NOTEBOOK_LOC"),Integer)

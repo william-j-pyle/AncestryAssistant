@@ -45,17 +45,15 @@
 
 #Region "Events"
 
-  Public Event PanelCloseRequested(sender As DockPanel)
+  Public Event PanelClose(dockPanelObj As DockPanel)
 
-  Public Event PanelFocusChanged(sender As DockPanel, hasFocus As Boolean)
+  Public Event PanelFocusChanged(dockPanelObj As DockPanel, hasFocus As Boolean)
 
-  Public Event PanelItemClosed(sender As IDockPanelItem)
+  Public Event PanelItemClose(panelItemObj As DockPanelItem)
 
-  Public Event PanelItemLocationChangeRequested(sender As IDockPanelItem, newPanelLocation As DockPanelLocation)
+  Public Event PanelItemLocationChange(panelItemObj As DockPanelItem, toPanelLocation As DockPanelLocation)
 
-  Public Event PanelLocationChanged(sender As DockPanel, newPanelLocation As DockPanelLocation)
-
-  Public Event PanelTypeChanged(sender As DockPanel, newPanelType As DockPanelType)
+  Public Event PanelItemSelected(panelItemObj As DockPanelItem)
 
 #End Region
 
@@ -76,6 +74,7 @@
         _PanelHasFocus = value
         LayoutPanel()
         RaiseEvent PanelFocusChanged(Me, value)
+        RaiseEvent PanelItemSelected(PanelSelectedItem)
       End If
     End Set
   End Property
@@ -103,7 +102,6 @@
     Set(value As DockPanelLocation)
       If _PanelLocation <> value Then
         _PanelLocation = value
-        RaiseEvent PanelLocationChanged(Me, value)
       End If
     End Set
   End Property
@@ -114,11 +112,13 @@
     End Get
   End Property
 
-  Public ReadOnly Property PanelSelectedItem As IDockPanelItem
+  Public ReadOnly Property PanelSelectedItem As DockPanelItem
     Get
       If pnlClient.TabCount > 0 Then
-        If pnlClient.SelectedTab.Controls.Count > 0 Then
-          Return CType(pnlClient.SelectedTab.Controls(0), IDockPanelItem)
+        If pnlClient.SelectedTab IsNot Nothing Then
+          If pnlClient.SelectedTab.Controls.Count > 0 Then
+            Return CType(pnlClient.SelectedTab.Controls(0), DockPanelItem)
+          End If
         End If
       End If
       Return Nothing
@@ -172,7 +172,6 @@
     Set(value As DockPanelType)
       If _PanelType <> value Then
         _PanelType = value
-        RaiseEvent PanelTypeChanged(Me, value)
         LayoutPanel()
       End If
     End Set
@@ -632,7 +631,12 @@
   End Sub
 
   Private Sub pnlClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles pnlClient.SelectedIndexChanged
+    If PanelSelectedItem Is Nothing Then Exit Sub
     lblCaption.Text = pnlClient.SelectedTab.Text
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("DockPanel.SelectedItemChanged(panelItem=[{0},{1},{2}])", PanelSelectedItem.Key, PanelSelectedItem.LocationCurrent.ToString, PanelSelectedIndex)
+#End If
+    RaiseEvent PanelItemSelected(PanelSelectedItem)
   End Sub
 
   Private Sub pnlContextMenu_ContextItemClicked(item As ToolStripMenuItem) Handles pnlContextMenu.ContextItemClicked
@@ -640,17 +644,17 @@
       Case "MnuDockClose"
         RemoveItem(PanelSelectedIndex)
       Case "MnuDockLeftTop"
-        RaiseEvent PanelItemLocationChangeRequested(GetItem(PanelSelectedIndex), DockPanelLocation.LeftTop)
+        RaiseEvent PanelItemLocationChange(GetItem(PanelSelectedIndex), DockPanelLocation.LeftTop)
       Case "MnuDockLeftBottom"
-        RaiseEvent PanelItemLocationChangeRequested(GetItem(PanelSelectedIndex), DockPanelLocation.LeftBottom)
+        RaiseEvent PanelItemLocationChange(GetItem(PanelSelectedIndex), DockPanelLocation.LeftBottom)
       Case "MnuDockRightTop"
-        RaiseEvent PanelItemLocationChangeRequested(GetItem(PanelSelectedIndex), DockPanelLocation.RightTop)
+        RaiseEvent PanelItemLocationChange(GetItem(PanelSelectedIndex), DockPanelLocation.RightTop)
       Case "MnuDockRightBottom"
-        RaiseEvent PanelItemLocationChangeRequested(GetItem(PanelSelectedIndex), DockPanelLocation.RightBottom)
+        RaiseEvent PanelItemLocationChange(GetItem(PanelSelectedIndex), DockPanelLocation.RightBottom)
       Case "MnuDockMiddleBottom"
-        RaiseEvent PanelItemLocationChangeRequested(GetItem(PanelSelectedIndex), DockPanelLocation.MiddleBottom)
+        RaiseEvent PanelItemLocationChange(GetItem(PanelSelectedIndex), DockPanelLocation.MiddleBottom)
       Case "MnuDockTabbed"
-        RaiseEvent PanelItemLocationChangeRequested(GetItem(PanelSelectedIndex), DockPanelLocation.MiddleTopLeft)
+        RaiseEvent PanelItemLocationChange(GetItem(PanelSelectedIndex), DockPanelLocation.MiddleTopLeft)
     End Select
   End Sub
 
@@ -671,7 +675,7 @@
     If pnlClient.SelectedTab Is Nothing Then Exit Sub
     Dim tp As TabPage = pnlClient.SelectedTab
     If tp.Controls.Count = 0 Then Exit Sub
-    Dim item As IDockPanelItem = CType(tp.Controls(0), IDockPanelItem)
+    Dim item As DockPanelItem = TryCast(tp.Controls(0), DockPanelItem)
     SuspendLayout()
     PanelShowClose = item.ItemSupportsClose
     PanelShowContextMenu = item.ItemSupportsMove
@@ -728,8 +732,8 @@
 
 #Region "Public Methods"
 
-  Public Function AddItem(item As IDockPanelItem) As Integer
-    item.ItemDockPanelLocation = PanelLocation
+  Public Function AddItem(item As DockPanelItem) As Integer
+    item.LocationCurrent = PanelLocation
     pnlClient.TabPages.Add(item.Key, item.ItemCaption)
     With pnlClient.TabPages(item.Key)
       .Name = item.Key
@@ -749,19 +753,19 @@
     SetPanelState()
   End Function
 
-  Public Function GetItem(key As String) As Control
+  Public Function GetItem(key As String) As DockPanelItem
     If Not pnlClient.TabPages.ContainsKey(key) Then
       Return Nothing
     End If
     Return GetItem(pnlClient.TabPages.IndexOfKey(key))
   End Function
 
-  Public Function GetItem(index As Integer) As Control
+  Public Function GetItem(index As Integer) As DockPanelItem
     If index < 0 Or index >= pnlClient.TabCount Then
       Return Nothing
     End If
     If pnlClient.TabPages(index).Controls.Count > 0 Then
-      Return pnlClient.TabPages(index).Controls(0)
+      Return TryCast(pnlClient.TabPages(index).Controls(0), DockPanelItem)
     Else
       Return Nothing
     End If
@@ -771,26 +775,26 @@
     Return pnlClient.TabPages.ContainsKey(key)
   End Function
 
-  Public Function RemoveItem(key As String) As Control
+  Public Function RemoveItem(key As String) As DockPanelItem
     If Not pnlClient.TabPages.ContainsKey(key) Then
       Return Nothing
     End If
     Return RemoveItem(pnlClient.TabPages.IndexOfKey(key))
   End Function
 
-  Public Function RemoveItem(index As Integer) As Control
-    Dim ctl As Control = GetItem(index)
+  Public Function RemoveItem(index As Integer) As DockPanelItem
+    Dim ctl As DockPanelItem = GetItem(index)
     If ctl Is Nothing Then
       Return Nothing
     End If
-    RaiseEvent PanelItemClosed(ctl)
+    RaiseEvent PanelItemClose(ctl)
     AddPlaceholderTab()
     pnlClient.TabPages.RemoveAt(index)
     If hasTabs() Then
       lblCaption.Text = pnlClient.SelectedTab.Text
     Else
       Visible = False
-      RaiseEvent PanelCloseRequested(Me)
+      RaiseEvent PanelClose(Me)
     End If
     LayoutPanel()
     Return ctl

@@ -8,6 +8,7 @@ Public Class Ribbon
 
   Private RegistryBar As New Dictionary(Of String, RibbonBar)
   Private RegistryGroup As New Dictionary(Of String, RibbonGroup)
+  Private RegistryTab As New Dictionary(Of String, TabPage)
   Public RegistryItem As New Dictionary(Of String, RibbonItem)
 
 #End Region
@@ -166,11 +167,11 @@ Public Class Ribbon
   End Sub
 
   Public Sub DisableGroup(groupKey As String)
-    SetGroupItemsAttribute(groupKey, "enabled", False)
+    SetGroupItemsAttribute(groupKey, RibbonItemAttribute.enabled, False)
   End Sub
 
   Public Sub EnableGroup(groupKey As String)
-    SetGroupItemsAttribute(groupKey, "enabled", True)
+    SetGroupItemsAttribute(groupKey, RibbonItemAttribute.enabled, True)
   End Sub
 
   Public Function GetBar(barId As Integer) As RibbonBar
@@ -201,7 +202,7 @@ Public Class Ribbon
     End Try
   End Function
 
-  Public Function getItemAttribute(key As String, attribute As String) As Object
+  Public Function getItemAttribute(key As String, attribute As RibbonItemAttribute) As Object
     Try
       Return GetItem(key).GetAttribute(attribute)
     Catch ex As Exception
@@ -209,14 +210,29 @@ Public Class Ribbon
     End Try
   End Function
 
+  Public Sub HideBar(barKey As String)
+    If RegistryTab.ContainsKey(barKey) Then
+      If TabPages.Contains(RegistryTab.Item(barKey)) Then
+        SelectedIndex = 1
+        TabPages.Remove(RegistryTab.Item(barKey))
+      End If
+    End If
+  End Sub
+
   Public Sub LoadConfig(jsonConfig As String)
     Dim cfg As RibbonConfig = JsonConvert.DeserializeObject(Of RibbonConfig)(jsonConfig)
     For Each Bar As RibbonConfig.Bar In cfg.bars
       Dim rBar As RibbonBar = AddBar(Bar.name, Bar.text, Bar.id)
       RegisterBar(rBar)
+      If Not Bar.visible Then
+        HideBar(RibbonKey(Bar.id))
+      End If
       For Each refGrp As RibbonConfig.Group In Bar.groups
         Dim Grp As RibbonConfig.Group = cfg.GetGroup(refGrp)
         Dim rBarGrp As RibbonGroup = rBar.AddGroup(Grp.name, Grp.text, Bar.id, Grp.id)
+        rBarGrp.Enabled = Grp.enabled
+        rBarGrp.Visible = Grp.visible
+        rBarGrp.ShowPane = Grp.showpanel
         RegisterGroup(rBarGrp)
         For Each refItem As RibbonConfig.Item In Grp.items
           Dim Item As RibbonConfig.Item = cfg.GetItem(refItem)
@@ -262,7 +278,8 @@ Public Class Ribbon
               .RowSpan = Item.rowspan
             End With
             For Each attr As RibbonConfig.AttributeValuePair In Item.attributes
-              rBarGrpItem.SetAttribute(attr.Attribute, attr.Value)
+              Dim itemAttribute As RibbonItemAttribute = DirectCast([Enum].Parse(GetType(RibbonItemAttribute), attr.Attribute.ToLower), RibbonItemAttribute)
+              rBarGrpItem.SetAttribute(itemAttribute, attr.Value)
             Next
             'Debug.Print("LoadConfig.AddBar({0}).AddGroup({1}).AddItem({2})", Bar.name, Grp.name, Item.name)
             rBarGrp.AddItem(rBarGrpItem)
@@ -276,6 +293,7 @@ Public Class Ribbon
 
   Public Sub RegisterBar(bar As RibbonBar)
     RegistryBar.Add(RibbonKey(bar.BarId), bar)
+    RegistryTab.Add(RibbonKey(bar.BarId), bar.Parent)
   End Sub
 
   Public Sub RegisterGroup(group As RibbonGroup)
@@ -286,7 +304,7 @@ Public Class Ribbon
     RegistryItem.Add(RibbonKey(item.BarId, item.GroupId, item.ItemId), item)
   End Sub
 
-  Public Sub SetGroupItemsAttribute(groupKey As String, attribute As String, value As Object)
+  Public Sub SetGroupItemsAttribute(groupKey As String, attribute As RibbonItemAttribute, value As Object)
     For Each Itemkey As String In RegistryItem.Keys
       If Itemkey.StartsWith(groupKey + ".") Then
         setItemAttribute(Itemkey, attribute, value)
@@ -294,8 +312,17 @@ Public Class Ribbon
     Next
   End Sub
 
-  Public Sub setItemAttribute(key As String, attribute As String, value As Object)
+  Public Sub setItemAttribute(key As String, attribute As RibbonItemAttribute, value As Object)
     GetItem(key).SetAttribute(attribute, value)
+  End Sub
+
+  Public Sub ShowBar(barKey As String)
+    If RegistryTab.ContainsKey(barKey) Then
+      If Not TabPages.Contains(RegistryTab.Item(barKey)) Then
+        TabPages.Add(RegistryTab.Item(barKey))
+      End If
+      SelectedTab = RegistryTab.Item(barKey)
+    End If
   End Sub
 
 #End Region

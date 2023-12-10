@@ -84,22 +84,22 @@
       <Value Profile="(Default)">424, 322</Value>
     </Setting>
     <Setting Name="DOCK_WEBBROWSER_LOC" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">2</Value>
+      <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="DOCK_ANCESTORSLIST_LOC" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="DOCK_ANCESTORATTRIBUTES_LOC" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+      <Value Profile="(Default)">6</Value>
     </Setting>
     <Setting Name="DOCK_CENSUS_LOC" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">98</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="DOCK_GALLERY_LOC" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">98</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="DOCK_NOTEBOOK_LOC" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">98</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

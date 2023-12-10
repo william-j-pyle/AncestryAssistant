@@ -4,7 +4,8 @@ Public Class Logger
 
 #Region "Fields"
 
-  Private Const LOG_FILENAME As String = "D:\Geneology\Logs\APIMessages.txt"
+  Private Const DEBUGLOG_FILENAME As String = "D:\Geneology\Logs\AncestryAssistantDebug.log"
+  Private Const LOG_FILENAME As String = "D:\Geneology\Logs\AncestryAssistant.log"
 
 #End Region
 
@@ -17,6 +18,17 @@ Public Class Logger
 #End Region
 
 #Region "Public Methods"
+
+  Public Shared Sub Clear()
+    My.Computer.FileSystem.DeleteFile(DEBUGLOG_FILENAME)
+    My.Computer.FileSystem.DeleteFile(LOG_FILENAME)
+  End Sub
+
+  Public Shared Sub debugPrint(format As String, ParamArray args As Object())
+    Dim str As String = Date.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + ": " + String.Format(format, args)
+    Debug.Print(str)
+    System.IO.File.AppendAllText(DEBUGLOG_FILENAME, str + vbCrLf)
+  End Sub
 
   Public Shared Sub log(typ As LOG_TYPE, message As String)
     message = message.Replace(vbCrLf, vbLf)

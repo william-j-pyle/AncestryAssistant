@@ -1,101 +1,76 @@
 ﻿Imports System.ComponentModel
 
-Public Class NotebookViewer
-  Inherits UserControl
-  Implements IDockPanelItem
+Public Class NotebookPanelItem
+  Inherits DockPanelItem
 
 #Region "Fields"
 
-  Private WithEvents Ancestors As AncestorCollection
-
   Friend WithEvents BtnAddPage As ToolStripButton
-
   Friend WithEvents BtnAddSection As ToolStripButton
-
   Friend WithEvents BtnH1 As ToolStripMenuItem
-
   Friend WithEvents BtnH2 As ToolStripMenuItem
-
   Friend WithEvents BtnH3 As ToolStripMenuItem
-
   Friend WithEvents BtnH4 As ToolStripMenuItem
-
   Friend WithEvents imgSection As ImageList
-
   Friend WithEvents LblStretch As Label
-
   Friend WithEvents PnlBody As Panel
-
   Friend WithEvents PnlHeader As Panel
-
   Friend WithEvents PnlHeaderStretch As FlatPanel
-
   Friend WithEvents SplitSectionsPage As SplitContainer
-
   Friend WithEvents ToolStripButton1 As ToolStripButton
-
   Friend WithEvents ToolStripButton10 As ToolStripButton
-
   Friend WithEvents ToolStripButton2 As ToolStripButton
-
   Friend WithEvents ToolStripButton3 As ToolStripButton
-
   Friend WithEvents ToolStripButton4 As ToolStripButton
-
   Friend WithEvents ToolStripButton5 As ToolStripButton
-
   Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
-
   Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
-
   Friend WithEvents ToolStripSplitButton1 As ToolStripSplitButton
-
   Friend WithEvents TreeSectionPages As TreeView
-
   Friend WithEvents tsPage As ToolStrip
-
   Friend WithEvents tsSections As ToolStrip
-
   Friend WithEvents TxtBody As RichTextBox
-
   Friend WithEvents TxtHeader As TextBox
-
-  Private Const EN_ITEMCAPTION As String = "Notebook"
+  Private Const Default_ItemCaption As String = "Notebook"
+  Private Const Default_ItemHasRibbonBar As Boolean = True
+  Private Const Default_ItemHasToolBar As Boolean = False
+  Private Const Default_ItemSupportsClose As Boolean = True
+  Private Const Default_ItemSupportsMove As Boolean = True
+  Private Const Default_ItemSupportsSearch As Boolean = False
+  Private Const Default_Key As String = "DOCK_NOTEBOOK"
+  Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
+  Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.MiddleTopRight
+  Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.MiddleTopRight
+  Private Const Default_RibbonBarKey As String = "B300"
+  Private Const Default_RibbonHideOnItemClose As Boolean = True
+  Private Const Default_RibbonSelectOnItemFocus As Boolean = True
+  Private Const Default_RibbonShowOnItemOpen As Boolean = True
 
   Private components As System.ComponentModel.IContainer
 
 #End Region
 
-#Region "Events"
-
-  Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
-
-  Public Event AncestorUpdated() Implements IDockPanelItem.AncestorUpdated
-
-  Public Event PanelItemGotFocus(sender As Object, e As EventArgs) Implements IDockPanelItem.PanelItemGotFocus
-
-#End Region
-
-#Region "Properties"
-
-  Public Property ItemAwake As Boolean = False Implements IDockPanelItem.ItemAwake
-  Public ReadOnly Property ItemCaption As String = EN_ITEMCAPTION Implements IDockPanelItem.ItemCaption
-  Public Property ItemDockPanelLocation As DockPanelLocation Implements IDockPanelItem.ItemDockPanelLocation
-  Public Property ItemHasFocus As Boolean = False Implements IDockPanelItem.ItemHasFocus
-  Public ReadOnly Property ItemHasRibbonBar As Boolean = True Implements IDockPanelItem.ItemHasRibbonBar
-  Public ReadOnly Property ItemHasToolBar As Boolean = False Implements IDockPanelItem.ItemHasToolBar
-  Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
-  Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
-  Public ReadOnly Property ItemSupportsSearch As Boolean = True Implements IDockPanelItem.ItemSupportsSearch
-  Public ReadOnly Property Key As String Implements IDockPanelItem.Key
-  Public ReadOnly Property ShowRibbonOnFocus As String = EN_ITEMCAPTION Implements IDockPanelItem.ShowRibbonOnFocus
-
-#End Region
-
 #Region "Public Constructors"
 
-  Public Sub New(itemKey As String)
-    Key = itemKey
+  Public Sub New(Optional itemKey As String = "")
+    'Apply Item Defaults for this Type
+    ItemCaption = Default_ItemCaption
+    ItemHasRibbonBar = Default_ItemHasRibbonBar
+    ItemHasToolBar = Default_ItemHasToolBar
+    ItemSupportsClose = Default_ItemSupportsClose
+    ItemSupportsMove = Default_ItemSupportsMove
+    ItemSupportsSearch = Default_ItemSupportsSearch
+    Key = Default_Key
+    LocationCurrent = Default_LocationCurrent
+    LocationPrefered = Default_LocationPrefered
+    LocationPrevious = Default_LocationPrevious
+    RibbonBarKey = Default_RibbonBarKey
+    RibbonHideOnItemClose = Default_RibbonHideOnItemClose
+    RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
+    RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
+    'Key can be overriden during creation, apply if set
+    If Len(itemKey) > 0 Then Key = itemKey
+    'Continue with creation
     components = New Container()
     Dim TreeNode1 As New TreeNode("My First Page")
     Dim TreeNode2 As New TreeNode("Welcome Section", New TreeNode() {TreeNode1})
@@ -469,37 +444,6 @@ Public Class NotebookViewer
 
 #Region "Private Methods"
 
-  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
-
-  End Sub
-
-  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
-
-  End Sub
-
-  Private Sub CaptureFocus(ctl As Control)
-    Try
-      AddHandler ctl.GotFocus, AddressOf DockPanelItem_GotFocus
-      AddHandler ctl.MouseDown, AddressOf DockPanelItem_GotFocus
-    Catch ex As Exception
-    End Try
-    For Each childCtl As Control In ctl.Controls
-      CaptureFocus(childCtl)
-    Next
-  End Sub
-
-  Private Sub DockPanelItem_GotFocus(sender As Object, e As EventArgs)
-    RaiseEvent PanelItemGotFocus(sender, e)
-  End Sub
-
-  Private Sub NotebookViewer_AncestorAssigned() Handles Me.AncestorAssigned
-
-  End Sub
-
-  Private Sub NotebookViewer_AncestorUpdated() Handles Me.AncestorUpdated
-
-  End Sub
-
   Private Sub txtNotebookPageTitle_TextChanged(sender As Object, e As EventArgs) Handles TxtHeader.TextChanged
     LblStretch.Text = TxtHeader.Text
   End Sub
@@ -520,28 +464,20 @@ Public Class NotebookViewer
     End Try
   End Sub
 
+  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
+    'Throw New NotImplementedException()
+  End Sub
+
 #End Region
 
 #Region "Public Methods"
 
-  Public Sub ApplySearch(criteria As String) Implements IDockPanelItem.ApplySearch
+  Public Overrides Sub ApplySearch(criteria As String)
     Throw New NotImplementedException()
   End Sub
 
-  Public Sub ClearSearch() Implements IDockPanelItem.ClearSearch
+  Public Overrides Sub ClearSearch()
     Throw New NotImplementedException()
-  End Sub
-
-  Public Function GetDockToolBarConfig() As DockToolBarConfig Implements IDockPanelItem.GetDockToolBarConfig
-    Throw New NotImplementedException()
-  End Function
-
-  Public Function GetRibbonBarConfig() As RibbonBarTabConfig Implements IDockPanelItem.GetRibbonBarConfig
-    Throw New NotImplementedException()
-  End Function
-
-  Public Sub SetAncestors(ancestorsObj As AncestorCollection) Implements IDockPanelItem.SetAncestors
-    Ancestors = ancestorsObj
   End Sub
 
 #End Region

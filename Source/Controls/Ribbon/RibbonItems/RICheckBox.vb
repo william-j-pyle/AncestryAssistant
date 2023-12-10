@@ -32,18 +32,18 @@
 
 #Region "Public Methods"
 
-  Public Overrides Function GetAttribute(attributeName As String) As Object
+  Public Overrides Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
     Throw New NotImplementedException()
   End Function
 
-  Public Overrides Sub SetAttribute(attributeName As String, attributeValue As Object)
-    Select Case attributeName.ToLower
-      Case "text"
+  Public Overrides Sub SetAttribute(ItemAttribute As RibbonItemAttribute, attributeValue As Object)
+    Select Case ItemAttribute
+      Case RibbonItemAttribute.Text
         ctl.Text = attributeValue
-      Case "value"
+      Case RibbonItemAttribute.checked
         ctl.Checked = attributeValue.ToLower.Equals("true") Or attributeValue.ToLower.Equals("1") Or attributeValue.ToLower.Equals("checked")
       Case Else
-        Debug.Print("Unhandled Attribute: {0}={1}", attributeName, attributeValue)
+        Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select
   End Sub
 

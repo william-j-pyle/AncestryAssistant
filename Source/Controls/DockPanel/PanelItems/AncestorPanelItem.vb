@@ -1,8 +1,7 @@
 ﻿Imports System.Text
 
-Public Class AncestorPanel
-  Inherits System.Windows.Forms.UserControl
-  Implements IDockPanelItem
+Public Class AncestorPanelItem
+  Inherits DockPanelItem
 
 #Region "Fields"
 
@@ -11,53 +10,54 @@ Public Class AncestorPanel
   Private WithEvents ancestorAttributesCol2 As FlatPanel
   Private WithEvents AncestorAttributesHeader As Panel
   Private WithEvents AncestorColSplitter As Splitter
-  Private WithEvents Ancestors As AncestorCollection
 
   Private WithEvents lblAncestorAttributesCol1 As Label
   Private WithEvents lblAncestorAttributesCol2 As Label
-  Private Const EN_ITEMCAPTION As String = "Ancestor"
+  Private Const Default_ItemCaption As String = "Ancestor"
+  Private Const Default_ItemHasRibbonBar As Boolean = False
+  Private Const Default_ItemHasToolBar As Boolean = False
+  Private Const Default_ItemSupportsClose As Boolean = True
+  Private Const Default_ItemSupportsMove As Boolean = True
+  Private Const Default_ItemSupportsSearch As Boolean = False
+  Private Const Default_Key As String = "DOCK_ANCESTORATTRIBUTES"
+  Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
+  Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.LeftBottom
+  Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.LeftBottom
+  Private Const Default_RibbonBarKey As String = ""
+  Private Const Default_RibbonHideOnItemClose As Boolean = False
+  Private Const Default_RibbonSelectOnItemFocus As Boolean = False
+  Private Const Default_RibbonShowOnItemOpen As Boolean = False
   Private Const SUBNODE_DELIMITER As String = vbTab
-  Private ActiveAncestorID As String = String.Empty
   Private AttributeState As List(Of String)
 
+  Private blockEvents As Boolean = False
   Private components As System.ComponentModel.IContainer
 
   Private LastAttributeItem As TreeNode
 
 #End Region
 
-#Region "Events"
-
-  Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
-
-  Public Event AncestorUpdated() Implements IDockPanelItem.AncestorUpdated
-
-  Public Event PanelCloseClicked(sender As Object)
-
-  Public Event PanelItemGotFocus(sender As Object, e As EventArgs) Implements IDockPanelItem.PanelItemGotFocus
-
-#End Region
-
-#Region "Properties"
-
-  Public Property ItemAwake As Boolean = False Implements IDockPanelItem.ItemAwake
-  Public ReadOnly Property ItemCaption As String = EN_ITEMCAPTION Implements IDockPanelItem.ItemCaption
-  Public Property ItemDockPanelLocation As DockPanelLocation Implements IDockPanelItem.ItemDockPanelLocation
-  Public Property ItemHasFocus As Boolean = False Implements IDockPanelItem.ItemHasFocus
-  Public ReadOnly Property ItemHasRibbonBar As Boolean = False Implements IDockPanelItem.ItemHasRibbonBar
-  Public ReadOnly Property ItemHasToolBar As Boolean = False Implements IDockPanelItem.ItemHasToolBar
-  Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
-  Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
-  Public ReadOnly Property ItemSupportsSearch As Boolean = False Implements IDockPanelItem.ItemSupportsSearch
-  Public ReadOnly Property Key As String Implements IDockPanelItem.Key
-  Public ReadOnly Property ShowRibbonOnFocus As String = String.Empty Implements IDockPanelItem.ShowRibbonOnFocus
-
-#End Region
-
 #Region "Public Constructors"
 
-  Public Sub New(itemKey As String)
-    Key = itemKey
+  Public Sub New(Optional itemKey As String = "")
+    'Apply Item Defaults for this Type
+    ItemCaption = Default_ItemCaption
+    ItemHasRibbonBar = Default_ItemHasRibbonBar
+    ItemHasToolBar = Default_ItemHasToolBar
+    ItemSupportsClose = Default_ItemSupportsClose
+    ItemSupportsMove = Default_ItemSupportsMove
+    ItemSupportsSearch = Default_ItemSupportsSearch
+    Key = Default_Key
+    LocationCurrent = Default_LocationCurrent
+    LocationPrefered = Default_LocationPrefered
+    LocationPrevious = Default_LocationPrevious
+    RibbonBarKey = Default_RibbonBarKey
+    RibbonHideOnItemClose = Default_RibbonHideOnItemClose
+    RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
+    RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
+    'Key can be overriden during creation, apply if set
+    If Len(itemKey) > 0 Then Key = itemKey
+    'Continue with creation
     AncestorAttributesHeader = New System.Windows.Forms.Panel()
     AncestorColSplitter = New System.Windows.Forms.Splitter()
     ancestorAttributesCol2 = New AncestryAssistant.FlatPanel()
@@ -186,7 +186,7 @@ Public Class AncestorPanel
     Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     ForeColor = My.Theme.PanelBackColor
     Margin = New System.Windows.Forms.Padding(0)
-    Name = "AncestorPanel"
+    Name = Key
     Size = New System.Drawing.Size(287, 308)
     Dock = DockStyle.Fill
     AncestorAttributesHeader.ResumeLayout(False)
@@ -253,11 +253,11 @@ Public Class AncestorPanel
     AncestorColSplitter.Tag = e.X
   End Sub
 
-  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
+  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles ancestors.ActiveAncestorChanged
     UpdateUI()
   End Sub
 
-  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
+  Private Sub Ancestors_AncestorsChanged() Handles ancestors.AncestorsChanged
     UpdateUI()
   End Sub
 
@@ -276,17 +276,6 @@ Public Class AncestorPanel
     Next
   End Sub
 
-  Private Sub CaptureFocus(ctl As Control)
-    Try
-      AddHandler ctl.GotFocus, AddressOf DockPanelItem_GotFocus
-      AddHandler ctl.MouseDown, AddressOf DockPanelItem_GotFocus
-    Catch ex As Exception
-    End Try
-    For Each childCtl As Control In ctl.Controls
-      CaptureFocus(childCtl)
-    Next
-  End Sub
-
   Private Function customNode(ParamArray subNodes() As String) As String
     Dim sb As New StringBuilder
     For Each node As String In subNodes
@@ -296,10 +285,6 @@ Public Class AncestorPanel
     Return sb.ToString
   End Function
 
-  Private Sub DockPanelItem_GotFocus(sender As Object, e As EventArgs)
-    RaiseEvent PanelItemGotFocus(sender, e)
-  End Sub
-
   Private Function HaveOrMissing(haveIt As Boolean) As String
     If haveIt Then
       Return "Have"
@@ -307,10 +292,6 @@ Public Class AncestorPanel
       Return "Missing"
     End If
   End Function
-
-  Private Sub JDockPanelHeader1_HeaderCloseClicked()
-    RaiseEvent PanelCloseClicked(Me)
-  End Sub
 
   Private Sub RestoreAttributeState()
     For Each i As TreeNode In AncestorAttributes.Nodes
@@ -341,35 +322,10 @@ Public Class AncestorPanel
     End Try
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
-  Public Sub ApplySearch(criteria As String) Implements IDockPanelItem.ApplySearch
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Sub ClearSearch() Implements IDockPanelItem.ClearSearch
-    Throw New NotImplementedException()
-  End Sub
-
-  Public Function GetDockToolBarConfig() As DockToolBarConfig Implements IDockPanelItem.GetDockToolBarConfig
-    Throw New NotImplementedException()
-  End Function
-
-  Public Function GetRibbonBarConfig() As RibbonBarTabConfig Implements IDockPanelItem.GetRibbonBarConfig
-    Throw New NotImplementedException()
-  End Function
-
-  Public Sub SetAncestors(ancestorsObj As AncestorCollection) Implements IDockPanelItem.SetAncestors
-    Ancestors = ancestorsObj
-    UpdateUI()
-  End Sub
-
-  Public Sub UpdateUI()
-    If Ancestors Is Nothing Then Exit Sub
-    If Not Ancestors.HasActiveAncestor Then Exit Sub
-    Dim ancestor As AncestorCollection.Ancestor = Ancestors.ActiveAncestor
+  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
+    If ancestors Is Nothing Then Exit Sub
+    If Not ancestors.HasActiveAncestor Then Exit Sub
+    Dim ancestor As AncestorCollection.Ancestor = ancestors.ActiveAncestor
     CaptureAttributeState()
     AncestorAttributes.Nodes.Clear()
 
@@ -410,6 +366,18 @@ Public Class AncestorPanel
     End If
 
     RestoreAttributeState()
+  End Sub
+
+#End Region
+
+#Region "Public Methods"
+
+  Public Overrides Sub ApplySearch(criteria As String)
+    Throw New NotImplementedException()
+  End Sub
+
+  Public Overrides Sub ClearSearch()
+    Throw New NotImplementedException()
   End Sub
 
 #End Region

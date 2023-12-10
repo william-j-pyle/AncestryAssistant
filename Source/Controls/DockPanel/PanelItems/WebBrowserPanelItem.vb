@@ -4,72 +4,53 @@ Imports Microsoft.Web.WebView2.Core
 Imports Microsoft.Web.WebView2.WinForms
 Imports Newtonsoft.Json
 
-#Const SHOW_DEBUG = False
-#Const MSG_DUMP = False
-#Const MSG_LOG = False
-
-Public Class AncestryWebViewer
-  Inherits System.Windows.Forms.UserControl
-  Implements IDockPanelItem
+Public Class WebBrowserPanelItem
+  Inherits DockPanelItem
 
 #Region "Fields"
 
-  Private WithEvents ancestors As AncestorCollection
-
   Private WithEvents btnBack As ToolStripButton
-
   Private WithEvents btnHome As ToolStripButton
-
   Private WithEvents btnReload As ToolStripButton
-
   Private WithEvents CoreWeb As CoreWebView2
-
   Private WithEvents CoreWebDownload As CoreWebView2DownloadOperation
-
   ' Tool Strip
   Private WithEvents tsWeb As FlatToolBar
-
   Private WithEvents txtHref As ToolStripTextBox
-
   ' Web Interface
   Private WithEvents web As WebView2
-
   Private Const AncestryBaseURL As String = "https://www.ancestry.com/"
-
-  Private Const EN_ITEMCAPTION As String = "Ancestry.com"
-
+  Private Const Default_ItemCaption As String = "Ancestry.com"
+  Private Const Default_ItemHasRibbonBar As Boolean = True
+  Private Const Default_ItemHasToolBar As Boolean = True
+  Private Const Default_ItemSupportsClose As Boolean = True
+  Private Const Default_ItemSupportsMove As Boolean = True
+  Private Const Default_ItemSupportsSearch As Boolean = False
+  Private Const Default_Key As String = "DOCK_WEBBROWSER"
+  Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
+  Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.MiddleTopLeft
+  Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.MiddleTopLeft
+  Private Const Default_RibbonBarKey As String = "B200"
+  Private Const Default_RibbonHideOnItemClose As Boolean = False
+  Private Const Default_RibbonSelectOnItemFocus As Boolean = True
+  Private Const Default_RibbonShowOnItemOpen As Boolean = True
   Private _AncestorID As String = ""
-
   Private _MsgSyncKey As Integer = 0
-
   Private _ShowToolbar As Boolean = False
-
   Private _UriTrackingGroup As UriTrackingGroupEnum = UriTrackingGroupEnum.ANCESTRY
-
   Private _URL As New Uri(AncestryBaseURL)
-
   Private components As System.ComponentModel.IContainer
 
   ' Tracking
   Private isReady As Boolean = False
-
   Private sameImageAsFilename As String = ""
-
   Private UriTrackingGroupDecoder As New UriTracking()
 
 #End Region
 
 #Region "Events"
 
-  Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
-
-  Public Event AncestorChanged(NewAncestorID As String)
-
-  Public Event AncestorUpdated() Implements IDockPanelItem.AncestorUpdated
-
   Public Event DataDownload(data As APIMessage)
-
-  Public Event PanelItemGotFocus(sender As Object, e As EventArgs) Implements IDockPanelItem.PanelItemGotFocus
 
   Public Event UriTrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
 
@@ -86,7 +67,6 @@ Public Class AncestryWebViewer
     Set(value As String)
       If Not value.Equals(_AncestorID) Then
         _AncestorID = value
-        RaiseEvent AncestorChanged(value)
       End If
     End Set
   End Property
@@ -105,17 +85,6 @@ Public Class AncestryWebViewer
     End Set
   End Property
 
-  Public Property ItemAwake As Boolean = True Implements IDockPanelItem.ItemAwake
-  Public ReadOnly Property ItemCaption As String = EN_ITEMCAPTION Implements IDockPanelItem.ItemCaption
-  Public Property ItemDockPanelLocation As DockPanelLocation Implements IDockPanelItem.ItemDockPanelLocation
-  Public Property ItemHasFocus As Boolean = False Implements IDockPanelItem.ItemHasFocus
-  Public ReadOnly Property ItemHasRibbonBar As Boolean = False Implements IDockPanelItem.ItemHasRibbonBar
-  Public ReadOnly Property ItemHasToolBar As Boolean = False Implements IDockPanelItem.ItemHasToolBar
-  Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
-  Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
-  Public ReadOnly Property ItemSupportsSearch As Boolean = False Implements IDockPanelItem.ItemSupportsSearch
-
-  Public ReadOnly Property Key As String Implements IDockPanelItem.Key
   Public ReadOnly Property MessageSyncKey As Integer
     Get
       _MsgSyncKey += 1
@@ -123,8 +92,6 @@ Public Class AncestryWebViewer
       Return _MsgSyncKey
     End Get
   End Property
-
-  Public ReadOnly Property ShowRibbonOnFocus As String = String.Empty Implements IDockPanelItem.ShowRibbonOnFocus
 
   Public Property ShowToolbar As Boolean
     Get
@@ -142,7 +109,9 @@ Public Class AncestryWebViewer
     End Get
     Set(value As UriTrackingGroupEnum)
       If value <> _UriTrackingGroup Then
+#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
         Logger.log(Logger.LOG_TYPE.INFO, "UriTrackingGroup Changed {New:" & value.ToString & ", Old:" & _UriTrackingGroup.ToString & "}")
+#End If
         Dim oldValue As UriTrackingGroupEnum = _UriTrackingGroup
         _UriTrackingGroup = value
         RaiseEvent UriTrackingGroupChanged(value, oldValue)
@@ -169,8 +138,25 @@ Public Class AncestryWebViewer
 
 #Region "Public Constructors"
 
-  Public Sub New(itemKey As String)
-    Key = itemKey
+  Public Sub New(Optional itemKey As String = "")
+    'Apply Item Defaults for this Type
+    ItemCaption = Default_ItemCaption
+    ItemHasRibbonBar = Default_ItemHasRibbonBar
+    ItemHasToolBar = Default_ItemHasToolBar
+    ItemSupportsClose = Default_ItemSupportsClose
+    ItemSupportsMove = Default_ItemSupportsMove
+    ItemSupportsSearch = Default_ItemSupportsSearch
+    Key = Default_Key
+    LocationCurrent = Default_LocationCurrent
+    LocationPrefered = Default_LocationPrefered
+    LocationPrevious = Default_LocationPrevious
+    RibbonBarKey = Default_RibbonBarKey
+    RibbonHideOnItemClose = Default_RibbonHideOnItemClose
+    RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
+    RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
+    'Key can be overriden during creation, apply if set
+    If Len(itemKey) > 0 Then Key = itemKey
+    'Continue with creation
     web = New Microsoft.Web.WebView2.WinForms.WebView2()
     tsWeb = New FlatToolBar()
     btnBack = New System.Windows.Forms.ToolStripButton()
@@ -281,17 +267,6 @@ Public Class AncestryWebViewer
     web.Reload()
   End Sub
 
-  Private Sub CaptureFocus(ctl As Control)
-    Try
-      AddHandler ctl.GotFocus, AddressOf DockPanelItem_GotFocus
-      AddHandler ctl.MouseDown, AddressOf DockPanelItem_GotFocus
-    Catch ex As Exception
-    End Try
-    For Each childCtl As Control In ctl.Controls
-      CaptureFocus(childCtl)
-    Next
-  End Sub
-
   ' When the browser detects a file is being downloaded me routine will fire, we Capture the DownloadOperation object
   ' and monitor its events for completion of the download, then fire an event about the download
   Private Sub CoreWeb_DownloadStarting(sender As Object, e As CoreWebView2DownloadStartingEventArgs) Handles CoreWeb.DownloadStarting
@@ -301,13 +276,9 @@ Public Class AncestryWebViewer
   ' If enabled, me routine will cancel every request to various tracking sites
   Private Sub CoreWeb_FrameNavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles CoreWeb.FrameNavigationStarting
     If BlockWebTracking Then
-      For Each partialDomain As String In BlockedWebDomains
-        If e.Uri.ToLower.Contains(partialDomain.ToLower) Then
-          'Debug.Print("BLOCKED:  " + e.Uri)
-          e.Cancel = True
-          Exit Sub
-        End If
-      Next
+      If ShouldBlockNavigation(e.Uri) Then
+        e.Cancel = True
+      End If
     End If
   End Sub
 
@@ -317,12 +288,9 @@ Public Class AncestryWebViewer
 
   Private Sub CoreWeb_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles CoreWeb.NavigationStarting
     If BlockWebTracking Then
-      For Each partialDomain As String In BlockedWebDomains
-        If e.Uri.ToLower.Contains(partialDomain.ToLower) Then
-          e.Cancel = True
-          Exit Sub
-        End If
-      Next
+      If ShouldBlockNavigation(e.Uri) Then
+        e.Cancel = True
+      End If
     End If
   End Sub
 
@@ -378,20 +346,18 @@ Public Class AncestryWebViewer
     End If
   End Sub
 
-  Private Sub DockPanelItem_GotFocus(sender As Object, e As EventArgs)
-    Debug.Print("DockPanelItem_GotFocus")
-
-    RaiseEvent PanelItemGotFocus(sender, e)
-  End Sub
-
   Private Async Sub JSAPI_Execute(script As String)
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("WebBrowserPanelItem.JSAPI_Execute(script=[{0}])", script)
+#End If
+
     Await web.CoreWebView2.ExecuteScriptAsync(script)
   End Sub
 
   Private Sub JSAPI_Message(sender As Object, e As CoreWebView2WebMessageReceivedEventArgs) Handles web.WebMessageReceived
     Dim msg As APIMessage = JsonConvert.DeserializeObject(Of APIMessage)(e.WebMessageAsJson)
 
-#If MSG_LOG Then
+#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
     Logger.log(Logger.LOG_TYPE.DEBUG, msg.ToString)
 #End If
 
@@ -403,11 +369,13 @@ Public Class AncestryWebViewer
       sameImageAsFilename = ""
       Dim tracks As String = msg.GetValue("PAGEKEY")
       Dim utg As UriTrackingGroupEnum = UriTrackingGroupDecoder.GetEnum(tracks.Split(":"))
+#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
       Logger.log(Logger.LOG_TYPE.INFO, "-----------------------------")
       Logger.log(Logger.LOG_TYPE.INFO, "-- URITrackingGroup        --")
       Logger.log(Logger.LOG_TYPE.INFO, "-----------------------------")
       Logger.log(Logger.LOG_TYPE.INFO, "-- tracks        = " & tracks)
       Logger.log(Logger.LOG_TYPE.INFO, "-- TrackingGroup = " & utg.ToString)
+#End If
       UriTrackingGroup = utg
       ' Ancestry Image and Media Viewer Data Capture
       If utg = UriTrackingGroupEnum.ANCESTRY_VIEWER_IMAGE Or utg = UriTrackingGroupEnum.ANCESTRY_VIEWER_MEDIA Then
@@ -429,6 +397,15 @@ Public Class AncestryWebViewer
     RaiseEvent DataDownload(msg)
   End Sub
 
+  Private Function ShouldBlockNavigation(uri As String) As Boolean
+    For Each partialDomain As String In BlockedWebDomains
+      If uri.ToLower.Contains(partialDomain.ToLower) Then
+        Return True
+      End If
+    Next
+    Return False
+  End Function
+
   Private Sub tsWeb_Resize(sender As Object, e As EventArgs) Handles tsWeb.Resize
     txtHref.Width = tsWeb.Bounds.Width - btnHome.Bounds.Right - 46
   End Sub
@@ -439,8 +416,8 @@ Public Class AncestryWebViewer
 
   Private Sub web_CoreWebView2InitializationCompleted(sender As Object, e As CoreWebView2InitializationCompletedEventArgs) Handles web.CoreWebView2InitializationCompleted
     CoreWeb = web.CoreWebView2
-#If SHOW_DEBUG Then
-    Debug.Print("JWebView2_CoreWebView2InitializationCompleted")
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("WebBrowserPanelItem.web_CoreWebView2InitializationCompleted()")
 #End If
     With CoreWeb
       With .Settings
@@ -451,7 +428,7 @@ Public Class AncestryWebViewer
         .IsScriptEnabled = True
         .IsZoomControlEnabled = False
         .AreBrowserAcceleratorKeysEnabled = False
-#If SHOW_DEBUG Then
+#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
         .AreDefaultScriptDialogsEnabled = True
         .AreDevToolsEnabled = True
         .AreDefaultContextMenusEnabled = True
@@ -475,31 +452,24 @@ Public Class AncestryWebViewer
     End If
   End Sub
 
-  Private Sub web_GotFocus(sender As Object, e As EventArgs) Handles web.GotFocus
-    Debug.Print("web_GotFocus")
-
-  End Sub
-
-  Private Sub web_LostFocus(sender As Object, e As EventArgs) Handles web.LostFocus
-    Debug.Print("Web_LostFocus")
-  End Sub
-
-  Private Sub web_MouseDown(sender As Object, e As MouseEventArgs) Handles web.MouseDown
-    Debug.Print("web_MouseDown")
-
-  End Sub
-
   Private Sub web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles web.NavigationCompleted
-    Debug.Print("web_NavigationCompleted")
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("WebBrowserPanelItem.web_NavigationCompleted()")
+#End If
     RaiseEvent ViewerBusy(False)
   End Sub
 
   Private Sub web_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles web.NavigationStarting
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("WebBrowserPanelItem.web_NavigationStarting()")
+#End If
     RaiseEvent ViewerBusy(True)
   End Sub
 
   Private Sub web_SourceChanged(sender As Object, e As CoreWebView2SourceChangedEventArgs) Handles web.SourceChanged
-    Debug.Print("web_SourceChanged")
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("WebBrowserPanelItem.web_SourceChanged(uri=[{0}])", web.Source.AbsoluteUri)
+#End If
     JSAPI_Execute("ancestryAssistant.getPage();")
     txtHref.Text = web.Source.AbsoluteUri
   End Sub
@@ -520,27 +490,26 @@ Public Class AncestryWebViewer
     End Try
   End Sub
 
+  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
+    'Throw New NotImplementedException()
+  End Sub
+
 #End Region
 
 #Region "Public Methods"
 
-  Public Sub ApplySearch(criteria As String) Implements IDockPanelItem.ApplySearch
+  Public Overrides Sub ApplySearch(criteria As String)
     Throw New NotImplementedException()
   End Sub
 
-  Public Sub ClearSearch() Implements IDockPanelItem.ClearSearch
+  Public Overrides Sub ClearSearch()
     Throw New NotImplementedException()
   End Sub
-
-  Public Function GetDockToolBarConfig() As DockToolBarConfig Implements IDockPanelItem.GetDockToolBarConfig
-    Throw New NotImplementedException()
-  End Function
-
-  Public Function GetRibbonBarConfig() As RibbonBarTabConfig Implements IDockPanelItem.GetRibbonBarConfig
-    Throw New NotImplementedException()
-  End Function
 
   Public Sub NavigateTo(target As UriTrackingGroupEnum, Optional customParam As String = "")
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("WebBrowserPanelItem.NavigateTo(target=[{0}], customParam=[{1}])", target.ToString, customParam)
+#End If
     Dim rtn As String = AncestryBaseURL
     Select Case target
       Case UriTrackingGroupEnum.CUSTOM
@@ -580,6 +549,9 @@ Public Class AncestryWebViewer
   End Sub
 
   Public Sub saveImageAs(filename As String)
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("WebBrowserPanelItem.saveImageAs(filename=[{0}])", filename)
+#End If
     Dim src As String = web.Source.AbsoluteUri
     If src.EndsWith("jpg") Or src.EndsWith("jpeg") Then
       My.Computer.Network.DownloadFile(src, filename)
@@ -587,10 +559,6 @@ Public Class AncestryWebViewer
       sameImageAsFilename = filename
       JSAPI_Execute("ancestryAssistant.getImage();")
     End If
-  End Sub
-
-  Public Sub SetAncestors(ancestorsObj As AncestorCollection) Implements IDockPanelItem.SetAncestors
-    ancestors = ancestorsObj
   End Sub
 
 #End Region

@@ -1,63 +1,59 @@
 ﻿Imports System.IO
 
-Public Class CensusViewer
-  Inherits UserControl
-  Implements IDockPanelItem
+Public Class CensusPanelItem
+  Inherits DockPanelItem
 
 #Region "Fields"
 
   Private WithEvents Ancestors As AncestorCollection
   Private WithEvents ts As FlatToolBar
-
   Private WithEvents xlsActiveSheet As DataGridView
-
-  Private Const EN_ITEMCAPTION As String = "Census"
-
+  Private Const Default_ItemCaption As String = "Census"
+  Private Const Default_ItemHasRibbonBar As Boolean = True
+  Private Const Default_ItemHasToolBar As Boolean = True
+  Private Const Default_ItemSupportsClose As Boolean = True
+  Private Const Default_ItemSupportsMove As Boolean = True
+  Private Const Default_ItemSupportsSearch As Boolean = False
+  Private Const Default_Key As String = "DOCK_CENSUS"
+  Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
+  Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.MiddleBottom
+  Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.MiddleBottom
+  Private Const Default_RibbonBarKey As String = "B400"
+  Private Const Default_RibbonHideOnItemClose As Boolean = True
+  Private Const Default_RibbonSelectOnItemFocus As Boolean = True
+  Private Const Default_RibbonShowOnItemOpen As Boolean = True
   Const UNIFIED_TEXT As String = "Unified"
-
   Private Ancestor As AncestorCollection.Ancestor
   Private AvailableYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
-
+  Private blockEvents As Boolean = False
   Private CensusData As Collection
-
   Private CensusFileList As Collection
-
   Private components As System.ComponentModel.IContainer
-
   Private xlsWorkbook As Dictionary(Of Integer, DataGridView)
-
-#End Region
-
-#Region "Events"
-
-  Public Event AncestorAssigned() Implements IDockPanelItem.AncestorAssigned
-
-  Public Event AncestorUpdated() Implements IDockPanelItem.AncestorUpdated
-
-  Public Event PanelItemGotFocus(sender As Object, e As EventArgs) Implements IDockPanelItem.PanelItemGotFocus
-
-#End Region
-
-#Region "Properties"
-
-  Public Property ItemAwake As Boolean = False Implements IDockPanelItem.ItemAwake
-  Public ReadOnly Property ItemCaption As String = EN_ITEMCAPTION Implements IDockPanelItem.ItemCaption
-  Public Property ItemDockPanelLocation As DockPanelLocation Implements IDockPanelItem.ItemDockPanelLocation
-  Public Property ItemHasFocus As Boolean = False Implements IDockPanelItem.ItemHasFocus
-  Public ReadOnly Property ItemHasRibbonBar As Boolean = True Implements IDockPanelItem.ItemHasRibbonBar
-  Public ReadOnly Property ItemHasToolBar As Boolean = True Implements IDockPanelItem.ItemHasToolBar
-  Public ReadOnly Property ItemSupportsClose As Boolean = True Implements IDockPanelItem.ItemSupportsClose
-  Public ReadOnly Property ItemSupportsMove As Boolean = True Implements IDockPanelItem.ItemSupportsMove
-  Public ReadOnly Property ItemSupportsSearch As Boolean = True Implements IDockPanelItem.ItemSupportsSearch
-  Public ReadOnly Property Key As String Implements IDockPanelItem.Key
-  Public ReadOnly Property ShowRibbonOnFocus As String = UNIFIED_TEXT Implements IDockPanelItem.ShowRibbonOnFocus
 
 #End Region
 
 #Region "Public Constructors"
 
-  Public Sub New(itemKey As String)
-    Key = itemKey
+  Public Sub New(Optional itemKey As String = "")
+    'Apply Item Defaults for this Type
+    ItemCaption = Default_ItemCaption
+    ItemHasRibbonBar = Default_ItemHasRibbonBar
+    ItemHasToolBar = Default_ItemHasToolBar
+    ItemSupportsClose = Default_ItemSupportsClose
+    ItemSupportsMove = Default_ItemSupportsMove
+    ItemSupportsSearch = Default_ItemSupportsSearch
+    Key = Default_Key
+    LocationCurrent = Default_LocationCurrent
+    LocationPrefered = Default_LocationPrefered
+    LocationPrevious = Default_LocationPrevious
+    RibbonBarKey = Default_RibbonBarKey
+    RibbonHideOnItemClose = Default_RibbonHideOnItemClose
+    RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
+    RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
+    'Key can be overriden during creation, apply if set
+    If Len(itemKey) > 0 Then Key = itemKey
+    'Continue with creation
     ts = New FlatToolBar()
     SuspendLayout()
     With ts
@@ -69,7 +65,6 @@ Public Class CensusViewer
       .Name = "ts"
       .Size = New Size(439, 25)
       .TabIndex = 3
-      .Text = "ToolStrip1"
     End With
     AutoScaleDimensions = New SizeF(6.0!, 13.0!)
     AutoScaleMode = AutoScaleMode.None
@@ -117,17 +112,6 @@ Public Class CensusViewer
 
   Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
     UpdateUI()
-  End Sub
-
-  Private Sub CaptureFocus(ctl As Control)
-    Try
-      AddHandler ctl.GotFocus, AddressOf DockPanelItem_GotFocus
-      AddHandler ctl.MouseDown, AddressOf DockPanelItem_GotFocus
-    Catch ex As Exception
-    End Try
-    For Each childCtl As Control In ctl.Controls
-      CaptureFocus(childCtl)
-    Next
   End Sub
 
   Private Sub CensusSelect(sender As Object, e As EventArgs)
@@ -201,10 +185,6 @@ Public Class CensusViewer
         xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = My.Theme.XLSBackColor
       End If
     End If
-  End Sub
-
-  Private Sub DockPanelItem_GotFocus(sender As Object, e As EventArgs)
-    RaiseEvent PanelItemGotFocus(sender, e)
   End Sub
 
   Private Function GetData(csvFilePath As String) As ArrayList
@@ -640,7 +620,23 @@ Public Class CensusViewer
     xlsActiveSheet.BringToFront()
   End Sub
 
-  Private Sub UpdateUI()
+#End Region
+
+#Region "Protected Methods"
+
+  'UserControl overrides dispose to clean up the component list.
+  <System.Diagnostics.DebuggerNonUserCode()>
+  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+    Try
+      If disposing AndAlso components IsNot Nothing Then
+        components.Dispose()
+      End If
+    Finally
+      MyBase.Dispose(disposing)
+    End Try
+  End Sub
+
+  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
     ResetViewer()
     If Ancestors Is Nothing Then Exit Sub
     If Not Ancestors.HasActiveAncestor Then Exit Sub
@@ -678,43 +674,14 @@ Public Class CensusViewer
 
 #End Region
 
-#Region "Protected Methods"
-
-  'UserControl overrides dispose to clean up the component list.
-  <System.Diagnostics.DebuggerNonUserCode()>
-  Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-    Try
-      If disposing AndAlso components IsNot Nothing Then
-        components.Dispose()
-      End If
-    Finally
-      MyBase.Dispose(disposing)
-    End Try
-  End Sub
-
-#End Region
-
 #Region "Public Methods"
 
-  Public Sub ApplySearch(criteria As String) Implements IDockPanelItem.ApplySearch
+  Public Overrides Sub ApplySearch(criteria As String)
     Throw New NotImplementedException()
   End Sub
 
-  Public Sub ClearSearch() Implements IDockPanelItem.ClearSearch
+  Public Overrides Sub ClearSearch()
     Throw New NotImplementedException()
-  End Sub
-
-  Public Function GetDockToolBarConfig() As DockToolBarConfig Implements IDockPanelItem.GetDockToolBarConfig
-    Throw New NotImplementedException()
-  End Function
-
-  Public Function GetRibbonBarConfig() As RibbonBarTabConfig Implements IDockPanelItem.GetRibbonBarConfig
-    Throw New NotImplementedException()
-  End Function
-
-  Public Sub SetAncestors(ancestorsObj As AncestorCollection) Implements IDockPanelItem.SetAncestors
-    Ancestors = ancestorsObj
-    UpdateUI()
   End Sub
 
 #End Region

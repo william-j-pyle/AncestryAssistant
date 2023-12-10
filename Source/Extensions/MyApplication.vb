@@ -41,6 +41,7 @@ Namespace My
     ''' <param name="e">
     ''' </param>
     Private Sub MyApplication_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
+      Logger.Clear()
       Logger.log(Logger.LOG_TYPE.DEBUG, "Starting Up")
     End Sub
 

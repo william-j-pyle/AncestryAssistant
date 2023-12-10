@@ -2,6 +2,7 @@
 Imports System.IO
 Imports AncestryAssistant.AncestorCollection
 
+#Const RESET_SAVED_SETTINGS = False
 #Const SHOW_DEBUG = True
 
 Public Class AssistantAppForm
@@ -9,7 +10,7 @@ Public Class AssistantAppForm
 #Region "Fields"
 
   Private WithEvents Ancestors As AncestorCollection
-  Private WithEvents Ancestry As AncestryWebViewer
+  Private WithEvents Ancestry As WebBrowserPanelItem
 
   Private WithEvents FormExtensions As ResizeDragHandler
 
@@ -36,6 +37,12 @@ Public Class AssistantAppForm
 #Region "Public Constructors"
 
   Public Sub New()
+#If RESET_SAVED_SETTINGS Then
+    My.Settings.Reset()
+    My.Settings.Save()
+    End
+#End If
+
     InitializeComponent()
     RibbonFileTab = New RibbonPage With {
       .Visible = False
@@ -54,8 +61,8 @@ Public Class AssistantAppForm
   Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
     Dim ancestor As AncestorCollection.Ancestor = Ancestors.ActiveAncestor
 
-    RibbonBar.setItemAttribute(Ribbon.RibbonKey(200, 2, 7), "text", ancestor.GedBirthDate.toAssistantDate)
-    RibbonBar.setItemAttribute(Ribbon.RibbonKey(200, 2, 8), "text", ancestor.GedDeathDate.toAssistantDate)
+    RibbonBar.setItemAttribute(Ribbon.RibbonKey(200, 2, 7), RibbonItemAttribute.text, ancestor.GedBirthDate.toAssistantDate)
+    RibbonBar.setItemAttribute(Ribbon.RibbonKey(200, 2, 8), RibbonItemAttribute.text, ancestor.GedDeathDate.toAssistantDate)
     RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 2))
     RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 3))
     RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 4))
@@ -68,6 +75,7 @@ Public Class AssistantAppForm
       Cursor = Cursors.WaitCursor
     Else
       Cursor = Cursors.Default
+      DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
     End If
   End Sub
 
@@ -209,12 +217,37 @@ Public Class AssistantAppForm
   Private Sub ApplicationForm_Load(sender As Object, e As EventArgs) Handles Me.Load
     FormExtensions = New ResizeDragHandler(Me)
     FormExtensions.SetDragControl(AppTitle)
-    DockManager.RegisterDockItem(Register_AncestorsList())
-    DockManager.RegisterDockItem(Register_AncestorViewer())
-    DockManager.RegisterDockItem(Register_Census())
-    DockManager.RegisterDockItem(Register_Gallery())
-    DockManager.RegisterDockItem(Register_Notebook())
-    DockManager.RegisterDockItem(Register_WebBrowser())
+    Dim item As DockPanelItem
+
+    item = New AncestorsListPanelItem()
+    AddHandler CType(item, AncestorsListPanelItem).AncestryNavigateRequest, AddressOf AncestryNavigateRequest
+    item.SetAncestors(Ancestors)
+    DockManager.RegisterDockItem(item)
+
+    item = New AncestorPanelItem()
+    item.SetAncestors(Ancestors)
+    DockManager.RegisterDockItem(item)
+
+    item = New CensusPanelItem()
+    item.SetAncestors(Ancestors)
+    DockManager.RegisterDockItem(item)
+
+    item = New ImageGalleryPanelItem()
+    item.SetAncestors(Ancestors)
+    DockManager.RegisterDockItem(item)
+
+    item = New NotebookPanelItem()
+    item.SetAncestors(Ancestors)
+    DockManager.RegisterDockItem(item)
+
+    Ancestry = New WebBrowserPanelItem With {
+      .AncestryTreeID = My.Settings.ANCESTRY_TREE_ID
+    }
+    Ancestry.SetAncestors(Ancestors)
+    AddHandler Ancestry.ViewerBusy, AddressOf AncestryBrowserBusyChanged
+    AddHandler Ancestry.UriTrackingGroupChanged, AddressOf AncestryURITrackingGroupChanged
+    AddHandler Ancestry.DataDownload, AddressOf AncestryDataMessage
+    DockManager.RegisterDockItem(Ancestry)
     SettingsLoad()
   End Sub
 
@@ -336,14 +369,37 @@ Public Class AssistantAppForm
 
   End Sub
 
-  Private Sub btnCensus_Click(sender As Object, e As EventArgs)
-    'PanelManager.SetPanelVisibility(DockPanelLocation.MiddleBottom, btnCensus.Checked)
-  End Sub
+  'Private Sub DockManager_PanelItemClosed(regItem As DockItemRegistryEntry) Handles DockManager.PanelItemClosed
+  '  If regItem.ribbonBarKey.Length > 0 Then
+  '    RibbonBar.HideBar(regItem.ribbonBarKey)
+  '  End If
+  '  regItem.control.ItemAwake = False
+  'End Sub
 
-  ' ==========================
-  ' = App Toolbar - Event Handlers ==========================
-  Private Sub btnHomeTree_Click(sender As Object, e As EventArgs)
-    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_OVERVIEW_TREE)
+  'Private b DockManager_PanelItemGotFocus(regItem As DockItemRegistryEntry) Handles DockManager.PanelItemGotFocus
+  '  If regItem.ribbonBarKey.Length > 0 Then
+  '    RibbonBar.ShowBar(regItem.ribbonBarKey)
+  '  End If
+  'End Sub
+
+  Private Sub DockManager_PanelItemEvent(panelItem As DockPanelItem, eventType As DockPanelItemEventType) Handles DockManager.PanelItemEvent
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("FormMain.PanelItemEvent(panelItem=[{0}], eventType=[{1}])", panelItem.Name, eventType.ToString)
+#End If
+    Select Case eventType
+      Case DockPanelItemEventType.ItemClosed
+        If panelItem.ItemHasRibbonBar And panelItem.RibbonHideOnItemClose Then
+          RibbonBar.HideBar(panelItem.RibbonBarKey)
+        End If
+      Case DockPanelItemEventType.ItemOpened
+        If panelItem.ItemHasRibbonBar And panelItem.RibbonShowOnItemOpen Then
+          RibbonBar.ShowBar(panelItem.RibbonBarKey)
+        End If
+      Case DockPanelItemEventType.ItemSelected
+        If panelItem.ItemHasRibbonBar And panelItem.RibbonShowOnItemOpen Then
+          RibbonBar.ShowBar(panelItem.RibbonBarKey)
+        End If
+    End Select
   End Sub
 
   Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -351,86 +407,8 @@ Public Class AssistantAppForm
     Close()
   End Sub
 
-  Private Function Register_AncestorsList() As DockItemRegistryEntry
-    Dim tmp As New AncestorsListPanel("DOCK_ANCESTORSLIST")
-    tmp.SetAncestors(Ancestors)
-    AddHandler tmp.AncestryNavigateRequest, AddressOf AncestryNavigateRequest
-    Dim item As New DockItemRegistryEntry With {
-      .key = tmp.Key,
-      .control = tmp,
-      .defaultLocation = DockPanelLocation.LeftTop,
-      .currentLocation = DockPanelLocation.Tray
-    }
-    Return item
-  End Function
-
-  Private Function Register_AncestorViewer() As DockItemRegistryEntry
-    Dim tmp As New AncestorPanel("DOCK_ANCESTORATTRIBUTES")
-    tmp.SetAncestors(Ancestors)
-    Dim item As New DockItemRegistryEntry With {
-      .key = tmp.Key,
-      .control = tmp,
-      .defaultLocation = DockPanelLocation.LeftBottom,
-      .currentLocation = DockPanelLocation.Tray
-    }
-    Return item
-  End Function
-
-  Private Function Register_Census() As DockItemRegistryEntry
-    Dim tmp As New CensusViewer("DOCK_CENSUS")
-    tmp.SetAncestors(Ancestors)
-    Dim item As New DockItemRegistryEntry With {
-      .key = tmp.Key,
-      .control = tmp,
-      .defaultLocation = DockPanelLocation.MiddleBottom,
-      .currentLocation = DockPanelLocation.Tray
-    }
-    Return item
-  End Function
-
-  Private Function Register_Gallery() As DockItemRegistryEntry
-    Dim tmp As New ImageGalleryPanelItem("DOCK_GALLERY")
-    tmp.SetAncestors(Ancestors)
-    Dim item As New DockItemRegistryEntry With {
-      .key = tmp.Key,
-      .control = tmp,
-      .defaultLocation = DockPanelLocation.MiddleTopLeft,
-      .currentLocation = DockPanelLocation.Tray
-    }
-    Return item
-  End Function
-
-  Private Function Register_Notebook() As DockItemRegistryEntry
-    Dim tmp As New NotebookViewer("DOCK_NOTEBOOK")
-    tmp.SetAncestors(Ancestors)
-    Dim item As New DockItemRegistryEntry With {
-      .key = tmp.Key,
-      .control = tmp,
-      .defaultLocation = DockPanelLocation.MiddleTopLeft,
-      .currentLocation = DockPanelLocation.Tray
-    }
-    Return item
-  End Function
-
-  Private Function Register_WebBrowser() As DockItemRegistryEntry
-    Ancestry = New AncestryWebViewer("DOCK_WEBBROWSER") With {
-      .AncestryTreeID = My.Settings.ANCESTRY_TREE_ID
-    }
-    Ancestry.SetAncestors(Ancestors)
-    AddHandler Ancestry.ViewerBusy, AddressOf AncestryBrowserBusyChanged
-    AddHandler Ancestry.UriTrackingGroupChanged, AddressOf AncestryURITrackingGroupChanged
-    AddHandler Ancestry.DataDownload, AddressOf AncestryDataMessage
-    Dim item As New DockItemRegistryEntry With {
-      .key = Ancestry.Key,
-      .control = Ancestry,
-      .defaultLocation = DockPanelLocation.MiddleTopLeft,
-      .currentLocation = DockPanelLocation.Tray
-    }
-    Return item
-  End Function
-
   Private Sub RibbonBar_RibbonAction(action As RibbonEventType, value As Object, barId As Integer, groupId As Integer, itemId As Integer) Handles RibbonBar.RibbonAction
-    Debug.Print("RibbonAction: {0}={1}    [{2}]", action.ToString, value, Ribbon.RibbonKey(barId, groupId, itemId))
+    Logger.debugPrint("RibbonAction: {0}={1}    [{2}]", action.ToString, value, Ribbon.RibbonKey(barId, groupId, itemId))
 
     Select Case Ribbon.RibbonKey(barId, groupId, itemId)
       Case "B200.G5.I17" 'Census

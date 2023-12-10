@@ -42,22 +42,22 @@
 
 #Region "Public Methods"
 
-  Public Overrides Function GetAttribute(attributeName As String) As Object
+  Public Overrides Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
     Throw New NotImplementedException()
   End Function
 
-  Public Overrides Sub SetAttribute(attributeName As String, attributeValue As Object)
-    Select Case attributeName.ToLower
-      Case "ImageFromFile".ToLower
+  Public Overrides Sub SetAttribute(ItemAttribute As RibbonItemAttribute, attributeValue As Object)
+    Select Case ItemAttribute
+      Case RibbonItemAttribute.ImageFromFile
         Image = ImageFromFile(CType(attributeValue, String))
-      Case "ImageFromResource".ToLower
+      Case RibbonItemAttribute.ImageFromResource
         Image = ImageFromResource(CType(attributeValue, String))
-      Case "Image".ToLower
+      Case RibbonItemAttribute.Image
         Image = CType(attributeValue, Image)
-      Case "enabled"
+      Case RibbonItemAttribute.Enabled
         img.Enabled = CType(attributeValue, Boolean)
       Case Else
-        Debug.Print("Unhandled Attribute: {0}={1}", attributeName, attributeValue)
+        Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select
   End Sub
 

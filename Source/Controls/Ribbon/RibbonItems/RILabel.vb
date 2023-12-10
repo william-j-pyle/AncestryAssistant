@@ -42,13 +42,13 @@
 
 #Region "Public Methods"
 
-  Public Overrides Function GetAttribute(attributeName As String) As Object
+  Public Overrides Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
     Throw New NotImplementedException()
   End Function
 
-  Public Overrides Sub SetAttribute(attributeName As String, attributeValue As Object)
-    Select Case attributeName.ToLower
-      Case "ImageFromResource".ToLower
+  Public Overrides Sub SetAttribute(ItemAttribute As RibbonItemAttribute, attributeValue As Object)
+    Select Case ItemAttribute
+      Case RibbonItemAttribute.ImageFromResource
         Dim img As Image = My.Resources.ResourceManager.GetObject(attributeValue)
         Debug.Print("ImageFromResource:  Img.width={0}", img.Width)
         Debug.Print("ImageFromResource:  text.MeasureSpace.width={0}", TextRenderer.MeasureText(" ", ctl.Font).Width)
@@ -62,20 +62,20 @@
         ctl.Text = " ".PadLeft(textImageOffset, " "c) + ctl.Text
         Debug.Print("ImageFromResource:  Img.test=[{0}]", ctl.Text)
 
-      Case "imagealign"
+      Case RibbonItemAttribute.ImageAlign
         ctl.ImageAlign = CType(attributeValue, ContentAlignment)
-      Case "text"
+      Case RibbonItemAttribute.Text
         If textImageOffset > 0 Then
           ctl.Text = " ".PadLeft(textImageOffset, " "c) + attributeValue
         Else
           ctl.Text = attributeValue
         End If
-      Case "enabled"
+      Case RibbonItemAttribute.Enabled
         ctl.Enabled = CType(attributeValue, Boolean)
-      Case "textalign"
+      Case RibbonItemAttribute.TextAlign
         ctl.TextAlign = CType(attributeValue, ContentAlignment)
       Case Else
-        Debug.Print("Unhandled Attribute: {0}={1}", attributeName, attributeValue)
+        Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select
   End Sub
 

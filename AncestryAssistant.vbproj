@@ -19,7 +19,7 @@
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2023.1207.2214</Version>
+    <Version>1.2023.1210.214</Version>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -50,6 +50,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <DefineConstants>DEBUG_LEVEL_OFF=0,DEBUG_LEVEL_CRITICAL=1,DEBUG_LEVEL_EVENTS=2,DEBUG_LEVEL_ALL=3,DEBUG_LEVEL=DEBUG_LEVEL_ALL</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -298,7 +299,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\DockItemRegistryEntry.vb" />
+    <Compile Include="Source\Controls\DockPanel\Enum\DockPanelItemEventType.vb" />
     <Compile Include="Source\Controls\Flat\FlatComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -309,6 +310,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Controls\Flat\IFlatItem.vb" />
+    <Compile Include="Source\Controls\Ribbon\Enum\RibbonItemAttribute.vb" />
     <Compile Include="Source\Controls\Ribbon\RibbonConfig.vb" />
     <Compile Include="Source\Controls\Ribbon\RibbonItems\RIButton.vb">
       <SubType>UserControl</SubType>
@@ -355,8 +357,8 @@
     <Compile Include="Source\Controls\Ribbon\RibbonItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Enums\RibbonEventType.vb" />
-    <Compile Include="Source\Enums\RibbonItemType.vb" />
+    <Compile Include="Source\Controls\Ribbon\Enum\RibbonEventType.vb" />
+    <Compile Include="Source\Controls\Ribbon\Enum\RibbonItemType.vb" />
     <Compile Include="Source\EventHandlers\FlatSearchEventHandler.vb" />
     <Compile Include="Source\Controls\Flat\FlatLabel.vb">
       <SubType>UserControl</SubType>
@@ -365,7 +367,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Extensions\MySettings.vb" />
-    <Compile Include="Source\Enums\DockPanelType.vb" />
+    <Compile Include="Source\Controls\DockPanel\Enum\DockPanelType.vb" />
     <Compile Include="Source\Enums\ResizeEventType.vb" />
     <Compile Include="Source\Data\Ancestor\AncestorAbstract.vb" />
     <Compile Include="Source\Data\Ancestor\AncestorCollection.vb" />
@@ -397,12 +399,14 @@
     <Compile Include="Source\Controls\Flat\FlatTabControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\IDockPanelItem.vb" />
+    <Compile Include="Source\Controls\DockPanel\DockPanelItem.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Source\Data\Config\DockToolBarConfig.vb" />
     <Compile Include="Source\Controls\Flat\FlatMenuBar.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Enums\DockPanelLocation.vb" />
+    <Compile Include="Source\Controls\DockPanel\Enum\DockPanelLocation.vb" />
     <Compile Include="Source\Data\Gedcom\Primatives\Individual.vb" />
     <Compile Include="Source\Controls\Flat\FlatPanel.vb">
       <SubType>Component</SubType>
@@ -458,7 +462,7 @@
     </Compile>
     <Compile Include="Source\Data\Gedcom\File\FileLineEntry.vb" />
     <Compile Include="Source\Data\Gedcom\Primatives\GedDate.vb" />
-    <None Include="Resources\ribbon\Ribbon.json" />
+    <None Include="Source\Controls\Ribbon\Config\Ribbon.json" />
     <None Include="Source\Data\Gedcom\File\PlaceNormalized.vb" />
     <Compile Include="Source\Controls\DockPanel\PanelItems\ImageGalleryPanelItem.vb">
       <SubType>UserControl</SubType>
@@ -489,7 +493,6 @@
     <Compile Include="Source\Enums\FontAncestryIconEnum.vb" />
     <Compile Include="Source\Enums\FontSegoeFluentIconsEnum.vb" />
     <Compile Include="Source\Enums\IconSizeEnum.vb" />
-    <Compile Include="Source\Enums\RibbonButtonSizeEnum.vb" />
     <Compile Include="Source\Enums\UriTrackingGroupEnum.vb" />
     <Compile Include="Source\Extensions\Utils.vb" />
     <Compile Include="Source\Data\APIMessage.vb" />
