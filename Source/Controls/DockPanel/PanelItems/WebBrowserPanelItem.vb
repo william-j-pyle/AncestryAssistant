@@ -9,16 +9,16 @@ Public Class WebBrowserPanelItem
 
 #Region "Fields"
 
-  Private WithEvents btnBack As ToolStripButton
-  Private WithEvents btnHome As ToolStripButton
-  Private WithEvents btnReload As ToolStripButton
+  Private WithEvents BtnBack As ToolStripButton
+  Private WithEvents BtnHome As ToolStripButton
+  Private WithEvents BtnReload As ToolStripButton
   Private WithEvents CoreWeb As CoreWebView2
   Private WithEvents CoreWebDownload As CoreWebView2DownloadOperation
   ' Tool Strip
-  Private WithEvents tsWeb As FlatToolBar
-  Private WithEvents txtHref As ToolStripTextBox
+  Private WithEvents TsWeb As FlatToolBar
+  Private WithEvents TxtHref As ToolStripTextBox
   ' Web Interface
-  Private WithEvents web As WebView2
+  Private WithEvents Web As WebView2
   Private Const AncestryBaseURL As String = "https://www.ancestry.com/"
   Private Const Default_ItemCaption As String = "Ancestry.com"
   Private Const Default_ItemHasRibbonBar As Boolean = True
@@ -98,7 +98,7 @@ Public Class WebBrowserPanelItem
     End Get
     Set(value As Boolean)
       _ShowToolbar = value
-      tsWeb.Visible = value
+      TsWeb.Visible = value
     End Set
   End Property
 
@@ -127,7 +127,7 @@ Public Class WebBrowserPanelItem
       _URL = value
       If isReady And value IsNot Nothing Then
         If value.OriginalString.Length > 0 Then
-          web.Source = value
+          Web.Source = value
         End If
       End If
     End Set
@@ -153,100 +153,100 @@ Public Class WebBrowserPanelItem
     RibbonHideOnItemClose = Default_RibbonHideOnItemClose
     RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
     RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Key can be overriden during creation, apply if set
+    'Key can be overriden during creation, apply if Set
     If Len(itemKey) > 0 Then Key = itemKey
     'Continue with creation
-    web = New Microsoft.Web.WebView2.WinForms.WebView2()
-    tsWeb = New FlatToolBar()
-    btnBack = New System.Windows.Forms.ToolStripButton()
-    btnReload = New System.Windows.Forms.ToolStripButton()
-    btnHome = New System.Windows.Forms.ToolStripButton()
-    txtHref = New System.Windows.Forms.ToolStripTextBox()
-    CType(web, System.ComponentModel.ISupportInitialize).BeginInit()
-    tsWeb.SuspendLayout()
+    Web = New Microsoft.Web.WebView2.WinForms.WebView2()
+    TsWeb = New FlatToolBar()
+    BtnBack = New System.Windows.Forms.ToolStripButton()
+    BtnReload = New System.Windows.Forms.ToolStripButton()
+    BtnHome = New System.Windows.Forms.ToolStripButton()
+    TxtHref = New System.Windows.Forms.ToolStripTextBox()
+    CType(Web, System.ComponentModel.ISupportInitialize).BeginInit()
+    TsWeb.SuspendLayout()
     SuspendLayout()
     '
     'web
     '
-    web.AllowExternalDrop = True
-    web.BackColor = My.Theme.PanelBackColor
-    web.CreationProperties = Nothing
-    web.DefaultBackgroundColor = My.Theme.PanelBackColor
-    web.Dock = System.Windows.Forms.DockStyle.Fill
-    web.Location = New System.Drawing.Point(0, 25)
-    web.Margin = New System.Windows.Forms.Padding(0)
-    web.Name = "web"
-    web.Size = New System.Drawing.Size(600, 202)
-    web.TabIndex = 0
-    web.ZoomFactor = 0.75R
+    Web.AllowExternalDrop = True
+    Web.BackColor = My.Theme.PanelBackColor
+    Web.CreationProperties = Nothing
+    Web.DefaultBackgroundColor = My.Theme.PanelBackColor
+    Web.Dock = System.Windows.Forms.DockStyle.Fill
+    Web.Location = New System.Drawing.Point(0, 25)
+    Web.Margin = New System.Windows.Forms.Padding(0)
+    Web.Name = "web"
+    Web.Size = New System.Drawing.Size(600, 202)
+    Web.TabIndex = 0
+    Web.ZoomFactor = 0.75R
     '
     'tsWeb
     '
-    tsWeb.CanOverflow = False
-    tsWeb.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-    tsWeb.Items.AddRange(New System.Windows.Forms.ToolStripItem() {btnBack, btnReload, btnHome, txtHref})
-    tsWeb.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-    tsWeb.Name = "tsWeb"
-    tsWeb.Padding = New System.Windows.Forms.Padding(4, 0, 16, 0)
-    tsWeb.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-    tsWeb.Size = New System.Drawing.Size(600, 25)
-    tsWeb.Stretch = True
-    tsWeb.TabIndex = 2
+    TsWeb.CanOverflow = False
+    TsWeb.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+    TsWeb.Items.AddRange(New System.Windows.Forms.ToolStripItem() {BtnBack, BtnReload, BtnHome, TxtHref})
+    TsWeb.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
+    TsWeb.Name = "tsWeb"
+    TsWeb.Padding = New System.Windows.Forms.Padding(4, 0, 16, 0)
+    TsWeb.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+    TsWeb.Size = New System.Drawing.Size(600, 25)
+    TsWeb.Stretch = True
+    TsWeb.TabIndex = 2
     '
     'btnBack
     '
-    btnBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    btnBack.Image = My.Theme.ImageButtonBack
-    btnBack.Name = "btnBack"
-    btnBack.Size = New System.Drawing.Size(23, 22)
-    btnBack.Text = "ToolStripButton2"
-    btnBack.ToolTipText = "Previous Page"
+    BtnBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+    BtnBack.Image = My.Theme.ImageButtonBack
+    BtnBack.Name = "btnBack"
+    BtnBack.Size = New System.Drawing.Size(23, 22)
+    BtnBack.Text = "ToolStripButton2"
+    BtnBack.ToolTipText = "Previous Page"
     '
     'btnReload
     '
-    btnReload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    btnReload.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
-    btnReload.ImageTransparentColor = System.Drawing.Color.Magenta
-    btnReload.Name = "btnReload"
-    btnReload.Size = New System.Drawing.Size(23, 22)
-    btnReload.Text = "ToolStripButton1"
-    btnReload.ToolTipText = "Refresh"
+    BtnReload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+    BtnReload.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnReload.ImageTransparentColor = System.Drawing.Color.Magenta
+    BtnReload.Name = "btnReload"
+    BtnReload.Size = New System.Drawing.Size(23, 22)
+    BtnReload.Text = "ToolStripButton1"
+    BtnReload.ToolTipText = "Refresh"
     '
     'btnHome
     '
-    btnHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    btnHome.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
-    btnHome.ImageTransparentColor = System.Drawing.Color.Magenta
-    btnHome.Name = "btnHome"
-    btnHome.Size = New System.Drawing.Size(23, 22)
-    btnHome.Text = "ToolStripButton1"
-    btnHome.ToolTipText = "Ancestry Home Page"
+    BtnHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+    BtnHome.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnHome.ImageTransparentColor = System.Drawing.Color.Magenta
+    BtnHome.Name = "btnHome"
+    BtnHome.Size = New System.Drawing.Size(23, 22)
+    BtnHome.Text = "ToolStripButton1"
+    BtnHome.ToolTipText = "Ancestry Home Page"
     '
     'txtHref
     '
-    txtHref.AutoSize = False
-    txtHref.BackColor = System.Drawing.SystemColors.Window
-    txtHref.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    txtHref.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    txtHref.Name = "txtHref"
-    txtHref.Size = New System.Drawing.Size(100, 22)
-    txtHref.ToolTipText = "Website URL"
+    TxtHref.AutoSize = False
+    TxtHref.BackColor = System.Drawing.SystemColors.Window
+    TxtHref.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    TxtHref.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    TxtHref.Name = "txtHref"
+    TxtHref.Size = New System.Drawing.Size(100, 22)
+    TxtHref.ToolTipText = "Website URL"
     '
     'AncestryWebViewer
     '
     AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-    Controls.Add(web)
-    Controls.Add(tsWeb)
+    Controls.Add(Web)
+    Controls.Add(TsWeb)
     Dock = DockStyle.Fill
     Name = "AncestryWebViewer"
     Size = New System.Drawing.Size(600, 227)
-    CType(web, System.ComponentModel.ISupportInitialize).EndInit()
-    tsWeb.ResumeLayout(False)
-    tsWeb.PerformLayout()
+    CType(Web, System.ComponentModel.ISupportInitialize).EndInit()
+    TsWeb.ResumeLayout(False)
+    TsWeb.PerformLayout()
     ResumeLayout(False)
     PerformLayout()
-    web.EnsureCoreWebView2Async()
+    Web.EnsureCoreWebView2Async()
     CaptureFocus(Me)
   End Sub
 
@@ -254,16 +254,16 @@ Public Class WebBrowserPanelItem
 
 #Region "Private Methods"
 
-  Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-    web.GoBack()
+  Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
+    Web.GoBack()
   End Sub
 
-  Private Sub btnHome_Click_1(sender As Object, e As EventArgs) Handles btnHome.Click
+  Private Sub BtnHome_Click_1(sender As Object, e As EventArgs) Handles BtnHome.Click
     NavigateTo(UriTrackingGroupEnum.ANCESTRY_HOME)
   End Sub
 
-  Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
-    web.Reload()
+  Private Sub BtnReload_Click(sender As Object, e As EventArgs) Handles BtnReload.Click
+    Web.Reload()
   End Sub
 
   ' When the browser detects a file is being downloaded me routine will fire, we Capture the DownloadOperation object
@@ -282,7 +282,7 @@ Public Class WebBrowserPanelItem
   End Sub
 
   Private Sub CoreWeb_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles CoreWeb.NavigationCompleted
-    _URL = web.Source
+    _URL = Web.Source
   End Sub
 
   Private Sub CoreWeb_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles CoreWeb.NavigationStarting
@@ -350,10 +350,10 @@ Public Class WebBrowserPanelItem
     Logger.debugPrint("WebBrowserPanelItem.JSAPI_Execute(script=[{0}])", script)
 #End If
 
-    Await web.CoreWebView2.ExecuteScriptAsync(script)
+    Await Web.CoreWebView2.ExecuteScriptAsync(script)
   End Sub
 
-  Private Sub JSAPI_Message(sender As Object, e As CoreWebView2WebMessageReceivedEventArgs) Handles web.WebMessageReceived
+  Private Sub JSAPI_Message(sender As Object, e As CoreWebView2WebMessageReceivedEventArgs) Handles Web.WebMessageReceived
     Dim msg As APIMessage = JsonConvert.DeserializeObject(Of APIMessage)(e.WebMessageAsJson)
 
 #If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
@@ -367,7 +367,7 @@ Public Class WebBrowserPanelItem
     If msg.MessageType.Equals("page") Then
       sameImageAsFilename = ""
       Dim tracks As String = msg.GetValue("PAGEKEY")
-      Dim utg As UriTrackingGroupEnum = UriTrackingGroupDecoder.GetEnum(tracks.Split(":"))
+      Dim utg As UriTrackingGroupEnum = UriTrackingGroupDecoder.GetEnum(tracks.Split(":"c))
 #If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
       Logger.log(Logger.LOG_TYPE.INFO, "-----------------------------")
       Logger.log(Logger.LOG_TYPE.INFO, "-- URITrackingGroup        --")
@@ -405,16 +405,16 @@ Public Class WebBrowserPanelItem
     Return False
   End Function
 
-  Private Sub tsWeb_Resize(sender As Object, e As EventArgs) Handles tsWeb.Resize
-    txtHref.Width = tsWeb.Bounds.Width - btnHome.Bounds.Right - 46
+  Private Sub TsWeb_Resize(sender As Object, e As EventArgs) Handles TsWeb.Resize
+    TxtHref.Width = TsWeb.Bounds.Width - BtnHome.Bounds.Right - 46
   End Sub
 
-  Private Sub txtHref_Enter(sender As Object, e As EventArgs) Handles txtHref.Enter
-    NavigateTo(UriTrackingGroupEnum.CUSTOM, txtHref.Text)
+  Private Sub TxtHref_Enter(sender As Object, e As EventArgs) Handles TxtHref.Enter
+    NavigateTo(UriTrackingGroupEnum.CUSTOM, TxtHref.Text)
   End Sub
 
-  Private Sub web_CoreWebView2InitializationCompleted(sender As Object, e As CoreWebView2InitializationCompletedEventArgs) Handles web.CoreWebView2InitializationCompleted
-    CoreWeb = web.CoreWebView2
+  Private Sub Web_CoreWebView2InitializationCompleted(sender As Object, e As CoreWebView2InitializationCompletedEventArgs) Handles Web.CoreWebView2InitializationCompleted
+    CoreWeb = Web.CoreWebView2
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
     Logger.debugPrint("WebBrowserPanelItem.web_CoreWebView2InitializationCompleted()")
 #End If
@@ -446,31 +446,31 @@ Public Class WebBrowserPanelItem
     isReady = True
     If URL IsNot Nothing Then
       If URL.OriginalString.Length > 0 Then
-        web.Source = URL
+        Web.Source = URL
       End If
     End If
   End Sub
 
-  Private Sub web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles web.NavigationCompleted
+  Private Sub Web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles Web.NavigationCompleted
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
     Logger.debugPrint("WebBrowserPanelItem.web_NavigationCompleted()")
 #End If
     RaiseEvent ViewerBusy(False)
   End Sub
 
-  Private Sub web_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles web.NavigationStarting
+  Private Sub Web_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles Web.NavigationStarting
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
     Logger.debugPrint("WebBrowserPanelItem.web_NavigationStarting()")
 #End If
     RaiseEvent ViewerBusy(True)
   End Sub
 
-  Private Sub web_SourceChanged(sender As Object, e As CoreWebView2SourceChangedEventArgs) Handles web.SourceChanged
+  Private Sub Web_SourceChanged(sender As Object, e As CoreWebView2SourceChangedEventArgs) Handles Web.SourceChanged
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
-    Logger.debugPrint("WebBrowserPanelItem.web_SourceChanged(uri=[{0}])", web.Source.AbsoluteUri)
+    Logger.debugPrint("WebBrowserPanelItem.web_SourceChanged(uri=[{0}])", Web.Source.AbsoluteUri)
 #End If
     JSAPI_Execute("ancestryAssistant.getPage();")
-    txtHref.Text = web.Source.AbsoluteUri
+    TxtHref.Text = Web.Source.AbsoluteUri
   End Sub
 
 #End Region
@@ -541,7 +541,7 @@ Public Class WebBrowserPanelItem
       'TODO activeAncestor.Reset()
       rtn = rtn.Replace("{PERSONID}", customParam)
     Else
-      rtn = rtn.Replace("{PERSONID}", ancestors.ActiveAncestorID)
+      rtn = rtn.Replace("{PERSONID}", Ancestors.ActiveAncestorID)
     End If
     ' Perform Navigation
     HREF = rtn
@@ -551,7 +551,7 @@ Public Class WebBrowserPanelItem
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
     Logger.debugPrint("WebBrowserPanelItem.saveImageAs(filename=[{0}])", filename)
 #End If
-    Dim src As String = web.Source.AbsoluteUri
+    Dim src As String = Web.Source.AbsoluteUri
     If src.EndsWith("jpg") Or src.EndsWith("jpeg") Then
       My.Computer.Network.DownloadFile(src, filename)
     Else

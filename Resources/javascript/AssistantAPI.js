@@ -148,7 +148,7 @@ ancestryAssistant.getFindAGrave = function () {
 		setTimeout(() => { ancestryAssistant.getFindAGrave(); }, 2000);
 		return;
 	}
-	console.log("Executing: getFindAGrave");
+	console.log("Executing: GetFindAGrave");
 	if (typeof (findagrave) !== 'undefined') {
 		console.log("Generating Message");
 		hdr.push("memorialId"); dta.push(findagrave.memorialId);

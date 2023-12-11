@@ -1,4 +1,5 @@
-﻿Imports System.Text
+﻿Imports System.IO
+Imports System.Text
 
 Public Class Logger
 
@@ -20,8 +21,8 @@ Public Class Logger
 #Region "Public Methods"
 
   Public Shared Sub Clear()
-    My.Computer.FileSystem.DeleteFile(DEBUGLOG_FILENAME)
-    My.Computer.FileSystem.DeleteFile(LOG_FILENAME)
+    If File.Exists(DEBUGLOG_FILENAME) Then My.Computer.FileSystem.DeleteFile(DEBUGLOG_FILENAME)
+    If File.Exists(LOG_FILENAME) Then My.Computer.FileSystem.DeleteFile(LOG_FILENAME)
   End Sub
 
   Public Shared Sub debugPrint(format As String, ParamArray args As Object())

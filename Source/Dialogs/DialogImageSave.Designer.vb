@@ -174,9 +174,9 @@ Partial Class SaveImageDialog
     Friend WithEvents Label1 As Label
     Friend WithEvents cmbCategory As ComboBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents txtSummary As TextBox
+    Friend WithEvents TxtSummary As TextBox
     Friend WithEvents cmbType As ComboBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents lblDetails As Label
+    Friend WithEvents LblDetails As Label
     Friend WithEvents tblDetails As DataGridView
 End Class

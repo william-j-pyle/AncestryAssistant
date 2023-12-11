@@ -10,24 +10,24 @@
   Private WithEvents DockMiddleTopRight As DockPanel
   Private WithEvents DockRightBottom As DockPanel
   Private WithEvents DockRightTop As DockPanel
-  Private WithEvents pnlLeft As Panel
-  Private WithEvents pnlLeftBottom As Panel
-  Private WithEvents pnlLeftTop As Panel
-  Private WithEvents pnlMain As Panel
-  Private WithEvents pnlMiddle As Panel
-  Private WithEvents pnlMiddleBottom As Panel
-  Private WithEvents pnlMiddleLeft As Panel
-  Private WithEvents pnlMiddleRight As Panel
-  Private WithEvents pnlMiddleTop As Panel
-  Private WithEvents pnlRight As Panel
-  Private WithEvents pnlRightBottom As Panel
-  Private WithEvents pnlRightTop As Panel
-  Private WithEvents splitLeft As Splitter
-  Private WithEvents splitLeftTopBottom As Splitter
-  Private WithEvents splitMiddleBottom As Splitter
-  Private WithEvents splitMiddleLeftRight As Splitter
-  Private WithEvents splitRight As Splitter
-  Private WithEvents splitRightTopBottom As Splitter
+  Private WithEvents PnlLeft As Panel
+  Private WithEvents PnlLeftBottom As Panel
+  Private WithEvents PnlLeftTop As Panel
+  Private WithEvents PnlMain As Panel
+  Private WithEvents PnlMiddle As Panel
+  Private WithEvents PnlMiddleBottom As Panel
+  Private WithEvents PnlMiddleLeft As Panel
+  Private WithEvents PnlMiddleRight As Panel
+  Private WithEvents PnlMiddleTop As Panel
+  Private WithEvents PnlRight As Panel
+  Private WithEvents PnlRightBottom As Panel
+  Private WithEvents PnlRightTop As Panel
+  Private WithEvents SplitLeft As Splitter
+  Private WithEvents SplitLeftTopBottom As Splitter
+  Private WithEvents SplitMiddleBottom As Splitter
+  Private WithEvents SplitMiddleLeftRight As Splitter
+  Private WithEvents SplitRight As Splitter
+  Private WithEvents SplitRightTopBottom As Splitter
   Private components As System.ComponentModel.IContainer
   Private RegistryItems As Dictionary(Of String, DockPanelItem)
   Private RegistryPanels As Dictionary(Of DockPanelLocation, DockPanel)
@@ -45,53 +45,53 @@
   Public Sub New()
     RegistryPanels = New Dictionary(Of DockPanelLocation, DockPanel)
     RegistryItems = New Dictionary(Of String, DockPanelItem)
-    pnlMain = New System.Windows.Forms.Panel()
-    pnlMiddle = New System.Windows.Forms.Panel()
-    pnlMiddleTop = New System.Windows.Forms.Panel()
-    pnlMiddleLeft = New System.Windows.Forms.Panel()
+    PnlMain = New System.Windows.Forms.Panel()
+    PnlMiddle = New System.Windows.Forms.Panel()
+    PnlMiddleTop = New System.Windows.Forms.Panel()
+    PnlMiddleLeft = New System.Windows.Forms.Panel()
     DockMiddleLeftTop = New AncestryAssistant.DockPanel()
-    splitMiddleLeftRight = New System.Windows.Forms.Splitter()
-    pnlMiddleRight = New System.Windows.Forms.Panel()
+    SplitMiddleLeftRight = New System.Windows.Forms.Splitter()
+    PnlMiddleRight = New System.Windows.Forms.Panel()
     DockMiddleTopRight = New AncestryAssistant.DockPanel()
-    splitMiddleBottom = New System.Windows.Forms.Splitter()
-    pnlMiddleBottom = New System.Windows.Forms.Panel()
+    SplitMiddleBottom = New System.Windows.Forms.Splitter()
+    PnlMiddleBottom = New System.Windows.Forms.Panel()
     DockMiddleBottom = New AncestryAssistant.DockPanel()
-    splitLeft = New System.Windows.Forms.Splitter()
-    pnlLeft = New System.Windows.Forms.Panel()
-    pnlLeftBottom = New System.Windows.Forms.Panel()
+    SplitLeft = New System.Windows.Forms.Splitter()
+    PnlLeft = New System.Windows.Forms.Panel()
+    PnlLeftBottom = New System.Windows.Forms.Panel()
     DockLeftBottom = New AncestryAssistant.DockPanel()
-    splitLeftTopBottom = New System.Windows.Forms.Splitter()
-    pnlLeftTop = New System.Windows.Forms.Panel()
+    SplitLeftTopBottom = New System.Windows.Forms.Splitter()
+    PnlLeftTop = New System.Windows.Forms.Panel()
     DockLeftTop = New AncestryAssistant.DockPanel()
-    splitRight = New System.Windows.Forms.Splitter()
-    pnlRight = New System.Windows.Forms.Panel()
-    pnlRightBottom = New System.Windows.Forms.Panel()
+    SplitRight = New System.Windows.Forms.Splitter()
+    PnlRight = New System.Windows.Forms.Panel()
+    PnlRightBottom = New System.Windows.Forms.Panel()
     DockRightBottom = New AncestryAssistant.DockPanel()
-    splitRightTopBottom = New System.Windows.Forms.Splitter()
-    pnlRightTop = New System.Windows.Forms.Panel()
+    SplitRightTopBottom = New System.Windows.Forms.Splitter()
+    PnlRightTop = New System.Windows.Forms.Panel()
     DockRightTop = New AncestryAssistant.DockPanel()
-    pnlMain.SuspendLayout()
-    pnlMiddle.SuspendLayout()
-    pnlMiddleTop.SuspendLayout()
-    pnlMiddleLeft.SuspendLayout()
+    PnlMain.SuspendLayout()
+    PnlMiddle.SuspendLayout()
+    PnlMiddleTop.SuspendLayout()
+    PnlMiddleLeft.SuspendLayout()
     DockMiddleLeftTop.SuspendLayout()
-    pnlMiddleRight.SuspendLayout()
+    PnlMiddleRight.SuspendLayout()
     DockMiddleTopRight.SuspendLayout()
-    pnlMiddleBottom.SuspendLayout()
-    pnlLeft.SuspendLayout()
-    pnlLeftBottom.SuspendLayout()
-    pnlLeftTop.SuspendLayout()
-    pnlRight.SuspendLayout()
-    pnlRightBottom.SuspendLayout()
-    pnlRightTop.SuspendLayout()
+    PnlMiddleBottom.SuspendLayout()
+    PnlLeft.SuspendLayout()
+    PnlLeftBottom.SuspendLayout()
+    PnlLeftTop.SuspendLayout()
+    PnlRight.SuspendLayout()
+    PnlRightBottom.SuspendLayout()
+    PnlRightTop.SuspendLayout()
     SuspendLayout()
-    With pnlMain
+    With PnlMain
       .BackColor = My.Theme.PanelBackColor
-      .Controls.Add(pnlMiddle)
-      .Controls.Add(splitLeft)
-      .Controls.Add(pnlLeft)
-      .Controls.Add(splitRight)
-      .Controls.Add(pnlRight)
+      .Controls.Add(PnlMiddle)
+      .Controls.Add(SplitLeft)
+      .Controls.Add(PnlLeft)
+      .Controls.Add(SplitRight)
+      .Controls.Add(PnlRight)
       .Dock = System.Windows.Forms.DockStyle.Fill
       .ForeColor = My.Theme.PanelFontColor
       .Location = New System.Drawing.Point(0, 0)
@@ -100,25 +100,25 @@
       .Padding = New System.Windows.Forms.Padding(4)
       .Size = New System.Drawing.Size(637, 378)
     End With
-    With pnlMiddle
-      .Controls.Add(pnlMiddleTop)
-      .Controls.Add(splitMiddleBottom)
-      .Controls.Add(pnlMiddleBottom)
+    With PnlMiddle
+      .Controls.Add(PnlMiddleTop)
+      .Controls.Add(SplitMiddleBottom)
+      .Controls.Add(PnlMiddleBottom)
       .Dock = System.Windows.Forms.DockStyle.Fill
       .Location = New System.Drawing.Point(214, 4)
       .Name = "pnlMiddle"
       .Size = New System.Drawing.Size(215, 370)
     End With
-    With pnlMiddleTop
-      .Controls.Add(pnlMiddleLeft)
-      .Controls.Add(splitMiddleLeftRight)
-      .Controls.Add(pnlMiddleRight)
+    With PnlMiddleTop
+      .Controls.Add(PnlMiddleLeft)
+      .Controls.Add(SplitMiddleLeftRight)
+      .Controls.Add(PnlMiddleRight)
       .Dock = System.Windows.Forms.DockStyle.Fill
       .Location = New System.Drawing.Point(0, 0)
       .Name = "pnlMiddleTop"
       .Size = New System.Drawing.Size(215, 295)
     End With
-    With pnlMiddleLeft
+    With PnlMiddleLeft
       .BackColor = My.Theme.PanelBackColor
       .Controls.Add(DockMiddleLeftTop)
       .Dock = System.Windows.Forms.DockStyle.Fill
@@ -135,13 +135,13 @@
       .Name = "DockMiddleLeftTop"
     End With
     RegisterDock(DockMiddleLeftTop)
-    With splitMiddleLeftRight
+    With SplitMiddleLeftRight
       .Dock = System.Windows.Forms.DockStyle.Right
       .Location = New System.Drawing.Point(96, 0)
       .Name = "splitMiddleLeftRight"
       .Size = New System.Drawing.Size(4, 295)
     End With
-    With pnlMiddleRight
+    With PnlMiddleRight
       .BackColor = My.Theme.PanelBackColor
       .Controls.Add(DockMiddleTopRight)
       .Dock = System.Windows.Forms.DockStyle.Right
@@ -158,13 +158,13 @@
       .PanelLocation = DockPanelLocation.MiddleTopRight
     End With
     RegisterDock(DockMiddleTopRight)
-    With splitMiddleBottom
+    With SplitMiddleBottom
       .Dock = System.Windows.Forms.DockStyle.Bottom
       .Location = New System.Drawing.Point(0, 295)
       .Name = "splitMiddleBottom"
       .Size = New System.Drawing.Size(215, 4)
     End With
-    With pnlMiddleBottom
+    With PnlMiddleBottom
       .BackColor = My.Theme.PanelBackColor
       .Controls.Add(DockMiddleBottom)
       .Dock = System.Windows.Forms.DockStyle.Bottom
@@ -180,21 +180,21 @@
       .PanelLocation = DockPanelLocation.MiddleBottom
     End With
     RegisterDock(DockMiddleBottom)
-    With splitLeft
+    With SplitLeft
       .Location = New System.Drawing.Point(210, 4)
       .Name = "splitLeft"
       .Size = New System.Drawing.Size(4, 370)
     End With
-    With pnlLeft
-      .Controls.Add(pnlLeftBottom)
-      .Controls.Add(splitLeftTopBottom)
-      .Controls.Add(pnlLeftTop)
+    With PnlLeft
+      .Controls.Add(PnlLeftBottom)
+      .Controls.Add(SplitLeftTopBottom)
+      .Controls.Add(PnlLeftTop)
       .Dock = System.Windows.Forms.DockStyle.Left
       .Location = New System.Drawing.Point(4, 4)
       .Name = "pnlLeft"
       .Size = New System.Drawing.Size(206, 370)
     End With
-    With pnlLeftBottom
+    With PnlLeftBottom
       .BackColor = My.Theme.PanelBackColor
       .Controls.Add(DockLeftBottom)
       .Dock = System.Windows.Forms.DockStyle.Fill
@@ -211,13 +211,13 @@
       .PanelLocation = DockPanelLocation.LeftBottom
     End With
     RegisterDock(DockLeftBottom)
-    With splitLeftTopBottom
+    With SplitLeftTopBottom
       .Dock = System.Windows.Forms.DockStyle.Top
       .Location = New System.Drawing.Point(0, 149)
       .Name = "splitLeftTopBottom"
       .Size = New System.Drawing.Size(206, 4)
     End With
-    With pnlLeftTop
+    With PnlLeftTop
       .BackColor = My.Theme.PanelBackColor
       .Controls.Add(DockLeftTop)
       .Dock = System.Windows.Forms.DockStyle.Top
@@ -233,22 +233,22 @@
       .PanelLocation = DockPanelLocation.LeftTop
     End With
     RegisterDock(DockLeftTop)
-    With splitRight
+    With SplitRight
       .Dock = System.Windows.Forms.DockStyle.Right
       .Location = New System.Drawing.Point(429, 4)
       .Name = "splitRight"
       .Size = New System.Drawing.Size(4, 370)
     End With
-    With pnlRight
-      .Controls.Add(pnlRightBottom)
-      .Controls.Add(splitRightTopBottom)
-      .Controls.Add(pnlRightTop)
+    With PnlRight
+      .Controls.Add(PnlRightBottom)
+      .Controls.Add(SplitRightTopBottom)
+      .Controls.Add(PnlRightTop)
       .Dock = System.Windows.Forms.DockStyle.Right
       .Location = New System.Drawing.Point(433, 4)
       .Name = "pnlRight"
       .Size = New System.Drawing.Size(200, 370)
     End With
-    With pnlRightBottom
+    With PnlRightBottom
       .BackColor = My.Theme.PanelBackColor
       .Controls.Add(DockRightBottom)
       .Dock = System.Windows.Forms.DockStyle.Fill
@@ -264,13 +264,13 @@
       .PanelLocation = DockPanelLocation.RightBottom
     End With
     RegisterDock(DockRightBottom)
-    With splitRightTopBottom
+    With SplitRightTopBottom
       .Dock = System.Windows.Forms.DockStyle.Top
       .Location = New System.Drawing.Point(0, 152)
       .Name = "splitRightTopBottom"
       .Size = New System.Drawing.Size(200, 4)
     End With
-    With pnlRightTop
+    With PnlRightTop
       .BackColor = My.Theme.PanelBackColor
       .Controls.Add(DockRightTop)
       .Dock = System.Windows.Forms.DockStyle.Top
@@ -287,23 +287,23 @@
     End With
     RegisterDock(DockRightTop)
     AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-    Controls.Add(pnlMain)
+    Controls.Add(PnlMain)
     Name = "DockPanelManager"
     Size = New System.Drawing.Size(637, 378)
-    pnlMain.ResumeLayout(False)
-    pnlMiddle.ResumeLayout(False)
-    pnlMiddleTop.ResumeLayout(False)
-    pnlMiddleLeft.ResumeLayout(False)
+    PnlMain.ResumeLayout(False)
+    PnlMiddle.ResumeLayout(False)
+    PnlMiddleTop.ResumeLayout(False)
+    PnlMiddleLeft.ResumeLayout(False)
     DockMiddleLeftTop.ResumeLayout(False)
-    pnlMiddleRight.ResumeLayout(False)
+    PnlMiddleRight.ResumeLayout(False)
     DockMiddleTopRight.ResumeLayout(False)
-    pnlMiddleBottom.ResumeLayout(False)
-    pnlLeft.ResumeLayout(False)
-    pnlLeftBottom.ResumeLayout(False)
-    pnlLeftTop.ResumeLayout(False)
-    pnlRight.ResumeLayout(False)
-    pnlRightBottom.ResumeLayout(False)
-    pnlRightTop.ResumeLayout(False)
+    PnlMiddleBottom.ResumeLayout(False)
+    PnlLeft.ResumeLayout(False)
+    PnlLeftBottom.ResumeLayout(False)
+    PnlLeftTop.ResumeLayout(False)
+    PnlRight.ResumeLayout(False)
+    PnlRightBottom.ResumeLayout(False)
+    PnlRightTop.ResumeLayout(False)
     ResumeLayout(False)
   End Sub
 
@@ -316,60 +316,60 @@
   End Function
 
   Private Sub ManageSplitters_PanelLeft(topVis As Boolean, botVis As Boolean)
-    If pnlLeftTop.Dock = DockStyle.Top Then
-      pnlLeftTop.Tag = pnlLeftTop.Height
+    If PnlLeftTop.Dock = DockStyle.Top Then
+      PnlLeftTop.Tag = PnlLeftTop.Height
     End If
     If topVis And Not botVis Then
-      pnlLeftTop.Dock = DockStyle.Fill
+      PnlLeftTop.Dock = DockStyle.Fill
     End If
-    If topVis And botVis And pnlLeftTop.Dock = DockStyle.Fill Then
-      pnlLeftTop.Dock = DockStyle.Top
-      pnlLeftTop.Height = CInt(pnlLeftTop.Tag)
+    If topVis And botVis And PnlLeftTop.Dock = DockStyle.Fill Then
+      PnlLeftTop.Dock = DockStyle.Top
+      PnlLeftTop.Height = CInt(PnlLeftTop.Tag)
     End If
 
-    pnlLeftTop.Visible = topVis
-    pnlLeftBottom.Visible = botVis
-    splitLeft.Visible = topVis Or botVis
-    splitLeftTopBottom.Visible = topVis And botVis
-    pnlLeft.Visible = topVis Or botVis
+    PnlLeftTop.Visible = topVis
+    PnlLeftBottom.Visible = botVis
+    SplitLeft.Visible = topVis Or botVis
+    SplitLeftTopBottom.Visible = topVis And botVis
+    PnlLeft.Visible = topVis Or botVis
   End Sub
 
   Private Sub ManageSplitters_PanelMiddle(leftVis As Boolean, rightVis As Boolean, bottomVis As Boolean)
-    If pnlMiddleRight.Dock = DockStyle.Right Then
-      pnlMiddleRight.Tag = pnlMiddleRight.Width
+    If PnlMiddleRight.Dock = DockStyle.Right Then
+      PnlMiddleRight.Tag = PnlMiddleRight.Width
     End If
     If rightVis And Not leftVis Then
-      pnlMiddleRight.Dock = DockStyle.Fill
+      PnlMiddleRight.Dock = DockStyle.Fill
     End If
-    If leftVis And rightVis And pnlMiddleRight.Dock = DockStyle.Fill Then
-      pnlMiddleRight.Dock = DockStyle.Right
-      pnlMiddleRight.Width = CInt(pnlMiddleRight.Tag)
+    If leftVis And rightVis And PnlMiddleRight.Dock = DockStyle.Fill Then
+      PnlMiddleRight.Dock = DockStyle.Right
+      PnlMiddleRight.Width = CInt(PnlMiddleRight.Tag)
     End If
 
-    pnlMiddleBottom.Visible = bottomVis
-    splitMiddleBottom.Visible = bottomVis
-    pnlMiddleLeft.Visible = leftVis
-    pnlMiddleRight.Visible = rightVis
-    splitMiddleLeftRight.Visible = leftVis And rightVis
+    PnlMiddleBottom.Visible = bottomVis
+    SplitMiddleBottom.Visible = bottomVis
+    PnlMiddleLeft.Visible = leftVis
+    PnlMiddleRight.Visible = rightVis
+    SplitMiddleLeftRight.Visible = leftVis And rightVis
   End Sub
 
   Private Sub ManageSplitters_PanelRight(topVis As Boolean, botVis As Boolean)
-    If pnlRightTop.Dock = DockStyle.Top Then
-      pnlRightTop.Tag = pnlRightTop.Height
+    If PnlRightTop.Dock = DockStyle.Top Then
+      PnlRightTop.Tag = PnlRightTop.Height
     End If
     If topVis And Not botVis Then
-      pnlRightTop.Dock = DockStyle.Fill
+      PnlRightTop.Dock = DockStyle.Fill
     End If
-    If topVis And botVis And pnlRightTop.Dock = DockStyle.Fill Then
-      pnlRightTop.Dock = DockStyle.Top
-      pnlRightTop.Height = CInt(pnlRightTop.Tag)
+    If topVis And botVis And PnlRightTop.Dock = DockStyle.Fill Then
+      PnlRightTop.Dock = DockStyle.Top
+      PnlRightTop.Height = CInt(PnlRightTop.Tag)
     End If
 
-    pnlRightTop.Visible = topVis
-    pnlRightBottom.Visible = botVis
-    splitRight.Visible = topVis Or botVis
-    splitRightTopBottom.Visible = topVis And botVis
-    pnlRight.Visible = topVis Or botVis
+    PnlRightTop.Visible = topVis
+    PnlRightBottom.Visible = botVis
+    SplitRight.Visible = topVis Or botVis
+    SplitRightTopBottom.Visible = topVis And botVis
+    PnlRight.Visible = topVis Or botVis
   End Sub
 
   Private Sub PanelClose(sender As DockPanel)
@@ -379,10 +379,10 @@
     PanelVisible(sender.PanelLocation, False)
   End Sub
 
-  Private Sub PanelFocusChanged(sender As DockPanel, hasFocus As Boolean)
-    If Not hasFocus Then Exit Sub
+  Private Sub PanelFocusChanged(sender As DockPanel, HasFocus As Boolean)
+    If Not HasFocus Then Exit Sub
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
-    Logger.debugPrint("DockPanelManager.PanelFocusChanged(dockPanel=[{0}, {1}], hasFocus=[{2}])", sender.Name, sender.PanelLocation.ToString, hasFocus)
+    Logger.debugPrint("DockPanelManager.PanelFocusChanged(dockPanel=[{0}, {1}], HasFocus=[{2}])", sender.Name, sender.PanelLocation.ToString, HasFocus)
 #End If
     PanelFocus(sender.PanelLocation)
   End Sub
@@ -499,19 +499,19 @@
   Public Sub PanelVisible(panelLocation As DockPanelLocation, isVisible As Boolean)
     Select Case panelLocation
       Case DockPanelLocation.LeftTop
-        ManageSplitters_PanelLeft(isVisible, pnlLeftBottom.Visible)
+        ManageSplitters_PanelLeft(isVisible, PnlLeftBottom.Visible)
       Case DockPanelLocation.LeftBottom
-        ManageSplitters_PanelLeft(pnlLeftTop.Visible, isVisible)
+        ManageSplitters_PanelLeft(PnlLeftTop.Visible, isVisible)
       Case DockPanelLocation.MiddleTopLeft
-        ManageSplitters_PanelMiddle(isVisible, pnlMiddleRight.Visible, pnlMiddleBottom.Visible)
+        ManageSplitters_PanelMiddle(isVisible, PnlMiddleRight.Visible, PnlMiddleBottom.Visible)
       Case DockPanelLocation.MiddleTopRight
-        ManageSplitters_PanelMiddle(pnlMiddleLeft.Visible, isVisible, pnlMiddleBottom.Visible)
+        ManageSplitters_PanelMiddle(PnlMiddleLeft.Visible, isVisible, PnlMiddleBottom.Visible)
       Case DockPanelLocation.MiddleBottom
-        ManageSplitters_PanelMiddle(pnlMiddleLeft.Visible, pnlMiddleRight.Visible, isVisible)
+        ManageSplitters_PanelMiddle(PnlMiddleLeft.Visible, PnlMiddleRight.Visible, isVisible)
       Case DockPanelLocation.RightTop
-        ManageSplitters_PanelRight(isVisible, pnlRightBottom.Visible)
+        ManageSplitters_PanelRight(isVisible, PnlRightBottom.Visible)
       Case DockPanelLocation.RightBottom
-        ManageSplitters_PanelRight(pnlRightTop.Visible, isVisible)
+        ManageSplitters_PanelRight(PnlRightTop.Visible, isVisible)
     End Select
   End Sub
 
@@ -537,7 +537,7 @@
 #If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
         Logger.debugPrint("DockPanelManager.SettingsLoad: {0}=[{1}]", prop, My.Settings.Item(prop))
 #End If
-        loc = My.Settings.Item(prop)
+        loc = CType(My.Settings.Item(prop), DockPanelLocation)
       Catch ex As Exception
 #If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
         Logger.debugPrint("DockPanelManager.SettingsLoad: {0}=[{1}]", prop, "FAILED")
@@ -551,18 +551,18 @@
     PanelVisible(DockPanelLocation.MiddleTopLeft, My.Settings.UI_ML_VIS)
     PanelVisible(DockPanelLocation.MiddleTopRight, My.Settings.UI_MR_VIS)
     PanelVisible(DockPanelLocation.MiddleBottom, My.Settings.UI_MB_VIS)
-    pnlMiddleRight.Width = My.Settings.UI_MR_WIDTH
-    pnlMiddleBottom.Height = My.Settings.UI_MB_HEIGHT
+    PnlMiddleRight.Width = My.Settings.UI_MR_WIDTH
+    PnlMiddleBottom.Height = My.Settings.UI_MB_HEIGHT
 
     PanelVisible(DockPanelLocation.LeftTop, My.Settings.UI_LT_VIS)
     PanelVisible(DockPanelLocation.LeftBottom, My.Settings.UI_LB_VIS)
-    pnlLeft.Width = My.Settings.UI_L_WIDTH
-    pnlLeftTop.Height = My.Settings.UI_LT_HEIGHT
+    PnlLeft.Width = My.Settings.UI_L_WIDTH
+    PnlLeftTop.Height = My.Settings.UI_LT_HEIGHT
 
     PanelVisible(DockPanelLocation.RightTop, My.Settings.UI_RT_VIS)
     PanelVisible(DockPanelLocation.RightBottom, My.Settings.UI_RB_VIS)
-    pnlRight.Width = My.Settings.UI_R_WIDTH
-    pnlRightTop.Height = My.Settings.UI_RT_HEIGHT
+    PnlRight.Width = My.Settings.UI_R_WIDTH
+    PnlRightTop.Height = My.Settings.UI_RT_HEIGHT
 
     'Hide blank panels
     If RegistryPanels(DockPanelLocation.LeftTop).Visible = False Then
@@ -583,13 +583,13 @@
     If RegistryPanels(DockPanelLocation.RightTop).Visible = False Then
       PanelVisible(DockPanelLocation.RightTop, False)
     End If
-    'Clean up any assigned items to hidden tabs
+    'Clean up any assigned items to hidden Tabs
     For Each key As String In RegistryItems.Keys
       Dim itm As DockPanelItem = RegistryItems(key)
       If IsDockableLocation(itm.LocationCurrent) Then
-        Dim pnl As DockPanel = RegistryPanels(itm.LocationCurrent)
-        If Not pnl.Visible Then
-          pnl.RemoveItem(key)
+        Dim Pnl As DockPanel = RegistryPanels(itm.LocationCurrent)
+        If Not Pnl.Visible Then
+          Pnl.RemoveItem(key)
         End If
       End If
     Next
@@ -609,21 +609,21 @@
 #End If
       End Try
     Next
-    My.Settings.UI_MR_WIDTH = pnlMiddleRight.Width
-    My.Settings.UI_MB_HEIGHT = pnlMiddleBottom.Height
-    My.Settings.UI_ML_VIS = pnlMiddleLeft.Visible
-    My.Settings.UI_MR_VIS = pnlMiddleRight.Visible
-    My.Settings.UI_MB_VIS = pnlMiddleBottom.Visible
+    My.Settings.UI_MR_WIDTH = PnlMiddleRight.Width
+    My.Settings.UI_MB_HEIGHT = PnlMiddleBottom.Height
+    My.Settings.UI_ML_VIS = PnlMiddleLeft.Visible
+    My.Settings.UI_MR_VIS = PnlMiddleRight.Visible
+    My.Settings.UI_MB_VIS = PnlMiddleBottom.Visible
 
-    My.Settings.UI_L_WIDTH = pnlLeft.Width
-    My.Settings.UI_LT_HEIGHT = pnlLeftTop.Height
-    My.Settings.UI_LT_VIS = pnlLeftTop.Visible
-    My.Settings.UI_LB_VIS = pnlLeftBottom.Visible
+    My.Settings.UI_L_WIDTH = PnlLeft.Width
+    My.Settings.UI_LT_HEIGHT = PnlLeftTop.Height
+    My.Settings.UI_LT_VIS = PnlLeftTop.Visible
+    My.Settings.UI_LB_VIS = PnlLeftBottom.Visible
 
-    My.Settings.UI_R_WIDTH = pnlRight.Width
-    My.Settings.UI_RT_HEIGHT = pnlRightTop.Height
-    My.Settings.UI_RT_VIS = pnlRightTop.Visible
-    My.Settings.UI_RB_VIS = pnlRightBottom.Visible
+    My.Settings.UI_R_WIDTH = PnlRight.Width
+    My.Settings.UI_RT_HEIGHT = PnlRightTop.Height
+    My.Settings.UI_RT_VIS = PnlRightTop.Visible
+    My.Settings.UI_RB_VIS = PnlRightBottom.Visible
 
   End Sub
 

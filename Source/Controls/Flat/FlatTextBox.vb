@@ -9,7 +9,7 @@ Public Class FlatTextBox
 
 #Region "Fields"
 
-  Friend WithEvents txtCenterMe As TextBox
+  Friend WithEvents TxtCenterMe As TextBox
 
 #End Region
 
@@ -206,10 +206,10 @@ Public Class FlatTextBox
   <Browsable(True), EditorBrowsable(EditorBrowsableState.Always)>
   Public Overrides Property Text As String
     Get
-      Return txtCenterMe.Text
+      Return TxtCenterMe.Text
     End Get
     Set(value As String)
-      txtCenterMe.Text = value
+      TxtCenterMe.Text = value
     End Set
   End Property
 
@@ -220,8 +220,8 @@ Public Class FlatTextBox
   Public Sub New()
     SuspendLayout()
 
-    txtCenterMe = New System.Windows.Forms.TextBox()
-    With txtCenterMe
+    TxtCenterMe = New System.Windows.Forms.TextBox()
+    With TxtCenterMe
       .BorderStyle = System.Windows.Forms.BorderStyle.None
       .Dock = System.Windows.Forms.DockStyle.Fill
       .Location = New System.Drawing.Point(1, 1)
@@ -247,60 +247,60 @@ Public Class FlatTextBox
 #Region "Private Methods"
 
   Private Sub FlatTextBox_GotFocus(sender As Object, e As EventArgs) Handles Me.GotFocus
-    If Not txtCenterMe.Focused Then txtCenterMe.Focus()
+    If Not TxtCenterMe.Focused Then TxtCenterMe.Focus()
   End Sub
 
-  Private Sub SyncSettings(sender As Object, e As EventArgs) Handles Me.ForeColorChanged, Me.FontChanged, Me.BackColorChanged, txtCenterMe.SizeChanged, txtCenterMe.Resize, Me.ClientSizeChanged
-    With txtCenterMe
+  Private Sub SyncSettings(sender As Object, e As EventArgs) Handles Me.ForeColorChanged, Me.FontChanged, Me.BackColorChanged, TxtCenterMe.SizeChanged, TxtCenterMe.Resize, Me.ClientSizeChanged
+    With TxtCenterMe
       .Font = Font
       .BackColor = BackColor
       .ForeColor = ForeColor
-      'Do this here because a change in font will alter the txtbox.cientsize.height
+      'Do this here because a change in font will alter the Txtbox.cientsize.height
       MyBase.Padding = New Padding(2, 0 + Math.Max(0, CInt((ClientSize.Height - .ClientSize.Height) / 2)), 0, 0)
     End With
   End Sub
 
-  Private Sub txtCenterMe_Click(sender As Object, e As EventArgs) Handles txtCenterMe.Click
+  Private Sub TxtCenterMe_Click(sender As Object, e As EventArgs) Handles TxtCenterMe.Click
     OnClick(e)
   End Sub
 
-  Private Sub txtCenterMe_GotFocus(sender As Object, e As EventArgs) Handles txtCenterMe.GotFocus
+  Private Sub TxtCenterMe_GotFocus(sender As Object, e As EventArgs) Handles TxtCenterMe.GotFocus
     OnGotFocus(e)
   End Sub
 
-  Private Sub txtCenterMe_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCenterMe.KeyDown
+  Private Sub TxtCenterMe_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCenterMe.KeyDown
     OnKeyDown(e)
   End Sub
 
-  Private Sub txtCenterMe_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCenterMe.KeyPress
+  Private Sub TxtCenterMe_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtCenterMe.KeyPress
     OnKeyPress(e)
   End Sub
 
-  Private Sub txtCenterMe_LostFocus(sender As Object, e As EventArgs) Handles txtCenterMe.LostFocus
+  Private Sub TxtCenterMe_LostFocus(sender As Object, e As EventArgs) Handles TxtCenterMe.LostFocus
     OnLostFocus(e)
   End Sub
 
-  Private Sub txtCenterMe_MouseClick(sender As Object, e As MouseEventArgs) Handles txtCenterMe.MouseClick
+  Private Sub TxtCenterMe_MouseClick(sender As Object, e As MouseEventArgs) Handles TxtCenterMe.MouseClick
     OnMouseClick(e)
   End Sub
 
-  Private Sub txtCenterMe_MouseDown(sender As Object, e As MouseEventArgs) Handles txtCenterMe.MouseDown
+  Private Sub TxtCenterMe_MouseDown(sender As Object, e As MouseEventArgs) Handles TxtCenterMe.MouseDown
     OnMouseDown(e)
   End Sub
 
-  Private Sub txtCenterMe_MouseEnter(sender As Object, e As EventArgs) Handles txtCenterMe.MouseEnter
+  Private Sub TxtCenterMe_MouseEnter(sender As Object, e As EventArgs) Handles TxtCenterMe.MouseEnter
     OnMouseEnter(e)
   End Sub
 
-  Private Sub txtCenterMe_MouseLeave(sender As Object, e As EventArgs) Handles txtCenterMe.MouseLeave
+  Private Sub TxtCenterMe_MouseLeave(sender As Object, e As EventArgs) Handles TxtCenterMe.MouseLeave
     OnMouseLeave(e)
   End Sub
 
-  Private Sub txtCenterMe_MouseMove(sender As Object, e As MouseEventArgs) Handles txtCenterMe.MouseMove
+  Private Sub TxtCenterMe_MouseMove(sender As Object, e As MouseEventArgs) Handles TxtCenterMe.MouseMove
     OnMouseMove(e)
   End Sub
 
-  Private Sub txtCenterMe_TextChanged(sender As Object, e As EventArgs) Handles txtCenterMe.TextChanged
+  Private Sub TxtCenterMe_TextChanged(sender As Object, e As EventArgs) Handles TxtCenterMe.TextChanged
     OnTextChanged(e)
   End Sub
 

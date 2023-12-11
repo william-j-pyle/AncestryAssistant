@@ -129,7 +129,7 @@
       End Get
       Set(value As String)
         If Val(value) > 0 Then
-          ribbonitemtype = CInt(value)
+          ribbonitemtype = CType(value, RibbonItemType)
         Else
           ribbonitemtype = DirectCast([Enum].Parse(GetType(RibbonItemType), value), RibbonItemType)
         End If
@@ -145,7 +145,7 @@
 
 #Region "Public Methods"
 
-    Public Function getAttribute(attributeName As String) As String
+    Public Function GetAttribute(attributeName As String) As String
       For Each kv As AttributeValuePair In attributes
         If kv.Attribute.Equals(attributeName) Then
           Return kv.Value
@@ -154,8 +154,8 @@
       Return String.Empty
     End Function
 
-    Public Function getIcon() As Image
-      Return My.Resources.ResourceManager.GetObject(getAttribute("icon"))
+    Public Function GetIcon() As Image
+      Return My.Resources.ResourceManager.GetObject(GetAttribute("icon"))
     End Function
 
 #End Region

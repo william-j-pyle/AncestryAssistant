@@ -158,7 +158,7 @@ Public Class AAFile
   Public Sub Save()
     If Not CanSave Then Exit Sub
     If AAFileName.Length = 0 Or AAFileType < 0 Then
-      Throw New FormatException("Both Filename and FileType must be set to perform a save")
+      Throw New FormatException("Both Filename and FileType must be Set to perform a save")
       Exit Sub
     End If
     Dim sb As New StringBuilder
@@ -202,10 +202,10 @@ Public Class AAFile
   End Sub
 
   Public Sub SetTableData(table As List(Of List(Of String)))
-    If table.Count > 0 Then
-      aValueHeaders = table.Item(0).ToArray()
+    If Table.Count > 0 Then
+      aValueHeaders = Table.Item(0).ToArray()
       aValues.Clear()
-      For i As Integer = 1 To table.Count - 1
+      For i As Integer = 1 To Table.Count - 1
         aValues.Add(table.Item(i).ToArray())
       Next
       _IsDirty = True
@@ -213,9 +213,9 @@ Public Class AAFile
   End Sub
 
   Public Sub SetTableData(table As ArrayList)
-    aValueHeaders = table.Item(0)
+    aValueHeaders = Table.Item(0)
     aValues.Clear()
-    For i As Integer = 1 To table.Count - 1
+    For i As Integer = 1 To Table.Count - 1
       aValues.Add(table.Item(i))
     Next
     _IsDirty = True

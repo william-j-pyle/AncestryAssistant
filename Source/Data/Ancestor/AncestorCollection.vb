@@ -94,13 +94,13 @@ Public Class AncestorCollection
 
   Private Sub LoadRepository()
     Dim myAncestor As Ancestor
-    For Each ancestorPath As String In Directory.GetDirectories(RepositoryPath)
+    For Each AncestorPath As String In Directory.GetDirectories(RepositoryPath)
       Try
         myAncestor = New Ancestor(ancestorPath)
         Add(myAncestor.ID, myAncestor)
         RaiseEvent AncestorsChanged()
       Catch ex As InvalidDataException
-        Debug.Print("Invalid Repository Entry: " + ancestorPath)
+        Debug.Print("Invalid Repository Entry: " + AncestorPath)
       End Try
     Next
   End Sub
@@ -109,7 +109,7 @@ Public Class AncestorCollection
 
 #Region "Public Methods"
 
-  Public Function hasAncestor(AncestryID As String) As Boolean
+  Public Function HasAncestor(AncestryID As String) As Boolean
     Return ContainsKey(AncestryID)
   End Function
 

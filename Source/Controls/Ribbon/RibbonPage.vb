@@ -48,7 +48,7 @@
   Public Sub New()
     InitializeComponent()
     items = New Dictionary(Of String, FlatPanel)
-    btnFileTabBack.BackColor = My.Theme.AppBackColor
+    BtnFileTabBack.BackColor = My.Theme.AppBackColor
     ClientArea.BackColor = My.Theme.AppBorderColor
     BackColor = My.Theme.AppBackColor
     Font = My.Theme.AppFont
@@ -70,7 +70,7 @@
 
 #Region "Private Methods"
 
-  Private Sub btnFileTabBack_ButtonClick(sender As Object, e As EventArgs) Handles btnFileTabBack.Click
+  Private Sub BtnFileTabBack_ButtonClick(sender As Object, e As EventArgs) Handles BtnFileTabBack.Click
     Visible = False
   End Sub
 

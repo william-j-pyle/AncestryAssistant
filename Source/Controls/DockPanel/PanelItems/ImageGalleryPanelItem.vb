@@ -6,29 +6,29 @@ Public Class ImageGalleryPanelItem
 
 #Region "Fields"
 
-  Friend WithEvents btnBack As ToolStripButton
+  Friend WithEvents BtnBack As ToolStripButton
 
-  Friend WithEvents btnFlipH As ToolStripButton
+  Friend WithEvents BtnFlipH As ToolStripButton
 
-  Friend WithEvents btnFlipV As ToolStripButton
+  Friend WithEvents BtnFlipV As ToolStripButton
 
-  Friend WithEvents btnSizeH As ToolStripButton
+  Friend WithEvents BtnSizeH As ToolStripButton
 
-  Friend WithEvents btnSizeHV As ToolStripButton
+  Friend WithEvents BtnSizeHV As ToolStripButton
 
-  Friend WithEvents btnSizeV As ToolStripButton
+  Friend WithEvents BtnSizeV As ToolStripButton
 
-  Friend WithEvents imgBox As PictureBox
+  Friend WithEvents ImgBox As PictureBox
 
-  Friend WithEvents imgContainer As Panel
+  Friend WithEvents ImgContainer As Panel
 
-  Friend WithEvents imgViewer As ListView
+  Friend WithEvents ImgViewer As ListView
 
-  Friend WithEvents imgViewerList As ImageList
+  Friend WithEvents ImgViewerList As ImageList
 
-  Friend WithEvents lblCaption As ToolStripLabel
+  Friend WithEvents LblCaption As ToolStripLabel
 
-  Friend WithEvents lblZoom As ToolStripLabel
+  Friend WithEvents LblZoom As ToolStripLabel
 
   Friend WithEvents slider As TrackBar
 
@@ -36,7 +36,7 @@ Public Class ImageGalleryPanelItem
 
   Friend WithEvents toolStripSeparator As ToolStripSeparator
 
-  Friend WithEvents ts As FlatToolBar
+  Friend WithEvents Ts As FlatToolBar
 
   Private Const Default_ItemCaption As String = "Image Gallery"
   Private Const Default_ItemHasRibbonBar As Boolean = True
@@ -80,76 +80,76 @@ Public Class ImageGalleryPanelItem
     RibbonHideOnItemClose = Default_RibbonHideOnItemClose
     RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
     RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Key can be overriden during creation, apply if set
+    'Key can be overriden during creation, apply if Set
     If Len(itemKey) > 0 Then Key = itemKey
     'Continue with creation
     components = New Container()
-    imgViewer = New ListView()
-    imgViewerList = New ImageList(components)
-    imgContainer = New Panel()
-    imgBox = New PictureBox()
-    ts = New FlatToolBar()
+    ImgViewer = New ListView()
+    ImgViewerList = New ImageList(components)
+    ImgContainer = New Panel()
+    ImgBox = New PictureBox()
+    Ts = New FlatToolBar()
     slider = New TrackBar()
-    btnBack = New ToolStripButton()
-    btnFlipV = New ToolStripButton()
-    btnFlipH = New ToolStripButton()
-    lblCaption = New ToolStripLabel()
-    btnSizeHV = New ToolStripButton()
-    btnSizeH = New ToolStripButton()
-    btnSizeV = New ToolStripButton()
-    lblZoom = New ToolStripLabel()
+    BtnBack = New ToolStripButton()
+    BtnFlipV = New ToolStripButton()
+    BtnFlipH = New ToolStripButton()
+    LblCaption = New ToolStripLabel()
+    BtnSizeHV = New ToolStripButton()
+    BtnSizeH = New ToolStripButton()
+    BtnSizeV = New ToolStripButton()
+    LblZoom = New ToolStripLabel()
     toolStripSeparator = New ToolStripSeparator()
-    imgContainer.SuspendLayout()
-    CType(imgBox, System.ComponentModel.ISupportInitialize).BeginInit()
-    ts.SuspendLayout()
+    ImgContainer.SuspendLayout()
+    CType(ImgBox, System.ComponentModel.ISupportInitialize).BeginInit()
+    Ts.SuspendLayout()
     SuspendLayout()
     '
     'imgViewer
     '
-    imgViewer.BackColor = My.Theme.PanelBackColor
-    imgViewer.BorderStyle = BorderStyle.None
-    imgViewer.Font = New Font("Segoe UI Semibold", 9.0!, FontStyle.Bold)
-    imgViewer.ForeColor = My.Theme.PanelFontColor
-    imgViewer.HideSelection = False
-    imgViewer.LargeImageList = imgViewerList
-    imgViewer.Location = New Point(0, 144)
-    imgViewer.MultiSelect = False
-    imgViewer.Name = "imgViewer"
-    imgViewer.Size = New Size(223, 174)
-    imgViewer.TabIndex = 0
-    imgViewer.TileSize = New Size(256, 256)
-    imgViewer.UseCompatibleStateImageBehavior = False
-    imgViewer.View = View.Tile
+    ImgViewer.BackColor = My.Theme.PanelBackColor
+    ImgViewer.BorderStyle = BorderStyle.None
+    ImgViewer.Font = New Font("Segoe UI Semibold", 9.0!, FontStyle.Bold)
+    ImgViewer.ForeColor = My.Theme.PanelFontColor
+    ImgViewer.HideSelection = False
+    ImgViewer.LargeImageList = ImgViewerList
+    ImgViewer.Location = New Point(0, 144)
+    ImgViewer.MultiSelect = False
+    ImgViewer.Name = "imgViewer"
+    ImgViewer.Size = New Size(223, 174)
+    ImgViewer.TabIndex = 0
+    ImgViewer.TileSize = New Size(256, 256)
+    ImgViewer.UseCompatibleStateImageBehavior = False
+    ImgViewer.View = View.Tile
     '
     'imgViewerList
     '
-    imgViewerList.ColorDepth = ColorDepth.Depth32Bit
-    imgViewerList.ImageSize = New Size(256, 256)
-    imgViewerList.TransparentColor = Color.Transparent
+    ImgViewerList.ColorDepth = ColorDepth.Depth32Bit
+    ImgViewerList.ImageSize = New Size(256, 256)
+    ImgViewerList.TransparentColor = Color.Transparent
     '
     'imgContainer
     '
-    imgContainer.BackColor = My.Theme.PanelBackColor
-    imgContainer.Controls.Add(imgBox)
-    imgContainer.Location = New Point(257, 144)
-    imgContainer.Margin = New Padding(0)
-    imgContainer.Name = "imgContainer"
-    imgContainer.Size = New Size(200, 174)
-    imgContainer.TabIndex = 4
+    ImgContainer.BackColor = My.Theme.PanelBackColor
+    ImgContainer.Controls.Add(ImgBox)
+    ImgContainer.Location = New Point(257, 144)
+    ImgContainer.Margin = New Padding(0)
+    ImgContainer.Name = "imgContainer"
+    ImgContainer.Size = New Size(200, 174)
+    ImgContainer.TabIndex = 4
     '
     'imgBox
     '
-    imgBox.BorderStyle = BorderStyle.FixedSingle
-    imgBox.Cursor = Cursors.Hand
-    imgBox.ErrorImage = Nothing
-    imgBox.ImageLocation = ""
-    imgBox.Location = New Point(29, 48)
-    imgBox.Margin = New Padding(0)
-    imgBox.Name = "imgBox"
-    imgBox.Size = New Size(100, 100)
-    imgBox.SizeMode = PictureBoxSizeMode.AutoSize
-    imgBox.TabIndex = 0
-    imgBox.TabStop = False
+    ImgBox.BorderStyle = BorderStyle.FixedSingle
+    ImgBox.Cursor = Cursors.Hand
+    ImgBox.ErrorImage = Nothing
+    ImgBox.ImageLocation = ""
+    ImgBox.Location = New Point(29, 48)
+    ImgBox.Margin = New Padding(0)
+    ImgBox.Name = "imgBox"
+    ImgBox.Size = New Size(100, 100)
+    ImgBox.SizeMode = PictureBoxSizeMode.AutoSize
+    ImgBox.TabIndex = 0
+    ImgBox.TabStop = False
 
     With slider
       .Minimum = 10
@@ -168,9 +168,9 @@ Public Class ImageGalleryPanelItem
     '
     'ts
     '
-    With ts
-      ts.GripStyle = ToolStripGripStyle.Hidden
-      .Items.AddRange(New ToolStripItem() {btnBack, btnFlipV, btnFlipH, lblCaption, lblZoom, sliderHost, toolStripSeparator, btnSizeH, btnSizeV, btnSizeHV})
+    With Ts
+      Ts.GripStyle = ToolStripGripStyle.Hidden
+      .Items.AddRange(New ToolStripItem() {BtnBack, BtnFlipV, BtnFlipH, LblCaption, LblZoom, sliderHost, toolStripSeparator, BtnSizeH, BtnSizeV, BtnSizeHV})
       .Location = New Point(0, 0)
       .Name = "ts"
       .RenderMode = ToolStripRenderMode.System
@@ -181,7 +181,7 @@ Public Class ImageGalleryPanelItem
     '
     'btnBack
     '
-    With btnBack
+    With BtnBack
       .DisplayStyle = ToolStripItemDisplayStyle.Image
       .Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
       .ImageTransparentColor = Color.Transparent
@@ -192,68 +192,68 @@ Public Class ImageGalleryPanelItem
     '
     'btnFlipV
     '
-    btnFlipV.DisplayStyle = ToolStripItemDisplayStyle.Image
-    btnFlipV.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
-    btnFlipV.ImageTransparentColor = Color.Transparent
-    btnFlipV.Name = "btnFlipV"
-    btnFlipV.Size = New Size(23, 22)
-    btnFlipV.Text = "Flip Image Vertically"
+    BtnFlipV.DisplayStyle = ToolStripItemDisplayStyle.Image
+    BtnFlipV.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnFlipV.ImageTransparentColor = Color.Transparent
+    BtnFlipV.Name = "btnFlipV"
+    BtnFlipV.Size = New Size(23, 22)
+    BtnFlipV.Text = "Flip Image Vertically"
     '
     'btnFlipH
     '
-    btnFlipH.DisplayStyle = ToolStripItemDisplayStyle.Image
-    btnFlipH.Image = My.Theme.ImageButtonFlipH
-    btnFlipH.ImageTransparentColor = Color.Transparent
-    btnFlipH.Name = "btnFlipH"
-    btnFlipH.Size = New Size(23, 22)
-    btnFlipH.Text = "Flip Image Horizontally"
+    BtnFlipH.DisplayStyle = ToolStripItemDisplayStyle.Image
+    BtnFlipH.Image = My.Theme.ImageButtonFlipH
+    BtnFlipH.ImageTransparentColor = Color.Transparent
+    BtnFlipH.Name = "btnFlipH"
+    BtnFlipH.Size = New Size(23, 22)
+    BtnFlipH.Text = "Flip Image Horizontally"
     '
-    'lblCaption
+    'LblCaption
     '
-    lblCaption.ForeColor = My.Theme.PanelFontColor
-    lblCaption.Name = "lblCaption"
-    lblCaption.Size = New Size(87, 22)
-    lblCaption.TextAlign = ContentAlignment.MiddleCenter
-    lblCaption.Text = ""
-    lblCaption.Dock = DockStyle.Fill
+    LblCaption.ForeColor = My.Theme.PanelFontColor
+    LblCaption.Name = "LblCaption"
+    LblCaption.Size = New Size(87, 22)
+    LblCaption.TextAlign = ContentAlignment.MiddleCenter
+    LblCaption.Text = ""
+    LblCaption.Dock = DockStyle.Fill
     '
     'btnSizeHV
     '
-    btnSizeHV.Alignment = ToolStripItemAlignment.Right
-    btnSizeHV.DisplayStyle = ToolStripItemDisplayStyle.Image
-    btnSizeHV.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
-    btnSizeHV.ImageTransparentColor = Color.Transparent
-    btnSizeHV.Name = "btnSizeHV"
-    btnSizeHV.Size = New Size(23, 22)
-    btnSizeHV.Text = "Fit Full Image"
+    BtnSizeHV.Alignment = ToolStripItemAlignment.Right
+    BtnSizeHV.DisplayStyle = ToolStripItemDisplayStyle.Image
+    BtnSizeHV.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnSizeHV.ImageTransparentColor = Color.Transparent
+    BtnSizeHV.Name = "btnSizeHV"
+    BtnSizeHV.Size = New Size(23, 22)
+    BtnSizeHV.Text = "Fit Full Image"
     '
     'btnSizeH
     '
-    btnSizeH.Alignment = ToolStripItemAlignment.Right
-    btnSizeH.DisplayStyle = ToolStripItemDisplayStyle.Image
-    btnSizeH.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
-    btnSizeH.ImageTransparentColor = Color.Transparent
-    btnSizeH.Name = "btnSizeH"
-    btnSizeH.Size = New Size(23, 22)
-    btnSizeH.Text = "Fit Image Width"
+    BtnSizeH.Alignment = ToolStripItemAlignment.Right
+    BtnSizeH.DisplayStyle = ToolStripItemDisplayStyle.Image
+    BtnSizeH.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnSizeH.ImageTransparentColor = Color.Transparent
+    BtnSizeH.Name = "btnSizeH"
+    BtnSizeH.Size = New Size(23, 22)
+    BtnSizeH.Text = "Fit Image Width"
     '
     'btnSizeV
     '
-    btnSizeV.Alignment = ToolStripItemAlignment.Right
-    btnSizeV.DisplayStyle = ToolStripItemDisplayStyle.Image
-    btnSizeV.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
-    btnSizeV.ImageTransparentColor = Color.Transparent
-    btnSizeV.Name = "btnSizeV"
-    btnSizeV.Size = New Size(23, 22)
-    btnSizeV.Text = "Fit Image Height"
+    BtnSizeV.Alignment = ToolStripItemAlignment.Right
+    BtnSizeV.DisplayStyle = ToolStripItemDisplayStyle.Image
+    BtnSizeV.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnSizeV.ImageTransparentColor = Color.Transparent
+    BtnSizeV.Name = "btnSizeV"
+    BtnSizeV.Size = New Size(23, 22)
+    BtnSizeV.Text = "Fit Image Height"
     '
     'lblZoom
     '
-    lblZoom.Alignment = ToolStripItemAlignment.Right
-    lblZoom.ForeColor = My.Theme.PanelFontColor
-    lblZoom.Name = "lblZoom"
-    lblZoom.Size = New Size(25, 22)
-    lblZoom.Text = "100"
+    LblZoom.Alignment = ToolStripItemAlignment.Right
+    LblZoom.ForeColor = My.Theme.PanelFontColor
+    LblZoom.Name = "lblZoom"
+    LblZoom.Size = New Size(25, 22)
+    LblZoom.Text = "100"
 
     '
     'toolStripSeparator
@@ -269,21 +269,21 @@ Public Class ImageGalleryPanelItem
 
     AutoScaleDimensions = New SizeF(6.0!, 13.0!)
     AutoScaleMode = AutoScaleMode.Font
-    Controls.Add(ts)
-    Controls.Add(imgContainer)
-    Controls.Add(imgViewer)
+    Controls.Add(Ts)
+    Controls.Add(ImgContainer)
+    Controls.Add(ImgViewer)
     Name = "ImageGallery"
     Size = New Size(465, 330)
-    imgContainer.ResumeLayout(False)
-    imgContainer.PerformLayout()
-    CType(imgBox, System.ComponentModel.ISupportInitialize).EndInit()
-    ts.ResumeLayout(False)
-    ts.PerformLayout()
+    ImgContainer.ResumeLayout(False)
+    ImgContainer.PerformLayout()
+    CType(ImgBox, System.ComponentModel.ISupportInitialize).EndInit()
+    Ts.ResumeLayout(False)
+    Ts.PerformLayout()
     ResumeLayout(False)
     PerformLayout()
     Dock = DockStyle.Fill
-    imgViewer.Dock = DockStyle.Fill
-    imgContainer.Dock = DockStyle.Fill
+    ImgViewer.Dock = DockStyle.Fill
+    ImgContainer.Dock = DockStyle.Fill
     ShowGallery()
     CaptureFocus(Me)
   End Sub
@@ -292,47 +292,47 @@ Public Class ImageGalleryPanelItem
 
 #Region "Private Methods"
 
-  Private Sub btnFlipH_Click(sender As Object, e As EventArgs) Handles btnFlipH.Click
-    imgBox.Image.RotateFlip(RotateFlipType.RotateNoneFlipY)
-    imgBox.Invalidate()
+  Private Sub BtnFlipH_Click(sender As Object, e As EventArgs) Handles BtnFlipH.Click
+    ImgBox.Image.RotateFlip(RotateFlipType.RotateNoneFlipY)
+    ImgBox.Invalidate()
   End Sub
 
-  Private Sub btnFlipV_Click(sender As Object, e As EventArgs) Handles btnFlipV.Click
-    imgBox.Image.RotateFlip(RotateFlipType.RotateNoneFlipX)
-    imgBox.Invalidate()
+  Private Sub BtnFlipV_Click(sender As Object, e As EventArgs) Handles BtnFlipV.Click
+    ImgBox.Image.RotateFlip(RotateFlipType.RotateNoneFlipX)
+    ImgBox.Invalidate()
   End Sub
 
-  Private Sub btnGallery_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+  Private Sub BtnGallery_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
     ShowGallery()
   End Sub
 
-  Private Sub btnZoomFitHeight_Click(sender As Object, e As EventArgs) Handles btnSizeV.Click
-    Dim zoom As Integer = CInt(100 * ((imgContainer.Height - 30) / imgBox.Image.Height))
+  Private Sub BtnZoomFitHeight_Click(sender As Object, e As EventArgs) Handles BtnSizeV.Click
+    Dim zoom As Integer = CInt(100 * ((ImgContainer.Height - 30) / ImgBox.Image.Height))
     If zoom > slider.Maximum Then zoom = slider.Maximum
     If zoom < slider.Minimum Then zoom = slider.Minimum
     slider.Value = zoom
-    imgBox.Location = New Point(15, 15)
+    ImgBox.Location = New Point(15, 15)
 
   End Sub
 
-  Private Sub btnZoomFitHeightWidth_Click(sender As Object, e As EventArgs) Handles btnSizeHV.Click
-    Dim zoomW As Integer = CInt(100 * ((imgContainer.Width - 30) / imgBox.Image.Width))
-    Dim zoomH As Integer = CInt(100 * ((imgContainer.Height - 30) / imgBox.Image.Height))
+  Private Sub BtnZoomFitHeightWidth_Click(sender As Object, e As EventArgs) Handles BtnSizeHV.Click
+    Dim zoomW As Integer = CInt(100 * ((ImgContainer.Width - 30) / ImgBox.Image.Width))
+    Dim zoomH As Integer = CInt(100 * ((ImgContainer.Height - 30) / ImgBox.Image.Height))
     Dim zoom As Integer = Math.Min(zoomW, zoomH)
     If zoom > slider.Maximum Then zoom = slider.Maximum
     If zoom < slider.Minimum Then zoom = slider.Minimum
 
     slider.Value = zoom
-    imgBox.Location = New Point(15, 15)
+    ImgBox.Location = New Point(15, 15)
 
   End Sub
 
-  Private Sub btnZoomFitWidth_Click(sender As Object, e As EventArgs) Handles btnSizeH.Click
-    Dim zoom As Integer = CInt(100 * ((imgContainer.Width - 30) / imgBox.Image.Width))
+  Private Sub BtnZoomFitWidth_Click(sender As Object, e As EventArgs) Handles BtnSizeH.Click
+    Dim zoom As Integer = CInt(100 * ((ImgContainer.Width - 30) / ImgBox.Image.Width))
     If zoom > slider.Maximum Then zoom = slider.Maximum
     If zoom < slider.Minimum Then zoom = slider.Minimum
     slider.Value = zoom
-    imgBox.Location = New Point(15, 15)
+    ImgBox.Location = New Point(15, 15)
 
   End Sub
 
@@ -356,63 +356,63 @@ Public Class ImageGalleryPanelItem
     Return paddedImage
   End Function
 
-  Private Sub imgBox_LoadCompleted(sender As Object, e As AsyncCompletedEventArgs) Handles imgBox.LoadCompleted
+  Private Sub ImgBox_LoadCompleted(sender As Object, e As AsyncCompletedEventArgs) Handles ImgBox.LoadCompleted
     slider.Value = 100
-    imgBox.Location = New Point(15, 15)
-    imgBox.Size = imgBox.Image.Size
-    imgBox.SizeMode = PictureBoxSizeMode.Zoom
-    imgBox.Visible = True
+    ImgBox.Location = New Point(15, 15)
+    ImgBox.Size = ImgBox.Image.Size
+    ImgBox.SizeMode = PictureBoxSizeMode.Zoom
+    ImgBox.Visible = True
     zoomActive = True
   End Sub
 
-  Private Sub imgBox_MouseDown(sender As Object, e As MouseEventArgs) Handles imgBox.MouseDown
-    If PanningEnabled And e.Button = MouseButtons.Left And (imgBox.Height > imgContainer.Height Or imgBox.Width > imgContainer.Width) Then
+  Private Sub ImgBox_MouseDown(sender As Object, e As MouseEventArgs) Handles ImgBox.MouseDown
+    If PanningEnabled And e.Button = MouseButtons.Left And (ImgBox.Height > ImgContainer.Height Or ImgBox.Width > ImgContainer.Width) Then
       panningActive = True
       smoothedMousePosition = e.Location
     End If
   End Sub
 
-  Private Sub imgBox_MouseMove(sender As Object, e As MouseEventArgs) Handles imgBox.MouseMove
+  Private Sub ImgBox_MouseMove(sender As Object, e As MouseEventArgs) Handles ImgBox.MouseMove
     If panningActive Then
       Dim deltaX As Integer = CInt((e.X - smoothedMousePosition.X) * MouseSmoothingFactor)
       Dim deltaY As Integer = CInt((e.Y - smoothedMousePosition.Y) * MouseSmoothingFactor)
       smoothedMousePosition = New Point(smoothedMousePosition.X + deltaX, smoothedMousePosition.Y + deltaY)
 
-      Dim newX As Integer = Math.Min(15, imgBox.Left + deltaX)
-      Dim newY As Integer = Math.Min(15, imgBox.Top + deltaY)
+      Dim newX As Integer = Math.Min(15, ImgBox.Left + deltaX)
+      Dim newY As Integer = Math.Min(15, ImgBox.Top + deltaY)
 
-      If newX < (imgContainer.Width - imgBox.Width - 15) Then newX = imgContainer.Width - imgBox.Width - 15
-      If newY < (imgContainer.Height - imgBox.Height - 15) Then newY = imgContainer.Height - imgBox.Height - 15
+      If newX < (ImgContainer.Width - ImgBox.Width - 15) Then newX = ImgContainer.Width - ImgBox.Width - 15
+      If newY < (ImgContainer.Height - ImgBox.Height - 15) Then newY = ImgContainer.Height - ImgBox.Height - 15
 
-      imgBox.Location = New Point(newX, newY)
+      ImgBox.Location = New Point(newX, newY)
     End If
   End Sub
 
-  Private Sub imgBox_MouseUp(sender As Object, e As MouseEventArgs) Handles imgBox.MouseUp
+  Private Sub ImgBox_MouseUp(sender As Object, e As MouseEventArgs) Handles ImgBox.MouseUp
     If e.Button = MouseButtons.Left Then
       panningActive = False
     End If
   End Sub
 
-  Private Sub imgContainer_Resize(sender As Object, e As EventArgs) Handles imgContainer.Resize
-    imgBox.Location = New Point(15, 15)
+  Private Sub ImgContainer_Resize(sender As Object, e As EventArgs) Handles ImgContainer.Resize
+    ImgBox.Location = New Point(15, 15)
   End Sub
 
-  Private Sub imgViewer_DoubleClick(sender As Object, e As EventArgs) Handles imgViewer.DoubleClick
-    ShowViewer(imgViewer.SelectedItems.Item(0).Tag)
+  Private Sub ImgViewer_DoubleClick(sender As Object, e As EventArgs) Handles ImgViewer.DoubleClick
+    ShowViewer(ImgViewer.SelectedItems.Item(0).Tag.ToString)
   End Sub
 
   Private Sub LoadGalleryImage(caption As String, filename As String)
-    Dim maxSize As Integer = imgViewerList.ImageSize.Height
-    Dim img As Image = GetImageThumbnail(Image.FromFile(filename), maxSize)
-    Dim key As String = (imgViewerList.Images.Count + 1).ToString
-    imgViewerList.Images.Add(key, img)
-    Dim newItem As ListViewItem = imgViewer.Items.Add(caption, key)
+    Dim maxSize As Integer = ImgViewerList.ImageSize.Height
+    Dim Img As Image = GetImageThumbnail(Image.FromFile(filename), maxSize)
+    Dim key As String = (ImgViewerList.Images.Count + 1).ToString
+    ImgViewerList.Images.Add(key, Img)
+    Dim newItem As ListViewItem = ImgViewer.Items.Add(caption, key)
     newItem.Tag = filename
   End Sub
 
-  Private Async Function ProcessFileAsync(fileName As String) As Task
-    Dim galleryPath As String = ancestors.ActiveAncestor.AncestorPath
+  Private Sub ProcessFileAsync(fileName As String)
+    Dim galleryPath As String = Ancestors.ActiveAncestor.AncestorPath
     Dim caption As String = fileName.Replace(galleryPath, "")
     If File.Exists(fileName + ".txt") Then
       caption = File.ReadAllText(fileName + ".txt")
@@ -424,22 +424,21 @@ Public Class ImageGalleryPanelItem
     Else
       LoadGalleryImage(caption, fileName)
     End If
-
-  End Function
+  End Sub
 
   Private Sub ReloadGalleryAsync()
-    Dim fileNames As List(Of String) = Directory.GetFiles(ancestors.ActiveAncestor.AncestorPath, "*.jpg", SearchOption.AllDirectories).ToList()
+    Dim fileNames As List(Of String) = Directory.GetFiles(Ancestors.ActiveAncestor.AncestorPath, "*.jpg", SearchOption.AllDirectories).ToList()
     Parallel.ForEach(fileNames, Async Sub(fileName)
-                                  Await ProcessFileAsync(fileName)
+                                  ProcessFileAsync(fileName)
                                 End Sub)
   End Sub
 
   Private Sub ShowGallery()
-    imgContainer.Visible = False
+    ImgContainer.Visible = False
     'ts.Visible = False
-    imgViewer.Visible = True
-    imgViewer.BringToFront()
-    For Each item As ToolStripItem In ts.Items
+    ImgViewer.Visible = True
+    ImgViewer.BringToFront()
+    For Each item As ToolStripItem In Ts.Items
       item.Visible = False
     Next
     Refresh()
@@ -447,24 +446,24 @@ Public Class ImageGalleryPanelItem
 
   Private Sub ShowViewer(filename As String)
     Dim f() As String = filename.Split("\"c)
-    lblCaption.Text = f(UBound(f))
-    For Each item As ToolStripItem In ts.Items
+    LblCaption.Text = f(UBound(f))
+    For Each item As ToolStripItem In Ts.Items
       item.Visible = True
     Next
     'ts.Visible = True
-    imgContainer.Visible = True
-    imgContainer.BringToFront()
-    imgViewer.Visible = False
+    ImgContainer.Visible = True
+    ImgContainer.BringToFront()
+    ImgViewer.Visible = False
     Refresh()
-    imgBox.LoadAsync(filename)
+    ImgBox.LoadAsync(filename)
   End Sub
 
   Private Sub slider_ValueChanged(sender As Object, e As EventArgs) Handles slider.ValueChanged
-    lblZoom.Text = slider.Value
+    LblZoom.Text = CStr(slider.Value)
     If zoomActive Then
-      Dim width As Integer = CInt(imgBox.Image.Width * (slider.Value / 100))
-      Dim height As Integer = CInt(imgBox.Image.Height * (slider.Value / 100))
-      imgBox.Size = New Size(width, height)
+      Dim width As Integer = CInt(ImgBox.Image.Width * (slider.Value / 100))
+      Dim height As Integer = CInt(ImgBox.Image.Height * (slider.Value / 100))
+      ImgBox.Size = New Size(width, height)
     End If
   End Sub
 
@@ -484,10 +483,10 @@ Public Class ImageGalleryPanelItem
   End Sub
 
   Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
-    If ancestors Is Nothing Then Exit Sub
-    imgViewer.Items.Clear()
-    imgViewerList.Images.Clear()
-    If Not ancestors.HasActiveAncestor Then Exit Sub
+    If Ancestors Is Nothing Then Exit Sub
+    ImgViewer.Items.Clear()
+    ImgViewerList.Images.Clear()
+    If Not Ancestors.HasActiveAncestor Then Exit Sub
     ShowGallery()
     ReloadGalleryAsync()
   End Sub

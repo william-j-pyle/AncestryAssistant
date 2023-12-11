@@ -3,7 +3,7 @@
 
 #Region "Fields"
 
-  Protected Friend WithEvents ancestors As AncestorCollection
+  Protected Friend WithEvents Ancestors As AncestorCollection
   Private _LocationCurrent As DockPanelLocation = DockPanelLocation.None
 
 #End Region
@@ -107,7 +107,7 @@
   Public MustOverride Sub ClearSearch()
 
   Public Sub SetAncestors(ancestorsObj As AncestorCollection)
-    ancestors = ancestorsObj
+    Ancestors = ancestorsObj
     UpdateUI()
   End Sub
 

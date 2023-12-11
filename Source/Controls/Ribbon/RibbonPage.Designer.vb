@@ -432,7 +432,7 @@ Partial Class RibbonPage
     Friend WithEvents BordersPanel8 As FlatPanel
     Friend WithEvents BordersPanel10 As FlatPanel
     Friend WithEvents Label7 As Label
-  Friend WithEvents btnFileTabBack As FlatIconButton
+  Friend WithEvents BtnFileTabBack As FlatIconButton
   Friend WithEvents BordersPanel1 As FlatPanel
     Friend WithEvents Label1 As Label
     Friend WithEvents BordersPanel7 As FlatPanel

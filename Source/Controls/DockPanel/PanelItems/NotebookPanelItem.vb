@@ -11,7 +11,7 @@ Public Class NotebookPanelItem
   Friend WithEvents BtnH2 As ToolStripMenuItem
   Friend WithEvents BtnH3 As ToolStripMenuItem
   Friend WithEvents BtnH4 As ToolStripMenuItem
-  Friend WithEvents imgSection As ImageList
+  Friend WithEvents ImgSection As ImageList
   Friend WithEvents LblStretch As Label
   Friend WithEvents PnlBody As Panel
   Friend WithEvents PnlHeader As Panel
@@ -27,8 +27,8 @@ Public Class NotebookPanelItem
   Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
   Friend WithEvents ToolStripSplitButton1 As ToolStripSplitButton
   Friend WithEvents TreeSectionPages As TreeView
-  Friend WithEvents tsPage As ToolStrip
-  Friend WithEvents tsSections As ToolStrip
+  Friend WithEvents TsPage As ToolStrip
+  Friend WithEvents TsSections As ToolStrip
   Friend WithEvents TxtBody As RichTextBox
   Friend WithEvents TxtHeader As TextBox
   Private Const Default_ItemCaption As String = "Notebook"
@@ -67,7 +67,7 @@ Public Class NotebookPanelItem
     RibbonHideOnItemClose = Default_RibbonHideOnItemClose
     RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
     RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Key can be overriden during creation, apply if set
+    'Key can be overriden during creation, apply if Set
     If Len(itemKey) > 0 Then Key = itemKey
     'Continue with creation
     components = New Container()
@@ -76,8 +76,8 @@ Public Class NotebookPanelItem
     Dim TreeNode3 As New TreeNode("Last, First - YYYY", New TreeNode() {TreeNode2})
     SplitSectionsPage = New SplitContainer()
     TreeSectionPages = New TreeView()
-    imgSection = New ImageList(components)
-    tsSections = New ToolStrip()
+    ImgSection = New ImageList(components)
+    TsSections = New ToolStrip()
     BtnAddSection = New ToolStripButton()
     BtnAddPage = New ToolStripButton()
     PnlBody = New Panel()
@@ -86,7 +86,7 @@ Public Class NotebookPanelItem
     PnlHeaderStretch = New AncestryAssistant.FlatPanel()
     TxtHeader = New TextBox()
     LblStretch = New Label()
-    tsPage = New ToolStrip()
+    TsPage = New ToolStrip()
     ToolStripButton10 = New ToolStripButton()
     ToolStripButton1 = New ToolStripButton()
     ToolStripButton2 = New ToolStripButton()
@@ -104,11 +104,11 @@ Public Class NotebookPanelItem
     SplitSectionsPage.Panel1.SuspendLayout()
     SplitSectionsPage.Panel2.SuspendLayout()
     SplitSectionsPage.SuspendLayout()
-    tsSections.SuspendLayout()
+    TsSections.SuspendLayout()
     PnlBody.SuspendLayout()
     PnlHeader.SuspendLayout()
     PnlHeaderStretch.SuspendLayout()
-    tsPage.SuspendLayout()
+    TsPage.SuspendLayout()
     SuspendLayout()
     '
     'SplitSectionsPage
@@ -121,14 +121,14 @@ Public Class NotebookPanelItem
     'SplitSectionsPage.Panel1
     '
     SplitSectionsPage.Panel1.Controls.Add(TreeSectionPages)
-    SplitSectionsPage.Panel1.Controls.Add(tsSections)
+    SplitSectionsPage.Panel1.Controls.Add(TsSections)
     '
     'SplitSectionsPage.Panel2
     '
     SplitSectionsPage.Panel2.BackColor = Color.White
     SplitSectionsPage.Panel2.Controls.Add(PnlBody)
     SplitSectionsPage.Panel2.Controls.Add(PnlHeader)
-    SplitSectionsPage.Panel2.Controls.Add(tsPage)
+    SplitSectionsPage.Panel2.Controls.Add(TsPage)
     SplitSectionsPage.Size = New Size(654, 435)
     SplitSectionsPage.SplitterDistance = 102
     SplitSectionsPage.TabIndex = 4
@@ -139,7 +139,7 @@ Public Class NotebookPanelItem
     TreeSectionPages.BorderStyle = BorderStyle.None
     TreeSectionPages.Dock = DockStyle.Fill
     TreeSectionPages.ImageIndex = 2
-    TreeSectionPages.ImageList = imgSection
+    TreeSectionPages.ImageList = ImgSection
     TreeSectionPages.Location = New Point(0, 25)
     TreeSectionPages.Name = "TreeSectionPages"
     TreeNode1.ImageKey = "PAGE"
@@ -162,12 +162,12 @@ Public Class NotebookPanelItem
     TreeSectionPages.ShowNodeToolTips = True
     TreeSectionPages.ShowRootLines = False
     TreeSectionPages.Size = New Size(102, 410)
-    TreeSectionPages.StateImageList = imgSection
+    TreeSectionPages.StateImageList = ImgSection
     TreeSectionPages.TabIndex = 0
     '
     'imgSection
     '
-    '  imgSection.ImageStream = CType(resources.GetObject("imgSection.ImageStream"), ImageListStreamer)
+    '  ImgSection.ImageStream = CType(resources.GetObject("imgSection.ImageStream"), ImageListStreamer)
     'imgSection.TransparentColor = Color.Transparent
     'imgSection.Images.SetKeyName(0, "SECTIONS")
     'imgSection.Images.SetKeyName(1, "SECTION")
@@ -175,16 +175,16 @@ Public Class NotebookPanelItem
     '
     'tsSections
     '
-    tsSections.CanOverflow = False
-    tsSections.GripStyle = ToolStripGripStyle.Hidden
-    tsSections.Items.AddRange(New ToolStripItem() {BtnAddSection, BtnAddPage})
-    tsSections.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow
-    tsSections.Name = "tsSections"
-    tsSections.Padding = New Padding(4, 0, 16, 0)
-    tsSections.RenderMode = ToolStripRenderMode.System
-    tsSections.Size = New Size(102, 25)
-    tsSections.Stretch = True
-    tsSections.TabIndex = 5
+    TsSections.CanOverflow = False
+    TsSections.GripStyle = ToolStripGripStyle.Hidden
+    TsSections.Items.AddRange(New ToolStripItem() {BtnAddSection, BtnAddPage})
+    TsSections.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow
+    TsSections.Name = "tsSections"
+    TsSections.Padding = New Padding(4, 0, 16, 0)
+    TsSections.RenderMode = ToolStripRenderMode.System
+    TsSections.Size = New Size(102, 25)
+    TsSections.Stretch = True
+    TsSections.TabIndex = 5
     '
     'BtnAddSection
     '
@@ -286,16 +286,16 @@ Public Class NotebookPanelItem
     '
     'tsPage
     '
-    tsPage.CanOverflow = False
-    tsPage.GripStyle = ToolStripGripStyle.Hidden
-    tsPage.Items.AddRange(New ToolStripItem() {ToolStripButton10, ToolStripButton1, ToolStripButton2, ToolStripSeparator1, ToolStripButton3, ToolStripButton4, ToolStripButton5, ToolStripSeparator2, ToolStripSplitButton1})
-    tsPage.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow
-    tsPage.Name = "tsPage"
-    tsPage.Padding = New Padding(4, 0, 16, 0)
-    tsPage.RenderMode = ToolStripRenderMode.System
-    tsPage.Size = New Size(548, 25)
-    tsPage.Stretch = True
-    tsPage.TabIndex = 4
+    TsPage.CanOverflow = False
+    TsPage.GripStyle = ToolStripGripStyle.Hidden
+    TsPage.Items.AddRange(New ToolStripItem() {ToolStripButton10, ToolStripButton1, ToolStripButton2, ToolStripSeparator1, ToolStripButton3, ToolStripButton4, ToolStripButton5, ToolStripSeparator2, ToolStripSplitButton1})
+    TsPage.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow
+    TsPage.Name = "tsPage"
+    TsPage.Padding = New Padding(4, 0, 16, 0)
+    TsPage.RenderMode = ToolStripRenderMode.System
+    TsPage.Size = New Size(548, 25)
+    TsPage.Stretch = True
+    TsPage.TabIndex = 4
     '
     'ToolStripButton10
     '
@@ -425,15 +425,15 @@ Public Class NotebookPanelItem
     SplitSectionsPage.Panel2.PerformLayout()
     CType(SplitSectionsPage, ISupportInitialize).EndInit()
     SplitSectionsPage.ResumeLayout(False)
-    tsSections.ResumeLayout(False)
-    tsSections.PerformLayout()
+    TsSections.ResumeLayout(False)
+    TsSections.PerformLayout()
     PnlBody.ResumeLayout(False)
     PnlHeader.ResumeLayout(False)
     PnlHeader.PerformLayout()
     PnlHeaderStretch.ResumeLayout(False)
     PnlHeaderStretch.PerformLayout()
-    tsPage.ResumeLayout(False)
-    tsPage.PerformLayout()
+    TsPage.ResumeLayout(False)
+    TsPage.PerformLayout()
     ResumeLayout(False)
 
     CaptureFocus(Me)
@@ -443,7 +443,7 @@ Public Class NotebookPanelItem
 
 #Region "Private Methods"
 
-  Private Sub txtNotebookPageTitle_TextChanged(sender As Object, e As EventArgs) Handles TxtHeader.TextChanged
+  Private Sub TxtNotebookPageTitle_TextChanged(sender As Object, e As EventArgs) Handles TxtHeader.TextChanged
     LblStretch.Text = TxtHeader.Text
   End Sub
 

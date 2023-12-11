@@ -11,7 +11,7 @@ Namespace My
 #Region "Private Methods"
 
     ''' <summary>
-    '''     The PropertyChanged event is raised after a setting's value is changed.
+    '''     The PropertyChanged event is raised after a Setting's value is changed.
     ''' </summary>
     ''' <param name="sender">
     ''' </param>
@@ -22,7 +22,7 @@ Namespace My
     End Sub
 
     ''' <summary>
-    '''     The SettingChanging event is raised before a setting's value is changed.
+    '''     The SettingChanging event is raised before a Setting's value is changed.
     ''' </summary>
     ''' <param name="sender">
     ''' </param>
@@ -33,7 +33,7 @@ Namespace My
     End Sub
 
     ''' <summary>
-    '''     The SettingsLoaded event is raised after the setting values are loaded.
+    '''     The SettingsLoaded event is raised after the Setting values are loaded.
     ''' </summary>
     ''' <param name="sender">
     ''' </param>
@@ -44,7 +44,7 @@ Namespace My
     End Sub
 
     ''' <summary>
-    '''     The SettingsSaving event is raised before the setting values are saved.
+    '''     The SettingsSaving event is raised before the Setting values are saved.
     ''' </summary>
     ''' <param name="sender">
     ''' </param>

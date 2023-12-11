@@ -8,7 +8,7 @@ Public Class FlatLabel
 
 #Region "Fields"
 
-  Friend WithEvents txtCenterMe As Label
+  Friend WithEvents TxtCenterMe As Label
 
 #End Region
 
@@ -20,10 +20,10 @@ Public Class FlatLabel
   <Browsable(True), EditorBrowsable(EditorBrowsableState.Always)>
   Public Overrides Property Text As String
     Get
-      Return txtCenterMe.Text
+      Return TxtCenterMe.Text
     End Get
     Set(value As String)
-      txtCenterMe.Text = value
+      TxtCenterMe.Text = value
     End Set
   End Property
 
@@ -34,8 +34,8 @@ Public Class FlatLabel
   Public Sub New()
     SuspendLayout()
 
-    txtCenterMe = New System.Windows.Forms.Label()
-    With txtCenterMe
+    TxtCenterMe = New System.Windows.Forms.Label()
+    With TxtCenterMe
       .BorderStyle = System.Windows.Forms.BorderStyle.None
       .Dock = System.Windows.Forms.DockStyle.None
       .AutoEllipsis = True
@@ -45,7 +45,7 @@ Public Class FlatLabel
       .Name = "txtCenterMe"
     End With
 
-    Controls.Add(txtCenterMe)
+    Controls.Add(TxtCenterMe)
     BorderStyle = BorderStyle.None
     AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
     Margin = New System.Windows.Forms.Padding(0)
@@ -63,14 +63,14 @@ Public Class FlatLabel
 #Region "Private Methods"
 
   Private Sub InitializeComponent()
-    Me.SuspendLayout()
-    Me.Name = "FlatLabel"
-    Me.Size = New System.Drawing.Size(312, 79)
-    Me.ResumeLayout(False)
+    SuspendLayout()
+    Name = "FlatLabel"
+    Size = New System.Drawing.Size(312, 79)
+    ResumeLayout(False)
   End Sub
 
-  Private Sub SyncSettings(sender As Object, e As EventArgs) Handles Me.ForeColorChanged, Me.FontChanged, Me.BackColorChanged, txtCenterMe.SizeChanged, txtCenterMe.Resize, Me.ClientSizeChanged
-    With txtCenterMe
+  Private Sub SyncSettings(sender As Object, e As EventArgs) Handles Me.ForeColorChanged, Me.FontChanged, Me.BackColorChanged, TxtCenterMe.SizeChanged, TxtCenterMe.Resize, Me.ClientSizeChanged
+    With TxtCenterMe
       .Font = Font
       .BackColor = BackColor
       .ForeColor = ForeColor
@@ -78,39 +78,39 @@ Public Class FlatLabel
     End With
   End Sub
 
-  Private Sub txtCenterMe_Click(sender As Object, e As EventArgs) Handles txtCenterMe.Click
+  Private Sub TxtCenterMe_Click(sender As Object, e As EventArgs) Handles TxtCenterMe.Click
     OnClick(e)
   End Sub
 
-  Private Sub txtCenterMe_GotFocus(sender As Object, e As EventArgs) Handles txtCenterMe.GotFocus
+  Private Sub TxtCenterMe_GotFocus(sender As Object, e As EventArgs) Handles TxtCenterMe.GotFocus
     OnGotFocus(e)
   End Sub
 
-  Private Sub txtCenterMe_LostFocus(sender As Object, e As EventArgs) Handles txtCenterMe.LostFocus
+  Private Sub TxtCenterMe_LostFocus(sender As Object, e As EventArgs) Handles TxtCenterMe.LostFocus
     OnLostFocus(e)
   End Sub
 
-  Private Sub txtCenterMe_MouseClick(sender As Object, e As MouseEventArgs) Handles txtCenterMe.MouseClick
+  Private Sub TxtCenterMe_MouseClick(sender As Object, e As MouseEventArgs) Handles TxtCenterMe.MouseClick
     OnMouseClick(e)
   End Sub
 
-  Private Sub txtCenterMe_MouseDown(sender As Object, e As MouseEventArgs) Handles txtCenterMe.MouseDown
+  Private Sub TxtCenterMe_MouseDown(sender As Object, e As MouseEventArgs) Handles TxtCenterMe.MouseDown
     OnMouseDown(e)
   End Sub
 
-  Private Sub txtCenterMe_MouseEnter(sender As Object, e As EventArgs) Handles txtCenterMe.MouseEnter
+  Private Sub TxtCenterMe_MouseEnter(sender As Object, e As EventArgs) Handles TxtCenterMe.MouseEnter
     OnMouseEnter(e)
   End Sub
 
-  Private Sub txtCenterMe_MouseLeave(sender As Object, e As EventArgs) Handles txtCenterMe.MouseLeave
+  Private Sub TxtCenterMe_MouseLeave(sender As Object, e As EventArgs) Handles TxtCenterMe.MouseLeave
     OnMouseLeave(e)
   End Sub
 
-  Private Sub txtCenterMe_MouseMove(sender As Object, e As MouseEventArgs) Handles txtCenterMe.MouseMove
+  Private Sub TxtCenterMe_MouseMove(sender As Object, e As MouseEventArgs) Handles TxtCenterMe.MouseMove
     OnMouseMove(e)
   End Sub
 
-  Private Sub txtCenterMe_TextChanged(sender As Object, e As EventArgs) Handles txtCenterMe.TextChanged
+  Private Sub TxtCenterMe_TextChanged(sender As Object, e As EventArgs) Handles TxtCenterMe.TextChanged
     OnTextChanged(e)
   End Sub
 

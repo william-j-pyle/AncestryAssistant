@@ -594,13 +594,13 @@ Namespace My.Resources
         '''        { &quot;id&quot;: 4 },
         '''        { &quot;id&quot;: 5 }
         '''      ]
-        '''    }
-        '''    //,
-        '''    //{
-        '''    //  &quot;name&quot;: &quot;Testing&quot;,
-        '''    //  &quot;text&quot;: &quot;Testing&quot;,
-        '''    //  &quot;id&quot;: 100,
-        '''    //  &quot;gr [rest of string was truncated]&quot;;.
+        '''    },
+        '''    {
+        '''      &quot;name&quot;: &quot;Notebook&quot;,
+        '''      &quot;text&quot;: &quot;Notebook&quot;,
+        '''      &quot;id&quot;: 300,
+        '''      &quot;visible&quot;: false,
+        ''' [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Ribbon() As String
             Get

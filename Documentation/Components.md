@@ -2,7 +2,7 @@
 
 * AncestryViewer
   * Manages Login to Ancestry.com
-  * Presents website via WebView2
+  * Presents Website via WebView2
   * Provides NavigateTo method for all common Ancestry links
     * Internally tracks treeID, and activeAncestor making it possible to jump from point to point
     * NavigateTo also accepts optional AncestorID to quickly jump to any person on your tree externally controled
@@ -16,11 +16,11 @@
 * NotesViewer
   * Provides a lite One Note style interface
   * Allows for text formatting
-  * Accepts web cut/paste
+  * Accepts Web cut/paste
   * Accepts images
-  * Every Ancestor has there own unique NotesViewer data file. But each data file can contain one or more pages of information similar to One Note
+  * Every Ancestor Has there own unique NotesViewer data file. But each data file can contain one or more pages of information similar to One Note
 * GalleryViewer
-  * Provides a list of Image thumbnails saved from web, or added locally for an ancestor
+  * Provides a list of Image thumbnails saved from Web, or added locally for an Ancestor
   * If Image is captured via Ancestry, then all details are captured too
   * A fullsize image view is also available, and provides the following features
     * Pan/Zoom

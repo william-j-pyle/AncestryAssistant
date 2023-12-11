@@ -5,8 +5,8 @@ Public Class CensusPanelItem
 
 #Region "Fields"
 
-  Private WithEvents ts As FlatToolBar
-  Private WithEvents xlsActiveSheet As DataGridView
+  Private WithEvents Ts As FlatToolBar
+  Private WithEvents XlsActiveSheet As DataGridView
   Private Const Default_ItemCaption As String = "Census"
   Private Const Default_ItemHasRibbonBar As Boolean = True
   Private Const Default_ItemHasToolBar As Boolean = True
@@ -27,7 +27,7 @@ Public Class CensusPanelItem
   Private CensusData As Collection
   Private CensusFileList As Collection
   Private components As System.ComponentModel.IContainer
-  Private xlsWorkbook As Dictionary(Of Integer, DataGridView)
+  Private XlsWorkbook As Dictionary(Of Integer, DataGridView)
   Public Const Default_Key As String = "DOCK_CENSUS"
 
 #End Region
@@ -50,12 +50,12 @@ Public Class CensusPanelItem
     RibbonHideOnItemClose = Default_RibbonHideOnItemClose
     RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
     RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Key can be overriden during creation, apply if set
+    'Key can be overriden during creation, apply if Set
     If Len(itemKey) > 0 Then Key = itemKey
     'Continue with creation
-    ts = New FlatToolBar()
+    Ts = New FlatToolBar()
     SuspendLayout()
-    With ts
+    With Ts
       .SuspendLayout()
       .BackColor = My.Theme.PanelBorderColor
       .ForeColor = My.Theme.PanelFontColor
@@ -69,15 +69,15 @@ Public Class CensusPanelItem
     AutoScaleMode = AutoScaleMode.None
     BackColor = My.Theme.PanelBackColor
     ForeColor = My.Theme.PanelFontColor
-    Controls.Add(xlsActiveSheet)
-    Controls.Add(ts)
+    Controls.Add(XlsActiveSheet)
+    Controls.Add(Ts)
     DoubleBuffered = True
     Font = New Font("Segoe UI", 8.25!, FontStyle.Regular, GraphicsUnit.Point, CType(0, Byte))
     Name = "CensusViewer"
     Size = New Size(439, 150)
     Dock = DockStyle.Fill
-    ts.ResumeLayout(False)
-    ts.PerformLayout()
+    Ts.ResumeLayout(False)
+    Ts.PerformLayout()
     ResumeLayout(False)
     PerformLayout()
     CaptureFocus(Me)
@@ -90,39 +90,39 @@ Public Class CensusPanelItem
   Private Sub AddCensusFile(CensusYear As String, Filename As String)
     Debug.Print(CensusYear, Filename)
     'CensusFileList.Add(Filename, CensusYear)
-    'For Each btn As ToolStripItem In tsCensus.Items
-    'If btn.Text.Equals(CensusYear) Then
+    'For Each Btn As ToolStripItem In TsCensus.Items
+    'If Btn.Text.Equals(CensusYear) Then
     'btn.Visible = True
     'End If
     'Next
   End Sub
 
   Private Sub addRemapData(CensusYear As Integer, BaseKey As Integer, CensusHeader As String, Optional CustomHandler As String = "")
-    Debug.Print(CensusYear, BaseKey, CensusHeader, CustomHandler)
+    Debug.Print(CStr(CensusYear), BaseKey, CensusHeader, CustomHandler)
   End Sub
 
   Private Sub addUnifiedData(CensusOrder As Integer, BaseKey As Integer, CensusHeader As String)
-    Debug.Print(CensusOrder, BaseKey, CensusHeader)
+    Debug.Print(CStr(CensusOrder), BaseKey, CensusHeader)
   End Sub
 
-  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles ancestors.ActiveAncestorChanged
+  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
     UpdateUI()
   End Sub
 
-  Private Sub Ancestors_AncestorsChanged() Handles ancestors.AncestorsChanged
+  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
     UpdateUI()
   End Sub
 
   Private Sub CensusSelect(sender As Object, e As EventArgs)
     If TypeOf sender IsNot ToolStripButton Then Exit Sub
     Dim srcSender As ToolStripButton = DirectCast(sender, ToolStripButton)
-    For Each btn As ToolStripButton In ts.Items
-      If srcSender.Text.Equals(btn.Text) Then
-        btn.Checked = True
-        btn.ForeColor = My.Theme.PanelFontColor
+    For Each Btn As ToolStripButton In Ts.Items
+      If srcSender.Text.Equals(Btn.Text) Then
+        Btn.Checked = True
+        Btn.ForeColor = My.Theme.PanelFontColor
       Else
-        btn.Checked = False
-        btn.ForeColor = My.Theme.PanelFontColor
+        Btn.Checked = False
+        Btn.ForeColor = My.Theme.PanelFontColor
       End If
     Next
     If srcSender.Text.Equals(UNIFIED_TEXT) Then
@@ -152,7 +152,7 @@ Public Class CensusPanelItem
     'Get the data
     Dim aa As AAFile = Ancestor.Census.GetAADatasource(censusYear)
     Dim i As Integer
-    'Add Header to table
+    'Add Header to Table
     For Each columnName As String In aa.GetHeaders
       Dim column As New DataGridViewTextBoxColumn With {
         .DataPropertyName = columnName,
@@ -160,35 +160,35 @@ Public Class CensusPanelItem
       }
       tmpWorkSheet.Columns.Add(column)
     Next
-    'Add Data to table
+    'Add Data to Table
     For Each row() As String In aa.GetValues
       i = tmpWorkSheet.Rows.Add(row)
     Next
     'Add Sheet to the workbook
-    xlsWorkbook.Add(censusYear, tmpWorkSheet)
+    XlsWorkbook.Add(censusYear, tmpWorkSheet)
     Return tmpWorkSheet
   End Function
 
-  Private Sub DataGridView1_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles xlsActiveSheet.CellFormatting
+  Private Sub DataGridView1_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles XlsActiveSheet.CellFormatting
     ' Check if the current column is the first column (index 0) and the row is not a header row
     If e.ColumnIndex = 0 AndAlso e.RowIndex >= 0 Then
       ' Check the value of the first column
-      If xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value IsNot Nothing AndAlso xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value.ToString() = "P" Then
+      If XlsActiveSheet.Rows(e.RowIndex).Cells(0).Value IsNot Nothing AndAlso XlsActiveSheet.Rows(e.RowIndex).Cells(0).Value.ToString() = "P" Then
         ' Set the background color to green if col(0)="P"
-        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = My.Theme.XLSHighlightColor
-      ElseIf xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value IsNot Nothing AndAlso xlsActiveSheet.Rows(e.RowIndex).Cells(0).Value.ToString() = "F" Then
+        XlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = My.Theme.XLSHighlightColor
+      ElseIf XlsActiveSheet.Rows(e.RowIndex).Cells(0).Value IsNot Nothing AndAlso XlsActiveSheet.Rows(e.RowIndex).Cells(0).Value.ToString() = "F" Then
         ' Set the background color to yellow if col(0)="F"
-        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = My.Theme.XLSHighlightColor2
+        XlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = My.Theme.XLSHighlightColor2
       Else
         ' Reset the background color for other values if needed
-        xlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = My.Theme.XLSBackColor
+        XlsActiveSheet.Rows(e.RowIndex).DefaultCellStyle.BackColor = My.Theme.XLSBackColor
       End If
     End If
   End Sub
 
   Private Function GetData(csvFilePath As String) As ArrayList
     If CensusData.Contains(csvFilePath) Then
-      Return CensusData.Item(csvFilePath)
+      Return CType(CensusData.Item(csvFilePath), ArrayList)
     End If
     Dim lines As String() = File.ReadAllLines(csvFilePath)
     Dim data As New ArrayList()
@@ -567,22 +567,22 @@ Public Class CensusPanelItem
 
   Private Sub LoadFile(csvFilePath As String)
     Dim lines As ArrayList = GetData(csvFilePath)
-    xlsActiveSheet.Columns.Clear()
-    xlsActiveSheet.Rows.Clear()
-    xlsActiveSheet.SuspendLayout()
+    XlsActiveSheet.Columns.Clear()
+    XlsActiveSheet.Rows.Clear()
+    XlsActiveSheet.SuspendLayout()
     Dim i As Integer = 0
     For Each data() As String In lines
       If i = 0 Then
         For Each column As String In data
-          xlsActiveSheet.Columns.Add(column, column)
+          XlsActiveSheet.Columns.Add(column, column)
         Next
       Else
-        xlsActiveSheet.Rows.Add(data)
+        XlsActiveSheet.Rows.Add(data)
       End If
       i += 1
     Next
-    xlsActiveSheet.ResumeLayout(False)
-    xlsActiveSheet.PerformLayout()
+    XlsActiveSheet.ResumeLayout(False)
+    XlsActiveSheet.PerformLayout()
   End Sub
 
   Private Sub ResetViewer()
@@ -594,14 +594,14 @@ Public Class CensusPanelItem
         idx += 1
       End If
     End While
-    ts.Items.Clear()
-    xlsActiveSheet = Nothing
-    xlsWorkbook = New Dictionary(Of Integer, DataGridView)
+    Ts.Items.Clear()
+    XlsActiveSheet = Nothing
+    XlsWorkbook = New Dictionary(Of Integer, DataGridView)
   End Sub
 
   Private Sub ShowCensus(CensusYear As String)
     If CensusFileList.Contains(CensusYear) Then
-      LoadFile(CensusFileList.Item(CensusYear))
+      LoadFile(CensusFileList.Item(CensusYear).ToString)
     End If
   End Sub
 
@@ -610,13 +610,13 @@ Public Class CensusPanelItem
   End Sub
 
   Private Sub showWorkSheet(censusYear As Integer)
-    If xlsWorkbook.ContainsKey(censusYear) Then
-      xlsActiveSheet = xlsWorkbook.Item(censusYear)
+    If XlsWorkbook.ContainsKey(censusYear) Then
+      XlsActiveSheet = XlsWorkbook.Item(censusYear)
     Else
-      xlsActiveSheet = CreateWorkSheet(censusYear)
-      Controls.Add(xlsActiveSheet)
+      XlsActiveSheet = CreateWorkSheet(censusYear)
+      Controls.Add(XlsActiveSheet)
     End If
-    xlsActiveSheet.BringToFront()
+    XlsActiveSheet.BringToFront()
   End Sub
 
 #End Region
@@ -637,9 +637,9 @@ Public Class CensusPanelItem
 
   Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
     ResetViewer()
-    If ancestors Is Nothing Then Exit Sub
-    If Not ancestors.HasActiveAncestor Then Exit Sub
-    Ancestor = ancestors.ActiveAncestor
+    If Ancestors Is Nothing Then Exit Sub
+    If Not Ancestors.HasActiveAncestor Then Exit Sub
+    Ancestor = Ancestors.ActiveAncestor
     Dim item As ToolStripButton
     Dim expectedCensus As List(Of Integer) = Ancestor.Census.ExpectedYears
     Dim availableCensus As List(Of Integer) = Ancestor.Census.AvailableYears
@@ -657,7 +657,7 @@ Public Class CensusPanelItem
           item.ForeColor = My.Theme.PanelFontColor 'Need to modify theme and code to allow for error condition
           item.ToolTipText = censusYear & " Census Unavailable"
         End If
-        ts.Items.Add(item)
+        Ts.Items.Add(item)
       Next
       If availableCensus.Count > 0 Then
         item = New ToolStripButton(UNIFIED_TEXT) With {
@@ -666,7 +666,7 @@ Public Class CensusPanelItem
           .Tag = Nothing
         }
         AddHandler item.Click, AddressOf CensusSelect
-        ts.Items.Add(item)
+        Ts.Items.Add(item)
       End If
     End If
   End Sub

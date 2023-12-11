@@ -83,7 +83,7 @@
 
   Private Sub RibbonBar_ParentChanged(sender As Object, e As EventArgs) Handles Me.ParentChanged
     If RibbonCntl Is Nothing And TypeOf Parent Is Ribbon Then
-      RibbonCntl = Parent
+      RibbonCntl = TryCast(Parent, Ribbon)
       BarId = Parent.Controls.Count
       If Name = "RibbonBar" Then Name += BarId.ToString
     End If

@@ -8,11 +8,11 @@ Public Class FlatSearchBox
 
 #Region "Fields"
 
-  Private WithEvents btnDropdown As Button
+  Private WithEvents BtnDropdown As Button
 
-  Private WithEvents btnSearch As Button
+  Private WithEvents BtnSearch As Button
 
-  Private WithEvents txtSearch As TextBox
+  Private WithEvents TxtSearch As TextBox
 
   Private _BlockLostFocus As Boolean = False
 
@@ -22,7 +22,7 @@ Public Class FlatSearchBox
 
   Private components As System.ComponentModel.IContainer
 
-  Private pnlContainer As Panel
+  Private PnlContainer As Panel
 
 #End Region
 
@@ -42,7 +42,7 @@ Public Class FlatSearchBox
       Return _BlockLostFocus
     End Get
     Set(value As Boolean)
-      _BlockLostFocus = value And txtSearch.Focused
+      _BlockLostFocus = value And TxtSearch.Focused
     End Set
   End Property
 
@@ -62,7 +62,7 @@ Public Class FlatSearchBox
     End Get
     Set(value As Boolean)
       _ShowDropDown = value
-      btnDropdown.Visible = _ShowDropDown
+      BtnDropdown.Visible = _ShowDropDown
     End Set
   End Property
 
@@ -74,35 +74,35 @@ Public Class FlatSearchBox
       _State = value
       Select Case _State
         Case SearchState.NoFocusNoSearch
-          txtSearch.ForeColor = ForeColor
-          txtSearch.BackColor = BackColor
-          pnlContainer.BackColor = BackColor
-          btnDropdown.BackColor = BackColor
-          btnSearch.BackColor = BackColor
-          txtSearch.Text = SearchPromptText
-          btnSearch.Image = ImageSearch
+          TxtSearch.ForeColor = ForeColor
+          TxtSearch.BackColor = BackColor
+          PnlContainer.BackColor = BackColor
+          BtnDropdown.BackColor = BackColor
+          BtnSearch.BackColor = BackColor
+          TxtSearch.Text = SearchPromptText
+          BtnSearch.Image = ImageSearch
         Case SearchState.NoFocusSearch
-          txtSearch.ForeColor = ForeColor
-          txtSearch.BackColor = BackColor
-          pnlContainer.BackColor = BackColor
-          btnDropdown.BackColor = BackColor
-          btnSearch.BackColor = BackColor
-          btnSearch.Image = ImageCancelSearch
+          TxtSearch.ForeColor = ForeColor
+          TxtSearch.BackColor = BackColor
+          PnlContainer.BackColor = BackColor
+          BtnDropdown.BackColor = BackColor
+          BtnSearch.BackColor = BackColor
+          BtnSearch.Image = ImageCancelSearch
         Case SearchState.FocusNoSearch
-          txtSearch.ForeColor = ForeColor
-          txtSearch.BackColor = BackColorActive
-          pnlContainer.BackColor = BackColorActive
-          btnDropdown.BackColor = BackColorActive
-          btnSearch.BackColor = BackColorActive
-          If txtSearch.Text.Equals(SearchPromptText) Then txtSearch.Text = ""
-          btnSearch.Image = ImageSearch
+          TxtSearch.ForeColor = ForeColor
+          TxtSearch.BackColor = BackColorActive
+          PnlContainer.BackColor = BackColorActive
+          BtnDropdown.BackColor = BackColorActive
+          BtnSearch.BackColor = BackColorActive
+          If TxtSearch.Text.Equals(SearchPromptText) Then TxtSearch.Text = ""
+          BtnSearch.Image = ImageSearch
         Case SearchState.FocusSearch
-          txtSearch.ForeColor = ForeColor
-          pnlContainer.BackColor = BackColorActive
-          txtSearch.BackColor = BackColorActive
-          btnDropdown.BackColor = BackColorActive
-          btnSearch.BackColor = BackColorActive
-          btnSearch.Image = ImageCancelSearch
+          TxtSearch.ForeColor = ForeColor
+          PnlContainer.BackColor = BackColorActive
+          TxtSearch.BackColor = BackColorActive
+          BtnDropdown.BackColor = BackColorActive
+          BtnSearch.BackColor = BackColorActive
+          BtnSearch.Image = ImageCancelSearch
       End Select
     End Set
   End Property
@@ -114,8 +114,8 @@ Public Class FlatSearchBox
   Public Sub New()
     SuspendLayout()
 
-    btnDropdown = New System.Windows.Forms.Button()
-    With btnDropdown
+    BtnDropdown = New System.Windows.Forms.Button()
+    With BtnDropdown
       .Dock = System.Windows.Forms.DockStyle.Right
       .FlatAppearance.BorderSize = 0
       .FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -127,21 +127,21 @@ Public Class FlatSearchBox
       .UseVisualStyleBackColor = False
     End With
 
-    btnSearch = New System.Windows.Forms.Button()
-    With btnSearch
+    BtnSearch = New System.Windows.Forms.Button()
+    With BtnSearch
       .Dock = System.Windows.Forms.DockStyle.Right
       .FlatAppearance.BorderSize = 0
       .FlatStyle = System.Windows.Forms.FlatStyle.Flat
       .Location = New System.Drawing.Point(17, 1)
       .Margin = New System.Windows.Forms.Padding(0)
-      .Name = "btnSearch"
+      .Name = "BtnSearch"
       .Size = New System.Drawing.Size(15, 18)
       .UseMnemonic = False
       .UseVisualStyleBackColor = False
     End With
 
-    txtSearch = New System.Windows.Forms.TextBox()
-    With txtSearch
+    TxtSearch = New System.Windows.Forms.TextBox()
+    With TxtSearch
       .BorderStyle = System.Windows.Forms.BorderStyle.None
       .Dock = System.Windows.Forms.DockStyle.Fill
       .Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -152,8 +152,8 @@ Public Class FlatSearchBox
       .Size = New System.Drawing.Size(14, 16)
     End With
 
-    pnlContainer = New Panel()
-    With pnlContainer
+    PnlContainer = New Panel()
+    With PnlContainer
       .Controls.Add(txtSearch)
       .BorderStyle = BorderStyle.None
       .Location = New Point(0, 0)
@@ -164,7 +164,7 @@ Public Class FlatSearchBox
     End With
 
     Controls.Add(pnlContainer)
-    Controls.Add(btnSearch)
+    Controls.Add(BtnSearch)
     Controls.Add(btnDropdown)
     BorderStyle = BorderStyle.None
     AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -185,45 +185,45 @@ Public Class FlatSearchBox
 
 #Region "Private Methods"
 
-  Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
-    If State = SearchState.FocusNoSearch And txtSearch.Text.Length > 0 Then
+  Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+    If State = SearchState.FocusNoSearch And TxtSearch.Text.Length > 0 Then
       RaiseEvent SearchEvent(Me, New FlatSearchEventArgs(txtSearch.Text))
       State = SearchState.FocusSearch
       Exit Sub
     End If
     If State = SearchState.FocusSearch Then
       RaiseEvent SearchEvent(Me, New FlatSearchEventArgs(True))
-      txtSearch.Text = ""
+      TxtSearch.Text = ""
       State = SearchState.NoFocusNoSearch
     End If
 
   End Sub
 
-  Private Sub btnSearch_GotFocus(sender As Object, e As EventArgs) Handles btnSearch.GotFocus
+  Private Sub BtnSearch_GotFocus(sender As Object, e As EventArgs) Handles BtnSearch.GotFocus
     If BlockLostFocus And Not State = SearchState.FocusSearch Then
-      txtSearch.Focus()
+      TxtSearch.Focus()
     End If
   End Sub
 
-  Private Sub btnSearch_LostFocus(sender As Object, e As EventArgs) Handles btnSearch.LostFocus
-    'Debug.Print("btnSearch_LostFocus")
+  Private Sub BtnSearch_LostFocus(sender As Object, e As EventArgs) Handles BtnSearch.LostFocus
+    'Debug.Print("BtnSearch_LostFocus")
   End Sub
 
-  Private Sub btnSearch_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSearch.MouseDown
-    'Debug.Print("btnSearch_MouseDown")
+  Private Sub BtnSearch_MouseDown(sender As Object, e As MouseEventArgs) Handles BtnSearch.MouseDown
+    'Debug.Print("BtnSearch_MouseDown")
   End Sub
 
-  Private Sub btnSearch_MouseEnter(sender As Object, e As EventArgs) Handles btnSearch.MouseEnter
+  Private Sub BtnSearch_MouseEnter(sender As Object, e As EventArgs) Handles BtnSearch.MouseEnter
     'Debug.Print("Block Lost Focus")
     BlockLostFocus = True
   End Sub
 
-  Private Sub btnSearch_MouseLeave(sender As Object, e As EventArgs) Handles btnSearch.MouseLeave
+  Private Sub BtnSearch_MouseLeave(sender As Object, e As EventArgs) Handles BtnSearch.MouseLeave
     'Debug.Print("Allow Lost Focus")
     BlockLostFocus = False
   End Sub
 
-  Private Sub txtSearch_GotFocus(sender As Object, e As EventArgs) Handles txtSearch.GotFocus
+  Private Sub TxtSearch_GotFocus(sender As Object, e As EventArgs) Handles TxtSearch.GotFocus
     If BlockLostFocus Then Exit Sub
     'Debug.Print("txtSearch_GotFocus")
     Select Case State
@@ -234,9 +234,9 @@ Public Class FlatSearchBox
     End Select
   End Sub
 
-  Private Sub txtSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearch.KeyDown
+  Private Sub TxtSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSearch.KeyDown
     'Debug.Print("txtSearch_KeyDown")
-    If e.KeyCode = Keys.Enter And txtSearch.Text.Length > 0 Then
+    If e.KeyCode = Keys.Enter And TxtSearch.Text.Length > 0 Then
       RaiseEvent SearchEvent(Me, New FlatSearchEventArgs(txtSearch.Text))
       State = SearchState.FocusSearch
     ElseIf e.KeyCode = Keys.Escape Then
@@ -244,11 +244,11 @@ Public Class FlatSearchBox
         RaiseEvent SearchEvent(Me, New FlatSearchEventArgs(True))
         State = SearchState.FocusNoSearch
       End If
-      txtSearch.Text = ""
+      TxtSearch.Text = ""
     End If
   End Sub
 
-  Private Sub txtSearch_LostFocus(sender As Object, e As EventArgs) Handles txtSearch.LostFocus
+  Private Sub TxtSearch_LostFocus(sender As Object, e As EventArgs) Handles TxtSearch.LostFocus
     If BlockLostFocus Then Exit Sub
     'Debug.Print("txtSearch_LostFocus")
     Select Case State

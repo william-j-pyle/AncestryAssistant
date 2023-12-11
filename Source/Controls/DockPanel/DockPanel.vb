@@ -3,25 +3,25 @@
 
 #Region "Fields"
 
-  Private WithEvents btnClose As FlatIconButton
-  Private WithEvents btnContextMenu As FlatIconButton
-  Private WithEvents btnPinned As FlatIconButton
-  Private WithEvents btnSearch As FlatIconButton
-  Private WithEvents ctxMenu As ContextMenuStrip
-  Private WithEvents lblCaption As Label
-  Private WithEvents pnlButtonContainerHeader As TableLayoutPanel
-  Private WithEvents pnlButtonContainerSearch As TableLayoutPanel
-  Private WithEvents pnlClient As FlatTabControl
-  Private WithEvents pnlContextMenu As FlatContextMenu
-  Private WithEvents pnlHeader As FlatPanel
+  Private WithEvents BtnClose As FlatIconButton
+  Private WithEvents BtnContextMenu As FlatIconButton
+  Private WithEvents BtnPinned As FlatIconButton
+  Private WithEvents BtnSearch As FlatIconButton
+  Private WithEvents CtxMenu As ContextMenuStrip
+  Private WithEvents LblCaption As Label
+  Private WithEvents PnlButtonContainerHeader As TableLayoutPanel
+  Private WithEvents PnlButtonContainerSearch As TableLayoutPanel
+  Private WithEvents PnlClient As FlatTabControl
+  Private WithEvents PnlContextMenu As FlatContextMenu
+  Private WithEvents PnlHeader As FlatPanel
 
-  Private WithEvents pnlMain As FlatPanel
+  Private WithEvents PnlMain As FlatPanel
 
-  Private WithEvents pnlSearch As FlatPanel
+  Private WithEvents PnlSearch As FlatPanel
 
   Private WithEvents TabPage1 As TabPage
 
-  Private WithEvents txtSearch As TextBox
+  Private WithEvents TxtSearch As TextBox
 
   Private _PanelHasFocus As Boolean = True
 
@@ -47,7 +47,7 @@
 
   Public Event PanelClose(dockPanelObj As DockPanel)
 
-  Public Event PanelFocusChanged(dockPanelObj As DockPanel, hasFocus As Boolean)
+  Public Event PanelFocusChanged(dockPanelObj As DockPanel, HasFocus As Boolean)
 
   Public Event PanelItemClose(panelItemObj As DockPanelItem)
 
@@ -61,7 +61,7 @@
 
   Public ReadOnly Property PanelCaption As String
     Get
-      Return lblCaption.Text
+      Return LblCaption.Text
     End Get
   End Property
 
@@ -93,7 +93,7 @@
 
   Public ReadOnly Property PanelItemCount As Integer
     Get
-      Return tabPages.Count
+      Return TabPages.Count
     End Get
   End Property
 
@@ -110,16 +110,16 @@
 
   Public ReadOnly Property PanelSelectedIndex As Integer
     Get
-      Return pnlClient.SelectedIndex
+      Return PnlClient.SelectedIndex
     End Get
   End Property
 
   Public ReadOnly Property PanelSelectedItem As DockPanelItem
     Get
-      If pnlClient.TabCount > 0 Then
-        If pnlClient.SelectedTab IsNot Nothing Then
-          If pnlClient.SelectedTab.Controls.Count > 0 Then
-            Return CType(pnlClient.SelectedTab.Controls(0), DockPanelItem)
+      If PnlClient.TabCount > 0 Then
+        If PnlClient.SelectedTab IsNot Nothing Then
+          If PnlClient.SelectedTab.Controls.Count > 0 Then
+            Return CType(PnlClient.SelectedTab.Controls(0), DockPanelItem)
           End If
         End If
       End If
@@ -179,9 +179,9 @@
     End Set
   End Property
 
-  Public ReadOnly Property tabPages As TabControl.TabPageCollection
+  Public ReadOnly Property TabPages As TabControl.TabPageCollection
     Get
-      Return pnlClient.TabPages
+      Return PnlClient.TabPages
     End Get
   End Property
 
@@ -190,217 +190,217 @@
 #Region "Public Constructors"
 
   Public Sub New()
-    pnlMain = New AncestryAssistant.FlatPanel()
-    pnlSearch = New AncestryAssistant.FlatPanel()
-    txtSearch = New System.Windows.Forms.TextBox()
-    pnlButtonContainerSearch = New System.Windows.Forms.TableLayoutPanel()
-    btnSearch = New AncestryAssistant.FlatIconButton()
-    pnlHeader = New AncestryAssistant.FlatPanel()
-    lblCaption = New System.Windows.Forms.Label()
-    pnlButtonContainerHeader = New System.Windows.Forms.TableLayoutPanel()
-    btnClose = New AncestryAssistant.FlatIconButton()
-    btnPinned = New AncestryAssistant.FlatIconButton()
-    btnContextMenu = New AncestryAssistant.FlatIconButton()
-    pnlClient = New AncestryAssistant.FlatTabControl()
+    PnlMain = New AncestryAssistant.FlatPanel()
+    PnlSearch = New AncestryAssistant.FlatPanel()
+    TxtSearch = New System.Windows.Forms.TextBox()
+    PnlButtonContainerSearch = New System.Windows.Forms.TableLayoutPanel()
+    BtnSearch = New AncestryAssistant.FlatIconButton()
+    PnlHeader = New AncestryAssistant.FlatPanel()
+    LblCaption = New System.Windows.Forms.Label()
+    PnlButtonContainerHeader = New System.Windows.Forms.TableLayoutPanel()
+    BtnClose = New AncestryAssistant.FlatIconButton()
+    BtnPinned = New AncestryAssistant.FlatIconButton()
+    BtnContextMenu = New AncestryAssistant.FlatIconButton()
+    PnlClient = New AncestryAssistant.FlatTabControl()
     TabPage1 = New System.Windows.Forms.TabPage()
-    pnlMain.SuspendLayout()
-    pnlSearch.SuspendLayout()
-    pnlButtonContainerSearch.SuspendLayout()
-    pnlHeader.SuspendLayout()
-    pnlButtonContainerHeader.SuspendLayout()
-    pnlClient.SuspendLayout()
+    PnlMain.SuspendLayout()
+    PnlSearch.SuspendLayout()
+    PnlButtonContainerSearch.SuspendLayout()
+    PnlHeader.SuspendLayout()
+    PnlButtonContainerHeader.SuspendLayout()
+    PnlClient.SuspendLayout()
     SuspendLayout()
     '
     'pnlMain
     '
-    pnlMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly
-    pnlMain.BorderColor = My.Theme.PanelBorderColor
-    pnlMain.BorderColorBottom = My.Theme.PanelBorderColor
-    pnlMain.BorderColorLeft = My.Theme.PanelBorderColor
-    pnlMain.BorderColorRight = My.Theme.PanelBorderColor
-    pnlMain.BorderColorTop = System.Drawing.Color.Lime
-    pnlMain.BorderWidth = New System.Windows.Forms.Padding(1, 3, 1, 1)
-    pnlMain.Controls.Add(pnlSearch)
-    pnlMain.Controls.Add(pnlHeader)
-    pnlMain.CornerRadius = New System.Windows.Forms.Padding(0)
-    pnlMain.Dock = System.Windows.Forms.DockStyle.Top
-    pnlMain.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    pnlMain.ForeColor = System.Drawing.Color.WhiteSmoke
-    pnlMain.Location = New System.Drawing.Point(0, 0)
-    pnlMain.Margin = New System.Windows.Forms.Padding(0)
-    pnlMain.MaximumSize = New System.Drawing.Size(0, 42)
-    pnlMain.MinimumSize = New System.Drawing.Size(170, 42)
-    pnlMain.Name = "pnlMain"
-    pnlMain.Padding = New System.Windows.Forms.Padding(1, 3, 1, 1)
-    pnlMain.Size = New System.Drawing.Size(348, 42)
-    pnlMain.TabIndex = 5
+    PnlMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly
+    PnlMain.BorderColor = My.Theme.PanelBorderColor
+    PnlMain.BorderColorBottom = My.Theme.PanelBorderColor
+    PnlMain.BorderColorLeft = My.Theme.PanelBorderColor
+    PnlMain.BorderColorRight = My.Theme.PanelBorderColor
+    PnlMain.BorderColorTop = System.Drawing.Color.Lime
+    PnlMain.BorderWidth = New System.Windows.Forms.Padding(1, 3, 1, 1)
+    PnlMain.Controls.Add(PnlSearch)
+    PnlMain.Controls.Add(PnlHeader)
+    PnlMain.CornerRadius = New System.Windows.Forms.Padding(0)
+    PnlMain.Dock = System.Windows.Forms.DockStyle.Top
+    PnlMain.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    PnlMain.ForeColor = System.Drawing.Color.WhiteSmoke
+    PnlMain.Location = New System.Drawing.Point(0, 0)
+    PnlMain.Margin = New System.Windows.Forms.Padding(0)
+    PnlMain.MaximumSize = New System.Drawing.Size(0, 42)
+    PnlMain.MinimumSize = New System.Drawing.Size(170, 42)
+    PnlMain.Name = "pnlMain"
+    PnlMain.Padding = New System.Windows.Forms.Padding(1, 3, 1, 1)
+    PnlMain.Size = New System.Drawing.Size(348, 42)
+    PnlMain.TabIndex = 5
     '
     'pnlSearch
     '
-    pnlSearch.BackColor = My.Theme.PanelBorderColor
-    pnlSearch.BorderColor = System.Drawing.Color.Transparent
-    pnlSearch.BorderColorBottom = System.Drawing.Color.Black
-    pnlSearch.BorderColorLeft = System.Drawing.Color.Black
-    pnlSearch.BorderColorRight = System.Drawing.Color.Black
-    pnlSearch.BorderColorTop = System.Drawing.Color.Black
-    pnlSearch.BorderWidth = New System.Windows.Forms.Padding(0)
-    pnlSearch.Controls.Add(txtSearch)
-    pnlSearch.Controls.Add(pnlButtonContainerSearch)
-    pnlSearch.CornerRadius = New System.Windows.Forms.Padding(0)
-    pnlSearch.Dock = System.Windows.Forms.DockStyle.Top
-    pnlSearch.Location = New System.Drawing.Point(1, 23)
-    pnlSearch.Margin = New System.Windows.Forms.Padding(0)
-    pnlSearch.MaximumSize = New System.Drawing.Size(0, 20)
-    pnlSearch.MinimumSize = New System.Drawing.Size(0, 20)
-    pnlSearch.Name = "pnlSearch"
-    pnlSearch.Padding = New System.Windows.Forms.Padding(4, 3, 1, 1)
-    pnlSearch.Size = New System.Drawing.Size(346, 20)
-    pnlSearch.TabIndex = 2
+    PnlSearch.BackColor = My.Theme.PanelBorderColor
+    PnlSearch.BorderColor = System.Drawing.Color.Transparent
+    PnlSearch.BorderColorBottom = System.Drawing.Color.Black
+    PnlSearch.BorderColorLeft = System.Drawing.Color.Black
+    PnlSearch.BorderColorRight = System.Drawing.Color.Black
+    PnlSearch.BorderColorTop = System.Drawing.Color.Black
+    PnlSearch.BorderWidth = New System.Windows.Forms.Padding(0)
+    PnlSearch.Controls.Add(TxtSearch)
+    PnlSearch.Controls.Add(PnlButtonContainerSearch)
+    PnlSearch.CornerRadius = New System.Windows.Forms.Padding(0)
+    PnlSearch.Dock = System.Windows.Forms.DockStyle.Top
+    PnlSearch.Location = New System.Drawing.Point(1, 23)
+    PnlSearch.Margin = New System.Windows.Forms.Padding(0)
+    PnlSearch.MaximumSize = New System.Drawing.Size(0, 20)
+    PnlSearch.MinimumSize = New System.Drawing.Size(0, 20)
+    PnlSearch.Name = "pnlSearch"
+    PnlSearch.Padding = New System.Windows.Forms.Padding(4, 3, 1, 1)
+    PnlSearch.Size = New System.Drawing.Size(346, 20)
+    PnlSearch.TabIndex = 2
     '
     'txtSearch
     '
-    txtSearch.BackColor = My.Theme.PanelBorderColor
-    txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None
-    txtSearch.Dock = System.Windows.Forms.DockStyle.Fill
-    txtSearch.ForeColor = System.Drawing.Color.White
-    txtSearch.Location = New System.Drawing.Point(4, 3)
-    txtSearch.Margin = New System.Windows.Forms.Padding(0)
-    txtSearch.Name = "txtSearch"
-    txtSearch.Size = New System.Drawing.Size(321, 15)
-    txtSearch.TabIndex = 3
-    txtSearch.Text = "Search"
+    TxtSearch.BackColor = My.Theme.PanelBorderColor
+    TxtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None
+    TxtSearch.Dock = System.Windows.Forms.DockStyle.Fill
+    TxtSearch.ForeColor = System.Drawing.Color.White
+    TxtSearch.Location = New System.Drawing.Point(4, 3)
+    TxtSearch.Margin = New System.Windows.Forms.Padding(0)
+    TxtSearch.Name = "txtSearch"
+    TxtSearch.Size = New System.Drawing.Size(321, 15)
+    TxtSearch.TabIndex = 3
+    TxtSearch.Text = "Search"
     '
     'pnlButtonContainerSearch
     '
-    pnlButtonContainerSearch.ColumnCount = 1
-    pnlButtonContainerSearch.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-    pnlButtonContainerSearch.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-    pnlButtonContainerSearch.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-    pnlButtonContainerSearch.Controls.Add(btnSearch, 0, 0)
-    pnlButtonContainerSearch.Dock = System.Windows.Forms.DockStyle.Right
-    pnlButtonContainerSearch.Location = New System.Drawing.Point(325, 3)
-    pnlButtonContainerSearch.Margin = New System.Windows.Forms.Padding(0)
-    pnlButtonContainerSearch.Name = "pnlButtonContainerSearch"
-    pnlButtonContainerSearch.RowCount = 1
-    pnlButtonContainerSearch.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-    pnlButtonContainerSearch.Size = New System.Drawing.Size(20, 16)
-    pnlButtonContainerSearch.TabIndex = 2
+    PnlButtonContainerSearch.ColumnCount = 1
+    PnlButtonContainerSearch.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+    PnlButtonContainerSearch.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+    PnlButtonContainerSearch.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+    PnlButtonContainerSearch.Controls.Add(BtnSearch, 0, 0)
+    PnlButtonContainerSearch.Dock = System.Windows.Forms.DockStyle.Right
+    PnlButtonContainerSearch.Location = New System.Drawing.Point(325, 3)
+    PnlButtonContainerSearch.Margin = New System.Windows.Forms.Padding(0)
+    PnlButtonContainerSearch.Name = "pnlButtonContainerSearch"
+    PnlButtonContainerSearch.RowCount = 1
+    PnlButtonContainerSearch.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+    PnlButtonContainerSearch.Size = New System.Drawing.Size(20, 16)
+    PnlButtonContainerSearch.TabIndex = 2
     '
-    'btnSearch
+    'BtnSearch
     '
-    btnSearch.BackColor = My.Theme.PanelBackColor
-    btnSearch.Icon = My.Resources.panel_search
-    btnSearch.Location = New System.Drawing.Point(4, 0)
-    btnSearch.Margin = New System.Windows.Forms.Padding(4, 0, 0, 0)
-    btnSearch.MaximumSize = New System.Drawing.Size(16, 16)
-    btnSearch.MinimumSize = New System.Drawing.Size(16, 16)
-    btnSearch.Name = "btnSearch"
-    btnSearch.Size = New System.Drawing.Size(16, 16)
-    btnSearch.TabIndex = 0
+    BtnSearch.BackColor = My.Theme.PanelBackColor
+    BtnSearch.Icon = My.Resources.panel_search
+    BtnSearch.Location = New System.Drawing.Point(4, 0)
+    BtnSearch.Margin = New System.Windows.Forms.Padding(4, 0, 0, 0)
+    BtnSearch.MaximumSize = New System.Drawing.Size(16, 16)
+    BtnSearch.MinimumSize = New System.Drawing.Size(16, 16)
+    BtnSearch.Name = "BtnSearch"
+    BtnSearch.Size = New System.Drawing.Size(16, 16)
+    BtnSearch.TabIndex = 0
     '
     'pnlHeader
     '
-    pnlHeader.BackColor = My.Theme.PanelBackColor
-    pnlHeader.BorderColorBottom = My.Theme.PanelBorderColor
-    pnlHeader.BorderColorLeft = My.Theme.PanelBorderColor
-    pnlHeader.BorderColorRight = My.Theme.PanelBorderColor
-    pnlHeader.BorderColorTop = My.Theme.PanelHighlightColor
-    pnlHeader.BorderWidth = New System.Windows.Forms.Padding(1, 0, 1, 1)
-    pnlHeader.Controls.Add(lblCaption)
-    pnlHeader.Controls.Add(pnlButtonContainerHeader)
-    pnlHeader.CornerRadius = New System.Windows.Forms.Padding(0)
-    pnlHeader.BackgroundImage = My.Resources.panel_header_bgpattern
-    pnlHeader.BackgroundImageLayout = ImageLayout.None
-    pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
-    pnlHeader.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    pnlHeader.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-    pnlHeader.Location = New System.Drawing.Point(1, 3)
-    pnlHeader.Margin = New System.Windows.Forms.Padding(0)
-    pnlHeader.MaximumSize = New System.Drawing.Size(0, 20)
-    pnlHeader.MinimumSize = New System.Drawing.Size(0, 20)
-    pnlHeader.Name = "pnlHeader"
-    pnlHeader.Padding = New System.Windows.Forms.Padding(1, 0, 1, 1)
-    pnlHeader.Size = New System.Drawing.Size(346, 20)
-    pnlHeader.TabIndex = 0
+    PnlHeader.BackColor = My.Theme.PanelBackColor
+    PnlHeader.BorderColorBottom = My.Theme.PanelBorderColor
+    PnlHeader.BorderColorLeft = My.Theme.PanelBorderColor
+    PnlHeader.BorderColorRight = My.Theme.PanelBorderColor
+    PnlHeader.BorderColorTop = My.Theme.PanelHighlightColor
+    PnlHeader.BorderWidth = New System.Windows.Forms.Padding(1, 0, 1, 1)
+    PnlHeader.Controls.Add(LblCaption)
+    PnlHeader.Controls.Add(PnlButtonContainerHeader)
+    PnlHeader.CornerRadius = New System.Windows.Forms.Padding(0)
+    PnlHeader.BackgroundImage = My.Resources.panel_header_bgpattern
+    PnlHeader.BackgroundImageLayout = ImageLayout.None
+    PnlHeader.Dock = System.Windows.Forms.DockStyle.Top
+    PnlHeader.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    PnlHeader.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+    PnlHeader.Location = New System.Drawing.Point(1, 3)
+    PnlHeader.Margin = New System.Windows.Forms.Padding(0)
+    PnlHeader.MaximumSize = New System.Drawing.Size(0, 20)
+    PnlHeader.MinimumSize = New System.Drawing.Size(0, 20)
+    PnlHeader.Name = "pnlHeader"
+    PnlHeader.Padding = New System.Windows.Forms.Padding(1, 0, 1, 1)
+    PnlHeader.Size = New System.Drawing.Size(346, 20)
+    PnlHeader.TabIndex = 0
     '
-    'lblCaption
+    'LblCaption
     '
-    lblCaption.Dock = System.Windows.Forms.DockStyle.Left
-    lblCaption.AutoSize = True
-    lblCaption.Location = New System.Drawing.Point(1, 0)
-    lblCaption.Name = "lblCaption"
-    lblCaption.Padding = New System.Windows.Forms.Padding(3, 3, 0, 0)
-    lblCaption.Size = New System.Drawing.Size(284, 19)
-    lblCaption.TabIndex = 2
-    lblCaption.Text = "DockPanelHeader"
+    LblCaption.Dock = System.Windows.Forms.DockStyle.Left
+    LblCaption.AutoSize = True
+    LblCaption.Location = New System.Drawing.Point(1, 0)
+    LblCaption.Name = "LblCaption"
+    LblCaption.Padding = New System.Windows.Forms.Padding(3, 3, 0, 0)
+    LblCaption.Size = New System.Drawing.Size(284, 19)
+    LblCaption.TabIndex = 2
+    LblCaption.Text = "DockPanelHeader"
     '
     'pnlButtonContainerHeader
     '
-    pnlButtonContainerHeader.ColumnCount = 3
-    pnlButtonContainerHeader.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-    pnlButtonContainerHeader.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-    pnlButtonContainerHeader.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-    pnlButtonContainerHeader.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-    pnlButtonContainerHeader.Controls.Add(btnClose, 2, 0)
-    pnlButtonContainerHeader.Controls.Add(btnPinned, 1, 0)
-    pnlButtonContainerHeader.Controls.Add(btnContextMenu, 0, 0)
-    pnlButtonContainerHeader.BackColor = pnlHeader.BackColor
-    pnlButtonContainerHeader.Dock = System.Windows.Forms.DockStyle.Right
-    pnlButtonContainerHeader.Location = New System.Drawing.Point(285, 0)
-    pnlButtonContainerHeader.Margin = New System.Windows.Forms.Padding(0)
-    pnlButtonContainerHeader.Name = "pnlButtonContainerHeader"
-    pnlButtonContainerHeader.RowCount = 1
-    pnlButtonContainerHeader.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-    pnlButtonContainerHeader.Size = New System.Drawing.Size(60, 19)
-    pnlButtonContainerHeader.TabIndex = 1
+    PnlButtonContainerHeader.ColumnCount = 3
+    PnlButtonContainerHeader.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+    PnlButtonContainerHeader.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+    PnlButtonContainerHeader.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+    PnlButtonContainerHeader.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+    PnlButtonContainerHeader.Controls.Add(BtnClose, 2, 0)
+    PnlButtonContainerHeader.Controls.Add(BtnPinned, 1, 0)
+    PnlButtonContainerHeader.Controls.Add(BtnContextMenu, 0, 0)
+    PnlButtonContainerHeader.BackColor = PnlHeader.BackColor
+    PnlButtonContainerHeader.Dock = System.Windows.Forms.DockStyle.Right
+    PnlButtonContainerHeader.Location = New System.Drawing.Point(285, 0)
+    PnlButtonContainerHeader.Margin = New System.Windows.Forms.Padding(0)
+    PnlButtonContainerHeader.Name = "pnlButtonContainerHeader"
+    PnlButtonContainerHeader.RowCount = 1
+    PnlButtonContainerHeader.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+    PnlButtonContainerHeader.Size = New System.Drawing.Size(60, 19)
+    PnlButtonContainerHeader.TabIndex = 1
     '
-    'btnClose
+    'BtnClose
     '
-    btnClose.Icon = My.Resources.panel_header_close
-    btnClose.Location = New System.Drawing.Point(40, 1)
-    btnClose.Margin = New System.Windows.Forms.Padding(0, 1, 0, 0)
-    btnClose.MaximumSize = New System.Drawing.Size(16, 16)
-    btnClose.MinimumSize = New System.Drawing.Size(16, 16)
-    btnClose.Name = "btnClose"
-    btnClose.Size = New System.Drawing.Size(16, 16)
+    BtnClose.Icon = My.Resources.panel_header_close
+    BtnClose.Location = New System.Drawing.Point(40, 1)
+    BtnClose.Margin = New System.Windows.Forms.Padding(0, 1, 0, 0)
+    BtnClose.MaximumSize = New System.Drawing.Size(16, 16)
+    BtnClose.MinimumSize = New System.Drawing.Size(16, 16)
+    BtnClose.Name = "BtnClose"
+    BtnClose.Size = New System.Drawing.Size(16, 16)
     '
-    'btnPinned
+    'BtnPinned
     '
-    btnPinned.Icon = My.Resources.panel_header_pin
-    btnPinned.Location = New System.Drawing.Point(20, 1)
-    btnPinned.Margin = New System.Windows.Forms.Padding(0, 1, 0, 0)
-    btnPinned.MaximumSize = New System.Drawing.Size(16, 16)
-    btnPinned.MinimumSize = New System.Drawing.Size(16, 16)
-    btnPinned.Name = "btnPinned"
-    btnPinned.Size = New System.Drawing.Size(16, 16)
+    BtnPinned.Icon = My.Resources.panel_header_pin
+    BtnPinned.Location = New System.Drawing.Point(20, 1)
+    BtnPinned.Margin = New System.Windows.Forms.Padding(0, 1, 0, 0)
+    BtnPinned.MaximumSize = New System.Drawing.Size(16, 16)
+    BtnPinned.MinimumSize = New System.Drawing.Size(16, 16)
+    BtnPinned.Name = "BtnPinned"
+    BtnPinned.Size = New System.Drawing.Size(16, 16)
     '
-    'btnContextMenu
+    'BtnContextMenu
     '
-    btnContextMenu.Icon = My.Resources.panel_header_menu
-    btnContextMenu.Location = New System.Drawing.Point(0, 1)
-    btnContextMenu.Margin = New System.Windows.Forms.Padding(0, 1, 0, 0)
-    btnContextMenu.MaximumSize = New System.Drawing.Size(16, 16)
-    btnContextMenu.MinimumSize = New System.Drawing.Size(16, 16)
-    btnContextMenu.Name = "btnContextMenu"
-    btnContextMenu.Size = New System.Drawing.Size(16, 16)
+    BtnContextMenu.Icon = My.Resources.panel_header_menu
+    BtnContextMenu.Location = New System.Drawing.Point(0, 1)
+    BtnContextMenu.Margin = New System.Windows.Forms.Padding(0, 1, 0, 0)
+    BtnContextMenu.MaximumSize = New System.Drawing.Size(16, 16)
+    BtnContextMenu.MinimumSize = New System.Drawing.Size(16, 16)
+    BtnContextMenu.Name = "BtnContextMenu"
+    BtnContextMenu.Size = New System.Drawing.Size(16, 16)
     '
     'pnlClient
     '
-    pnlClient.Alignment = System.Windows.Forms.TabAlignment.Bottom
-    pnlClient.Controls.Add(TabPage1)
-    pnlClient.Dock = System.Windows.Forms.DockStyle.Fill
-    pnlClient.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed
-    pnlClient.HotTrack = True
-    pnlClient.Location = New System.Drawing.Point(0, 42)
-    pnlClient.Margin = New System.Windows.Forms.Padding(0)
-    pnlClient.Name = "pnlClient"
-    pnlClient.SelectedIndex = 0
-    pnlClient.ShowHasFocus = False
-    pnlClient.ShowToolTips = True
-    pnlClient.Size = New System.Drawing.Size(348, 310)
-    pnlClient.TabIndex = 6
-    pnlClient.TabShowClose = True
-    pnlClient.TabType = AncestryAssistant.DockPanelType.Tab
+    PnlClient.Alignment = System.Windows.Forms.TabAlignment.Bottom
+    PnlClient.Controls.Add(TabPage1)
+    PnlClient.Dock = System.Windows.Forms.DockStyle.Fill
+    PnlClient.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed
+    PnlClient.HotTrack = True
+    PnlClient.Location = New System.Drawing.Point(0, 42)
+    PnlClient.Margin = New System.Windows.Forms.Padding(0)
+    PnlClient.Name = "pnlClient"
+    PnlClient.SelectedIndex = 0
+    PnlClient.ShowHasFocus = False
+    PnlClient.ShowToolTips = True
+    PnlClient.Size = New System.Drawing.Size(348, 310)
+    PnlClient.TabIndex = 6
+    PnlClient.TabShowClose = True
+    PnlClient.TabType = AncestryAssistant.DockPanelType.Tab
     '
     'TabPage1
     '
@@ -415,34 +415,34 @@
     '
     AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
     BackColor = System.Drawing.Color.Black
-    Controls.Add(pnlClient)
-    Controls.Add(pnlMain)
+    Controls.Add(PnlClient)
+    Controls.Add(PnlMain)
     Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     ForeColor = System.Drawing.Color.WhiteSmoke
     Margin = New System.Windows.Forms.Padding(0)
     Name = "DockPanel"
     Size = New System.Drawing.Size(348, 352)
-    pnlMain.ResumeLayout(False)
-    pnlSearch.ResumeLayout(False)
-    pnlSearch.PerformLayout()
-    pnlButtonContainerSearch.ResumeLayout(False)
-    pnlHeader.ResumeLayout(False)
-    pnlButtonContainerHeader.ResumeLayout(False)
-    pnlClient.ResumeLayout(False)
+    PnlMain.ResumeLayout(False)
+    PnlSearch.ResumeLayout(False)
+    PnlSearch.PerformLayout()
+    PnlButtonContainerSearch.ResumeLayout(False)
+    PnlHeader.ResumeLayout(False)
+    PnlButtonContainerHeader.ResumeLayout(False)
+    PnlClient.ResumeLayout(False)
     ResumeLayout(False)
 
     DoubleBuffered = True
-    ctxMenu = New ContextMenuStrip With {
+    CtxMenu = New ContextMenuStrip With {
       .DropShadowEnabled = True
     }
     SetStyle(ControlStyles.DoubleBuffer Or ControlStyles.ResizeRedraw, True)
-    pnlSearch.BackColor = My.Theme.PanelBorderColor
-    txtSearch.BackColor = My.Theme.PanelBorderColor
-    btnSearch.BackColor = My.Theme.PanelBorderColor
-    txtSearch.ForeColor = My.Theme.PanelShadowColor
+    PnlSearch.BackColor = My.Theme.PanelBorderColor
+    TxtSearch.BackColor = My.Theme.PanelBorderColor
+    BtnSearch.BackColor = My.Theme.PanelBorderColor
+    TxtSearch.ForeColor = My.Theme.PanelShadowColor
     BackColor = My.Theme.PanelBackColor
     ForeColor = My.Theme.PanelFontColor
-    With pnlClient
+    With PnlClient
       .HotTrack = True
       .Margin = New System.Windows.Forms.Padding(0)
       .ShowToolTips = True
@@ -452,7 +452,7 @@
     End With
     CreatePanelContextMenu()
     UpdateStyles()
-    lblCaption.Text = ""
+    LblCaption.Text = ""
     CaptureFocus(Me)
     LayoutPanel()
   End Sub
@@ -462,35 +462,35 @@
 #Region "Private Methods"
 
   Private Sub AddPlaceholderTab()
-    If pnlClient.TabCount = 1 Then
-      If Not pnlClient.SelectedTab.Text.Equals("") Then
-        pnlClient.TabPages.Add("BLANK", "")
+    If PnlClient.TabCount = 1 Then
+      If Not PnlClient.SelectedTab.Text.Equals("") Then
+        PnlClient.TabPages.Add("BLANK", "")
       End If
     End If
   End Sub
 
-  Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click, pnlClient.btnClose_Click
-    RemoveItem(PanelSelectedIndex)
+  Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click, PnlClient.BtnClose_Click
+    RemoveItem(PanelSelectedItem)
   End Sub
 
-  Private Sub btnContextMenu_MouseDown(sender As Object, e As MouseEventArgs) Handles btnContextMenu.MouseDown
-    pnlContextMenu.Show(btnContextMenu, New Point(0, btnContextMenu.Height))
+  Private Sub BtnContextMenu_MouseDown(sender As Object, e As MouseEventArgs) Handles BtnContextMenu.MouseDown
+    PnlContextMenu.Show(BtnContextMenu, New Point(0, BtnContextMenu.Height))
   End Sub
 
-  Private Sub btnPinned_Click(sender As Object, e As EventArgs) Handles btnPinned.Click
+  Private Sub BtnPinned_Click(sender As Object, e As EventArgs) Handles BtnPinned.Click
     PanelIsPinned = Not PanelIsPinned
   End Sub
 
-  Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
-    If txtSearch.Text.Equals("Search") Then Exit Sub
-    If btnSearch.Icon.Equals(btnClose.Icon) Then
+  Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+    If TxtSearch.Text.Equals("Search") Then Exit Sub
+    If BtnSearch.Icon.Equals(BtnClose.Icon) Then
       PanelSelectedItem.ClearSearch()
-      btnSearch.Icon = My.Resources.panel_search
-      txtSearch.Text = "Search"
-      txtSearch.ForeColor = My.Theme.PanelShadowColor
+      BtnSearch.Icon = My.Resources.panel_search
+      TxtSearch.Text = "Search"
+      TxtSearch.ForeColor = My.Theme.PanelShadowColor
     Else
-      PanelSelectedItem.ApplySearch(txtSearch.Text)
-      btnSearch.Icon = btnClose.Icon
+      PanelSelectedItem.ApplySearch(TxtSearch.Text)
+      BtnSearch.Icon = BtnClose.Icon
     End If
   End Sub
 
@@ -510,24 +510,24 @@
   Private Sub CreatePanelContextMenu()
     Dim item As System.Windows.Forms.ToolStripMenuItem
 
-    pnlContextMenu = New AncestryAssistant.FlatContextMenu() With {
+    PnlContextMenu = New AncestryAssistant.FlatContextMenu() With {
     .Name = "pnlContextMenu"
     }
 
-    pnlContextMenu.AddMenuItem("MnuDockFloat", "Float", enabled:=False)
+    PnlContextMenu.AddMenuItem("MnuDockFloat", "Float", enabled:=False)
 
-    item = pnlContextMenu.AddMenuItem("MnuDock", "Dock")
-    pnlContextMenu.AddMenuItem(item, "MnuDockLeftTop", "Top Left")
-    pnlContextMenu.AddMenuItem(item, "MnuDockLeftBottom", "Bottom Left")
-    pnlContextMenu.AddMenuItem(item, "MnuDockRightTop", "Top Right")
-    pnlContextMenu.AddMenuItem(item, "MnuDockRightBottom", "Bottom Right")
-    pnlContextMenu.AddMenuItem(item, "MnuDockMiddleBottom", "Middle Bottom")
-    pnlContextMenu.AddSeperator(item)
-    pnlContextMenu.AddMenuItem(item, "MnuDockTabbed", "As Tabbed Document")
+    item = PnlContextMenu.AddMenuItem("MnuDock", "Dock")
+    PnlContextMenu.AddMenuItem(item, "MnuDockLeftTop", "Top Left")
+    PnlContextMenu.AddMenuItem(item, "MnuDockLeftBottom", "Bottom Left")
+    PnlContextMenu.AddMenuItem(item, "MnuDockRightTop", "Top Right")
+    PnlContextMenu.AddMenuItem(item, "MnuDockRightBottom", "Bottom Right")
+    PnlContextMenu.AddMenuItem(item, "MnuDockMiddleBottom", "Middle Bottom")
+    PnlContextMenu.AddSeperator(item)
+    PnlContextMenu.AddMenuItem(item, "MnuDockTabbed", "As Tabbed Document")
 
-    pnlContextMenu.AddSeperator()
+    PnlContextMenu.AddSeperator()
 
-    pnlContextMenu.AddMenuItem("MnuDockClose", "Close")
+    PnlContextMenu.AddMenuItem("MnuDockClose", "Close")
 
   End Sub
 
@@ -535,26 +535,26 @@
     PanelHasFocus = True
   End Sub
 
-  Private Function hasTabs() As Boolean
-    If pnlClient.TabCount > 1 Then Return True
-    If pnlClient.TabCount = 0 Then Return False
-    If pnlClient.TabPages(0).Text.Equals("") Then Return False
+  Private Function HasTabs() As Boolean
+    If PnlClient.TabCount > 1 Then Return True
+    If PnlClient.TabCount = 0 Then Return False
+    If PnlClient.TabPages(0).Text.Equals("") Then Return False
     Return True
   End Function
 
   Private Sub LayoutPanel()
     'Prevent display of control when its empty
-    If Not hasTabs() Then
+    If Not HasTabs() Then
       Visible = False
       Exit Sub
     End If
     'We have data so generate the interface
     Visible = True
-    With ctxMenu
+    With CtxMenu
       .BackColor = My.Theme.PanelBorderColor
       .ForeColor = My.Theme.PanelFontColor
     End With
-    With pnlClient
+    With PnlClient
       .TabShowClose = PanelShowClose
       .TabType = PanelType
       .ShowHasFocus = PanelHasFocus
@@ -565,12 +565,12 @@
       Case DockPanelType.Panel
         Visible = True
         'Adjust visibility of all controls within Main Panel
-        btnClose.Visible = PanelShowClose
-        btnContextMenu.Visible = PanelShowContextMenu
-        btnPinned.Visible = PanelShowPinned
-        pnlSearch.Visible = PanelShowSearch
+        BtnClose.Visible = PanelShowClose
+        BtnContextMenu.Visible = PanelShowContextMenu
+        BtnPinned.Visible = PanelShowPinned
+        PnlSearch.Visible = PanelShowSearch
         'Apply Main Panel Formatting and refresh
-        With pnlMain
+        With PnlMain
           If PanelShowSearch Then
             .MinimumSize = New Size(0, 42)
             .MaximumSize = New Size(0, 42)
@@ -582,22 +582,22 @@
           End If
           .Visible = True
           If PanelHasFocus Then
-            pnlHeader.BackgroundImageLayout = ImageLayout.Tile
+            PnlHeader.BackgroundImageLayout = ImageLayout.Tile
             .BorderColorTop = My.Theme.PanelHighlightColor
             .BorderWidth = New Padding(1, 3, 1, 1)
           Else
-            pnlHeader.BackgroundImageLayout = ImageLayout.None
+            PnlHeader.BackgroundImageLayout = ImageLayout.None
             .BorderColorTop = My.Theme.PanelBorderColor
             .BorderWidth = New Padding(1, 1, 1, 1)
           End If
           .Invalidate(True)
         End With
         'Apply Client Panel layout and sizing
-        With pnlClient
+        With PnlClient
           .Alignment = System.Windows.Forms.TabAlignment.Bottom
           .Padding = New System.Drawing.Point(2, 2)
           If .TabPages.Count < 2 Then
-            Dim h As Integer = Height - pnlMain.Height + .ItemSize.Height
+            Dim h As Integer = Height - PnlMain.Height + .ItemSize.Height
             .MinimumSize = New Size(100, h)
             .Size = New Size(.Width, h)
           Else
@@ -611,9 +611,9 @@
       Case DockPanelType.Tab
         Visible = True
         'Hide the main panel
-        pnlMain.Visible = False
+        PnlMain.Visible = False
         'Apply Client Panel layout and sizing
-        With pnlClient
+        With PnlClient
           .Alignment = System.Windows.Forms.TabAlignment.Top
           If PanelShowClose Then
             .Padding = New System.Drawing.Point(20, 2)
@@ -628,20 +628,20 @@
     End Select
   End Sub
 
-  Private Sub pnlClient_Selected(sender As Object, e As TabControlEventArgs) Handles pnlClient.Selected
+  Private Sub PnlClient_Selected(sender As Object, e As TabControlEventArgs) Handles PnlClient.Selected
     SetPanelState()
   End Sub
 
-  Private Sub pnlClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles pnlClient.SelectedIndexChanged
+  Private Sub PnlClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PnlClient.SelectedIndexChanged
     If PanelSelectedItem Is Nothing Then Exit Sub
-    lblCaption.Text = pnlClient.SelectedTab.Text
+    LblCaption.Text = PnlClient.SelectedTab.Text
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
     Logger.debugPrint("DockPanel.SelectedItemChanged(panelItem=[{0},{1},{2}])", PanelSelectedItem.Key, PanelSelectedItem.LocationCurrent.ToString, PanelSelectedIndex)
 #End If
     RaiseEvent PanelItemSelected(PanelSelectedItem)
   End Sub
 
-  Private Sub pnlContextMenu_ContextItemClicked(item As ToolStripMenuItem) Handles pnlContextMenu.ContextItemClicked
+  Private Sub PnlContextMenu_ContextItemClicked(item As ToolStripMenuItem) Handles PnlContextMenu.ContextItemClicked
     Dim panelItem As DockPanelItem = PanelSelectedItem
     Select Case item.Name
       Case "MnuDockClose"
@@ -666,17 +666,17 @@
   End Sub
 
   Private Sub RemoveBlankTabs()
-    Dim cnt As Integer = pnlClient.TabCount - 1
+    Dim cnt As Integer = PnlClient.TabCount - 1
     For idx As Integer = cnt To 0 Step -1
-      If pnlClient.TabPages(idx).Text = "" Then
-        pnlClient.TabPages.RemoveAt(idx)
+      If PnlClient.TabPages(idx).Text = "" Then
+        PnlClient.TabPages.RemoveAt(idx)
       End If
     Next
   End Sub
 
   Private Sub SetPanelState()
-    If pnlClient.SelectedTab Is Nothing Then Exit Sub
-    Dim tp As TabPage = pnlClient.SelectedTab
+    If PnlClient.SelectedTab Is Nothing Then Exit Sub
+    Dim tp As TabPage = PnlClient.SelectedTab
     If tp.Controls.Count = 0 Then Exit Sub
     Dim item As DockPanelItem = TryCast(tp.Controls(0), DockPanelItem)
     If PanelShowClose = item.ItemSupportsClose And PanelShowContextMenu = item.ItemSupportsMove And PanelShowSearch = item.ItemSupportsSearch Then Exit Sub
@@ -688,33 +688,33 @@
     PerformLayout()
   End Sub
 
-  Private Sub txtSearch_GotFocus(sender As Object, e As EventArgs) Handles txtSearch.GotFocus
-    If txtSearch.Text.Equals("Search") Then
-      txtSearch.Text = ""
+  Private Sub TxtSearch_GotFocus(sender As Object, e As EventArgs) Handles TxtSearch.GotFocus
+    If TxtSearch.Text.Equals("Search") Then
+      TxtSearch.Text = ""
     End If
-    txtSearch.ForeColor = My.Theme.PanelFontColor
-    txtSearch.BackColor = My.Theme.PanelBackColor
+    TxtSearch.ForeColor = My.Theme.PanelFontColor
+    TxtSearch.BackColor = My.Theme.PanelBackColor
   End Sub
 
-  Private Sub txtSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearch.KeyDown
+  Private Sub TxtSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSearch.KeyDown
     If e.KeyCode = Keys.Enter Then
       e.Handled = True
-      PanelSelectedItem.ApplySearch(txtSearch.Text)
-      btnSearch.Icon = btnClose.Icon
+      PanelSelectedItem.ApplySearch(TxtSearch.Text)
+      BtnSearch.Icon = BtnClose.Icon
     ElseIf e.KeyCode = Keys.Escape Then
       PanelSelectedItem.ClearSearch()
-      btnSearch.Icon = My.Resources.panel_search
-      txtSearch.Text = "Search"
-      txtSearch.ForeColor = My.Theme.PanelShadowColor
-      pnlClient.Focus()
+      BtnSearch.Icon = My.Resources.panel_search
+      TxtSearch.Text = "Search"
+      TxtSearch.ForeColor = My.Theme.PanelShadowColor
+      PnlClient.Focus()
     End If
   End Sub
 
-  Private Sub txtSearch_LostFocus(sender As Object, e As EventArgs) Handles txtSearch.LostFocus
-    If txtSearch.Text.Equals("") Then
-      txtSearch.Text = "Search"
+  Private Sub TxtSearch_LostFocus(sender As Object, e As EventArgs) Handles TxtSearch.LostFocus
+    If TxtSearch.Text.Equals("") Then
+      TxtSearch.Text = "Search"
     End If
-    txtSearch.BackColor = My.Theme.PanelBorderColor
+    TxtSearch.BackColor = My.Theme.PanelBorderColor
   End Sub
 
 #End Region
@@ -736,10 +736,10 @@
 
 #Region "Public Methods"
 
-  Public Function AddItem(item As DockPanelItem) As Integer
+  Public Sub AddItem(item As DockPanelItem)
     item.LocationCurrent = PanelLocation
-    pnlClient.TabPages.Add(item.Key, item.ItemCaption)
-    With pnlClient.TabPages(item.Key)
+    PnlClient.TabPages.Add(item.Key, item.ItemCaption)
+    With PnlClient.TabPages(item.Key)
       .Name = item.Key
       .Padding = New Padding(0)
       .Margin = New Padding(0)
@@ -752,14 +752,14 @@
     AddHandler item.PanelItemGotFocus, AddressOf DockPanel_GotFocus
     RemoveBlankTabs()
     LayoutPanel()
-    pnlClient.SelectTab(item.Key)
-    lblCaption.Text = item.ItemCaption
+    PnlClient.SelectTab(item.Key)
+    LblCaption.Text = item.ItemCaption
     SetPanelState()
-  End Function
+  End Sub
 
   Public Function GetItem(key As String) As DockPanelItem
     If HasItem(key) Then
-      Return TryCast(pnlClient.TabPages(key).Controls(0), DockPanelItem)
+      Return TryCast(PnlClient.TabPages(key).Controls(0), DockPanelItem)
     End If
     Return Nothing
   End Function
@@ -769,7 +769,7 @@
   End Function
 
   Public Function HasItem(key As String) As Boolean
-    Return pnlClient.TabPages.ContainsKey(key)
+    Return PnlClient.TabPages.ContainsKey(key)
   End Function
 
   Public Function RemoveItem(key As String) As DockPanelItem
@@ -783,10 +783,10 @@
     If panelItem IsNot Nothing Then
       RaiseEvent PanelItemClose(panelItem)
       AddPlaceholderTab()
-      pnlClient.TabPages.RemoveByKey(panelItem.Key)
-      pnlClient.SelectedIndex = 0
-      If hasTabs() Then
-        lblCaption.Text = pnlClient.SelectedTab.Text
+      PnlClient.TabPages.RemoveByKey(panelItem.Key)
+      PnlClient.SelectedIndex = 0
+      If HasTabs() Then
+        LblCaption.Text = PnlClient.SelectedTab.Text
       Else
         Visible = False
         RaiseEvent PanelClose(Me)
@@ -799,7 +799,7 @@
 
   Public Sub SelectItem(key As String)
     If HasItem(key) Then
-      pnlClient.SelectTab(pnlClient.TabPages.IndexOfKey(key))
+      PnlClient.SelectTab(PnlClient.TabPages.IndexOfKey(key))
       SetPanelState()
     End If
   End Sub

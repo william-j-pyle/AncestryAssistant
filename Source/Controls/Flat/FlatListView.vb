@@ -259,12 +259,12 @@ Public Class FlatListView
   Protected Overrides Sub OnDrawSubItem(ByVal e As DrawListViewSubItemEventArgs)
     'Debug.Print("DrawSubItem({0},{1})={2}    {3}", e.ItemIndex, e.ColumnIndex, e.ItemState.ToString, e.SubItem.Bounds)
     Dim rec As Rectangle
-    Dim txt As String
+    Dim Txt As String
     If e.ColumnIndex = 0 Then
-      txt = e.Item.Text
+      Txt = e.Item.Text
       rec = e.Item.GetBounds(ItemBoundsPortion.Label)
     Else
-      txt = e.SubItem.Text
+      Txt = e.SubItem.Text
       rec = e.SubItem.Bounds
     End If
 

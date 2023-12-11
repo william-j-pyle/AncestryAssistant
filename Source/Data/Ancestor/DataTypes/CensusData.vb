@@ -4,7 +4,7 @@ Public Class ACensus
 
 #Region "Fields"
 
-  Private ancestor As AncestorCollection.Ancestor
+  Private Ancestor As AncestorCollection.Ancestor
   Private censusYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
   Private dataEntries() As String
 
@@ -20,8 +20,8 @@ Public Class ACensus
 
   Public ReadOnly Property ExpectedYears As List(Of Integer)
     Get
-      Dim birth As Integer = ancestor.GedBirthDate.Year
-      Dim death As Integer = ancestor.GedDeathDate.Year
+      Dim birth As Integer = Ancestor.GedBirthDate.Year
+      Dim death As Integer = Ancestor.GedDeathDate.Year
       Return CreateExpectedYears(birth, death)
     End Get
   End Property
@@ -39,8 +39,8 @@ Public Class ACensus
 #Region "Public Constructors"
 
   Public Sub New(ancestorObj As AncestorCollection.Ancestor)
-    ancestor = ancestorObj
-    Dim recordslocation As String = ancestor.FullPath("Census")
+    Ancestor = AncestorObj
+    Dim recordslocation As String = Ancestor.FullPath("Census")
     If Not recordslocation.EndsWith("\") Then recordslocation += "\"
     RecordsBasePath = recordslocation
     Initialize()

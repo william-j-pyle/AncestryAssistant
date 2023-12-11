@@ -79,39 +79,39 @@ Public Class Ribbon
 
     Dim r As Integer = Right - 1
     Dim b As Integer = Height - t - 1
-    Dim tabOrigBounds As Rectangle
-    Dim tabBounds As Rectangle
+    Dim TabOrigBounds As Rectangle
+    Dim TabBounds As Rectangle
     Dim textColor As Color
-    Dim tabColor As Color
+    Dim TabColor As Color
     Dim stringFormat As New StringFormat With {
       .Alignment = StringAlignment.Center,
       .LineAlignment = StringAlignment.Center
     }
 
-    'Add the tabs
+    'Add the Tabs
     For i As Integer = 0 To TabPages.Count - 1
-      tabOrigBounds = GetTabRect(i)
+      TabOrigBounds = GetTabRect(i)
 
-      'Erase current tab
+      'Erase current Tab
       Using brush As New SolidBrush(AppBackColor)
-        g.FillRectangle(brush, tabOrigBounds)
+        g.FillRectangle(brush, TabOrigBounds)
       End Using
 
       textColor = AppForeColor
-      tabColor = AppBackColor
-      tabBounds = New Rectangle(tabOrigBounds.X, tabOrigBounds.Y + 1, tabOrigBounds.Width, tabOrigBounds.Height - 3)
-      ' Fill the new tab
-      Using brush As New SolidBrush(tabColor)
-        g.FillRectangle(brush, tabBounds)
+      TabColor = AppBackColor
+      TabBounds = New Rectangle(TabOrigBounds.X, TabOrigBounds.Y + 1, TabOrigBounds.Width, TabOrigBounds.Height - 3)
+      ' Fill the new Tab
+      Using brush As New SolidBrush(TabColor)
+        g.FillRectangle(brush, TabBounds)
       End Using
 
-      ' Draw the tab text
+      ' Draw the Tab text
       Using brush As New SolidBrush(textColor)
-        g.DrawString(TabPages(i).Text, Font, brush, tabBounds, stringFormat)
+        g.DrawString(TabPages(i).Text, Font, brush, TabBounds, stringFormat)
       End Using
 
       If SelectedIndex = i Then
-        g.DrawLine(New Pen(AppHighlightColor, 2), tabBounds.Left + 1, tabBounds.Bottom - 1, tabBounds.Right - 1, tabBounds.Bottom - 1)
+        g.DrawLine(New Pen(AppHighlightColor, 2), TabBounds.Left + 1, TabBounds.Bottom - 1, TabBounds.Right - 1, TabBounds.Bottom - 1)
       End If
 
     Next
@@ -206,7 +206,7 @@ Public Class Ribbon
     End Try
   End Function
 
-  Public Function getItemAttribute(key As String, attribute As RibbonItemAttribute) As Object
+  Public Function GetItemAttribute(key As String, attribute As RibbonItemAttribute) As Object
     Try
       Return GetItem(key).GetAttribute(attribute)
     Catch ex As Exception
@@ -298,7 +298,7 @@ Public Class Ribbon
 
   Public Sub RegisterBar(bar As RibbonBar)
     RegistryBar.Add(RibbonKey(bar.BarId), bar)
-    RegistryTab.Add(RibbonKey(bar.BarId), bar.Parent)
+    RegistryTab.Add(RibbonKey(bar.BarId), TryCast(bar.Parent, TabPage))
   End Sub
 
   Public Sub RegisterGroup(group As RibbonGroup)
@@ -312,12 +312,12 @@ Public Class Ribbon
   Public Sub SetGroupItemsAttribute(groupKey As String, attribute As RibbonItemAttribute, value As Object)
     For Each Itemkey As String In RegistryItem.Keys
       If Itemkey.StartsWith(groupKey + ".") Then
-        setItemAttribute(Itemkey, attribute, value)
+        SetItemAttribute(Itemkey, attribute, value)
       End If
     Next
   End Sub
 
-  Public Sub setItemAttribute(key As String, attribute As RibbonItemAttribute, value As Object)
+  Public Sub SetItemAttribute(key As String, attribute As RibbonItemAttribute, value As Object)
     GetItem(key).SetAttribute(attribute, value)
   End Sub
 

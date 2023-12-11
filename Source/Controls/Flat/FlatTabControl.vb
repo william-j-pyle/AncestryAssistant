@@ -9,7 +9,7 @@
 
 #Region "Events"
 
-  Public Event btnClose_Click(sender As Object, e As EventArgs)
+  Public Event BtnClose_Click(sender As Object, e As EventArgs)
 
 #End Region
 
@@ -43,7 +43,7 @@
     If closeTarget.IsEmpty Then Exit Sub
     If e.Button = MouseButtons.Left Then
       If closeTarget.Contains(PointToClient(MousePosition)) Then
-        RaiseEvent btnClose_Click(sender, New EventArgs)
+        RaiseEvent BtnClose_Click(sender, New EventArgs)
       End If
     End If
   End Sub
@@ -80,15 +80,15 @@
 
     If TabCount > 1 Then
 
-      'Add the tabs
+      'Add the Tabs
       For i As Integer = 0 To TabCount - 1
-        Dim tabPage As TabPage = TabPages(i)
-        Dim tabBounds As Rectangle = GetTabRect(i)
+        Dim TabPage As TabPage = TabPages(i)
+        Dim TabBounds As Rectangle = GetTabRect(i)
         Dim textColor As Color
 
         ' Fill the background
         Using brush As New SolidBrush(My.Theme.TabBackColor)
-          g.FillRectangle(brush, tabBounds)
+          g.FillRectangle(brush, TabBounds)
         End Using
 
         ' Set the text and background colors based on selected and unselected states
@@ -98,26 +98,26 @@
           textColor = My.Theme.TabFontColor
         End If
 
-        ' Draw the tab text
+        ' Draw the Tab text
         Using brush As New SolidBrush(textColor)
           Dim sf As New StringFormat With {
             .Alignment = StringAlignment.Center,
             .LineAlignment = StringAlignment.Center
           }
-          g.DrawString(tabPage.Text, Font, brush, tabBounds, sf)
+          g.DrawString(tabPage.Text, Font, brush, TabBounds, sf)
         End Using
 
-        ' Draw the individual tabs
+        ' Draw the individual Tabs
         Const ADJ As Integer = 2
         If SelectedIndex = i Then
-          e.Graphics.DrawLine(borderPen, tabBounds.Left - ADJ, tabBounds.Top, tabBounds.Left - ADJ, tabBounds.Bottom)
-          e.Graphics.DrawLine(borderPen, tabBounds.Right - ADJ, tabBounds.Top, tabBounds.Right - ADJ, tabBounds.Bottom)
-          e.Graphics.DrawLine(borderPen, tabBounds.Left - ADJ, tabBounds.Bottom, tabBounds.Right - ADJ, tabBounds.Bottom)
+          e.Graphics.DrawLine(borderPen, TabBounds.Left - ADJ, TabBounds.Top, TabBounds.Left - ADJ, TabBounds.Bottom)
+          e.Graphics.DrawLine(borderPen, TabBounds.Right - ADJ, TabBounds.Top, TabBounds.Right - ADJ, TabBounds.Bottom)
+          e.Graphics.DrawLine(borderPen, TabBounds.Left - ADJ, TabBounds.Bottom, TabBounds.Right - ADJ, TabBounds.Bottom)
         Else
-          e.Graphics.DrawLine(borderPen, tabBounds.Left - ADJ, tabBounds.Top, tabBounds.Right - ADJ, tabBounds.Top)
+          e.Graphics.DrawLine(borderPen, TabBounds.Left - ADJ, TabBounds.Top, TabBounds.Right - ADJ, TabBounds.Top)
         End If
         If i = TabCount - 1 Then
-          e.Graphics.DrawLine(borderPen, tabBounds.Right - ADJ, tabBounds.Top, r, tabBounds.Top)
+          e.Graphics.DrawLine(borderPen, TabBounds.Right - ADJ, TabBounds.Top, r, TabBounds.Top)
         End If
       Next
     End If
@@ -140,10 +140,10 @@
     Dim r As Integer = Right - 1
     Dim b As Integer = Height - t - 1
     Dim closeBtn As Rectangle
-    Dim tabOrigBounds As Rectangle
-    Dim tabBounds As Rectangle
+    Dim TabOrigBounds As Rectangle
+    Dim TabBounds As Rectangle
     Dim textColor As Color
-    Dim tabColor As Color
+    Dim TabColor As Color
     Dim stringFormat As New StringFormat()
     If TabShowClose Then
       stringFormat.Alignment = StringAlignment.Near
@@ -156,42 +156,42 @@
 
     e.Graphics.DrawRectangle(PenBorder, l, t, r, b)
 
-    'Add the tabs
+    'Add the Tabs
     For i As Integer = 0 To TabPages.Count - 1
-      tabOrigBounds = GetTabRect(i)
+      TabOrigBounds = GetTabRect(i)
 
-      'Erase current tab
+      'Erase current Tab
       Using brush As New SolidBrush(My.Theme.TabBackColor)
-        g.FillRectangle(brush, tabOrigBounds)
+        g.FillRectangle(brush, TabOrigBounds)
       End Using
 
       ' Set the text and background colors based on selected and unselected states
       If SelectedIndex = i Then
         textColor = My.Theme.TabFontColor
-        tabColor = My.Theme.TabBorderColor
-        tabBounds = New Rectangle(tabOrigBounds.X, tabOrigBounds.Y + 1, tabOrigBounds.Width, tabOrigBounds.Height - 3)
+        TabColor = My.Theme.TabBorderColor
+        TabBounds = New Rectangle(tabOrigBounds.X, TabOrigBounds.Y + 1, TabOrigBounds.Width, TabOrigBounds.Height - 3)
       Else
-        tabColor = My.Theme.TabShadowColor
-        tabBounds = New Rectangle(tabOrigBounds.X + 1, tabOrigBounds.Y + 2, tabOrigBounds.Width - 1, tabOrigBounds.Height - 4)
-        If tabOrigBounds.Contains(PointToClient(MousePosition)) Then
+        TabColor = My.Theme.TabShadowColor
+        TabBounds = New Rectangle(tabOrigBounds.X + 1, TabOrigBounds.Y + 2, TabOrigBounds.Width - 1, TabOrigBounds.Height - 4)
+        If TabOrigBounds.Contains(PointToClient(MousePosition)) Then
           textColor = My.Theme.TabFontColor
         Else
           textColor = My.Theme.ColorToShadow(My.Theme.TabFontColor)
         End If
       End If
 
-      ' Fill the new tab
+      ' Fill the new Tab
       Using brush As New SolidBrush(tabColor)
-        g.FillRectangle(brush, tabBounds)
+        g.FillRectangle(brush, TabBounds)
       End Using
 
-      ' Draw the tab text
+      ' Draw the Tab text
       Using brush As New SolidBrush(textColor)
-        g.DrawString(TabPages(i).Text, Font, brush, tabBounds, stringFormat)
+        g.DrawString(TabPages(i).Text, Font, brush, TabBounds, stringFormat)
       End Using
 
       If TabShowClose Then
-        closeBtn = New Rectangle(tabOrigBounds.X + tabOrigBounds.Width - 21, tabOrigBounds.Y, 20, 20)
+        closeBtn = New Rectangle(tabOrigBounds.X + TabOrigBounds.Width - 21, TabOrigBounds.Y, 20, 20)
         If closeBtn.Contains(PointToClient(MousePosition)) Then
           closeTarget = closeBtn
         End If
@@ -201,7 +201,7 @@
             g.DrawString(ChrW(FontSegoeFluentIconsEnum.CalculatorMultiply), My.Theme.AppIconsFont, brush, closeBtn, stringFormat)
           End Using
         Else
-          If tabOrigBounds.Contains(PointToClient(MousePosition)) Then
+          If TabOrigBounds.Contains(PointToClient(MousePosition)) Then
             Using brush As New SolidBrush(textColor)
               g.DrawString(ChrW(FontSegoeFluentIconsEnum.CalculatorMultiply), My.Theme.AppIconsFont, brush, closeBtn, stringFormat)
             End Using
@@ -211,18 +211,18 @@
     Next
 
     'Draw Divider lines
-    tabBounds = GetTabRect(SelectedIndex)
-    Dim tabBarColor As Color
+    TabBounds = GetTabRect(SelectedIndex)
+    Dim TabBarColor As Color
     Dim ctlBarColor As Color
     If ShowHasFocus Then
-      tabBarColor = My.Theme.TabHighlightColor
+      TabBarColor = My.Theme.TabHighlightColor
       ctlBarColor = My.Theme.TabHighlightColor
     Else
-      tabBarColor = My.Theme.TabAccentColor
+      TabBarColor = My.Theme.TabAccentColor
       ctlBarColor = My.Theme.TabShadowColor
     End If
-    e.Graphics.DrawLine(New Pen(tabBarColor, 2), tabBounds.X, tabBounds.Y, tabBounds.Right, tabBounds.Y)
-    e.Graphics.DrawLine(New Pen(ctlBarColor, 2), l, tabBounds.Bottom - 1, r, tabBounds.Bottom - 1)
+    e.Graphics.DrawLine(New Pen(tabBarColor, 2), TabBounds.X, TabBounds.Y, TabBounds.Right, TabBounds.Y)
+    e.Graphics.DrawLine(New Pen(ctlBarColor, 2), l, TabBounds.Bottom - 1, r, TabBounds.Bottom - 1)
 
   End Sub
 

@@ -18,9 +18,9 @@
     End Get
     Set(value As String)
       If value.Contains(",") Then
-        Dim v() As String = value.Split(",")
+        Dim v() As String = value.Split(","c)
         If v(0).Contains(" ") Then
-          Dim p() As String = v(0).Split(" ")
+          Dim p() As String = v(0).Split(" "c)
           SurName = p(0)
           Suffix = p(1)
         Else
@@ -28,7 +28,7 @@
         End If
         Given = v(1)
       Else
-        Dim v() As String = value.Split(" ")
+        Dim v() As String = value.Split(" "c)
         If v.Length = 2 Then
           SurName = v(1)
           Given = v(0)

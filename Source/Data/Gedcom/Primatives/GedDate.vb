@@ -170,7 +170,7 @@ Public Class GedDate
     If workingDate.Length() = 4 And IsNumeric(workingDate) And Val(workingDate) > 0 Then
       sFormat = "yyyy"
       sCleanDateString = workingDate
-      dResultDate = New Date(workingDate.Substring(0, 4), 1, 1)
+      dResultDate = New Date(CInt(workingDate.Substring(0, 4)), 1, 1)
       bYear = True
       bValid = True
       Return True
@@ -180,7 +180,7 @@ Public Class GedDate
       If IsNumeric(workingDate.Substring(0, 4)) And workingDate.Substring(4, 1).Equals("-") And Val(Right(workingDate, 4)) > 0 Then
         sFormat = "yyyy-yyyy"
         sCleanDateString = workingDate
-        dResultDate = New Date(workingDate.Substring(0, 4), 1, 1)
+        dResultDate = New Date(CInt(workingDate.Substring(0, 4)), 1, 1)
         bRange = True
         bYear = True
         bValid = True
@@ -330,12 +330,12 @@ Public Class GedDate
       Else
         rtnString += dResultDate.Year.ToString()
         If bMonth Then
-          rtnString += "-" + dResultDate.Month.ToString.PadLeft(2, "0")
+          rtnString += "-" + dResultDate.Month.ToString.PadLeft(2, "0"c)
         Else
           rtnString += "-00"
         End If
         If bDay Then
-          rtnString += "-" + dResultDate.Day.ToString.PadLeft(2, "0")
+          rtnString += "-" + dResultDate.Day.ToString.PadLeft(2, "0"c)
         Else
           rtnString += "-00"
         End If
@@ -371,12 +371,12 @@ Public Class GedDate
       Else
         rtnString += dResultDate.Year.ToString()
         If bMonth Then
-          rtnString += dResultDate.Month.ToString.PadLeft(2, "0")
+          rtnString += dResultDate.Month.ToString.PadLeft(2, "0"c)
         Else
           rtnString += "00"
         End If
         If bDay Then
-          rtnString += dResultDate.Day.ToString.PadLeft(2, "0")
+          rtnString += dResultDate.Day.ToString.PadLeft(2, "0"c)
         Else
           rtnString += "00"
         End If

@@ -120,19 +120,19 @@ Public Class RibbonGroup
       ri.Tag = "AddItem"
       Controls.Add(ri)
     End If
-    ri.Location = getItemTargetLocation(ri.Col, ri.ColSpan, ri.Row, ri.RowSpan)
+    ri.Location = GetItemTargetLocation(ri.Col, ri.ColSpan, ri.Row, ri.RowSpan)
     AddHandler ri.RibbonItemLocationChanged, AddressOf RibbonItemLocationChanged
     AddHandler ri.RibbonItemSizeChanged, AddressOf RibbonItemSizeChanged
   End Sub
 
-  Private Function getItemTargetLocation(Col As Double, ColSpan As Double, Row As Double, RowSpan As Double) As Point
+  Private Function GetItemTargetLocation(Col As Double, ColSpan As Double, Row As Double, RowSpan As Double) As Point
     If ColCount < Col + ColSpan Then
       ColCount = CInt(Col + ColSpan)
     End If
     Return New Point(CInt(((Col - 1) * (RibbonConfig.GROUP_COL_WIDTH + RibbonConfig.GROUP_COL_SPACING)) + RibbonConfig.GROUP_LEFT_SPACING), CInt(((Row - 1) * (RibbonConfig.GROUP_ROW_HEIGHT + RibbonConfig.GROUP_ROW_SPACING)) + RibbonConfig.GROUP_TOP_SPACING))
   End Function
 
-  Private Function getItemTargetSize(Col As Double, ColSpan As Double, Row As Double, RowSpan As Double) As Size
+  Private Function GetItemTargetSize(Col As Double, ColSpan As Double, Row As Double, RowSpan As Double) As Size
     If ColCount < Col + ColSpan Then
       ColCount = CInt(Col + ColSpan)
     End If
@@ -171,8 +171,14 @@ Public Class RibbonGroup
     End If
   End Sub
 
-  ''' <summary> When Group is added via addItem, all proper inits are completed When Group is added via designer, then
-  ''' this event will apply the required parent values </summary <param name="sender"> </param> <param name="e"> </param>
+  ''' <summary>
+  '''     When Group is added via addItem, all proper inits are completed When Group is added via designer, then this
+  '''     event will apply the required parent values
+  ''' </summary>
+  ''' <param name="sender">
+  ''' </param>
+  ''' <param name="e">
+  ''' </param>
   Private Sub RibbonGroup_ParentChanged(sender As Object, e As EventArgs) Handles Me.ParentChanged
     If RibbonCntl Is Nothing And TypeOf Parent Is RibbonBar Then
       With CType(Parent, RibbonBar)
@@ -260,14 +266,14 @@ Public Class RibbonGroup
 
   Public Sub RibbonItemLocationChanged(sender As Object, e As EventArgs)
     With CType(sender, RibbonItem)
-      .Location = getItemTargetLocation(.Col, .ColSpan, .Row, .RowSpan)
+      .Location = GetItemTargetLocation(.Col, .ColSpan, .Row, .RowSpan)
       .Refresh()
     End With
   End Sub
 
   Public Sub RibbonItemSizeChanged(sender As Object, e As EventArgs)
     With CType(sender, RibbonItem)
-      .Size = getItemTargetSize(.Col, .ColSpan, .Row, .RowSpan)
+      .Size = GetItemTargetSize(.Col, .ColSpan, .Row, .RowSpan)
       .Refresh()
     End With
   End Sub

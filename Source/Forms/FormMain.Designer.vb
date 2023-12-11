@@ -258,8 +258,8 @@ Partial Class AssistantAppForm
     Friend WithEvents AppMaxButton As Button
     Friend WithEvents StatusBar As Panel
     Friend WithEvents RibbonBar As Ribbon
-    Friend WithEvents tabFile As TabPage
-    Friend WithEvents tabHome As TabPage
+    Friend WithEvents TabFile As TabPage
+    Friend WithEvents TabHome As TabPage
     Friend WithEvents RibbonBarTabHome As RibbonBar
-    Friend WithEvents btnAlert As Button
+    Friend WithEvents BtnAlert As Button
 End Class

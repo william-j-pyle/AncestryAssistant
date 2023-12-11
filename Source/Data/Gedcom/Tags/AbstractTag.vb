@@ -43,13 +43,13 @@ Public MustInherit Class AbstractTag
     realTag = grealTag
     isRootTag = gisRootTag
     TagOwnerID = gownerID
-    If setTagDefaults() Then
+    If SetTagDefaults() Then
       generateID()
       tagLoop()
     End If
   End Sub
 
-  Private Function setTagDefaults() As Boolean
+  Private Function SetTagDefaults() As Boolean
     Dim useTag As String = rootTag
     If Not realTag.Equals(String.Empty) Then
       useTag = realTag

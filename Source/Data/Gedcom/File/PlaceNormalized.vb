@@ -23,11 +23,11 @@ Public Class PlaceNormalized {
 
     Private Properties loadTable(String name){
         Properties properties = New Properties()
-  Try (InputStream inputStream = getClass().getResourceAsStream("/"+name+".properties")) {
+  Try (InputStream inputStream = GetClass().getResourceAsStream("/"+name+".properties")) {
                 If (inputStream <> null) {
                     properties.load(inputStream)
                 } else {
-                    logger.error("Unable to load properties file: {}", getClass().getSimpleName()+".properties" )
+                    logger.error("Unable to load properties file: {}", GetClass().getSimpleName()+".properties" )
                     System.exit(1)
                 }
             } catch (IOException e) {

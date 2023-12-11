@@ -122,7 +122,7 @@ Public Class FlatMenuBar
         e.Graphics.FillRectangle(brush, 0 - 2, 0, e.Item.Width + 2, e.Item.Height)
       End Using
       Using pen As New Pen(My.Theme.PanelShadowColor, 1)
-        Dim y As Single = ((e.Item.ContentRectangle.Y + 1) / 2) + 1
+        Dim y As Single = CInt(((e.Item.ContentRectangle.Y + 1) / 2) + 1)
         Dim x As Single = 26
         Dim w As Single = e.Item.Width - 30
         e.Graphics.DrawLine(pen, x, y, w, y)

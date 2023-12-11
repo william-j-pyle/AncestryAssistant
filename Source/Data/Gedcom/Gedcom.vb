@@ -128,7 +128,7 @@ Public Class Gedcom
     Next
     ' PROOCESS FILE
     rewind()
-    While hasNext()
+    While HasNext()
       Dim success As Boolean = False
       If tag.Equals(HeaderTag.GEDCOM_TAG) Then success = NewHeaderTag() IsNot Nothing
       If tag.Equals(MediaTag.GEDCOM_TAG) Then success = NewMediaTag() IsNot Nothing
@@ -154,8 +154,8 @@ Public Class Gedcom
 
 #Region "Private Methods"
 
-  Private Function setIndex(value As Integer) As Boolean
-    Dim setVal As Integer = value
+  Private Function SetIndex(value As Integer) As Boolean
+    Dim SetVal As Integer = value
     If value < 0 Then
       fileIndex = 0
       Return False
@@ -401,7 +401,7 @@ Public Class Gedcom
     End Select
   End Function
 
-  Public Function hasNext() As Boolean
+  Public Function HasNext() As Boolean
     Return (fileIndex + 1) < fileData.Count()
   End Function
 
@@ -498,15 +498,15 @@ Public Class Gedcom
   End Function
 
   Public Function nextRow() As Boolean
-    Return setIndex(fileIndex + 1)
+    Return SetIndex(fileIndex + 1)
   End Function
 
   Public Function prevRow() As Boolean
-    Return setIndex(fileIndex - 1)
+    Return SetIndex(fileIndex - 1)
   End Function
 
   Public Function rewind() As Boolean
-    Return setIndex(0)
+    Return SetIndex(0)
   End Function
 
 #End Region

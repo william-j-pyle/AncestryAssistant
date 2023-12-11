@@ -49,8 +49,8 @@
   Public Overrides Sub SetAttribute(ItemAttribute As RibbonItemAttribute, attributeValue As Object)
     Select Case ItemAttribute
       Case RibbonItemAttribute.ImageFromResource
-        Dim img As Image = My.Resources.ResourceManager.GetObject(attributeValue)
-        Debug.Print("ImageFromResource:  Img.width={0}", img.Width)
+        Dim Img As Image = My.Resources.ResourceManager.GetObject(attributeValue)
+        Debug.Print("ImageFromResource:  Img.width={0}", Img.Width)
         Debug.Print("ImageFromResource:  text.MeasureSpace.width={0}", TextRenderer.MeasureText(" ", ctl.Font).Width)
 
         textImageOffset = CInt(img.Width / TextRenderer.MeasureText(" ", ctl.Font).Width) * 3
@@ -58,7 +58,7 @@
 
         ctl.ImageAlign = ContentAlignment.MiddleLeft
         ctl.TextAlign = ContentAlignment.MiddleLeft
-        ctl.Image = img
+        ctl.Image = Img
         ctl.Text = " ".PadLeft(textImageOffset, " "c) + ctl.Text
         Debug.Print("ImageFromResource:  Img.test=[{0}]", ctl.Text)
 

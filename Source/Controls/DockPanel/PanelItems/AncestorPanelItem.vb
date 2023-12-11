@@ -6,13 +6,13 @@ Public Class AncestorPanelItem
 #Region "Fields"
 
   Private WithEvents AncestorAttributes As TreeView
-  Private WithEvents ancestorAttributesCol1 As FlatPanel
-  Private WithEvents ancestorAttributesCol2 As FlatPanel
+  Private WithEvents AncestorAttributesCol1 As FlatPanel
+  Private WithEvents AncestorAttributesCol2 As FlatPanel
   Private WithEvents AncestorAttributesHeader As Panel
   Private WithEvents AncestorColSplitter As Splitter
 
-  Private WithEvents lblAncestorAttributesCol1 As Label
-  Private WithEvents lblAncestorAttributesCol2 As Label
+  Private WithEvents LblAncestorAttributesCol1 As Label
+  Private WithEvents LblAncestorAttributesCol2 As Label
   Private Const Default_ItemCaption As String = "Ancestor"
   Private Const Default_ItemHasRibbonBar As Boolean = False
   Private Const Default_ItemHasToolBar As Boolean = False
@@ -26,7 +26,7 @@ Public Class AncestorPanelItem
   Private Const Default_RibbonHideOnItemClose As Boolean = False
   Private Const Default_RibbonSelectOnItemFocus As Boolean = False
   Private Const Default_RibbonShowOnItemOpen As Boolean = False
-  Private Const SUBNODE_DELIMITER As String = vbTab
+  Private Const SUBNODE_DELIMITER As Char = CChar(vbTab)
   Private AttributeState As List(Of String)
   Private blockEvents As Boolean = False
   Private components As System.ComponentModel.IContainer
@@ -53,27 +53,27 @@ Public Class AncestorPanelItem
     RibbonHideOnItemClose = Default_RibbonHideOnItemClose
     RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
     RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Key can be overriden during creation, apply if set
+    'Key can be overriden during creation, apply if Set
     If Len(itemKey) > 0 Then Key = itemKey
     'Continue with creation
     AncestorAttributesHeader = New System.Windows.Forms.Panel()
     AncestorColSplitter = New System.Windows.Forms.Splitter()
-    ancestorAttributesCol2 = New AncestryAssistant.FlatPanel()
-    lblAncestorAttributesCol2 = New System.Windows.Forms.Label()
-    ancestorAttributesCol1 = New AncestryAssistant.FlatPanel()
-    lblAncestorAttributesCol1 = New System.Windows.Forms.Label()
+    AncestorAttributesCol2 = New AncestryAssistant.FlatPanel()
+    LblAncestorAttributesCol2 = New System.Windows.Forms.Label()
+    AncestorAttributesCol1 = New AncestryAssistant.FlatPanel()
+    LblAncestorAttributesCol1 = New System.Windows.Forms.Label()
     AncestorAttributes = New System.Windows.Forms.TreeView()
     AncestorAttributesHeader.SuspendLayout()
-    ancestorAttributesCol2.SuspendLayout()
-    ancestorAttributesCol1.SuspendLayout()
+    AncestorAttributesCol2.SuspendLayout()
+    AncestorAttributesCol1.SuspendLayout()
     SuspendLayout()
     '
     'AncestorAttributesHeader
     '
     AncestorAttributesHeader.BackColor = My.Theme.PanelBorderColor
     AncestorAttributesHeader.Controls.Add(AncestorColSplitter)
-    AncestorAttributesHeader.Controls.Add(ancestorAttributesCol2)
-    AncestorAttributesHeader.Controls.Add(ancestorAttributesCol1)
+    AncestorAttributesHeader.Controls.Add(AncestorAttributesCol2)
+    AncestorAttributesHeader.Controls.Add(AncestorAttributesCol1)
     AncestorAttributesHeader.Dock = System.Windows.Forms.DockStyle.Top
     AncestorAttributesHeader.Location = New System.Drawing.Point(0, 0)
     AncestorAttributesHeader.MaximumSize = New System.Drawing.Size(0, 18)
@@ -95,68 +95,68 @@ Public Class AncestorPanelItem
     '
     'ancestorAttributesCol2
     '
-    ancestorAttributesCol2.BackColor = My.Theme.PanelBorderColor
-    ancestorAttributesCol2.BorderColor = My.Theme.PanelBackColor
-    ancestorAttributesCol2.BorderColorBottom = My.Theme.PanelShadowColor
-    ancestorAttributesCol2.BorderColorLeft = My.Theme.PanelAccentColor
-    ancestorAttributesCol2.BorderColorRight = My.Theme.PanelShadowColor
-    ancestorAttributesCol2.BorderColorTop = My.Theme.PanelShadowColor
-    ancestorAttributesCol2.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
-    ancestorAttributesCol2.Controls.Add(lblAncestorAttributesCol2)
-    ancestorAttributesCol2.CornerRadius = New System.Windows.Forms.Padding(0)
-    ancestorAttributesCol2.Dock = System.Windows.Forms.DockStyle.Fill
-    ancestorAttributesCol2.Location = New System.Drawing.Point(150, 0)
-    ancestorAttributesCol2.MinimumSize = New System.Drawing.Size(60, 0)
-    ancestorAttributesCol2.Name = "ancestorAttributesCol2"
-    ancestorAttributesCol2.Padding = New System.Windows.Forms.Padding(1)
-    ancestorAttributesCol2.Size = New System.Drawing.Size(137, 18)
-    ancestorAttributesCol2.TabIndex = 4
+    AncestorAttributesCol2.BackColor = My.Theme.PanelBorderColor
+    AncestorAttributesCol2.BorderColor = My.Theme.PanelBackColor
+    AncestorAttributesCol2.BorderColorBottom = My.Theme.PanelShadowColor
+    AncestorAttributesCol2.BorderColorLeft = My.Theme.PanelAccentColor
+    AncestorAttributesCol2.BorderColorRight = My.Theme.PanelShadowColor
+    AncestorAttributesCol2.BorderColorTop = My.Theme.PanelShadowColor
+    AncestorAttributesCol2.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
+    AncestorAttributesCol2.Controls.Add(LblAncestorAttributesCol2)
+    AncestorAttributesCol2.CornerRadius = New System.Windows.Forms.Padding(0)
+    AncestorAttributesCol2.Dock = System.Windows.Forms.DockStyle.Fill
+    AncestorAttributesCol2.Location = New System.Drawing.Point(150, 0)
+    AncestorAttributesCol2.MinimumSize = New System.Drawing.Size(60, 0)
+    AncestorAttributesCol2.Name = "ancestorAttributesCol2"
+    AncestorAttributesCol2.Padding = New System.Windows.Forms.Padding(1)
+    AncestorAttributesCol2.Size = New System.Drawing.Size(137, 18)
+    AncestorAttributesCol2.TabIndex = 4
     '
     'lblAncestorAttributesCol2
     '
-    lblAncestorAttributesCol2.BackColor = My.Theme.PanelBorderColor
-    lblAncestorAttributesCol2.Dock = System.Windows.Forms.DockStyle.Fill
-    lblAncestorAttributesCol2.ForeColor = My.Theme.PanelFontColor
-    lblAncestorAttributesCol2.Location = New System.Drawing.Point(1, 1)
-    lblAncestorAttributesCol2.Name = "lblAncestorAttributesCol2"
-    lblAncestorAttributesCol2.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
-    lblAncestorAttributesCol2.Size = New System.Drawing.Size(135, 16)
-    lblAncestorAttributesCol2.TabIndex = 0
-    lblAncestorAttributesCol2.Text = "Value"
-    lblAncestorAttributesCol2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    LblAncestorAttributesCol2.BackColor = My.Theme.PanelBorderColor
+    LblAncestorAttributesCol2.Dock = System.Windows.Forms.DockStyle.Fill
+    LblAncestorAttributesCol2.ForeColor = My.Theme.PanelFontColor
+    LblAncestorAttributesCol2.Location = New System.Drawing.Point(1, 1)
+    LblAncestorAttributesCol2.Name = "lblAncestorAttributesCol2"
+    LblAncestorAttributesCol2.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
+    LblAncestorAttributesCol2.Size = New System.Drawing.Size(135, 16)
+    LblAncestorAttributesCol2.TabIndex = 0
+    LblAncestorAttributesCol2.Text = "Value"
+    LblAncestorAttributesCol2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
     '
     'ancestorAttributesCol1
     '
-    ancestorAttributesCol1.BackColor = My.Theme.PanelBorderColor
-    ancestorAttributesCol1.BorderColor = My.Theme.PanelBackColor
-    ancestorAttributesCol1.BorderColorBottom = My.Theme.PanelBorderColor
-    ancestorAttributesCol1.BorderColorLeft = My.Theme.PanelBorderColor
-    ancestorAttributesCol1.BorderColorRight = My.Theme.PanelBorderColor
-    ancestorAttributesCol1.BorderColorTop = My.Theme.PanelBorderColor
-    ancestorAttributesCol1.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
-    ancestorAttributesCol1.Controls.Add(lblAncestorAttributesCol1)
-    ancestorAttributesCol1.CornerRadius = New System.Windows.Forms.Padding(0)
-    ancestorAttributesCol1.Dock = System.Windows.Forms.DockStyle.Left
-    ancestorAttributesCol1.Location = New System.Drawing.Point(0, 0)
-    ancestorAttributesCol1.Margin = New System.Windows.Forms.Padding(0)
-    ancestorAttributesCol1.MinimumSize = New System.Drawing.Size(80, 0)
-    ancestorAttributesCol1.Name = "ancestorAttributesCol1"
-    ancestorAttributesCol1.Padding = New System.Windows.Forms.Padding(1)
-    ancestorAttributesCol1.Size = New System.Drawing.Size(150, 18)
-    ancestorAttributesCol1.TabIndex = 3
+    AncestorAttributesCol1.BackColor = My.Theme.PanelBorderColor
+    AncestorAttributesCol1.BorderColor = My.Theme.PanelBackColor
+    AncestorAttributesCol1.BorderColorBottom = My.Theme.PanelBorderColor
+    AncestorAttributesCol1.BorderColorLeft = My.Theme.PanelBorderColor
+    AncestorAttributesCol1.BorderColorRight = My.Theme.PanelBorderColor
+    AncestorAttributesCol1.BorderColorTop = My.Theme.PanelBorderColor
+    AncestorAttributesCol1.BorderWidth = New System.Windows.Forms.Padding(0, 0, 1, 1)
+    AncestorAttributesCol1.Controls.Add(LblAncestorAttributesCol1)
+    AncestorAttributesCol1.CornerRadius = New System.Windows.Forms.Padding(0)
+    AncestorAttributesCol1.Dock = System.Windows.Forms.DockStyle.Left
+    AncestorAttributesCol1.Location = New System.Drawing.Point(0, 0)
+    AncestorAttributesCol1.Margin = New System.Windows.Forms.Padding(0)
+    AncestorAttributesCol1.MinimumSize = New System.Drawing.Size(80, 0)
+    AncestorAttributesCol1.Name = "ancestorAttributesCol1"
+    AncestorAttributesCol1.Padding = New System.Windows.Forms.Padding(1)
+    AncestorAttributesCol1.Size = New System.Drawing.Size(150, 18)
+    AncestorAttributesCol1.TabIndex = 3
     '
     'lblAncestorAttributesCol1
     '
-    lblAncestorAttributesCol1.BackColor = My.Theme.PanelBackColor
-    lblAncestorAttributesCol1.Dock = System.Windows.Forms.DockStyle.Fill
-    lblAncestorAttributesCol1.ForeColor = My.Theme.PanelFontColor
-    lblAncestorAttributesCol1.Location = New System.Drawing.Point(1, 1)
-    lblAncestorAttributesCol1.Name = "lblAncestorAttributesCol1"
-    lblAncestorAttributesCol1.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
-    lblAncestorAttributesCol1.Size = New System.Drawing.Size(148, 16)
-    lblAncestorAttributesCol1.TabIndex = 0
-    lblAncestorAttributesCol1.Text = "Attribute"
-    lblAncestorAttributesCol1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    LblAncestorAttributesCol1.BackColor = My.Theme.PanelBackColor
+    LblAncestorAttributesCol1.Dock = System.Windows.Forms.DockStyle.Fill
+    LblAncestorAttributesCol1.ForeColor = My.Theme.PanelFontColor
+    LblAncestorAttributesCol1.Location = New System.Drawing.Point(1, 1)
+    LblAncestorAttributesCol1.Name = "lblAncestorAttributesCol1"
+    LblAncestorAttributesCol1.Padding = New System.Windows.Forms.Padding(4, 0, 0, 0)
+    LblAncestorAttributesCol1.Size = New System.Drawing.Size(148, 16)
+    LblAncestorAttributesCol1.TabIndex = 0
+    LblAncestorAttributesCol1.Text = "Attribute"
+    LblAncestorAttributesCol1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
     '
     'AncestorAttributes
     '
@@ -188,8 +188,8 @@ Public Class AncestorPanelItem
     Size = New System.Drawing.Size(287, 308)
     Dock = DockStyle.Fill
     AncestorAttributesHeader.ResumeLayout(False)
-    ancestorAttributesCol2.ResumeLayout(False)
-    ancestorAttributesCol1.ResumeLayout(False)
+    AncestorAttributesCol2.ResumeLayout(False)
+    AncestorAttributesCol1.ResumeLayout(False)
     ResumeLayout(False)
 
     AncestorAttributes.DrawMode = TreeViewDrawMode.OwnerDrawText
@@ -222,28 +222,28 @@ Public Class AncestorPanelItem
     Dim node As TreeNode = e.Node
 
     ' Define the bounds for the first column
-    Dim boundsColumn1 As New Rectangle(e.Bounds.Left, e.Bounds.Top, lblAncestorAttributesCol1.Width, e.Bounds.Height) ' Adjust width as needed
+    Dim boundsColumn1 As New Rectangle(e.Bounds.Left, e.Bounds.Top, LblAncestorAttributesCol1.Width, e.Bounds.Height) ' Adjust width as needed
     ' Define the bounds for the second column
     'boundsColumn1.Right
-    Dim boundsColumn2 As New Rectangle(lblAncestorAttributesCol1.Width + 2, e.Bounds.Top, AncestorAttributes.Width, e.Bounds.Height) ' Adjust width as needed
+    Dim boundsColumn2 As New Rectangle(LblAncestorAttributesCol1.Width + 2, e.Bounds.Top, AncestorAttributes.Width, e.Bounds.Height) ' Adjust width as needed
 
-    Dim txt As String = node.Text & SUBNODE_DELIMITER & SUBNODE_DELIMITER
-    Dim txtA() As String = txt.Split(SUBNODE_DELIMITER)
+    Dim Txt As String = node.Text & SUBNODE_DELIMITER & SUBNODE_DELIMITER
+    Dim TxtA() As String = Txt.Split(SUBNODE_DELIMITER)
 
     ' Draw the first column
     Dim fnt As New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 
-    TextRenderer.DrawText(e.Graphics, txtA(0), fnt, boundsColumn1, My.Theme.PanelFontColor, TextFormatFlags.Left Or TextFormatFlags.EndEllipsis)
+    TextRenderer.DrawText(e.Graphics, TxtA(0), fnt, boundsColumn1, My.Theme.PanelFontColor, TextFormatFlags.Left Or TextFormatFlags.EndEllipsis)
 
     ' Draw the second column
-    TextRenderer.DrawText(e.Graphics, txtA(1), fnt, boundsColumn2, My.Theme.PanelFontColor, TextFormatFlags.Left)
+    TextRenderer.DrawText(e.Graphics, TxtA(1), fnt, boundsColumn2, My.Theme.PanelFontColor, TextFormatFlags.Left)
 
     ' Prevent default drawing of the node's text
     e.DrawDefault = False
   End Sub
 
   Private Sub AncestorColSplitter_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles AncestorColSplitter.SplitterMoved
-    ancestorAttributesCol1.Width = AncestorColSplitter.Tag
+    AncestorAttributesCol1.Width = CInt(AncestorColSplitter.Tag)
     AncestorAttributes.Refresh()
   End Sub
 
@@ -251,11 +251,11 @@ Public Class AncestorPanelItem
     AncestorColSplitter.Tag = e.X
   End Sub
 
-  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles ancestors.ActiveAncestorChanged
+  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
     UpdateUI()
   End Sub
 
-  Private Sub Ancestors_AncestorsChanged() Handles ancestors.AncestorsChanged
+  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
     UpdateUI()
   End Sub
 
@@ -264,10 +264,10 @@ Public Class AncestorPanelItem
     AttributeState = New List(Of String)
     For Each i As TreeNode In AncestorAttributes.Nodes
       If i.IsExpanded Then
-        AttributeState.Add(i.Tag)
+        AttributeState.Add(CStr(i.Tag))
         For Each j As TreeNode In i.Nodes
           If j.IsExpanded Then
-            AttributeState.Add(j.Tag)
+            AttributeState.Add(CStr(j.Tag))
           End If
         Next
       End If
@@ -293,11 +293,11 @@ Public Class AncestorPanelItem
 
   Private Sub RestoreAttributeState()
     For Each i As TreeNode In AncestorAttributes.Nodes
-      If AttributeState.Contains(i.Tag) Then
+      If AttributeState.Contains(CStr(i.Tag)) Then
         i.Expand()
       End If
       For Each j As TreeNode In i.Nodes
-        If AttributeState.Contains(j.Tag) Then
+        If AttributeState.Contains(CStr(j.Tag)) Then
           j.Expand()
         End If
       Next
@@ -321,35 +321,35 @@ Public Class AncestorPanelItem
   End Sub
 
   Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
-    If ancestors Is Nothing Then Exit Sub
-    If Not ancestors.HasActiveAncestor Then Exit Sub
-    Dim ancestor As AncestorCollection.Ancestor = ancestors.ActiveAncestor
+    If Ancestors Is Nothing Then Exit Sub
+    If Not Ancestors.HasActiveAncestor Then Exit Sub
+    Dim Ancestor As AncestorCollection.Ancestor = Ancestors.ActiveAncestor
     CaptureAttributeState()
     AncestorAttributes.Nodes.Clear()
 
-    AddAttributeItem("NAME", customNode("Name", ancestor.FullName))
-    AddSubAttributeItem("SURNAME", customNode("Surname", ancestor.Surname))
-    AddSubAttributeItem("GIVENNAME", customNode("Givenname", ancestor.Givenname))
+    AddAttributeItem("NAME", customNode("Name", Ancestor.FullName))
+    AddSubAttributeItem("SURNAME", customNode("Surname", Ancestor.Surname))
+    AddSubAttributeItem("GIVENNAME", customNode("Givenname", Ancestor.Givenname))
 
-    AddAttributeItem("PROFILEIMG", customNode("HasProfileImage", HaveOrMissing(ancestor.HasProfileImage)))
+    AddAttributeItem("PROFILEIMG", customNode("HasProfileImage", HaveOrMissing(Ancestor.HasProfileImage)))
 
-    AddAttributeItem("BIRTH", customNode("Birth", ancestor.GedBirthDate.toAssistantDate))
-    AddSubAttributeItem("BIRTHPLACE", customNode("Place", ancestor.Fact("BirthPlace")))
+    AddAttributeItem("BIRTH", customNode("Birth", Ancestor.GedBirthDate.toAssistantDate))
+    AddSubAttributeItem("BIRTHPLACE", customNode("Place", Ancestor.Fact("BirthPlace")))
     AddSubAttributeItem("BIRTHDOCUMENTS", customNode("HasDocuments", HaveOrMissing(False)))
 
-    If Not ancestor.LifeSpan.Contains("Living") Then
-      AddAttributeItem("DEATH", customNode("Death", ancestor.GedDeathDate.toAssistantDate))
-      AddSubAttributeItem("DEATHPLACE", customNode("Death Location", ancestor.Fact("DeathPlace")))
-      If Not ancestor.Fact("cemeteryName").Equals("") Then
-        AddSubAttributeItem("Burial", customNode("Burial", ancestor.Fact("cemeteryName")))
-        AddSubAttributeItem("BurialPlace", customNode("Burial Location", ancestor.Fact("cemeteryPlace")))
+    If Not Ancestor.LifeSpan.Contains("Living") Then
+      AddAttributeItem("DEATH", customNode("Death", Ancestor.GedDeathDate.toAssistantDate))
+      AddSubAttributeItem("DEATHPLACE", customNode("Death Location", Ancestor.Fact("DeathPlace")))
+      If Not Ancestor.Fact("cemeteryName").Equals("") Then
+        AddSubAttributeItem("Burial", customNode("Burial", Ancestor.Fact("cemeteryName")))
+        AddSubAttributeItem("BurialPlace", customNode("Burial Location", Ancestor.Fact("cemeteryPlace")))
       End If
       'item.Nodes.Add("DEATHDOCUMENTS", "HasDocuments" & vbTab & workingAncestor.hasDeathCertificate)
       'item.Nodes.Add("DEATHHEADSTONE", "HasHeadstone" & vbTab & workingAncestor.hasHeadstoneImage)
     End If
 
-    Dim expectedCensus As List(Of Integer) = ancestor.Census.ExpectedYears
-    Dim availableCensus As List(Of Integer) = ancestor.Census.AvailableYears
+    Dim expectedCensus As List(Of Integer) = Ancestor.Census.ExpectedYears
+    Dim availableCensus As List(Of Integer) = Ancestor.Census.AvailableYears
     If expectedCensus.Count > 0 Then
       AddAttributeItem("CENSUS", "Census Records")
       For Each censusYear As Integer In expectedCensus
@@ -358,9 +358,9 @@ Public Class AncestorPanelItem
     End If
 
     AddAttributeItem("ID", "Links")
-    AddSubAttributeItem("ANCESTRYID", customNode("Ancestry.com", ancestor.ID))
-    If Not ancestor.Fact("FindAGraveID").Equals("") Then
-      AddSubAttributeItem("FindAGraveID", customNode("FindAGrave.com", ancestor.Fact("FindAGraveID")))
+    AddSubAttributeItem("ANCESTRYID", customNode("Ancestry.com", Ancestor.ID))
+    If Not Ancestor.Fact("FindAGraveID").Equals("") Then
+      AddSubAttributeItem("FindAGraveID", customNode("FindAGrave.com", Ancestor.Fact("FindAGraveID")))
     End If
 
     RestoreAttributeState()

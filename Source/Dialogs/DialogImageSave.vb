@@ -16,7 +16,7 @@
 
   Public ReadOnly Property Summary As String
     Get
-      Return txtSummary.Text
+      Return TxtSummary.Text
     End Get
   End Property
 
@@ -66,7 +66,7 @@
       cmbCategory.Items.Add(str)
     Next
     cmbCategory.Items.Add("Other")
-    cmbCategory.Text = txt
+    cmbCategory.Text = Txt
   End Sub
 
   Private Sub InitDetails(data As List(Of List(Of String)))
@@ -93,7 +93,7 @@
   End Sub
 
   Private Sub InitSummary(txt As String)
-    txtSummary.Text = txt
+    TxtSummary.Text = Txt
   End Sub
 
   Private Sub loadTypes(category As String, Optional type As String = "")
@@ -145,7 +145,7 @@
 #Region "Public Methods"
 
   Public Sub HidePayload()
-    ' lblDetails.Visible = False
+    ' LblDetails.Visible = False
     'tblDetails.Visible = False
     'Height = 187
   End Sub

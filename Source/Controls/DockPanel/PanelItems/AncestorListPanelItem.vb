@@ -49,7 +49,7 @@ Public Class AncestorsListPanelItem
     RibbonHideOnItemClose = Default_RibbonHideOnItemClose
     RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
     RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Key can be overriden during creation, apply if set
+    'Key can be overriden during creation, apply if Set
     If Len(itemKey) > 0 Then Key = itemKey
     'Continue with creation
     AncestorsList = New FlatListView()
@@ -97,11 +97,11 @@ Public Class AncestorsListPanelItem
 
 #Region "Private Methods"
 
-  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles ancestors.ActiveAncestorChanged
+  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
     UpdateUI(False)
   End Sub
 
-  Private Sub Ancestors_AncestorsChanged() Handles ancestors.AncestorsChanged
+  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
     UpdateUI()
   End Sub
 
@@ -114,7 +114,7 @@ Public Class AncestorsListPanelItem
 
   Private Sub AncestorsList_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles AncestorsList.ItemSelectionChanged
     If e.IsSelected And Not blockEvents Then
-      ancestors.ActiveAncestorID = e.Item.Tag.ToString
+      Ancestors.ActiveAncestorID = e.Item.Tag.ToString
     End If
   End Sub
 
@@ -144,25 +144,25 @@ Public Class AncestorsListPanelItem
   End Sub
 
   Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
-    If ancestors Is Nothing Then Exit Sub
+    If Ancestors Is Nothing Then Exit Sub
     blockEvents = True
     If reload Then
       With AncestorsList
         .Tag = ""
         .Items.Clear()
-        For Each ancestor As AncestorCollection.Ancestor In ancestors.Values
+        For Each Ancestor As AncestorCollection.Ancestor In Ancestors.Values
           Dim item As ListViewItem
-          item = .Items.Add(ancestor.FullName)
-          item.SubItems.Add(ancestor.LifeSpan)
-          item.Tag = ancestor.ID
+          item = .Items.Add(Ancestor.FullName)
+          item.SubItems.Add(Ancestor.LifeSpan)
+          item.Tag = Ancestor.ID
         Next
       End With
     End If
-    If ancestors.HasActiveAncestor Then
+    If Ancestors.HasActiveAncestor Then
       For Each item As ListViewItem In AncestorsList.Items
         If item IsNot Nothing Then
           If item.Tag IsNot Nothing Then
-            item.Selected = item.Tag.Equals(ancestors.ActiveAncestorID)
+            item.Selected = item.Tag.Equals(Ancestors.ActiveAncestorID)
           End If
         End If
       Next

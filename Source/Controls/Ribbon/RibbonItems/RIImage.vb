@@ -3,7 +3,7 @@
 
 #Region "Fields"
 
-  Private WithEvents img As Panel
+  Private WithEvents Img As Panel
 
 #End Region
 
@@ -11,15 +11,15 @@
 
   Public Property Image As Image
     Get
-      Return img.BackgroundImage
+      Return Img.BackgroundImage
     End Get
     Set(value As Image)
       If value.Height > (RowSpan * RibbonConfig.GROUP_ROW_HEIGHT) Or value.Width > (ColSpan * RibbonConfig.GROUP_COL_WIDTH) Then
-        img.BackgroundImageLayout = ImageLayout.Zoom
+        Img.BackgroundImageLayout = ImageLayout.Zoom
       Else
-        img.BackgroundImageLayout = ImageLayout.None
+        Img.BackgroundImageLayout = ImageLayout.None
       End If
-      img.BackgroundImage = value
+      Img.BackgroundImage = value
     End Set
   End Property
 
@@ -28,7 +28,7 @@
 #Region "Public Constructors"
 
   Public Sub New()
-    img = New Panel With {
+    Img = New Panel With {
       .Dock = DockStyle.Fill,
       .BackColor = BackColor,
       .Font = Font,
@@ -55,7 +55,7 @@
       Case RibbonItemAttribute.Image
         Image = CType(attributeValue, Image)
       Case RibbonItemAttribute.Enabled
-        img.Enabled = CType(attributeValue, Boolean)
+        Img.Enabled = CType(attributeValue, Boolean)
       Case Else
         Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select
