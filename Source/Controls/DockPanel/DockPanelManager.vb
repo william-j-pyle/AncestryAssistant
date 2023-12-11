@@ -311,15 +311,6 @@
 
 #Region "Private Methods"
 
-  Private Sub ApplyFocus(panelLocation As DockPanelLocation, hasFocus As Boolean)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
-    Logger.debugPrint("DockPanelManager.ApplyFocus(panelLocation=[{0}], hasFocus=[{1}])", panelLocation.ToString, hasFocus)
-#End If
-    If IsDockableLocation(panelLocation) Then
-      RegistryPanels.Item(panelLocation).PanelHasFocus = hasFocus
-    End If
-  End Sub
-
   Private Function IsDockableLocation(dockLocation As DockPanelLocation) As Boolean
     Return Not (dockLocation.Equals(DockPanelLocation.None) Or dockLocation.Equals(DockPanelLocation.TrayBottom) Or dockLocation.Equals(DockPanelLocation.Tray) Or dockLocation.Equals(DockPanelLocation.TrayLeft) Or dockLocation.Equals(DockPanelLocation.TrayRight) Or dockLocation.Equals(DockPanelLocation.Floating))
   End Function
@@ -385,23 +376,23 @@
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
     Logger.debugPrint("DockPanelManager.PanelClose(DockPanel=[{0}, {1}])", sender.Name, sender.PanelLocation.ToString)
 #End If
-    SetPanelVisibility(sender.PanelLocation, False)
-  End Sub
-
-  Private Sub PanelClosedItem(sender As DockPanelItem)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
-    Logger.debugPrint("DockPanelManager.PanelCloseItem(panelItem=[{0}, {1}])", sender.Name, sender.LocationCurrent.ToString)
-#End If
-    sender.LocationCurrent = DockPanelLocation.Tray
-    RaiseEvent PanelItemEvent(sender, DockPanelItemEventType.ItemClosed)
+    PanelVisible(sender.PanelLocation, False)
   End Sub
 
   Private Sub PanelFocusChanged(sender As DockPanel, hasFocus As Boolean)
+    If Not hasFocus Then Exit Sub
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
     Logger.debugPrint("DockPanelManager.PanelFocusChanged(dockPanel=[{0}, {1}], hasFocus=[{2}])", sender.Name, sender.PanelLocation.ToString, hasFocus)
 #End If
-    SetPanelFocus(sender.PanelLocation, hasFocus)
-    'If sender.PanelSelectedItem Is Nothing Then Exit Sub
+    PanelFocus(sender.PanelLocation)
+  End Sub
+
+  Private Sub PanelItemClosed(sender As DockPanelItem)
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("DockPanelManager.PanelItemClosed(panelItem=[{0}, {1}])", sender.Name, sender.LocationCurrent.ToString)
+#End If
+    sender.LocationCurrent = DockPanelLocation.Tray
+    RaiseEvent PanelItemEvent(sender, DockPanelItemEventType.ItemClosed)
   End Sub
 
   Private Sub PanelItemLocationChange(panelItem As DockPanelItem, newPanelLocation As DockPanelLocation)
@@ -433,7 +424,7 @@
     AddHandler pnl.PanelClose, AddressOf PanelClose
     AddHandler pnl.PanelFocusChanged, AddressOf PanelFocusChanged
     AddHandler pnl.PanelItemLocationChange, AddressOf PanelItemLocationChange
-    AddHandler pnl.PanelItemClose, AddressOf PanelClosedItem
+    AddHandler pnl.PanelItemClose, AddressOf PanelItemClosed
     AddHandler pnl.PanelItemSelected, AddressOf PanelItemSelected
   End Sub
 
@@ -474,7 +465,7 @@
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
     Logger.debugPrint("DockPanelManager.HidePanel(dockLocation=[{0}])", dockLocation)
 #End If
-    SetPanelVisibility(dockLocation, False)
+    PanelVisible(dockLocation, False)
   End Sub
 
   Public Function IsPanelVisible(dockLocation As DockPanelLocation) As Boolean
@@ -494,63 +485,48 @@
     End If
   End Sub
 
+  Public Sub PanelFocus(focusedLocation As DockPanelLocation)
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("DockPanelManager.PanelUnFocus(skipPanelLocation=[{0}])", focusedLocation.ToString)
+#End If
+    For Each panelLocation As DockPanelLocation In [Enum].GetValues(GetType(DockPanelLocation))
+      If IsDockableLocation(panelLocation) Then
+        RegistryPanels.Item(panelLocation).PanelHasFocus = focusedLocation.Equals(panelLocation)
+      End If
+    Next
+  End Sub
+
+  Public Sub PanelVisible(panelLocation As DockPanelLocation, isVisible As Boolean)
+    Select Case panelLocation
+      Case DockPanelLocation.LeftTop
+        ManageSplitters_PanelLeft(isVisible, pnlLeftBottom.Visible)
+      Case DockPanelLocation.LeftBottom
+        ManageSplitters_PanelLeft(pnlLeftTop.Visible, isVisible)
+      Case DockPanelLocation.MiddleTopLeft
+        ManageSplitters_PanelMiddle(isVisible, pnlMiddleRight.Visible, pnlMiddleBottom.Visible)
+      Case DockPanelLocation.MiddleTopRight
+        ManageSplitters_PanelMiddle(pnlMiddleLeft.Visible, isVisible, pnlMiddleBottom.Visible)
+      Case DockPanelLocation.MiddleBottom
+        ManageSplitters_PanelMiddle(pnlMiddleLeft.Visible, pnlMiddleRight.Visible, isVisible)
+      Case DockPanelLocation.RightTop
+        ManageSplitters_PanelRight(isVisible, pnlRightBottom.Visible)
+      Case DockPanelLocation.RightBottom
+        ManageSplitters_PanelRight(pnlRightTop.Visible, isVisible)
+    End Select
+  End Sub
+
   Public Sub RegisterDockItem(item As DockPanelItem)
     RegistryItems.Add(item.Key, item)
   End Sub
 
-  Public Sub SelectItemTab(dockLocation As DockPanelLocation, tabIndex As Integer)
+  Public Sub SelectItem(panelItem As DockPanelItem)
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
-    Logger.debugPrint("DockPanelManager.SelectItemTab(dockLocation=[{0}], tabIndex=[{1}])", dockLocation.ToString, tabIndex)
+    Logger.debugPrint("DockPanelManager.SelectItemTab(panelItem=[{0},{1}])", panelItem.Key, panelItem.LocationCurrent.ToString)
 #End If
-    Dim dockPnl As DockPanel = RegistryPanels(dockLocation)
+    Dim dockPnl As DockPanel = RegistryPanels(panelItem.LocationCurrent)
     If dockPnl Is Nothing Then Exit Sub
-    dockPnl.SelectItem(tabIndex)
-  End Sub
-
-  Public Sub SelectItemTab(dockLocation As DockPanelLocation, key As String)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
-    Logger.debugPrint("DockPanelManager.SelectItemTab(dockLocation=[{0}], key=[{1}])", dockLocation.ToString, key)
-#End If
-    Dim dockPnl As DockPanel = RegistryPanels(dockLocation)
-    If dockPnl Is Nothing Then Exit Sub
-    dockPnl.SelectItem(key)
-  End Sub
-
-  Public Sub SetPanelFocus(panelLocation As DockPanelLocation, hasFocus As Boolean)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
-    Logger.debugPrint("DockPanelManager.SetPanelFocus(panelLocation=[{0}], hasFocus=[{1}])", panelLocation.ToString, hasFocus)
-#End If
-
-    Dim chk As DockPanelLocation
-    'Logger.debugPrint("{0}:  hasFocus={1}", panelLocation.ToString, hasFocus)
-    If hasFocus Then
-      For loc As Integer = 0 To 6
-        chk = CType(loc, DockPanelLocation)
-        If chk <> panelLocation Then
-          'Logger.debugPrint("RemoveFocus: {0}", chk.ToString)
-          ApplyFocus(chk, False)
-        End If
-      Next
-    End If
-  End Sub
-
-  Public Sub SetPanelVisibility(panelLocation As DockPanelLocation, pnlVisible As Boolean)
-    Select Case panelLocation
-      Case DockPanelLocation.LeftTop
-        ManageSplitters_PanelLeft(pnlVisible, pnlLeftBottom.Visible)
-      Case DockPanelLocation.LeftBottom
-        ManageSplitters_PanelLeft(pnlLeftTop.Visible, pnlVisible)
-      Case DockPanelLocation.MiddleTopLeft
-        ManageSplitters_PanelMiddle(pnlVisible, pnlMiddleRight.Visible, pnlMiddleBottom.Visible)
-      Case DockPanelLocation.MiddleTopRight
-        ManageSplitters_PanelMiddle(pnlMiddleLeft.Visible, pnlVisible, pnlMiddleBottom.Visible)
-      Case DockPanelLocation.MiddleBottom
-        ManageSplitters_PanelMiddle(pnlMiddleLeft.Visible, pnlMiddleRight.Visible, pnlVisible)
-      Case DockPanelLocation.RightTop
-        ManageSplitters_PanelRight(pnlVisible, pnlRightBottom.Visible)
-      Case DockPanelLocation.RightBottom
-        ManageSplitters_PanelRight(pnlRightTop.Visible, pnlVisible)
-    End Select
+    dockPnl.SelectItem(panelItem.Key)
+    PanelFocus(panelItem.LocationCurrent)
   End Sub
 
   Public Sub SettingsLoad()
@@ -572,40 +548,40 @@
         AddItem(loc, key)
       End If
     Next
-    SetPanelVisibility(DockPanelLocation.MiddleTopLeft, My.Settings.UI_ML_VIS)
-    SetPanelVisibility(DockPanelLocation.MiddleTopRight, My.Settings.UI_MR_VIS)
-    SetPanelVisibility(DockPanelLocation.MiddleBottom, My.Settings.UI_MB_VIS)
+    PanelVisible(DockPanelLocation.MiddleTopLeft, My.Settings.UI_ML_VIS)
+    PanelVisible(DockPanelLocation.MiddleTopRight, My.Settings.UI_MR_VIS)
+    PanelVisible(DockPanelLocation.MiddleBottom, My.Settings.UI_MB_VIS)
     pnlMiddleRight.Width = My.Settings.UI_MR_WIDTH
     pnlMiddleBottom.Height = My.Settings.UI_MB_HEIGHT
 
-    SetPanelVisibility(DockPanelLocation.LeftTop, My.Settings.UI_LT_VIS)
-    SetPanelVisibility(DockPanelLocation.LeftBottom, My.Settings.UI_LB_VIS)
+    PanelVisible(DockPanelLocation.LeftTop, My.Settings.UI_LT_VIS)
+    PanelVisible(DockPanelLocation.LeftBottom, My.Settings.UI_LB_VIS)
     pnlLeft.Width = My.Settings.UI_L_WIDTH
     pnlLeftTop.Height = My.Settings.UI_LT_HEIGHT
 
-    SetPanelVisibility(DockPanelLocation.RightTop, My.Settings.UI_RT_VIS)
-    SetPanelVisibility(DockPanelLocation.RightBottom, My.Settings.UI_RB_VIS)
+    PanelVisible(DockPanelLocation.RightTop, My.Settings.UI_RT_VIS)
+    PanelVisible(DockPanelLocation.RightBottom, My.Settings.UI_RB_VIS)
     pnlRight.Width = My.Settings.UI_R_WIDTH
     pnlRightTop.Height = My.Settings.UI_RT_HEIGHT
 
     'Hide blank panels
     If RegistryPanels(DockPanelLocation.LeftTop).Visible = False Then
-      SetPanelVisibility(DockPanelLocation.LeftTop, False)
+      PanelVisible(DockPanelLocation.LeftTop, False)
     End If
     If RegistryPanels(DockPanelLocation.LeftBottom).Visible = False Then
-      SetPanelVisibility(DockPanelLocation.LeftBottom, False)
+      PanelVisible(DockPanelLocation.LeftBottom, False)
     End If
     If RegistryPanels(DockPanelLocation.MiddleTopRight).Visible = False Then
-      SetPanelVisibility(DockPanelLocation.MiddleTopRight, False)
+      PanelVisible(DockPanelLocation.MiddleTopRight, False)
     End If
     If RegistryPanels(DockPanelLocation.MiddleBottom).Visible = False Then
-      SetPanelVisibility(DockPanelLocation.MiddleBottom, False)
+      PanelVisible(DockPanelLocation.MiddleBottom, False)
     End If
     If RegistryPanels(DockPanelLocation.RightBottom).Visible = False Then
-      SetPanelVisibility(DockPanelLocation.RightBottom, False)
+      PanelVisible(DockPanelLocation.RightBottom, False)
     End If
     If RegistryPanels(DockPanelLocation.RightTop).Visible = False Then
-      SetPanelVisibility(DockPanelLocation.RightTop, False)
+      PanelVisible(DockPanelLocation.RightTop, False)
     End If
     'Clean up any assigned items to hidden tabs
     For Each key As String In RegistryItems.Keys
@@ -617,7 +593,7 @@
         End If
       End If
     Next
-    SetPanelFocus(DockPanelLocation.MiddleTopLeft, True)
+    PanelFocus(DockPanelLocation.MiddleTopLeft)
   End Sub
 
   Public Sub SettingsSave()
@@ -655,7 +631,7 @@
 #If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
     Logger.debugPrint("DockPanelManager.ShowPanel(dockLocation=[{0}])", dockLocation.ToString)
 #End If
-    SetPanelVisibility(dockLocation, True)
+    PanelVisible(dockLocation, True)
   End Sub
 
   Public Sub ShowRegisteredItem(itemKey As String)
@@ -672,9 +648,8 @@
     Else
       loc = itm.LocationCurrent
     End If
-    SetPanelVisibility(itm.LocationCurrent, True)
-    SelectItemTab(itm.LocationCurrent, itm.Key)
-    SetPanelFocus(itm.LocationCurrent, True)
+    PanelVisible(itm.LocationCurrent, True)
+    SelectItem(itm)
     RaiseEvent PanelItemEvent(itm, DockPanelItemEventType.ItemOpened)
   End Sub
 

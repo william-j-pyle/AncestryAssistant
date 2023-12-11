@@ -3,4 +3,5 @@
   ButtonCheckChanged
   RibbonEnableChanged
   GroupEnableChanged
+  GroupPanelClick
 End Enum

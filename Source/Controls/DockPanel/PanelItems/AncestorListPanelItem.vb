@@ -12,7 +12,6 @@ Public Class AncestorsListPanelItem
   Private Const Default_ItemSupportsClose As Boolean = True
   Private Const Default_ItemSupportsMove As Boolean = True
   Private Const Default_ItemSupportsSearch As Boolean = True
-  Private Const Default_Key As String = "DOCK_ANCESTORSLIST"
   Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
   Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.LeftTop
   Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.LeftTop
@@ -22,6 +21,7 @@ Public Class AncestorsListPanelItem
   Private Const Default_RibbonShowOnItemOpen As Boolean = False
   Private blockEvents As Boolean = False
   Private components As System.ComponentModel.IContainer
+  Public Const Default_Key As String = "DOCK_ANCESTORSLIST"
 
 #End Region
 

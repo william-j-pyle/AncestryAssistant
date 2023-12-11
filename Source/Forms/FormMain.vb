@@ -44,6 +44,8 @@ Public Class AssistantAppForm
 #End If
 
     InitializeComponent()
+
+    'Init the Ribbon Bar
     RibbonFileTab = New RibbonPage With {
       .Visible = False
     }
@@ -51,7 +53,93 @@ Public Class AssistantAppForm
     RibbonFileTab.BringToFront()
     RibbonBar.LoadConfig(My.Resources.Ribbon)
     RibbonBar.SelectedIndex = 1
+
+    'Move this to the config file
+    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 2))
+    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 3))
+    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 4))
+    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 5))
+
+    ' Init the FormExtensions to make this a borderless form
+    FormExtensions = New ResizeDragHandler(Me)
+    FormExtensions.SetDragControl(AppTitle)
+
+    ' Init the Ancestors data repository
     Ancestors = New AncestorCollection(My.Settings.AncestorsPath)
+
+    'Create and register all Panel Items
+
+    Ancestry = New WebBrowserPanelItem With {
+      .AncestryTreeID = My.Settings.ANCESTRY_TREE_ID
+    }
+    Ancestry.SetAncestors(Ancestors)
+    ' Add Custom Handlers for Panel Item
+    AddHandler Ancestry.ViewerBusy, AddressOf AncestryBrowserBusyChanged
+    AddHandler Ancestry.UriTrackingGroupChanged, AddressOf AncestryURITrackingGroupChanged
+    AddHandler Ancestry.DataDownload, AddressOf AncestryDataMessage
+    ' Register PanelItem
+    DockManager.RegisterDockItem(Ancestry)
+
+    Dim item As DockPanelItem
+
+    item = New AncestorsListPanelItem()
+    item.SetAncestors(Ancestors)
+    ' Add Custom Handlers for Panel Item
+    AddHandler CType(item, AncestorsListPanelItem).AncestryNavigateRequest, AddressOf AncestryNavigateRequest
+    ' Register PanelItem
+    DockManager.RegisterDockItem(item)
+
+    item = New AncestorPanelItem()
+    item.SetAncestors(Ancestors)
+    ' Register PanelItem
+    DockManager.RegisterDockItem(item)
+
+    item = New CensusPanelItem()
+    item.SetAncestors(Ancestors)
+    ' Register PanelItem
+    DockManager.RegisterDockItem(item)
+
+    item = New ImageGalleryPanelItem()
+    item.SetAncestors(Ancestors)
+    ' Register PanelItem
+    DockManager.RegisterDockItem(item)
+
+    item = New NotebookPanelItem()
+    item.SetAncestors(Ancestors)
+    ' Register PanelItem
+    DockManager.RegisterDockItem(item)
+    DockManager.SettingsLoad()
+
+    Size = My.Settings.APP_CLIENTSIZE
+
+    'Theme Data - Move all of this to the base assignments
+    AppIcon.BackColor = My.Theme.AppBackColor
+    AppControlBox.BackColor = My.Theme.AppBackColor
+    AppTitle.BackColor = My.Theme.AppBackColor
+    AppTitle.ForeColor = My.Theme.AppFontColor
+    AppCloseButton.FlatAppearance.MouseDownBackColor = My.Theme.AppAccentColor
+    AppCloseButton.FlatAppearance.MouseOverBackColor = My.Theme.AppAccent2Color
+    AppCloseButton.ForeColor = My.Theme.AppFontColor
+    AppMaxButton.FlatAppearance.MouseDownBackColor = My.Theme.AppAccentColor
+    AppMaxButton.FlatAppearance.MouseOverBackColor = My.Theme.AppAccent2Color
+    AppMaxButton.ForeColor = My.Theme.AppFontColor
+    AppMinButton.FlatAppearance.MouseDownBackColor = My.Theme.AppAccentColor
+    AppMinButton.FlatAppearance.MouseOverBackColor = My.Theme.AppAccent2Color
+    AppMinButton.ForeColor = My.Theme.AppFontColor
+    AppTitle.BackColor = My.Theme.AppBackColor
+    AppTitle.ForeColor = My.Theme.AppFontColor
+    AppTitleBar.BackColor = My.Theme.AppBackColor
+    BackColor = My.Theme.AppBackColor
+    ForeColor = My.Theme.AppFontColor
+    FormBar.BackColor = My.Theme.AppBackColor
+    StatusBar.BackColor = My.Theme.StatusBarBackColor
+    StatusBar.ForeColor = My.Theme.StatusBarFontColor
+    AppCloseButton.Font = My.Theme.AppIconsFont
+    AppMaxButton.Font = My.Theme.AppIconsFont
+    AppMinButton.Font = My.Theme.AppIconsFont
+    AppTitle.Font = My.Theme.AppTitleFont
+    FormBar.BackColor = My.Theme.AppBackColor
+    FormBar.ForeColor = My.Theme.AppFontColor
   End Sub
 
 #End Region
@@ -75,7 +163,7 @@ Public Class AssistantAppForm
       Cursor = Cursors.WaitCursor
     Else
       Cursor = Cursors.Default
-      DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+      DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
     End If
   End Sub
 
@@ -205,80 +293,11 @@ Public Class AssistantAppForm
     Close()
   End Sub
 
-  ' ==========================
-  ' = App Form - Event Handlers ==========================
   Private Sub ApplicationForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
     If WindowState <> FormWindowState.Normal Then
       WindowState = FormWindowState.Normal
     End If
     SettingsSave()
-  End Sub
-
-  Private Sub ApplicationForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-    FormExtensions = New ResizeDragHandler(Me)
-    FormExtensions.SetDragControl(AppTitle)
-    Dim item As DockPanelItem
-
-    item = New AncestorsListPanelItem()
-    AddHandler CType(item, AncestorsListPanelItem).AncestryNavigateRequest, AddressOf AncestryNavigateRequest
-    item.SetAncestors(Ancestors)
-    DockManager.RegisterDockItem(item)
-
-    item = New AncestorPanelItem()
-    item.SetAncestors(Ancestors)
-    DockManager.RegisterDockItem(item)
-
-    item = New CensusPanelItem()
-    item.SetAncestors(Ancestors)
-    DockManager.RegisterDockItem(item)
-
-    item = New ImageGalleryPanelItem()
-    item.SetAncestors(Ancestors)
-    DockManager.RegisterDockItem(item)
-
-    item = New NotebookPanelItem()
-    item.SetAncestors(Ancestors)
-    DockManager.RegisterDockItem(item)
-
-    Ancestry = New WebBrowserPanelItem With {
-      .AncestryTreeID = My.Settings.ANCESTRY_TREE_ID
-    }
-    Ancestry.SetAncestors(Ancestors)
-    AddHandler Ancestry.ViewerBusy, AddressOf AncestryBrowserBusyChanged
-    AddHandler Ancestry.UriTrackingGroupChanged, AddressOf AncestryURITrackingGroupChanged
-    AddHandler Ancestry.DataDownload, AddressOf AncestryDataMessage
-    DockManager.RegisterDockItem(Ancestry)
-    SettingsLoad()
-  End Sub
-
-  Private Sub ApplyTheme()
-    AppIcon.BackColor = My.Theme.AppBackColor
-    AppControlBox.BackColor = My.Theme.AppBackColor
-    AppTitle.BackColor = My.Theme.AppBackColor
-    AppTitle.ForeColor = My.Theme.AppFontColor
-    AppCloseButton.FlatAppearance.MouseDownBackColor = My.Theme.AppAccentColor
-    AppCloseButton.FlatAppearance.MouseOverBackColor = My.Theme.AppAccent2Color
-    AppCloseButton.ForeColor = My.Theme.AppFontColor
-    AppMaxButton.FlatAppearance.MouseDownBackColor = My.Theme.AppAccentColor
-    AppMaxButton.FlatAppearance.MouseOverBackColor = My.Theme.AppAccent2Color
-    AppMaxButton.ForeColor = My.Theme.AppFontColor
-    AppMinButton.FlatAppearance.MouseDownBackColor = My.Theme.AppAccentColor
-    AppMinButton.FlatAppearance.MouseOverBackColor = My.Theme.AppAccent2Color
-    AppMinButton.ForeColor = My.Theme.AppFontColor
-    AppTitle.BackColor = My.Theme.AppBackColor
-    AppTitle.ForeColor = My.Theme.AppFontColor
-    AppTitleBar.BackColor = My.Theme.AppBackColor
-    BackColor = My.Theme.AppBackColor
-    ForeColor = My.Theme.AppFontColor
-    FormBar.BackColor = My.Theme.AppBackColor
-    StatusBar.BackColor = My.Theme.StatusBarBackColor
-    StatusBar.ForeColor = My.Theme.StatusBarFontColor
-    AppCloseButton.Font = My.Theme.AppIconsFont
-    AppMaxButton.Font = My.Theme.AppIconsFont
-    AppMinButton.Font = My.Theme.AppIconsFont
-    AppTitle.Font = My.Theme.AppTitleFont
-    FormBar.BackColor = My.Theme.AppBackColor
-    FormBar.ForeColor = My.Theme.AppFontColor
   End Sub
 
   Private Sub AppMaxButton_Click(sender As Object, e As EventArgs) Handles AppMaxButton.Click, AppTitle.DoubleClick
@@ -369,19 +388,6 @@ Public Class AssistantAppForm
 
   End Sub
 
-  'Private Sub DockManager_PanelItemClosed(regItem As DockItemRegistryEntry) Handles DockManager.PanelItemClosed
-  '  If regItem.ribbonBarKey.Length > 0 Then
-  '    RibbonBar.HideBar(regItem.ribbonBarKey)
-  '  End If
-  '  regItem.control.ItemAwake = False
-  'End Sub
-
-  'Private b DockManager_PanelItemGotFocus(regItem As DockItemRegistryEntry) Handles DockManager.PanelItemGotFocus
-  '  If regItem.ribbonBarKey.Length > 0 Then
-  '    RibbonBar.ShowBar(regItem.ribbonBarKey)
-  '  End If
-  'End Sub
-
   Private Sub DockManager_PanelItemEvent(panelItem As DockPanelItem, eventType As DockPanelItemEventType) Handles DockManager.PanelItemEvent
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
     Logger.debugPrint("FormMain.PanelItemEvent(panelItem=[{0}], eventType=[{1}])", panelItem.Name, eventType.ToString)
@@ -412,32 +418,34 @@ Public Class AssistantAppForm
 
     Select Case Ribbon.RibbonKey(barId, groupId, itemId)
       Case "B200.G5.I17" 'Census
-        DockManager.ShowRegisteredItem("DOCK_CENSUS")
+        DockManager.ShowRegisteredItem(CensusPanelItem.Default_Key)
       Case "B200.G5.I18" 'Gallery
-        DockManager.ShowRegisteredItem("DOCK_GALLERY")
+        DockManager.ShowRegisteredItem(ImageGalleryPanelItem.Default_Key)
       Case "B200.G5.I19" 'Notebook
-        DockManager.ShowRegisteredItem("DOCK_NOTEBOOK")
+        DockManager.ShowRegisteredItem(NotebookPanelItem.Default_Key)
       Case "B200.G3.I9" 'Facts
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON)
-        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
+      Case "B200.G2"
+        DockManager.ShowRegisteredItem(AncestorsListPanelItem.Default_Key)
       Case "ASSIGN" 'Ancestry Person Gallery
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON)
-        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
       Case "ASSIGN" 'Ancestry Person Hints
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON)
-        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
       Case "ASSIGN" 'Ancestry Person Story
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_STORY_PERSON)
-        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
       Case "B200.G3.I12" 'Ancestry Person Fan
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FANVIEW_PERSON)
-        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
       Case "B200.G3.I11" 'Ancestry Person Pedigree
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_PEDIGREEVIEW_PERSON)
-        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
       Case "B200.G3.I10" 'Ancestry Person Tree
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_TREEVIEW_PERSON)
-        DockManager.ShowRegisteredItem("DOCK_WEBBROWSER")
+        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
     End Select
   End Sub
 
@@ -452,26 +460,6 @@ Public Class AssistantAppForm
         .Visible = True
       End With
     End If
-  End Sub
-
-  Private Sub SettingsLoad()
-    ApplyTheme()
-    DockManager.SettingsLoad()
-    Size = My.Settings.APP_CLIENTSIZE
-    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 2))
-    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 3))
-    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 4))
-    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 5))
-    'Case "B200.G5.I18" 'Gallery
-    'Case "B200.G5.I19" 'Notebook
-    'Case "B200.G3.I9" 'Facts
-    'Case "ASSIGN" 'Ancestry Person Gallery
-    'Case "ASSIGN" 'Ancestry Person Hints
-    'Case "ASSIGN" 'Ancestry Person Story
-    'Case "B200.G3.I12" 'Ancestry Person Fan
-    'Case "B200.G3.I11" 'Ancestry Person Pedigree
-    'Case "B200.G3.I10" 'Ancestry Person Tree
-
   End Sub
 
   Private Sub SettingsSave()

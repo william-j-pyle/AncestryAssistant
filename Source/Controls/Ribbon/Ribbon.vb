@@ -118,6 +118,10 @@ Public Class Ribbon
 
   End Sub
 
+  Private Sub RibbonGroupAction(sender As RibbonGroup, action As RibbonEventType, value As Object)
+    RaiseEvent RibbonAction(action, value, sender.BarId, sender.GroupId, 0)
+  End Sub
+
   Private Sub RibbonItemAction(sender As RibbonItem, action As RibbonEventType, value As Object)
     RaiseEvent RibbonAction(action, value, sender.BarId, sender.GroupId, sender.ItemId)
   End Sub
@@ -234,6 +238,7 @@ Public Class Ribbon
         rBarGrp.Visible = Grp.visible
         rBarGrp.ShowPane = Grp.showpanel
         RegisterGroup(rBarGrp)
+        AddHandler rBarGrp.RibbonGroupAction, AddressOf RibbonGroupAction
         For Each refItem As RibbonConfig.Item In Grp.items
           Dim Item As RibbonConfig.Item = cfg.GetItem(refItem)
           Dim rBarGrpItem As RibbonItem = Nothing

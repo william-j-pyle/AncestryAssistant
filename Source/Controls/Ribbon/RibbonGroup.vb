@@ -7,13 +7,33 @@ Public Class RibbonGroup
 
   Private Const DEFAULT_NAME As String = "RibbonGroup"
   Private _ColCount As Integer = 1
+  Private _MouseOverPanelOpen As Boolean = False
   Private CaptionFont As New System.Drawing.Font("Segoe UI Semibold", 10, FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
+  Private RegionPanelOpen As Rectangle = ClientRectangle
   Protected Friend RibbonCntl As Ribbon
+
+#End Region
+
+#Region "Events"
+
+  Public Event RibbonGroupAction(group As RibbonGroup, action As RibbonEventType, value As Object)
 
 #End Region
 
 #Region "Properties"
 
+  Private Property MouseOverPanelOpen As Boolean
+    Get
+      Return _MouseOverPanelOpen
+    End Get
+    Set(value As Boolean)
+      If Not value.Equals(_MouseOverPanelOpen) Then
+        _MouseOverPanelOpen = value
+        Debug.Print("INVALIDATE: {0}", value)
+        Invalidate(RegionPanelOpen)
+      End If
+    End Set
+  End Property
   Public Property AppBackColor As Color = My.Theme.AppBackColor
   Public Property AppForeColor As Color = My.Theme.AppFontColor
   Public Property AppHighlightColor As Color = My.Theme.AppHighlightColor
@@ -119,14 +139,67 @@ Public Class RibbonGroup
     Return New Size(CInt(ColSpan * RibbonConfig.GROUP_COL_WIDTH), CInt(RowSpan * RibbonConfig.GROUP_ROW_HEIGHT))
   End Function
 
-  Private Sub RenderControl(sender As Object, e As PaintEventArgs) Handles Me.Paint
+  Private Sub RibbonGroup_ControlAdded(sender As Object, e As ControlEventArgs) Handles Me.ControlAdded
+    If TypeOf e.Control Is RibbonItem Then
+      If e.Control.Tag IsNot Nothing Then
+        If e.Control.Tag.Equals("AddItem") Then
+          Exit Sub
+        End If
+      End If
+      AddItemProcessing(CType(e.Control, RibbonItem), False)
+    End If
+  End Sub
 
+  Private Sub RibbonGroup_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown
+    If MouseOverPanelOpen Then
+      RaiseEvent RibbonGroupAction(Me, RibbonEventType.GroupPanelClick, True)
+    End If
+  End Sub
+
+  Private Sub RibbonGroup_MouseLeave(sender As Object, e As EventArgs) Handles Me.MouseLeave
+    If MouseOverPanelOpen Then MouseOverPanelOpen = False
+
+  End Sub
+
+  Private Sub RibbonGroup_MouseMove(sender As Object, e As MouseEventArgs) Handles Me.MouseMove
+    If ShowPane Then
+      If RegionPanelOpen.Contains(e.Location) Then
+        MouseOverPanelOpen = True
+      Else
+        MouseOverPanelOpen = False
+      End If
+    End If
+  End Sub
+
+  ''' <summary> When Group is added via addItem, all proper inits are completed When Group is added via designer, then
+  ''' this event will apply the required parent values </summary <param name="sender"> </param> <param name="e"> </param>
+  Private Sub RibbonGroup_ParentChanged(sender As Object, e As EventArgs) Handles Me.ParentChanged
+    If RibbonCntl Is Nothing And TypeOf Parent Is RibbonBar Then
+      With CType(Parent, RibbonBar)
+        RibbonCntl = .RibbonCntl
+        BarId = .BarId
+        GroupId = Parent.Controls.Count
+        If Name.Equals(DEFAULT_NAME) Then Name += GroupId.ToString
+        If Text.Equals(DEFAULT_NAME) Then Text = Name
+      End With
+    End If
+  End Sub
+
+  Private Sub RibbonGroup_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+    RegionPanelOpen = New Rectangle(Width - 14, Height - 14, 12, 14)
+  End Sub
+
+#End Region
+
+#Region "Protected Methods"
+
+  Protected Overrides Sub OnPaint(e As PaintEventArgs)
     'Clear Group Client Area
     Using brush As New SolidBrush(RibbonBackColor)
       e.Graphics.FillRectangle(brush, ClientRectangle)
     End Using
 
-    If Width <> e.ClipRectangle.Width Then Exit Sub
+    'If Width <> e.ClipRectangle.Width Then Exit Sub
 
     'Draw the seperator bar at the end of the group
     Dim jPen As New Pen(Color.FromArgb(100, RibbonForeColor), 1)
@@ -144,10 +217,29 @@ Public Class RibbonGroup
       Dim t As Integer = textLocation.Y + 5
       Dim l As Integer = Width - 12
 
-      jPen = New Pen(RibbonAccentColor, 2)
+      Dim c1 As Color
+      Dim c2 As Color
+
+      If MouseOverPanelOpen Then
+        Debug.Print("Draw-True")
+        Using brush As New SolidBrush(RibbonForeColor)
+          e.Graphics.FillRectangle(brush, RegionPanelOpen)
+        End Using
+        c2 = RibbonShadowColor
+        c1 = RibbonBackColor
+      Else
+        Debug.Print("Draw-False")
+        Using brush As New SolidBrush(RibbonBackColor)
+          e.Graphics.FillRectangle(brush, RegionPanelOpen)
+        End Using
+        c2 = RibbonForeColor
+        c1 = RibbonAccentColor
+      End If
+
+      jPen = New Pen(c1, 2)
       e.Graphics.DrawLine(jPen, l + 3, t + 3, l + 7, t + 7)
 
-      jPen = New Pen(RibbonForeColor, 1)
+      jPen = New Pen(c2, 1)
       e.Graphics.DrawLine(jPen, l, t, l, t + 6)
       e.Graphics.DrawLine(jPen, l, t, l + 6, t)
       e.Graphics.DrawLine(jPen, l + 7, t + 3, l + 7, t + 7)
@@ -156,37 +248,6 @@ Public Class RibbonGroup
 
     End If
 
-  End Sub
-
-  Private Sub RibbonGroup_ControlAdded(sender As Object, e As ControlEventArgs) Handles Me.ControlAdded
-    If TypeOf e.Control Is RibbonItem Then
-      If e.Control.Tag IsNot Nothing Then
-        If e.Control.Tag.Equals("AddItem") Then
-          Exit Sub
-        End If
-      End If
-      AddItemProcessing(CType(e.Control, RibbonItem), False)
-    End If
-  End Sub
-
-  ''' <summary>
-  '''     When Group is added via addItem, all proper inits are completed When Group is added via designer, then this
-  '''     event will apply the required parent values
-  ''' </summary>
-  ''' <param name="sender">
-  ''' </param>
-  ''' <param name="e">
-  ''' </param>
-  Private Sub RibbonGroup_ParentChanged(sender As Object, e As EventArgs) Handles Me.ParentChanged
-    If RibbonCntl Is Nothing And TypeOf Parent Is RibbonBar Then
-      With CType(Parent, RibbonBar)
-        RibbonCntl = .RibbonCntl
-        BarId = .BarId
-        GroupId = Parent.Controls.Count
-        If Name.Equals(DEFAULT_NAME) Then Name += GroupId.ToString
-        If Text.Equals(DEFAULT_NAME) Then Text = Name
-      End With
-    End If
   End Sub
 
 #End Region

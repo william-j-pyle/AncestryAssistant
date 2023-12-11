@@ -19,7 +19,6 @@ Public Class AncestorPanelItem
   Private Const Default_ItemSupportsClose As Boolean = True
   Private Const Default_ItemSupportsMove As Boolean = True
   Private Const Default_ItemSupportsSearch As Boolean = False
-  Private Const Default_Key As String = "DOCK_ANCESTORATTRIBUTES"
   Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
   Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.LeftBottom
   Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.LeftBottom
@@ -29,11 +28,10 @@ Public Class AncestorPanelItem
   Private Const Default_RibbonShowOnItemOpen As Boolean = False
   Private Const SUBNODE_DELIMITER As String = vbTab
   Private AttributeState As List(Of String)
-
   Private blockEvents As Boolean = False
   Private components As System.ComponentModel.IContainer
-
   Private LastAttributeItem As TreeNode
+  Public Const Default_Key As String = "DOCK_ANCESTORATTRIBUTES"
 
 #End Region
 

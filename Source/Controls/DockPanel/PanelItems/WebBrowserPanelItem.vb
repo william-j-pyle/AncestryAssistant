@@ -26,7 +26,6 @@ Public Class WebBrowserPanelItem
   Private Const Default_ItemSupportsClose As Boolean = True
   Private Const Default_ItemSupportsMove As Boolean = True
   Private Const Default_ItemSupportsSearch As Boolean = False
-  Private Const Default_Key As String = "DOCK_WEBBROWSER"
   Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
   Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.MiddleTopLeft
   Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.MiddleTopLeft
@@ -40,11 +39,11 @@ Public Class WebBrowserPanelItem
   Private _UriTrackingGroup As UriTrackingGroupEnum = UriTrackingGroupEnum.ANCESTRY
   Private _URL As New Uri(AncestryBaseURL)
   Private components As System.ComponentModel.IContainer
-
   ' Tracking
   Private isReady As Boolean = False
   Private sameImageAsFilename As String = ""
   Private UriTrackingGroupDecoder As New UriTracking()
+  Public Const Default_Key As String = "DOCK_WEBBROWSER"
 
 #End Region
 

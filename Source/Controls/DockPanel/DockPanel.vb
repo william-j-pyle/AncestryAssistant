@@ -74,7 +74,9 @@
         _PanelHasFocus = value
         LayoutPanel()
         RaiseEvent PanelFocusChanged(Me, value)
-        RaiseEvent PanelItemSelected(PanelSelectedItem)
+        If value Then
+          RaiseEvent PanelItemSelected(PanelSelectedItem)
+        End If
       End If
     End Set
   End Property
@@ -640,21 +642,22 @@
   End Sub
 
   Private Sub pnlContextMenu_ContextItemClicked(item As ToolStripMenuItem) Handles pnlContextMenu.ContextItemClicked
+    Dim panelItem As DockPanelItem = PanelSelectedItem
     Select Case item.Name
       Case "MnuDockClose"
-        RemoveItem(PanelSelectedIndex)
+        RemoveItem(panelItem)
       Case "MnuDockLeftTop"
-        RaiseEvent PanelItemLocationChange(GetItem(PanelSelectedIndex), DockPanelLocation.LeftTop)
+        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.LeftTop)
       Case "MnuDockLeftBottom"
-        RaiseEvent PanelItemLocationChange(GetItem(PanelSelectedIndex), DockPanelLocation.LeftBottom)
+        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.LeftBottom)
       Case "MnuDockRightTop"
-        RaiseEvent PanelItemLocationChange(GetItem(PanelSelectedIndex), DockPanelLocation.RightTop)
+        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.RightTop)
       Case "MnuDockRightBottom"
-        RaiseEvent PanelItemLocationChange(GetItem(PanelSelectedIndex), DockPanelLocation.RightBottom)
+        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.RightBottom)
       Case "MnuDockMiddleBottom"
-        RaiseEvent PanelItemLocationChange(GetItem(PanelSelectedIndex), DockPanelLocation.MiddleBottom)
+        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.MiddleBottom)
       Case "MnuDockTabbed"
-        RaiseEvent PanelItemLocationChange(GetItem(PanelSelectedIndex), DockPanelLocation.MiddleTopLeft)
+        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.MiddleTopLeft)
     End Select
   End Sub
 
@@ -676,6 +679,7 @@
     Dim tp As TabPage = pnlClient.SelectedTab
     If tp.Controls.Count = 0 Then Exit Sub
     Dim item As DockPanelItem = TryCast(tp.Controls(0), DockPanelItem)
+    If PanelShowClose = item.ItemSupportsClose And PanelShowContextMenu = item.ItemSupportsMove And PanelShowSearch = item.ItemSupportsSearch Then Exit Sub
     SuspendLayout()
     PanelShowClose = item.ItemSupportsClose
     PanelShowContextMenu = item.ItemSupportsMove
@@ -754,21 +758,14 @@
   End Function
 
   Public Function GetItem(key As String) As DockPanelItem
-    If Not pnlClient.TabPages.ContainsKey(key) Then
-      Return Nothing
+    If HasItem(key) Then
+      Return TryCast(pnlClient.TabPages(key).Controls(0), DockPanelItem)
     End If
-    Return GetItem(pnlClient.TabPages.IndexOfKey(key))
+    Return Nothing
   End Function
 
-  Public Function GetItem(index As Integer) As DockPanelItem
-    If index < 0 Or index >= pnlClient.TabCount Then
-      Return Nothing
-    End If
-    If pnlClient.TabPages(index).Controls.Count > 0 Then
-      Return TryCast(pnlClient.TabPages(index).Controls(0), DockPanelItem)
-    Else
-      Return Nothing
-    End If
+  Public Function GetItem() As DockPanelItem
+    Return PanelSelectedItem
   End Function
 
   Public Function HasItem(key As String) As Boolean
@@ -776,40 +773,33 @@
   End Function
 
   Public Function RemoveItem(key As String) As DockPanelItem
-    If Not pnlClient.TabPages.ContainsKey(key) Then
-      Return Nothing
+    If HasItem(key) Then
+      Return RemoveItem(GetItem(key))
     End If
-    Return RemoveItem(pnlClient.TabPages.IndexOfKey(key))
+    Return Nothing
   End Function
 
-  Public Function RemoveItem(index As Integer) As DockPanelItem
-    Dim ctl As DockPanelItem = GetItem(index)
-    If ctl Is Nothing Then
-      Return Nothing
+  Public Function RemoveItem(panelItem As DockPanelItem) As DockPanelItem
+    If panelItem IsNot Nothing Then
+      RaiseEvent PanelItemClose(panelItem)
+      AddPlaceholderTab()
+      pnlClient.TabPages.RemoveByKey(panelItem.Key)
+      pnlClient.SelectedIndex = 0
+      If hasTabs() Then
+        lblCaption.Text = pnlClient.SelectedTab.Text
+      Else
+        Visible = False
+        RaiseEvent PanelClose(Me)
+      End If
+      LayoutPanel()
+      Return panelItem
     End If
-    RaiseEvent PanelItemClose(ctl)
-    AddPlaceholderTab()
-    pnlClient.TabPages.RemoveAt(index)
-    If hasTabs() Then
-      lblCaption.Text = pnlClient.SelectedTab.Text
-    Else
-      Visible = False
-      RaiseEvent PanelClose(Me)
-    End If
-    LayoutPanel()
-    Return ctl
+    Return Nothing
   End Function
 
   Public Sub SelectItem(key As String)
-    If Not pnlClient.TabPages.ContainsKey(key) Then
-      Exit Sub
-    End If
-    SelectItem(pnlClient.TabPages.IndexOfKey(key))
-  End Sub
-
-  Public Sub SelectItem(index As Integer)
-    If index >= 0 Or index < pnlClient.TabCount Then
-      pnlClient.SelectedIndex = index
+    If HasItem(key) Then
+      pnlClient.SelectTab(pnlClient.TabPages.IndexOfKey(key))
       SetPanelState()
     End If
   End Sub

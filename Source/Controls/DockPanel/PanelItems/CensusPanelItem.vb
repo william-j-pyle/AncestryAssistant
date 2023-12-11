@@ -5,7 +5,6 @@ Public Class CensusPanelItem
 
 #Region "Fields"
 
-  Private WithEvents Ancestors As AncestorCollection
   Private WithEvents ts As FlatToolBar
   Private WithEvents xlsActiveSheet As DataGridView
   Private Const Default_ItemCaption As String = "Census"
@@ -14,7 +13,6 @@ Public Class CensusPanelItem
   Private Const Default_ItemSupportsClose As Boolean = True
   Private Const Default_ItemSupportsMove As Boolean = True
   Private Const Default_ItemSupportsSearch As Boolean = False
-  Private Const Default_Key As String = "DOCK_CENSUS"
   Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
   Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.MiddleBottom
   Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.MiddleBottom
@@ -30,6 +28,7 @@ Public Class CensusPanelItem
   Private CensusFileList As Collection
   Private components As System.ComponentModel.IContainer
   Private xlsWorkbook As Dictionary(Of Integer, DataGridView)
+  Public Const Default_Key As String = "DOCK_CENSUS"
 
 #End Region
 
@@ -106,11 +105,11 @@ Public Class CensusPanelItem
     Debug.Print(CensusOrder, BaseKey, CensusHeader)
   End Sub
 
-  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
+  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles ancestors.ActiveAncestorChanged
     UpdateUI()
   End Sub
 
-  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
+  Private Sub Ancestors_AncestorsChanged() Handles ancestors.AncestorsChanged
     UpdateUI()
   End Sub
 
@@ -638,9 +637,9 @@ Public Class CensusPanelItem
 
   Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
     ResetViewer()
-    If Ancestors Is Nothing Then Exit Sub
-    If Not Ancestors.HasActiveAncestor Then Exit Sub
-    Ancestor = Ancestors.ActiveAncestor
+    If ancestors Is Nothing Then Exit Sub
+    If Not ancestors.HasActiveAncestor Then Exit Sub
+    Ancestor = ancestors.ActiveAncestor
     Dim item As ToolStripButton
     Dim expectedCensus As List(Of Integer) = Ancestor.Census.ExpectedYears
     Dim availableCensus As List(Of Integer) = Ancestor.Census.AvailableYears

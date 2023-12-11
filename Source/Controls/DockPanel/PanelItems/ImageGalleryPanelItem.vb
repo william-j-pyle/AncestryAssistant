@@ -44,7 +44,6 @@ Public Class ImageGalleryPanelItem
   Private Const Default_ItemSupportsClose As Boolean = True
   Private Const Default_ItemSupportsMove As Boolean = True
   Private Const Default_ItemSupportsSearch As Boolean = False
-  Private Const Default_Key As String = "DOCK_GALLERY"
   Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
   Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.MiddleTopLeft
   Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.MiddleTopLeft
@@ -53,17 +52,13 @@ Public Class ImageGalleryPanelItem
   Private Const Default_RibbonSelectOnItemFocus As Boolean = True
   Private Const Default_RibbonShowOnItemOpen As Boolean = True
   Private components As System.ComponentModel.IContainer
-
   Private MouseSmoothingFactor As Double = 0.1
-
   ' Tracking
   Private panningActive As Boolean = False
-
   Private PanningEnabled As Boolean = True
-
   Private smoothedMousePosition As Point
-
   Private zoomActive As Boolean = False
+  Public Const Default_Key As String = "DOCK_GALLERY"
 
 #End Region
 

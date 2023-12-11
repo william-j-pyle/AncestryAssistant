@@ -37,7 +37,6 @@ Public Class NotebookPanelItem
   Private Const Default_ItemSupportsClose As Boolean = True
   Private Const Default_ItemSupportsMove As Boolean = True
   Private Const Default_ItemSupportsSearch As Boolean = False
-  Private Const Default_Key As String = "DOCK_NOTEBOOK"
   Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
   Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.MiddleTopRight
   Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.MiddleTopRight
@@ -45,8 +44,8 @@ Public Class NotebookPanelItem
   Private Const Default_RibbonHideOnItemClose As Boolean = True
   Private Const Default_RibbonSelectOnItemFocus As Boolean = True
   Private Const Default_RibbonShowOnItemOpen As Boolean = True
-
   Private components As System.ComponentModel.IContainer
+  Public Const Default_Key As String = "DOCK_NOTEBOOK"
 
 #End Region
 
