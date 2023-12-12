@@ -490,9 +490,9 @@
     End If
   End Sub
 
-  Private Sub Panel_ContextMenuClicked(item As ToolStripMenuItem) Handles PnlContextMenu.ContextItemClicked
+  Private Sub Panel_ContextMenuClicked(menuItem As ToolStripMenuItem) Handles PnlContextMenu.ContextItemClicked
     Dim panelItem As DockPanelItem = PanelSelectedItem
-    Select Case item.Name
+    Select Case menuItem.Name
       Case "MnuDockClose"
         ItemRemove(panelItem)
       Case "MnuDockLeftTop"
@@ -758,9 +758,9 @@
 
 #Region "Public Methods"
 
-  Public Function Item(key As String) As DockPanelItem
-    If ItemExists(key) Then
-      Return TryCast(PnlClient.TabPages(key).Controls(0), DockPanelItem)
+  Public Function Item(itemKey As String) As DockPanelItem
+    If ItemExists(itemKey) Then
+      Return TryCast(PnlClient.TabPages(itemKey).Controls(0), DockPanelItem)
     End If
     Return Nothing
   End Function
@@ -769,34 +769,34 @@
     Return PanelSelectedItem
   End Function
 
-  Public Sub ItemAdd(item As DockPanelItem)
-    item.LocationCurrent = PanelLocation
-    PnlClient.TabPages.Add(item.Key, item.ItemCaption)
-    With PnlClient.TabPages(item.Key)
-      .Name = item.Key
+  Public Sub ItemAdd(panelItem As DockPanelItem)
+    panelItem.LocationCurrent = PanelLocation
+    PnlClient.TabPages.Add(panelItem.Key, panelItem.ItemCaption)
+    With PnlClient.TabPages(panelItem.Key)
+      .Name = panelItem.Key
       .Padding = New Padding(0)
       .Margin = New Padding(0)
       .BackColor = My.Theme.PanelBackColor
       .BorderStyle = BorderStyle.None
       .UseVisualStyleBackColor = False
       .ForeColor = My.Theme.PanelFontColor
-      .Controls.Add(CType(item, Control))
+      .Controls.Add(CType(panelItem, Control))
     End With
-    AddHandler item.PanelItemGotFocus, AddressOf Panel_GotFocus
+    AddHandler panelItem.PanelItemGotFocus, AddressOf Panel_GotFocus
     PanelRemoveEmpty()
     PanelLayout()
-    PnlClient.SelectTab(item.Key)
-    LblCaption.Text = item.ItemCaption
+    PnlClient.SelectTab(panelItem.Key)
+    LblCaption.Text = panelItem.ItemCaption
     PanelSetState()
   End Sub
 
-  Public Function ItemExists(key As String) As Boolean
-    Return PnlClient.TabPages.ContainsKey(key)
+  Public Function ItemExists(itemKey As String) As Boolean
+    Return PnlClient.TabPages.ContainsKey(itemKey)
   End Function
 
-  Public Function ItemRemove(key As String) As DockPanelItem
-    If ItemExists(key) Then
-      Return ItemRemove(Item(key))
+  Public Function ItemRemove(itemKey As String) As DockPanelItem
+    If ItemExists(itemKey) Then
+      Return ItemRemove(Item(itemKey))
     End If
     Return Nothing
   End Function
@@ -819,9 +819,9 @@
     Return Nothing
   End Function
 
-  Public Sub ItemSelect(key As String)
-    If ItemExists(key) Then
-      PnlClient.SelectTab(PnlClient.TabPages.IndexOfKey(key))
+  Public Sub ItemSelect(itemKey As String)
+    If ItemExists(itemKey) Then
+      PnlClient.SelectTab(PnlClient.TabPages.IndexOfKey(itemKey))
       PanelSetState()
     End If
   End Sub

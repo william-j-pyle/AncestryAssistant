@@ -1,6 +1,6 @@
 ﻿Imports System.ComponentModel
 
-Public Class NotebookPanelItem
+Public Class DPINotebook
   Inherits DockPanelItem
 
 #Region "Fields"
@@ -51,7 +51,7 @@ Public Class NotebookPanelItem
 
 #Region "Public Constructors"
 
-  Public Sub New(Optional itemKey As String = "")
+  Public Sub New(Optional instanceKey As String = "")
     'Apply Item Defaults for this Type
     ItemCaption = Default_ItemCaption
     ItemHasRibbonBar = Default_ItemHasRibbonBar
@@ -59,7 +59,8 @@ Public Class NotebookPanelItem
     ItemSupportsClose = Default_ItemSupportsClose
     ItemSupportsMove = Default_ItemSupportsMove
     ItemSupportsSearch = Default_ItemSupportsSearch
-    Key = Default_Key
+    ItemKey = Default_Key
+    ItemInstanceKey = instanceKey
     LocationCurrent = Default_LocationCurrent
     LocationPrefered = Default_LocationPrefered
     LocationPrevious = Default_LocationPrevious
@@ -67,8 +68,6 @@ Public Class NotebookPanelItem
     RibbonHideOnItemClose = Default_RibbonHideOnItemClose
     RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
     RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Key can be overriden during creation, apply if Set
-    If Len(itemKey) > 0 Then Key = itemKey
     'Continue with creation
     components = New Container()
     Dim TreeNode1 As New TreeNode("My First Page")

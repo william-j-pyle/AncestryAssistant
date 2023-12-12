@@ -1,7 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 
-Public Class ImageGalleryPanelItem
+Public Class DPIImageGallery
   Inherits DockPanelItem
 
 #Region "Fields"
@@ -64,7 +64,7 @@ Public Class ImageGalleryPanelItem
 
 #Region "Public Constructors"
 
-  Public Sub New(Optional itemKey As String = "")
+  Public Sub New(Optional instanceKey As String = "")
     'Apply Item Defaults for this Type
     ItemCaption = Default_ItemCaption
     ItemHasRibbonBar = Default_ItemHasRibbonBar
@@ -72,7 +72,8 @@ Public Class ImageGalleryPanelItem
     ItemSupportsClose = Default_ItemSupportsClose
     ItemSupportsMove = Default_ItemSupportsMove
     ItemSupportsSearch = Default_ItemSupportsSearch
-    Key = Default_Key
+    ItemKey = Default_Key
+    ItemInstanceKey = instanceKey
     LocationCurrent = Default_LocationCurrent
     LocationPrefered = Default_LocationPrefered
     LocationPrevious = Default_LocationPrevious
@@ -80,8 +81,6 @@ Public Class ImageGalleryPanelItem
     RibbonHideOnItemClose = Default_RibbonHideOnItemClose
     RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
     RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Key can be overriden during creation, apply if Set
-    If Len(itemKey) > 0 Then Key = itemKey
     'Continue with creation
     components = New Container()
     ImgViewer = New ListView()

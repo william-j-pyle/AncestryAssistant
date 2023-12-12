@@ -4,7 +4,7 @@ Imports Microsoft.Web.WebView2.Core
 Imports Microsoft.Web.WebView2.WinForms
 Imports Newtonsoft.Json
 
-Public Class WebBrowserPanelItem
+Public Class DPIWebBrowser
   Inherits DockPanelItem
 
 #Region "Fields"
@@ -137,7 +137,7 @@ Public Class WebBrowserPanelItem
 
 #Region "Public Constructors"
 
-  Public Sub New(Optional itemKey As String = "")
+  Public Sub New(Optional instanceKey As String = "")
     'Apply Item Defaults for this Type
     ItemCaption = Default_ItemCaption
     ItemHasRibbonBar = Default_ItemHasRibbonBar
@@ -145,7 +145,8 @@ Public Class WebBrowserPanelItem
     ItemSupportsClose = Default_ItemSupportsClose
     ItemSupportsMove = Default_ItemSupportsMove
     ItemSupportsSearch = Default_ItemSupportsSearch
-    Key = Default_Key
+    ItemKey = Default_Key
+    ItemInstanceKey = instanceKey
     LocationCurrent = Default_LocationCurrent
     LocationPrefered = Default_LocationPrefered
     LocationPrevious = Default_LocationPrevious
@@ -153,8 +154,6 @@ Public Class WebBrowserPanelItem
     RibbonHideOnItemClose = Default_RibbonHideOnItemClose
     RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
     RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Key can be overriden during creation, apply if Set
-    If Len(itemKey) > 0 Then Key = itemKey
     'Continue with creation
     Web = New Microsoft.Web.WebView2.WinForms.WebView2()
     TsWeb = New FlatToolBar()

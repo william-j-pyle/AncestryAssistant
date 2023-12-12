@@ -71,34 +71,34 @@ Partial Class AssistantAppForm
 
     Select Case Ribbon.RibbonKey(barId, groupId, itemId)
       Case "B200.G5.I17" 'Census
-        DockManager.ItemShow(CensusPanelItem.Default_Key)
+        DockManager.ItemShow(DPICensus.Default_Key)
       Case "B200.G5.I18" 'Gallery
-        DockManager.ItemShow(ImageGalleryPanelItem.Default_Key)
+        DockManager.ItemShow(DPIImageGallery.Default_Key)
       Case "B200.G5.I19" 'Notebook
-        DockManager.ItemShow(NotebookPanelItem.Default_Key)
+        DockManager.ItemShow(DPINotebook.Default_Key)
       Case "B200.G3.I9" 'Facts
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON)
-        DockManager.ItemShow(WebBrowserPanelItem.Default_Key)
+        DockManager.ItemShow(DPIWebBrowser.Default_Key)
       Case "B200.G2"
-        DockManager.ItemShow(AncestorsListPanelItem.Default_Key)
+        DockManager.ItemShow(DPIAncestorsList.Default_Key)
       Case "ASSIGN" 'Ancestry Person Gallery
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON)
-        DockManager.ItemShow(WebBrowserPanelItem.Default_Key)
+        DockManager.ItemShow(DPIWebBrowser.Default_Key)
       Case "ASSIGN" 'Ancestry Person Hints
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON)
-        DockManager.ItemShow(WebBrowserPanelItem.Default_Key)
+        DockManager.ItemShow(DPIWebBrowser.Default_Key)
       Case "ASSIGN" 'Ancestry Person Story
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_STORY_PERSON)
-        DockManager.ItemShow(WebBrowserPanelItem.Default_Key)
+        DockManager.ItemShow(DPIWebBrowser.Default_Key)
       Case "B200.G3.I12" 'Ancestry Person Fan
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FANVIEW_PERSON)
-        DockManager.ItemShow(WebBrowserPanelItem.Default_Key)
+        DockManager.ItemShow(DPIWebBrowser.Default_Key)
       Case "B200.G3.I11" 'Ancestry Person Pedigree
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_PEDIGREEVIEW_PERSON)
-        DockManager.ItemShow(WebBrowserPanelItem.Default_Key)
+        DockManager.ItemShow(DPIWebBrowser.Default_Key)
       Case "B200.G3.I10" 'Ancestry Person Tree
         Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_TREEVIEW_PERSON)
-        DockManager.ItemShow(WebBrowserPanelItem.Default_Key)
+        DockManager.ItemShow(DPIWebBrowser.Default_Key)
     End Select
   End Sub
 

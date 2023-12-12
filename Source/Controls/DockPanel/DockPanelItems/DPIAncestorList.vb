@@ -1,6 +1,6 @@
 ﻿Imports AncestryAssistant.AncestorCollection
 
-Public Class AncestorsListPanelItem
+Public Class DPIAncestorsList
   Inherits DockPanelItem
 
 #Region "Fields"
@@ -33,7 +33,7 @@ Public Class AncestorsListPanelItem
 
 #Region "Public Constructors"
 
-  Public Sub New(Optional itemKey As String = "")
+  Public Sub New(Optional instanceKey As String = "")
     'Apply Item Defaults for this Type
     ItemCaption = Default_ItemCaption
     ItemHasRibbonBar = Default_ItemHasRibbonBar
@@ -41,7 +41,8 @@ Public Class AncestorsListPanelItem
     ItemSupportsClose = Default_ItemSupportsClose
     ItemSupportsMove = Default_ItemSupportsMove
     ItemSupportsSearch = Default_ItemSupportsSearch
-    Key = Default_Key
+    ItemKey = Default_Key
+    ItemInstanceKey = instanceKey
     LocationCurrent = Default_LocationCurrent
     LocationPrefered = Default_LocationPrefered
     LocationPrevious = Default_LocationPrevious
@@ -49,8 +50,6 @@ Public Class AncestorsListPanelItem
     RibbonHideOnItemClose = Default_RibbonHideOnItemClose
     RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
     RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Key can be overriden during creation, apply if Set
-    If Len(itemKey) > 0 Then Key = itemKey
     'Continue with creation
     AncestorsList = New FlatListView()
     SuspendLayout()

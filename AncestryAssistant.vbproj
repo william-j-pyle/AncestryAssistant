@@ -19,7 +19,7 @@
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2023.1211.2137</Version>
+    <Version>1.2023.1212.1101</Version>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -382,7 +382,7 @@
     <Compile Include="Source\Controls\Flat\FlatListView.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\PanelItems\WebBrowserPanelItem.vb">
+    <Compile Include="Source\Controls\DockPanel\DockPanelItems\DPIWebBrowser.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Controls\DockPanel\DockPanelManager.vb">
@@ -391,10 +391,10 @@
     <Compile Include="Source\Controls\DockPanel\DockPanel.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\PanelItems\AncestorPanelItem.vb">
+    <Compile Include="Source\Controls\DockPanel\DockPanelItems\DPIAncestorDetails.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\PanelItems\AncestorListPanelItem.vb">
+    <Compile Include="Source\Controls\DockPanel\DockPanelItems\DPIAncestorList.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Controls\Flat\FlatTabControl.vb">
@@ -461,17 +461,17 @@
     <Compile Include="Source\Controls\Flat\FlatSearchBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\PanelItems\CensusPanelItem.vb">
+    <Compile Include="Source\Controls\DockPanel\DockPanelItems\DPICensus.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Data\Gedcom\File\FileLineEntry.vb" />
     <Compile Include="Source\Data\Gedcom\Primatives\GedDate.vb" />
     <None Include="Source\Controls\Ribbon\Config\Ribbon.json" />
     <None Include="Source\Data\Gedcom\File\PlaceNormalized.vb" />
-    <Compile Include="Source\Controls\DockPanel\PanelItems\ImageGalleryPanelItem.vb">
+    <Compile Include="Source\Controls\DockPanel\DockPanelItems\DPIImageGallery.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\Controls\DockPanel\PanelItems\NotebookPanelItem.vb">
+    <Compile Include="Source\Controls\DockPanel\DockPanelItems\DPINotebook.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Source\Data\Gedcom\Gedcom.vb" />

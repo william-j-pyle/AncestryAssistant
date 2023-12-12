@@ -19,7 +19,8 @@
         },
         { "id": 3 },
         { "id": 4 },
-        { "id": 5 }
+        { "id": 5 },
+        { "id": 6 }
       ]
     },
     {
@@ -163,6 +164,64 @@
           "row": 1
         }
       ]
+    },
+    {
+      "name": "Census",
+      "text": "Census",
+      "id": 6,
+      "showpanel": false,
+      "items": [
+        {
+          "id": 17,
+          "col": 1,
+          "row": 1
+        },
+        {
+          "id": 201,
+          "col": 3,
+          "row": 1
+        },
+        {
+          "id": 202,
+          "col": 3,
+          "row": 2
+        },
+        {
+          "id": 203,
+          "col": 3,
+          "row": 3
+        },
+        {
+          "id": 204,
+          "col": 5,
+          "row": 1
+        },
+        {
+          "id": 205,
+          "col": 5,
+          "row": 2
+        },
+        {
+          "id": 206,
+          "col": 5,
+          "row": 3
+        },
+        {
+          "id": 207,
+          "col": 7,
+          "row": 1
+        },
+        {
+          "id": 208,
+          "col": 7,
+          "row": 2
+        },
+        {
+          "id": 209,
+          "col": 7,
+          "row": 3
+        }
+      ]
     }
     //,
     //{
@@ -238,7 +297,7 @@
     {
       "name": "Ancestor",
       "id": 4,
-      "itemtype": "RIImage",
+      "itemtype": "RIButton",
       "attributes": [
         //{
         //  "attribute": "ImageFromFile",
@@ -488,8 +547,124 @@
       ],
       "colspan": 2,
       "rowspan": 3
-    }
-    //{
+    },
+    {
+      "name": "btnCensus1",
+      "id": 201,
+      "itemtype": "RIButton",
+      "attributes": [
+        {
+          "attribute": "caption",
+          "value": "----"
+        }
+      ],
+      "colspan": 2,
+      "rowspan": 1
+    },
+    {
+      "name": "btnCensus2",
+      "id": 202,
+      "itemtype": "RIButton",
+      "attributes": [
+        {
+          "attribute": "caption",
+          "value": "----"
+        }
+      ],
+      "colspan": 2,
+      "rowspan": 1
+    },
+    {
+      "name": "btnCensus3",
+      "id": 203,
+      "itemtype": "RIButton",
+      "attributes": [
+        {
+          "attribute": "caption",
+          "value": "----"
+        }
+      ],
+      "colspan": 2,
+      "rowspan": 1
+    },
+    {
+      "name": "btnCensus4",
+      "id": 204,
+      "itemtype": "RIButton",
+      "attributes": [
+        {
+          "attribute": "caption",
+          "value": "----"
+        }
+      ],
+      "colspan": 2,
+      "rowspan": 1
+    },
+    {
+      "name": "btnCensus5",
+      "id": 205,
+      "itemtype": "RIButton",
+      "attributes": [
+        {
+          "attribute": "caption",
+          "value": "----"
+        }
+      ],
+      "colspan": 2,
+      "rowspan": 1
+    },
+    {
+      "name": "btnCensus6",
+      "id": 206,
+      "itemtype": "RIButton",
+      "attributes": [
+        {
+          "attribute": "caption",
+          "value": "----"
+        }
+      ],
+      "colspan": 2,
+      "rowspan": 1
+    },
+    {
+      "name": "btnCensus7",
+      "id": 207,
+      "itemtype": "RIButton",
+      "attributes": [
+        {
+          "attribute": "caption",
+          "value": "----"
+        }
+      ],
+      "colspan": 2,
+      "rowspan": 1
+    },
+    {
+      "name": "btnCensus8",
+      "id": 208,
+      "itemtype": "RIButton",
+      "attributes": [
+        {
+          "attribute": "caption",
+          "value": "----"
+        }
+      ],
+      "colspan": 2,
+      "rowspan": 1
+    },
+    {
+      "name": "btnCensus9",
+      "id": 209,
+      "itemtype": "RIButton",
+      "attributes": [
+        {
+          "attribute": "caption",
+          "value": "----"
+        }
+      ],
+      "colspan": 2,
+      "rowspan": 1
+    } //{
     //  "name": "RIButton",
     //  "id": 10,
     //  "itemtype": 10,

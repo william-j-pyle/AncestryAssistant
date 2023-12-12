@@ -10,13 +10,13 @@
 
 #Region "Events"
 
-  Public Event PanelItemClosed(sender As DockPanelItem, e As EventArgs)
+  Public Event PanelItemClosed(panelItem As DockPanelItem, e As EventArgs)
 
-  Public Event PanelItemGotFocus(sender As DockPanelItem, e As EventArgs)
+  Public Event PanelItemGotFocus(panelItem As DockPanelItem, e As EventArgs)
 
-  Public Event PanelItemMoved(sender As DockPanelItem, e As EventArgs)
+  Public Event PanelItemMoved(panelItem As DockPanelItem, e As EventArgs)
 
-  Public Event PanelItemOpened(sender As DockPanelItem, e As EventArgs)
+  Public Event PanelItemOpened(panelItem As DockPanelItem, e As EventArgs)
 
 #End Region
 
@@ -26,11 +26,21 @@
   Public Property ItemHasFocus As Boolean
   Public Property ItemHasRibbonBar As Boolean
   Public Property ItemHasToolBar As Boolean
+  Public Property ItemInstanceKey As String
   Public Property ItemIsSuspended As Boolean
+  Public Property ItemKey As String
   Public Property ItemSupportsClose As Boolean
   Public Property ItemSupportsMove As Boolean
   Public Property ItemSupportsSearch As Boolean
-  Public Property Key As String
+  Public ReadOnly Property Key As String
+    Get
+      If Len(ItemInstanceKey) > 0 Then
+        Return ItemKey + "_" + ItemInstanceKey
+      Else
+        Return ItemKey
+      End If
+    End Get
+  End Property
   Public Property LocationCurrent As DockPanelLocation
     Get
       Return _LocationCurrent

@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 
-Public Class CensusPanelItem
+Public Class DPICensus
   Inherits DockPanelItem
 
 #Region "Fields"
@@ -34,7 +34,7 @@ Public Class CensusPanelItem
 
 #Region "Public Constructors"
 
-  Public Sub New(Optional itemKey As String = "")
+  Public Sub New(Optional instanceKey As String = "")
     'Apply Item Defaults for this Type
     ItemCaption = Default_ItemCaption
     ItemHasRibbonBar = Default_ItemHasRibbonBar
@@ -42,7 +42,8 @@ Public Class CensusPanelItem
     ItemSupportsClose = Default_ItemSupportsClose
     ItemSupportsMove = Default_ItemSupportsMove
     ItemSupportsSearch = Default_ItemSupportsSearch
-    Key = Default_Key
+    ItemKey = Default_Key
+    ItemInstanceKey = instanceKey
     LocationCurrent = Default_LocationCurrent
     LocationPrefered = Default_LocationPrefered
     LocationPrevious = Default_LocationPrevious
@@ -50,8 +51,6 @@ Public Class CensusPanelItem
     RibbonHideOnItemClose = Default_RibbonHideOnItemClose
     RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
     RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Key can be overriden during creation, apply if Set
-    If Len(itemKey) > 0 Then Key = itemKey
     'Continue with creation
     Ts = New FlatToolBar()
     SuspendLayout()

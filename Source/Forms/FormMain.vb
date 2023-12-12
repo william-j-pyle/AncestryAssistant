@@ -8,7 +8,7 @@ Public Class AssistantAppForm
 #Region "Fields"
 
   Private WithEvents Ancestors As AncestorCollection
-  Private WithEvents Ancestry As WebBrowserPanelItem
+  Private WithEvents Ancestry As DPIWebBrowser
 
   Private Const ANCESTOR_CENSUS As String = "Download Census Data"
 
@@ -60,7 +60,7 @@ Public Class AssistantAppForm
   Private Sub AncestryBrowserBusyChanged(busy As Boolean)
     If busy Then
       Cursor = Cursors.WaitCursor
-      DockManager.ItemShow(WebBrowserPanelItem.Default_Key)
+      DockManager.ItemShow(DPIWebBrowser.Default_Key)
     Else
       Cursor = Cursors.Default
     End If
@@ -294,7 +294,7 @@ Public Class AssistantAppForm
 
     'Create and register all Panel Items
 
-    Ancestry = New WebBrowserPanelItem With {
+    Ancestry = New DPIWebBrowser With {
       .AncestryTreeID = My.Settings.ANCESTRY_TREE_ID
     }
     Ancestry.SetAncestors(Ancestors)
@@ -307,29 +307,29 @@ Public Class AssistantAppForm
 
     Dim item As DockPanelItem
 
-    item = New AncestorsListPanelItem()
+    item = New DPIAncestorsList()
     item.SetAncestors(Ancestors)
     ' Add Custom Handlers for Panel Item
-    AddHandler CType(item, AncestorsListPanelItem).AncestryNavigateRequest, AddressOf AncestryNavigateRequest
+    AddHandler CType(item, DPIAncestorsList).AncestryNavigateRequest, AddressOf AncestryNavigateRequest
     ' Register PanelItem
     DockManager.ItemRegister(item)
 
-    item = New AncestorPanelItem()
+    item = New DPIAncestorDetails()
     item.SetAncestors(Ancestors)
     ' Register PanelItem
     DockManager.ItemRegister(item)
 
-    item = New CensusPanelItem()
+    item = New DPICensus()
     item.SetAncestors(Ancestors)
     ' Register PanelItem
     DockManager.ItemRegister(item)
 
-    item = New ImageGalleryPanelItem()
+    item = New DPIImageGallery()
     item.SetAncestors(Ancestors)
     ' Register PanelItem
     DockManager.ItemRegister(item)
 
-    item = New NotebookPanelItem()
+    item = New DPINotebook()
     item.SetAncestors(Ancestors)
     ' Register PanelItem
     DockManager.ItemRegister(item)
