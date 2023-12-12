@@ -38,10 +38,10 @@
 
   Public Overrides Sub SetAttribute(ItemAttribute As RibbonItemAttribute, attributeValue As Object)
     Select Case ItemAttribute
-      Case RibbonItemAttribute.Text
-        ctl.Text = attributeValue
+      Case RibbonItemAttribute.text
+        ctl.Text = CStr(attributeValue)
       Case RibbonItemAttribute.checked
-        ctl.Checked = attributeValue.ToLower.Equals("true") Or attributeValue.ToLower.Equals("1") Or attributeValue.ToLower.Equals("checked")
+        ctl.Checked = CStr(attributeValue).ToLower.Equals("true") Or CStr(attributeValue).ToLower.Equals("1") Or CStr(attributeValue).ToLower.Equals("checked")
       Case Else
         Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select

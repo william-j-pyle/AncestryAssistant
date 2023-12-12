@@ -32,10 +32,10 @@ Partial Class AssistantAppForm
         Me.AppMaxButton = New System.Windows.Forms.Button()
         Me.AppCloseButton = New System.Windows.Forms.Button()
         Me.AppIcon = New System.Windows.Forms.Panel()
-        Me.tabFile = New System.Windows.Forms.TabPage()
-        Me.tabHome = New System.Windows.Forms.TabPage()
+        Me.TabFile = New System.Windows.Forms.TabPage()
+        Me.TabHome = New System.Windows.Forms.TabPage()
         Me.StatusBar = New System.Windows.Forms.Panel()
-        Me.btnAlert = New System.Windows.Forms.Button()
+        Me.BtnAlert = New System.Windows.Forms.Button()
         Me.FormBar.SuspendLayout()
         Me.AppTitleBar.SuspendLayout()
         Me.AppControlBox.SuspendLayout()
@@ -183,19 +183,19 @@ Partial Class AssistantAppForm
         Me.AppIcon.Size = New System.Drawing.Size(27, 28)
         Me.AppIcon.TabIndex = 0
         '
-        'tabFile
+        'TabFile
         '
-        Me.tabFile.Location = New System.Drawing.Point(0, 0)
-        Me.tabFile.Name = "tabFile"
-        Me.tabFile.Size = New System.Drawing.Size(200, 100)
-        Me.tabFile.TabIndex = 0
+        Me.TabFile.Location = New System.Drawing.Point(0, 0)
+        Me.TabFile.Name = "TabFile"
+        Me.TabFile.Size = New System.Drawing.Size(200, 100)
+        Me.TabFile.TabIndex = 0
         '
-        'tabHome
+        'TabHome
         '
-        Me.tabHome.Location = New System.Drawing.Point(0, 0)
-        Me.tabHome.Name = "tabHome"
-        Me.tabHome.Size = New System.Drawing.Size(200, 100)
-        Me.tabHome.TabIndex = 0
+        Me.TabHome.Location = New System.Drawing.Point(0, 0)
+        Me.TabHome.Name = "TabHome"
+        Me.TabHome.Size = New System.Drawing.Size(200, 100)
+        Me.TabHome.TabIndex = 0
         '
         'StatusBar
         '
@@ -207,31 +207,31 @@ Partial Class AssistantAppForm
         Me.StatusBar.Size = New System.Drawing.Size(774, 24)
         Me.StatusBar.TabIndex = 13
         '
-        'btnAlert
+        'BtnAlert
         '
-        Me.btnAlert.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAlert.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.btnAlert.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.btnAlert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAlert.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAlert.ForeColor = System.Drawing.Color.White
-        Me.btnAlert.Location = New System.Drawing.Point(640, 30)
-        Me.btnAlert.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnAlert.Name = "btnAlert"
-        Me.btnAlert.Size = New System.Drawing.Size(109, 22)
-        Me.btnAlert.TabIndex = 0
-        Me.btnAlert.Text = "No Alert"
-        Me.btnAlert.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAlert.UseMnemonic = False
-        Me.btnAlert.UseVisualStyleBackColor = False
-        Me.btnAlert.Visible = False
+        Me.BtnAlert.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnAlert.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.BtnAlert.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.BtnAlert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnAlert.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAlert.ForeColor = System.Drawing.Color.White
+        Me.BtnAlert.Location = New System.Drawing.Point(640, 30)
+        Me.BtnAlert.Margin = New System.Windows.Forms.Padding(0)
+        Me.BtnAlert.Name = "BtnAlert"
+        Me.BtnAlert.Size = New System.Drawing.Size(109, 22)
+        Me.BtnAlert.TabIndex = 0
+        Me.BtnAlert.Text = "No Alert"
+        Me.BtnAlert.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.BtnAlert.UseMnemonic = False
+        Me.BtnAlert.UseVisualStyleBackColor = False
+        Me.BtnAlert.Visible = False
         '
         'AssistantAppForm
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.DarkOliveGreen
         Me.ClientSize = New System.Drawing.Size(774, 444)
-        Me.Controls.Add(Me.btnAlert)
+        Me.Controls.Add(Me.BtnAlert)
         Me.Controls.Add(Me.FormBar)
         Me.Controls.Add(Me.StatusBar)
         Me.DoubleBuffered = True

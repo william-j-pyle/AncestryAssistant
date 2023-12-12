@@ -451,6 +451,13 @@ Public Class WebBrowserPanelItem
     End If
   End Sub
 
+  Private Sub Web_Layout(sender As Object, e As LayoutEventArgs) Handles Web.Layout
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("WebBrowserPanelItem.Web_Layout(affectedControl={0}, prop={1}, bounds={2})", e.AffectedControl.Name, e.AffectedProperty, e.AffectedControl.Bounds.ToString)
+
+#End If
+  End Sub
+
   Private Sub Web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles Web.NavigationCompleted
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
     Logger.debugPrint("WebBrowserPanelItem.web_NavigationCompleted()")
@@ -463,6 +470,12 @@ Public Class WebBrowserPanelItem
     Logger.debugPrint("WebBrowserPanelItem.web_NavigationStarting()")
 #End If
     RaiseEvent ViewerBusy(True)
+  End Sub
+
+  Private Sub Web_Paint(sender As Object, e As PaintEventArgs) Handles Web.Paint
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("WebBrowserPanelItem.Web_Paint(rectangle={0})", e.ClipRectangle.ToString)
+#End If
   End Sub
 
   Private Sub Web_SourceChanged(sender As Object, e As CoreWebView2SourceChangedEventArgs) Handles Web.SourceChanged

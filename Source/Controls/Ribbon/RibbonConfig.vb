@@ -155,7 +155,7 @@
     End Function
 
     Public Function GetIcon() As Image
-      Return My.Resources.ResourceManager.GetObject(GetAttribute("icon"))
+      Return TryCast(My.Resources.ResourceManager.GetObject(GetAttribute("icon")), Image)
     End Function
 
 #End Region

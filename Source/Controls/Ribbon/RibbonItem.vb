@@ -227,7 +227,7 @@ Public MustInherit Class RibbonItem
   End Function
 
   Public Function ImageFromResource(resourceName As String) As Image
-    Return My.Resources.ResourceManager.GetObject(resourceName)
+    Return TryCast(My.Resources.ResourceManager.GetObject(resourceName), Image)
   End Function
 
   Public Sub OnRibbonItemAction(eventType As RibbonEventType, value As Object)

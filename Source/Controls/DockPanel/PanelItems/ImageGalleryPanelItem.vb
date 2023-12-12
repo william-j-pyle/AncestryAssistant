@@ -292,6 +292,14 @@ Public Class ImageGalleryPanelItem
 
 #Region "Private Methods"
 
+  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
+    UpdateUI()
+  End Sub
+
+  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
+    UpdateUI()
+  End Sub
+
   Private Sub BtnFlipH_Click(sender As Object, e As EventArgs) Handles BtnFlipH.Click
     ImgBox.Image.RotateFlip(RotateFlipType.RotateNoneFlipY)
     ImgBox.Invalidate()
@@ -427,6 +435,10 @@ Public Class ImageGalleryPanelItem
   End Sub
 
   Private Sub ReloadGalleryAsync()
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("ImageGalleryPanelItem.ReloadGalleryAsync()")
+#End If
+
     Dim fileNames As List(Of String) = Directory.GetFiles(Ancestors.ActiveAncestor.AncestorPath, "*.jpg", SearchOption.AllDirectories).ToList()
     Parallel.ForEach(fileNames, Async Sub(fileName)
                                   ProcessFileAsync(fileName)
@@ -434,6 +446,9 @@ Public Class ImageGalleryPanelItem
   End Sub
 
   Private Sub ShowGallery()
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("ImageGalleryPanelItem.ShowGallery()")
+#End If
     ImgContainer.Visible = False
     'ts.Visible = False
     ImgViewer.Visible = True
@@ -445,6 +460,10 @@ Public Class ImageGalleryPanelItem
   End Sub
 
   Private Sub ShowViewer(filename As String)
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("ImageGalleryPanelItem.ShowViewer(filename=[{0}])", filename)
+#End If
+
     Dim f() As String = filename.Split("\"c)
     LblCaption.Text = f(UBound(f))
     For Each item As ToolStripItem In Ts.Items
@@ -483,6 +502,10 @@ Public Class ImageGalleryPanelItem
   End Sub
 
   Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("ImageGalleryPanelItem.UpdateUI()")
+#End If
+
     If Ancestors Is Nothing Then Exit Sub
     ImgViewer.Items.Clear()
     ImgViewerList.Images.Clear()

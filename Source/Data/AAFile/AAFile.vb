@@ -100,7 +100,7 @@ Public Class AAFile
     If File.Exists(AAFileName) Then
       Dim lines() As String = File.ReadAllLines(AAFileName)
       If lines.Length > 0 Then
-        AAFileType = CInt(lines(0).Substring(0, 1))
+        AAFileType = CType(CInt(lines(0).Substring(0, 1)), AAFileTypeEnum)
         Select Case AAFileType
           Case AAFileTypeEnum.KEYVALUEPAIRS ' Key/Value Pairs
             Dim pair As String()
@@ -202,10 +202,10 @@ Public Class AAFile
   End Sub
 
   Public Sub SetTableData(table As List(Of List(Of String)))
-    If Table.Count > 0 Then
-      aValueHeaders = Table.Item(0).ToArray()
+    If table.Count > 0 Then
+      aValueHeaders = table.Item(0).ToArray()
       aValues.Clear()
-      For i As Integer = 1 To Table.Count - 1
+      For i As Integer = 1 To table.Count - 1
         aValues.Add(table.Item(i).ToArray())
       Next
       _IsDirty = True
@@ -213,9 +213,9 @@ Public Class AAFile
   End Sub
 
   Public Sub SetTableData(table As ArrayList)
-    aValueHeaders = Table.Item(0)
+    aValueHeaders = table.Item(0)
     aValues.Clear()
-    For i As Integer = 1 To Table.Count - 1
+    For i As Integer = 1 To table.Count - 1
       aValues.Add(table.Item(i))
     Next
     _IsDirty = True

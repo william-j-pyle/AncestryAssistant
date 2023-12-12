@@ -46,7 +46,7 @@ Public Class Logger
   Public Shared Sub log(typ As LOG_TYPE, message() As String)
     Dim sb As New StringBuilder
     For Each lin As String In message
-      sb.AppendLine(Date.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + " " + typ.ToString.PadRight(6, " ") + lin)
+      sb.AppendLine(Date.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + " " + typ.ToString.PadRight(6, " "c) + lin)
     Next
     System.IO.File.AppendAllText(LOG_FILENAME, sb.ToString)
   End Sub

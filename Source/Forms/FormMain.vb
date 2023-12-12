@@ -1,9 +1,7 @@
-﻿Imports System.ComponentModel
-Imports System.IO
+﻿Imports System.IO
 Imports AncestryAssistant.AncestorCollection
 
 #Const RESET_SAVED_SETTINGS = False
-#Const SHOW_DEBUG = True
 
 Public Class AssistantAppForm
 
@@ -11,10 +9,6 @@ Public Class AssistantAppForm
 
   Private WithEvents Ancestors As AncestorCollection
   Private WithEvents Ancestry As WebBrowserPanelItem
-
-  Private WithEvents FormExtensions As ResizeDragHandler
-
-  Private WithEvents RibbonFileTab As RibbonPage
 
   Private Const ANCESTOR_CENSUS As String = "Download Census Data"
 
@@ -66,9 +60,9 @@ Public Class AssistantAppForm
   Private Sub AncestryBrowserBusyChanged(busy As Boolean)
     If busy Then
       Cursor = Cursors.WaitCursor
+      DockManager.ItemShow(WebBrowserPanelItem.Default_Key)
     Else
       Cursor = Cursors.Default
-      DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
     End If
   End Sub
 
@@ -182,39 +176,12 @@ Public Class AssistantAppForm
     Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON, Ancestors.ActiveAncestorID)
   End Sub
 
-  Private Sub AncestryToolbarToolStripMenuItem_Click(sender As Object, e As EventArgs)
-    'Ancestry.ShowToolbar = AncestryToolbarToolStripMenuItem.Checked
-  End Sub
-
   Private Sub AncestryURITrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
     ' If BtnActions.Visible Then
     'If NewGroup <> OldGroup Then
     'btnActions.Visible = False
     'End If
     'End If
-  End Sub
-
-  Private Sub AppCloseButton_Click(sender As Object, e As EventArgs) Handles AppCloseButton.Click
-    Close()
-  End Sub
-
-  Private Sub ApplicationForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-    If WindowState <> FormWindowState.Normal Then
-      WindowState = FormWindowState.Normal
-    End If
-    SettingsSave()
-  End Sub
-
-  Private Sub AppMaxButton_Click(sender As Object, e As EventArgs) Handles AppMaxButton.Click, AppTitle.DoubleClick
-    If WindowState = FormWindowState.Normal Then
-      WindowState = FormWindowState.Maximized
-    ElseIf WindowState = FormWindowState.Maximized Then
-      WindowState = FormWindowState.Normal
-    End If
-  End Sub
-
-  Private Sub AppMinButton_Click(sender As Object, e As EventArgs) Handles AppMinButton.Click
-    WindowState = FormWindowState.Minimized
   End Sub
 
   Private Sub BtnActions_Click(sender As Object, e As EventArgs)
@@ -313,60 +280,6 @@ Public Class AssistantAppForm
     End Select
   End Sub
 
-  Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs)
-    SettingsSave()
-    Close()
-  End Sub
-
-  Private Sub RibbonBar_RibbonAction(action As RibbonEventType, value As Object, barId As Integer, groupId As Integer, itemId As Integer) Handles RibbonBar.RibbonAction
-    Logger.debugPrint("RibbonAction: {0}={1}    [{2}]", action.ToString, value, Ribbon.RibbonKey(barId, groupId, itemId))
-
-    Select Case Ribbon.RibbonKey(barId, groupId, itemId)
-      Case "B200.G5.I17" 'Census
-        DockManager.ShowRegisteredItem(CensusPanelItem.Default_Key)
-      Case "B200.G5.I18" 'Gallery
-        DockManager.ShowRegisteredItem(ImageGalleryPanelItem.Default_Key)
-      Case "B200.G5.I19" 'Notebook
-        DockManager.ShowRegisteredItem(NotebookPanelItem.Default_Key)
-      Case "B200.G3.I9" 'Facts
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON)
-        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
-      Case "B200.G2"
-        DockManager.ShowRegisteredItem(AncestorsListPanelItem.Default_Key)
-      Case "ASSIGN" 'Ancestry Person Gallery
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON)
-        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
-      Case "ASSIGN" 'Ancestry Person Hints
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON)
-        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
-      Case "ASSIGN" 'Ancestry Person Story
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_STORY_PERSON)
-        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
-      Case "B200.G3.I12" 'Ancestry Person Fan
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FANVIEW_PERSON)
-        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
-      Case "B200.G3.I11" 'Ancestry Person Pedigree
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_PEDIGREEVIEW_PERSON)
-        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
-      Case "B200.G3.I10" 'Ancestry Person Tree
-        Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_TREEVIEW_PERSON)
-        DockManager.ShowRegisteredItem(WebBrowserPanelItem.Default_Key)
-    End Select
-  End Sub
-
-  Private Sub RibbonBar_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles RibbonBar.Selecting
-    If e.TabPageIndex = 0 Then
-      e.Cancel = True
-      With RibbonFileTab
-        .Location = New Point(4, AppTitleBar.Height)
-        .Width = Width - 8
-        .Height = Height - AppTitleBar.Height - 2
-        .Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top
-        .Visible = True
-      End With
-    End If
-  End Sub
-
   Private Sub SettingsSave()
     DockManager.SettingsSave()
     My.Settings.APP_CLIENTSIZE = Size
@@ -374,24 +287,7 @@ Public Class AssistantAppForm
   End Sub
 
   Private Sub UpdateUI(sender As Object, e As EventArgs) Handles Me.Load
-    'Init the Ribbon Bar
-    RibbonFileTab = New RibbonPage With {
-      .Visible = False
-    }
-    Controls.Add(RibbonFileTab)
-    RibbonFileTab.BringToFront()
-    RibbonBar.LoadConfig(My.Resources.Ribbon)
-    RibbonBar.SelectedIndex = 1
-
-    'Move this to the config file
-    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 2))
-    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 3))
-    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 4))
-    RibbonBar.DisableGroup(Ribbon.RibbonKey(200, 5))
-
-    ' Init the FormExtensions to make this a borderless form
-    FormExtensions = New ResizeDragHandler(Me)
-    FormExtensions.SetDragControl(AppTitle)
+    InitUIExtensions()
 
     ' Init the Ancestors data repository
     Ancestors = New AncestorCollection(My.Settings.AncestorsPath)
@@ -407,7 +303,7 @@ Public Class AssistantAppForm
     AddHandler Ancestry.UriTrackingGroupChanged, AddressOf AncestryURITrackingGroupChanged
     AddHandler Ancestry.DataDownload, AddressOf AncestryDataMessage
     ' Register PanelItem
-    DockManager.RegisterDockItem(Ancestry)
+    DockManager.ItemRegister(Ancestry)
 
     Dim item As DockPanelItem
 
@@ -416,27 +312,27 @@ Public Class AssistantAppForm
     ' Add Custom Handlers for Panel Item
     AddHandler CType(item, AncestorsListPanelItem).AncestryNavigateRequest, AddressOf AncestryNavigateRequest
     ' Register PanelItem
-    DockManager.RegisterDockItem(item)
+    DockManager.ItemRegister(item)
 
     item = New AncestorPanelItem()
     item.SetAncestors(Ancestors)
     ' Register PanelItem
-    DockManager.RegisterDockItem(item)
+    DockManager.ItemRegister(item)
 
     item = New CensusPanelItem()
     item.SetAncestors(Ancestors)
     ' Register PanelItem
-    DockManager.RegisterDockItem(item)
+    DockManager.ItemRegister(item)
 
     item = New ImageGalleryPanelItem()
     item.SetAncestors(Ancestors)
     ' Register PanelItem
-    DockManager.RegisterDockItem(item)
+    DockManager.ItemRegister(item)
 
     item = New NotebookPanelItem()
     item.SetAncestors(Ancestors)
     ' Register PanelItem
-    DockManager.RegisterDockItem(item)
+    DockManager.ItemRegister(item)
     DockManager.SettingsLoad()
 
     Size = My.Settings.APP_CLIENTSIZE

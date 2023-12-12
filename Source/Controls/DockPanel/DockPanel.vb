@@ -14,32 +14,23 @@
   Private WithEvents PnlClient As FlatTabControl
   Private WithEvents PnlContextMenu As FlatContextMenu
   Private WithEvents PnlHeader As FlatPanel
-
   Private WithEvents PnlMain As FlatPanel
-
   Private WithEvents PnlSearch As FlatPanel
-
   Private WithEvents TabPage1 As TabPage
-
   Private WithEvents TxtSearch As TextBox
-
   Private _PanelHasFocus As Boolean = True
-
   Private _PanelIsPinned As Boolean = True
-
   Private _PanelLocation As DockPanelLocation = DockPanelLocation.Floating
-
   Private _PanelShowClose As Boolean = True
-
   Private _PanelShowContextMenu As Boolean = True
-
   Private _PanelShowPinned As Boolean = True
-
   Private _PanelShowSearch As Boolean = True
-
   Private _PanelType As DockPanelType = DockPanelType.Panel
-
   Private components As System.ComponentModel.IContainer
+  Private PrevLayout As New LayoutPropertyBag
+  Private RegionControlBox As Rectangle
+  Private RegionHeader As Rectangle
+  Private RegionSearch As Rectangle
 
 #End Region
 
@@ -72,7 +63,7 @@
     Set(value As Boolean)
       If value <> _PanelHasFocus Then
         _PanelHasFocus = value
-        LayoutPanel()
+        PanelLayout()
         RaiseEvent PanelFocusChanged(Me, value)
         If value Then
           RaiseEvent PanelItemSelected(PanelSelectedItem)
@@ -87,7 +78,7 @@
     End Get
     Set(value As Boolean)
       _PanelIsPinned = value
-      Invalidate(True)
+      Invalidate(PnlHeader.Region)
     End Set
   End Property
 
@@ -133,7 +124,7 @@
     End Get
     Set(value As Boolean)
       _PanelShowClose = value
-      LayoutPanel()
+      PanelLayout()
     End Set
   End Property
 
@@ -143,7 +134,7 @@
     End Get
     Set(value As Boolean)
       _PanelShowContextMenu = value
-      LayoutPanel()
+      PanelLayout()
     End Set
   End Property
 
@@ -153,7 +144,7 @@
     End Get
     Set(value As Boolean)
       _PanelShowPinned = value
-      LayoutPanel()
+      PanelLayout()
     End Set
   End Property
 
@@ -163,7 +154,7 @@
     End Get
     Set(value As Boolean)
       _PanelShowSearch = value
-      LayoutPanel()
+      PanelLayout()
     End Set
   End Property
 
@@ -174,7 +165,7 @@
     Set(value As DockPanelType)
       If _PanelType <> value Then
         _PanelType = value
-        LayoutPanel()
+        PanelLayout()
       End If
     End Set
   End Property
@@ -450,38 +441,43 @@
       .TabPages(0).BackColor = My.Theme.PanelBackColor
       .TabPages(0).ForeColor = My.Theme.PanelFontColor
     End With
-    CreatePanelContextMenu()
+    Panel_ContextMenuCreate()
     UpdateStyles()
     LblCaption.Text = ""
     CaptureFocus(Me)
-    LayoutPanel()
+    PanelLayout()
   End Sub
 
 #End Region
 
 #Region "Private Methods"
 
-  Private Sub AddPlaceholderTab()
-    If PnlClient.TabCount = 1 Then
-      If Not PnlClient.SelectedTab.Text.Equals("") Then
-        PnlClient.TabPages.Add("BLANK", "")
+  Private Sub CaptureFocus(ctl As Control)
+    Try
+      If Not ctl.Name.ToUpper.Contains("CLOSE") Then
+        AddHandler ctl.GotFocus, AddressOf Panel_GotFocus
+        AddHandler ctl.MouseDown, AddressOf Panel_GotFocus
       End If
-    End If
+    Catch ex As Exception
+    End Try
+    For Each childCtl As Control In ctl.Controls
+      CaptureFocus(childCtl)
+    Next
   End Sub
 
-  Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click, PnlClient.BtnClose_Click
-    RemoveItem(PanelSelectedItem)
+  Private Sub Panel_ButtonClose(sender As Object, e As EventArgs) Handles BtnClose.Click, PnlClient.BtnClose_Click
+    ItemRemove(PanelSelectedItem)
   End Sub
 
-  Private Sub BtnContextMenu_MouseDown(sender As Object, e As MouseEventArgs) Handles BtnContextMenu.MouseDown
+  Private Sub Panel_ButtonContextMenu(sender As Object, e As MouseEventArgs) Handles BtnContextMenu.MouseDown
     PnlContextMenu.Show(BtnContextMenu, New Point(0, BtnContextMenu.Height))
   End Sub
 
-  Private Sub BtnPinned_Click(sender As Object, e As EventArgs) Handles BtnPinned.Click
+  Private Sub Panel_ButtonPinned(sender As Object, e As EventArgs) Handles BtnPinned.Click
     PanelIsPinned = Not PanelIsPinned
   End Sub
 
-  Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+  Private Sub Panel_ButtonSearch(sender As Object, e As EventArgs) Handles BtnSearch.Click
     If TxtSearch.Text.Equals("Search") Then Exit Sub
     If BtnSearch.Icon.Equals(BtnClose.Icon) Then
       PanelSelectedItem.ClearSearch()
@@ -494,20 +490,27 @@
     End If
   End Sub
 
-  Private Sub CaptureFocus(ctl As Control)
-    Try
-      If Not ctl.Name.ToUpper.Contains("CLOSE") Then
-        AddHandler ctl.GotFocus, AddressOf DockPanel_GotFocus
-        AddHandler ctl.MouseDown, AddressOf DockPanel_GotFocus
-      End If
-    Catch ex As Exception
-    End Try
-    For Each childCtl As Control In ctl.Controls
-      CaptureFocus(childCtl)
-    Next
+  Private Sub Panel_ContextMenuClicked(item As ToolStripMenuItem) Handles PnlContextMenu.ContextItemClicked
+    Dim panelItem As DockPanelItem = PanelSelectedItem
+    Select Case item.Name
+      Case "MnuDockClose"
+        ItemRemove(panelItem)
+      Case "MnuDockLeftTop"
+        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.LeftTop)
+      Case "MnuDockLeftBottom"
+        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.LeftBottom)
+      Case "MnuDockRightTop"
+        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.RightTop)
+      Case "MnuDockRightBottom"
+        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.RightBottom)
+      Case "MnuDockMiddleBottom"
+        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.MiddleBottom)
+      Case "MnuDockTabbed"
+        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.MiddleTopLeft)
+    End Select
   End Sub
 
-  Private Sub CreatePanelContextMenu()
+  Private Sub Panel_ContextMenuCreate()
     Dim item As System.Windows.Forms.ToolStripMenuItem
 
     PnlContextMenu = New AncestryAssistant.FlatContextMenu() With {
@@ -531,23 +534,49 @@
 
   End Sub
 
-  Private Sub DockPanel_GotFocus(sender As Object, e As EventArgs) Handles Me.GotFocus
+  Private Sub Panel_GotFocus(sender As Object, e As EventArgs) Handles Me.GotFocus
     PanelHasFocus = True
   End Sub
 
-  Private Function HasTabs() As Boolean
-    If PnlClient.TabCount > 1 Then Return True
-    If PnlClient.TabCount = 0 Then Return False
-    If PnlClient.TabPages(0).Text.Equals("") Then Return False
-    Return True
+  Private Sub Panel_Selected(sender As Object, e As TabControlEventArgs) Handles PnlClient.Selected
+    PanelSetState()
+  End Sub
+
+  Private Sub Panel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PnlClient.SelectedIndexChanged
+    If PanelSelectedItem Is Nothing Then Exit Sub
+    LblCaption.Text = PnlClient.SelectedTab.Text
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("DockPanel.SelectedItemChanged(panelItem=[{0},{1},{2}])", PanelSelectedItem.Key, PanelSelectedItem.LocationCurrent.ToString, PanelSelectedIndex)
+#End If
+    RaiseEvent PanelItemSelected(PanelSelectedItem)
+  End Sub
+
+  Private Sub PanelAddEmpty()
+    If PnlClient.TabCount = 1 Then
+      If Not PnlClient.SelectedTab.Text.Equals("") Then
+        PnlClient.TabPages.Add("BLANK", "")
+      End If
+    End If
+  End Sub
+
+  Private Function PanelIsEmpty() As Boolean
+    If PnlClient.TabCount > 1 Then Return False
+    If PnlClient.TabCount = 0 Then Return True
+    If PnlClient.TabPages(0).Text.Equals("") Then Return True
+    Return False
   End Function
 
-  Private Sub LayoutPanel()
+  Private Sub PanelLayout(Optional sender As Object = Nothing, Optional e As EventArgs = Nothing) Handles Me.SizeChanged, Me.Load
     'Prevent display of control when its empty
-    If Not HasTabs() Then
+    If PanelIsEmpty() Then
       Visible = False
       Exit Sub
     End If
+#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+    Logger.debugPrint("DockPanel.PanelLayout(BEGIN)")
+#End If
+    SuspendLayout()
+    PnlClient.SuspendLayout()
     'We have data so generate the interface
     Visible = True
     With CtxMenu
@@ -590,7 +619,6 @@
             .BorderColorTop = My.Theme.PanelBorderColor
             .BorderWidth = New Padding(1, 1, 1, 1)
           End If
-          .Invalidate(True)
         End With
         'Apply Client Panel layout and sizing
         With PnlClient
@@ -609,63 +637,57 @@
         'For entire control to refresh and repaint
         'Update()
       Case DockPanelType.Tab
-        Visible = True
-        'Hide the main panel
-        PnlMain.Visible = False
-        'Apply Client Panel layout and sizing
-        With PnlClient
-          .Alignment = System.Windows.Forms.TabAlignment.Top
-          If PanelShowClose Then
-            .Padding = New System.Drawing.Point(20, 2)
+        If Not (PrevLayout.Ready And PanelType = PrevLayout.PanelType) Then
+          Visible = True
+          'Hide the main panel
+          PnlMain.Visible = False
+          'Apply Client Panel layout and sizing
+          With PnlClient
+            .Alignment = System.Windows.Forms.TabAlignment.Top
+            If PanelShowClose Then
+              .Padding = New System.Drawing.Point(20, 2)
+            Else
+              .Padding = New System.Drawing.Point(2, 2)
+            End If
+            '.Size = New Size(0, 0)
+            .Dock = DockStyle.Fill
+          End With
+        End If
+    End Select
+    If PrevLayout.Ready Then
+      If Not PanelType.Equals(PrevLayout.PanelType) Or Not PrevLayout.TabPagesCount = TabPages.Count Then
+        Invalidate(True)
+      Else
+        If Not PrevLayout.PanelShowClose = PanelShowClose Then Invalidate(PnlButtonContainerHeader.Region)
+        If Not PrevLayout.PanelShowPinned = PanelShowPinned Then Invalidate(PnlButtonContainerHeader.Region)
+        If Not PrevLayout.PanelShowContextMenu = PanelShowContextMenu Then Invalidate(PnlButtonContainerHeader.Region)
+        If Not PrevLayout.PanelHasFocus = PanelHasFocus Then
+          If PanelType = DockPanelType.Tab Then
+            PnlClient.Invalidate(New Rectangle(0, 0, Width, 25))
           Else
-            .Padding = New System.Drawing.Point(2, 2)
+            Invalidate(PnlHeader.Region)
           End If
-          .Size = New Size(0, 0)
-          .Dock = DockStyle.Fill
-          .Invalidate()
-        End With
-        'Update()
-    End Select
-  End Sub
-
-  Private Sub PnlClient_Selected(sender As Object, e As TabControlEventArgs) Handles PnlClient.Selected
-    SetPanelState()
-  End Sub
-
-  Private Sub PnlClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PnlClient.SelectedIndexChanged
-    If PanelSelectedItem Is Nothing Then Exit Sub
-    LblCaption.Text = PnlClient.SelectedTab.Text
+        End If
+      End If
+    End If
+    With PrevLayout
+      .PanelShowClose = PanelShowClose
+      .PanelType = PanelType
+      .PanelHasFocus = PanelHasFocus
+      .PanelShowContextMenu = PanelShowContextMenu
+      .PanelShowPinned = PanelShowPinned
+      .PanelShowSearch = PanelShowSearch
+      .TabPagesCount = TabPages.Count
+      .Ready = True
+    End With
+    PnlClient.ResumeLayout(True)
+    ResumeLayout(True)
 #If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
-    Logger.debugPrint("DockPanel.SelectedItemChanged(panelItem=[{0},{1},{2}])", PanelSelectedItem.Key, PanelSelectedItem.LocationCurrent.ToString, PanelSelectedIndex)
+    Logger.debugPrint("DockPanel.PanelLayout(END)")
 #End If
-    RaiseEvent PanelItemSelected(PanelSelectedItem)
   End Sub
 
-  Private Sub PnlContextMenu_ContextItemClicked(item As ToolStripMenuItem) Handles PnlContextMenu.ContextItemClicked
-    Dim panelItem As DockPanelItem = PanelSelectedItem
-    Select Case item.Name
-      Case "MnuDockClose"
-        RemoveItem(panelItem)
-      Case "MnuDockLeftTop"
-        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.LeftTop)
-      Case "MnuDockLeftBottom"
-        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.LeftBottom)
-      Case "MnuDockRightTop"
-        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.RightTop)
-      Case "MnuDockRightBottom"
-        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.RightBottom)
-      Case "MnuDockMiddleBottom"
-        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.MiddleBottom)
-      Case "MnuDockTabbed"
-        RaiseEvent PanelItemLocationChange(panelItem, DockPanelLocation.MiddleTopLeft)
-    End Select
-  End Sub
-
-  Private Sub ReLayoutRequired(sender As Object, e As EventArgs) Handles Me.SizeChanged, Me.Load
-    LayoutPanel()
-  End Sub
-
-  Private Sub RemoveBlankTabs()
+  Private Sub PanelRemoveEmpty()
     Dim cnt As Integer = PnlClient.TabCount - 1
     For idx As Integer = cnt To 0 Step -1
       If PnlClient.TabPages(idx).Text = "" Then
@@ -674,7 +696,7 @@
     Next
   End Sub
 
-  Private Sub SetPanelState()
+  Private Sub PanelSetState()
     If PnlClient.SelectedTab Is Nothing Then Exit Sub
     Dim tp As TabPage = PnlClient.SelectedTab
     If tp.Controls.Count = 0 Then Exit Sub
@@ -688,7 +710,7 @@
     PerformLayout()
   End Sub
 
-  Private Sub TxtSearch_GotFocus(sender As Object, e As EventArgs) Handles TxtSearch.GotFocus
+  Private Sub Search_GotFocus(sender As Object, e As EventArgs) Handles TxtSearch.GotFocus
     If TxtSearch.Text.Equals("Search") Then
       TxtSearch.Text = ""
     End If
@@ -696,7 +718,7 @@
     TxtSearch.BackColor = My.Theme.PanelBackColor
   End Sub
 
-  Private Sub TxtSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSearch.KeyDown
+  Private Sub Search_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSearch.KeyDown
     If e.KeyCode = Keys.Enter Then
       e.Handled = True
       PanelSelectedItem.ApplySearch(TxtSearch.Text)
@@ -710,7 +732,7 @@
     End If
   End Sub
 
-  Private Sub TxtSearch_LostFocus(sender As Object, e As EventArgs) Handles TxtSearch.LostFocus
+  Private Sub Search_LostFocus(sender As Object, e As EventArgs) Handles TxtSearch.LostFocus
     If TxtSearch.Text.Equals("") Then
       TxtSearch.Text = "Search"
     End If
@@ -736,7 +758,18 @@
 
 #Region "Public Methods"
 
-  Public Sub AddItem(item As DockPanelItem)
+  Public Function Item(key As String) As DockPanelItem
+    If ItemExists(key) Then
+      Return TryCast(PnlClient.TabPages(key).Controls(0), DockPanelItem)
+    End If
+    Return Nothing
+  End Function
+
+  Public Function Item() As DockPanelItem
+    Return PanelSelectedItem
+  End Function
+
+  Public Sub ItemAdd(item As DockPanelItem)
     item.LocationCurrent = PanelLocation
     PnlClient.TabPages.Add(item.Key, item.ItemCaption)
     With PnlClient.TabPages(item.Key)
@@ -749,60 +782,70 @@
       .ForeColor = My.Theme.PanelFontColor
       .Controls.Add(CType(item, Control))
     End With
-    AddHandler item.PanelItemGotFocus, AddressOf DockPanel_GotFocus
-    RemoveBlankTabs()
-    LayoutPanel()
+    AddHandler item.PanelItemGotFocus, AddressOf Panel_GotFocus
+    PanelRemoveEmpty()
+    PanelLayout()
     PnlClient.SelectTab(item.Key)
     LblCaption.Text = item.ItemCaption
-    SetPanelState()
+    PanelSetState()
   End Sub
 
-  Public Function GetItem(key As String) As DockPanelItem
-    If HasItem(key) Then
-      Return TryCast(PnlClient.TabPages(key).Controls(0), DockPanelItem)
-    End If
-    Return Nothing
-  End Function
-
-  Public Function GetItem() As DockPanelItem
-    Return PanelSelectedItem
-  End Function
-
-  Public Function HasItem(key As String) As Boolean
+  Public Function ItemExists(key As String) As Boolean
     Return PnlClient.TabPages.ContainsKey(key)
   End Function
 
-  Public Function RemoveItem(key As String) As DockPanelItem
-    If HasItem(key) Then
-      Return RemoveItem(GetItem(key))
+  Public Function ItemRemove(key As String) As DockPanelItem
+    If ItemExists(key) Then
+      Return ItemRemove(Item(key))
     End If
     Return Nothing
   End Function
 
-  Public Function RemoveItem(panelItem As DockPanelItem) As DockPanelItem
+  Public Function ItemRemove(panelItem As DockPanelItem) As DockPanelItem
     If panelItem IsNot Nothing Then
       RaiseEvent PanelItemClose(panelItem)
-      AddPlaceholderTab()
+      PanelAddEmpty()
       PnlClient.TabPages.RemoveByKey(panelItem.Key)
       PnlClient.SelectedIndex = 0
-      If HasTabs() Then
-        LblCaption.Text = PnlClient.SelectedTab.Text
-      Else
+      If PanelIsEmpty() Then
         Visible = False
         RaiseEvent PanelClose(Me)
+      Else
+        LblCaption.Text = PnlClient.SelectedTab.Text
       End If
-      LayoutPanel()
+      PanelLayout()
       Return panelItem
     End If
     Return Nothing
   End Function
 
-  Public Sub SelectItem(key As String)
-    If HasItem(key) Then
+  Public Sub ItemSelect(key As String)
+    If ItemExists(key) Then
       PnlClient.SelectTab(PnlClient.TabPages.IndexOfKey(key))
-      SetPanelState()
+      PanelSetState()
     End If
   End Sub
+
+#End Region
+
+#Region "Classes"
+
+  Private Class LayoutPropertyBag
+
+#Region "Properties"
+
+    Public Property PanelHasFocus As Boolean
+    Public Property PanelShowClose As Boolean
+    Public Property PanelShowContextMenu As Boolean
+    Public Property PanelShowPinned As Boolean
+    Public Property PanelShowSearch As Boolean
+    Public Property PanelType As DockPanelType
+    Public Property Ready As Boolean = False
+    Public Property TabPagesCount As Integer
+
+#End Region
+
+  End Class
 
 #End Region
 

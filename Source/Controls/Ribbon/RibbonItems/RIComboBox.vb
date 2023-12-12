@@ -56,10 +56,10 @@
 
   Public Overrides Sub SetAttribute(ItemAttribute As RibbonItemAttribute, attributeValue As Object)
     Select Case ItemAttribute
-      Case RibbonItemAttribute.CSVItems
-        ctl.Items.AddRange(attributeValue.Split(","c))
-      Case RibbonItemAttribute.Text
-        ctl.Text = attributeValue
+      Case RibbonItemAttribute.csvitems
+        ctl.Items.AddRange(CStr(attributeValue).Split(","c))
+      Case RibbonItemAttribute.text
+        ctl.Text = CStr(attributeValue)
       Case Else
         Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select

@@ -114,28 +114,22 @@ Public Class RibbonGroup
   Private Sub AddItemProcessing(ri As RibbonItem, isAddItem As Boolean)
     ri.BarId = BarId
     If ColCount < ri.Col + ri.ColSpan Then
-      ColCount = ri.Col + ri.ColSpan
+      ColCount = CInt(ri.Col + ri.ColSpan)
     End If
     If isAddItem Then
       ri.Tag = "AddItem"
       Controls.Add(ri)
     End If
-    ri.Location = GetItemTargetLocation(ri.Col, ri.ColSpan, ri.Row, ri.RowSpan)
+    ri.Location = GetItemTargetLocation(ri.Col, ri.Row)
     AddHandler ri.RibbonItemLocationChanged, AddressOf RibbonItemLocationChanged
     AddHandler ri.RibbonItemSizeChanged, AddressOf RibbonItemSizeChanged
   End Sub
 
-  Private Function GetItemTargetLocation(Col As Double, ColSpan As Double, Row As Double, RowSpan As Double) As Point
-    If ColCount < Col + ColSpan Then
-      ColCount = CInt(Col + ColSpan)
-    End If
+  Private Function GetItemTargetLocation(Col As Double, Row As Double) As Point
     Return New Point(CInt(((Col - 1) * (RibbonConfig.GROUP_COL_WIDTH + RibbonConfig.GROUP_COL_SPACING)) + RibbonConfig.GROUP_LEFT_SPACING), CInt(((Row - 1) * (RibbonConfig.GROUP_ROW_HEIGHT + RibbonConfig.GROUP_ROW_SPACING)) + RibbonConfig.GROUP_TOP_SPACING))
   End Function
 
-  Private Function GetItemTargetSize(Col As Double, ColSpan As Double, Row As Double, RowSpan As Double) As Size
-    If ColCount < Col + ColSpan Then
-      ColCount = CInt(Col + ColSpan)
-    End If
+  Private Function GetItemTargetSize(ColSpan As Double, RowSpan As Double) As Size
     Return New Size(CInt(ColSpan * RibbonConfig.GROUP_COL_WIDTH), CInt(RowSpan * RibbonConfig.GROUP_ROW_HEIGHT))
   End Function
 
@@ -213,7 +207,7 @@ Public Class RibbonGroup
 
     'Draw the group caption
     Dim textBrush As Brush = New SolidBrush(RibbonForeColor)
-    Dim textLocation As New Point(e.ClipRectangle.Left + 1 + ((e.ClipRectangle.Width - TextSize.Width) / 2), e.ClipRectangle.Bottom - TextSize.Height - 4)
+    Dim textLocation As New Point(CInt(e.ClipRectangle.Left + 1 + ((e.ClipRectangle.Width - TextSize.Width) / 2)), CInt(e.ClipRectangle.Bottom - TextSize.Height - 4))
     e.Graphics.DrawString(Text, CaptionFont, textBrush, textLocation)
 
     ' Draw the Exapand Icon
@@ -266,14 +260,14 @@ Public Class RibbonGroup
 
   Public Sub RibbonItemLocationChanged(sender As Object, e As EventArgs)
     With CType(sender, RibbonItem)
-      .Location = GetItemTargetLocation(.Col, .ColSpan, .Row, .RowSpan)
+      .Location = GetItemTargetLocation(.Col, .Row)
       .Refresh()
     End With
   End Sub
 
   Public Sub RibbonItemSizeChanged(sender As Object, e As EventArgs)
     With CType(sender, RibbonItem)
-      .Size = GetItemTargetSize(.Col, .ColSpan, .Row, .RowSpan)
+      .Size = GetItemTargetSize(.ColSpan, .RowSpan)
       .Refresh()
     End With
   End Sub
