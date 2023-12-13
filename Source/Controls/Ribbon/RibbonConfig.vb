@@ -46,9 +46,9 @@
   Public Function GetItem(refItem As Item) As Item
     Dim itm As Item = GetItem(refItem.id)
     If refItem.col > 0 Then itm.col = refItem.col
-    If refItem.colspan > 0 Then itm.colspan = refItem.colspan
+    If refItem.colspan > 1 Then itm.colspan = refItem.colspan
     If refItem.row > 0 Then itm.row = refItem.row
-    If refItem.rowspan > 0 Then itm.rowspan = refItem.rowspan
+    If refItem.rowspan > 1 Then itm.rowspan = refItem.rowspan
     If Len(refItem.name) > 0 Then itm.name = refItem.name
     If refItem.attributes IsNot Nothing Then
       For Each rAvp As AttributeValuePair In refItem.attributes
@@ -119,8 +119,8 @@
 #Region "Properties"
 
     Public Property attributes As List(Of AttributeValuePair)
-    Public Property col As Double
-    Public Property colspan As Double
+    Public Property col As Double = 0
+    Public Property colspan As Double = 1
     Public Property enabled As Boolean = True
     Public Property id As Integer
     Public Property itemtype As String
@@ -137,8 +137,8 @@
     End Property
     Public Property name As String = ""
     Public Property ribbonitemtype As RibbonItemType
-    Public Property row As Double
-    Public Property rowspan As Double
+    Public Property row As Double = 0
+    Public Property rowspan As Double = 1
     Public Property visible As Boolean = True
 
 #End Region

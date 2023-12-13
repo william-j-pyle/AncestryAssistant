@@ -39,7 +39,7 @@ Public Class ACensus
 #Region "Public Constructors"
 
   Public Sub New(ancestorObj As AncestorCollection.Ancestor)
-    Ancestor = AncestorObj
+    Ancestor = ancestorObj
     Dim recordslocation As String = Ancestor.FullPath("Census")
     If Not recordslocation.EndsWith("\") Then recordslocation += "\"
     RecordsBasePath = recordslocation
@@ -112,6 +112,15 @@ Public Class ACensus
       End If
     Next
     Return aaRtn
+  End Function
+
+  Public Function hasYear(censusYear As Integer) As Boolean
+    For Each entry As String In dataEntries
+      If censusYear = CInt(entry.Split("-"c)(1)) Then
+        Return True
+      End If
+    Next
+    Return False
   End Function
 
   Public Sub Refresh()

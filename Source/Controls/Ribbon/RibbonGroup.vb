@@ -1,14 +1,15 @@
 ﻿Imports System.ComponentModel
 
 Public Class RibbonGroup
-  Inherits Panel
+  Inherits FlowLayoutPanel
 
 #Region "Fields"
 
   Private Const DEFAULT_NAME As String = "RibbonGroup"
-  Private _ColCount As Integer = 1
+  Private _ColCount As Integer = 0
   Private _MouseOverPanelOpen As Boolean = False
   Private CaptionFont As New System.Drawing.Font("Segoe UI Semibold", 10, FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
+  Private MinimumWidthForItems As Integer = 0
   Private RegionPanelOpen As Rectangle = ClientRectangle
   Protected Friend RibbonCntl As Ribbon
 
@@ -55,7 +56,8 @@ Public Class RibbonGroup
   Public Property GroupId As Integer
   Public ReadOnly Property MinimumWidth As Integer
     Get
-      Return Math.Max(TextSize.Width + 50, _ColCount * (RibbonConfig.GROUP_COL_WIDTH + RibbonConfig.GROUP_COL_SPACING))
+      'Return Math.Max(TextSize.Width + 50, _ColCount * (RibbonConfig.GROUP_COL_WIDTH + RibbonConfig.GROUP_COL_SPACING))
+      Return Math.Max(TextSize.Width + 50, MinimumWidthForItems)
     End Get
   End Property
   Public Property RibbonAccentColor As Color = My.Theme.RibbonAccentColor
@@ -96,6 +98,7 @@ Public Class RibbonGroup
     GroupId = iGroupId
     BarId = iBarId
     Text = sCaption
+    FlowDirection = FlowDirection.TopDown
     BackColor = RibbonBackColor
     ForeColor = RibbonForeColor
     Padding = New Padding(8, 0, 0, 0)
@@ -113,21 +116,27 @@ Public Class RibbonGroup
 
   Private Sub AddItemProcessing(ri As RibbonItem, isAddItem As Boolean)
     ri.BarId = BarId
-    If ColCount < ri.Col + ri.ColSpan Then
-      ColCount = CInt(ri.Col + ri.ColSpan)
-    End If
+    'If ColCount < ri.Col + ri.ColSpan Then
+    'ColCount = CInt(ri.Col + ri.ColSpan)
+    'End If
     If isAddItem Then
       ri.Tag = "AddItem"
       Controls.Add(ri)
     End If
-    ri.Location = GetItemTargetLocation(ri.Col, ri.Row)
-    AddHandler ri.RibbonItemLocationChanged, AddressOf RibbonItemLocationChanged
+    'ri.Location = New Point(0, 0)
+    Debug.Print("ADDING RIBBON ITEM: {0}=[{1}]", ri.Name, ri.Location.ToString)
+    If ri.Location.X + ri.Size.Width + 10 > MinimumWidthForItems Then
+      MinimumWidthForItems = ri.Location.X + ri.Size.Width + 10
+    End If
+    'AddHandler ri.RibbonItemLocationChanged, AddressOf RibbonItemLocationChanged
     AddHandler ri.RibbonItemSizeChanged, AddressOf RibbonItemSizeChanged
+    AddHandler ri.VisibleChanged, AddressOf RibbonItemVisibleChanged
+    Width = MinimumWidth
   End Sub
 
-  Private Function GetItemTargetLocation(Col As Double, Row As Double) As Point
-    Return New Point(CInt(((Col - 1) * (RibbonConfig.GROUP_COL_WIDTH + RibbonConfig.GROUP_COL_SPACING)) + RibbonConfig.GROUP_LEFT_SPACING), CInt(((Row - 1) * (RibbonConfig.GROUP_ROW_HEIGHT + RibbonConfig.GROUP_ROW_SPACING)) + RibbonConfig.GROUP_TOP_SPACING))
-  End Function
+  'Private Function GetItemTargetLocation(Col As Double, Row As Double) As Point
+  'Return New Point(CInt(((Col - 1) * (RibbonConfig.GROUP_COL_WIDTH + RibbonConfig.GROUP_COL_SPACING)) + RibbonConfig.GROUP_LEFT_SPACING), CInt(((Row - 1) * (RibbonConfig.GROUP_ROW_HEIGHT + RibbonConfig.GROUP_ROW_SPACING)) + RibbonConfig.GROUP_TOP_SPACING))
+  'End Function
 
   Private Function GetItemTargetSize(ColSpan As Double, RowSpan As Double) As Size
     Return New Size(CInt(ColSpan * RibbonConfig.GROUP_COL_WIDTH), CInt(RowSpan * RibbonConfig.GROUP_ROW_HEIGHT))
@@ -207,7 +216,7 @@ Public Class RibbonGroup
 
     'Draw the group caption
     Dim textBrush As Brush = New SolidBrush(RibbonForeColor)
-    Dim textLocation As New Point(CInt(e.ClipRectangle.Left + 1 + ((e.ClipRectangle.Width - TextSize.Width) / 2)), CInt(e.ClipRectangle.Bottom - TextSize.Height - 4))
+    Dim textLocation As New Point(CInt(ClientRectangle.Left + 1 + ((ClientRectangle.Width - TextSize.Width) / 2)), CInt(ClientRectangle.Bottom - TextSize.Height - 4))
     e.Graphics.DrawString(Text, CaptionFont, textBrush, textLocation)
 
     ' Draw the Exapand Icon
@@ -258,18 +267,35 @@ Public Class RibbonGroup
     AddItemProcessing(ri, True)
   End Sub
 
-  Public Sub RibbonItemLocationChanged(sender As Object, e As EventArgs)
-    With CType(sender, RibbonItem)
-      .Location = GetItemTargetLocation(.Col, .Row)
-      .Refresh()
-    End With
-  End Sub
+  'Public Sub RibbonItemLocationChanged(sender As Object, e As EventArgs)
+  'With CType(sender, RibbonItem)
+  '.Location = GetItemTargetLocation(.Col, .Row)
+  '.Refresh()
+  'End With
+  'End Sub
 
   Public Sub RibbonItemSizeChanged(sender As Object, e As EventArgs)
     With CType(sender, RibbonItem)
       .Size = GetItemTargetSize(.ColSpan, .RowSpan)
       .Refresh()
     End With
+  End Sub
+
+  Public Sub RibbonItemVisibleChanged(sender As Object, e As EventArgs)
+    Debug.Print("SENDER: {0}={1}", sender.name, sender.visible)
+    Debug.Print("ITEMVISIBILITY:  MinForItem={0}    Width={1}   Min={2}", MinimumWidthForItems, Width, MinimumWidth)
+    MinimumWidthForItems = 0
+    For Each ctl As Control In Controls
+      Debug.Print("CTL: {0}={1}", ctl.Name, ctl.Visible)
+      If ctl.Visible Then
+        If ctl.Location.X + ctl.Size.Width + 10 > MinimumWidthForItems Then
+          MinimumWidthForItems = ctl.Location.X + ctl.Size.Width + 10
+        End If
+      End If
+    Next
+    MinimumSize = New System.Drawing.Size(MinimumWidth, 0)
+    Width = MinimumWidth
+    Debug.Print("ITEMVISIBILITY:  MinForItem={0}    Width={1}   Min={2}", MinimumWidthForItems, Width, MinimumWidth)
   End Sub
 
 #End Region

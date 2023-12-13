@@ -54,6 +54,21 @@ Public Class AssistantAppForm
     RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 3))
     RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 4))
     RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 5))
+    Dim x As Integer
+    For x = 209 To 201 Step -1
+      RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, x), RibbonItemAttribute.visible, False)
+    Next
+    Dim hasCensus As Boolean = False
+    x = 201
+    For Each yr As Integer In Ancestor.Census.ExpectedYears
+      Dim hasYear As Boolean = Ancestor.Census.hasYear(yr)
+      If Not hasCensus And hasYear Then hasCensus = True
+      RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, x), RibbonItemAttribute.text, yr)
+      RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, x), RibbonItemAttribute.visible, True)
+      RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, x), RibbonItemAttribute.enabled, hasYear)
+      x += 1
+    Next
+    RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, 17), RibbonItemAttribute.enabled, hasCensus)
 
   End Sub
 

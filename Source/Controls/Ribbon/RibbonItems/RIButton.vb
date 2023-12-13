@@ -46,16 +46,18 @@
 
   Public Overrides Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
     Select Case ItemAttribute
-      Case RibbonItemAttribute.Image
+      Case RibbonItemAttribute.image
         Return Image
-      Case RibbonItemAttribute.Text
+      Case RibbonItemAttribute.text
         Return ctl.Text
-      Case RibbonItemAttribute.Caption
+      Case RibbonItemAttribute.caption
         Return ctl.Text
-      Case RibbonItemAttribute.TextAlign
+      Case RibbonItemAttribute.textalign
         Return ctl.TextAlign
-      Case RibbonItemAttribute.Enabled
+      Case RibbonItemAttribute.enabled
         Return ctl.Enabled
+      Case RibbonItemAttribute.visible
+        Return Visible
       Case Else
         Debug.Print("Unhandled Attribute Requested: {0}", ItemAttribute.ToString)
     End Select
@@ -64,20 +66,22 @@
 
   Public Overrides Sub SetAttribute(ItemAttribute As RibbonItemAttribute, attributeValue As Object)
     Select Case ItemAttribute
-      Case RibbonItemAttribute.ImageFromFile
+      Case RibbonItemAttribute.imagefromfile
         Image = ImageFromFile(CType(attributeValue, String))
-      Case RibbonItemAttribute.ImageFromResource
+      Case RibbonItemAttribute.imagefromresource
         Image = ImageFromResource(CType(attributeValue, String))
-      Case RibbonItemAttribute.Image
+      Case RibbonItemAttribute.image
         Image = CType(attributeValue, Image)
-      Case RibbonItemAttribute.Text
+      Case RibbonItemAttribute.text
         ctl.Text = CType(attributeValue, String)
-      Case RibbonItemAttribute.Caption
+      Case RibbonItemAttribute.caption
         ctl.Text = CType(attributeValue, String)
-      Case RibbonItemAttribute.TextAlign
+      Case RibbonItemAttribute.textalign
         ctl.TextAlign = CType(attributeValue, ContentAlignment)
-      Case RibbonItemAttribute.Enabled
+      Case RibbonItemAttribute.enabled
         ctl.Enabled = CType(attributeValue, Boolean)
+      Case RibbonItemAttribute.visible
+        Visible = CBool(attributeValue)
       Case Else
         Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select
