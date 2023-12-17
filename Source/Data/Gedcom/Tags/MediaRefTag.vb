@@ -1,8 +1,6 @@
 Public Class MediaRefTag
   Inherits AbstractTag
 
-#Region "Properties"
-
   ' Attributes
   Public Property cropHeight As Integer
 
@@ -14,17 +12,9 @@ Public Class MediaRefTag
 
   Public Property isPrimary As Boolean
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New(data As Gedcom, ownerID As String)
     MyBase.New(data, "OBJE", False, ownerID)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Function processTag(key As String) As Boolean
     Select Case key
@@ -51,7 +41,5 @@ Public Class MediaRefTag
     End Select
     Return True
   End Function
-
-#End Region
 
 End Class

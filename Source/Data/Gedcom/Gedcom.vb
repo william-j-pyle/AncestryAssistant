@@ -2,8 +2,6 @@ Imports System.Text
 
 Public Class Gedcom
 
-#Region "Fields"
-
   Private fileData As List(Of FileLineEntry)
   Private fileIndex As Integer
   Public events As List(Of EventTag)
@@ -21,10 +19,6 @@ Public Class Gedcom
   Public sources As List(Of SourceTag)
   Public tagrefs As List(Of MttagRefTag)
   Public tags As List(Of MttagTag)
-
-#End Region
-
-#Region "Properties"
 
   Public ReadOnly Property data() As String
     Get
@@ -69,10 +63,6 @@ Public Class Gedcom
       Return fileData.Item(fileIndex).lineTag
     End Get
   End Property
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New(gedFilename As String)
     header = Nothing
@@ -150,10 +140,6 @@ Public Class Gedcom
     End If
   End Sub
 
-#End Region
-
-#Region "Private Methods"
-
   Private Function SetIndex(value As Integer) As Boolean
     Dim SetVal As Integer = value
     If value < 0 Then
@@ -167,10 +153,6 @@ Public Class Gedcom
     fileIndex = value
     Return True
   End Function
-
-#End Region
-
-#Region "Public Methods"
 
   Public Function addObject(obj As Object) As String
 
@@ -508,7 +490,5 @@ Public Class Gedcom
   Public Function rewind() As Boolean
     Return SetIndex(0)
   End Function
-
-#End Region
 
 End Class

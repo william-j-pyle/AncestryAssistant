@@ -4,24 +4,19 @@ Imports System.IO
 <DefaultPropertyAttribute("ID")>
 Public MustInherit Class AncestorAbstract
 
-#Region "Fields"
-
+  Private _ProfileImage As Image = Nothing
   Private children As AAFile
-  Private events As TimelineData
+  Private events As AncestorTimelineData
   Private facts As AAFile
-  Private gallery As AGallery
+  Private gallery As AncestorGalleryData
   Private marriages() As String
   Private notebook As ANotebook
-  Private oCensus As ACensus
+  Private oCensus As AncestorCensusData
   Private parents As AAFile
   Private sAncestorPath As String = ""
   Private siblings As AAFile
   Private sID As String = ""
-  Private sources As SourceData
-
-#End Region
-
-#Region "Properties"
+  Private sources As AncestorSourcesData
 
   Public Property AncestorPath As String
     Get
@@ -38,12 +33,11 @@ Public MustInherit Class AncestorAbstract
     End Set
   End Property
 
-  Public ReadOnly Property Census As ACensus
+  Public ReadOnly Property Census As AncestorCensusData
     Get
       Return oCensus
     End Get
   End Property
-
   Public Property FullName As String
     Get
       Return New GedName(facts.Value("SURNAME"), facts.Value("GIVENNAME"), facts.Value("SUFFIX")).Name
@@ -56,19 +50,16 @@ Public MustInherit Class AncestorAbstract
       facts.Save()
     End Set
   End Property
-
   Public ReadOnly Property GedBirthDate As GedDate
     Get
       Return New GedDate(Fact("birthDate"))
     End Get
   End Property
-
   Public ReadOnly Property GedDeathDate As GedDate
     Get
       Return New GedDate(Fact("deathDate"))
     End Get
   End Property
-
   Public Property Givenname As String
     Get
       Return facts.Value("GIVENNAME")
@@ -78,34 +69,33 @@ Public MustInherit Class AncestorAbstract
       facts.Save()
     End Set
   End Property
-
   Public ReadOnly Property HasCensus As Boolean
     Get
       Return oCensus.length > 0
     End Get
   End Property
-
   Public ReadOnly Property HasFamily As Boolean = False
   Public ReadOnly Property HasImages As Boolean
     Get
       Return gallery.length > 0
     End Get
   End Property
-
   Public ReadOnly Property HasNotes As Boolean = False
-  Public ReadOnly Property HasProfileImage As Boolean = False
+  Public ReadOnly Property HasProfileImage As Boolean
+    Get
+      Return ProfileImage IsNot Nothing
+    End Get
+  End Property
   Public ReadOnly Property HasSources As Boolean
     Get
       Return sources.length > 0
     End Get
   End Property
-
   Public ReadOnly Property HasTimeline As Boolean
     Get
       Return events.length > 0
     End Get
   End Property
-
   Public Property ID As String
     Get
       Return sID
@@ -120,13 +110,11 @@ Public MustInherit Class AncestorAbstract
       End If
     End Set
   End Property
-
   Public ReadOnly Property IsDeathDateExpected As Boolean
     Get
       Return (2023 - GedBirthDate.Year) > 90
     End Get
   End Property
-
   Public ReadOnly Property IsValid As Boolean = False
   Public ReadOnly Property LifeSpan As String
     Get
@@ -144,7 +132,16 @@ Public MustInherit Class AncestorAbstract
       Return birth & " - " & death
     End Get
   End Property
-
+  Public ReadOnly Property ProfileImage As Image
+    Get
+      If _ProfileImage Is Nothing Then
+        If gallery.length > 0 Then
+          _ProfileImage = gallery.ProfileImage
+        End If
+      End If
+      Return _ProfileImage
+    End Get
+  End Property
   Public Property Surname As String
     Get
       Return facts.Value("SURNAME")
@@ -154,86 +151,6 @@ Public MustInherit Class AncestorAbstract
       facts.Save()
     End Set
   End Property
-
-#End Region
-
-#Region "Private Methods"
-
-  Private Sub LoadAncestor()
-    facts = New AAFile(FullPath("facts.aa"))
-    If facts.AAFileType = AAFileTypeEnum.UNDEFINED Then
-      facts.AAFileType = AAFileTypeEnum.KEYVALUEPAIRS
-      facts.Value("SURNAME") = ""
-      facts.Value("GIVENNAME") = ""
-      facts.Save()
-    End If
-    parents = New AAFile(FullPath("parents.aa"))
-    If parents.AAFileType = AAFileTypeEnum.UNDEFINED Then
-      parents.AAFileType = AAFileTypeEnum.LISTARRAY
-      parents.Save()
-    End If
-    children = New AAFile(FullPath("children.aa"))
-    If children.AAFileType = AAFileTypeEnum.UNDEFINED Then
-      children.AAFileType = AAFileTypeEnum.LISTARRAY
-      children.Save()
-    End If
-    siblings = New AAFile(FullPath("siblings.aa"))
-    If siblings.AAFileType = AAFileTypeEnum.UNDEFINED Then
-      siblings.AAFileType = AAFileTypeEnum.LISTARRAY
-      siblings.Save()
-    End If
-    sources = New SourceData(FullPath("Sources"))
-    oCensus = New ACensus(Me)
-    events = New TimelineData(FullPath("Events"))
-    notebook = New ANotebook(FullPath("Notebook"))
-    gallery = New AGallery(FullPath("Gallery"), FullPath("Census"))
-
-  End Sub
-
-#End Region
-
-#Region "Internal Methods"
-
-  Friend Sub LoadAncestor(MyAncestorPath As String)
-    AncestorPath = MyAncestorPath
-    LoadAncestor()
-  End Sub
-
-#End Region
-
-#Region "Public Methods"
-
-  Public Function AncestorFactDifferences(msg As APIMessage) As List(Of String)
-    Dim rtn As New List(Of String)
-    For Each factkey As String In AncestorFactList()
-      If Not Fact(factkey).Equals(msg.GetValue(factkey)) Then
-        rtn.Add(factkey)
-      End If
-    Next
-    Return rtn
-  End Function
-
-  Public Function AncestorFactList() As List(Of String)
-    Dim rtn As New List(Of String)
-    rtn.AddRange({"givenname", "surname", "suffix", "birthPlace", "birthDate", "deathPlace", "deathDate", "gender", "photo"})
-    Return rtn
-  End Function
-
-  Public Function AncestorMatchesMessage(msg As APIMessage) As Boolean
-    Return AncestorFactDifferences(msg).Count = 0
-  End Function
-
-  Public Function FullPath(FileOrDirName As String) As String
-    Return AncestorPath + FileOrDirName
-  End Function
-
-  Public Sub Refresh()
-    LoadAncestor()
-  End Sub
-
-#End Region
-
-#Region "Indexers"
 
   Public Property Fact(factKey As String) As String
     Get
@@ -263,6 +180,68 @@ Public MustInherit Class AncestorAbstract
     End Set
   End Property
 
-#End Region
+  Private Sub LoadAncestor()
+    facts = New AAFile(FullPath("facts.aa"))
+    If facts.AAFileType = AAFileTypeEnum.UNDEFINED Then
+      facts.AAFileType = AAFileTypeEnum.KEYVALUEPAIRS
+      facts.Value("SURNAME") = ""
+      facts.Value("GIVENNAME") = ""
+      facts.Save()
+    End If
+    parents = New AAFile(FullPath("parents.aa"))
+    If parents.AAFileType = AAFileTypeEnum.UNDEFINED Then
+      parents.AAFileType = AAFileTypeEnum.LISTARRAY
+      parents.Save()
+    End If
+    children = New AAFile(FullPath("children.aa"))
+    If children.AAFileType = AAFileTypeEnum.UNDEFINED Then
+      children.AAFileType = AAFileTypeEnum.LISTARRAY
+      children.Save()
+    End If
+    siblings = New AAFile(FullPath("siblings.aa"))
+    If siblings.AAFileType = AAFileTypeEnum.UNDEFINED Then
+      siblings.AAFileType = AAFileTypeEnum.LISTARRAY
+      siblings.Save()
+    End If
+    sources = New AncestorSourcesData(FullPath("Sources"))
+    oCensus = New AncestorCensusData(Me)
+    events = New AncestorTimelineData(FullPath("Events"))
+    notebook = New ANotebook(FullPath("Notebook"))
+    gallery = New AncestorGalleryData(FullPath("Gallery"), FullPath("Census"))
+
+  End Sub
+
+  Friend Sub LoadAncestor(MyAncestorPath As String)
+    AncestorPath = MyAncestorPath
+    LoadAncestor()
+  End Sub
+
+  Public Function AncestorFactDifferences(msg As APIMessage) As List(Of String)
+    Dim rtn As New List(Of String)
+    For Each factkey As String In AncestorFactList()
+      If Not Fact(factkey).Equals(msg.GetValue(factkey)) Then
+        rtn.Add(factkey)
+      End If
+    Next
+    Return rtn
+  End Function
+
+  Public Function AncestorFactList() As List(Of String)
+    Dim rtn As New List(Of String)
+    rtn.AddRange({"givenname", "surname", "suffix", "birthPlace", "birthDate", "deathPlace", "deathDate", "gender", "photo"})
+    Return rtn
+  End Function
+
+  Public Function AncestorMatchesMessage(msg As APIMessage) As Boolean
+    Return AncestorFactDifferences(msg).Count = 0
+  End Function
+
+  Public Function FullPath(FileOrDirName As String) As String
+    Return AncestorPath + FileOrDirName
+  End Function
+
+  Public Sub Refresh()
+    LoadAncestor()
+  End Sub
 
 End Class

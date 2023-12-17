@@ -3,22 +3,10 @@
 Public Class Ribbon
   Inherits TabControl
 
-#Region "Fields"
-
   Private RegistryBar As New Dictionary(Of String, RibbonBar)
   Private RegistryGroup As New Dictionary(Of String, RibbonGroup)
   Private RegistryTab As New Dictionary(Of String, TabPage)
   Public RegistryItem As New Dictionary(Of String, RibbonItem)
-
-#End Region
-
-#Region "Events"
-
-  Public Event RibbonAction(action As RibbonEventType, value As Object, barId As Integer, groupId As Integer, itemId As Integer)
-
-#End Region
-
-#Region "Properties"
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)>
   Private Shadows ReadOnly Property TabPages As TabPageCollection
@@ -28,16 +16,20 @@ Public Class Ribbon
   End Property
 
   Public Property AppBackColor As Color = My.Theme.AppBackColor
+
   Public Property AppForeColor As Color = My.Theme.AppFontColor
+
   Public Property AppHighlightColor As Color = My.Theme.AppHighlightColor
+
   Public Property RibbonAccentColor As Color = My.Theme.RibbonAccentColor
+
   Public Property RibbonBackColor As Color = My.Theme.RibbonBackColor
+
   Public Property RibbonForeColor As Color = My.Theme.RibbonForeColor
+
   Public Property RibbonShadowColor As Color = My.Theme.RibbonShadowColor
 
-#End Region
-
-#Region "Public Constructors"
+  Public Event RibbonAction(action As RibbonEventType, value As Object, barId As Integer, groupId As Integer, itemId As Integer)
 
   Public Sub New()
     MyBase.New
@@ -58,10 +50,6 @@ Public Class Ribbon
     ResumeLayout(False)
     PerformLayout()
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub RenderControl(sender As Object, e As PaintEventArgs) Handles Me.Paint
     Dim g As Graphics = e.Graphics
@@ -124,10 +112,6 @@ Public Class Ribbon
   Private Sub RibbonItemAction(sender As RibbonItem, action As RibbonEventType, value As Object)
     RaiseEvent RibbonAction(action, value, sender.BarId, sender.GroupId, sender.ItemId)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Shared Function RibbonKey(barId As Integer, Optional groupId As Integer = 0, Optional itemId As Integer = 0) As String
     If itemId > 0 Then Return "B" & barId & ".G" & groupId & ".I" & itemId
@@ -321,6 +305,12 @@ Public Class Ribbon
     RegistryItem.Add(RibbonKey(item.BarId, item.GroupId, item.ItemId), item)
   End Sub
 
+  Public Sub SetGroupAttribute(groupKey As String, attribute As RibbonItemAttribute, value As Object)
+    If RegistryGroup.ContainsKey(groupKey) Then
+      RegistryGroup(groupKey).SetAttribute(attribute, value)
+    End If
+  End Sub
+
   Public Sub SetGroupItemsAttribute(groupKey As String, attribute As RibbonItemAttribute, value As Object)
     For Each Itemkey As String In RegistryItem.Keys
       If Itemkey.StartsWith(groupKey + ".") Then
@@ -330,7 +320,9 @@ Public Class Ribbon
   End Sub
 
   Public Sub SetItemAttribute(key As String, attribute As RibbonItemAttribute, value As Object)
-    GetItem(key).SetAttribute(attribute, value)
+    If RegistryItem.ContainsKey(key) Then
+      GetItem(key).SetAttribute(attribute, value)
+    End If
   End Sub
 
   Public Sub ShowBar(barKey As String)
@@ -341,7 +333,5 @@ Public Class Ribbon
       SelectedTab = RegistryTab.Item(barKey)
     End If
   End Sub
-
-#End Region
 
 End Class

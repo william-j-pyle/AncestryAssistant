@@ -1,15 +1,9 @@
 Public Class IndividualTag
   Inherits AbstractTag
 
-#Region "Fields"
-
   Private _given As String = String.Empty
   Private _surname As String = String.Empty
   Public Const GEDCOM_TAG As String = "INDI"
-
-#End Region
-
-#Region "Properties"
 
   Public Property familySearchID As String
   ' Attributes
@@ -61,17 +55,9 @@ Public Class IndividualTag
 
   Public Property universalID As String
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New(data As Gedcom)
     MyBase.New(data, GEDCOM_TAG, True)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Function processTag(key As String) As Boolean
     Select Case key
@@ -130,7 +116,5 @@ Public Class IndividualTag
     End Select
     Return True
   End Function
-
-#End Region
 
 End Class

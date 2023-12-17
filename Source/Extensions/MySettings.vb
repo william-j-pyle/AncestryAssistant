@@ -8,8 +8,6 @@ Namespace My
   ''' </summary>
   Partial Friend NotInheritable Class MySettings
 
-#Region "Private Methods"
-
     ''' <summary>
     '''     The PropertyChanged event is raised after a Setting's value is changed.
     ''' </summary>
@@ -53,8 +51,6 @@ Namespace My
     Private Sub MySettings_SettingsSaving(sender As Object, e As CancelEventArgs) Handles Me.SettingsSaving
 
     End Sub
-
-#End Region
 
   End Class
 

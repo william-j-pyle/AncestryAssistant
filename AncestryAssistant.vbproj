@@ -19,7 +19,7 @@
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2023.1216.1322</Version>
+    <Version>1.2023.1217.419</Version>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -39,8 +39,8 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>false</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>AncestryAssistant.xml</DocumentationFile>
     <NoWarn>
@@ -320,6 +320,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Controls\Flat\IFlatItem.vb" />
+    <Compile Include="Source\Controls\Ribbon\Config\RibbonConstants.vb" />
     <Compile Include="Source\Controls\Ribbon\Enum\RibbonItemAttribute.vb" />
     <Compile Include="Source\Controls\Ribbon\RibbonConfig.vb" />
     <Compile Include="Source\Controls\Ribbon\RibbonItems\RIButton.vb">
@@ -382,11 +383,11 @@
     <Compile Include="Source\Data\Ancestor\AncestorAbstract.vb" />
     <Compile Include="Source\Data\Ancestor\AncestorCollection.vb" />
     <Compile Include="Source\Data\AAFile\AAFile.vb" />
-    <Compile Include="Source\Data\Ancestor\DataTypes\CensusData.vb" />
-    <Compile Include="Source\Data\Ancestor\DataTypes\GalleryData.vb" />
+    <Compile Include="Source\Data\Ancestor\DataTypes\AncestorCensusData.vb" />
+    <Compile Include="Source\Data\Ancestor\DataTypes\AncestorGalleryData.vb" />
     <Compile Include="Source\Data\Ancestor\DataTypes\NotebookData.vb" />
-    <Compile Include="Source\Data\Ancestor\DataTypes\SourceData.vb" />
-    <Compile Include="Source\Data\Ancestor\DataTypes\TimelineData.vb" />
+    <Compile Include="Source\Data\Ancestor\DataTypes\AncestorSourcesData.vb" />
+    <Compile Include="Source\Data\Ancestor\DataTypes\AncestorTimelineData.vb" />
     <Compile Include="Source\Data\AAFile\AAFileTypeEnum.vb" />
     <Compile Include="Source\Controls\Flat\FlatListView.vb">
       <SubType>Component</SubType>
@@ -449,7 +450,6 @@
     <Compile Include="Source\Forms\FormTestFlat.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\Helpers\ResizeDragHandler.vb" />
     <Compile Include="Source\Dialogs\DialogImageSave.Designer.vb">
       <DependentUpon>DialogImageSave.vb</DependentUpon>
     </Compile>
@@ -487,7 +487,6 @@
     </Compile>
     <Compile Include="Source\Data\Gedcom\File\FileLineEntry.vb" />
     <Compile Include="Source\Data\Gedcom\Primatives\GedDate.vb" />
-    <None Include="Source\Controls\Ribbon\Config\Ribbon - Original.json" />
     <None Include="Source\Controls\Ribbon\Config\Ribbon_ImageEditorBar.json" />
     <None Include="Source\Controls\Ribbon\Config\Ribbon_NotesBar.json" />
     <None Include="Source\Controls\Ribbon\Config\Ribbon_ResearchBar.json" />
@@ -603,11 +602,14 @@
     <Folder Include="Config\" />
     <Folder Include="Documentation\assets\" />
     <Folder Include="Source\Controls\Ribbon\RibbonPageItems\" />
+    <Folder Include="Source\Controls\Web\" />
     <Folder Include="Source\Data\SQLite\" />
     <Folder Include="Source\Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <None Include="Resources\image\missing-profile-female.png" />
+    <None Include="Resources\image\missing-profile-male.png" />
     <None Include="Resources\image\event-education.png" />
     <None Include="Resources\image\location.png" />
     <None Include="Resources\image\image-crop.png" />

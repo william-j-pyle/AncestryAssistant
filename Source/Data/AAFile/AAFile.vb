@@ -3,8 +3,6 @@ Imports System.Text
 
 Public Class AAFile
 
-#Region "Fields"
-
   Const FIELD_SEPERATOR_CODE As Integer = 175
   Private _IsDirty As Boolean = False
   Private aValueHeaders() As String = {}
@@ -13,10 +11,6 @@ Public Class AAFile
   Private iAAFileType As AAFileTypeEnum = AAFileTypeEnum.UNDEFINED
   Private sAAFileName As String = ""
   Private sSingleValue As String = ""
-
-#End Region
-
-#Region "Properties"
 
   Public Property AAFileName As String
     Get
@@ -70,9 +64,34 @@ Public Class AAFile
     End Get
   End Property
 
-#End Region
-
-#Region "Public Constructors"
+  Public Property Value(Optional key As String = "") As String
+    Get
+      Select Case AAFileType
+        Case AAFileTypeEnum.KEYVALUEPAIRS ' Key/Value Pairs
+          If dKeyValuePair.ContainsKey(key) Then
+            Return dKeyValuePair.Item(key)
+          Else
+            Return String.Empty
+          End If
+        Case AAFileTypeEnum.SINGLEVALUE ' Single Value
+          Return sSingleValue
+      End Select
+      Return String.Empty
+    End Get
+    Set(value As String)
+      Select Case AAFileType
+        Case AAFileTypeEnum.KEYVALUEPAIRS ' Key/Value Pairs
+          If dKeyValuePair.ContainsKey(key) Then
+            dKeyValuePair.Item(key) = value
+          Else
+            dKeyValuePair.Add(key, value)
+          End If
+        Case AAFileTypeEnum.SINGLEVALUE ' Single Value
+          sSingleValue = value
+      End Select
+      _IsDirty = True
+    End Set
+  End Property
 
   Public Sub New()
     Initialize()
@@ -82,10 +101,6 @@ Public Class AAFile
     AAFileType = FileType
     AAFileName = FileName
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub Initialize()
     aValueHeaders = {}
@@ -134,10 +149,6 @@ Public Class AAFile
       End If
     End If
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Function GetHeaders() As String()
     Return aValueHeaders
@@ -225,40 +236,5 @@ Public Class AAFile
     aValues = values
     _IsDirty = True
   End Sub
-
-#End Region
-
-#Region "Indexers"
-
-  Public Property Value(Optional key As String = "") As String
-    Get
-      Select Case AAFileType
-        Case AAFileTypeEnum.KEYVALUEPAIRS ' Key/Value Pairs
-          If dKeyValuePair.ContainsKey(key) Then
-            Return dKeyValuePair.Item(key)
-          Else
-            Return String.Empty
-          End If
-        Case AAFileTypeEnum.SINGLEVALUE ' Single Value
-          Return sSingleValue
-      End Select
-      Return String.Empty
-    End Get
-    Set(value As String)
-      Select Case AAFileType
-        Case AAFileTypeEnum.KEYVALUEPAIRS ' Key/Value Pairs
-          If dKeyValuePair.ContainsKey(key) Then
-            dKeyValuePair.Item(key) = value
-          Else
-            dKeyValuePair.Add(key, value)
-          End If
-        Case AAFileTypeEnum.SINGLEVALUE ' Single Value
-          sSingleValue = value
-      End Select
-      _IsDirty = True
-    End Set
-  End Property
-
-#End Region
 
 End Class

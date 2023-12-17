@@ -1,15 +1,9 @@
 ﻿Imports System.IO
 
-Public Class AGallery
-
-#Region "Fields"
+Public Class AncestorGalleryData
 
   Private dataEntries As List(Of String)
   Private recordLocations() As String
-
-#End Region
-
-#Region "Properties"
 
   Public ReadOnly Property length As Integer
     Get
@@ -17,11 +11,29 @@ Public Class AGallery
     End Get
   End Property
 
+  Public ReadOnly Property ProfileFilename As String
+    Get
+      If length > 0 Then
+        For Each filename As String In dataEntries
+          If filename.Contains("PHOTO-PROFILE") Then
+            Return filename
+          End If
+        Next
+      End If
+      Return String.Empty
+    End Get
+  End Property
+
+  Public ReadOnly Property ProfileImage As Image
+    Get
+      If ProfileFilename.Length > 0 Then
+        Return Image.FromFile(ProfileFilename)
+      End If
+      Return Nothing
+    End Get
+  End Property
+
   Public ReadOnly Property RecordsBasePath As String = ""
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New(ParamArray RecordsLocations() As String)
     recordLocations = RecordsLocations
@@ -29,10 +41,6 @@ Public Class AGallery
     If Not RecordsBasePath.EndsWith("\") Then RecordsBasePath += "\"
     Initialize()
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub Initialize()
     dataEntries = New List(Of String)
@@ -43,7 +51,5 @@ Public Class AGallery
       dataEntries.AddRange(Directory.GetFiles(Loc, "*.jpg"))
     Next
   End Sub
-
-#End Region
 
 End Class

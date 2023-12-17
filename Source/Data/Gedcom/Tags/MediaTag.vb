@@ -1,13 +1,7 @@
 Public Class MediaTag
   Inherits AbstractTag
 
-#Region "Fields"
-
   Public Const GEDCOM_TAG As String = "OBJE"
-
-#End Region
-
-#Region "Properties"
 
   ' Attributes
   Public Property atl As String
@@ -35,17 +29,9 @@ Public Class MediaTag
   Public Property placeID As String
   Public Property rin As String
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New(data As Gedcom)
     MyBase.New(data, GEDCOM_TAG, True)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Function processTag(key As String) As Boolean
     Select Case key
@@ -116,7 +102,5 @@ Public Class MediaTag
     Return True
 
   End Function
-
-#End Region
 
 End Class

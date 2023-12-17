@@ -3,14 +3,8 @@
 Public Class FlatMenuBar
   Inherits System.Windows.Forms.MenuStrip
 
-#Region "Fields"
-
   'Required by the Windows Form Designer
   Private components As System.ComponentModel.IContainer
-
-#End Region
-
-#Region "Properties"
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
   Public Shadows Property BackColor As Color
@@ -18,20 +12,12 @@ Public Class FlatMenuBar
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
   Public Shadows Property RenderMode As ToolStripRenderMode
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New()
     components = New System.ComponentModel.Container()
     Renderer = New MyRenderer()
     MyBase.BackColor = My.Theme.PanelBorderColor
     MyBase.ForeColor = My.Theme.PanelFontColor
   End Sub
-
-#End Region
-
-#Region "Protected Methods"
 
   'UserControl overrides dispose to clean up the component list.
   <System.Diagnostics.DebuggerNonUserCode()>
@@ -57,14 +43,8 @@ Public Class FlatMenuBar
     MyBase.OnPaintGrip(e)
   End Sub
 
-#End Region
-
-#Region "Classes"
-
   Private Class MyRenderer
     Inherits ToolStripRenderer
-
-#Region "Protected Methods"
 
     Protected Overrides Sub OnRenderArrow(e As ToolStripArrowRenderEventArgs)
       MyBase.OnRenderArrow(e)
@@ -181,10 +161,6 @@ Public Class FlatMenuBar
       MyBase.OnRenderToolStripStatusLabelBackground(e)
     End Sub
 
-#End Region
-
   End Class
-
-#End Region
 
 End Class

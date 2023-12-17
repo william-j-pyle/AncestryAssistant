@@ -1,13 +1,7 @@
 ﻿Public Class RibbonBar
   Inherits Panel
 
-#Region "Fields"
-
   Protected Friend WithEvents RibbonCntl As Ribbon
-
-#End Region
-
-#Region "Properties"
 
   Public Property AppBackColor As Color = My.Theme.AppBackColor
   Public Property AppForeColor As Color = My.Theme.AppFontColor
@@ -17,10 +11,6 @@
   Public Property RibbonBackColor As Color = My.Theme.RibbonBackColor
   Public Property RibbonForeColor As Color = My.Theme.RibbonForeColor
   Public Property RibbonShadowColor As Color = My.Theme.RibbonShadowColor
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New()
     Me.New(Nothing, "RibbonBar", 1)
@@ -43,10 +33,6 @@
     Dock = DockStyle.Top
     ResumeLayout(False)
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub RenderControl(sender As Object, e As PaintEventArgs) Handles Me.Paint
     Dim h As Integer = Height - 1
@@ -89,10 +75,6 @@
     End If
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
   Public Function AddGroup(sName As String, sCaption As String, iBarId As Integer, iGroupId As Integer) As RibbonGroup
     Dim rg As New RibbonGroup(RibbonCntl, sName, sCaption, iBarId, iGroupId) With {
       .AppBackColor = AppBackColor,
@@ -107,7 +89,5 @@
     rg.BringToFront()
     Return rg
   End Function
-
-#End Region
 
 End Class

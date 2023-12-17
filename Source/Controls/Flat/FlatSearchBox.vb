@@ -6,8 +6,6 @@
 Public Class FlatSearchBox
   Inherits System.Windows.Forms.UserControl
 
-#Region "Fields"
-
   Private WithEvents BtnDropdown As Button
 
   Private WithEvents BtnSearch As Button
@@ -23,16 +21,6 @@ Public Class FlatSearchBox
   Private components As System.ComponentModel.IContainer
 
   Private PnlContainer As Panel
-
-#End Region
-
-#Region "Events"
-
-  Public Event SearchEvent As FlatSearchEventHandler
-
-#End Region
-
-#Region "Properties"
 
   Public Property BackColorActive As Color = My.Theme.PanelBackColor
 
@@ -107,9 +95,7 @@ Public Class FlatSearchBox
     End Set
   End Property
 
-#End Region
-
-#Region "Public Constructors"
+  Public Event SearchEvent As FlatSearchEventHandler
 
   Public Sub New()
     SuspendLayout()
@@ -180,10 +166,6 @@ Public Class FlatSearchBox
     ResumeLayout(False)
     PerformLayout()
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
     If State = SearchState.FocusNoSearch And TxtSearch.Text.Length > 0 Then
@@ -262,10 +244,6 @@ Public Class FlatSearchBox
 
   End Sub
 
-#End Region
-
-#Region "Protected Methods"
-
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
     Try
       If disposing AndAlso components IsNot Nothing Then
@@ -276,17 +254,11 @@ Public Class FlatSearchBox
     End Try
   End Sub
 
-#End Region
-
-#Region "Enums"
-
   Public Enum SearchState
     NoFocusNoSearch = 0
     NoFocusSearch
     FocusNoSearch
     FocusSearch
   End Enum
-
-#End Region
 
 End Class

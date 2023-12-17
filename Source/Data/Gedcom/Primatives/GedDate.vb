@@ -2,8 +2,6 @@
 
 Public Class GedDate
 
-#Region "Fields"
-
   Private bAbout As Boolean = False
   Private bAfter As Boolean = False
   Private bBefore As Boolean = False
@@ -16,10 +14,6 @@ Public Class GedDate
   Private sCleanDateString As String = ""
   Private sFormat As String = ""
   Private sSourceDateString As String = ""
-
-#End Region
-
-#Region "Properties"
 
   Public ReadOnly Property DateFormat As String
     Get
@@ -115,10 +109,6 @@ Public Class GedDate
     End Get
   End Property
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New(dateString As String)
     SourceDateString = dateString
   End Sub
@@ -126,10 +116,6 @@ Public Class GedDate
   Public Sub New()
     'Nothing to see here...
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub Initialize()
     sSourceDateString = ""
@@ -318,10 +304,6 @@ Public Class GedDate
     Return False
   End Function
 
-#End Region
-
-#Region "Public Methods"
-
   Public Function toAssistantDate() As String
     Dim rtnString As String = ""
     If IsValid Then
@@ -391,7 +373,5 @@ Public Class GedDate
     End If
     Return rtnString
   End Function
-
-#End Region
 
 End Class

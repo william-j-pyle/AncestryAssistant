@@ -3,8 +3,6 @@
   'TODO: This form can easily be Set as the splash screen for the application by going to the "Application" Tab
   '  of the Project Designer ("Properties" under the "Project" menu).
 
-#Region "Private Methods"
-
   Private Sub SplashForm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     'Set up the dialog text at runtime according to the application's assembly information.
 
@@ -24,7 +22,5 @@
     'Copyright info
     Copyright.Text = My.Application.Info.Copyright
   End Sub
-
-#End Region
 
 End Class

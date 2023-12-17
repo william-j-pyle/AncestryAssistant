@@ -3,8 +3,6 @@
 Public Class DPICensus
   Inherits DockPanelItem
 
-#Region "Fields"
-
   Private WithEvents Ts As FlatToolBar
   Private WithEvents XlsActiveSheet As DataGridView
   Private Const Default_ItemCaption As String = "Census"
@@ -29,10 +27,6 @@ Public Class DPICensus
   Private components As System.ComponentModel.IContainer
   Private XlsWorkbook As Dictionary(Of Integer, DataGridView)
   Public Const Base_Key As String = "DOCK_CENSUS"
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New(Optional instanceKey As String = "")
     'Apply Item Defaults for this Type
@@ -82,10 +76,6 @@ Public Class DPICensus
     PerformLayout()
     CaptureFocus(Me)
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub AddCensusFile(CensusYear As String, Filename As String)
     Debug.Print(CensusYear, Filename)
@@ -611,10 +601,6 @@ Public Class DPICensus
     XlsActiveSheet.BringToFront()
   End Sub
 
-#End Region
-
-#Region "Protected Methods"
-
   'UserControl overrides dispose to clean up the component list.
   <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
@@ -663,10 +649,6 @@ Public Class DPICensus
     End If
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
   Public Overrides Sub ApplySearch(criteria As String)
     Throw New NotImplementedException()
   End Sub
@@ -677,7 +659,5 @@ Public Class DPICensus
 
   Public Overrides Sub EventRequest(eventType As DockPanelItemEventType, eventData As Object)
   End Sub
-
-#End Region
 
 End Class

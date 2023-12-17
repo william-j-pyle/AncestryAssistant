@@ -1,7 +1,5 @@
 Public Class FileLineEntry
 
-#Region "Properties"
-
   Public ReadOnly Property keyFlat As String
 
   Public ReadOnly Property line As String
@@ -16,10 +14,6 @@ Public Class FileLineEntry
 
   Public ReadOnly Property lineTag As String
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New(dlineIdx As Double, ilineLvl As Integer, slineTag As String, slineRef As String, slineData As String, skeyFlat As String, sline As String)
     lineIdx = dlineIdx
     lineLvl = ilineLvl
@@ -29,7 +23,5 @@ Public Class FileLineEntry
     keyFlat = skeyFlat
     line = sline
   End Sub
-
-#End Region
 
 End Class

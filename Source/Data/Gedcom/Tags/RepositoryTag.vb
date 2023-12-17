@@ -1,30 +1,16 @@
 Public Class RepositoryTag
   Inherits AbstractTag
 
-#Region "Fields"
-
   Public Const GEDCOM_TAG As String = "REPO"
-
-#End Region
-
-#Region "Properties"
 
   ' Attributes
   Public Property address As String
 
   Public Property name As String
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New(data As Gedcom)
     MyBase.New(data, GEDCOM_TAG, True)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Function processTag(key As String) As Boolean
     Select Case key
@@ -42,7 +28,5 @@ Public Class RepositoryTag
     End Select
     Return True
   End Function
-
-#End Region
 
 End Class

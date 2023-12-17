@@ -1,8 +1,6 @@
 ﻿Public Class RIListView
   Inherits RibbonItem
 
-#Region "Public Methods"
-
   Public Overrides Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
     Throw New NotImplementedException()
   End Function
@@ -13,7 +11,5 @@
         Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select
   End Sub
-
-#End Region
 
 End Class

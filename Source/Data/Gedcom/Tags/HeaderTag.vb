@@ -1,13 +1,7 @@
 Public Class HeaderTag
   Inherits AbstractTag
 
-#Region "Fields"
-
   Public Const GEDCOM_TAG As String = "HEAD"
-
-#End Region
-
-#Region "Properties"
 
   Public Property anTreeName As String
   Public Property createDate As GedDate
@@ -24,17 +18,9 @@ Public Class HeaderTag
   Public Property rin As String
   Public Property sourceCount As Integer
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New(data As Gedcom)
     MyBase.New(data, GEDCOM_TAG, True)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Function processTag(key As String) As Boolean
     Select Case key
@@ -69,7 +55,5 @@ Public Class HeaderTag
     End Select
     Return True
   End Function
-
-#End Region
 
 End Class

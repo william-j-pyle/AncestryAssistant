@@ -3,8 +3,6 @@
 Public Class DPIAncestorDetails
   Inherits DockPanelItem
 
-#Region "Fields"
-
   Private WithEvents AncestorAttributes As TreeView
   Private WithEvents AncestorAttributesCol1 As FlatPanel
   Private WithEvents AncestorAttributesCol2 As FlatPanel
@@ -32,10 +30,6 @@ Public Class DPIAncestorDetails
   Private components As System.ComponentModel.IContainer
   Private LastAttributeItem As TreeNode
   Public Const Base_Key As String = "DOCK_ANCESTORATTRIBUTES"
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New(Optional instanceKey As String = "")
     'Apply Item Defaults for this Type
@@ -197,10 +191,6 @@ Public Class DPIAncestorDetails
     CaptureFocus(Me)
   End Sub
 
-#End Region
-
-#Region "Private Methods"
-
   Private Sub AddAttributeItem(Key As String, Text As String, Optional ImageKey As String = "", Optional SelectedImageKey As String = "")
     LastAttributeItem = AncestorAttributes.Nodes.Add(Key, Text, ImageKey, SelectedImageKey)
     LastAttributeItem.Tag = Key
@@ -295,10 +285,6 @@ Public Class DPIAncestorDetails
     Next
   End Sub
 
-#End Region
-
-#Region "Protected Methods"
-
   'UserControl overrides dispose to clean up the component list.
   <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
@@ -357,10 +343,6 @@ Public Class DPIAncestorDetails
     RestoreAttributeState()
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
   Public Overrides Sub ApplySearch(criteria As String)
   End Sub
 
@@ -369,7 +351,5 @@ Public Class DPIAncestorDetails
 
   Public Overrides Sub EventRequest(eventType As DockPanelItemEventType, eventData As Object)
   End Sub
-
-#End Region
 
 End Class

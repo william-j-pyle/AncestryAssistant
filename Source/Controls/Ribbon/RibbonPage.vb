@@ -1,31 +1,25 @@
 ﻿Public Class RibbonPage
 
-#Region "Fields"
-
   Private items As Dictionary(Of String, FlatPanel)
 
   Private selectedKey As String = ""
 
-#End Region
-
-#Region "Events"
-
-  Public Event FileTabButtonClicked(key As String)
-
-  Public Event FileTabItemSelected(key As String)
-
-#End Region
-
-#Region "Properties"
-
   Public Property AppBackColor As Color = My.Theme.AppBackColor
+
   Public Property AppForeColor As Color = My.Theme.AppFontColor
+
   Public Property AppHighlightColor As Color = My.Theme.AppHighlightColor
+
   Public ReadOnly Property Id As String = ""
+
   Public Property RibbonAccentColor As Color = My.Theme.RibbonAccentColor
+
   Public Property RibbonBackColor As Color = My.Theme.RibbonBackColor
+
   Public Property RibbonForeColor As Color = My.Theme.RibbonForeColor
+
   Public Property RibbonShadowColor As Color = My.Theme.RibbonShadowColor
+
   Public Property SelectedItemKey As String
     Get
       Return selectedKey
@@ -41,9 +35,9 @@
     End Set
   End Property
 
-#End Region
+  Public Event FileTabButtonClicked(key As String)
 
-#Region "Public Constructors"
+  Public Event FileTabItemSelected(key As String)
 
   Public Sub New()
     InitializeComponent()
@@ -65,10 +59,6 @@
     trackButton("options", {Label8, BordersPanel9})
     SelectedItemKey = "new"
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub BtnFileTabBack_ButtonClick(sender As Object, e As EventArgs) Handles BtnFileTabBack.Click
     Visible = False
@@ -125,7 +115,5 @@
       End If
     Next
   End Sub
-
-#End Region
 
 End Class

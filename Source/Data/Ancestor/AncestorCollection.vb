@@ -3,25 +3,9 @@
 Public Class AncestorCollection
   Inherits Dictionary(Of String, Ancestor)
 
-#Region "Fields"
-
   Private _ActiveAncestorID As String = ""
   'Private AncestorEntries As Dictionary(Of String, Ancestor)
   Private _RepositoryPath As String = ""
-
-#End Region
-
-#Region "Events"
-
-  Public Event ActiveAncestorChanged()
-
-  Public Event AncestorsChanged()
-
-  Public Event RepositoryPathChanged(NewPath As String)
-
-#End Region
-
-#Region "Properties"
 
   Public ReadOnly Property ActiveAncestor As Ancestor
     Get
@@ -32,6 +16,7 @@ Public Class AncestorCollection
       End If
     End Get
   End Property
+
   Public Property ActiveAncestorID As String
     Get
       Return _ActiveAncestorID
@@ -43,11 +28,13 @@ Public Class AncestorCollection
       End If
     End Set
   End Property
+
   Public ReadOnly Property HasActiveAncestor As Boolean
     Get
       Return Len(ActiveAncestorID) > 1
     End Get
   End Property
+
   Public Property RepositoryPath As String
     Get
       Return _RepositoryPath
@@ -65,17 +52,20 @@ Public Class AncestorCollection
     End Set
   End Property
 
-#End Region
+  Public Event ActiveAncestorChanged()
 
-#Region "Public Constructors"
+  Public Event AncestorsChanged()
+
+  Public Event RepositoryPathChanged(NewPath As String)
 
   Public Sub New(AncestorsRepositoryPath As String)
     RepositoryPath = AncestorsRepositoryPath
   End Sub
 
-#End Region
-
-#Region "Private Methods"
+  Protected Overrides Sub Finalize()
+    EndPathMonitoring()
+    MyBase.Finalize()
+  End Sub
 
   Private Sub AncestorsRepositoryPathChanged(NewPath As String) Handles Me.RepositoryPathChanged
     ' Setup Path Monitoring
@@ -105,10 +95,6 @@ Public Class AncestorCollection
     Next
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
   Public Function HasAncestor(AncestryID As String) As Boolean
     Return ContainsKey(AncestryID)
   End Function
@@ -130,32 +116,13 @@ Public Class AncestorCollection
     End If
   End Sub
 
-#End Region
-
-#Region "Protected Destructors"
-
-  Protected Overrides Sub Finalize()
-    EndPathMonitoring()
-    MyBase.Finalize()
-  End Sub
-
-#End Region
-
-#Region "Classes"
-
   Public Class Ancestor
     Inherits AncestorAbstract
-
-#Region "Internal Constructors"
 
     Friend Sub New(AncestorPath As String)
       LoadAncestor(AncestorPath)
     End Sub
 
-#End Region
-
   End Class
-
-#End Region
 
 End Class

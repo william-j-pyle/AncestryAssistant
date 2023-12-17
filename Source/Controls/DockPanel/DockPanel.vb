@@ -1,8 +1,6 @@
 ﻿Public Class DockPanel
   Inherits System.Windows.Forms.UserControl
 
-#Region "Fields"
-
   Private WithEvents BtnClose As FlatIconButton
   Private WithEvents BtnContextMenu As FlatIconButton
   Private WithEvents BtnPinned As FlatIconButton
@@ -32,26 +30,6 @@
   Private RegionControlBox As Rectangle
   Private RegionHeader As Rectangle
   Private RegionSearch As Rectangle
-
-#End Region
-
-#Region "Events"
-
-  Public Event PanelClose(dockPanelObj As DockPanel)
-
-  Public Event PanelFocusChanged(dockPanelObj As DockPanel, HasFocus As Boolean)
-
-  'Public Event PanelItemClose(panelItemObj As DockPanelItem)
-
-  'Public Event PanelItemLocationChange(panelItemObj As DockPanelItem, toPanelLocation As DockPanelLocation)
-
-  'Public Event PanelItemSelected(panelItemObj As DockPanelItem)
-
-  Public Event PanelItemEvent(panelItem As DockPanelItem, eventType As DockPanelItemEventType, eventData As Object)
-
-#End Region
-
-#Region "Properties"
 
   Public ReadOnly Property PanelCaption As String
     Get
@@ -183,9 +161,17 @@
     End Get
   End Property
 
-#End Region
+  Public Event PanelClose(dockPanelObj As DockPanel)
 
-#Region "Public Constructors"
+  Public Event PanelFocusChanged(dockPanelObj As DockPanel, HasFocus As Boolean)
+
+  'Public Event PanelItemClose(panelItemObj As DockPanelItem)
+
+  'Public Event PanelItemLocationChange(panelItemObj As DockPanelItem, toPanelLocation As DockPanelLocation)
+
+  'Public Event PanelItemSelected(panelItemObj As DockPanelItem)
+
+  Public Event PanelItemEvent(panelItem As DockPanelItem, eventType As DockPanelItemEventType, eventData As Object)
 
   Public Sub New()
     PnlMain = New AncestryAssistant.FlatPanel()
@@ -459,10 +445,6 @@
     AddHandler TxtSearch.LostFocus, AddressOf Search_LostFocus
 
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub CaptureFocus(ctl As Control)
     Try
@@ -752,10 +734,6 @@
     TxtSearch.BackColor = My.Theme.PanelBorderColor
   End Sub
 
-#End Region
-
-#Region "Protected Methods"
-
   <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
     Try
@@ -766,10 +744,6 @@
       MyBase.Dispose(disposing)
     End Try
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Function Item(itemKey As String) As DockPanelItem
     If ItemExists(itemKey) Then
@@ -888,13 +862,7 @@
     RaiseEvent PanelItemEvent(Item, eventType, eventData)
   End Sub
 
-#End Region
-
-#Region "Classes"
-
   Private Class LayoutPropertyBag
-
-#Region "Properties"
 
     Public Property PanelHasFocus As Boolean
     Public Property PanelShowClose As Boolean
@@ -905,10 +873,6 @@
     Public Property Ready As Boolean = False
     Public Property TabPagesCount As Integer
 
-#End Region
-
   End Class
-
-#End Region
 
 End Class

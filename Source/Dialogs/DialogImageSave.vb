@@ -1,7 +1,5 @@
 ﻿Public Class SaveImageDialog
 
-#Region "Properties"
-
   Public ReadOnly Property ImageCategory As String
     Get
       Return cmbType.Text
@@ -25,10 +23,6 @@
       Return GetDetails()
     End Get
   End Property
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub Cancel_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
     DialogResult = System.Windows.Forms.DialogResult.Cancel
@@ -66,7 +60,7 @@
       cmbCategory.Items.Add(str)
     Next
     cmbCategory.Items.Add("Other")
-    cmbCategory.Text = Txt
+    cmbCategory.Text = txt
   End Sub
 
   Private Sub InitDetails(data As List(Of List(Of String)))
@@ -93,7 +87,7 @@
   End Sub
 
   Private Sub InitSummary(txt As String)
-    TxtSummary.Text = Txt
+    TxtSummary.Text = txt
   End Sub
 
   Private Sub loadTypes(category As String, Optional type As String = "")
@@ -139,10 +133,6 @@
     End If
     Logger.log(Logger.LOG_TYPE.INFO, "SaveSettings.End")
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Sub HidePayload()
     ' LblDetails.Visible = False
@@ -193,7 +183,5 @@
     InitDetails(msg.Payload)
 
   End Sub
-
-#End Region
 
 End Class

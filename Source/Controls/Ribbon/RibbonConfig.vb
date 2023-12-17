@@ -1,7 +1,5 @@
 ﻿Public Class RibbonConfig
 
-#Region "Fields"
-
   Public Const GROUP_COL_SPACING As Integer = 2
   Public Const GROUP_COL_WIDTH As Integer = 24
   Public Const GROUP_LEFT_SPACING As Integer = 4
@@ -11,19 +9,11 @@
   Public Const RIBBON_BAR_HEIGHT As Integer = 100
   Public Const RIBBON_TAB_HEIGHT As Integer = 20
 
-#End Region
-
-#Region "Properties"
-
   Public Property bars As List(Of Bar)
 
   Public Property groups As List(Of Group)
 
   Public Property items As List(Of Item)
-
-#End Region
-
-#Region "Public Methods"
 
   Public Sub AppendConfig(config As RibbonConfig)
     If config IsNot Nothing Then
@@ -102,24 +92,14 @@
     Return itm
   End Function
 
-#End Region
-
-#Region "Classes"
-
   Public Class AttributeValuePair
-
-#Region "Properties"
 
     Public Property Attribute As String
     Public Property Value As String
 
-#End Region
-
   End Class
 
   Public Class Bar
-
-#Region "Properties"
 
     Public Property attributes As List(Of AttributeValuePair)
     Public Property enabled As Boolean = True
@@ -130,10 +110,6 @@
     Public Property text As String = ""
     Public Property visible As Boolean = True
 
-#End Region
-
-#Region "Public Methods"
-
     Public Function GetAttribute(attributeName As String, Optional defaultValue As Object = Nothing) As Object
       If attributes Is Nothing Then Return defaultValue
       For Each kv As AttributeValuePair In attributes
@@ -144,13 +120,9 @@
       Return defaultValue
     End Function
 
-#End Region
-
   End Class
 
   Public Class Group
-
-#Region "Properties"
 
     Public Property attributes As List(Of AttributeValuePair)
     Public Property enabled As Boolean = True
@@ -161,10 +133,6 @@
     Public Property text As String = ""
     Public Property visible As Boolean = True
 
-#End Region
-
-#Region "Public Methods"
-
     Public Function GetAttribute(attributeName As String, Optional defaultValue As Object = Nothing) As Object
       If attributes Is Nothing Then Return defaultValue
       For Each kv As AttributeValuePair In attributes
@@ -175,13 +143,9 @@
       Return defaultValue
     End Function
 
-#End Region
-
   End Class
 
   Public Class Item
-
-#Region "Properties"
 
     Public Property attributes As List(Of AttributeValuePair)
     Public Property col As Double = 0
@@ -206,10 +170,6 @@
     Public Property rowspan As Double = 1
     Public Property visible As Boolean = True
 
-#End Region
-
-#Region "Public Methods"
-
     Public Function GetAttribute(attributeName As String, Optional defaultValue As Object = Nothing) As Object
       If attributes Is Nothing Then Return defaultValue
       For Each kv As AttributeValuePair In attributes
@@ -224,10 +184,6 @@
       Return TryCast(My.Resources.ResourceManager.GetObject(CStr(GetAttribute("icon"))), Image)
     End Function
 
-#End Region
-
   End Class
-
-#End Region
 
 End Class

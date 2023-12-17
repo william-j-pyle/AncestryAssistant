@@ -1,16 +1,10 @@
 ﻿Imports System.IO
 
-Public Class ACensus
-
-#Region "Fields"
+Public Class AncestorCensusData
 
   Private Ancestor As AncestorCollection.Ancestor
   Private censusYears() As Integer = {1950, 1940, 1930, 1920, 1910, 1900, 1890, 1880, 1870, 1860, 1850, 1840, 1830, 1820, 1810, 1800, 1790}
   Private dataEntries() As String
-
-#End Region
-
-#Region "Properties"
 
   Public ReadOnly Property AvailableYears As List(Of Integer)
     Get
@@ -18,6 +12,25 @@ Public Class ACensus
     End Get
   End Property
 
+  Public ReadOnly Property CensusEntries As List(Of CensusEntry)
+    Get
+      Dim entries As New List(Of CensusEntry)
+      Dim entry As CensusEntry
+      For Each censusYear As Integer In ExpectedYears
+        entry = New CensusEntry()
+        With entry
+          .Year = censusYear
+          .hasData = AvailableYears.Contains(censusYear)
+          .aaFilename = String.Empty
+          If .hasData Then
+            .aaFilename = GetAAFilename(censusYear)
+          End If
+        End With
+        entries.Add(entry)
+      Next
+      Return entries
+    End Get
+  End Property
   Public ReadOnly Property ExpectedYears As List(Of Integer)
     Get
       Dim birth As Integer = Ancestor.GedBirthDate.Year
@@ -25,7 +38,6 @@ Public Class ACensus
       Return CreateExpectedYears(birth, death)
     End Get
   End Property
-
   Public ReadOnly Property length As Integer
     Get
       Return dataEntries.Length
@@ -34,10 +46,6 @@ Public Class ACensus
 
   Public ReadOnly Property RecordsBasePath As String = ""
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New(ancestorObj As AncestorCollection.Ancestor)
     Ancestor = ancestorObj
     Dim recordslocation As String = Ancestor.FullPath("Census")
@@ -45,10 +53,6 @@ Public Class ACensus
     RecordsBasePath = recordslocation
     Initialize()
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Function CreateAvailableYears() As List(Of Integer)
     Dim available As New List(Of Integer)
@@ -80,10 +84,6 @@ Public Class ACensus
 
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
   Public Function addCensusData(msg As APIMessage) As String
     Dim year As String = msg.GetValue("Title").Split(" "c)(0)
     Dim page As String = msg.GetValue("PageNbr")
@@ -114,6 +114,15 @@ Public Class ACensus
     Return aaRtn
   End Function
 
+  Public Function GetAAFilename(censusYear As Integer) As String
+    For Each entry As String In dataEntries
+      If censusYear = CInt(entry.Split("-"c)(1)) Then
+        Return entry
+      End If
+    Next
+    Return String.Empty
+  End Function
+
   Public Function hasYear(censusYear As Integer) As Boolean
     For Each entry As String In dataEntries
       If censusYear = CInt(entry.Split("-"c)(1)) Then
@@ -127,6 +136,12 @@ Public Class ACensus
     Initialize()
   End Sub
 
-#End Region
+  Public Class CensusEntry
+
+    Public Property aaFilename As String
+    Public Property hasData As Boolean
+    Public Property Year As Integer
+
+  End Class
 
 End Class

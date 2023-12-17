@@ -3,8 +3,6 @@
 Public Class DPIAncestorsList
   Inherits DockPanelItem
 
-#Region "Fields"
-
   Private WithEvents AncestorsList As FlatListView
   Private Const Default_ItemCaption As String = "Ancestors List"
   Private Const Default_ItemHasRibbonBar As Boolean = False
@@ -22,10 +20,6 @@ Public Class DPIAncestorsList
   Private blockEvents As Boolean = False
   Private components As System.ComponentModel.IContainer
   Public Const Base_Key As String = "DOCK_ANCESTORSLIST"
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New(Optional instanceKey As String = "")
     'Apply Item Defaults for this Type
@@ -86,10 +80,6 @@ Public Class DPIAncestorsList
     CaptureFocus(Me)
   End Sub
 
-#End Region
-
-#Region "Private Methods"
-
   Private Sub AncestorsList_DoubleClick(sender As Object, e As EventArgs) Handles AncestorsList.DoubleClick
     Dim ActiveAncestorID As String = AncestorsList.SelectedItems.Item(0).Tag.ToString
     If Not ActiveAncestorID.Equals("") Then
@@ -111,10 +101,6 @@ Public Class DPIAncestorsList
       End If
     End With
   End Sub
-
-#End Region
-
-#Region "Protected Methods"
 
   'UserControl overrides dispose to clean up the component list.
   <System.Diagnostics.DebuggerNonUserCode()>
@@ -161,10 +147,6 @@ Public Class DPIAncestorsList
     UpdateUI(False)
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
   Public Overrides Sub ApplySearch(criteria As String)
     AncestorsList.Filter(criteria)
   End Sub
@@ -175,7 +157,5 @@ Public Class DPIAncestorsList
 
   Public Overrides Sub EventRequest(eventType As DockPanelItemEventType, eventData As Object)
   End Sub
-
-#End Region
 
 End Class

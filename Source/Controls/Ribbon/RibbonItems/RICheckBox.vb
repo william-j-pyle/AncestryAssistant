@@ -1,13 +1,7 @@
 ﻿Public Class RICheckBox
   Inherits RibbonItem
 
-#Region "Fields"
-
   Private ctl As CheckBox
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New()
     ctl = New CheckBox With {
@@ -28,10 +22,6 @@
     Controls.Add(ctl)
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
   Public Overrides Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
     Throw New NotImplementedException()
   End Function
@@ -46,7 +36,5 @@
         Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select
   End Sub
-
-#End Region
 
 End Class

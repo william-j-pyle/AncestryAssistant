@@ -1,8 +1,6 @@
 Public Class NameTag
   Inherits AbstractTag
 
-#Region "Properties"
-
   ' Attributes
   Public Property given As String
 
@@ -12,17 +10,9 @@ Public Class NameTag
 
   Public Property surname As String
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New(data As Gedcom, ownerID As String)
     MyBase.New(data, "NAME", False, ownerID)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Sub generateID()
     ID = data.createID(GedTagEnum.TYPE_NAME)
@@ -52,7 +42,5 @@ Public Class NameTag
     Return True
 
   End Function
-
-#End Region
 
 End Class

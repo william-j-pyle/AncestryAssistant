@@ -7,8 +7,6 @@ Imports Newtonsoft.Json
 Public Class DPIWebBrowser
   Inherits DockPanelItem
 
-#Region "Fields"
-
   Private WithEvents BtnBack As ToolStripButton
   Private WithEvents BtnHome As ToolStripButton
   Private WithEvents BtnReload As ToolStripButton
@@ -46,20 +44,6 @@ Public Class DPIWebBrowser
   Private UriTrackingGroupDecoder As New UriTracking()
   Public Const Base_Key As String = "DOCK_WEBBROWSER"
 
-#End Region
-
-#Region "Events"
-
-  Public Event DataDownload(data As APIMessage)
-
-  Public Event UriTrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
-
-  Public Event ViewerBusy(busy As Boolean)
-
-#End Region
-
-#Region "Properties"
-
   Public Property AncestorID As String
     Get
       Return _AncestorID
@@ -72,8 +56,11 @@ Public Class DPIWebBrowser
   End Property
 
   Public Property AncestryPage As String = ""
+
   Public Property AncestryTreeID As String = ""
+
   Public Property BlockedWebDomains As String() = {"adsafe", "syndication", "facebook", "doubleclick", "tiktok", "pinterest", "adservice", "ad-delivery", "adspsp", "adsystem", "adnxs", "securepubads"}
+
   Public Property BlockWebTracking As Boolean = False
 
   Public Property HREF As String
@@ -134,9 +121,11 @@ Public Class DPIWebBrowser
     End Set
   End Property
 
-#End Region
+  Public Event DataDownload(data As APIMessage)
 
-#Region "Public Constructors"
+  Public Event UriTrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
+
+  Public Event ViewerBusy(busy As Boolean)
 
   Public Sub New(Optional instanceKey As String = "")
     'Apply Item Defaults for this Type
@@ -251,10 +240,6 @@ Public Class DPIWebBrowser
     Web.EnsureCoreWebView2Async()
     CaptureFocus(Me)
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
     Web.GoBack()
@@ -488,10 +473,6 @@ Public Class DPIWebBrowser
     TxtHref.Text = Web.Source.AbsoluteUri
   End Sub
 
-#End Region
-
-#Region "Protected Methods"
-
   'UserControl overrides dispose to clean up the component list.
   <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
@@ -507,10 +488,6 @@ Public Class DPIWebBrowser
   Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
     'Throw New NotImplementedException()
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Sub ApplySearch(criteria As String)
     Throw New NotImplementedException()
@@ -582,19 +559,9 @@ Public Class DPIWebBrowser
     End If
   End Sub
 
-#End Region
-
-#Region "Classes"
-
   Public Class UriTracking
 
-#Region "Fields"
-
     Private UriTrackerConfig As List(Of UriTracks)
-
-#End Region
-
-#Region "Public Constructors"
 
     Public Sub New()
       UriTrackerConfig = New List(Of UriTracks) From {
@@ -627,10 +594,6 @@ Public Class DPIWebBrowser
       }
     End Sub
 
-#End Region
-
-#Region "Public Methods"
-
     Public Function GetEnum(pageData() As String) As UriTrackingGroupEnum
       For Each track As UriTracks In UriTrackerConfig
         If track.Matches(pageData) Then
@@ -640,31 +603,17 @@ Public Class DPIWebBrowser
       Return UriTrackingGroupEnum.CUSTOM
     End Function
 
-#End Region
-
-#Region "Classes"
-
     Public Class UriTracks
-
-#Region "Properties"
 
       Public ReadOnly Property PageDataElements As String()
 
       Public ReadOnly Property UriTrackingGroup As UriTrackingGroupEnum
-
-#End Region
-
-#Region "Public Constructors"
 
       Public Sub New(trackingGroup As UriTrackingGroupEnum, pageData() As String)
         UriTrackingGroup = trackingGroup
 
         PageDataElements = pageData
       End Sub
-
-#End Region
-
-#Region "Public Methods"
 
       Public Function Matches(pPageData() As String) As Boolean
         Dim uPageData() As String = PageDataElements
@@ -679,14 +628,8 @@ Public Class DPIWebBrowser
         Return True
       End Function
 
-#End Region
-
     End Class
 
-#End Region
-
   End Class
-
-#End Region
 
 End Class

@@ -1,13 +1,7 @@
 Public Class FamilyTag
   Inherits AbstractTag
 
-#Region "Fields"
-
   Public Const GEDCOM_TAG As String = "FAM"
-
-#End Region
-
-#Region "Properties"
 
   Public Property childIDs As List(Of String)
   ' Attributes
@@ -16,17 +10,9 @@ Public Class FamilyTag
   Public Property motherID As String
   Public Property parentRelationship As String
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New(data As Gedcom)
     MyBase.New(data, GEDCOM_TAG, True)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Function processTag(key As String) As Boolean
     Select Case key
@@ -57,7 +43,5 @@ Public Class FamilyTag
     End Select
     Return True
   End Function
-
-#End Region
 
 End Class

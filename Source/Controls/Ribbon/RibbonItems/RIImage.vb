@@ -1,13 +1,7 @@
 ﻿Public Class RIImage
   Inherits RibbonItem
 
-#Region "Fields"
-
   Private WithEvents Img As Panel
-
-#End Region
-
-#Region "Properties"
 
   Public Property Image As Image
     Get
@@ -23,10 +17,6 @@
     End Set
   End Property
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New()
     Img = New Panel With {
       .Dock = DockStyle.Fill,
@@ -35,12 +25,8 @@
       .ForeColor = ForeColor,
       .BackgroundImageLayout = ImageLayout.None
     }
-    Controls.Add(img)
+    Controls.Add(Img)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
     Throw New NotImplementedException()
@@ -48,19 +34,17 @@
 
   Public Overrides Sub SetAttribute(ItemAttribute As RibbonItemAttribute, attributeValue As Object)
     Select Case ItemAttribute
-      Case RibbonItemAttribute.ImageFromFile
+      Case RibbonItemAttribute.imagefromfile
         Image = ImageFromFile(CType(attributeValue, String))
-      Case RibbonItemAttribute.ImageFromResource
+      Case RibbonItemAttribute.imagefromresource
         Image = ImageFromResource(CType(attributeValue, String))
-      Case RibbonItemAttribute.Image
+      Case RibbonItemAttribute.image
         Image = CType(attributeValue, Image)
-      Case RibbonItemAttribute.Enabled
+      Case RibbonItemAttribute.enabled
         Img.Enabled = CType(attributeValue, Boolean)
       Case Else
         Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select
   End Sub
-
-#End Region
 
 End Class

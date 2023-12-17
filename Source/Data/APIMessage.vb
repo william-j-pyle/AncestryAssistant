@@ -2,8 +2,6 @@
 
 Public Class APIMessage
 
-#Region "Fields"
-
   Public Const MT_ACCOUNT As String = "account"
   Public Const MT_FINDAGRAVE As String = "findagrave"
   Public Const MT_IMGDOWNLOAD As String = "imageDownload"
@@ -13,18 +11,10 @@ Public Class APIMessage
   Public Const MT_TABLEDATA As String = "tabledata"
   Public Const MT_TREES As String = "trees"
 
-#End Region
-
-#Region "Properties"
-
   Public Property MessageKey As String
   Public Property MessageType As String
   Public Property PageKey As String
   Public Property Payload As List(Of List(Of String))
-
-#End Region
-
-#Region "Public Methods"
 
   Public Function ContainsKey(key As String) As Boolean
     Return KeyIndex(key) > 0
@@ -84,7 +74,5 @@ Public Class APIMessage
     End If
     Return 0
   End Function
-
-#End Region
 
 End Class

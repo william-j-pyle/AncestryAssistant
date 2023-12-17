@@ -1,7 +1,5 @@
 ﻿Public Class GedName
 
-#Region "Properties"
-
   Public Property AKA As String = String.Empty
 
   Public Property Given As String = String.Empty
@@ -45,10 +43,6 @@
 
   Public Property SurName As String = String.Empty
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New(newFullName As String)
     Name = newFullName
   End Sub
@@ -63,7 +57,5 @@
     Given = newGivenName
     Suffix = newSuffix
   End Sub
-
-#End Region
 
 End Class

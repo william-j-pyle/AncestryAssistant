@@ -5,14 +5,8 @@ Public Delegate Sub FlatSearchEventHandler(sender As Object, e As FlatSearchEven
 Public Class FlatSearchEventArgs
   Inherits EventArgs
 
-#Region "Properties"
-
   Public Property Criteria As String = ""
   Public Property IsCanceled As Boolean = False
-
-#End Region
-
-#Region "Public Constructors"
 
   ' Constructor to initialize the custom data
   Public Sub New(searchCriteria As String)
@@ -27,7 +21,5 @@ Public Class FlatSearchEventArgs
     Criteria = searchCriteria
     IsCanceled = canceled
   End Sub
-
-#End Region
 
 End Class

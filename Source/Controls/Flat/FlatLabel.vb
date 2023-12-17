@@ -6,13 +6,7 @@
 Public Class FlatLabel
   Inherits System.Windows.Forms.UserControl
 
-#Region "Fields"
-
   Friend WithEvents TxtCenterMe As Label
-
-#End Region
-
-#Region "Properties"
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)>
   Public Shadows Property Padding As Padding
@@ -26,10 +20,6 @@ Public Class FlatLabel
       TxtCenterMe.Text = value
     End Set
   End Property
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New()
     SuspendLayout()
@@ -57,10 +47,6 @@ Public Class FlatLabel
     ResumeLayout(False)
     PerformLayout()
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub InitializeComponent()
     SuspendLayout()
@@ -113,7 +99,5 @@ Public Class FlatLabel
   Private Sub TxtCenterMe_TextChanged(sender As Object, e As EventArgs) Handles TxtCenterMe.TextChanged
     OnTextChanged(e)
   End Sub
-
-#End Region
 
 End Class

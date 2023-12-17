@@ -2,13 +2,7 @@
 
 Partial Class AssistantAppForm
 
-#Region "Fields"
-
   Private WithEvents RibbonFileTab As RibbonPage
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub InitRibbonExtension() Handles Me.InitUIExtensions
 #If TRACE Then
@@ -33,7 +27,9 @@ Partial Class AssistantAppForm
   End Sub
 
   Private Sub RibbonBar_Action(action As RibbonEventType, value As Object, barId As Integer, groupId As Integer, itemId As Integer)
-    'Logger.debugPrint("RibbonAction: {0}={1}    [{2}]", action.ToString, value, Ribbon.RibbonKey(barId, groupId, itemId))
+#If DEBUG Then
+    Logger.debugPrint("RibbonAction: {0}={1}    [{2}]", action.ToString, value, Ribbon.RibbonKey(barId, groupId, itemId))
+#End If
 
     Select Case Ribbon.RibbonKey(barId, groupId, itemId)
       Case "B200.G5.I17" 'Census
@@ -51,7 +47,7 @@ Partial Class AssistantAppForm
         DockManager.ItemShow(DPIImageGallery.Base_Key)
       Case "B200.G5.I19" 'Notebook
         DockManager.ItemShow(DPINotebook.Base_Key)
-      Case "B200.G3.I9" 'Facts
+      Case RIBBON_MAIN_ANCESTRY_FACTS 'Facts
         DockManager.ItemEventRequest(DPIWebBrowser.Base_Key, DockPanelItemEventType.NavRequested, UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON)
         DockManager.ItemShow(DPIWebBrowser.Base_Key)
       Case "B200.G2"
@@ -80,6 +76,22 @@ Partial Class AssistantAppForm
   Private Sub RibbonBar_ActiveAncestorChanged()
     Dim Ancestor As AncestorCollection.Ancestor = Ancestors.ActiveAncestor
 
+    Dim profileImage As Image
+    If Ancestor.HasProfileImage Then
+      profileImage = GetImageThumbnail(Ancestor.ProfileImage, 72)
+    Else
+      Select Case Ancestor.Fact("GENDER")
+        Case "Female"
+          profileImage = My.Resources.missing_profile_female
+        Case "Male"
+          profileImage = My.Resources.missing_profile_male
+        Case Else
+          profileImage = My.Resources.missing_profile
+      End Select
+    End If
+
+    RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 2, 4), RibbonItemAttribute.image, profileImage)
+    RibbonBar.SetGroupAttribute(Ribbon.RibbonKey(200, 2), RibbonItemAttribute.text, Ancestor.FullName)
     RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 2, 7), RibbonItemAttribute.text, Ancestor.GedBirthDate.toAssistantDate)
     RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 2, 8), RibbonItemAttribute.text, Ancestor.GedDeathDate.toAssistantDate)
     RibbonBar.EnableBar(Ribbon.RibbonKey(200))
@@ -90,12 +102,15 @@ Partial Class AssistantAppForm
     Next
     Dim hasCensus As Boolean = False
     x = 201
-    For Each yr As Integer In Ancestor.Census.ExpectedYears
-      Dim hasYear As Boolean = Ancestor.Census.hasYear(yr)
-      If Not hasCensus And hasYear Then hasCensus = True
-      RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, x), RibbonItemAttribute.text, yr)
-      RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, x), RibbonItemAttribute.visible, True)
-      RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, x), RibbonItemAttribute.enabled, hasYear)
+    For Each censusEntry As AncestorCensusData.CensusEntry In Ancestor.Census.CensusEntries
+      Dim key As String = Ribbon.RibbonKey(200, 6, x)
+      With censusEntry
+        If .hasData Then hasCensus = True
+        RibbonBar.SetItemAttribute(key, RibbonItemAttribute.value, .Year)
+        RibbonBar.SetItemAttribute(key, RibbonItemAttribute.text, .Year)
+        RibbonBar.SetItemAttribute(key, RibbonItemAttribute.enabled, .hasData)
+        RibbonBar.SetItemAttribute(key, RibbonItemAttribute.visible, True)
+      End With
       x += 1
     Next
     RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, 17), RibbonItemAttribute.enabled, hasCensus)
@@ -113,7 +128,5 @@ Partial Class AssistantAppForm
       End With
     End If
   End Sub
-
-#End Region
 
 End Class

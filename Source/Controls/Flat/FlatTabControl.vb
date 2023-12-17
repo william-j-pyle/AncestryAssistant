@@ -1,30 +1,21 @@
 ﻿Public Class FlatTabControl
   Inherits TabControl
 
-#Region "Fields"
-
   Private closeTarget As Rectangle
 
-#End Region
-
-#Region "Events"
-
-  Public Event BtnClose_Click(sender As Object, e As EventArgs)
-
-#End Region
-
-#Region "Properties"
-
   Public Property ShowHasFocus As Boolean = False
+
   Public Property TabCloseIcon As Image = My.Resources.panel_header_close
+
   Public Property TabPinnedIcon As Image = My.Resources.panel_header_pin
+
   Public Property TabShowClose As Boolean = True
+
   Public Property TabType As DockPanelType = DockPanelType.Tab
+
   Public Property TabUnPinnedIcon As Image = My.Resources.panel_header_unpinned
 
-#End Region
-
-#Region "Public Constructors"
+  Public Event BtnClose_Click(sender As Object, e As EventArgs)
 
   Public Sub New()
     SetStyle(ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.UserPaint Or ControlStyles.OptimizedDoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
@@ -34,10 +25,6 @@
     closeTarget = New Rectangle
     ShowToolTips = True
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub DockTabControl_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown
     If closeTarget.IsEmpty Then Exit Sub
@@ -229,7 +216,5 @@
     e.Graphics.DrawLine(New Pen(ctlBarColor, 2), l, TabBounds.Bottom - 1, r, TabBounds.Bottom - 1)
 
   End Sub
-
-#End Region
 
 End Class

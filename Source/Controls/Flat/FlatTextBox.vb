@@ -7,13 +7,7 @@ Imports System.Windows.Forms.Layout
 Public Class FlatTextBox
   Inherits System.Windows.Forms.UserControl
 
-#Region "Fields"
-
   Friend WithEvents TxtCenterMe As TextBox
-
-#End Region
-
-#Region "Properties"
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)>
   Public Overrides Property AllowDrop As Boolean
@@ -213,10 +207,6 @@ Public Class FlatTextBox
     End Set
   End Property
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New()
     SuspendLayout()
 
@@ -229,7 +219,7 @@ Public Class FlatTextBox
       .Name = "txtCenterMe"
     End With
 
-    Controls.Add(txtCenterMe)
+    Controls.Add(TxtCenterMe)
     BorderStyle = BorderStyle.None
     AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
     Margin = New System.Windows.Forms.Padding(0)
@@ -241,10 +231,6 @@ Public Class FlatTextBox
     ResumeLayout(False)
     PerformLayout()
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub FlatTextBox_GotFocus(sender As Object, e As EventArgs) Handles Me.GotFocus
     If Not TxtCenterMe.Focused Then TxtCenterMe.Focus()
@@ -303,7 +289,5 @@ Public Class FlatTextBox
   Private Sub TxtCenterMe_TextChanged(sender As Object, e As EventArgs) Handles TxtCenterMe.TextChanged
     OnTextChanged(e)
   End Sub
-
-#End Region
 
 End Class

@@ -6,8 +6,6 @@ Imports Newtonsoft.Json
 Public Class FlatWebBrowser
   Inherits UserControl
 
-#Region "Fields"
-
   Private WithEvents CoreWeb As CoreWebView2
   Private WithEvents CoreWebDownload As CoreWebView2DownloadOperation
   Private WithEvents Web As WebView2
@@ -16,29 +14,9 @@ Public Class FlatWebBrowser
   ' Tracking
   Private isReady As Boolean = False
 
-#End Region
-
-#Region "Events"
-
-  Public Event DataDownload(data As APIMessage)
-
-  Public Event ViewerBusy(busy As Boolean)
-
-#End Region
-
-#Region "Properties"
-
   Public Property BlockedWebDomains As String() = {"adsafe", "syndication", "facebook", "doubleclick", "tiktok", "pinterest", "adservice", "ad-delivery", "adspsp", "adsystem", "adnxs", "securepubads"}
-  Public Property BlockWebTracking As Boolean = False
 
-  'Public Property HREF As String
-  '  Get
-  '    Return URL.AbsoluteUri
-  '  End Get
-  '  Set(value As String)
-  '    URL = New Uri(value)
-  '  End Set
-  'End Property
+  Public Property BlockWebTracking As Boolean = False
 
   Public Property ZoomFactor As Double
     Get
@@ -49,9 +27,18 @@ Public Class FlatWebBrowser
     End Set
   End Property
 
-#End Region
+  Public Event DataDownload(data As APIMessage)
 
-#Region "Public Constructors"
+  Public Event ViewerBusy(busy As Boolean)
+
+  'Public Property HREF As String
+  '  Get
+  '    Return URL.AbsoluteUri
+  '  End Get
+  '  Set(value As String)
+  '    URL = New Uri(value)
+  '  End Set
+  'End Property
 
   Public Sub New()
     Web = New Microsoft.Web.WebView2.WinForms.WebView2()
@@ -75,10 +62,6 @@ Public Class FlatWebBrowser
     PerformLayout()
     Web.EnsureCoreWebView2Async()
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   ' When the browser detects a file is being downloaded me routine will fire, we Capture the DownloadOperation object
   ' and monitor its events for completion of the download, then fire an event about the download
@@ -239,10 +222,6 @@ Public Class FlatWebBrowser
     'TxtHref.Text = Web.Source.AbsoluteUri
   End Sub
 
-#End Region
-
-#Region "Protected Methods"
-
   'UserControl overrides dispose to clean up the component list.
   <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
@@ -255,18 +234,12 @@ Public Class FlatWebBrowser
     End Try
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
   Public Sub ActionRequest(eventType As DockPanelItemEventType, eventData As Object)
     Select Case eventType
       Case DockPanelItemEventType.NavRequested
         ' NavigateTo(CType(eventData, UriTrackingGroupEnum))
     End Select
   End Sub
-
-#End Region
 
   'Public Sub saveImageAs(filename As String)
   '  Dim src As String = Web.Source.AbsoluteUri

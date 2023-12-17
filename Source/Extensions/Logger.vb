@@ -3,22 +3,12 @@ Imports System.Text
 
 Public Class Logger
 
-#Region "Fields"
-
   Private Const DEBUGLOG_FILENAME As String = "D:\Geneology\Logs\AncestryAssistantDebug.log"
   Private Const LOG_FILENAME As String = "D:\Geneology\Logs\AncestryAssistant.log"
-
-#End Region
-
-#Region "Private Constructors"
 
   Private Sub New()
     'NOOP
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Shared Sub Clear()
     If File.Exists(DEBUGLOG_FILENAME) Then My.Computer.FileSystem.DeleteFile(DEBUGLOG_FILENAME)
@@ -51,17 +41,11 @@ Public Class Logger
     System.IO.File.AppendAllText(LOG_FILENAME, sb.ToString)
   End Sub
 
-#End Region
-
-#Region "Enums"
-
   Public Enum LOG_TYPE
     INFO
     ERR
     DEBUG
   End Enum
-
-#End Region
 
   'Public Shared Sub info(message() As String)
   '  log(LOG_TYPE.INFO, message)

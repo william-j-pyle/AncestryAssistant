@@ -1,11 +1,10 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Imports AncestryAssistant.AncestorCollection
 
 #Const RESET_SAVED_SETTINGS = False
 
 Public Class AssistantAppForm
-
-#Region "Fields"
 
   Private WithEvents Ancestors As AncestorCollection
 
@@ -17,19 +16,11 @@ Public Class AssistantAppForm
 
   Private Const FINDAGRAVE_IMAGE As String = "Download FindAGrave Image"
 
-#End Region
-
   'Public Event ActiveAncestorChanged()
 
   'Public Event AncestorsUpdated()
 
-#Region "Events"
-
   Public Event InitUIExtensions()
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New()
 #If RESET_SAVED_SETTINGS Then
@@ -41,10 +32,6 @@ Public Class AssistantAppForm
     InitializeComponent()
 
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub AncestryBrowserBusyChanged(busy As Boolean)
     If busy Then
@@ -172,6 +159,29 @@ Public Class AssistantAppForm
     'End If
   End Sub
 
+  Private Sub Application_CloseButton_Click(sender As Object, e As EventArgs)
+    Close()
+  End Sub
+
+  Private Sub Application_Form_Closing(sender As Object, e As CancelEventArgs)
+    If WindowState <> FormWindowState.Normal Then
+      WindowState = FormWindowState.Normal
+    End If
+    SettingsSave()
+  End Sub
+
+  Private Sub Application_MaxButton_Click(sender As Object, e As EventArgs)
+    If WindowState = FormWindowState.Normal Then
+      WindowState = FormWindowState.Maximized
+    ElseIf WindowState = FormWindowState.Maximized Then
+      WindowState = FormWindowState.Normal
+    End If
+  End Sub
+
+  Private Sub Application_MinButton_Click(sender As Object, e As EventArgs)
+    WindowState = FormWindowState.Minimized
+  End Sub
+
   Private Sub BtnActions_Click(sender As Object, e As EventArgs)
     'btnActions.Visible = False
     'If BtnActions.Tag Is Nothing Then Exit Sub
@@ -249,11 +259,15 @@ Public Class AssistantAppForm
   End Sub
 
   Private Sub InitUI(sender As Object, e As EventArgs) Handles Me.Load
-#If TRACE Then
-    Logger.debugPrint("FormMain.InitUI()")
-#End If
     ' Init the Ancestors data repository
     Ancestors = New AncestorCollection(My.Settings.AncestorsPath)
+
+    'Add Form Event Handlers
+    AddHandler AppMinButton.Click, AddressOf Application_MinButton_Click
+    AddHandler AppMaxButton.Click, AddressOf Application_MaxButton_Click
+    AddHandler AppTitle.DoubleClick, AddressOf Application_MaxButton_Click
+    AddHandler Closing, AddressOf Application_Form_Closing
+    AddHandler AppCloseButton.Click, AddressOf Application_CloseButton_Click
 
     RaiseEvent InitUIExtensions()
 
@@ -294,7 +308,5 @@ Public Class AssistantAppForm
     My.Settings.APP_CLIENTSIZE = Size
     My.Settings.Save()
   End Sub
-
-#End Region
 
 End Class

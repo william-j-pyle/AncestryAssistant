@@ -1,15 +1,9 @@
 Public Class MttagRefTag
   Inherits AbstractTag
 
-#Region "Public Constructors"
-
   Public Sub New(data As Gedcom, ownerID As String)
     MyBase.New(data, "_MTTAG", False, ownerID)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Function processTag(key As String) As Boolean
     Select Case key
@@ -20,7 +14,5 @@ Public Class MttagRefTag
     End Select
     Return True
   End Function
-
-#End Region
 
 End Class

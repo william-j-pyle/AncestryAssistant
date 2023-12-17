@@ -3,8 +3,6 @@
 Public Class FlatPanel
   Inherits Panel
 
-#Region "Fields"
-
   <Browsable(True), Category("JControl"), Description("Color of the border around the control")>
   Dim _BorderColor As Color = Color.Transparent
   Dim _BorderColorBottom As Color = Color.Transparent
@@ -15,10 +13,6 @@ Public Class FlatPanel
   Dim _BorderWidth As New Padding(0)
   <Browsable(True), Category("JControl"), Description("Sets the number of pixels for the Corner radius. Valid 0 to Min(Height,Width)/2")>
   Private _CornerRadius As New Padding(0)
-
-#End Region
-
-#Region "Properties"
 
   Public Property BorderColor As Color
     Get
@@ -118,17 +112,9 @@ Public Class FlatPanel
     End Set
   End Property
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New()
     SetStyle(ControlStyles.UserPaint Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub BordersPanel_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
     'MyBase.OnPaint(e)
@@ -202,7 +188,5 @@ Public Class FlatPanel
     End If
 
   End Sub
-
-#End Region
 
 End Class

@@ -2,8 +2,6 @@
 
 Public MustInherit Class RibbonItem
 
-#Region "Fields"
-
   Private WithEvents RibbonCntl As Ribbon
   Private _Col As Double = 1
   Private _ColSpan As Double = 0
@@ -12,20 +10,6 @@ Public MustInherit Class RibbonItem
   <Browsable(True), EditorBrowsable(EditorBrowsableState.Always), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
   Private _Text As String = ""
   Private CaptionFont As New System.Drawing.Font("Segoe UI", 12, FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
-
-#End Region
-
-#Region "Events"
-
-  Public Event RibbonItemAction(sender As RibbonItem, eventType As RibbonEventType, value As Object)
-
-  Public Event RibbonItemLocationChanged(sender As Object, e As EventArgs)
-
-  Public Event RibbonItemSizeChanged(sender As Object, e As EventArgs)
-
-#End Region
-
-#Region "Properties"
 
   Public Property AppBackColor As Color = My.Theme.AppBackColor
 
@@ -67,6 +51,8 @@ Public MustInherit Class RibbonItem
   Public Property GroupId As Integer
 
   Public Property ItemId As Integer
+
+  Public Property ItemValue As Object = Nothing
 
   Public Property Ribbon As Ribbon
     Get
@@ -125,9 +111,11 @@ Public MustInherit Class RibbonItem
 
   Public Property TextImageRelation As TextImageRelation = TextImageRelation.ImageAboveText
 
-#End Region
+  Public Event RibbonItemAction(sender As RibbonItem, eventType As RibbonEventType, value As Object)
 
-#Region "Public Constructors"
+  Public Event RibbonItemLocationChanged(sender As Object, e As EventArgs)
+
+  Public Event RibbonItemSizeChanged(sender As Object, e As EventArgs)
 
   Public Sub New()
     Me.New(Nothing, "RibbonItem", 0, 0, 0)
@@ -150,10 +138,6 @@ Public MustInherit Class RibbonItem
     MaximumSize = New System.Drawing.Size(0, 0)
     MinimumSize = New System.Drawing.Size(RibbonConfig.GROUP_COL_WIDTH, RibbonConfig.GROUP_ROW_HEIGHT)
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub ApplyConstraints()
     'MinimumSize = New System.Drawing.Size(CInt(RibbonConfig.GROUP_COL_WIDTH * ColSpan), CInt(RibbonConfig.GROUP_ROW_HEIGHT * RowSpan))
@@ -190,8 +174,6 @@ Public MustInherit Class RibbonItem
     ApplyConstraints()
   End Sub
 
-#End Region
-
   'Public Function AlignStringToEnum(alignString As String) As ContentAlignment
   '  Dim align As ContentAlignment
   '  Select Case alignString.ToLower
@@ -218,8 +200,6 @@ Public MustInherit Class RibbonItem
   '  Return align
   'End Function
 
-#Region "Public Methods"
-
   Public MustOverride Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
 
   Public Function ImageFromFile(fileName As String) As Image
@@ -235,7 +215,5 @@ Public MustInherit Class RibbonItem
   End Sub
 
   Public MustOverride Sub SetAttribute(ItemAttribute As RibbonItemAttribute, attributeValue As Object)
-
-#End Region
 
 End Class

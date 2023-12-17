@@ -3,8 +3,6 @@
 Public Class DPINotebook
   Inherits DockPanelItem
 
-#Region "Fields"
-
   Friend WithEvents BtnAddPage As ToolStripButton
   Friend WithEvents BtnAddSection As ToolStripButton
   Friend WithEvents BtnH1 As ToolStripMenuItem
@@ -46,10 +44,6 @@ Public Class DPINotebook
   Private Const Default_RibbonShowOnItemOpen As Boolean = True
   Private components As System.ComponentModel.IContainer
   Public Const Base_Key As String = "DOCK_NOTEBOOK"
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New(Optional instanceKey As String = "")
     'Apply Item Defaults for this Type
@@ -440,17 +434,9 @@ Public Class DPINotebook
     CaptureFocus(Me)
   End Sub
 
-#End Region
-
-#Region "Private Methods"
-
   Private Sub TxtNotebookPageTitle_TextChanged(sender As Object, e As EventArgs) Handles TxtHeader.TextChanged
     LblStretch.Text = TxtHeader.Text
   End Sub
-
-#End Region
-
-#Region "Protected Methods"
 
   'UserControl overrides dispose to clean up the component list.
   <System.Diagnostics.DebuggerNonUserCode()>
@@ -468,10 +454,6 @@ Public Class DPINotebook
     'Throw New NotImplementedException()
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
   Public Overrides Sub ApplySearch(criteria As String)
     Throw New NotImplementedException()
   End Sub
@@ -482,7 +464,5 @@ Public Class DPINotebook
 
   Public Overrides Sub EventRequest(eventType As DockPanelItemEventType, eventData As Object)
   End Sub
-
-#End Region
 
 End Class

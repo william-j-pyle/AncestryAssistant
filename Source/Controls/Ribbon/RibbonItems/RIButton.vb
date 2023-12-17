@@ -1,13 +1,7 @@
 ﻿Public Class RIButton
   Inherits RibbonItem
 
-#Region "Fields"
-
   Private WithEvents ctl As FlatIconButton
-
-#End Region
-
-#Region "Properties"
 
   Public Property Image As Image
     Get
@@ -17,10 +11,6 @@
       ctl.Image = value
     End Set
   End Property
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New()
     ctl = New FlatIconButton With {
@@ -32,17 +22,9 @@
     Controls.Add(ctl)
   End Sub
 
-#End Region
-
-#Region "Private Methods"
-
   Private Sub ctl_Click(sender As Object, e As EventArgs) Handles ctl.Click
-    OnRibbonItemAction(RibbonEventType.ButtonClick, True)
+    OnRibbonItemAction(RibbonEventType.ButtonClick, ItemValue)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
     Select Case ItemAttribute
@@ -58,6 +40,8 @@
         Return ctl.Enabled
       Case RibbonItemAttribute.visible
         Return Visible
+      Case RibbonItemAttribute.value
+        Return ItemValue
       Case Else
         Debug.Print("Unhandled Attribute Requested: {0}", ItemAttribute.ToString)
     End Select
@@ -67,11 +51,11 @@
   Public Overrides Sub SetAttribute(ItemAttribute As RibbonItemAttribute, attributeValue As Object)
     Select Case ItemAttribute
       Case RibbonItemAttribute.imagefromfile
-        Image = ImageFromFile(CType(attributeValue, String))
+        ctl.Image = ImageFromFile(CType(attributeValue, String))
       Case RibbonItemAttribute.imagefromresource
-        Image = ImageFromResource(CType(attributeValue, String))
+        ctl.Image = ImageFromResource(CType(attributeValue, String))
       Case RibbonItemAttribute.image
-        Image = CType(attributeValue, Image)
+        ctl.Image = CType(attributeValue, Image)
       Case RibbonItemAttribute.text
         ctl.Text = CType(attributeValue, String)
       Case RibbonItemAttribute.caption
@@ -82,11 +66,11 @@
         ctl.Enabled = CType(attributeValue, Boolean)
       Case RibbonItemAttribute.visible
         Visible = CBool(attributeValue)
+      Case RibbonItemAttribute.value
+        ItemValue = attributeValue
       Case Else
         Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select
   End Sub
-
-#End Region
 
 End Class

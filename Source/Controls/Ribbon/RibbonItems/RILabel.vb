@@ -1,15 +1,9 @@
 ﻿Public Class RILabel
   Inherits RibbonItem
 
-#Region "Fields"
-
   Private ctl As Label
 
   Private textImageOffset As Integer = 0
-
-#End Region
-
-#Region "Properties"
 
   Public Property Image As Image
     Get
@@ -19,10 +13,6 @@
       ctl.Image = value
     End Set
   End Property
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New()
     ctl = New Label With {
@@ -37,10 +27,6 @@
     }
     Controls.Add(ctl)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
     Throw New NotImplementedException()
@@ -78,7 +64,5 @@
         Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select
   End Sub
-
-#End Region
 
 End Class

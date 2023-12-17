@@ -1,8 +1,6 @@
 ﻿Public Class DockPanelManager
   Inherits System.Windows.Forms.UserControl
 
-#Region "Fields"
-
   Private WithEvents DockLeftBottom As DockPanel
   Private WithEvents DockLeftTop As DockPanel
   Private WithEvents DockMiddleBottom As DockPanel
@@ -36,21 +34,9 @@
 
   Private RegistryPanels As Dictionary(Of DockPanelLocation, DockPanel)
 
-#End Region
-
-#Region "Events"
-
-  Public Event PanelItemEvent(panelItem As DockPanelItem, eventType As DockPanelItemEventType, eventData As Object)
-
-#End Region
-
-#Region "Delegates"
-
   Public Delegate Function PanelItemCreateDelegate() As DockPanelItem
 
-#End Region
-
-#Region "Public Constructors"
+  Public Event PanelItemEvent(panelItem As DockPanelItem, eventType As DockPanelItemEventType, eventData As Object)
 
   Public Sub New()
     RegistryDelegates = New Dictionary(Of String, PanelItemCreateDelegate)
@@ -318,10 +304,6 @@
     ResumeLayout(False)
   End Sub
 
-#End Region
-
-#Region "Private Methods"
-
   Private Function IsDockableLocation(dockLocation As DockPanelLocation) As Boolean
     Return Not (dockLocation.Equals(DockPanelLocation.None) Or dockLocation.Equals(DockPanelLocation.TrayBottom) Or dockLocation.Equals(DockPanelLocation.Tray) Or dockLocation.Equals(DockPanelLocation.TrayLeft) Or dockLocation.Equals(DockPanelLocation.TrayRight) Or dockLocation.Equals(DockPanelLocation.Floating))
   End Function
@@ -483,10 +465,6 @@
     'AddHandler panelObj.PanelItemSelected, AddressOf Panel_ItemSelected
   End Sub
 
-#End Region
-
-#Region "Protected Methods"
-
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
     Try
       If disposing AndAlso components IsNot Nothing Then
@@ -496,10 +474,6 @@
       MyBase.Dispose(disposing)
     End Try
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Function ItemAdd(dockLocation As DockPanelLocation, itemKey As String) As DockPanelItem
     'Logger.debugPrint("AddItem: {0}({1})", panelItemKey, dockLocation.ToString)
@@ -734,7 +708,5 @@
     My.Settings.UI_RB_VIS = PnlRightBottom.Visible
 
   End Sub
-
-#End Region
 
 End Class

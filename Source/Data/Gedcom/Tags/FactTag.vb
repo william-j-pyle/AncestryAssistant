@@ -1,16 +1,10 @@
 Public Class FactTag
   Inherits AbstractTag
 
-#Region "Properties"
-
   ' Attributes
   Public Property factType As String
 
   Public Property text As String
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New(data As Gedcom, ownerID As String, realTag As String)
     MyBase.New(data, "FACT", False, ownerID, realTag)
@@ -19,10 +13,6 @@ Public Class FactTag
   Public Sub New(data As Gedcom, ownerID As String)
     MyBase.New(data, "FACT", False, ownerID)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Sub generateID()
     ID = data.createID(GedTagEnum.TYPE_FACT)
@@ -45,7 +35,5 @@ Public Class FactTag
     End Select
     Return True
   End Function
-
-#End Region
 
 End Class

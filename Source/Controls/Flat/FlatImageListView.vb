@@ -4,8 +4,6 @@ Public Class FlatImageListView
   Inherits ListView
   Implements IFlatItem
 
-#Region "Fields"
-
   Friend WithEvents ImgViewerList As ImageList
   Private _FilterCriteria As String = String.Empty
   Private activeItems As List(Of ListViewItem)
@@ -14,10 +12,6 @@ Public Class FlatImageListView
   Private columnSortingOrder As SortOrder = SortOrder.None
   Private components As System.ComponentModel.IContainer
   Private ignoreSizingOfIndex As Integer = -1
-
-#End Region
-
-#Region "Properties"
 
   <Browsable(False)>
   Public Shadows Property BackColor As Color
@@ -82,10 +76,6 @@ Public Class FlatImageListView
     End Get
   End Property
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New()
     SetStyle(ControlStyles.OptimizedDoubleBuffer Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer, True)
     components = New Container()
@@ -118,10 +108,6 @@ Public Class FlatImageListView
     TileSize = New Size(256, 256)
     View = View.Tile
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub AddImageToGallery(path As String, fileName As String)
     Dim caption As String = ""
@@ -242,10 +228,6 @@ Public Class FlatImageListView
 
   End Sub
 
-#End Region
-
-#Region "Protected Methods"
-
   <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
     Try
@@ -322,10 +304,6 @@ Public Class FlatImageListView
     End If
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
   Public Overloads Sub Clear()
     MyBase.Clear()
     ImgViewerList.Images.Clear()
@@ -357,7 +335,5 @@ Public Class FlatImageListView
     columnSortingOrder = order
     ApplyItemSortFilter()
   End Sub
-
-#End Region
 
 End Class

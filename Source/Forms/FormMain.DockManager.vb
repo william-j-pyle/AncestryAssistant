@@ -1,7 +1,5 @@
 ﻿Partial Class AssistantAppForm
 
-#Region "Private Methods"
-
   Private Sub DockManager_PanelItemEvent(panelItem As DockPanelItem, eventType As DockPanelItemEventType, eventData As Object) Handles DockManager.PanelItemEvent
 #If TRACE Then
     Logger.debugPrint("FormMain.PanelItemEvent(panelItem=[{0}], eventType=[{1}])", panelItem.Name, eventType.ToString)
@@ -83,7 +81,5 @@
     DockManager.SettingsLoad()
 
   End Sub
-
-#End Region
 
 End Class

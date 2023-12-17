@@ -2,8 +2,6 @@
 
 Public Class ANotebook
 
-#Region "Fields"
-
   Private Const NOTE_PAGES_CONFIG As String = "anote_pages.aa"
 
   Private Const NOTE_SECTION_CONFIG As String = "anote_sections.aa"
@@ -15,18 +13,6 @@ Public Class ANotebook
   Private sActiveSection As String = ""
 
   Private sections As AAFile
-
-#End Region
-
-#Region "Events"
-
-  Public Event PageChanged(PageName As String)
-
-  Public Event SectionChanged(SectionName As String)
-
-#End Region
-
-#Region "Properties"
 
   Public Property ActivePage As String
     Get
@@ -82,25 +68,22 @@ Public Class ANotebook
   End Property
 
   Public ReadOnly Property RecordsBasePath As String = ""
+
   Public ReadOnly Property SectionCount As Integer
     Get
       Return sections.Count
     End Get
   End Property
 
-#End Region
+  Public Event PageChanged(PageName As String)
 
-#Region "Public Constructors"
+  Public Event SectionChanged(SectionName As String)
 
   Public Sub New(RecordsLocation As String)
     If Not RecordsLocation.EndsWith("\") Then RecordsLocation += "\"
     RecordsBasePath = RecordsLocation
     Initialize()
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub Initialize()
     If Not Directory.Exists(RecordsBasePath) Then
@@ -119,10 +102,6 @@ Public Class ANotebook
     End If
 
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Sub AddPage(PageName As String)
     'Debug.Print("AddPage({0})", PageName)
@@ -172,7 +151,5 @@ Public Class ANotebook
     'Debug.Print("RenameSection({0},{1})", OldSectionName, NewSectionName)
 
   End Sub
-
-#End Region
 
 End Class

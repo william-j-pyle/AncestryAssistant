@@ -10,4 +10,5 @@
   imagealign
   enabled
   visible
+  value
 End Enum

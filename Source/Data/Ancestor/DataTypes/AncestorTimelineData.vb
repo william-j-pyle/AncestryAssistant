@@ -1,14 +1,8 @@
 ﻿Imports System.IO
 
-Public Class TimelineData
-
-#Region "Fields"
+Public Class AncestorTimelineData
 
   Private dataEntries() As String
-
-#End Region
-
-#Region "Properties"
 
   Public ReadOnly Property length As Integer
     Get
@@ -18,19 +12,11 @@ Public Class TimelineData
 
   Public ReadOnly Property RecordsBasePath As String = ""
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New(RecordsLocation As String)
     If Not RecordsLocation.EndsWith("\") Then RecordsLocation += "\"
     RecordsBasePath = RecordsLocation
     Initialize()
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub Initialize()
     If Not Directory.Exists(RecordsBasePath) Then
@@ -39,7 +25,5 @@ Public Class TimelineData
     dataEntries = Directory.GetFiles(RecordsBasePath, "*.aa")
 
   End Sub
-
-#End Region
 
 End Class

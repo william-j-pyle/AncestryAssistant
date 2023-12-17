@@ -3,8 +3,6 @@
 Public Class RibbonGroup
   Inherits FlowLayoutPanel
 
-#Region "Fields"
-
   Private Const DEFAULT_NAME As String = "RibbonGroup"
   Private _ColCount As Integer = 0
   Private _MouseOverPanelOpen As Boolean = False
@@ -12,16 +10,6 @@ Public Class RibbonGroup
   Private MinimumWidthForItems As Integer = 0
   Private RegionPanelOpen As Rectangle = ClientRectangle
   Protected Friend RibbonCntl As Ribbon
-
-#End Region
-
-#Region "Events"
-
-  Public Event RibbonGroupAction(group As RibbonGroup, action As RibbonEventType, value As Object)
-
-#End Region
-
-#Region "Properties"
 
   Private Property MouseOverPanelOpen As Boolean
     Get
@@ -35,10 +23,15 @@ Public Class RibbonGroup
       End If
     End Set
   End Property
+
   Public Property AppBackColor As Color = My.Theme.AppBackColor
+
   Public Property AppForeColor As Color = My.Theme.AppFontColor
+
   Public Property AppHighlightColor As Color = My.Theme.AppHighlightColor
+
   Public Property BarId As Integer
+
   Public Property ColCount As Integer
     Get
       Return _ColCount
@@ -53,19 +46,28 @@ Public Class RibbonGroup
       End If
     End Set
   End Property
+
   Public Property GroupId As Integer
+
   Public ReadOnly Property MinimumWidth As Integer
     Get
       'Return Math.Max(TextSize.Width + 50, _ColCount * (RibbonConfig.GROUP_COL_WIDTH + RibbonConfig.GROUP_COL_SPACING))
       Return Math.Max(TextSize.Width + 50, MinimumWidthForItems)
     End Get
   End Property
+
   Public Property RibbonAccentColor As Color = My.Theme.RibbonAccentColor
+
   Public Property RibbonBackColor As Color = My.Theme.RibbonBackColor
+
   Public Property RibbonForeColor As Color = My.Theme.RibbonForeColor
+
   Public Property RibbonShadowColor As Color = My.Theme.RibbonShadowColor
+
   Public Property RowCount As Integer = 1
+
   Public Property ShowPane As Boolean = True
+
   <Browsable(True), EditorBrowsable(EditorBrowsableState.Always), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
   Public Overrides Property Text As String
     Get
@@ -73,18 +75,17 @@ Public Class RibbonGroup
     End Get
     Set(value As String)
       MyBase.Text = value
-      Invalidate()
+      Invalidate(Region)
     End Set
   End Property
+
   Public ReadOnly Property TextSize As Size
     Get
       Return TextRenderer.MeasureText(Text, CaptionFont)
     End Get
   End Property
 
-#End Region
-
-#Region "Public Constructors"
+  Public Event RibbonGroupAction(group As RibbonGroup, action As RibbonEventType, value As Object)
 
   Public Sub New()
     Me.New(Nothing, DEFAULT_NAME, DEFAULT_NAME, 0, 0)
@@ -110,10 +111,6 @@ Public Class RibbonGroup
     ResumeLayout(False)
   End Sub
 
-#End Region
-
-#Region "Private Methods"
-
   Private Sub AddItemProcessing(ri As RibbonItem, isAddItem As Boolean)
     ri.BarId = BarId
     'If ColCount < ri.Col + ri.ColSpan Then
@@ -134,14 +131,13 @@ Public Class RibbonGroup
     Width = MinimumWidth
   End Sub
 
-  'Private Function GetItemTargetLocation(Col As Double, Row As Double) As Point
-  'Return New Point(CInt(((Col - 1) * (RibbonConfig.GROUP_COL_WIDTH + RibbonConfig.GROUP_COL_SPACING)) + RibbonConfig.GROUP_LEFT_SPACING), CInt(((Row - 1) * (RibbonConfig.GROUP_ROW_HEIGHT + RibbonConfig.GROUP_ROW_SPACING)) + RibbonConfig.GROUP_TOP_SPACING))
-  'End Function
-
   Private Function GetItemTargetSize(ColSpan As Double, RowSpan As Double) As Size
     Return New Size(CInt(ColSpan * RibbonConfig.GROUP_COL_WIDTH), CInt(RowSpan * RibbonConfig.GROUP_ROW_HEIGHT))
   End Function
 
+  'Private Function GetItemTargetLocation(Col As Double, Row As Double) As Point
+  'Return New Point(CInt(((Col - 1) * (RibbonConfig.GROUP_COL_WIDTH + RibbonConfig.GROUP_COL_SPACING)) + RibbonConfig.GROUP_LEFT_SPACING), CInt(((Row - 1) * (RibbonConfig.GROUP_ROW_HEIGHT + RibbonConfig.GROUP_ROW_SPACING)) + RibbonConfig.GROUP_TOP_SPACING))
+  'End Function
   Private Sub RibbonGroup_ControlAdded(sender As Object, e As ControlEventArgs) Handles Me.ControlAdded
     If TypeOf e.Control Is RibbonItem Then
       If e.Control.Tag IsNot Nothing Then
@@ -198,10 +194,6 @@ Public Class RibbonGroup
     RegionPanelOpen = New Rectangle(Width - 14, Height - 14, 12, 14)
   End Sub
 
-#End Region
-
-#Region "Protected Methods"
-
   Protected Overrides Sub OnPaint(e As PaintEventArgs)
     'Clear Group Client Area
     Using brush As New SolidBrush(RibbonBackColor)
@@ -216,7 +208,7 @@ Public Class RibbonGroup
 
     'Draw the group caption
     Dim textBrush As Brush = New SolidBrush(RibbonForeColor)
-    Dim textLocation As New Point(CInt(ClientRectangle.Left + 1 + ((ClientRectangle.Width - TextSize.Width) / 2)), CInt(ClientRectangle.Bottom - TextSize.Height - 4))
+    Dim textLocation As New Point(CInt(1 + ((Width - TextSize.Width) / 2)), CInt(Height - TextSize.Height - 4))
     e.Graphics.DrawString(Text, CaptionFont, textBrush, textLocation)
 
     ' Draw the Exapand Icon
@@ -259,20 +251,21 @@ Public Class RibbonGroup
 
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
   Public Sub AddItem(ri As RibbonItem)
     AddItemProcessing(ri, True)
   End Sub
 
-  'Public Sub RibbonItemLocationChanged(sender As Object, e As EventArgs)
-  'With CType(sender, RibbonItem)
-  '.Location = GetItemTargetLocation(.Col, .Row)
-  '.Refresh()
-  'End With
-  'End Sub
+  Public Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
+    Select Case ItemAttribute
+      Case RibbonItemAttribute.text
+        Return Text
+      Case RibbonItemAttribute.caption
+        Return Text
+      Case Else
+        Debug.Print("Unhandled Attribute Requested: {0}", ItemAttribute.ToString)
+    End Select
+    Return Nothing
+  End Function
 
   Public Sub RibbonItemSizeChanged(sender As Object, e As EventArgs)
     With CType(sender, RibbonItem)
@@ -281,6 +274,12 @@ Public Class RibbonGroup
     End With
   End Sub
 
+  'Public Sub RibbonItemLocationChanged(sender As Object, e As EventArgs)
+  'With CType(sender, RibbonItem)
+  '.Location = GetItemTargetLocation(.Col, .Row)
+  '.Refresh()
+  'End With
+  'End Sub
   Public Sub RibbonItemVisibleChanged(sender As Object, e As EventArgs)
     'Debug.Print("SENDER: {0}={1}", sender.name, sender.visible)
     'Debug.Print("ITEMVISIBILITY:  MinForItem={0}    Width={1}   Min={2}", MinimumWidthForItems, Width, MinimumWidth)
@@ -298,6 +297,15 @@ Public Class RibbonGroup
     'Debug.Print("ITEMVISIBILITY:  MinForItem={0}    Width={1}   Min={2}", MinimumWidthForItems, Width, MinimumWidth)
   End Sub
 
-#End Region
+  Public Sub SetAttribute(ItemAttribute As RibbonItemAttribute, attributeValue As Object)
+    Select Case ItemAttribute
+      Case RibbonItemAttribute.text
+        Text = CType(attributeValue, String)
+      Case RibbonItemAttribute.caption
+        Text = CType(attributeValue, String)
+      Case Else
+        Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
+    End Select
+  End Sub
 
 End Class

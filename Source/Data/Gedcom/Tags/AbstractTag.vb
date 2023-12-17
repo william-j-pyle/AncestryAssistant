@@ -1,7 +1,5 @@
 Public MustInherit Class AbstractTag
 
-#Region "Fields"
-
   Public isRootTag As Boolean
   Public keyTagBase As String
   Public lvlTagBase As Integer
@@ -9,17 +7,9 @@ Public MustInherit Class AbstractTag
   Public rootTag As String
   Public tagStarted As Boolean
 
-#End Region
-
-#Region "Properties"
-
   Public Property data As Gedcom
   Public Property ID As String
   Public Property TagOwnerID As String
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New(gdata As Gedcom, grootTag As String, gisRootTag As Boolean, gownerID As String, grealTag As String)
     initObject(gdata, grootTag, gisRootTag, gownerID, grealTag)
@@ -32,10 +22,6 @@ Public MustInherit Class AbstractTag
   Public Sub New(gdata As Gedcom, grootTag As String, gisRootTag As Boolean)
     initObject(gdata, grootTag, gisRootTag, String.Empty, String.Empty)
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub initObject(gdata As Gedcom, grootTag As String, gisRootTag As Boolean, gownerID As String, grealTag As String)
     data = gdata
@@ -73,7 +59,7 @@ Public MustInherit Class AbstractTag
 
   Private Sub tagLoop()
     ' Begin processing loop
-    While data.hasNext()
+    While data.HasNext()
       ' Have we completed the current tag
       If tagStarted And data.lineLevel() <= lvlTagBase Then
         data.prevRow()
@@ -92,10 +78,6 @@ Public MustInherit Class AbstractTag
 
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
   Public Overridable Sub generateID()
     'NOOP
   End Sub
@@ -105,7 +87,5 @@ Public MustInherit Class AbstractTag
   Public Function wasTagProcessed() As Boolean
     Return tagStarted
   End Function
-
-#End Region
 
 End Class

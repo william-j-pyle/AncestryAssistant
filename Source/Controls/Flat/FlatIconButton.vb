@@ -1,8 +1,6 @@
 ﻿Public Class FlatIconButton
   Inherits Button
 
-#Region "Properties"
-
   Public Property Icon As Image
     Get
       Return Image
@@ -11,10 +9,6 @@
       Image = value
     End Set
   End Property
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New()
     SetStyle(ControlStyles.Selectable, False)
@@ -33,7 +27,5 @@
     Font = My.Theme.RibbonButtonFont
     Text = ""
   End Sub
-
-#End Region
 
 End Class

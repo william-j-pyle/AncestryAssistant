@@ -3,23 +3,13 @@
 Public Class FlatToolBar
   Inherits System.Windows.Forms.ToolStrip
 
-#Region "Fields"
-
   Private components As System.ComponentModel.IContainer
-
-#End Region
-
-#Region "Properties"
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
   Public Shadows Property BackColor As Color
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
   Public Shadows Property RenderMode As ToolStripRenderMode
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New()
     MyBase.New()
@@ -28,10 +18,6 @@ Public Class FlatToolBar
     MyBase.BackColor = My.Theme.PanelBorderColor
     MyBase.ForeColor = My.Theme.PanelFontColor
   End Sub
-
-#End Region
-
-#Region "Protected Methods"
 
   <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
@@ -56,14 +42,8 @@ Public Class FlatToolBar
     MyBase.OnPaintGrip(e)
   End Sub
 
-#End Region
-
-#Region "Classes"
-
   Private Class MyRenderer
     Inherits ToolStripRenderer
-
-#Region "Protected Methods"
 
     Protected Overrides Sub OnRenderArrow(e As ToolStripArrowRenderEventArgs)
       MyBase.OnRenderArrow(e)
@@ -180,10 +160,6 @@ Public Class FlatToolBar
       MyBase.OnRenderToolStripStatusLabelBackground(e)
     End Sub
 
-#End Region
-
   End Class
-
-#End Region
 
 End Class

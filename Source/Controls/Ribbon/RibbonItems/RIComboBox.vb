@@ -1,13 +1,7 @@
 ﻿Public Class RIComboBox
   Inherits RibbonItem
 
-#Region "Fields"
-
   Private ctl As ComboBox
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New()
     ctl = New ComboBox With {
@@ -24,17 +18,9 @@
     Controls.Add(ctl)
   End Sub
 
-#End Region
-
-#Region "Private Methods"
-
   Private Sub RIComboBox_RegionChanged(sender As Object, e As EventArgs) Handles Me.RegionChanged
     Debug.Print("RegionChanged")
   End Sub
-
-#End Region
-
-#Region "Protected Methods"
 
   Protected Overrides Sub OnPaint(e As PaintEventArgs)
     Debug.Print("OnPaint: {0}", e.ClipRectangle.ToString)
@@ -45,10 +31,6 @@
     Debug.Print("OnPaintBackground: {0}", e.ClipRectangle.ToString)
     MyBase.OnPaintBackground(e)
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Overrides Function GetAttribute(ItemAttribute As RibbonItemAttribute) As Object
     Throw New NotImplementedException()
@@ -64,7 +46,5 @@
         Debug.Print("Unhandled Attribute: {0}={1}", ItemAttribute.ToString, attributeValue)
     End Select
   End Sub
-
-#End Region
 
 End Class

@@ -4,18 +4,12 @@ Public Class FlatListView
   Inherits ListView
   Implements IFlatItem
 
-#Region "Fields"
-
   Private _FilterCriteria As String = String.Empty
   Private activeItems As List(Of ListViewItem)
   Private allItems As List(Of ListViewItem)
   Private columnSorting As Integer = 0
   Private columnSortingOrder As SortOrder = SortOrder.None
   Private ignoreSizingOfIndex As Integer = -1
-
-#End Region
-
-#Region "Properties"
 
   <Browsable(False)>
   Public Shadows Property BackColor As Color
@@ -80,10 +74,6 @@ Public Class FlatListView
     End Get
   End Property
 
-#End Region
-
-#Region "Public Constructors"
-
   Public Sub New()
     SetStyle(ControlStyles.OptimizedDoubleBuffer Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer, True)
     ' Set up the ListView
@@ -100,10 +90,6 @@ Public Class FlatListView
     MyBase.ForeColor = FlatForeColor
     Scrollable = True
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub ApplyItemSortFilter()
     Dim selText As String = String.Empty
@@ -208,10 +194,6 @@ Public Class FlatListView
 
   End Sub
 
-#End Region
-
-#Region "Protected Methods"
-
   Protected Overrides Sub OnDrawColumnHeader(ByVal e As DrawListViewColumnHeaderEventArgs)
     'Debug.Print("DrawColumnHeader({0})=[{1}, {2}]", e.ColumnIndex, columnSorting, columnSortingOrder)
 
@@ -270,16 +252,12 @@ Public Class FlatListView
 
     If e.Item.Selected And e.Item.Focused Then
       e.Graphics.FillRectangle(New SolidBrush(FlatHighlightColor), rec)
-      e.Graphics.DrawString(txt, Font, New SolidBrush(FlatBackColor), New PointF(rec.X + 2, rec.Y))
+      e.Graphics.DrawString(Txt, Font, New SolidBrush(FlatBackColor), New PointF(rec.X + 2, rec.Y))
     Else
       e.Graphics.FillRectangle(New SolidBrush(FlatBackColor), rec)
-      e.Graphics.DrawString(txt, Font, New SolidBrush(FlatForeColor), New PointF(rec.X + 2, rec.Y))
+      e.Graphics.DrawString(Txt, Font, New SolidBrush(FlatForeColor), New PointF(rec.X + 2, rec.Y))
     End If
   End Sub
-
-#End Region
-
-#Region "Public Methods"
 
   Public Sub ClearFilter()
     _FilterCriteria = String.Empty
@@ -296,7 +274,5 @@ Public Class FlatListView
     columnSortingOrder = order
     ApplyItemSortFilter()
   End Sub
-
-#End Region
 
 End Class

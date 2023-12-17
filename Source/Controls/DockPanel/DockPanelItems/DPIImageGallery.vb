@@ -4,8 +4,6 @@ Imports System.IO
 Public Class DPIImageGallery
   Inherits DockPanelItem
 
-#Region "Fields"
-
   Friend WithEvents BtnBack As ToolStripButton
 
   Friend WithEvents BtnFlipH As ToolStripButton
@@ -58,10 +56,6 @@ Public Class DPIImageGallery
   Private smoothedMousePosition As Point
   Private zoomActive As Boolean = False
   Public Const Base_Key As String = "DOCK_GALLERY"
-
-#End Region
-
-#Region "Public Constructors"
 
   Public Sub New(Optional instanceKey As String = "")
     'Apply Item Defaults for this Type
@@ -275,10 +269,6 @@ Public Class DPIImageGallery
     CaptureFocus(Me)
   End Sub
 
-#End Region
-
-#Region "Private Methods"
-
   Private Sub BtnFlipH_Click(sender As Object, e As EventArgs) Handles BtnFlipH.Click
     ImgBox.Image.RotateFlip(RotateFlipType.RotateNoneFlipY)
     ImgBox.Invalidate()
@@ -451,10 +441,6 @@ Public Class DPIImageGallery
     End If
   End Sub
 
-#End Region
-
-#Region "Protected Methods"
-
   <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
     Try
@@ -478,10 +464,6 @@ Public Class DPIImageGallery
     ReloadGalleryAsync()
   End Sub
 
-#End Region
-
-#Region "Public Methods"
-
   Public Overrides Sub ApplySearch(criteria As String)
     Throw New NotImplementedException()
   End Sub
@@ -492,7 +474,5 @@ Public Class DPIImageGallery
 
   Public Overrides Sub EventRequest(eventType As DockPanelItemEventType, eventData As Object)
   End Sub
-
-#End Region
 
 End Class

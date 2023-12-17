@@ -8,8 +8,6 @@ Namespace My
   ''' </summary>
   Partial Friend Class MyApplication
 
-#Region "Private Methods"
-
     ''' <summary>
     '''     NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
     ''' </summary>
@@ -67,8 +65,6 @@ Namespace My
       Logger.log(Logger.LOG_TYPE.ERR, e.Exception.Message)
       Logger.log(Logger.LOG_TYPE.ERR, e.Exception.StackTrace)
     End Sub
-
-#End Region
 
   End Class
 

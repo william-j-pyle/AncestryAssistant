@@ -3,8 +3,6 @@
 Public Class FlatContextMenu
   Inherits System.Windows.Forms.ContextMenuStrip
 
-#Region "Fields"
-
   Shared MenuBackColor As Color
   Shared MenuBorderColor As Color
   Shared MenuForeColor As Color
@@ -13,25 +11,13 @@ Public Class FlatContextMenu
   'Required by the Windows Form Designer
   Private components As System.ComponentModel.IContainer
 
-#End Region
-
-#Region "Events"
-
-  Public Event ContextItemClicked(item As ToolStripMenuItem)
-
-#End Region
-
-#Region "Properties"
-
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
   Public Shadows Property BackColor As Color
 
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
   Public Shadows Property RenderMode As ToolStripRenderMode
 
-#End Region
-
-#Region "Public Constructors"
+  Public Event ContextItemClicked(item As ToolStripMenuItem)
 
   Public Sub New()
     components = New System.ComponentModel.Container()
@@ -44,10 +30,6 @@ Public Class FlatContextMenu
     MenuHoverBackColor = My.Theme.AppShadowColor
     MenuHoverForeColor = My.Theme.AppAccentColor
   End Sub
-
-#End Region
-
-#Region "Private Methods"
 
   Private Sub DropDown_Click(sender As Object, e As EventArgs)
     If TypeOf sender Is ToolStripMenuItem Then
@@ -75,10 +57,6 @@ Public Class FlatContextMenu
     Return item
   End Function
 
-#End Region
-
-#Region "Protected Methods"
-
   'UserControl overrides dispose to clean up the component list.
   <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
@@ -91,8 +69,6 @@ Public Class FlatContextMenu
     End Try
   End Sub
 
-#End Region
-
   'Protected Overrides Sub OnPaint(e As PaintEventArgs)
   '  MyBase.OnPaint(e)
   'End Sub
@@ -104,8 +80,6 @@ Public Class FlatContextMenu
   'Protected Overrides Sub OnPaintGrip(e As PaintEventArgs)
   '  MyBase.OnPaintGrip(e)
   'End Sub
-
-#Region "Public Methods"
 
   Public Function AddMenuItem(name As String, text As String, Optional enabled As Boolean = True, Optional checked As Boolean = False) As ToolStripMenuItem
     Dim item As System.Windows.Forms.ToolStripMenuItem = NewMenuItem(name, text, enabled, checked)
@@ -132,14 +106,8 @@ Public Class FlatContextMenu
     End If
   End Sub
 
-#End Region
-
-#Region "Classes"
-
   Private Class MyRenderer
     Inherits ToolStripRenderer
-
-#Region "Protected Methods"
 
     Protected Overrides Sub OnRenderArrow(e As ToolStripArrowRenderEventArgs)
       MyBase.OnRenderArrow(e)
@@ -278,10 +246,6 @@ Public Class FlatContextMenu
       MyBase.OnRenderToolStripStatusLabelBackground(e)
     End Sub
 
-#End Region
-
   End Class
-
-#End Region
 
 End Class
