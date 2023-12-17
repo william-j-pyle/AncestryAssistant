@@ -34,7 +34,6 @@ Partial Class AssistantAppForm
         Me.AppIcon = New System.Windows.Forms.Panel()
         Me.TabFile = New System.Windows.Forms.TabPage()
         Me.TabHome = New System.Windows.Forms.TabPage()
-        Me.StatusBar = New System.Windows.Forms.Panel()
         Me.BtnAlert = New System.Windows.Forms.Button()
         Me.FormBar.SuspendLayout()
         Me.AppTitleBar.SuspendLayout()
@@ -51,7 +50,7 @@ Partial Class AssistantAppForm
         Me.FormBar.Margin = New System.Windows.Forms.Padding(0)
         Me.FormBar.Name = "FormBar"
         Me.FormBar.Padding = New System.Windows.Forms.Padding(3)
-        Me.FormBar.Size = New System.Drawing.Size(774, 420)
+        Me.FormBar.Size = New System.Drawing.Size(774, 444)
         Me.FormBar.TabIndex = 13
         '
         'DockManager
@@ -59,7 +58,7 @@ Partial Class AssistantAppForm
         Me.DockManager.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DockManager.Location = New System.Drawing.Point(3, 168)
         Me.DockManager.Name = "DockManager"
-        Me.DockManager.Size = New System.Drawing.Size(768, 249)
+        Me.DockManager.Size = New System.Drawing.Size(768, 273)
         Me.DockManager.TabIndex = 12
         '
         'RibbonBar
@@ -197,16 +196,6 @@ Partial Class AssistantAppForm
         Me.TabHome.Size = New System.Drawing.Size(200, 100)
         Me.TabHome.TabIndex = 0
         '
-        'StatusBar
-        '
-        Me.StatusBar.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.StatusBar.Location = New System.Drawing.Point(0, 420)
-        Me.StatusBar.MaximumSize = New System.Drawing.Size(0, 24)
-        Me.StatusBar.MinimumSize = New System.Drawing.Size(0, 24)
-        Me.StatusBar.Name = "StatusBar"
-        Me.StatusBar.Size = New System.Drawing.Size(774, 24)
-        Me.StatusBar.TabIndex = 13
-        '
         'BtnAlert
         '
         Me.BtnAlert.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -233,7 +222,6 @@ Partial Class AssistantAppForm
         Me.ClientSize = New System.Drawing.Size(774, 444)
         Me.Controls.Add(Me.BtnAlert)
         Me.Controls.Add(Me.FormBar)
-        Me.Controls.Add(Me.StatusBar)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -256,7 +244,6 @@ Partial Class AssistantAppForm
     Friend WithEvents AppCloseButton As Button
     Friend WithEvents AppMinButton As Button
     Friend WithEvents AppMaxButton As Button
-    Friend WithEvents StatusBar As Panel
     Friend WithEvents RibbonBar As Ribbon
     Friend WithEvents TabFile As TabPage
     Friend WithEvents TabHome As TabPage

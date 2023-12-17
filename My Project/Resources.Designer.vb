@@ -63,16 +63,6 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property ANCESTRY() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("ANCESTRY", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
         Friend ReadOnly Property ancestry_dna() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("ancestry_dna", resourceCulture)
@@ -113,9 +103,39 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property ancestry_view_gallery() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ancestry_view_gallery", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property ancestry_view_hint() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ancestry_view_hint", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property ancestry_view_pedigree() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("ancestry_view_pedigree", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property ancestry_view_story() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ancestry_view_story", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -147,6 +167,26 @@ Namespace My.Resources
         Friend ReadOnly Property AssistantAPI() As String
             Get
                 Return ResourceManager.GetString("AssistantAPI", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property back() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("back", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property back_circle() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("back_circle", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         
@@ -246,6 +286,16 @@ Namespace My.Resources
         Friend ReadOnly Property event_death() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("event_death", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property event_education() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("event_education", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -463,6 +513,76 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property image_crop() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("image_crop", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property image_fit_all() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("image_fit_all", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property image_fit_horizontal() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("image_fit_horizontal", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property image_fit_vertical() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("image_fit_vertical", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property image_flip_horizontal() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("image_flip_horizontal", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property image_flip_vertical() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("image_flip_vertical", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property location() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("location", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property missing_profile() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("missing_profile", resourceCulture)
@@ -571,40 +691,61 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property refresh() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("refresh", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to {
         '''  &quot;bars&quot;: [
         '''    {
-        '''      &quot;name&quot;: &quot;File&quot;,
+        '''      &quot;name&quot;: &quot;BAR_FILE&quot;,
         '''      &quot;text&quot;: &quot;File&quot;,
         '''      &quot;id&quot;: 0,
-        '''      &quot;visible&quot;: true,
-        '''      &quot;enabled&quot;: true,
         '''      &quot;showpage&quot;: true,
         '''      &quot;groups&quot;: []
-        '''    },
-        '''    {
-        '''      &quot;name&quot;: &quot;Ancestor&quot;,
-        '''      &quot;text&quot;: &quot;Ancestor&quot;,
-        '''      &quot;id&quot;: 200,
-        '''      &quot;groups&quot;: [
-        '''        {
-        '''          &quot;id&quot;: 2
-        '''        },
-        '''        { &quot;id&quot;: 3 },
-        '''        { &quot;id&quot;: 4 },
-        '''        { &quot;id&quot;: 5 }
-        '''      ]
-        '''    },
-        '''    {
-        '''      &quot;name&quot;: &quot;Notebook&quot;,
-        '''      &quot;text&quot;: &quot;Notebook&quot;,
-        '''      &quot;id&quot;: 300,
-        '''      &quot;visible&quot;: false,
-        ''' [rest of string was truncated]&quot;;.
+        '''    }
+        '''  ]
+        '''}.
         '''</summary>
         Friend ReadOnly Property Ribbon() As String
             Get
                 Return ResourceManager.GetString("Ribbon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to {
+        '''  &quot;bars&quot;: [
+        '''    {
+        '''      &quot;name&quot;: &quot;BAR_ANCESTOR&quot;,
+        '''      &quot;text&quot;: &quot;Ancestor&quot;,
+        '''      &quot;id&quot;: 200,
+        '''      &quot;enabled&quot;: false,
+        '''      &quot;groups&quot;: [
+        '''        {
+        '''          &quot;name&quot;: &quot;GROUP_ANCESTOR&quot;,
+        '''          &quot;text&quot;: &quot;Ancestor&quot;,
+        '''          &quot;id&quot;: 2,
+        '''          &quot;showpanel&quot;: true,
+        '''          &quot;items&quot;: [
+        '''            {
+        '''              &quot;name&quot;: &quot;Ancestor&quot;,
+        '''              &quot;id&quot;: 4,
+        '''              &quot;itemtype&quot;: &quot;RIButton&quot;,
+        '''              &quot;attributes&quot;: [
+        '''                //{
+        '''                //  &quot;attribute&quot;: &quot;ImageFromFile&quot;,
+        '''   [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property Ribbon_AncestryBar() As String
+            Get
+                Return ResourceManager.GetString("Ribbon_AncestryBar", resourceCulture)
             End Get
         End Property
         
@@ -614,6 +755,117 @@ Namespace My.Resources
         Friend ReadOnly Property ribbon_button_dropdown() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("ribbon-button-dropdown", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to {
+        '''  &quot;bars&quot;: [
+        '''    {
+        '''      &quot;name&quot;: &quot;BAR_FILE&quot;,
+        '''      &quot;text&quot;: &quot;File&quot;,
+        '''      &quot;id&quot;: 0,
+        '''      &quot;visible&quot;: true,
+        '''      &quot;enabled&quot;: true,
+        '''      &quot;showpage&quot;: true,
+        '''      &quot;groups&quot;: []
+        '''    },
+        '''    {
+        '''      &quot;name&quot;: &quot;BAR_ANCESTOR&quot;,
+        '''      &quot;text&quot;: &quot;Ancestor&quot;,
+        '''      &quot;id&quot;: 200,
+        '''      &quot;attributes&quot;: [
+        '''        {
+        '''          &quot;attribute&quot;: &quot;enabled&quot;,
+        '''          &quot;value&quot;: false
+        '''        }
+        '''      ],
+        '''      &quot;groups&quot;: [
+        '''        {
+        '''          &quot;id&quot;: 2
+        '''        },
+        '''        { &quot;id&quot;: 3 },
+        '''        { &quot;id&quot;: 5 },
+        '''        { &quot;id&quot;: 6  [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property Ribbon_ImageEditorBar() As String
+            Get
+                Return ResourceManager.GetString("Ribbon_ImageEditorBar", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to {
+        '''  &quot;bars&quot;: [
+        '''    {
+        '''      &quot;name&quot;: &quot;BAR_FILE&quot;,
+        '''      &quot;text&quot;: &quot;File&quot;,
+        '''      &quot;id&quot;: 0,
+        '''      &quot;visible&quot;: true,
+        '''      &quot;enabled&quot;: true,
+        '''      &quot;showpage&quot;: true,
+        '''      &quot;groups&quot;: []
+        '''    },
+        '''    {
+        '''      &quot;name&quot;: &quot;BAR_ANCESTOR&quot;,
+        '''      &quot;text&quot;: &quot;Ancestor&quot;,
+        '''      &quot;id&quot;: 200,
+        '''      &quot;attributes&quot;: [
+        '''        {
+        '''          &quot;attribute&quot;: &quot;enabled&quot;,
+        '''          &quot;value&quot;: false
+        '''        }
+        '''      ],
+        '''      &quot;groups&quot;: [
+        '''        {
+        '''          &quot;id&quot;: 2
+        '''        },
+        '''        { &quot;id&quot;: 3 },
+        '''        { &quot;id&quot;: 5 },
+        '''        { &quot;id&quot;: 6  [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property Ribbon_NotesBar() As String
+            Get
+                Return ResourceManager.GetString("Ribbon_NotesBar", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to {
+        '''  &quot;bars&quot;: [
+        '''    {
+        '''      &quot;name&quot;: &quot;BAR_RESEARCH&quot;,
+        '''      &quot;text&quot;: &quot;Research&quot;,
+        '''      &quot;id&quot;: 400,
+        '''      &quot;visible&quot;: true,
+        '''      &quot;groups&quot;: [
+        '''        {
+        '''          &quot;name&quot;: &quot;GROUP_REFERENCE&quot;,
+        '''          &quot;text&quot;: &quot;Sites&quot;,
+        '''          &quot;id&quot;: 400,
+        '''          &quot;showpanel&quot;: false,
+        '''          &quot;items&quot;: [
+        '''            {
+        '''              &quot;name&quot;: &quot;btnFindAGrave&quot;,
+        '''              &quot;id&quot;: 401,
+        '''              &quot;itemtype&quot;: &quot;RIButton&quot;,
+        '''              &quot;attributes&quot;: [
+        '''                {
+        '''                  &quot;attribute&quot;: &quot;ImageFromResourc [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property Ribbon_ResearchBar() As String
+            Get
+                Return ResourceManager.GetString("Ribbon_ResearchBar", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property tag() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("tag", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

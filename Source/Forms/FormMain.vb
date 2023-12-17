@@ -8,7 +8,6 @@ Public Class AssistantAppForm
 #Region "Fields"
 
   Private WithEvents Ancestors As AncestorCollection
-  Private WithEvents Ancestry As DPIWebBrowser
 
   Private Const ANCESTOR_CENSUS As String = "Download Census Data"
 
@@ -20,11 +19,13 @@ Public Class AssistantAppForm
 
 #End Region
 
+  'Public Event ActiveAncestorChanged()
+
+  'Public Event AncestorsUpdated()
+
 #Region "Events"
 
-  Public Event ActiveAncestorChanged()
-
-  Public Event AncestorsUpdated()
+  Public Event InitUIExtensions()
 
 #End Region
 
@@ -45,37 +46,10 @@ Public Class AssistantAppForm
 
 #Region "Private Methods"
 
-  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
-    Dim Ancestor As AncestorCollection.Ancestor = Ancestors.ActiveAncestor
-
-    RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 2, 7), RibbonItemAttribute.text, Ancestor.GedBirthDate.toAssistantDate)
-    RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 2, 8), RibbonItemAttribute.text, Ancestor.GedDeathDate.toAssistantDate)
-    RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 2))
-    RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 3))
-    RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 4))
-    RibbonBar.EnableGroup(Ribbon.RibbonKey(200, 5))
-    Dim x As Integer
-    For x = 209 To 201 Step -1
-      RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, x), RibbonItemAttribute.visible, False)
-    Next
-    Dim hasCensus As Boolean = False
-    x = 201
-    For Each yr As Integer In Ancestor.Census.ExpectedYears
-      Dim hasYear As Boolean = Ancestor.Census.hasYear(yr)
-      If Not hasCensus And hasYear Then hasCensus = True
-      RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, x), RibbonItemAttribute.text, yr)
-      RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, x), RibbonItemAttribute.visible, True)
-      RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, x), RibbonItemAttribute.enabled, hasYear)
-      x += 1
-    Next
-    RibbonBar.SetItemAttribute(Ribbon.RibbonKey(200, 6, 17), RibbonItemAttribute.enabled, hasCensus)
-
-  End Sub
-
   Private Sub AncestryBrowserBusyChanged(busy As Boolean)
     If busy Then
       Cursor = Cursors.WaitCursor
-      DockManager.ItemShow(DPIWebBrowser.Default_Key)
+      DockManager.ItemShow(DPIWebBrowser.Base_Key)
     Else
       Cursor = Cursors.Default
     End If
@@ -153,7 +127,6 @@ Public Class AssistantAppForm
             If Ancestor.Fact("FindAGraveID").Equals("") Then
               Ancestor.Fact("FindAGraveID") = msg.GetValue("memorialId")
             End If
-            RaiseEvent ActiveAncestorChanged()
           End If
           'End If
         End If
@@ -188,7 +161,7 @@ Public Class AssistantAppForm
   End Sub
 
   Private Sub AncestryNavigateRequest(SelectedAncestorID As String)
-    Ancestry.NavigateTo(UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON, Ancestors.ActiveAncestorID)
+    DockManager.ItemEventRequest(DPIWebBrowser.Base_Key, DockPanelItemEventType.NavRequested, UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON)
   End Sub
 
   Private Sub AncestryURITrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
@@ -275,84 +248,19 @@ Public Class AssistantAppForm
 
   End Sub
 
-  Private Sub DockManager_PanelItemEvent(panelItem As DockPanelItem, eventType As DockPanelItemEventType) Handles DockManager.PanelItemEvent
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
-    Logger.debugPrint("FormMain.PanelItemEvent(panelItem=[{0}], eventType=[{1}])", panelItem.Name, eventType.ToString)
+  Private Sub InitUI(sender As Object, e As EventArgs) Handles Me.Load
+#If TRACE Then
+    Logger.debugPrint("FormMain.InitUI()")
 #End If
-    Select Case eventType
-      Case DockPanelItemEventType.ItemClosed
-        If panelItem.ItemHasRibbonBar And panelItem.RibbonHideOnItemClose Then
-          RibbonBar.HideBar(panelItem.RibbonBarKey)
-        End If
-      Case DockPanelItemEventType.ItemOpened
-        If panelItem.ItemHasRibbonBar And panelItem.RibbonShowOnItemOpen Then
-          RibbonBar.ShowBar(panelItem.RibbonBarKey)
-        End If
-      Case DockPanelItemEventType.ItemSelected
-        If panelItem.ItemHasRibbonBar And panelItem.RibbonShowOnItemOpen Then
-          RibbonBar.ShowBar(panelItem.RibbonBarKey)
-        End If
-    End Select
-  End Sub
-
-  Private Sub SettingsSave()
-    DockManager.SettingsSave()
-    My.Settings.APP_CLIENTSIZE = Size
-    My.Settings.Save()
-  End Sub
-
-  Private Sub UpdateUI(sender As Object, e As EventArgs) Handles Me.Load
-    InitUIExtensions()
-
     ' Init the Ancestors data repository
     Ancestors = New AncestorCollection(My.Settings.AncestorsPath)
 
-    'Create and register all Panel Items
+    RaiseEvent InitUIExtensions()
 
-    Ancestry = New DPIWebBrowser With {
-      .AncestryTreeID = My.Settings.ANCESTRY_TREE_ID
-    }
-    Ancestry.SetAncestors(Ancestors)
-    ' Add Custom Handlers for Panel Item
-    AddHandler Ancestry.ViewerBusy, AddressOf AncestryBrowserBusyChanged
-    AddHandler Ancestry.UriTrackingGroupChanged, AddressOf AncestryURITrackingGroupChanged
-    AddHandler Ancestry.DataDownload, AddressOf AncestryDataMessage
-    ' Register PanelItem
-    DockManager.ItemRegister(Ancestry)
-
-    Dim item As DockPanelItem
-
-    item = New DPIAncestorsList()
-    item.SetAncestors(Ancestors)
-    ' Add Custom Handlers for Panel Item
-    AddHandler CType(item, DPIAncestorsList).AncestryNavigateRequest, AddressOf AncestryNavigateRequest
-    ' Register PanelItem
-    DockManager.ItemRegister(item)
-
-    item = New DPIAncestorDetails()
-    item.SetAncestors(Ancestors)
-    ' Register PanelItem
-    DockManager.ItemRegister(item)
-
-    item = New DPICensus()
-    item.SetAncestors(Ancestors)
-    ' Register PanelItem
-    DockManager.ItemRegister(item)
-
-    item = New DPIImageGallery()
-    item.SetAncestors(Ancestors)
-    ' Register PanelItem
-    DockManager.ItemRegister(item)
-
-    item = New DPINotebook()
-    item.SetAncestors(Ancestors)
-    ' Register PanelItem
-    DockManager.ItemRegister(item)
-    DockManager.SettingsLoad()
-
+    ' Restore Size
     Size = My.Settings.APP_CLIENTSIZE
 
-    'Theme Data - Move all of this to the base assignments
+    ' Theme Data - Move all of this to the base assignments
     AppIcon.BackColor = My.Theme.AppBackColor
     AppControlBox.BackColor = My.Theme.AppBackColor
     AppTitle.BackColor = My.Theme.AppBackColor
@@ -372,14 +280,19 @@ Public Class AssistantAppForm
     BackColor = My.Theme.AppBackColor
     ForeColor = My.Theme.AppFontColor
     FormBar.BackColor = My.Theme.AppBackColor
-    StatusBar.BackColor = My.Theme.StatusBarBackColor
-    StatusBar.ForeColor = My.Theme.StatusBarFontColor
     AppCloseButton.Font = My.Theme.AppIconsFont
     AppMaxButton.Font = My.Theme.AppIconsFont
     AppMinButton.Font = My.Theme.AppIconsFont
     AppTitle.Font = My.Theme.AppTitleFont
     FormBar.BackColor = My.Theme.AppBackColor
     FormBar.ForeColor = My.Theme.AppFontColor
+
+  End Sub
+
+  Private Sub SettingsSave()
+    DockManager.SettingsSave()
+    My.Settings.APP_CLIENTSIZE = Size
+    My.Settings.Save()
   End Sub
 
 #End Region

@@ -104,7 +104,7 @@
             .Alignment = StringAlignment.Center,
             .LineAlignment = StringAlignment.Center
           }
-          g.DrawString(tabPage.Text, Font, brush, TabBounds, sf)
+          g.DrawString(TabPage.Text, Font, brush, TabBounds, sf)
         End Using
 
         ' Draw the individual Tabs
@@ -136,6 +136,10 @@
     Dim w As Integer = 1
     Dim l As Integer = Left
     Dim t As Integer = GetTabRect(0).Height + 2
+
+    Using brush As New SolidBrush(My.Theme.TabBorderColor)
+      e.Graphics.FillRectangle(brush, New Rectangle(Left, t, Right - 1, Height - t - 1))
+    End Using
 
     Dim r As Integer = Right - 1
     Dim b As Integer = Height - t - 1
@@ -169,10 +173,10 @@
       If SelectedIndex = i Then
         textColor = My.Theme.TabFontColor
         TabColor = My.Theme.TabBorderColor
-        TabBounds = New Rectangle(tabOrigBounds.X, TabOrigBounds.Y + 1, TabOrigBounds.Width, TabOrigBounds.Height - 3)
+        TabBounds = New Rectangle(TabOrigBounds.X, TabOrigBounds.Y + 1, TabOrigBounds.Width, TabOrigBounds.Height - 3)
       Else
         TabColor = My.Theme.TabShadowColor
-        TabBounds = New Rectangle(tabOrigBounds.X + 1, TabOrigBounds.Y + 2, TabOrigBounds.Width - 1, TabOrigBounds.Height - 4)
+        TabBounds = New Rectangle(TabOrigBounds.X + 1, TabOrigBounds.Y + 2, TabOrigBounds.Width - 1, TabOrigBounds.Height - 4)
         If TabOrigBounds.Contains(PointToClient(MousePosition)) Then
           textColor = My.Theme.TabFontColor
         Else
@@ -181,7 +185,7 @@
       End If
 
       ' Fill the new Tab
-      Using brush As New SolidBrush(tabColor)
+      Using brush As New SolidBrush(TabColor)
         g.FillRectangle(brush, TabBounds)
       End Using
 
@@ -191,7 +195,7 @@
       End Using
 
       If TabShowClose Then
-        closeBtn = New Rectangle(tabOrigBounds.X + TabOrigBounds.Width - 21, TabOrigBounds.Y, 20, 20)
+        closeBtn = New Rectangle(TabOrigBounds.X + TabOrigBounds.Width - 21, TabOrigBounds.Y, 20, 20)
         If closeBtn.Contains(PointToClient(MousePosition)) Then
           closeTarget = closeBtn
         End If
@@ -221,7 +225,7 @@
       TabBarColor = My.Theme.TabAccentColor
       ctlBarColor = My.Theme.TabShadowColor
     End If
-    e.Graphics.DrawLine(New Pen(tabBarColor, 2), TabBounds.X, TabBounds.Y, TabBounds.Right, TabBounds.Y)
+    e.Graphics.DrawLine(New Pen(TabBarColor, 2), TabBounds.X, TabBounds.Y, TabBounds.Right, TabBounds.Y)
     e.Graphics.DrawLine(New Pen(ctlBarColor, 2), l, TabBounds.Bottom - 1, r, TabBounds.Bottom - 1)
 
   End Sub

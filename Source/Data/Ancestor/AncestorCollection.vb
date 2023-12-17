@@ -13,7 +13,7 @@ Public Class AncestorCollection
 
 #Region "Events"
 
-  Public Event ActiveAncestorChanged(ancestorId As String)
+  Public Event ActiveAncestorChanged()
 
   Public Event AncestorsChanged()
 
@@ -39,7 +39,7 @@ Public Class AncestorCollection
     Set(value As String)
       If Not _ActiveAncestorID.Equals(value) Then
         _ActiveAncestorID = value
-        RaiseEvent ActiveAncestorChanged(value)
+        RaiseEvent ActiveAncestorChanged()
       End If
     End Set
   End Property
@@ -96,7 +96,7 @@ Public Class AncestorCollection
     Dim myAncestor As Ancestor
     For Each AncestorPath As String In Directory.GetDirectories(RepositoryPath)
       Try
-        myAncestor = New Ancestor(ancestorPath)
+        myAncestor = New Ancestor(AncestorPath)
         Add(myAncestor.ID, myAncestor)
         RaiseEvent AncestorsChanged()
       Catch ex As InvalidDataException

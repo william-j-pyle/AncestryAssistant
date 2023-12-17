@@ -34,11 +34,11 @@
     type or mimetype. Type corresponds to a .NET class that support 
     text/value conversion through the TypeConverter architecture. 
     Classes that don't support this are serialized and stored with the 
-    mimetype Set.
+    mimetype set.
     
     The mimetype is used for serialized objects, and tells the 
     ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be Set accordingly:
+    extensible. For a given mimetype the value must be set accordingly:
     
     Note - application/x-microsoft.net.object.binary.base64 is the format 
     that the ResXResourceWriter will generate, however the reader can 
@@ -121,9 +121,6 @@
   <data name="AssistantAPI" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\javascript\AssistantAPI.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     <comment>Javascript API loaded into Webview for easy control</comment>
-  </data>
-  <data name="ANCESTRY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image\ALERT_CIRCLE_ICO20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="clipboard-copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image\Clipboard-Copy-Small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -274,5 +271,62 @@
   </data>
   <data name="Ribbon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Source\Controls\Ribbon\Config\Ribbon.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ancestry_view_gallery" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ancestry-view-gallery.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ancestry_view_hint" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ancestry-view-hint.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ancestry_view_story" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\ancestry-view-story.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ribbon_AncestryBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Source\Controls\Ribbon\Config\Ribbon_AncestryBar.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Ribbon_ImageEditorBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Source\Controls\Ribbon\Config\Ribbon_ImageEditorBar.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Ribbon_NotesBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Source\Controls\Ribbon\Config\Ribbon_NotesBar.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Ribbon_ResearchBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Source\Controls\Ribbon\Config\Ribbon_ResearchBar.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="back" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="back_circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\back-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="event_education" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\event-education.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="image_crop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\image-crop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="image_fit_all" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\image-fit-all.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="image_fit_horizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\image-fit-horizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="image_fit_vertical" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\image-fit-vertical.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="image_flip_horizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\image-flip-horizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="image_flip_vertical" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\image-flip-vertical.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="location" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\location.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image\tag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

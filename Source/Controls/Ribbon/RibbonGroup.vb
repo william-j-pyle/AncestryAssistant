@@ -30,7 +30,7 @@ Public Class RibbonGroup
     Set(value As Boolean)
       If Not value.Equals(_MouseOverPanelOpen) Then
         _MouseOverPanelOpen = value
-        Debug.Print("INVALIDATE: {0}", value)
+        'Debug.Print("INVALIDATE: {0}", value)
         Invalidate(RegionPanelOpen)
       End If
     End Set
@@ -124,7 +124,7 @@ Public Class RibbonGroup
       Controls.Add(ri)
     End If
     'ri.Location = New Point(0, 0)
-    Debug.Print("ADDING RIBBON ITEM: {0}=[{1}]", ri.Name, ri.Location.ToString)
+    'Debug.Print("ADDING RIBBON ITEM: {0}=[{1}]", ri.Name, ri.Location.ToString)
     If ri.Location.X + ri.Size.Width + 10 > MinimumWidthForItems Then
       MinimumWidthForItems = ri.Location.X + ri.Size.Width + 10
     End If
@@ -230,14 +230,14 @@ Public Class RibbonGroup
       Dim c2 As Color
 
       If MouseOverPanelOpen Then
-        Debug.Print("Draw-True")
+        'Debug.Print("Draw-True")
         Using brush As New SolidBrush(RibbonForeColor)
           e.Graphics.FillRectangle(brush, RegionPanelOpen)
         End Using
         c2 = RibbonShadowColor
         c1 = RibbonBackColor
       Else
-        Debug.Print("Draw-False")
+        'Debug.Print("Draw-False")
         Using brush As New SolidBrush(RibbonBackColor)
           e.Graphics.FillRectangle(brush, RegionPanelOpen)
         End Using
@@ -282,11 +282,11 @@ Public Class RibbonGroup
   End Sub
 
   Public Sub RibbonItemVisibleChanged(sender As Object, e As EventArgs)
-    Debug.Print("SENDER: {0}={1}", sender.name, sender.visible)
-    Debug.Print("ITEMVISIBILITY:  MinForItem={0}    Width={1}   Min={2}", MinimumWidthForItems, Width, MinimumWidth)
+    'Debug.Print("SENDER: {0}={1}", sender.name, sender.visible)
+    'Debug.Print("ITEMVISIBILITY:  MinForItem={0}    Width={1}   Min={2}", MinimumWidthForItems, Width, MinimumWidth)
     MinimumWidthForItems = 0
     For Each ctl As Control In Controls
-      Debug.Print("CTL: {0}={1}", ctl.Name, ctl.Visible)
+      'Debug.Print("CTL: {0}={1}", ctl.Name, ctl.Visible)
       If ctl.Visible Then
         If ctl.Location.X + ctl.Size.Width + 10 > MinimumWidthForItems Then
           MinimumWidthForItems = ctl.Location.X + ctl.Size.Width + 10
@@ -295,7 +295,7 @@ Public Class RibbonGroup
     Next
     MinimumSize = New System.Drawing.Size(MinimumWidth, 0)
     Width = MinimumWidth
-    Debug.Print("ITEMVISIBILITY:  MinForItem={0}    Width={1}   Min={2}", MinimumWidthForItems, Width, MinimumWidth)
+    'Debug.Print("ITEMVISIBILITY:  MinForItem={0}    Width={1}   Min={2}", MinimumWidthForItems, Width, MinimumWidth)
   End Sub
 
 #End Region

@@ -25,26 +25,61 @@
 
 #Region "Public Methods"
 
+  Public Sub AppendConfig(config As RibbonConfig)
+    If config IsNot Nothing Then
+      If config.items IsNot Nothing Then
+        For Each itm As Item In config.items
+          items.Add(itm)
+        Next
+      End If
+      If config.groups IsNot Nothing Then
+        For Each grp As Group In config.groups
+          groups.Add(grp)
+        Next
+      End If
+      If config.bars IsNot Nothing Then
+        For Each br As Bar In config.bars
+          bars.Add(br)
+        Next
+      End If
+    End If
+  End Sub
+
   Public Function GetGroup(id As Integer) As Group
-    For Each grp As Group In groups
-      If grp.id = id Then Return grp
-    Next
+    If groups Is Nothing Then Return Nothing
+    Try
+      For Each grp As Group In groups
+        If grp.id = id Then Return grp
+      Next
+    Catch ex As Exception
+
+    End Try
     Return Nothing
   End Function
 
   Public Function GetGroup(refGroup As Group) As Group
-    Return GetGroup(refGroup.id)
+    If groups Is Nothing Then Return refGroup
+    Dim grp As Group = GetGroup(refGroup.id)
+    If grp Is Nothing Then Return refGroup
+    Return grp
   End Function
 
   Public Function GetItem(id As Integer) As Item
-    For Each itm As Item In items
-      If itm.id = id Then Return itm
-    Next
+    If items Is Nothing Then Return Nothing
+    Try
+      For Each itm As Item In items
+        If itm.id = id Then Return itm
+      Next
+    Catch ex As Exception
+
+    End Try
     Return Nothing
   End Function
 
   Public Function GetItem(refItem As Item) As Item
+    If items Is Nothing Then Return refItem
     Dim itm As Item = GetItem(refItem.id)
+    If itm Is Nothing Then Return refItem
     If refItem.col > 0 Then itm.col = refItem.col
     If refItem.colspan > 1 Then itm.colspan = refItem.colspan
     If refItem.row > 0 Then itm.row = refItem.row
@@ -86,6 +121,7 @@
 
 #Region "Properties"
 
+    Public Property attributes As List(Of AttributeValuePair)
     Public Property enabled As Boolean = True
     Public Property groups As List(Of Group)
     Public Property id As Integer
@@ -96,12 +132,27 @@
 
 #End Region
 
+#Region "Public Methods"
+
+    Public Function GetAttribute(attributeName As String, Optional defaultValue As Object = Nothing) As Object
+      If attributes Is Nothing Then Return defaultValue
+      For Each kv As AttributeValuePair In attributes
+        If kv.Attribute.Equals(attributeName) Then
+          Return kv.Value
+        End If
+      Next
+      Return defaultValue
+    End Function
+
+#End Region
+
   End Class
 
   Public Class Group
 
 #Region "Properties"
 
+    Public Property attributes As List(Of AttributeValuePair)
     Public Property enabled As Boolean = True
     Public Property id As Integer
     Public Property items As List(Of Item)
@@ -109,6 +160,20 @@
     Public Property showpanel As Boolean = False
     Public Property text As String = ""
     Public Property visible As Boolean = True
+
+#End Region
+
+#Region "Public Methods"
+
+    Public Function GetAttribute(attributeName As String, Optional defaultValue As Object = Nothing) As Object
+      If attributes Is Nothing Then Return defaultValue
+      For Each kv As AttributeValuePair In attributes
+        If kv.Attribute.Equals(attributeName) Then
+          Return kv.Value
+        End If
+      Next
+      Return defaultValue
+    End Function
 
 #End Region
 
@@ -145,17 +210,18 @@
 
 #Region "Public Methods"
 
-    Public Function GetAttribute(attributeName As String) As String
+    Public Function GetAttribute(attributeName As String, Optional defaultValue As Object = Nothing) As Object
+      If attributes Is Nothing Then Return defaultValue
       For Each kv As AttributeValuePair In attributes
         If kv.Attribute.Equals(attributeName) Then
           Return kv.Value
         End If
       Next
-      Return String.Empty
+      Return defaultValue
     End Function
 
     Public Function GetIcon() As Image
-      Return TryCast(My.Resources.ResourceManager.GetObject(GetAttribute("icon")), Image)
+      Return TryCast(My.Resources.ResourceManager.GetObject(CStr(GetAttribute("icon"))), Image)
     End Function
 
 #End Region

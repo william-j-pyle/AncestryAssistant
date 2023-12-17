@@ -28,7 +28,7 @@ Public Class DPICensus
   Private CensusFileList As Collection
   Private components As System.ComponentModel.IContainer
   Private XlsWorkbook As Dictionary(Of Integer, DataGridView)
-  Public Const Default_Key As String = "DOCK_CENSUS"
+  Public Const Base_Key As String = "DOCK_CENSUS"
 
 #End Region
 
@@ -42,7 +42,7 @@ Public Class DPICensus
     ItemSupportsClose = Default_ItemSupportsClose
     ItemSupportsMove = Default_ItemSupportsMove
     ItemSupportsSearch = Default_ItemSupportsSearch
-    ItemKey = Default_Key
+    ItemKey = Base_Key
     ItemInstanceKey = instanceKey
     LocationCurrent = Default_LocationCurrent
     LocationPrefered = Default_LocationPrefered
@@ -63,6 +63,7 @@ Public Class DPICensus
       .Name = "ts"
       .Size = New Size(439, 25)
       .TabIndex = 3
+      .Visible = False
     End With
     AutoScaleDimensions = New SizeF(6.0!, 13.0!)
     AutoScaleMode = AutoScaleMode.None
@@ -102,14 +103,6 @@ Public Class DPICensus
 
   Private Sub addUnifiedData(CensusOrder As Integer, BaseKey As Integer, CensusHeader As String)
     Debug.Print(CStr(CensusOrder), BaseKey, CensusHeader)
-  End Sub
-
-  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
-    UpdateUI()
-  End Sub
-
-  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
-    UpdateUI()
   End Sub
 
   Private Sub CensusSelect(sender As Object, e As EventArgs)
@@ -634,7 +627,7 @@ Public Class DPICensus
     End Try
   End Sub
 
-  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
+  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True) Handles _Ancestors.ActiveAncestorChanged, _Ancestors.AncestorsChanged
     ResetViewer()
     If Ancestors Is Nothing Then Exit Sub
     If Not Ancestors.HasActiveAncestor Then Exit Sub
@@ -680,6 +673,9 @@ Public Class DPICensus
 
   Public Overrides Sub ClearSearch()
     Throw New NotImplementedException()
+  End Sub
+
+  Public Overrides Sub EventRequest(eventType As DockPanelItemEventType, eventData As Object)
   End Sub
 
 #End Region

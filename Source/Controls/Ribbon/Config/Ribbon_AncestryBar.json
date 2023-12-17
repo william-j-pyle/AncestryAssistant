@@ -1,0 +1,401 @@
+{
+  "bars": [
+    {
+      "name": "BAR_ANCESTOR",
+      "text": "Ancestor",
+      "id": 200,
+      "enabled": false,
+      "groups": [
+        {
+          "name": "GROUP_ANCESTOR",
+          "text": "Ancestor",
+          "id": 2,
+          "showpanel": true,
+          "items": [
+            {
+              "name": "Ancestor",
+              "id": 4,
+              "itemtype": "RIButton",
+              "attributes": [
+                //{
+                //  "attribute": "ImageFromFile",
+                //  "value": "D:\\Geneology\\Ancestors\\42135902201\\Gallery\\PHOTO-PROFILE-AliceAllen.jpg"
+                //},
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "missing_profile"
+                }
+              ],
+              "col": 1,
+              "row": 1,
+              "colspan": 3,
+              "rowspan": 3
+            },
+            {
+              "name": "lblBirth",
+              "id": 7,
+              "itemtype": "RILabel",
+              "attributes": [
+                {
+                  "attribute": "text",
+                  "value": ""
+                },
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "event_birth"
+                }
+
+              ],
+              "col": 5,
+              "colspan": 4,
+              "row": 1,
+              "rowspan": 1
+            },
+            {
+              "name": "lblDeath",
+              "id": 8,
+              "itemtype": "RILabel",
+              "attributes": [
+                {
+                  "attribute": "text",
+                  "value": ""
+                },
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "event_death"
+                }
+              ],
+              "col": 5,
+              "colspan": 4,
+              "row": 2,
+              "rowspan": 1
+            }
+          ]
+        },
+        {
+          "name": "GROUP_ANCESTRYLINKS",
+          "text": "Ancestry.com",
+          "id": 3,
+          "showpanel": false,
+          "items": [
+            {
+              "name": "btnAncestryFact",
+              "id": 9,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "ancestry_logo_lg"
+                },
+                {
+                  "attribute": "text",
+                  "value": "Facts"
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 3
+            },
+            {
+              "name": "btnAncestryTree",
+              "id": 10,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "ancestry_view_tree"
+                }
+              ],
+              "colspan": 1,
+              "rowspan": 1
+            },
+            {
+              "name": "btnAncestryPedigree",
+              "id": 11,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "ancestry_view_pedigree"
+                }
+              ],
+              "colspan": 1,
+              "rowspan": 1
+            },
+            {
+              "name": "btnAncestryFan",
+              "id": 12,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "ancestry_view_fan"
+                }
+              ],
+              "colspan": 1,
+              "rowspan": 1
+            },
+            {
+              "name": "btnAncestryHint",
+              "id": 122,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "ancestry_view_hint"
+                }
+              ],
+              "colspan": 1,
+              "rowspan": 1
+            },
+            {
+              "name": "btnAncestryStory",
+              "id": 123,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "ancestry_view_story"
+                }
+              ],
+              "colspan": 1,
+              "rowspan": 1
+            },
+            {
+              "name": "btnAncestryGallery",
+              "id": 124,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "ancestry_view_gallery"
+                }
+              ],
+              "colspan": 1,
+              "rowspan": 1
+            }
+          ]
+        },
+        {
+          "name": "Tools",
+          "text": "Tools",
+          "id": 5,
+          "showpanel": false,
+          "items": [
+            {
+              "name": "btnGallery",
+              "id": 18,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "gallery_lg"
+                },
+                {
+                  "attribute": "caption",
+                  "value": "Gallery"
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 3
+            },
+            {
+              "name": "btnNotebook",
+              "id": 19,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "notebook_lg"
+                },
+                {
+                  "attribute": "caption",
+                  "value": "Note book"
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 3
+            }
+          ]
+        },
+        {
+          "name": "Census",
+          "text": "Census",
+          "id": 6,
+          "showpanel": false,
+          "items": [
+            {
+              "name": "btnCensus",
+              "id": 17,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "census_lg"
+                },
+                {
+                  "attribute": "caption",
+                  "value": "Unified"
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 3
+            },
+            {
+              "name": "btnCensus1",
+              "id": 201,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "caption",
+                  "value": ""
+                },
+                {
+                  "attribute": "visible",
+                  "value": false
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 1
+            },
+            {
+              "name": "btnCensus2",
+              "id": 202,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "caption",
+                  "value": ""
+                },
+                {
+                  "attribute": "visible",
+                  "value": false
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 1
+            },
+            {
+              "name": "btnCensus3",
+              "id": 203,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "caption",
+                  "value": ""
+                },
+                {
+                  "attribute": "visible",
+                  "value": false
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 1
+            },
+            {
+              "name": "btnCensus4",
+              "id": 204,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "caption",
+                  "value": ""
+                },
+                {
+                  "attribute": "visible",
+                  "value": false
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 1
+            },
+            {
+              "name": "btnCensus5",
+              "id": 205,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "caption",
+                  "value": ""
+                },
+                {
+                  "attribute": "visible",
+                  "value": false
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 1
+            },
+            {
+              "name": "btnCensus6",
+              "id": 206,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "caption",
+                  "value": ""
+                },
+                {
+                  "attribute": "visible",
+                  "value": false
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 1
+            },
+            {
+              "name": "btnCensus7",
+              "id": 207,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "caption",
+                  "value": ""
+                },
+                {
+                  "attribute": "visible",
+                  "value": false
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 1
+            },
+            {
+              "name": "btnCensus8",
+              "id": 208,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "caption",
+                  "value": ""
+                },
+                {
+                  "attribute": "visible",
+                  "value": false
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 1
+            },
+            {
+              "name": "btnCensus9",
+              "id": 209,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "caption",
+                  "value": ""
+                },
+                {
+                  "attribute": "visible",
+                  "value": false
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

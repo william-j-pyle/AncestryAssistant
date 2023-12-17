@@ -19,7 +19,7 @@
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2023.1212.2238</Version>
+    <Version>1.2023.1216.1322</Version>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -50,7 +50,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-    <DefineConstants>DEBUG_LEVEL_OFF=0,DEBUG_LEVEL_CRITICAL=1,DEBUG_LEVEL_EVENTS=2,DEBUG_LEVEL_ALL=3,DEBUG_LEVEL=DEBUG_LEVEL_ALL</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -300,7 +302,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Source\Controls\DockPanel\DockPanelItemEventArgs.vb" />
     <Compile Include="Source\Controls\DockPanel\Enum\DockPanelItemEventType.vb" />
+    <Compile Include="Source\Controls\Flat\FlatWebBrowser.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Source\Controls\Flat\FlatComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -308,6 +314,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Controls\Flat\FlatContextMenu.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Flat\FlatImageListView.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Source\Controls\Flat\IFlatItem.vb" />
@@ -425,7 +434,19 @@
     <Compile Include="Source\Controls\Flat\FlatToolBar.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Source\Forms\FormMain.Extensions.vb">
+    <Compile Include="Source\Forms\FormMain.DockManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\FormMain.Ribbon.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\FormMain.ResizeDrag.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\FormTestFlat.Designer.vb">
+      <DependentUpon>FormTestFlat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\FormTestFlat.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Forms\Helpers\ResizeDragHandler.vb" />
@@ -466,6 +487,11 @@
     </Compile>
     <Compile Include="Source\Data\Gedcom\File\FileLineEntry.vb" />
     <Compile Include="Source\Data\Gedcom\Primatives\GedDate.vb" />
+    <None Include="Source\Controls\Ribbon\Config\Ribbon - Original.json" />
+    <None Include="Source\Controls\Ribbon\Config\Ribbon_ImageEditorBar.json" />
+    <None Include="Source\Controls\Ribbon\Config\Ribbon_NotesBar.json" />
+    <None Include="Source\Controls\Ribbon\Config\Ribbon_ResearchBar.json" />
+    <None Include="Source\Controls\Ribbon\Config\Ribbon_AncestryBar.json" />
     <None Include="Source\Controls\Ribbon\Config\Ribbon.json" />
     <None Include="Source\Data\Gedcom\File\PlaceNormalized.vb" />
     <Compile Include="Source\Controls\DockPanel\DockPanelItems\DPIImageGallery.vb">
@@ -496,7 +522,6 @@
     <Compile Include="Source\Extensions\Logger.vb" />
     <Compile Include="Source\Enums\FontAncestryIconEnum.vb" />
     <Compile Include="Source\Enums\FontSegoeFluentIconsEnum.vb" />
-    <Compile Include="Source\Enums\IconSizeEnum.vb" />
     <Compile Include="Source\Enums\UriTrackingGroupEnum.vb" />
     <Compile Include="Source\Extensions\Utils.vb" />
     <Compile Include="Source\Data\APIMessage.vb" />
@@ -533,6 +558,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\FormTestFlat.resx">
+      <DependentUpon>FormTestFlat.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -580,6 +608,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <None Include="Resources\image\event-education.png" />
+    <None Include="Resources\image\location.png" />
+    <None Include="Resources\image\image-crop.png" />
+    <None Include="Resources\image\image-flip-vertical.png" />
+    <None Include="Resources\image\image-flip-horizontal.png" />
+    <None Include="Resources\image\image-fit-all.png" />
+    <None Include="Resources\image\image-fit-horizontal.png" />
+    <None Include="Resources\image\image-fit-vertical.png" />
+    <None Include="Resources\image\tag.png" />
+    <None Include="Resources\image\back-circle.png" />
+    <None Include="Resources\image\back.png" />
+    <None Include="Resources\image\refresh.png" />
+    <None Include="Resources\image\ancestry-view-story.png" />
+    <None Include="Resources\image\ancestry-view-gallery.png" />
+    <None Include="Resources\image\ancestry-view-hint.png" />
     <None Include="Resources\image\missing-profile.png" />
     <None Include="Resources\image\notebook-lg.png" />
     <None Include="Resources\image\gallery-lg.png" />

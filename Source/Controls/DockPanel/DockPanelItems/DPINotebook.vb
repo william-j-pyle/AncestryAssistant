@@ -33,10 +33,10 @@ Public Class DPINotebook
   Friend WithEvents TxtHeader As TextBox
   Private Const Default_ItemCaption As String = "Notebook"
   Private Const Default_ItemHasRibbonBar As Boolean = True
-  Private Const Default_ItemHasToolBar As Boolean = False
+  Private Const Default_ItemHasToolBar As Boolean = True
   Private Const Default_ItemSupportsClose As Boolean = True
   Private Const Default_ItemSupportsMove As Boolean = True
-  Private Const Default_ItemSupportsSearch As Boolean = False
+  Private Const Default_ItemSupportsSearch As Boolean = True
   Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
   Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.MiddleTopRight
   Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.MiddleTopRight
@@ -45,7 +45,7 @@ Public Class DPINotebook
   Private Const Default_RibbonSelectOnItemFocus As Boolean = True
   Private Const Default_RibbonShowOnItemOpen As Boolean = True
   Private components As System.ComponentModel.IContainer
-  Public Const Default_Key As String = "DOCK_NOTEBOOK"
+  Public Const Base_Key As String = "DOCK_NOTEBOOK"
 
 #End Region
 
@@ -59,7 +59,7 @@ Public Class DPINotebook
     ItemSupportsClose = Default_ItemSupportsClose
     ItemSupportsMove = Default_ItemSupportsMove
     ItemSupportsSearch = Default_ItemSupportsSearch
-    ItemKey = Default_Key
+    ItemKey = Base_Key
     ItemInstanceKey = instanceKey
     LocationCurrent = Default_LocationCurrent
     LocationPrefered = Default_LocationPrefered
@@ -184,12 +184,13 @@ Public Class DPINotebook
     TsSections.Size = New Size(102, 25)
     TsSections.Stretch = True
     TsSections.TabIndex = 5
+    TsSections.Visible = False
     '
     'BtnAddSection
     '
     BtnAddSection.AutoToolTip = False
     BtnAddSection.DisplayStyle = ToolStripItemDisplayStyle.Image
-    BtnAddSection.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnAddSection.Image = Global.AncestryAssistant.My.Resources.Resources.ancestry_logo
     BtnAddSection.Name = "BtnAddSection"
     BtnAddSection.Size = New Size(23, 22)
     BtnAddSection.ToolTipText = "Add New Section to Notebook"
@@ -198,7 +199,7 @@ Public Class DPINotebook
     '
     BtnAddPage.AutoToolTip = False
     BtnAddPage.DisplayStyle = ToolStripItemDisplayStyle.Image
-    BtnAddPage.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnAddPage.Image = Global.AncestryAssistant.My.Resources.Resources.ancestry_logo
     BtnAddPage.ImageTransparentColor = Color.Magenta
     BtnAddPage.Name = "BtnAddPage"
     BtnAddPage.Size = New Size(23, 22)
@@ -295,11 +296,12 @@ Public Class DPINotebook
     TsPage.Size = New Size(548, 25)
     TsPage.Stretch = True
     TsPage.TabIndex = 4
+    TsPage.Visible = False
     '
     'ToolStripButton10
     '
     ToolStripButton10.DisplayStyle = ToolStripItemDisplayStyle.Image
-    ToolStripButton10.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    ToolStripButton10.Image = Global.AncestryAssistant.My.Resources.Resources.ancestry_logo
     ToolStripButton10.ImageTransparentColor = Color.Magenta
     ToolStripButton10.Name = "ToolStripButton10"
     ToolStripButton10.Size = New Size(23, 22)
@@ -309,7 +311,7 @@ Public Class DPINotebook
     'ToolStripButton1
     '
     ToolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image
-    ToolStripButton1.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    ToolStripButton1.Image = Global.AncestryAssistant.My.Resources.Resources.ancestry_logo
     ToolStripButton1.ImageTransparentColor = Color.Magenta
     ToolStripButton1.Name = "ToolStripButton1"
     ToolStripButton1.Size = New Size(23, 22)
@@ -318,7 +320,7 @@ Public Class DPINotebook
     'ToolStripButton2
     '
     ToolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image
-    ToolStripButton2.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    ToolStripButton2.Image = Global.AncestryAssistant.My.Resources.Resources.ancestry_logo
     ToolStripButton2.ImageTransparentColor = Color.Magenta
     ToolStripButton2.Name = "ToolStripButton2"
     ToolStripButton2.Size = New Size(23, 22)
@@ -332,7 +334,7 @@ Public Class DPINotebook
     'ToolStripButton3
     '
     ToolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Image
-    ToolStripButton3.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    ToolStripButton3.Image = Global.AncestryAssistant.My.Resources.Resources.ancestry_logo
     ToolStripButton3.ImageTransparentColor = Color.Magenta
     ToolStripButton3.Name = "ToolStripButton3"
     ToolStripButton3.Size = New Size(23, 22)
@@ -341,7 +343,7 @@ Public Class DPINotebook
     'ToolStripButton4
     '
     ToolStripButton4.DisplayStyle = ToolStripItemDisplayStyle.Image
-    ToolStripButton4.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    ToolStripButton4.Image = Global.AncestryAssistant.My.Resources.Resources.ancestry_logo
     ToolStripButton4.ImageTransparentColor = Color.Magenta
     ToolStripButton4.Name = "ToolStripButton4"
     ToolStripButton4.Size = New Size(23, 22)
@@ -350,7 +352,7 @@ Public Class DPINotebook
     'ToolStripButton5
     '
     ToolStripButton5.DisplayStyle = ToolStripItemDisplayStyle.Image
-    ToolStripButton5.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    ToolStripButton5.Image = Global.AncestryAssistant.My.Resources.Resources.ancestry_logo
     ToolStripButton5.ImageTransparentColor = Color.Magenta
     ToolStripButton5.Name = "ToolStripButton5"
     ToolStripButton5.Size = New Size(23, 22)
@@ -365,7 +367,7 @@ Public Class DPINotebook
     '
     ToolStripSplitButton1.DisplayStyle = ToolStripItemDisplayStyle.Image
     ToolStripSplitButton1.DropDownItems.AddRange(New ToolStripItem() {BtnH1, BtnH2, BtnH3, BtnH4})
-    ToolStripSplitButton1.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    ToolStripSplitButton1.Image = Global.AncestryAssistant.My.Resources.Resources.ancestry_logo
     ToolStripSplitButton1.ImageTransparentColor = Color.Magenta
     ToolStripSplitButton1.Name = "ToolStripSplitButton1"
     ToolStripSplitButton1.Size = New Size(32, 22)
@@ -375,7 +377,7 @@ Public Class DPINotebook
     '
     BtnH1.Font = New Font("Segoe UI", 18.0!, FontStyle.Bold, GraphicsUnit.Point, CType(0, Byte))
     BtnH1.ForeColor = Color.SeaGreen
-    BtnH1.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnH1.Image = Global.AncestryAssistant.My.Resources.Resources.ancestry_logo
     BtnH1.Name = "BtnH1"
     BtnH1.Size = New Size(259, 36)
     BtnH1.Text = "Heading Style 1"
@@ -384,7 +386,7 @@ Public Class DPINotebook
     '
     BtnH2.Font = New Font("Segoe UI", 15.75!, FontStyle.Bold, GraphicsUnit.Point, CType(0, Byte))
     BtnH2.ForeColor = Color.LimeGreen
-    BtnH2.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnH2.Image = Global.AncestryAssistant.My.Resources.Resources.ancestry_logo
     BtnH2.Name = "BtnH2"
     BtnH2.Size = New Size(259, 36)
     BtnH2.Text = "Heading Style 2"
@@ -393,7 +395,7 @@ Public Class DPINotebook
     '
     BtnH3.Font = New Font("Segoe UI Semibold", 12.0!, FontStyle.Bold, GraphicsUnit.Point, CType(0, Byte))
     BtnH3.ForeColor = Color.OliveDrab
-    BtnH3.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnH3.Image = Global.AncestryAssistant.My.Resources.Resources.ancestry_logo
     BtnH3.Name = "BtnH3"
     BtnH3.Size = New Size(259, 36)
     BtnH3.Text = "Heading Style 3"
@@ -402,7 +404,7 @@ Public Class DPINotebook
     '
     BtnH4.Font = New Font("Segoe UI Semibold", 12.0!, CType(FontStyle.Bold Or FontStyle.Italic, FontStyle), GraphicsUnit.Point, CType(0, Byte))
     BtnH4.ForeColor = Color.Black
-    BtnH4.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnH4.Image = Global.AncestryAssistant.My.Resources.Resources.ancestry_logo
     BtnH4.Name = "BtnH4"
     BtnH4.Size = New Size(259, 36)
     BtnH4.Text = "Heading Style 4"
@@ -476,6 +478,9 @@ Public Class DPINotebook
 
   Public Overrides Sub ClearSearch()
     Throw New NotImplementedException()
+  End Sub
+
+  Public Overrides Sub EventRequest(eventType As DockPanelItemEventType, eventData As Object)
   End Sub
 
 #End Region

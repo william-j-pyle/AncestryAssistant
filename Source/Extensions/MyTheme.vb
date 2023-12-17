@@ -49,10 +49,6 @@
 
     Public ReadOnly Property AppToolbarIconColor As Color = Color.White
 
-    Public ReadOnly Property ImageButtonBack As Image = My.Resources.Resources.ANCESTRY
-
-    Public ReadOnly Property ImageButtonFlipH As Image = My.Resources.Resources.ANCESTRY
-
     Public ReadOnly Property PanelAccentColor As Color = AppAccentColor
 
     Public ReadOnly Property PanelAccentColor2 As Color = AppAccent2Color

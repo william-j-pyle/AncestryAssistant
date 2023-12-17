@@ -31,7 +31,7 @@ Public Class DPIAncestorDetails
   Private blockEvents As Boolean = False
   Private components As System.ComponentModel.IContainer
   Private LastAttributeItem As TreeNode
-  Public Const Default_Key As String = "DOCK_ANCESTORATTRIBUTES"
+  Public Const Base_Key As String = "DOCK_ANCESTORATTRIBUTES"
 
 #End Region
 
@@ -45,7 +45,7 @@ Public Class DPIAncestorDetails
     ItemSupportsClose = Default_ItemSupportsClose
     ItemSupportsMove = Default_ItemSupportsMove
     ItemSupportsSearch = Default_ItemSupportsSearch
-    ItemKey = Default_Key
+    ItemKey = Base_Key
     ItemInstanceKey = instanceKey
     LocationCurrent = Default_LocationCurrent
     LocationPrefered = Default_LocationPrefered
@@ -250,14 +250,6 @@ Public Class DPIAncestorDetails
     AncestorColSplitter.Tag = e.X
   End Sub
 
-  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
-    UpdateUI()
-  End Sub
-
-  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
-    UpdateUI()
-  End Sub
-
   Private Sub CaptureAttributeState()
     ' Save the current expanded state
     AttributeState = New List(Of String)
@@ -319,7 +311,7 @@ Public Class DPIAncestorDetails
     End Try
   End Sub
 
-  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
+  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True) Handles _Ancestors.ActiveAncestorChanged, _Ancestors.AncestorsChanged
     If Ancestors Is Nothing Then Exit Sub
     If Not Ancestors.HasActiveAncestor Then Exit Sub
     Dim Ancestor As AncestorCollection.Ancestor = Ancestors.ActiveAncestor
@@ -370,11 +362,12 @@ Public Class DPIAncestorDetails
 #Region "Public Methods"
 
   Public Overrides Sub ApplySearch(criteria As String)
-    Throw New NotImplementedException()
   End Sub
 
   Public Overrides Sub ClearSearch()
-    Throw New NotImplementedException()
+  End Sub
+
+  Public Overrides Sub EventRequest(eventType As DockPanelItemEventType, eventData As Object)
   End Sub
 
 #End Region

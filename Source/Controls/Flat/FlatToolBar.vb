@@ -89,7 +89,7 @@ Public Class FlatToolBar
       Using brush As New SolidBrush(e.Item.BackColor)
         e.Graphics.FillRectangle(brush, e.Item.Bounds)
       End Using
-      e.Graphics.DrawRectangle(New Pen(My.Theme.PanelAccentColor, 1), e.Item.Bounds)
+      'e.Graphics.DrawRectangle(New Pen(My.Theme.PanelAccentColor, 1), e.Item.Bounds)
     End Sub
 
     Protected Overrides Sub OnRenderItemCheck(e As ToolStripItemImageRenderEventArgs)
@@ -141,31 +141,31 @@ Public Class FlatToolBar
     End Sub
 
     Protected Overrides Sub OnRenderToolStripBorder(e As ToolStripRenderEventArgs)
-      If e.ConnectedArea.IsEmpty Then
-        'ConnectedArea is all 0 then this is just normal borders
-        Using pen As New Pen(My.Theme.StatusBarBackColor, 2)
-          e.Graphics.DrawRectangle(pen, e.AffectedBounds)
-        End Using
-      Else
-        'we are working with a drop down! Need to be all special
-        Using brush As New SolidBrush(My.Theme.ColorToAccent(My.Theme.StatusBarBackColor))
-          e.Graphics.FillRectangle(brush, e.ConnectedArea)
-        End Using
-        Using pen As New Pen(My.Theme.ColorToShadow(My.Theme.StatusBarBackColor), 1)
-          'LEFT OF Connected Area
-          e.Graphics.DrawLine(pen, 0, 0, 0, e.ConnectedArea.Height - 1)
-          'RIGHT OF Connected Area
-          e.Graphics.DrawLine(pen, e.ConnectedArea.Width - 1, 0, e.ConnectedArea.Width - 1, e.ConnectedArea.Height - 1)
-          'TOP OF Affected (starts at end of connectedarea opening thru end of affectedbounds
-          e.Graphics.DrawLine(pen, e.ConnectedArea.Width, 0, e.AffectedBounds.Width - 1, 0)
-          'LEFT of Affected
-          e.Graphics.DrawLine(pen, 0, 0, 0, e.AffectedBounds.Height - 1)
-          'Right of Affected
-          e.Graphics.DrawLine(pen, e.AffectedBounds.Width - 1, 0, e.AffectedBounds.Width - 1, e.AffectedBounds.Height - 1)
-          'Bottom of affected
-          e.Graphics.DrawLine(pen, e.AffectedBounds.Width - 1, e.AffectedBounds.Height - 1, e.AffectedBounds.Width - 1, e.AffectedBounds.Height - 1)
-        End Using
-      End If
+      'If e.ConnectedArea.IsEmpty Then
+      '  'ConnectedArea is all 0 then this is just normal borders
+      '  Using pen As New Pen(My.Theme.StatusBarBackColor, 2)
+      '    e.Graphics.DrawRectangle(pen, e.AffectedBounds)
+      '  End Using
+      'Else
+      '  'we are working with a drop down! Need to be all special
+      '  Using brush As New SolidBrush(My.Theme.ColorToAccent(My.Theme.StatusBarBackColor))
+      '    e.Graphics.FillRectangle(brush, e.ConnectedArea)
+      '  End Using
+      '  Using pen As New Pen(My.Theme.ColorToShadow(My.Theme.StatusBarBackColor), 1)
+      '    'LEFT OF Connected Area
+      '    e.Graphics.DrawLine(pen, 0, 0, 0, e.ConnectedArea.Height - 1)
+      '    'RIGHT OF Connected Area
+      '    e.Graphics.DrawLine(pen, e.ConnectedArea.Width - 1, 0, e.ConnectedArea.Width - 1, e.ConnectedArea.Height - 1)
+      '    'TOP OF Affected (starts at end of connectedarea opening thru end of affectedbounds
+      '    e.Graphics.DrawLine(pen, e.ConnectedArea.Width, 0, e.AffectedBounds.Width - 1, 0)
+      '    'LEFT of Affected
+      '    e.Graphics.DrawLine(pen, 0, 0, 0, e.AffectedBounds.Height - 1)
+      '    'Right of Affected
+      '    e.Graphics.DrawLine(pen, e.AffectedBounds.Width - 1, 0, e.AffectedBounds.Width - 1, e.AffectedBounds.Height - 1)
+      '    'Bottom of affected
+      '    e.Graphics.DrawLine(pen, e.AffectedBounds.Width - 1, e.AffectedBounds.Height - 1, e.AffectedBounds.Width - 1, e.AffectedBounds.Height - 1)
+      '  End Using
+      'End If
     End Sub
 
     Protected Overrides Sub OnRenderToolStripContentPanelBackground(e As ToolStripContentPanelRenderEventArgs)

@@ -20,9 +20,9 @@ Imports System.Diagnostics.CodeAnalysis
 <Assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification:="<Pending>", Scope:="member", Target:="~F:AncestryAssistant.DPIImageGallery.MouseSmoothingFactor")>
 <Assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification:="<Pending>", Scope:="member", Target:="~F:AncestryAssistant.DPIImageGallery.PanningEnabled")>
 <Assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification:="<Pending>", Scope:="member", Target:="~F:AncestryAssistant.DPINotebook.components")>
-<Assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification:="<Pending>", Scope:="member", Target:="~F:AncestryAssistant.DPIWebBrowser.components")>
-<Assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification:="<Pending>", Scope:="member", Target:="~F:AncestryAssistant.DPIWebBrowser.UriTracking.UriTrackerConfig")>
-<Assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification:="<Pending>", Scope:="member", Target:="~F:AncestryAssistant.DPIWebBrowser.UriTrackingGroupDecoder")>
+<Assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification:="<Pending>", Scope:="member", Target:="~F:AncestryAssistant.FlatWebBrowser.components")>
+<Assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification:="<Pending>", Scope:="member", Target:="~F:AncestryAssistant.FlatWebBrowser.UriTracking.UriTrackerConfig")>
+<Assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification:="<Pending>", Scope:="member", Target:="~F:AncestryAssistant.FlatWebBrowser.UriTrackingGroupDecoder")>
 <Assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification:="<Pending>", Scope:="member", Target:="~F:AncestryAssistant.FlatContextMenu.components")>
 <Assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification:="<Pending>", Scope:="member", Target:="~F:AncestryAssistant.FlatMenuBar.components")>
 <Assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification:="<Pending>", Scope:="member", Target:="~F:AncestryAssistant.FlatSearchBox.components")>

@@ -16,7 +16,7 @@ Public Class FlatSearchBox
 
   Private _BlockLostFocus As Boolean = False
 
-  Private _ShowDropDown As Boolean = True
+  Private _ShowDropDown As Boolean = False
 
   Private _State As SearchState
 
@@ -48,11 +48,11 @@ Public Class FlatSearchBox
 
   Public Property ForeColorActive As Color = My.Theme.PanelFontColor
 
-  Public Property ImageCancelSearch As Image = My.Theme.ColorIcon(My.Resources.ANCESTRY, My.Theme.PanelFontColor)
+  Public Property ImageCancelSearch As Image = My.Theme.ColorIcon(My.Resources.panel_header_close, My.Theme.PanelFontColor)
 
-  Public Property ImageDropDown As Image = My.Theme.ColorIcon(My.Resources.ANCESTRY, My.Theme.PanelFontColor)
+  Public Property ImageDropDown As Image = My.Theme.ColorIcon(My.Resources.panel_header_menu, My.Theme.PanelFontColor)
 
-  Public Property ImageSearch As Image = My.Theme.ColorIcon(My.Resources.ANCESTRY, My.Theme.PanelFontColor)
+  Public Property ImageSearch As Image = My.Theme.ColorIcon(My.Resources.panel_search, My.Theme.PanelFontColor)
 
   Public Property SearchPromptText As String = "Search"
 
@@ -154,7 +154,7 @@ Public Class FlatSearchBox
 
     PnlContainer = New Panel()
     With PnlContainer
-      .Controls.Add(txtSearch)
+      .Controls.Add(TxtSearch)
       .BorderStyle = BorderStyle.None
       .Location = New Point(0, 0)
       .Margin = New Padding(0)
@@ -163,9 +163,9 @@ Public Class FlatSearchBox
       .Padding = New Padding(3, 2, 0, 0)
     End With
 
-    Controls.Add(pnlContainer)
+    Controls.Add(PnlContainer)
     Controls.Add(BtnSearch)
-    Controls.Add(btnDropdown)
+    Controls.Add(BtnDropdown)
     BorderStyle = BorderStyle.None
     AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
     Margin = New System.Windows.Forms.Padding(0)
@@ -187,7 +187,7 @@ Public Class FlatSearchBox
 
   Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
     If State = SearchState.FocusNoSearch And TxtSearch.Text.Length > 0 Then
-      RaiseEvent SearchEvent(Me, New FlatSearchEventArgs(txtSearch.Text))
+      RaiseEvent SearchEvent(Me, New FlatSearchEventArgs(TxtSearch.Text))
       State = SearchState.FocusSearch
       Exit Sub
     End If
@@ -237,7 +237,7 @@ Public Class FlatSearchBox
   Private Sub TxtSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSearch.KeyDown
     'Debug.Print("txtSearch_KeyDown")
     If e.KeyCode = Keys.Enter And TxtSearch.Text.Length > 0 Then
-      RaiseEvent SearchEvent(Me, New FlatSearchEventArgs(txtSearch.Text))
+      RaiseEvent SearchEvent(Me, New FlatSearchEventArgs(TxtSearch.Text))
       State = SearchState.FocusSearch
     ElseIf e.KeyCode = Keys.Escape Then
       If State = SearchState.NoFocusSearch Or State = SearchState.FocusSearch Then

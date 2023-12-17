@@ -21,13 +21,7 @@ Public Class DPIAncestorsList
   Private Const Default_RibbonShowOnItemOpen As Boolean = False
   Private blockEvents As Boolean = False
   Private components As System.ComponentModel.IContainer
-  Public Const Default_Key As String = "DOCK_ANCESTORSLIST"
-
-#End Region
-
-#Region "Events"
-
-  Public Event AncestryNavigateRequest(AncestorID As String)
+  Public Const Base_Key As String = "DOCK_ANCESTORSLIST"
 
 #End Region
 
@@ -41,7 +35,7 @@ Public Class DPIAncestorsList
     ItemSupportsClose = Default_ItemSupportsClose
     ItemSupportsMove = Default_ItemSupportsMove
     ItemSupportsSearch = Default_ItemSupportsSearch
-    ItemKey = Default_Key
+    ItemKey = Base_Key
     ItemInstanceKey = instanceKey
     LocationCurrent = Default_LocationCurrent
     LocationPrefered = Default_LocationPrefered
@@ -96,18 +90,10 @@ Public Class DPIAncestorsList
 
 #Region "Private Methods"
 
-  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
-    UpdateUI(False)
-  End Sub
-
-  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
-    UpdateUI()
-  End Sub
-
   Private Sub AncestorsList_DoubleClick(sender As Object, e As EventArgs) Handles AncestorsList.DoubleClick
     Dim ActiveAncestorID As String = AncestorsList.SelectedItems.Item(0).Tag.ToString
     If Not ActiveAncestorID.Equals("") Then
-      RaiseEvent AncestryNavigateRequest(ActiveAncestorID)
+      InvokePanelItemEvent(DockPanelItemEventType.NavRequested, UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON)
     End If
   End Sub
 
@@ -142,9 +128,10 @@ Public Class DPIAncestorsList
     End Try
   End Sub
 
-  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
+  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True) Handles _Ancestors.AncestorsChanged
     If Ancestors Is Nothing Then Exit Sub
     blockEvents = True
+    AncestorsList.SuspendLayout()
     If reload Then
       With AncestorsList
         .Tag = ""
@@ -166,7 +153,12 @@ Public Class DPIAncestorsList
         End If
       Next
     End If
+    AncestorsList.ResumeLayout(True)
     blockEvents = False
+  End Sub
+
+  Protected Sub UpdateUISelection() Handles _Ancestors.ActiveAncestorChanged
+    UpdateUI(False)
   End Sub
 
 #End Region
@@ -179,6 +171,9 @@ Public Class DPIAncestorsList
 
   Public Overrides Sub ClearSearch()
     AncestorsList.ClearFilter()
+  End Sub
+
+  Public Overrides Sub EventRequest(eventType As DockPanelItemEventType, eventData As Object)
   End Sub
 
 #End Region

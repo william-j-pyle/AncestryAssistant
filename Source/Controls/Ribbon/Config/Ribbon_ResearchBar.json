@@ -1,0 +1,88 @@
+{
+  "bars": [
+    {
+      "name": "BAR_RESEARCH",
+      "text": "Research",
+      "id": 400,
+      "visible": true,
+      "groups": [
+        {
+          "name": "GROUP_REFERENCE",
+          "text": "Sites",
+          "id": 400,
+          "showpanel": false,
+          "items": [
+            {
+              "name": "btnFindAGrave",
+              "id": 401,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "findagrave_logo_lg"
+                },
+                {
+                  "attribute": "caption",
+                  "value": "Find A Grave"
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 3
+            },
+            {
+              "name": "btnNewspaper",
+              "id": 402,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "newspaper_logo_lg"
+                },
+                {
+                  "attribute": "caption",
+                  "value": "News paper"
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 3
+            },
+            {
+              "name": "btnFold3",
+              "id": 403,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "fold3_logo_lg"
+                },
+                {
+                  "attribute": "caption",
+                  "value": "Fold3"
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 3
+            },
+            {
+              "name": "btnFamilySearch",
+              "id": 404,
+              "itemtype": "RIButton",
+              "attributes": [
+                {
+                  "attribute": "ImageFromResource",
+                  "value": "familysearch_logo_lg"
+                },
+                {
+                  "attribute": "caption",
+                  "value": "Family Search"
+                }
+              ],
+              "colspan": 2,
+              "rowspan": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

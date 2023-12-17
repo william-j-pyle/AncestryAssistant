@@ -22,6 +22,7 @@ Public Class DPIWebBrowser
   Private Const AncestryBaseURL As String = "https://www.ancestry.com/"
   Private Const Default_ItemCaption As String = "Ancestry.com"
   Private Const Default_ItemHasRibbonBar As Boolean = True
+  Private Const Default_ItemHasStatusBar As Boolean = False
   Private Const Default_ItemHasToolBar As Boolean = True
   Private Const Default_ItemSupportsClose As Boolean = True
   Private Const Default_ItemSupportsMove As Boolean = True
@@ -43,7 +44,7 @@ Public Class DPIWebBrowser
   Private isReady As Boolean = False
   Private sameImageAsFilename As String = ""
   Private UriTrackingGroupDecoder As New UriTracking()
-  Public Const Default_Key As String = "DOCK_WEBBROWSER"
+  Public Const Base_Key As String = "DOCK_WEBBROWSER"
 
 #End Region
 
@@ -108,7 +109,7 @@ Public Class DPIWebBrowser
     End Get
     Set(value As UriTrackingGroupEnum)
       If value <> _UriTrackingGroup Then
-#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
+#If TRACE Then
         Logger.log(Logger.LOG_TYPE.INFO, "UriTrackingGroup Changed {New:" & value.ToString & ", Old:" & _UriTrackingGroup.ToString & "}")
 #End If
         Dim oldValue As UriTrackingGroupEnum = _UriTrackingGroup
@@ -142,10 +143,11 @@ Public Class DPIWebBrowser
     ItemCaption = Default_ItemCaption
     ItemHasRibbonBar = Default_ItemHasRibbonBar
     ItemHasToolBar = Default_ItemHasToolBar
+    ItemHasStatusBar = Default_ItemHasStatusBar
     ItemSupportsClose = Default_ItemSupportsClose
     ItemSupportsMove = Default_ItemSupportsMove
     ItemSupportsSearch = Default_ItemSupportsSearch
-    ItemKey = Default_Key
+    ItemKey = Base_Key
     ItemInstanceKey = instanceKey
     LocationCurrent = Default_LocationCurrent
     LocationPrefered = Default_LocationPrefered
@@ -191,11 +193,12 @@ Public Class DPIWebBrowser
     TsWeb.Size = New System.Drawing.Size(600, 25)
     TsWeb.Stretch = True
     TsWeb.TabIndex = 2
+    TsWeb.Visible = False
     '
     'btnBack
     '
     BtnBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    BtnBack.Image = My.Theme.ImageButtonBack
+    BtnBack.Image = My.Resources.back_circle
     BtnBack.Name = "btnBack"
     BtnBack.Size = New System.Drawing.Size(23, 22)
     BtnBack.Text = "ToolStripButton2"
@@ -204,7 +207,7 @@ Public Class DPIWebBrowser
     'btnReload
     '
     BtnReload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    BtnReload.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnReload.Image = Global.AncestryAssistant.My.Resources.Resources.refresh
     BtnReload.ImageTransparentColor = System.Drawing.Color.Magenta
     BtnReload.Name = "btnReload"
     BtnReload.Size = New System.Drawing.Size(23, 22)
@@ -214,7 +217,7 @@ Public Class DPIWebBrowser
     'btnHome
     '
     BtnHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    BtnHome.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnHome.Image = Global.AncestryAssistant.My.Resources.Resources.filepage_home
     BtnHome.ImageTransparentColor = System.Drawing.Color.Magenta
     BtnHome.Name = "btnHome"
     BtnHome.Size = New System.Drawing.Size(23, 22)
@@ -345,7 +348,7 @@ Public Class DPIWebBrowser
   End Sub
 
   Private Async Sub JSAPI_Execute(script As String)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("WebBrowserPanelItem.JSAPI_Execute(script=[{0}])", script)
 #End If
 
@@ -355,7 +358,7 @@ Public Class DPIWebBrowser
   Private Sub JSAPI_Message(sender As Object, e As CoreWebView2WebMessageReceivedEventArgs) Handles Web.WebMessageReceived
     Dim msg As APIMessage = JsonConvert.DeserializeObject(Of APIMessage)(e.WebMessageAsJson)
 
-#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
+#If TRACE Then
     Logger.log(Logger.LOG_TYPE.DEBUG, msg.ToString)
 #End If
 
@@ -367,7 +370,7 @@ Public Class DPIWebBrowser
       sameImageAsFilename = ""
       Dim tracks As String = msg.GetValue("PAGEKEY")
       Dim utg As UriTrackingGroupEnum = UriTrackingGroupDecoder.GetEnum(tracks.Split(":"c))
-#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
+#If TRACE Then
       Logger.log(Logger.LOG_TYPE.INFO, "-----------------------------")
       Logger.log(Logger.LOG_TYPE.INFO, "-- URITrackingGroup        --")
       Logger.log(Logger.LOG_TYPE.INFO, "-----------------------------")
@@ -414,7 +417,7 @@ Public Class DPIWebBrowser
 
   Private Sub Web_CoreWebView2InitializationCompleted(sender As Object, e As CoreWebView2InitializationCompletedEventArgs) Handles Web.CoreWebView2InitializationCompleted
     CoreWeb = Web.CoreWebView2
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("WebBrowserPanelItem.web_CoreWebView2InitializationCompleted()")
 #End If
     With CoreWeb
@@ -426,7 +429,7 @@ Public Class DPIWebBrowser
         .IsScriptEnabled = True
         .IsZoomControlEnabled = False
         .AreBrowserAcceleratorKeysEnabled = False
-#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
+#If TRACE Then
         .AreDefaultScriptDialogsEnabled = True
         .AreDevToolsEnabled = True
         .AreDefaultContextMenusEnabled = True
@@ -451,34 +454,34 @@ Public Class DPIWebBrowser
   End Sub
 
   Private Sub Web_Layout(sender As Object, e As LayoutEventArgs) Handles Web.Layout
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("WebBrowserPanelItem.Web_Layout(affectedControl={0}, prop={1}, bounds={2})", e.AffectedControl.Name, e.AffectedProperty, e.AffectedControl.Bounds.ToString)
 
 #End If
   End Sub
 
   Private Sub Web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles Web.NavigationCompleted
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("WebBrowserPanelItem.web_NavigationCompleted()")
 #End If
     RaiseEvent ViewerBusy(False)
   End Sub
 
   Private Sub Web_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles Web.NavigationStarting
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("WebBrowserPanelItem.web_NavigationStarting()")
 #End If
     RaiseEvent ViewerBusy(True)
   End Sub
 
   Private Sub Web_Paint(sender As Object, e As PaintEventArgs) Handles Web.Paint
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("WebBrowserPanelItem.Web_Paint(rectangle={0})", e.ClipRectangle.ToString)
 #End If
   End Sub
 
   Private Sub Web_SourceChanged(sender As Object, e As CoreWebView2SourceChangedEventArgs) Handles Web.SourceChanged
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("WebBrowserPanelItem.web_SourceChanged(uri=[{0}])", Web.Source.AbsoluteUri)
 #End If
     JSAPI_Execute("ancestryAssistant.getPage();")
@@ -517,8 +520,15 @@ Public Class DPIWebBrowser
     Throw New NotImplementedException()
   End Sub
 
+  Public Overrides Sub EventRequest(eventType As DockPanelItemEventType, eventData As Object)
+    Select Case eventType
+      Case DockPanelItemEventType.NavRequested
+        NavigateTo(CType(eventData, UriTrackingGroupEnum))
+    End Select
+  End Sub
+
   Public Sub NavigateTo(target As UriTrackingGroupEnum, Optional customParam As String = "")
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("WebBrowserPanelItem.NavigateTo(target=[{0}], customParam=[{1}])", target.ToString, customParam)
 #End If
     Dim rtn As String = AncestryBaseURL
@@ -560,7 +570,7 @@ Public Class DPIWebBrowser
   End Sub
 
   Public Sub saveImageAs(filename As String)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("WebBrowserPanelItem.saveImageAs(filename=[{0}])", filename)
 #End If
     Dim src As String = Web.Source.AbsoluteUri

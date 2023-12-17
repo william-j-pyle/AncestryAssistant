@@ -22,9 +22,7 @@ Public Class DPIImageGallery
 
   Friend WithEvents ImgContainer As Panel
 
-  Friend WithEvents ImgViewer As ListView
-
-  Friend WithEvents ImgViewerList As ImageList
+  Friend WithEvents ImgViewer As FlatImageListView
 
   Friend WithEvents LblCaption As ToolStripLabel
 
@@ -40,7 +38,8 @@ Public Class DPIImageGallery
 
   Private Const Default_ItemCaption As String = "Image Gallery"
   Private Const Default_ItemHasRibbonBar As Boolean = True
-  Private Const Default_ItemHasToolBar As Boolean = False
+  Private Const Default_ItemHasStatusBar As Boolean = True
+  Private Const Default_ItemHasToolBar As Boolean = True
   Private Const Default_ItemSupportsClose As Boolean = True
   Private Const Default_ItemSupportsMove As Boolean = True
   Private Const Default_ItemSupportsSearch As Boolean = False
@@ -58,7 +57,7 @@ Public Class DPIImageGallery
   Private PanningEnabled As Boolean = True
   Private smoothedMousePosition As Point
   Private zoomActive As Boolean = False
-  Public Const Default_Key As String = "DOCK_GALLERY"
+  Public Const Base_Key As String = "DOCK_GALLERY"
 
 #End Region
 
@@ -69,10 +68,11 @@ Public Class DPIImageGallery
     ItemCaption = Default_ItemCaption
     ItemHasRibbonBar = Default_ItemHasRibbonBar
     ItemHasToolBar = Default_ItemHasToolBar
+    ItemHasStatusBar = Default_ItemHasStatusBar
     ItemSupportsClose = Default_ItemSupportsClose
     ItemSupportsMove = Default_ItemSupportsMove
     ItemSupportsSearch = Default_ItemSupportsSearch
-    ItemKey = Default_Key
+    ItemKey = Base_Key
     ItemInstanceKey = instanceKey
     LocationCurrent = Default_LocationCurrent
     LocationPrefered = Default_LocationPrefered
@@ -83,8 +83,7 @@ Public Class DPIImageGallery
     RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
     'Continue with creation
     components = New Container()
-    ImgViewer = New ListView()
-    ImgViewerList = New ImageList(components)
+    ImgViewer = New FlatImageListView()
     ImgContainer = New Panel()
     ImgBox = New PictureBox()
     Ts = New FlatToolBar()
@@ -109,22 +108,10 @@ Public Class DPIImageGallery
     ImgViewer.BorderStyle = BorderStyle.None
     ImgViewer.Font = New Font("Segoe UI Semibold", 9.0!, FontStyle.Bold)
     ImgViewer.ForeColor = My.Theme.PanelFontColor
-    ImgViewer.HideSelection = False
-    ImgViewer.LargeImageList = ImgViewerList
     ImgViewer.Location = New Point(0, 144)
-    ImgViewer.MultiSelect = False
     ImgViewer.Name = "imgViewer"
     ImgViewer.Size = New Size(223, 174)
-    ImgViewer.TabIndex = 0
-    ImgViewer.TileSize = New Size(256, 256)
-    ImgViewer.UseCompatibleStateImageBehavior = False
-    ImgViewer.View = View.Tile
-    '
-    'imgViewerList
-    '
-    ImgViewerList.ColorDepth = ColorDepth.Depth32Bit
-    ImgViewerList.ImageSize = New Size(256, 256)
-    ImgViewerList.TransparentColor = Color.Transparent
+
     '
     'imgContainer
     '
@@ -175,6 +162,7 @@ Public Class DPIImageGallery
       .RenderMode = ToolStripRenderMode.System
       .Size = New Size(465, 25)
       .Text = ""
+      .Visible = False
     End With
 
     '
@@ -182,7 +170,7 @@ Public Class DPIImageGallery
     '
     With BtnBack
       .DisplayStyle = ToolStripItemDisplayStyle.Image
-      .Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+      .Image = Global.AncestryAssistant.My.Resources.Resources.back_circle
       .ImageTransparentColor = Color.Transparent
       .Name = ""
       .Size = New Size(23, 22)
@@ -192,7 +180,7 @@ Public Class DPIImageGallery
     'btnFlipV
     '
     BtnFlipV.DisplayStyle = ToolStripItemDisplayStyle.Image
-    BtnFlipV.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnFlipV.Image = Global.AncestryAssistant.My.Resources.Resources.image_flip_vertical
     BtnFlipV.ImageTransparentColor = Color.Transparent
     BtnFlipV.Name = "btnFlipV"
     BtnFlipV.Size = New Size(23, 22)
@@ -201,7 +189,7 @@ Public Class DPIImageGallery
     'btnFlipH
     '
     BtnFlipH.DisplayStyle = ToolStripItemDisplayStyle.Image
-    BtnFlipH.Image = My.Theme.ImageButtonFlipH
+    BtnFlipH.Image = My.Resources.image_flip_horizontal
     BtnFlipH.ImageTransparentColor = Color.Transparent
     BtnFlipH.Name = "btnFlipH"
     BtnFlipH.Size = New Size(23, 22)
@@ -220,7 +208,7 @@ Public Class DPIImageGallery
     '
     BtnSizeHV.Alignment = ToolStripItemAlignment.Right
     BtnSizeHV.DisplayStyle = ToolStripItemDisplayStyle.Image
-    BtnSizeHV.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnSizeHV.Image = Global.AncestryAssistant.My.Resources.Resources.image_fit_all
     BtnSizeHV.ImageTransparentColor = Color.Transparent
     BtnSizeHV.Name = "btnSizeHV"
     BtnSizeHV.Size = New Size(23, 22)
@@ -230,7 +218,7 @@ Public Class DPIImageGallery
     '
     BtnSizeH.Alignment = ToolStripItemAlignment.Right
     BtnSizeH.DisplayStyle = ToolStripItemDisplayStyle.Image
-    BtnSizeH.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnSizeH.Image = Global.AncestryAssistant.My.Resources.Resources.image_fit_horizontal
     BtnSizeH.ImageTransparentColor = Color.Transparent
     BtnSizeH.Name = "btnSizeH"
     BtnSizeH.Size = New Size(23, 22)
@@ -240,7 +228,7 @@ Public Class DPIImageGallery
     '
     BtnSizeV.Alignment = ToolStripItemAlignment.Right
     BtnSizeV.DisplayStyle = ToolStripItemDisplayStyle.Image
-    BtnSizeV.Image = Global.AncestryAssistant.My.Resources.Resources.ANCESTRY
+    BtnSizeV.Image = Global.AncestryAssistant.My.Resources.Resources.image_fit_vertical
     BtnSizeV.ImageTransparentColor = Color.Transparent
     BtnSizeV.Name = "btnSizeV"
     BtnSizeV.Size = New Size(23, 22)
@@ -290,14 +278,6 @@ Public Class DPIImageGallery
 #End Region
 
 #Region "Private Methods"
-
-  Private Sub Ancestors_ActiveAncestorChanged(ancestorId As String) Handles Ancestors.ActiveAncestorChanged
-    UpdateUI()
-  End Sub
-
-  Private Sub Ancestors_AncestorsChanged() Handles Ancestors.AncestorsChanged
-    UpdateUI()
-  End Sub
 
   Private Sub BtnFlipH_Click(sender As Object, e As EventArgs) Handles BtnFlipH.Click
     ImgBox.Image.RotateFlip(RotateFlipType.RotateNoneFlipY)
@@ -409,43 +389,30 @@ Public Class DPIImageGallery
     ShowViewer(ImgViewer.SelectedItems.Item(0).Tag.ToString)
   End Sub
 
-  Private Sub LoadGalleryImage(caption As String, filename As String)
-    Dim maxSize As Integer = ImgViewerList.ImageSize.Height
-    Dim Img As Image = GetImageThumbnail(Image.FromFile(filename), maxSize)
-    Dim key As String = (ImgViewerList.Images.Count + 1).ToString
-    ImgViewerList.Images.Add(key, Img)
-    Dim newItem As ListViewItem = ImgViewer.Items.Add(caption, key)
-    newItem.Tag = filename
-  End Sub
+  'Private Sub ImgViewer_Paint(sender As Object, e As PaintEventArgs) Handles ImgViewer.Paint
+  '  ' Draw the background of the ListViewItem.
 
-  Private Sub ProcessFileAsync(fileName As String)
-    Dim galleryPath As String = Ancestors.ActiveAncestor.AncestorPath
-    Dim caption As String = fileName.Replace(galleryPath, "")
-    If File.Exists(fileName + ".txt") Then
-      caption = File.ReadAllText(fileName + ".txt")
-    End If
-    If InvokeRequired Then
-      BeginInvoke(Sub()
-                    LoadGalleryImage(caption, fileName)
-                  End Sub)
-    Else
-      LoadGalleryImage(caption, fileName)
-    End If
-  End Sub
+  '  ' Draw custom content or styles for the scrollbars. You can use e.Graphics to draw on the ListView.
+  '  ' Example: Draw a custom scrollbar on the right side of the ListView.
+  '  Dim scrollbarRect As New Rectangle(ImgViewer.Width - SystemInformation.VerticalScrollBarWidth, 0, SystemInformation.VerticalScrollBarWidth, ImgViewer.Height)
+  '  Debug.Print("PAINTING!: {0} ", scrollbarRect.ToString)
+  '  e.Graphics.FillRectangle(Brushes.Red, scrollbarRect)
+  '  e.Graphics.DrawRectangle(Pens.Blue, scrollbarRect)
+  'End Sub
 
   Private Sub ReloadGalleryAsync()
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("ImageGalleryPanelItem.ReloadGalleryAsync()")
 #End If
-
-    Dim fileNames As List(Of String) = Directory.GetFiles(Ancestors.ActiveAncestor.AncestorPath, "*.jpg", SearchOption.AllDirectories).ToList()
+    Dim galleryPath As String = Ancestors.ActiveAncestor.AncestorPath
+    Dim fileNames As List(Of String) = Directory.GetFiles(galleryPath, "*.jpg", SearchOption.AllDirectories).ToList()
     Parallel.ForEach(fileNames, Async Sub(fileName)
-                                  ProcessFileAsync(fileName)
+                                  ImgViewer.LoadImageAsync(galleryPath, fileName)
                                 End Sub)
   End Sub
 
   Private Sub ShowGallery()
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("ImageGalleryPanelItem.ShowGallery()")
 #End If
     ImgContainer.Visible = False
@@ -459,10 +426,9 @@ Public Class DPIImageGallery
   End Sub
 
   Private Sub ShowViewer(filename As String)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("ImageGalleryPanelItem.ShowViewer(filename=[{0}])", filename)
 #End If
-
     Dim f() As String = filename.Split("\"c)
     LblCaption.Text = f(UBound(f))
     For Each item As ToolStripItem In Ts.Items
@@ -500,14 +466,13 @@ Public Class DPIImageGallery
     End Try
   End Sub
 
-  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True) Handles _Ancestors.ActiveAncestorChanged, _Ancestors.AncestorsChanged
+#If TRACE Then
     Logger.debugPrint("ImageGalleryPanelItem.UpdateUI()")
 #End If
-
+    'Debug.Print(MyBase.Parent.Name)
+    ImgViewer.Clear()
     If Ancestors Is Nothing Then Exit Sub
-    ImgViewer.Items.Clear()
-    ImgViewerList.Images.Clear()
     If Not Ancestors.HasActiveAncestor Then Exit Sub
     ShowGallery()
     ReloadGalleryAsync()
@@ -523,6 +488,9 @@ Public Class DPIImageGallery
 
   Public Overrides Sub ClearSearch()
     Throw New NotImplementedException()
+  End Sub
+
+  Public Overrides Sub EventRequest(eventType As DockPanelItemEventType, eventData As Object)
   End Sub
 
 #End Region

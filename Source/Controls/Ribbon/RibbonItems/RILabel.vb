@@ -50,17 +50,17 @@
     Select Case ItemAttribute
       Case RibbonItemAttribute.imagefromresource
         Dim Img As Image = TryCast(My.Resources.ResourceManager.GetObject(CStr(attributeValue)), Image)
-        Debug.Print("ImageFromResource:  Img.width={0}", Img.Width)
-        Debug.Print("ImageFromResource:  text.MeasureSpace.width={0}", TextRenderer.MeasureText(" ", ctl.Font).Width)
+        'Debug.Print("ImageFromResource:  Img.width={0}", Img.Width)
+        'Debug.Print("ImageFromResource:  text.MeasureSpace.width={0}", TextRenderer.MeasureText(" ", ctl.Font).Width)
 
         textImageOffset = CInt(Img.Width / TextRenderer.MeasureText(" ", ctl.Font).Width) * 3
-        Debug.Print("ImageFromResource:  TextImageOffset={0}", textImageOffset)
+        'Debug.Print("ImageFromResource:  TextImageOffset={0}", textImageOffset)
 
         ctl.ImageAlign = ContentAlignment.MiddleLeft
         ctl.TextAlign = ContentAlignment.MiddleLeft
         ctl.Image = Img
         ctl.Text = " ".PadLeft(textImageOffset, " "c) + ctl.Text
-        Debug.Print("ImageFromResource:  Img.test=[{0}]", ctl.Text)
+        'Debug.Print("ImageFromResource:  Img.test=[{0}]", ctl.Text)
 
       Case RibbonItemAttribute.imagealign
         ctl.ImageAlign = CType(attributeValue, ContentAlignment)

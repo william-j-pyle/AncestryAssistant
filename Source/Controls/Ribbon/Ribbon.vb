@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports Newtonsoft.Json
 
 Public Class Ribbon
   Inherits TabControl
@@ -170,8 +169,16 @@ Public Class Ribbon
     Controls.Add(Tab)
   End Sub
 
+  Public Sub DisableBar(barKey As String)
+    SetGroupItemsAttribute(barKey, RibbonItemAttribute.enabled, False)
+  End Sub
+
   Public Sub DisableGroup(groupKey As String)
     SetGroupItemsAttribute(groupKey, RibbonItemAttribute.enabled, False)
+  End Sub
+
+  Public Sub EnableBar(barKey As String)
+    SetGroupItemsAttribute(barKey, RibbonItemAttribute.enabled, True)
   End Sub
 
   Public Sub EnableGroup(groupKey As String)
@@ -223,8 +230,7 @@ Public Class Ribbon
     End If
   End Sub
 
-  Public Sub LoadConfig(jsonConfig As String)
-    Dim cfg As RibbonConfig = JsonConvert.DeserializeObject(Of RibbonConfig)(jsonConfig)
+  Public Sub LoadConfig(cfg As RibbonConfig)
     For Each Bar As RibbonConfig.Bar In cfg.bars
       Dim rBar As RibbonBar = AddBar(Bar.name, Bar.text, Bar.id)
       RegisterBar(rBar)
@@ -234,9 +240,12 @@ Public Class Ribbon
       For Each refGrp As RibbonConfig.Group In Bar.groups
         Dim Grp As RibbonConfig.Group = cfg.GetGroup(refGrp)
         Dim rBarGrp As RibbonGroup = rBar.AddGroup(Grp.name, Grp.text, Bar.id, Grp.id)
-        rBarGrp.Enabled = Grp.enabled
-        rBarGrp.Visible = Grp.visible
-        rBarGrp.ShowPane = Grp.showpanel
+        If Not Bar.enabled Then
+          Grp.enabled = False
+        End If
+        'rBarGrp.Enabled = CBool(Grp.GetAttribute("enabled", Grp.enabled))
+        rBarGrp.Visible = CBool(Grp.GetAttribute("visible", Grp.visible))
+        rBarGrp.ShowPane = CBool(Grp.GetAttribute("showpane", Grp.showpanel))
         RegisterGroup(rBarGrp)
         AddHandler rBarGrp.RibbonGroupAction, AddressOf RibbonGroupAction
         For Each refItem As RibbonConfig.Item In Grp.items
@@ -286,6 +295,9 @@ Public Class Ribbon
               Dim itemAttribute As RibbonItemAttribute = DirectCast([Enum].Parse(GetType(RibbonItemAttribute), attr.Attribute.ToLower), RibbonItemAttribute)
               rBarGrpItem.SetAttribute(itemAttribute, attr.Value)
             Next
+            If Not Grp.enabled Then
+              rBarGrpItem.SetAttribute(RibbonItemAttribute.enabled, False)
+            End If
             'Debug.Print("LoadConfig.AddBar({0}).AddGroup({1}).AddItem({2})", Bar.name, Grp.name, Item.name)
             rBarGrp.AddItem(rBarGrpItem)
             RegisterItem(rBarGrpItem)

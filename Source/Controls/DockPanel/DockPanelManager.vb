@@ -29,20 +29,31 @@
   Private WithEvents SplitRight As Splitter
   Private WithEvents SplitRightTopBottom As Splitter
   Private components As System.ComponentModel.IContainer
+
+  Private RegistryDelegates As Dictionary(Of String, PanelItemCreateDelegate)
+
   Private RegistryItems As Dictionary(Of String, DockPanelItem)
+
   Private RegistryPanels As Dictionary(Of DockPanelLocation, DockPanel)
 
 #End Region
 
 #Region "Events"
 
-  Public Event PanelItemEvent(panelItem As DockPanelItem, eventType As DockPanelItemEventType)
+  Public Event PanelItemEvent(panelItem As DockPanelItem, eventType As DockPanelItemEventType, eventData As Object)
+
+#End Region
+
+#Region "Delegates"
+
+  Public Delegate Function PanelItemCreateDelegate() As DockPanelItem
 
 #End Region
 
 #Region "Public Constructors"
 
   Public Sub New()
+    RegistryDelegates = New Dictionary(Of String, PanelItemCreateDelegate)
     RegistryPanels = New Dictionary(Of DockPanelLocation, DockPanel)
     RegistryItems = New Dictionary(Of String, DockPanelItem)
     PnlMain = New System.Windows.Forms.Panel()
@@ -315,6 +326,26 @@
     Return Not (dockLocation.Equals(DockPanelLocation.None) Or dockLocation.Equals(DockPanelLocation.TrayBottom) Or dockLocation.Equals(DockPanelLocation.Tray) Or dockLocation.Equals(DockPanelLocation.TrayLeft) Or dockLocation.Equals(DockPanelLocation.TrayRight) Or dockLocation.Equals(DockPanelLocation.Floating))
   End Function
 
+  Private Function ItemCreate(itemKey As String) As DockPanelItem
+    If RegistryDelegates.ContainsKey(itemKey) Then
+      Dim funcCreate As PanelItemCreateDelegate = RegistryDelegates(itemKey)
+      Return funcCreate()
+    End If
+    Return Nothing
+  End Function
+
+  Private Sub ItemDestroy(itemKey As String)
+#If DEBUG Then
+    Logger.debugPrint("DockPanelManager.ItemDestroy(key=[{0}])", itemKey)
+#End If
+    If RegistryItems.ContainsKey(itemKey) Then
+      Dim panelItem As DockPanelItem = RegistryItems(itemKey)
+      RegistryItems.Remove(itemKey)
+      panelItem.Ancestors = Nothing
+      panelItem = Nothing
+    End If
+  End Sub
+
   Private Sub ManageSplitters_PanelLeft(topVis As Boolean, botVis As Boolean)
     If PnlLeftTop.Dock = DockStyle.Top Then
       PnlLeftTop.Tag = PnlLeftTop.Height
@@ -373,7 +404,7 @@
   End Sub
 
   Private Sub Panel_Close(panelObj As DockPanel)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("DockPanelManager.Panel_Close(DockPanel=[{0}, {1}])", panelObj.Name, panelObj.PanelLocation.ToString)
 #End If
     PanelVisible(panelObj.PanelLocation, False)
@@ -381,22 +412,45 @@
 
   Private Sub Panel_FocusChanged(panelObj As DockPanel, HasFocus As Boolean)
     If Not HasFocus Then Exit Sub
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("DockPanelManager.Panel_FocusChanged(dockPanel=[{0}, {1}], HasFocus=[{2}])", panelObj.Name, panelObj.PanelLocation.ToString, HasFocus)
 #End If
     PanelFocus(panelObj.PanelLocation)
   End Sub
 
   Private Sub Panel_ItemClosed(panelItem As DockPanelItem)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("DockPanelManager.Panel_ItemClosed(panelItem=[{0}, {1}])", panelItem.Name, panelItem.LocationCurrent.ToString)
 #End If
     panelItem.LocationCurrent = DockPanelLocation.Tray
-    RaiseEvent PanelItemEvent(panelItem, DockPanelItemEventType.ItemClosed)
+    RaiseEvent PanelItemEvent(panelItem, DockPanelItemEventType.ItemClosed, Nothing)
+    If panelItem.ItemSuspendOnClose Then
+      ItemDestroy(panelItem.Key)
+      panelItem = Nothing
+    End If
+  End Sub
+
+  Private Sub Panel_ItemEvent(Item As DockPanelItem, eventType As DockPanelItemEventType, eventData As Object)
+    Select Case eventType
+      Case DockPanelItemEventType.ItemLocationChanged
+        Panel_ItemLocationChange(Item, CType(eventData, DockPanelLocation))
+      Case DockPanelItemEventType.ItemClosed
+        Panel_ItemClosed(Item)
+      Case DockPanelItemEventType.ItemSelected
+        Panel_ItemSelected(Item)
+      Case DockPanelItemEventType.NavTrackingChanged
+        RaiseEvent PanelItemEvent(Item, eventType, eventData)
+      Case DockPanelItemEventType.NavRequested
+        RaiseEvent PanelItemEvent(Item, eventType, eventData)
+      Case DockPanelItemEventType.ItemBusy
+        RaiseEvent PanelItemEvent(Item, eventType, eventData)
+      Case DockPanelItemEventType.NavData
+        RaiseEvent PanelItemEvent(Item, eventType, eventData)
+    End Select
   End Sub
 
   Private Sub Panel_ItemLocationChange(panelItem As DockPanelItem, dockLocation As DockPanelLocation)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("DockPanelManager.Panel_ItemLocationChange(panelItem=[{0}, {1}], newPanelLocation[{2}])", panelItem.Name, panelItem.LocationCurrent.ToString, dockLocation.ToString)
 #End If
     Dim frmDock As DockPanel = RegistryPanels.Item(panelItem.LocationCurrent)
@@ -410,22 +464,23 @@
 
   Private Sub Panel_ItemSelected(panelItem As DockPanelItem)
     If panelItem Is Nothing Then Exit Sub
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("DockPanelManager.Panel_ItemSelected(panelItem=[{0}, {1}])", panelItem.Name, panelItem.LocationCurrent.ToString)
 #End If
-    RaiseEvent PanelItemEvent(panelItem, DockPanelItemEventType.ItemSelected)
+    RaiseEvent PanelItemEvent(panelItem, DockPanelItemEventType.ItemSelected, Nothing)
   End Sub
 
   Private Sub PanelRegister(panelObj As DockPanel)
-#If DEBUG_LEVEL = DEBUG_LEVEL_ALL Then
+#If DEBUG Then
     Logger.debugPrint("DockPanelManager.PanelRegister(pnl=[{0}, {1}])", panelObj.Name, panelObj.PanelLocation.ToString)
 #End If
     RegistryPanels.Add(panelObj.PanelLocation, panelObj)
     AddHandler panelObj.PanelClose, AddressOf Panel_Close
     AddHandler panelObj.PanelFocusChanged, AddressOf Panel_FocusChanged
-    AddHandler panelObj.PanelItemLocationChange, AddressOf Panel_ItemLocationChange
-    AddHandler panelObj.PanelItemClose, AddressOf Panel_ItemClosed
-    AddHandler panelObj.PanelItemSelected, AddressOf Panel_ItemSelected
+    AddHandler panelObj.PanelItemEvent, AddressOf Panel_ItemEvent
+    'AddHandler panelObj.PanelItemLocationChange, AddressOf Panel_ItemLocationChange
+    'AddHandler panelObj.PanelItemClose, AddressOf Panel_ItemClosed
+    'AddHandler panelObj.PanelItemSelected, AddressOf Panel_ItemSelected
   End Sub
 
 #End Region
@@ -449,11 +504,11 @@
   Public Function ItemAdd(dockLocation As DockPanelLocation, itemKey As String) As DockPanelItem
     'Logger.debugPrint("AddItem: {0}({1})", panelItemKey, dockLocation.ToString)
     If IsDockableLocation(dockLocation) Then
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
       Logger.debugPrint("DockPanelManager.ItemAdd(dockLocation=[{0}], panelItemKey=[{1}])", dockLocation.ToString, itemKey)
 #End If
       Dim dockPnl As DockPanel = RegistryPanels(dockLocation)
-      Dim item As DockPanelItem = RegistryItems(itemKey)
+      Dim item As DockPanelItem = ItemGet(itemKey)
       dockPnl.ItemAdd(item)
       item.LocationCurrent = dockLocation
       Return item
@@ -461,11 +516,35 @@
     Return Nothing
   End Function
 
+  Public Sub ItemEventRequest(itemKey As String, eventType As DockPanelItemEventType, eventData As Object)
+    Dim itm As DockPanelItem = RegistryItems(itemKey)
+    itm.EventRequest(eventType, eventData)
+  End Sub
+
+  Public Function ItemGet(itemKey As String) As DockPanelItem
+    If RegistryItems.ContainsKey(itemKey) Then
+#If DEBUG Then
+      Logger.debugPrint("DockPanelManager.ItemGet(key=[{0}], FromRegistry)", itemKey)
+#End If
+      Return RegistryItems(itemKey)
+    Else
+#If DEBUG Then
+      Logger.debugPrint("DockPanelManager.ItemGet(key=[{0}], FromDelegate)", itemKey)
+#End If
+      Dim panelItem As DockPanelItem = ItemCreate(itemKey)
+      If panelItem IsNot Nothing Then
+        RegistryItems.Add(itemKey, panelItem)
+        Return panelItem
+      End If
+    End If
+    Return Nothing
+  End Function
+
   Public Sub ItemMove(itemKey As String, dockLocation As DockPanelLocation)
-#If DEBUG_LEVEL = DEBUG_LEVEL_ALL Then
+#If DEBUG Then
     Logger.debugPrint("DockPanelManager.ItemMove(key=[{0}], dockLocation=[{1}])", itemKey, dockLocation.ToString)
 #End If
-    Dim item As DockPanelItem = RegistryItems(itemKey)
+    Dim item As DockPanelItem = ItemGet(itemKey)
     If item Is Nothing Then Exit Sub
     Dim dockPnl As DockPanel = RegistryPanels(dockLocation)
     If dockPnl IsNot Nothing Then
@@ -474,12 +553,15 @@
     End If
   End Sub
 
-  Public Sub ItemRegister(panelItem As DockPanelItem)
-    RegistryItems.Add(panelItem.Key, panelItem)
+  Public Sub ItemRegister(itemKey As String, funcCreate As PanelItemCreateDelegate)
+#If TRACE Then
+    Logger.debugPrint("DockPanelManager.ItemRegister(itemKey={0})", itemKey)
+#End If
+    RegistryDelegates.Add(itemKey, funcCreate)
   End Sub
 
   Public Sub ItemSelect(panelItem As DockPanelItem)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("DockPanelManager.ItemSelect(panelItem=[{0},{1}])", panelItem.Key, panelItem.LocationCurrent.ToString)
 #End If
     Dim dockPnl As DockPanel = RegistryPanels(panelItem.LocationCurrent)
@@ -489,10 +571,10 @@
   End Sub
 
   Public Sub ItemShow(itemKey As String)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
+#If TRACE Then
     Logger.debugPrint("DockPanelManager.ItemShow(itemKey=[{0}])", itemKey)
 #End If
-    Dim itm As DockPanelItem = RegistryItems(itemKey)
+    Dim itm As DockPanelItem = ItemGet(itemKey)
     Dim loc As DockPanelLocation = itm.LocationPrevious
     If itm.LocationCurrent = DockPanelLocation.Tray Or itm.LocationCurrent = DockPanelLocation.None Then
       If itm.LocationPrevious = DockPanelLocation.None Or itm.LocationPrevious = DockPanelLocation.Tray Then
@@ -504,15 +586,7 @@
     End If
     PanelShow(itm.LocationCurrent)
     ItemSelect(itm)
-    RaiseEvent PanelItemEvent(itm, DockPanelItemEventType.ItemOpened)
-  End Sub
-
-  Public Sub ItemUnRegister(panelItem As DockPanelItem)
-    If IsDockableLocation(panelItem.LocationCurrent) Then
-      Dim dockPnl As DockPanel = RegistryPanels(panelItem.LocationCurrent)
-      dockPnl.ItemRemove(panelItem)
-    End If
-    RegistryItems.Remove(panelItem.Key)
+    RaiseEvent PanelItemEvent(itm, DockPanelItemEventType.ItemOpened, Nothing)
   End Sub
 
   Public Sub PanelFocus(dockLocation As DockPanelLocation)
@@ -524,7 +598,7 @@
   End Sub
 
   Public Sub PanelHide(dockLocation As DockPanelLocation)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("DockPanelManager.PanelHide(dockLocation=[{0}])", dockLocation)
 #End If
     PanelVisible(dockLocation, False)
@@ -535,14 +609,14 @@
   End Function
 
   Public Sub PanelShow(dockLocation As DockPanelLocation)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
+#If TRACE Then
     Logger.debugPrint("DockPanelManager.PanelShow(dockLocation=[{0}])", dockLocation.ToString)
 #End If
     PanelVisible(dockLocation, True)
   End Sub
 
   Public Sub PanelVisible(dockLocation As DockPanelLocation, isVisible As Boolean)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_EVENT Then
+#If TRACE Then
     Logger.debugPrint("DockPanelManager.PanelVisible(panelLocation=[{0},{1}])", dockLocation.ToString, isVisible)
 #End If
     Select Case dockLocation
@@ -564,16 +638,16 @@
   End Sub
 
   Public Sub SettingsLoad()
-    For Each key As String In RegistryItems.Keys
+    For Each key As String In RegistryDelegates.Keys
       Dim prop As String = key + "_LOC"
       Dim loc As DockPanelLocation = DockPanelLocation.Tray
       Try
-#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
+#If TRACE Then
         Logger.debugPrint("DockPanelManager.SettingsLoad: {0}=[{1}]", prop, My.Settings.Item(prop))
 #End If
         loc = CType(My.Settings.Item(prop), DockPanelLocation)
       Catch ex As Exception
-#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
+#If TRACE Then
         Logger.debugPrint("DockPanelManager.SettingsLoad: {0}=[{1}]", prop, "FAILED")
 #End If
         loc = DockPanelLocation.Tray
@@ -634,11 +708,11 @@
     For Each key As String In RegistryItems.Keys
       Try
         My.Settings.Item(key + "_LOC") = CInt(RegistryItems(key).LocationCurrent)
-#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
+#If TRACE Then
         Logger.debugPrint("DockPanelManager.SettingsSave: {0}=[{1}]", key + "_LOC", CInt(RegistryItems(key).LocationCurrent))
 #End If
       Catch ex As Exception
-#If DEBUG_LEVEL >= DEBUG_LEVEL_CRITICAL Then
+#If TRACE Then
         Logger.debugPrint("DockPanelManager.SettingsSave: {0}=[{1}]", key + "_LOC", "FAILED")
 #End If
       End Try
