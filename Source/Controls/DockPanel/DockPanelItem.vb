@@ -2,17 +2,9 @@
   Inherits UserControl
 
   Protected Friend WithEvents _Ancestors As AncestorCollection
-  Private _ItemIsSuspended As Boolean = False
-  Private _LocationCurrent As DockPanelLocation = DockPanelLocation.None
-
-  'Public Event PanelItemClosed(panelItem As DockPanelItem, e As EventArgs)
-
-  'Public Event PanelItemGotFocus(panelItem As DockPanelItem, e As EventArgs)
-
-  'Public Event PanelItemMoved(panelItem As DockPanelItem, e As EventArgs)
-
-  'Public Event PanelItemOpened(panelItem As DockPanelItem, e As EventArgs)
-
+  Private _ItemCaption As String = ""
+  Protected Friend _LocationCurrent As DockPanelLocation
+  Protected Friend blockEvents As Boolean = False
   Public Property Ancestors As AncestorCollection
     Get
       Return _Ancestors
@@ -22,50 +14,40 @@
       UpdateUI()
     End Set
   End Property
-
   Public Property ItemCaption As String
-
-  Public Property ItemHasFocus As Boolean
-
-  Public Property ItemHasRibbonBar As Boolean
-
-  Public Property ItemHasStatusBar As Boolean
-
-  Public Property ItemHasToolBar As Boolean
-
-  Public Property ItemInstanceKey As String
-
-  Public Property ItemIsSuspended As Boolean
     Get
-      Return _ItemIsSuspended
-    End Get
-    Set(value As Boolean)
-      If Not value.Equals(_ItemIsSuspended) Then
-        _ItemIsSuspended = value
-        If Not _ItemIsSuspended Then UpdateUI()
+      If ItemInstanceKey.Length > 0 Then
+        If _ItemCaption.Length > 0 Then
+          Return _ItemCaption + " - " + ItemInstanceKey
+        Else
+          Return ItemInstanceKey
+        End If
+      Else
+        Return _ItemCaption
+
       End If
+    End Get
+    Set(value As String)
+      _ItemCaption = value
     End Set
   End Property
+  Public Property ItemDestroyOnClose As Boolean = False
+  Public Property ItemHasFocus As Boolean = False
+  Public Property ItemHasRibbonBar As Boolean = False
+  Public Property ItemHasStatusBar As Boolean = False
+  Public Property ItemHasToolBar As Boolean = False
+  Public Property ItemInstanceKey As String = ""
+  Public Property ItemKey As String = String.Empty
+  Public Property ItemPreRegister As Boolean = False
 
-  Public Property ItemKey As String
+  Public Property ItemSupportsClose As Boolean = True
 
-  Public Property ItemPreRegister As Boolean = True
+  Public Property ItemSupportsMove As Boolean = True
 
-  Public Property ItemSupportsClose As Boolean
-
-  Public Property ItemSupportsMove As Boolean
-
-  Public Property ItemSupportsSearch As Boolean
-
-  Public Property ItemSuspendOnClose As Boolean = False
-
+  Public Property ItemSupportsSearch As Boolean = False
   Public ReadOnly Property Key As String
     Get
-      If Len(ItemInstanceKey) > 0 Then
-        Return ItemKey + "_" + ItemInstanceKey
-      Else
-        Return ItemKey
-      End If
+      Return ItemKey + ItemInstanceKey
     End Get
   End Property
 
@@ -88,17 +70,16 @@
     End Set
   End Property
 
-  Public Property LocationPrefered As DockPanelLocation = DockPanelLocation.Tray
+  Public Property LocationPrefered As DockPanelLocation = DockPanelLocation.MiddleTopLeft
 
-  Public Property LocationPrevious As DockPanelLocation
+  Public Property LocationPrevious As DockPanelLocation = DockPanelLocation.None
 
-  Public Property RibbonBarKey As String = String.Empty
-
+  Public Property RibbonBarKey As String = ""
   Public Property RibbonHideOnItemClose As Boolean = True
 
-  Public Property RibbonSelectOnItemFocus As Boolean = False
+  Public Property RibbonSelectOnItemFocus As Boolean = True
 
-  Public Property RibbonShowOnItemOpen As Boolean = False
+  Public Property RibbonShowOnItemOpen As Boolean = True
 
   Public Event PanelItemEvent(panelItem As DockPanelItem, eventType As DockPanelItemEventType, eventData As Object)
 

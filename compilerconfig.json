@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "Resources/web/ccs/main.css",
+    "inputFile": "Resources/web/ccs/main.less"
+  },
+  {
+    "outputFile": "Resources/web/ccs/CSSWebControl.css",
+    "inputFile": "Resources/web/ccs/CSSWebControl.less"
+  },
+  {
+    "outputFile": "Source/Controls/Web/Html/WebControl.css",
+    "inputFile": "Source/Controls/Web/Html/WebControl.less"
+  }
+]

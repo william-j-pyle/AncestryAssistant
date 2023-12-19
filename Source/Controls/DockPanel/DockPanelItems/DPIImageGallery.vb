@@ -34,20 +34,6 @@ Public Class DPIImageGallery
 
   Friend WithEvents Ts As FlatToolBar
 
-  Private Const Default_ItemCaption As String = "Image Gallery"
-  Private Const Default_ItemHasRibbonBar As Boolean = True
-  Private Const Default_ItemHasStatusBar As Boolean = True
-  Private Const Default_ItemHasToolBar As Boolean = True
-  Private Const Default_ItemSupportsClose As Boolean = True
-  Private Const Default_ItemSupportsMove As Boolean = True
-  Private Const Default_ItemSupportsSearch As Boolean = False
-  Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
-  Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.MiddleTopLeft
-  Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.MiddleTopLeft
-  Private Const Default_RibbonBarKey As String = "B500"
-  Private Const Default_RibbonHideOnItemClose As Boolean = True
-  Private Const Default_RibbonSelectOnItemFocus As Boolean = True
-  Private Const Default_RibbonShowOnItemOpen As Boolean = True
   Private components As System.ComponentModel.IContainer
   Private MouseSmoothingFactor As Double = 0.1
   ' Tracking
@@ -58,23 +44,23 @@ Public Class DPIImageGallery
   Public Const Base_Key As String = "DOCK_GALLERY"
 
   Public Sub New(Optional instanceKey As String = "")
-    'Apply Item Defaults for this Type
-    ItemCaption = Default_ItemCaption
-    ItemHasRibbonBar = Default_ItemHasRibbonBar
-    ItemHasToolBar = Default_ItemHasToolBar
-    ItemHasStatusBar = Default_ItemHasStatusBar
-    ItemSupportsClose = Default_ItemSupportsClose
-    ItemSupportsMove = Default_ItemSupportsMove
-    ItemSupportsSearch = Default_ItemSupportsSearch
+    ItemCaption = "Image Gallery"
+    ItemDestroyOnClose = True
+    ItemHasRibbonBar = False
+    ItemHasStatusBar = False
+    ItemHasToolBar = True
+    ItemSupportsClose = True
+    ItemSupportsMove = True
+    ItemSupportsSearch = False
+    LocationCurrent = DockPanelLocation.None
+    LocationPrefered = DockPanelLocation.MiddleTopLeft
+    LocationPrevious = DockPanelLocation.MiddleTopLeft
+    RibbonBarKey = ""
+    RibbonHideOnItemClose = False
+    RibbonSelectOnItemFocus = False
+    RibbonShowOnItemOpen = False
     ItemKey = Base_Key
     ItemInstanceKey = instanceKey
-    LocationCurrent = Default_LocationCurrent
-    LocationPrefered = Default_LocationPrefered
-    LocationPrevious = Default_LocationPrevious
-    RibbonBarKey = Default_RibbonBarKey
-    RibbonHideOnItemClose = Default_RibbonHideOnItemClose
-    RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
-    RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
     'Continue with creation
     components = New Container()
     ImgViewer = New FlatImageListView()

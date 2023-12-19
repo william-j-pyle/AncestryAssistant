@@ -1,7 +1,7 @@
 {
   "bars": [
     {
-      "name": "BAR_FILE",
+      "name": "FILE",
       "text": "File",
       "id": 0,
       "showpage": true,

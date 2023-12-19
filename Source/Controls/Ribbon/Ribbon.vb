@@ -5,9 +5,9 @@ Public Class Ribbon
 
   Private RegistryBar As New Dictionary(Of String, RibbonBar)
   Private RegistryGroup As New Dictionary(Of String, RibbonGroup)
+  Private RegistryItem As New Dictionary(Of String, RibbonItem)
+  Private RegistryKey As New Dictionary(Of String, String)
   Private RegistryTab As New Dictionary(Of String, TabPage)
-  Public RegistryItem As New Dictionary(Of String, RibbonItem)
-
   <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)>
   Private Shadows ReadOnly Property TabPages As TabPageCollection
     Get
@@ -16,18 +16,20 @@ Public Class Ribbon
   End Property
 
   Public Property AppBackColor As Color = My.Theme.AppBackColor
-
   Public Property AppForeColor As Color = My.Theme.AppFontColor
-
   Public Property AppHighlightColor As Color = My.Theme.AppHighlightColor
-
   Public Property RibbonAccentColor As Color = My.Theme.RibbonAccentColor
-
   Public Property RibbonBackColor As Color = My.Theme.RibbonBackColor
-
   Public Property RibbonForeColor As Color = My.Theme.RibbonForeColor
-
   Public Property RibbonShadowColor As Color = My.Theme.RibbonShadowColor
+  Public ReadOnly Property Key(keyName As String) As String
+    Get
+      If RegistryKey.ContainsKey(keyName) Then
+        Return RegistryKey(keyName)
+      End If
+      Return ""
+    End Get
+  End Property
 
   Public Event RibbonAction(action As RibbonEventType, value As Object, barId As Integer, groupId As Integer, itemId As Integer)
 
@@ -293,16 +295,34 @@ Public Class Ribbon
   End Sub
 
   Public Sub RegisterBar(bar As RibbonBar)
-    RegistryBar.Add(RibbonKey(bar.BarId), bar)
-    RegistryTab.Add(RibbonKey(bar.BarId), TryCast(bar.Parent, TabPage))
+    Dim key As String = RibbonKey(bar.BarId)
+    Try
+      RegistryBar.Add(key, bar)
+      RegistryTab.Add(key, TryCast(bar.Parent, TabPage))
+      RegistryKey.Add(bar.Name, key)
+    Catch ex As Exception
+
+    End Try
   End Sub
 
   Public Sub RegisterGroup(group As RibbonGroup)
-    RegistryGroup.Add(RibbonKey(group.BarId, group.GroupId), group)
+    Dim key As String = RibbonKey(group.BarId, group.GroupId)
+    Try
+      RegistryGroup.Add(key, group)
+      RegistryKey.Add(group.Name, key)
+    Catch ex As Exception
+
+    End Try
   End Sub
 
   Public Sub RegisterItem(item As RibbonItem)
-    RegistryItem.Add(RibbonKey(item.BarId, item.GroupId, item.ItemId), item)
+    Dim key As String = RibbonKey(item.BarId, item.GroupId, item.ItemId)
+    Try
+      RegistryItem.Add(key, item)
+      RegistryKey.Add(item.Name, key)
+    Catch ex As Exception
+
+    End Try
   End Sub
 
   Public Sub SetGroupAttribute(groupKey As String, attribute As RibbonItemAttribute, value As Object)

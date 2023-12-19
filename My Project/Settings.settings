@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="AncestorsPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Geneology\Ancestors\</Value>
+      <Value Profile="(Default)">D:\Geneology\Apps\AncestryAssistant\AncestryAssistant\Ancestors\</Value>
     </Setting>
     <Setting Name="MainForm_ClientSize" Type="System.Drawing.size" Scope="User">
       <Value Profile="(Default)">700, 500</Value>
@@ -99,6 +99,21 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="DOCK_NOTEBOOK_LOC" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="WEB_HOSTNAME" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ancestryassistant</Value>
+    </Setting>
+    <Setting Name="WEB_VIRTUALPATH" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\Geneology\Apps\AncestryAssistant\AncestryAssistant\Ancestors\</Value>
+    </Setting>
+    <Setting Name="DOCK_ANCESTORSLISTWEB_LOC" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DOCK_IMAGEGALLERYWEB_LOC" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DOCK_CENSUSWEB_LOC" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>

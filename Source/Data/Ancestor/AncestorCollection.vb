@@ -85,13 +85,15 @@ Public Class AncestorCollection
   Private Sub LoadRepository()
     Dim myAncestor As Ancestor
     For Each AncestorPath As String In Directory.GetDirectories(RepositoryPath)
-      Try
-        myAncestor = New Ancestor(AncestorPath)
-        Add(myAncestor.ID, myAncestor)
-        RaiseEvent AncestorsChanged()
-      Catch ex As InvalidDataException
-        Debug.Print("Invalid Repository Entry: " + AncestorPath)
-      End Try
+      If Not AncestorPath.EndsWith("web") Then
+        Try
+          myAncestor = New Ancestor(AncestorPath)
+          Add(myAncestor.ID, myAncestor)
+          RaiseEvent AncestorsChanged()
+        Catch ex As InvalidDataException
+          Debug.Print("Invalid Repository Entry: " + AncestorPath)
+        End Try
+      End If
     Next
   End Sub
 

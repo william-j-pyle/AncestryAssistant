@@ -32,9 +32,34 @@ Partial Class AssistantAppForm
 #End If
 
     Select Case Ribbon.RibbonKey(barId, groupId, itemId)
-      Case "B200.G5.I17" 'Census
-        DockManager.ItemShow(DPICensus.Base_Key)
-      Case "B200.G5.I18" 'Gallery
+      Case "B400.G400.I401" 'Test 1
+        'DockManager.ItemShow(DPICensusWeb.Base_Key)
+      Case "B400.G400.I402" 'Test 2
+        'DockManager.ItemShow(DPIImageGalleryWeb.Base_Key)
+      Case "B400.G400.I403" 'Test 3
+      Case "B400.G400.I404" 'Test 4
+
+      Case RibbonBar.Key("ANCESTOR_CENSUS_UNIFIED") 'Census
+        DockManager.ItemShow(DPICensusWeb.Base_Key, "Unified")
+      Case RibbonBar.Key("ANCESTOR_CENSUS_YR1")
+        DockManager.ItemShow(DPICensusWeb.Base_Key, CStr(value))
+      Case RibbonBar.Key("ANCESTOR_CENSUS_YR2")
+        DockManager.ItemShow(DPICensusWeb.Base_Key, CStr(value))
+      Case RibbonBar.Key("ANCESTOR_CENSUS_YR3")
+        DockManager.ItemShow(DPICensusWeb.Base_Key, CStr(value))
+      Case RibbonBar.Key("ANCESTOR_CENSUS_YR4")
+        DockManager.ItemShow(DPICensusWeb.Base_Key, CStr(value))
+      Case RibbonBar.Key("ANCESTOR_CENSUS_YR5")
+        DockManager.ItemShow(DPICensusWeb.Base_Key, CStr(value))
+      Case RibbonBar.Key("ANCESTOR_CENSUS_YR6")
+        DockManager.ItemShow(DPICensusWeb.Base_Key, CStr(value))
+      Case RibbonBar.Key("ANCESTOR_CENSUS_YR7")
+        DockManager.ItemShow(DPICensusWeb.Base_Key, CStr(value))
+      Case RibbonBar.Key("ANCESTOR_CENSUS_YR8")
+        DockManager.ItemShow(DPICensusWeb.Base_Key, CStr(value))
+      Case RibbonBar.Key("ANCESTOR_CENSUS_YR9")
+        DockManager.ItemShow(DPICensusWeb.Base_Key, CStr(value))
+      Case RibbonBar.Key("ANCESTOR_TOOLS_GALLERY") 'Gallery
         'Dim item As DockPanelItem = DockManager.ItemGet(DPIImageGallery.Base_Key)
         'If item Is Nothing Then
         '  item = New DPIImageGallery With {
@@ -44,30 +69,32 @@ Partial Class AssistantAppForm
         '  ' Register PanelItem
         '  DockManager.ItemRegister(item)
         'End If
-        DockManager.ItemShow(DPIImageGallery.Base_Key)
-      Case "B200.G5.I19" 'Notebook
+        DockManager.ItemShow(DPIImageGalleryWeb.Base_Key)
+      Case RibbonBar.Key("ANCESTOR_TOOLS_NOTEBOOK") 'Notebook
         DockManager.ItemShow(DPINotebook.Base_Key)
-      Case RIBBON_MAIN_ANCESTRY_FACTS 'Facts
+      Case RibbonBar.Key("ANCESTOR_ANCESTRY_FACT") 'Facts
         DockManager.ItemEventRequest(DPIWebBrowser.Base_Key, DockPanelItemEventType.NavRequested, UriTrackingGroupEnum.ANCESTRY_FACTS_PERSON)
         DockManager.ItemShow(DPIWebBrowser.Base_Key)
-      Case "B200.G2"
-        DockManager.ItemShow(DPIAncestorsList.Base_Key)
-      Case "ASSIGN" 'Ancestry Person Gallery
+      Case RibbonBar.Key("ANCESTOR_PROFILE")
+        If action.Equals(RibbonEventType.GroupPanelClick) Then
+          DockManager.ItemShow(DPIAncestorListWeb.Base_Key)
+        End If
+      Case RibbonBar.Key("ANCESTOR_ANCESTRY_GALLERY") 'Ancestry Person Gallery
         DockManager.ItemEventRequest(DPIWebBrowser.Base_Key, DockPanelItemEventType.NavRequested, UriTrackingGroupEnum.ANCESTRY_GALLERY_PERSON)
         DockManager.ItemShow(DPIWebBrowser.Base_Key)
-      Case "ASSIGN" 'Ancestry Person Hints
+      Case RibbonBar.Key("ANCESTOR_ANCESTRY_HINT") 'Ancestry Person Hints
         DockManager.ItemEventRequest(DPIWebBrowser.Base_Key, DockPanelItemEventType.NavRequested, UriTrackingGroupEnum.ANCESTRY_HINTS_PERSON)
         DockManager.ItemShow(DPIWebBrowser.Base_Key)
-      Case "ASSIGN" 'Ancestry Person Story
+      Case RibbonBar.Key("ANCESTOR_ANCESTRY_STORY") 'Ancestry Person Story
         DockManager.ItemEventRequest(DPIWebBrowser.Base_Key, DockPanelItemEventType.NavRequested, UriTrackingGroupEnum.ANCESTRY_STORY_PERSON)
         DockManager.ItemShow(DPIWebBrowser.Base_Key)
-      Case "B200.G3.I12" 'Ancestry Person Fan
+      Case RibbonBar.Key("ANCESTOR_ANCESTRY_FAN") 'Ancestry Person Fan
         DockManager.ItemEventRequest(DPIWebBrowser.Base_Key, DockPanelItemEventType.NavRequested, UriTrackingGroupEnum.ANCESTRY_FANVIEW_PERSON)
         DockManager.ItemShow(DPIWebBrowser.Base_Key)
-      Case "B200.G3.I11" 'Ancestry Person Pedigree
+      Case RibbonBar.Key("ANCESTOR_ANCESTRY_PEDIGREE") 'Ancestry Person Pedigree
         DockManager.ItemEventRequest(DPIWebBrowser.Base_Key, DockPanelItemEventType.NavRequested, UriTrackingGroupEnum.ANCESTRY_PEDIGREEVIEW_PERSON)
         DockManager.ItemShow(DPIWebBrowser.Base_Key)
-      Case "B200.G3.I10" 'Ancestry Person Tree
+      Case RibbonBar.Key("ANCESTOR_ANCESTRY_TREE") 'Ancestry Person Tree
         DockManager.ItemEventRequest(DPIWebBrowser.Base_Key, DockPanelItemEventType.NavRequested, UriTrackingGroupEnum.ANCESTRY_TREEVIEW_PERSON)
         DockManager.ItemShow(DPIWebBrowser.Base_Key)
     End Select

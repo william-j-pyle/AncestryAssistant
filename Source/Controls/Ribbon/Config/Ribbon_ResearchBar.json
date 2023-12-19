@@ -1,19 +1,19 @@
 {
   "bars": [
     {
-      "name": "BAR_RESEARCH",
+      "name": "RESEARCH",
       "text": "Research",
       "id": 400,
       "visible": true,
       "groups": [
         {
-          "name": "GROUP_REFERENCE",
+          "name": "RESEARCH_REFERENCE",
           "text": "Sites",
           "id": 400,
           "showpanel": false,
           "items": [
             {
-              "name": "btnFindAGrave",
+              "name": "RESEARCH_REFERENCE_FINDAGRAVE",
               "id": 401,
               "itemtype": "RIButton",
               "attributes": [
@@ -30,7 +30,7 @@
               "rowspan": 3
             },
             {
-              "name": "btnNewspaper",
+              "name": "RESEARCH_REFERENCE_NEWSPAPER",
               "id": 402,
               "itemtype": "RIButton",
               "attributes": [
@@ -47,7 +47,7 @@
               "rowspan": 3
             },
             {
-              "name": "btnFold3",
+              "name": "RESEARCH_REFERENCE_FOLD3",
               "id": 403,
               "itemtype": "RIButton",
               "attributes": [
@@ -64,7 +64,7 @@
               "rowspan": 3
             },
             {
-              "name": "btnFamilySearch",
+              "name": "RESEARCH_REFERENCE_FAMILYSEARCH",
               "id": 404,
               "itemtype": "RIButton",
               "attributes": [

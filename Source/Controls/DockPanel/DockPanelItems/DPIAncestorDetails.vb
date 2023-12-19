@@ -11,44 +11,45 @@ Public Class DPIAncestorDetails
 
   Private WithEvents LblAncestorAttributesCol1 As Label
   Private WithEvents LblAncestorAttributesCol2 As Label
-  Private Const Default_ItemCaption As String = "Ancestor"
-  Private Const Default_ItemHasRibbonBar As Boolean = False
-  Private Const Default_ItemHasToolBar As Boolean = False
-  Private Const Default_ItemSupportsClose As Boolean = True
-  Private Const Default_ItemSupportsMove As Boolean = True
-  Private Const Default_ItemSupportsSearch As Boolean = False
-  Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
-  Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.LeftBottom
-  Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.LeftBottom
-  Private Const Default_RibbonBarKey As String = ""
-  Private Const Default_RibbonHideOnItemClose As Boolean = False
-  Private Const Default_RibbonSelectOnItemFocus As Boolean = False
-  Private Const Default_RibbonShowOnItemOpen As Boolean = False
+
   Private Const SUBNODE_DELIMITER As Char = CChar(vbTab)
   Private AttributeState As List(Of String)
-  Private blockEvents As Boolean = False
   Private components As System.ComponentModel.IContainer
   Private LastAttributeItem As TreeNode
   Public Const Base_Key As String = "DOCK_ANCESTORATTRIBUTES"
 
   Public Sub New(Optional instanceKey As String = "")
-    'Apply Item Defaults for this Type
-    ItemCaption = Default_ItemCaption
-    ItemHasRibbonBar = Default_ItemHasRibbonBar
-    ItemHasToolBar = Default_ItemHasToolBar
-    ItemSupportsClose = Default_ItemSupportsClose
-    ItemSupportsMove = Default_ItemSupportsMove
-    ItemSupportsSearch = Default_ItemSupportsSearch
+    ItemCaption = "Ancestor"
+
+    ItemDestroyOnClose = True
+
+    ItemHasRibbonBar = False
+
+    ItemHasStatusBar = False
+
+    ItemHasToolBar = False
+
+    ItemSupportsClose = True
+
+    ItemSupportsMove = True
+
+    ItemSupportsSearch = False
+
+    LocationCurrent = DockPanelLocation.None
+
+    LocationPrefered = DockPanelLocation.LeftBottom
+
+    LocationPrevious = DockPanelLocation.LeftBottom
+
+    RibbonBarKey = ""
+
+    RibbonHideOnItemClose = False
+
+    RibbonSelectOnItemFocus = False
+
+    RibbonShowOnItemOpen = False
     ItemKey = Base_Key
     ItemInstanceKey = instanceKey
-    LocationCurrent = Default_LocationCurrent
-    LocationPrefered = Default_LocationPrefered
-    LocationPrevious = Default_LocationPrevious
-    RibbonBarKey = Default_RibbonBarKey
-    RibbonHideOnItemClose = Default_RibbonHideOnItemClose
-    RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
-    RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Continue with creation
     AncestorAttributesHeader = New System.Windows.Forms.Panel()
     AncestorColSplitter = New System.Windows.Forms.Splitter()
     AncestorAttributesCol2 = New AncestryAssistant.FlatPanel()

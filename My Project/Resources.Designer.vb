@@ -151,26 +151,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to if (typeof ancestryAssistant === &apos;undefined&apos;)
-        '''	ancestryAssistant = {};
-        '''
-        '''ancestryAssistant.MessageTypes = {};
-        '''ancestryAssistant.MessageTypes.MT_PERSON = &apos;person&apos;;
-        '''ancestryAssistant.MessageTypes.MT_ACCOUNT = &apos;account&apos;;
-        '''ancestryAssistant.MessageTypes.MT_TREES = &apos;trees&apos;;
-        '''ancestryAssistant.MessageTypes.MT_PAGE = &apos;page&apos;;
-        '''ancestryAssistant.MessageTypes.MT_TABLEDATA = &apos;tabledata&apos;;
-        '''ancestryAssistant.MessageTypes.MT_FINDAGRAVE = &apos;findagrave&apos;;
-        '''
-        '''ancestryAssistant.postMessage = function (msgType, msgKey, payl [rest of string was truncated]&quot;;.
-        '''</summary>
-        Friend ReadOnly Property AssistantAPI() As String
-            Get
-                Return ResourceManager.GetString("AssistantAPI", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property back() As System.Drawing.Bitmap
@@ -571,6 +551,111 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to window.addEventListener(&apos;click&apos;, function () {
+        '''  var evnt = {};
+        '''  evnt.ControlKey = &quot;&quot;;
+        '''  evnt.EventName = &quot;WindowClick&quot;;
+        '''  evnt.DataSetName = &quot;&quot;;
+        '''  evnt.EventArg = &quot;&quot;;
+        '''  window.chrome.webview.postMessage(evnt);
+        '''});.
+        '''</summary>
+        Friend ReadOnly Property IncludeJSFocus() As String
+            Get
+                Return ResourceManager.GetString("IncludeJSFocus", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to document.addEventListener(&apos;DOMContentLoaded&apos;, function () {
+        '''  var x = document.createElement(&apos;STYLE&apos;);
+        '''  x.appendChild(document.createTextNode(&apos;::-webkit-scrollbar {width: 14px;background-color: #2e2e2e;}&apos;));
+        '''  x.appendChild(document.createTextNode(&apos;::-webkit-scrollbar-corner {background-color: #2e2e2e;}&apos;));
+        '''  x.appendChild(document.createTextNode(&apos;::-webkit-scrollbar-thumb {width: 14px;border-color: #2e2e2e;border-style: solid;border-size: .5px;background-color: #4d4d4d;}&apos;));
+        '''  x.appendChild(document. [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property IncludeJSScrollbars() As String
+            Get
+                Return ResourceManager.GetString("IncludeJSScrollbars", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to window.MyAncestryAPI = {
+        '''  ctlType: &quot;&quot;,
+        '''  ctlKey: &quot;&quot;,
+        '''  ctlDataSet: &quot;&quot;,
+        '''  selectedRID: -1,
+        '''  selectedText: &quot;&quot;,
+        '''  itemType: &quot;none&quot;,
+        '''  itemCount: 0,
+        '''  itemVisibleCount: 0,
+        '''  filter: &quot;&quot;,
+        '''  columnCount: 0,
+        '''  data: chrome.webview.hostObjects.sync.DataMgr,
+        '''  metadata: {},
+        '''  setControlFocus: function () { document.body.className = &apos;webcontrol hasfocus&apos;; },
+        '''  removeControlFocus: function () { document.body.className = &apos;webcontrol&apos;; },
+        '''  addDataHandlers: function () {
+        '''    chrome.webview.hostObjects.s [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property JSImageList() As String
+            Get
+                Return ResourceManager.GetString("JSImageList", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to window.MyAncestryAPI = {
+        '''  ctlType: &quot;&quot;,
+        '''  ctlKey: &quot;&quot;,
+        '''  ctlDataSet: &quot;&quot;,
+        '''  selectedRID: -1,
+        '''  selectedText: &quot;&quot;,
+        '''  itemType: &quot;none&quot;,
+        '''  itemCount: 0,
+        '''  itemVisibleCount: 0,
+        '''  filter: &quot;&quot;,
+        '''  columnCount: 0,
+        '''  data: chrome.webview.hostObjects.sync.DataMgr,
+        '''  metadata: {},
+        '''  setControlFocus: function () { document.body.className = &apos;webcontrol hasfocus&apos;; },
+        '''  removeControlFocus: function () { document.body.className = &apos;webcontrol&apos;; },
+        '''  addDataHandlers: function () {
+        '''    chrome.webview.hostObjects.s [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property JSListBox() As String
+            Get
+                Return ResourceManager.GetString("JSListBox", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to window.MyAncestryAPI = {
+        '''  ctlType: &quot;&quot;,
+        '''  ctlKey: &quot;&quot;,
+        '''  ctlDataSet: &quot;&quot;,
+        '''  selectedRID: -1,
+        '''  selectedText: &quot;&quot;,
+        '''  itemType: &quot;none&quot;,
+        '''  itemCount: 0,
+        '''  itemVisibleCount: 0,
+        '''  filter: &quot;&quot;,
+        '''  columnCount: 0,
+        '''  data: chrome.webview.hostObjects.sync.DataMgr,
+        '''  metadata: {},
+        '''  setControlFocus: function () { document.body.className = &apos;webcontrol hasfocus&apos;; },
+        '''  removeControlFocus: function () { document.body.className = &apos;webcontrol&apos;; },
+        '''  addDataHandlers: function () {
+        '''    chrome.webview.hostObjects.s [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property JSTable() As String
+            Get
+                Return ResourceManager.GetString("JSTable", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property location() As System.Drawing.Bitmap
@@ -724,7 +809,7 @@ Namespace My.Resources
         '''  Looks up a localized string similar to {
         '''  &quot;bars&quot;: [
         '''    {
-        '''      &quot;name&quot;: &quot;BAR_FILE&quot;,
+        '''      &quot;name&quot;: &quot;FILE&quot;,
         '''      &quot;text&quot;: &quot;File&quot;,
         '''      &quot;id&quot;: 0,
         '''      &quot;showpage&quot;: true,
@@ -743,25 +828,24 @@ Namespace My.Resources
         '''  Looks up a localized string similar to {
         '''  &quot;bars&quot;: [
         '''    {
-        '''      &quot;name&quot;: &quot;BAR_ANCESTOR&quot;,
+        '''      &quot;name&quot;: &quot;ANCESTOR&quot;,
         '''      &quot;text&quot;: &quot;Ancestor&quot;,
         '''      &quot;id&quot;: 200,
         '''      &quot;enabled&quot;: false,
         '''      &quot;groups&quot;: [
         '''        {
-        '''          &quot;name&quot;: &quot;GROUP_ANCESTOR&quot;,
+        '''          &quot;name&quot;: &quot;ANCESTOR_PROFILE&quot;,
         '''          &quot;text&quot;: &quot;Ancestor&quot;,
         '''          &quot;id&quot;: 2,
         '''          &quot;showpanel&quot;: true,
         '''          &quot;items&quot;: [
         '''            {
-        '''              &quot;name&quot;: &quot;Ancestor&quot;,
+        '''              &quot;name&quot;: &quot;ANCESTOR_PROFILE_IMAGE&quot;,
         '''              &quot;id&quot;: 4,
         '''              &quot;itemtype&quot;: &quot;RIButton&quot;,
         '''              &quot;attributes&quot;: [
         '''                //{
-        '''                //  &quot;attribute&quot;: &quot;ImageFromFile&quot;,
-        '''   [rest of string was truncated]&quot;;.
+        '''                //  &quot;attribute&quot;: &quot;ImageFr [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Ribbon_AncestryBar() As String
             Get
@@ -855,24 +939,24 @@ Namespace My.Resources
         '''  Looks up a localized string similar to {
         '''  &quot;bars&quot;: [
         '''    {
-        '''      &quot;name&quot;: &quot;BAR_RESEARCH&quot;,
+        '''      &quot;name&quot;: &quot;RESEARCH&quot;,
         '''      &quot;text&quot;: &quot;Research&quot;,
         '''      &quot;id&quot;: 400,
         '''      &quot;visible&quot;: true,
         '''      &quot;groups&quot;: [
         '''        {
-        '''          &quot;name&quot;: &quot;GROUP_REFERENCE&quot;,
+        '''          &quot;name&quot;: &quot;RESEARCH_REFERENCE&quot;,
         '''          &quot;text&quot;: &quot;Sites&quot;,
         '''          &quot;id&quot;: 400,
         '''          &quot;showpanel&quot;: false,
         '''          &quot;items&quot;: [
         '''            {
-        '''              &quot;name&quot;: &quot;btnFindAGrave&quot;,
+        '''              &quot;name&quot;: &quot;RESEARCH_REFERENCE_FINDAGRAVE&quot;,
         '''              &quot;id&quot;: 401,
         '''              &quot;itemtype&quot;: &quot;RIButton&quot;,
         '''              &quot;attributes&quot;: [
         '''                {
-        '''                  &quot;attribute&quot;: &quot;ImageFromResourc [rest of string was truncated]&quot;;.
+        '''                  &quot;attribute&quot;: &quot;I [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property Ribbon_ResearchBar() As String
             Get
@@ -887,6 +971,20 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("tag", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to document.addEventListener(&apos;DOMContentLoaded&apos;, function () {
+        '''  var x = document.createElement(&apos;STYLE&apos;);
+        '''  x.appendChild(document.createTextNode(&apos;::-webkit-scrollbar {width: 14px;background-color: #2e2e2e;}&apos;));
+        '''  x.appendChild(document.createTextNode(&apos;::-webkit-scrollbar-corner {background-color: #2e2e2e;}&apos;));
+        '''  x.appendChild(document.createTextNode(&apos;::-webkit-scrollbar-thumb {width: 14px;border-color: #2e2e2e;border-style: solid;border-size: .5px;background-color: #4d4d4d;}&apos;));
+        '''  x.appendChild(document. [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property WEBAPI() As String
+            Get
+                Return ResourceManager.GetString("WEBAPI", resourceCulture)
             End Get
         End Property
     End Module

@@ -34,12 +34,7 @@ Public Class AssistantAppForm
   End Sub
 
   Private Sub AncestryBrowserBusyChanged(busy As Boolean)
-    If busy Then
-      Cursor = Cursors.WaitCursor
-      DockManager.ItemShow(DPIWebBrowser.Base_Key)
-    Else
-      Cursor = Cursors.Default
-    End If
+
   End Sub
 
   Private Sub AncestryDataMessage(msg As APIMessage)

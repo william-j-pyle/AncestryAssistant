@@ -4,41 +4,27 @@ Public Class DPIAncestorsList
   Inherits DockPanelItem
 
   Private WithEvents AncestorsList As FlatListView
-  Private Const Default_ItemCaption As String = "Ancestors List"
-  Private Const Default_ItemHasRibbonBar As Boolean = False
-  Private Const Default_ItemHasToolBar As Boolean = True
-  Private Const Default_ItemSupportsClose As Boolean = True
-  Private Const Default_ItemSupportsMove As Boolean = True
-  Private Const Default_ItemSupportsSearch As Boolean = True
-  Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
-  Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.LeftTop
-  Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.LeftTop
-  Private Const Default_RibbonBarKey As String = ""
-  Private Const Default_RibbonHideOnItemClose As Boolean = False
-  Private Const Default_RibbonSelectOnItemFocus As Boolean = False
-  Private Const Default_RibbonShowOnItemOpen As Boolean = False
-  Private blockEvents As Boolean = False
   Private components As System.ComponentModel.IContainer
   Public Const Base_Key As String = "DOCK_ANCESTORSLIST"
 
   Public Sub New(Optional instanceKey As String = "")
-    'Apply Item Defaults for this Type
-    ItemCaption = Default_ItemCaption
-    ItemHasRibbonBar = Default_ItemHasRibbonBar
-    ItemHasToolBar = Default_ItemHasToolBar
-    ItemSupportsClose = Default_ItemSupportsClose
-    ItemSupportsMove = Default_ItemSupportsMove
-    ItemSupportsSearch = Default_ItemSupportsSearch
+    ItemCaption = "Ancestors List"
+    ItemDestroyOnClose = False
+    ItemHasRibbonBar = False
+    ItemHasStatusBar = False
+    ItemHasToolBar = True
+    ItemSupportsClose = True
+    ItemSupportsMove = True
+    ItemSupportsSearch = True
+    LocationCurrent = DockPanelLocation.None
+    LocationPrefered = DockPanelLocation.LeftTop
+    LocationPrevious = DockPanelLocation.LeftTop
+    RibbonBarKey = ""
+    RibbonHideOnItemClose = False
+    RibbonSelectOnItemFocus = False
+    RibbonShowOnItemOpen = False
     ItemKey = Base_Key
     ItemInstanceKey = instanceKey
-    LocationCurrent = Default_LocationCurrent
-    LocationPrefered = Default_LocationPrefered
-    LocationPrevious = Default_LocationPrevious
-    RibbonBarKey = Default_RibbonBarKey
-    RibbonHideOnItemClose = Default_RibbonHideOnItemClose
-    RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
-    RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Continue with creation
     AncestorsList = New FlatListView()
     SuspendLayout()
     With AncestorsList
@@ -52,9 +38,7 @@ Public Class DPIAncestorsList
       .HideSelection = False
       .Location = New System.Drawing.Point(0, 0)
       .MultiSelect = False
-      .Name = "AncestorsList"
       .Size = New System.Drawing.Size(364, 351)
-      .TabIndex = 4
       .UseCompatibleStateImageBehavior = False
       .OwnerDraw = True
       .View = System.Windows.Forms.View.Details
@@ -135,6 +119,9 @@ Public Class DPIAncestorsList
         If item IsNot Nothing Then
           If item.Tag IsNot Nothing Then
             item.Selected = item.Tag.Equals(Ancestors.ActiveAncestorID)
+            If item.Selected Then
+              item.Focused = True
+            End If
           End If
         End If
       Next

@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("D:\Geneology\Ancestors\")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\Geneology\Apps\AncestryAssistant\AncestryAssistant\Ancestors\")>  _
         Public Property AncestorsPath() As String
             Get
                 Return CType(Me("AncestorsPath"),String)
@@ -447,6 +447,60 @@ Namespace My
             End Get
             Set
                 Me("DOCK_NOTEBOOK_LOC") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("ancestryassistant")>  _
+        Public ReadOnly Property WEB_HOSTNAME() As String
+            Get
+                Return CType(Me("WEB_HOSTNAME"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\Geneology\Apps\AncestryAssistant\AncestryAssistant\Ancestors\")>  _
+        Public ReadOnly Property WEB_VIRTUALPATH() As String
+            Get
+                Return CType(Me("WEB_VIRTUALPATH"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property DOCK_ANCESTORSLISTWEB_LOC() As Integer
+            Get
+                Return CType(Me("DOCK_ANCESTORSLISTWEB_LOC"),Integer)
+            End Get
+            Set
+                Me("DOCK_ANCESTORSLISTWEB_LOC") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property DOCK_IMAGEGALLERYWEB_LOC() As Integer
+            Get
+                Return CType(Me("DOCK_IMAGEGALLERYWEB_LOC"),Integer)
+            End Get
+            Set
+                Me("DOCK_IMAGEGALLERYWEB_LOC") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property DOCK_CENSUSWEB_LOC() As Integer
+            Get
+                Return CType(Me("DOCK_CENSUSWEB_LOC"),Integer)
+            End Get
+            Set
+                Me("DOCK_CENSUSWEB_LOC") = value
             End Set
         End Property
     End Class

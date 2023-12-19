@@ -11,7 +11,6 @@
         End If
       Case DockPanelItemEventType.ItemOpened
         If panelItem.ItemHasRibbonBar And panelItem.RibbonShowOnItemOpen Then
-          panelItem.ItemIsSuspended = False
           RibbonBar.ShowBar(panelItem.RibbonBarKey)
         End If
       Case DockPanelItemEventType.ItemSelected
@@ -20,42 +19,62 @@
         End If
       Case DockPanelItemEventType.NavRequested
         DockManager.ItemEventRequest(DPIWebBrowser.Base_Key, eventType, eventData)
+      Case DockPanelItemEventType.ItemBusy
+        If CBool(eventData) Then
+          UseWaitCursor = True
+          Cursor = Cursors.WaitCursor
+          DockManager.ItemShow(panelItem.Key)
+        Else
+          UseWaitCursor = False
+          Cursor = Cursors.Default
+        End If
     End Select
   End Sub
 
-  Private Function DockManagerItem_AncestorDetails() As DockPanelItem
-    Return New DPIAncestorDetails() With {
+  Private Function DockManagerItem_AncestorDetails(Optional instanceKey As String = "") As DockPanelItem
+    Return New DPIAncestorDetails(instanceKey) With {
       .Ancestors = Ancestors
     }
   End Function
 
-  Private Function DockManagerItem_AncestorsList() As DockPanelItem
-    Return New DPIAncestorsList() With {
+  Private Function DockManagerItem_AncestorListWeb(Optional instanceKey As String = "") As DockPanelItem
+    Return New DPIAncestorListWeb(instanceKey) With {
       .Ancestors = Ancestors
     }
   End Function
 
-  Private Function DockManagerItem_Census() As DockPanelItem
-    Return New DPICensus() With {
+  Private Function DockManagerItem_AncestorsList(Optional instanceKey As String = "") As DockPanelItem
+    Return New DPIAncestorsList(instanceKey) With {
       .Ancestors = Ancestors
     }
   End Function
 
-  Private Function DockManagerItem_ImageGallery() As DockPanelItem
-    Return New DPIImageGallery With {
-            .ItemSuspendOnClose = True,
+  Private Function DockManagerItem_CensusWeb(Optional instanceKey As String = "") As DockPanelItem
+    Return New DPICensusWeb(instanceKey) With {
+      .Ancestors = Ancestors
+    }
+  End Function
+
+  Private Function DockManagerItem_ImageGallery(Optional instanceKey As String = "") As DockPanelItem
+    Return New DPIImageGallery(instanceKey) With {
             .Ancestors = Ancestors
           }
   End Function
 
-  Private Function DockManagerItem_Notebook() As DockPanelItem
-    Return New DPINotebook() With {
+  Private Function DockManagerItem_ImageGalleryWeb(Optional instanceKey As String = "") As DockPanelItem
+    Return New DPIImageGalleryWeb(instanceKey) With {
       .Ancestors = Ancestors
     }
   End Function
 
-  Private Function DockManagerItem_WebBrowser() As DockPanelItem
-    Return New DPIWebBrowser With {
+  Private Function DockManagerItem_Notebook(Optional instanceKey As String = "") As DockPanelItem
+    Return New DPINotebook(instanceKey) With {
+      .Ancestors = Ancestors
+    }
+  End Function
+
+  Private Function DockManagerItem_WebBrowser(Optional instanceKey As String = "") As DockPanelItem
+    Return New DPIWebBrowser(instanceKey) With {
       .AncestryTreeID = My.Settings.ANCESTRY_TREE_ID,
       .Ancestors = Ancestors
     }
@@ -70,13 +89,13 @@
 
     DockManager.ItemRegister(DPINotebook.Base_Key, AddressOf DockManagerItem_Notebook)
 
-    DockManager.ItemRegister(DPICensus.Base_Key, AddressOf DockManagerItem_Census)
+    DockManager.ItemRegister(DPICensusWeb.Base_Key, AddressOf DockManagerItem_CensusWeb)
 
     DockManager.ItemRegister(DPIAncestorDetails.Base_Key, AddressOf DockManagerItem_AncestorDetails)
 
-    DockManager.ItemRegister(DPIAncestorsList.Base_Key, AddressOf DockManagerItem_AncestorsList)
+    DockManager.ItemRegister(DPIAncestorListWeb.Base_Key, AddressOf DockManagerItem_AncestorListWeb)
 
-    DockManager.ItemRegister(DPIImageGallery.Base_Key, AddressOf DockManagerItem_ImageGallery)
+    DockManager.ItemRegister(DPIImageGalleryWeb.Base_Key, AddressOf DockManagerItem_ImageGalleryWeb)
 
     DockManager.SettingsLoad()
 

@@ -1,19 +1,19 @@
 {
   "bars": [
     {
-      "name": "BAR_ANCESTOR",
+      "name": "ANCESTOR",
       "text": "Ancestor",
       "id": 200,
       "enabled": false,
       "groups": [
         {
-          "name": "GROUP_ANCESTOR",
+          "name": "ANCESTOR_PROFILE",
           "text": "Ancestor",
           "id": 2,
           "showpanel": true,
           "items": [
             {
-              "name": "Ancestor",
+              "name": "ANCESTOR_PROFILE_IMAGE",
               "id": 4,
               "itemtype": "RIButton",
               "attributes": [
@@ -30,7 +30,7 @@
               "rowspan": 3
             },
             {
-              "name": "lblBirth",
+              "name": "ANCESTOR_PROFILE_DOB",
               "id": 7,
               "itemtype": "RILabel",
               "attributes": [
@@ -50,7 +50,7 @@
               "rowspan": 1
             },
             {
-              "name": "lblDeath",
+              "name": "ANCESTOR_PROFILE_DOD",
               "id": 8,
               "itemtype": "RILabel",
               "attributes": [
@@ -71,13 +71,13 @@
           ]
         },
         {
-          "name": "GROUP_ANCESTRYLINKS",
+          "name": "ANCESTOR_ANCESTRY",
           "text": "Ancestry.com",
           "id": 3,
           "showpanel": false,
           "items": [
             {
-              "name": "btnAncestryFact",
+              "name": "ANCESTOR_ANCESTRY_FACT",
               "id": 9,
               "itemtype": "RIButton",
               "attributes": [
@@ -94,7 +94,7 @@
               "rowspan": 3
             },
             {
-              "name": "btnAncestryTree",
+              "name": "ANCESTOR_ANCESTRY_TREE",
               "id": 10,
               "itemtype": "RIButton",
               "attributes": [
@@ -107,7 +107,7 @@
               "rowspan": 1
             },
             {
-              "name": "btnAncestryPedigree",
+              "name": "ANCESTOR_ANCESTRY_PEDIGREE",
               "id": 11,
               "itemtype": "RIButton",
               "attributes": [
@@ -120,7 +120,7 @@
               "rowspan": 1
             },
             {
-              "name": "btnAncestryFan",
+              "name": "ANCESTOR_ANCESTRY_FAN",
               "id": 12,
               "itemtype": "RIButton",
               "attributes": [
@@ -133,7 +133,7 @@
               "rowspan": 1
             },
             {
-              "name": "btnAncestryHint",
+              "name": "ANCESTOR_ANCESTRY_HINT",
               "id": 122,
               "itemtype": "RIButton",
               "attributes": [
@@ -146,7 +146,7 @@
               "rowspan": 1
             },
             {
-              "name": "btnAncestryStory",
+              "name": "ANCESTOR_ANCESTRY_STORY",
               "id": 123,
               "itemtype": "RIButton",
               "attributes": [
@@ -159,7 +159,7 @@
               "rowspan": 1
             },
             {
-              "name": "btnAncestryGallery",
+              "name": "ANCESTOR_ANCESTRY_GALLERY",
               "id": 124,
               "itemtype": "RIButton",
               "attributes": [
@@ -174,13 +174,13 @@
           ]
         },
         {
-          "name": "Tools",
+          "name": "ANCESTOR_TOOLS",
           "text": "Tools",
           "id": 5,
           "showpanel": false,
           "items": [
             {
-              "name": "btnGallery",
+              "name": "ANCESTOR_TOOLS_GALLERY",
               "id": 18,
               "itemtype": "RIButton",
               "attributes": [
@@ -197,7 +197,7 @@
               "rowspan": 3
             },
             {
-              "name": "btnNotebook",
+              "name": "ANCESTOR_TOOLS_NOTEBOOK",
               "id": 19,
               "itemtype": "RIButton",
               "attributes": [
@@ -216,13 +216,13 @@
           ]
         },
         {
-          "name": "Census",
+          "name": "ANCESTOR_CENSUS",
           "text": "Census",
           "id": 6,
           "showpanel": false,
           "items": [
             {
-              "name": "btnCensus",
+              "name": "ANCESTOR_CENSUS_UNIFIED",
               "id": 17,
               "itemtype": "RIButton",
               "attributes": [
@@ -239,7 +239,7 @@
               "rowspan": 3
             },
             {
-              "name": "btnCensus1",
+              "name": "ANCESTOR_CENSUS_YR1",
               "id": 201,
               "itemtype": "RIButton",
               "attributes": [
@@ -256,7 +256,7 @@
               "rowspan": 1
             },
             {
-              "name": "btnCensus2",
+              "name": "ANCESTOR_CENSUS_YR2",
               "id": 202,
               "itemtype": "RIButton",
               "attributes": [
@@ -273,7 +273,7 @@
               "rowspan": 1
             },
             {
-              "name": "btnCensus3",
+              "name": "ANCESTOR_CENSUS_YR3",
               "id": 203,
               "itemtype": "RIButton",
               "attributes": [
@@ -290,7 +290,7 @@
               "rowspan": 1
             },
             {
-              "name": "btnCensus4",
+              "name": "ANCESTOR_CENSUS_YR4",
               "id": 204,
               "itemtype": "RIButton",
               "attributes": [
@@ -307,7 +307,7 @@
               "rowspan": 1
             },
             {
-              "name": "btnCensus5",
+              "name": "ANCESTOR_CENSUS_YR5",
               "id": 205,
               "itemtype": "RIButton",
               "attributes": [
@@ -324,7 +324,7 @@
               "rowspan": 1
             },
             {
-              "name": "btnCensus6",
+              "name": "ANCESTOR_CENSUS_YR6",
               "id": 206,
               "itemtype": "RIButton",
               "attributes": [
@@ -341,7 +341,7 @@
               "rowspan": 1
             },
             {
-              "name": "btnCensus7",
+              "name": "ANCESTOR_CENSUS_YR7",
               "id": 207,
               "itemtype": "RIButton",
               "attributes": [
@@ -358,7 +358,7 @@
               "rowspan": 1
             },
             {
-              "name": "btnCensus8",
+              "name": "ANCESTOR_CENSUS_YR8",
               "id": 208,
               "itemtype": "RIButton",
               "attributes": [
@@ -375,7 +375,7 @@
               "rowspan": 1
             },
             {
-              "name": "btnCensus9",
+              "name": "ANCESTOR_CENSUS_YR9",
               "id": 209,
               "itemtype": "RIButton",
               "attributes": [

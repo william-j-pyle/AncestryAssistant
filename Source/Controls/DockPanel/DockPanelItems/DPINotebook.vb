@@ -29,40 +29,28 @@ Public Class DPINotebook
   Friend WithEvents TsSections As ToolStrip
   Friend WithEvents TxtBody As RichTextBox
   Friend WithEvents TxtHeader As TextBox
-  Private Const Default_ItemCaption As String = "Notebook"
-  Private Const Default_ItemHasRibbonBar As Boolean = True
-  Private Const Default_ItemHasToolBar As Boolean = True
-  Private Const Default_ItemSupportsClose As Boolean = True
-  Private Const Default_ItemSupportsMove As Boolean = True
-  Private Const Default_ItemSupportsSearch As Boolean = True
-  Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
-  Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.MiddleTopRight
-  Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.MiddleTopRight
-  Private Const Default_RibbonBarKey As String = "B300"
-  Private Const Default_RibbonHideOnItemClose As Boolean = True
-  Private Const Default_RibbonSelectOnItemFocus As Boolean = True
-  Private Const Default_RibbonShowOnItemOpen As Boolean = True
+
   Private components As System.ComponentModel.IContainer
   Public Const Base_Key As String = "DOCK_NOTEBOOK"
 
   Public Sub New(Optional instanceKey As String = "")
-    'Apply Item Defaults for this Type
-    ItemCaption = Default_ItemCaption
-    ItemHasRibbonBar = Default_ItemHasRibbonBar
-    ItemHasToolBar = Default_ItemHasToolBar
-    ItemSupportsClose = Default_ItemSupportsClose
-    ItemSupportsMove = Default_ItemSupportsMove
-    ItemSupportsSearch = Default_ItemSupportsSearch
+    ItemCaption = "Notebook"
+    ItemDestroyOnClose = False
+    ItemHasRibbonBar = True
+    ItemHasStatusBar = False
+    ItemHasToolBar = True
+    ItemSupportsClose = True
+    ItemSupportsMove = True
+    ItemSupportsSearch = False
+    LocationCurrent = DockPanelLocation.None
+    LocationPrefered = DockPanelLocation.MiddleTopRight
+    LocationPrevious = DockPanelLocation.MiddleTopRight
+    RibbonBarKey = "B300"
+    RibbonHideOnItemClose = True
+    RibbonSelectOnItemFocus = True
+    RibbonShowOnItemOpen = True
     ItemKey = Base_Key
     ItemInstanceKey = instanceKey
-    LocationCurrent = Default_LocationCurrent
-    LocationPrefered = Default_LocationPrefered
-    LocationPrevious = Default_LocationPrevious
-    RibbonBarKey = Default_RibbonBarKey
-    RibbonHideOnItemClose = Default_RibbonHideOnItemClose
-    RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
-    RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Continue with creation
     components = New Container()
     Dim TreeNode1 As New TreeNode("My First Page")
     Dim TreeNode2 As New TreeNode("Welcome Section", New TreeNode() {TreeNode1})

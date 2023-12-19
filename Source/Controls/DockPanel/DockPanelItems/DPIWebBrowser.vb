@@ -7,34 +7,12 @@ Imports Newtonsoft.Json
 Public Class DPIWebBrowser
   Inherits DockPanelItem
 
-  Private WithEvents BtnBack As ToolStripButton
-  Private WithEvents BtnHome As ToolStripButton
-  Private WithEvents BtnReload As ToolStripButton
   Private WithEvents CoreWeb As CoreWebView2
   Private WithEvents CoreWebDownload As CoreWebView2DownloadOperation
-  ' Tool Strip
-  Private WithEvents TsWeb As FlatToolBar
-  Private WithEvents TxtHref As ToolStripTextBox
-  ' Web Interface
   Private WithEvents Web As WebView2
   Private Const AncestryBaseURL As String = "https://www.ancestry.com/"
-  Private Const Default_ItemCaption As String = "Ancestry.com"
-  Private Const Default_ItemHasRibbonBar As Boolean = True
-  Private Const Default_ItemHasStatusBar As Boolean = False
-  Private Const Default_ItemHasToolBar As Boolean = True
-  Private Const Default_ItemSupportsClose As Boolean = True
-  Private Const Default_ItemSupportsMove As Boolean = True
-  Private Const Default_ItemSupportsSearch As Boolean = False
-  Private Const Default_LocationCurrent As DockPanelLocation = DockPanelLocation.None
-  Private Const Default_LocationPrefered As DockPanelLocation = DockPanelLocation.MiddleTopLeft
-  Private Const Default_LocationPrevious As DockPanelLocation = DockPanelLocation.MiddleTopLeft
-  Private Const Default_RibbonBarKey As String = "B200"
-  Private Const Default_RibbonHideOnItemClose As Boolean = False
-  Private Const Default_RibbonSelectOnItemFocus As Boolean = True
-  Private Const Default_RibbonShowOnItemOpen As Boolean = True
   Private _AncestorID As String = ""
   Private _MsgSyncKey As Integer = 0
-  Private _ShowToolbar As Boolean = False
   Private _UriTrackingGroup As UriTrackingGroupEnum = UriTrackingGroupEnum.ANCESTRY
   Private _URL As New Uri(AncestryBaseURL)
   Private components As System.ComponentModel.IContainer
@@ -43,7 +21,6 @@ Public Class DPIWebBrowser
   Private sameImageAsFilename As String = ""
   Private UriTrackingGroupDecoder As New UriTracking()
   Public Const Base_Key As String = "DOCK_WEBBROWSER"
-
   Public Property AncestorID As String
     Get
       Return _AncestorID
@@ -54,13 +31,9 @@ Public Class DPIWebBrowser
       End If
     End Set
   End Property
-
   Public Property AncestryPage As String = ""
-
   Public Property AncestryTreeID As String = ""
-
   Public Property BlockedWebDomains As String() = {"adsafe", "syndication", "facebook", "doubleclick", "tiktok", "pinterest", "adservice", "ad-delivery", "adspsp", "adsystem", "adnxs", "securepubads"}
-
   Public Property BlockWebTracking As Boolean = False
 
   Public Property HREF As String
@@ -80,16 +53,6 @@ Public Class DPIWebBrowser
     End Get
   End Property
 
-  Public Property ShowToolbar As Boolean
-    Get
-      Return _ShowToolbar
-    End Get
-    Set(value As Boolean)
-      _ShowToolbar = value
-      TsWeb.Visible = value
-    End Set
-  End Property
-
   Public Property UriTrackingGroup As UriTrackingGroupEnum
     Get
       Return _UriTrackingGroup
@@ -101,7 +64,8 @@ Public Class DPIWebBrowser
 #End If
         Dim oldValue As UriTrackingGroupEnum = _UriTrackingGroup
         _UriTrackingGroup = value
-        RaiseEvent UriTrackingGroupChanged(value, oldValue)
+        InvokePanelItemEvent(DockPanelItemEventType.NavTrackingChanged, value)
+        'RaiseEvent UriTrackingGroupChanged(value, oldValue)
       End If
     End Set
   End Property
@@ -121,43 +85,33 @@ Public Class DPIWebBrowser
     End Set
   End Property
 
-  Public Event DataDownload(data As APIMessage)
+  'Public Event DataDownload(data As APIMessage)
 
-  Public Event UriTrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
+  'Public Event UriTrackingGroupChanged(NewGroup As UriTrackingGroupEnum, OldGroup As UriTrackingGroupEnum)
 
-  Public Event ViewerBusy(busy As Boolean)
+  'Public Event ViewerBusy(busy As Boolean)
 
   Public Sub New(Optional instanceKey As String = "")
-    'Apply Item Defaults for this Type
-    ItemCaption = Default_ItemCaption
-    ItemHasRibbonBar = Default_ItemHasRibbonBar
-    ItemHasToolBar = Default_ItemHasToolBar
-    ItemHasStatusBar = Default_ItemHasStatusBar
-    ItemSupportsClose = Default_ItemSupportsClose
-    ItemSupportsMove = Default_ItemSupportsMove
-    ItemSupportsSearch = Default_ItemSupportsSearch
+    ItemCaption = "Ancestry.com"
+    ItemDestroyOnClose = False
+    ItemHasRibbonBar = True
+    ItemHasStatusBar = False
+    ItemHasToolBar = True
+    ItemSupportsClose = True
+    ItemSupportsMove = True
+    ItemSupportsSearch = False
+    LocationCurrent = DockPanelLocation.None
+    LocationPrefered = DockPanelLocation.MiddleTopLeft
+    LocationPrevious = DockPanelLocation.MiddleTopLeft
+    RibbonBarKey = "B200"
+    RibbonHideOnItemClose = False
+    RibbonSelectOnItemFocus = True
+    RibbonShowOnItemOpen = True
     ItemKey = Base_Key
     ItemInstanceKey = instanceKey
-    LocationCurrent = Default_LocationCurrent
-    LocationPrefered = Default_LocationPrefered
-    LocationPrevious = Default_LocationPrevious
-    RibbonBarKey = Default_RibbonBarKey
-    RibbonHideOnItemClose = Default_RibbonHideOnItemClose
-    RibbonSelectOnItemFocus = Default_RibbonSelectOnItemFocus
-    RibbonShowOnItemOpen = Default_RibbonShowOnItemOpen
-    'Continue with creation
     Web = New Microsoft.Web.WebView2.WinForms.WebView2()
-    TsWeb = New FlatToolBar()
-    BtnBack = New System.Windows.Forms.ToolStripButton()
-    BtnReload = New System.Windows.Forms.ToolStripButton()
-    BtnHome = New System.Windows.Forms.ToolStripButton()
-    TxtHref = New System.Windows.Forms.ToolStripTextBox()
     CType(Web, System.ComponentModel.ISupportInitialize).BeginInit()
-    TsWeb.SuspendLayout()
     SuspendLayout()
-    '
-    'web
-    '
     Web.AllowExternalDrop = True
     Web.BackColor = My.Theme.PanelBackColor
     Web.CreationProperties = Nothing
@@ -169,88 +123,16 @@ Public Class DPIWebBrowser
     Web.Size = New System.Drawing.Size(600, 202)
     Web.TabIndex = 0
     Web.ZoomFactor = 0.75R
-    '
-    'tsWeb
-    '
-    TsWeb.CanOverflow = False
-    TsWeb.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-    TsWeb.Items.AddRange(New System.Windows.Forms.ToolStripItem() {BtnBack, BtnReload, BtnHome, TxtHref})
-    TsWeb.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-    TsWeb.Name = "tsWeb"
-    TsWeb.Padding = New System.Windows.Forms.Padding(4, 0, 16, 0)
-    TsWeb.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-    TsWeb.Size = New System.Drawing.Size(600, 25)
-    TsWeb.Stretch = True
-    TsWeb.TabIndex = 2
-    TsWeb.Visible = False
-    '
-    'btnBack
-    '
-    BtnBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    BtnBack.Image = My.Resources.back_circle
-    BtnBack.Name = "btnBack"
-    BtnBack.Size = New System.Drawing.Size(23, 22)
-    BtnBack.Text = "ToolStripButton2"
-    BtnBack.ToolTipText = "Previous Page"
-    '
-    'btnReload
-    '
-    BtnReload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    BtnReload.Image = Global.AncestryAssistant.My.Resources.Resources.refresh
-    BtnReload.ImageTransparentColor = System.Drawing.Color.Magenta
-    BtnReload.Name = "btnReload"
-    BtnReload.Size = New System.Drawing.Size(23, 22)
-    BtnReload.Text = "ToolStripButton1"
-    BtnReload.ToolTipText = "Refresh"
-    '
-    'btnHome
-    '
-    BtnHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    BtnHome.Image = Global.AncestryAssistant.My.Resources.Resources.filepage_home
-    BtnHome.ImageTransparentColor = System.Drawing.Color.Magenta
-    BtnHome.Name = "btnHome"
-    BtnHome.Size = New System.Drawing.Size(23, 22)
-    BtnHome.Text = "ToolStripButton1"
-    BtnHome.ToolTipText = "Ancestry Home Page"
-    '
-    'txtHref
-    '
-    TxtHref.AutoSize = False
-    TxtHref.BackColor = System.Drawing.SystemColors.Window
-    TxtHref.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    TxtHref.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    TxtHref.Name = "txtHref"
-    TxtHref.Size = New System.Drawing.Size(100, 22)
-    TxtHref.ToolTipText = "Website URL"
-    '
-    'AncestryWebViewer
-    '
-    AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
     Controls.Add(Web)
-    Controls.Add(TsWeb)
     Dock = DockStyle.Fill
     Name = "AncestryWebViewer"
     Size = New System.Drawing.Size(600, 227)
     CType(Web, System.ComponentModel.ISupportInitialize).EndInit()
-    TsWeb.ResumeLayout(False)
-    TsWeb.PerformLayout()
     ResumeLayout(False)
     PerformLayout()
     Web.EnsureCoreWebView2Async()
     CaptureFocus(Me)
-  End Sub
-
-  Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-    Web.GoBack()
-  End Sub
-
-  Private Sub BtnHome_Click_1(sender As Object, e As EventArgs) Handles BtnHome.Click
-    NavigateTo(UriTrackingGroupEnum.ANCESTRY_HOME)
-  End Sub
-
-  Private Sub BtnReload_Click(sender As Object, e As EventArgs) Handles BtnReload.Click
-    Web.Reload()
   End Sub
 
   ' When the browser detects a file is being downloaded me routine will fire, we Capture the DownloadOperation object
@@ -306,7 +188,7 @@ Public Class DPIWebBrowser
         }
         payload.Add(row)
         msg.Payload = payload
-        RaiseEvent DataDownload(msg)
+        InvokePanelItemEvent(DockPanelItemEventType.NavData, msg)
       Else
         If System.IO.File.Exists(sameImageAsFilename) Then
           System.IO.File.Delete(sameImageAsFilename)
@@ -326,7 +208,8 @@ Public Class DPIWebBrowser
         }
         payload.Add(row)
         msg.Payload = payload
-        RaiseEvent DataDownload(msg)
+        InvokePanelItemEvent(DockPanelItemEventType.NavData, msg)
+        'RaiseEvent DataDownload(msg)
         sameImageAsFilename = ""
       End If
     End If
@@ -380,7 +263,7 @@ Public Class DPIWebBrowser
 
     End If
     msg.PageKey = UriTrackingGroup.ToString
-    RaiseEvent DataDownload(msg)
+    InvokePanelItemEvent(DockPanelItemEventType.NavData, msg)
   End Sub
 
   Private Function ShouldBlockNavigation(uri As String) As Boolean
@@ -391,14 +274,6 @@ Public Class DPIWebBrowser
     Next
     Return False
   End Function
-
-  Private Sub TsWeb_Resize(sender As Object, e As EventArgs) Handles TsWeb.Resize
-    TxtHref.Width = TsWeb.Bounds.Width - BtnHome.Bounds.Right - 46
-  End Sub
-
-  Private Sub TxtHref_Enter(sender As Object, e As EventArgs) Handles TxtHref.Enter
-    NavigateTo(UriTrackingGroupEnum.CUSTOM, TxtHref.Text)
-  End Sub
 
   Private Sub Web_CoreWebView2InitializationCompleted(sender As Object, e As CoreWebView2InitializationCompletedEventArgs) Handles Web.CoreWebView2InitializationCompleted
     CoreWeb = Web.CoreWebView2
@@ -428,7 +303,7 @@ Public Class DPIWebBrowser
         .IsBuiltInErrorPageEnabled = False
 #End If
       End With
-      .AddScriptToExecuteOnDocumentCreatedAsync(My.Resources.AssistantAPI)
+      .AddScriptToExecuteOnDocumentCreatedAsync(My.Resources.WEBAPI)
     End With
     isReady = True
     If URL IsNot Nothing Then
@@ -438,31 +313,18 @@ Public Class DPIWebBrowser
     End If
   End Sub
 
-  Private Sub Web_Layout(sender As Object, e As LayoutEventArgs) Handles Web.Layout
-#If TRACE Then
-    Logger.debugPrint("WebBrowserPanelItem.Web_Layout(affectedControl={0}, prop={1}, bounds={2})", e.AffectedControl.Name, e.AffectedProperty, e.AffectedControl.Bounds.ToString)
-
-#End If
-  End Sub
-
   Private Sub Web_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles Web.NavigationCompleted
 #If TRACE Then
     Logger.debugPrint("WebBrowserPanelItem.web_NavigationCompleted()")
 #End If
-    RaiseEvent ViewerBusy(False)
+    InvokePanelItemEvent(DockPanelItemEventType.ItemBusy, False)
   End Sub
 
   Private Sub Web_NavigationStarting(sender As Object, e As CoreWebView2NavigationStartingEventArgs) Handles Web.NavigationStarting
 #If TRACE Then
     Logger.debugPrint("WebBrowserPanelItem.web_NavigationStarting()")
 #End If
-    RaiseEvent ViewerBusy(True)
-  End Sub
-
-  Private Sub Web_Paint(sender As Object, e As PaintEventArgs) Handles Web.Paint
-#If TRACE Then
-    Logger.debugPrint("WebBrowserPanelItem.Web_Paint(rectangle={0})", e.ClipRectangle.ToString)
-#End If
+    InvokePanelItemEvent(DockPanelItemEventType.ItemBusy, True)
   End Sub
 
   Private Sub Web_SourceChanged(sender As Object, e As CoreWebView2SourceChangedEventArgs) Handles Web.SourceChanged
@@ -470,7 +332,7 @@ Public Class DPIWebBrowser
     Logger.debugPrint("WebBrowserPanelItem.web_SourceChanged(uri=[{0}])", Web.Source.AbsoluteUri)
 #End If
     JSAPI_Execute("ancestryAssistant.getPage();")
-    TxtHref.Text = Web.Source.AbsoluteUri
+    'TxtHref.Text = Web.Source.AbsoluteUri
   End Sub
 
   'UserControl overrides dispose to clean up the component list.
@@ -490,11 +352,11 @@ Public Class DPIWebBrowser
   End Sub
 
   Public Overrides Sub ApplySearch(criteria As String)
-    Throw New NotImplementedException()
+    'Throw New NotImplementedException()
   End Sub
 
   Public Overrides Sub ClearSearch()
-    Throw New NotImplementedException()
+    'Throw New NotImplementedException()
   End Sub
 
   Public Overrides Sub EventRequest(eventType As DockPanelItemEventType, eventData As Object)
