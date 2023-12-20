@@ -31,49 +31,49 @@
     End Select
   End Sub
 
-  Private Function DockManagerItem_AncestorDetails(Optional instanceKey As String = "") As DockPanelItem
+  Private Function DockManagerItem_AncestorDetails(Optional instanceKey As String = "", Optional ancestorId As String = "") As DockPanelItem
     Return New DPIAncestorDetails(instanceKey) With {
       .Ancestors = Ancestors
     }
   End Function
 
-  Private Function DockManagerItem_AncestorListWeb(Optional instanceKey As String = "") As DockPanelItem
+  Private Function DockManagerItem_AncestorListWeb(Optional instanceKey As String = "", Optional ancestorId As String = "") As DockPanelItem
     Return New DPIAncestorListWeb(instanceKey) With {
       .Ancestors = Ancestors
     }
   End Function
 
-  Private Function DockManagerItem_AncestorsList(Optional instanceKey As String = "") As DockPanelItem
+  Private Function DockManagerItem_AncestorsList(Optional instanceKey As String = "", Optional ancestorId As String = "") As DockPanelItem
     Return New DPIAncestorsList(instanceKey) With {
       .Ancestors = Ancestors
     }
   End Function
 
-  Private Function DockManagerItem_CensusWeb(Optional instanceKey As String = "") As DockPanelItem
-    Return New DPICensusWeb(instanceKey) With {
+  Private Function DockManagerItem_CensusWeb(Optional instanceKey As String = "", Optional ancestorId As String = "") As DockPanelItem
+    Return New DPICensusWeb(instanceKey, ancestorId) With {
       .Ancestors = Ancestors
     }
   End Function
 
-  Private Function DockManagerItem_ImageGallery(Optional instanceKey As String = "") As DockPanelItem
+  Private Function DockManagerItem_ImageGallery(Optional instanceKey As String = "", Optional ancestorId As String = "") As DockPanelItem
     Return New DPIImageGallery(instanceKey) With {
             .Ancestors = Ancestors
           }
   End Function
 
-  Private Function DockManagerItem_ImageGalleryWeb(Optional instanceKey As String = "") As DockPanelItem
+  Private Function DockManagerItem_ImageGalleryWeb(Optional instanceKey As String = "", Optional ancestorId As String = "") As DockPanelItem
     Return New DPIImageGalleryWeb(instanceKey) With {
       .Ancestors = Ancestors
     }
   End Function
 
-  Private Function DockManagerItem_Notebook(Optional instanceKey As String = "") As DockPanelItem
+  Private Function DockManagerItem_Notebook(Optional instanceKey As String = "", Optional ancestorId As String = "") As DockPanelItem
     Return New DPINotebook(instanceKey) With {
       .Ancestors = Ancestors
     }
   End Function
 
-  Private Function DockManagerItem_WebBrowser(Optional instanceKey As String = "") As DockPanelItem
+  Private Function DockManagerItem_WebBrowser(Optional instanceKey As String = "", Optional ancestorId As String = "") As DockPanelItem
     Return New DPIWebBrowser(instanceKey) With {
       .AncestryTreeID = My.Settings.ANCESTRY_TREE_ID,
       .Ancestors = Ancestors

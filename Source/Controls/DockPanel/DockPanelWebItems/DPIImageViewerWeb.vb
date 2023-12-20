@@ -1,40 +1,39 @@
-﻿Imports System.Text
+﻿Imports System.IO
+Imports System.Text
 Imports Microsoft.Web
 Imports Microsoft.Web.WebView2.Core
 Imports Microsoft.Web.WebView2.WinForms
-Imports Newtonsoft.Json
 
-Public Class DPICensusWeb
+Public Class DPIImageViewerWeb
   Inherits DockPanelItem
 
   Private WithEvents CoreWeb As CoreWebView2
   Private WithEvents CoreWebDownload As CoreWebView2DownloadOperation
   Private WithEvents DataMgr As WebData
   Private WithEvents Web As WebView2
+  Private Const ControlHtml As String = "WebControl.html"
   Private Const DatasetName As String = "WebControl"
-  Private APIJavaScript As String = ApplyVariables(My.Resources.IncludeJSFocus, My.Resources.IncludeJSScrollbars, My.Resources.JSTable)
+  Private ActiveAncestorId As String = ""
+  Private APIJavaScript As String = ApplyVariables(My.Resources.IncludeJSFocus, My.Resources.IncludeJSScrollbars, My.Resources.JSImageList)
   Private components As System.ComponentModel.IContainer
-  Private ControlHtml As String = "WebControl.html"
   Private isReady As Boolean = False
   Private VirtualHostName As String = My.Settings.WEB_HOSTNAME
   Private VirtualPath As String = My.Settings.WEB_VIRTUALPATH
-  Public Const Base_Key As String = "DOCK_CENSUSWEB"
-  Public ReadOnly Property ControlInitialized As Boolean = False
+  Public Const Base_Key As String = "DOCK_IMAGEVIEWER"
 
-  Public Sub New(Optional instanceKey As String = "", Optional instanceAncestorKey As String = "")
+  Public Sub New(Optional instanceKey As String = "")
     SetStyle(ControlStyles.ContainerControl Or ControlStyles.Selectable Or ControlStyles.StandardClick, True)
-    AncestorKey = instanceAncestorKey
     DataMgr = New WebData
-    ItemCaption = "Census"
+    ItemCaption = "Image Viewer"
     ItemDestroyOnClose = False
     ItemHasRibbonBar = True
     ItemHasStatusBar = False
-    ItemHasToolBar = False
+    ItemHasToolBar = True
     ItemSupportsClose = True
     ItemSupportsMove = True
     ItemSupportsSearch = False
     LocationCurrent = DockPanelLocation.None
-    LocationPrefered = DockPanelLocation.MiddleBottom
+    LocationPrefered = DockPanelLocation.MiddleTopLeft
     LocationPrevious = DockPanelLocation.None
     RibbonBarKey = ""
     RibbonHideOnItemClose = False
@@ -72,7 +71,7 @@ Public Class DPICensusWeb
     Next
     rtn = sb.ToString
     rtn = rtn.Replace("{VIRTUALHOSTNAME}", My.Settings.WEB_HOSTNAME)
-    rtn = rtn.Replace("{DATASETNAME}", "WebControl")
+    rtn = rtn.Replace("{DATASETNAME}", DatasetName)
     Return rtn
   End Function
 
@@ -81,12 +80,56 @@ Public Class DPICensusWeb
     Web.Source = New Uri(e.Uri)
   End Sub
 
+  Private Sub DataMgr_SelectionChanged(dataSetName As String, RID As String) Handles DataMgr.SelectionChanged
+    If ContainsFocus And Not Focused Then
+      Focus()
+    End If
+  End Sub
+
   Private Async Sub JSAPI_Execute(script As String)
     Await Web.CoreWebView2.ExecuteScriptAsync(script)
   End Sub
 
   Private Sub JSAPI_Message(sender As Object, e As CoreWebView2WebMessageReceivedEventArgs) Handles Web.WebMessageReceived
-    Dim msg As APIMessage = JsonConvert.DeserializeObject(Of APIMessage)(e.WebMessageAsJson)
+    'Dim msg As APIMessage = JsonConvert.DeserializeObject(Of APIMessage)(e.WebMessageAsJson)
+    If ContainsFocus And Not Focused Then
+      Focus()
+    End If
+  End Sub
+
+  Private Sub UpdateData()
+    Debug.Print("IN UPDATE DATE")
+    If ActiveAncestorId.Length > 0 Then
+      If ActiveAncestorId.Equals(Ancestors.ActiveAncestorID) Then Exit Sub
+    End If
+    Debug.Print("STEP1")
+    Dim ds As New DMDataSet With {
+        .DataSetName = DatasetName
+      }
+    ds.addColumn("Filename", DMColumnType.ColumnString)
+    ds.addColumn("Caption", DMColumnType.ColumnString)
+    If Ancestors IsNot Nothing Then
+      Debug.Print("STEP2")
+      If Ancestors.ActiveAncestor IsNot Nothing Then
+        Debug.Print("STEP3")
+        ActiveAncestorId = Ancestors.ActiveAncestorID
+        Dim galleryPath As String = Ancestors.ActiveAncestor.AncestorPath
+        For Each filename As String In Directory.GetFiles(galleryPath, "*.jpg", SearchOption.AllDirectories)
+          Dim caption As String = ""
+          If System.IO.File.Exists(filename + ".txt") Then
+            caption = System.IO.File.ReadAllText(filename + ".txt")
+          Else
+            caption = filename.Replace(galleryPath, "").Replace(".jpg", "")
+          End If
+          Dim relativeFilename As String = filename.Replace(My.Settings.WEB_VIRTUALPATH, "/")
+          Debug.Print("ADDING FILENAME: {0}", relativeFilename)
+          ds.addDataRow(filename, relativeFilename, caption)
+        Next
+      End If
+    End If
+    Debug.Print("STEP4")
+    DataMgr.RegisterDataSet(ds)
+    DataMgr.SelectRow(DatasetName, "")
   End Sub
 
   Private Sub Web_CoreWebView2InitializationCompleted(sender As Object, e As CoreWebView2InitializationCompletedEventArgs) Handles Web.CoreWebView2InitializationCompleted
@@ -135,29 +178,8 @@ Public Class DPICensusWeb
     End Try
   End Sub
 
-  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True) Handles _Ancestors.ActiveAncestorChanged, _Ancestors.AncestorsChanged
-    If ControlInitialized Then Exit Sub
-    If Ancestors Is Nothing Then Exit Sub
-    If Not Ancestors.HasActiveAncestor Then Exit Sub
-    AncestorKey = Ancestors.ActiveAncestorID
-    Dim ds As New DMDataSet With {
-      .DataSetName = "WebControl"
-    }
-    If ItemInstanceKey.Equals("Unified") Then
-    Else
-      Dim Data As AAFile = Ancestors.ActiveAncestor.Census.GetAADatasource(CInt(ItemInstanceKey))
-      For Each columnName As String In Data.GetHeaders
-        ds.addColumn(columnName, DMColumnType.ColumnString)
-      Next
-      Dim RID As Integer = 0
-      For Each row() As String In Data.GetValues
-        RID += 1
-        ds.addDataRow(RID.ToString, row)
-      Next
-    End If
-    DataMgr.RegisterDataSet(ds)
-    DataMgr.SelectRow(ds.DataSetName, "1")
-    _ControlInitialized = True
+  Protected Overrides Sub UpdateUI(Optional reload As Boolean = True)
+    AncestorsUpdated()
   End Sub
 
   Public Sub ActionRequest(eventType As DockPanelItemEventType, eventData As Object)
@@ -173,7 +195,7 @@ Public Class DPICensusWeb
   End Sub
 
   Public Overrides Sub EventRequest(eventType As DockPanelItemEventType, eventData As Object)
-
+    Throw New NotImplementedException()
   End Sub
 
 End Class

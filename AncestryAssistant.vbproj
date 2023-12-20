@@ -19,7 +19,7 @@
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2023.1219.1524</Version>
+    <Version>1.2023.1220.35</Version>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -305,6 +305,9 @@
     <Compile Include="Source\Controls\DockPanel\DockPanelWebItems\DPICensusWeb.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <None Include="Source\Controls\DockPanel\DockPanelWebItems\DPIImageViewerWeb.vb">
+      <SubType>UserControl</SubType>
+    </None>
     <Compile Include="Source\Controls\DockPanel\DockPanelWebItems\DPIImageGalleryWeb.vb">
       <SubType>UserControl</SubType>
     </Compile>

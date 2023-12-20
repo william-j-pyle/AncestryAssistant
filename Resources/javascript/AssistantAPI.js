@@ -1,26 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
-  var x = document.createElement('STYLE');
-  x.appendChild(document.createTextNode('::-webkit-scrollbar {width: 14px;background-color: #2e2e2e;}'));
-  x.appendChild(document.createTextNode('::-webkit-scrollbar-corner {background-color: #2e2e2e;}'));
-  x.appendChild(document.createTextNode('::-webkit-scrollbar-thumb {width: 14px;border-color: #2e2e2e;border-style: solid;border-size: .5px;background-color: #4d4d4d;}'));
-  x.appendChild(document.createTextNode('::-webkit-scrollbar-thumb:hover {width: 14px;border-color: #2e2e2e;border-style: solid;border-size: .5px;background-color: #cccccc;}'));
-  x.appendChild(document.createTextNode('::-webkit-scrollbar-track {background-color: #2e2e2e;}'));
-  //x.appendChild(document.createTextNode('::-webkit-scrollbar-button {background-color: #2e2e2e; height: 16px !important;}'));
-  x.appendChild(document.createTextNode('::-webkit-scrollbar-button:horizontal:increment:end:hover {height: 16px !important;background-color: #cccccc;background-repeat:no-repeat;background-position:center;background-image: url(http://ancestryassistant/img/ico_20_scrollbar_right.png);}'));
-  x.appendChild(document.createTextNode('::-webkit-scrollbar-button:horizontal:decrement:start:hover {height: 16px !important;background-color: #cccccc;background-repeat:no-repeat;background-position:center;background-image: url(http://ancestryassistant/img/ico_20_scrollbar_left.png);}'));
-  x.appendChild(document.createTextNode('::-webkit-scrollbar-button:vertical:increment:end:hover {height: 16px !important;background-color: #cccccc;background-repeat:no-repeat;background-position:center;background-image: url(http://ancestryassistant/img/ico_20_scrollbar_down.png);}'));
-  x.appendChild(document.createTextNode('::-webkit-scrollbar-button:vertical:decrement:start:hover {height: 16px !important;background-color: #cccccc;background-repeat:no-repeat;background-position:center;background-image: url(http://ancestryassistant/img/ico_20_scrollbar_up.png);}'));
-
-  x.appendChild(document.createTextNode('::-webkit-scrollbar-button:horizontal:increment:end {background-color: #2e2e2e; height: 16px !important;background-repeat:no-repeat;background-position:center;background-image: url(http://ancestryassistant/img/ico_20_scrollbar_right_default.png);}'));
-  x.appendChild(document.createTextNode('::-webkit-scrollbar-button:horizontal:decrement:start {background-color: #2e2e2e; height: 16px !important;background-repeat:no-repeat;background-position:center;background-image: url(http://ancestryassistant/img/ico_20_scrollbar_left_default.png);}'));
-  x.appendChild(document.createTextNode('::-webkit-scrollbar-button:vertical:increment:end {background-color: #2e2e2e; height: 16px !important;background-repeat:no-repeat;background-position:center;background-image: url(http://ancestryassistant/img/ico_20_scrollbar_down_default.png);}'));
-  x.appendChild(document.createTextNode('::-webkit-scrollbar-button:vertical:decrement:start {background-color: #2e2e2e; height: 16px !important;background-repeat:no-repeat;background-position:center;background-image: url(http://ancestryassistant/img/ico_20_scrollbar_up_default.png);}'));
-  x.appendChild(document.createTextNode('#BannerRegion {display:none;}'));
-  x.appendChild(document.createTextNode('#HeaderRegion {display:none;}'));
-  document.head.appendChild(x);
-});
-
-if (typeof ancestryAssistant === 'undefined')
+﻿if (typeof ancestryAssistant === 'undefined')
   ancestryAssistant = {};
 
 ancestryAssistant.MessageTypes = {};
@@ -30,7 +8,9 @@ ancestryAssistant.MessageTypes.MT_TREES = 'trees';
 ancestryAssistant.MessageTypes.MT_PAGE = 'page';
 ancestryAssistant.MessageTypes.MT_TABLEDATA = 'tabledata';
 ancestryAssistant.MessageTypes.MT_FINDAGRAVE = 'findagrave';
+ancestryAssistant.MessageTypes.MT_FOCUSEVENT = 'focusevent';
 
+// Add WebAPI Message Interface
 ancestryAssistant.postMessage = function (msgType, msgKey, payload) {
   var msg = {};
   msg.MessageType = msgType;
@@ -41,7 +21,14 @@ ancestryAssistant.postMessage = function (msgType, msgKey, payload) {
   window.chrome.webview.postMessage(msg);
 };
 
-ancestryAssistant.getPerson = function () {
+ancestryAssistant.initAppHandlers = function () {
+  window.addEventListener('click', function () {
+    this.postMessage(this.MessageTypes.MT_FOCUSEVENT, "", "");
+  });
+};
+
+// Capture the Ancestry.com person object, and post it back to the application
+ancestryAssistant.getAncestryPerson = function () {
   var key = "";
   var hdr = [], dta = [];
   if (typeof (PersonCard) !== 'undefined') {
@@ -65,39 +52,34 @@ ancestryAssistant.getPerson = function () {
   }
 };
 
-ancestryAssistant.getState = function () {
+// Get the current state of the Ancestry page, results in 2 messages to application
+ancestryAssistant.getAncestryState = function () {
   if (typeof (InitialState) !== 'undefined') {
     var state = JSON.parse(initialState.text);
     var trees = state.reduxInitialState.userTrees.sortedUserTrees;
-    var hdr = [], dta = [];
+    var hdr = [], dta = [], rows = [];
 
-    // Add Key(hdr)/Value(dta) entries
+    // Message 1
     hdr.push("USERID"); dta.push(state.reduxInitialState.user.uhomeUserProfile.userHandle);
     hdr.push("LASTLOGINDATE"); dta.push(state.reduxInitialState.user.uhomeUserProfile.lastLoginDate);
-    // Send message
     this.postMessage(this.MessageTypes.MT_ACCOUNT, '', [hdr, dta]);
 
-    var rows = [];
-    // Add Header Rows
+    // Message 2
     rows.push(["TREEID", "NAME", "LASTMODIFIED", "ACTIVETREE"]);
-    // Add Data Rows
     for (var r = 0; r < trees.length; r++)
       rows.push([trees[r].Id.v, trees[r].Name, trees[r].LastModifiedDateTime, trees[r].lastViewedTree]);
-    // Send Message
     this.postMessage(this.MessageTypes.MT_TREES, '', rows);
   }
 };
 
-ancestryAssistant.getPage = function () {
-  console.log("getPage");
+// Get the current page information, if required objects are not available, it automatically waits and retrys
+ancestryAssistant.getAncestryPage = function () {
   if (typeof (window.page_name) == 'undefined' && location.host == 'www.ancestry.com') {
     setTimeout(() => { ancestryAssistant.getPage(); }, 2000);
     return;
   }
-  console.log("getPage:Running");
   var rows = [];
   rows.push(['PAGEKEY']);
-
   if (typeof (window.page_name) !== 'undefined') {
     rows.push([window.page_name.replaceAll(' ', '')]);
   } else {
@@ -106,7 +88,9 @@ ancestryAssistant.getPage = function () {
   this.postMessage(this.MessageTypes.MT_PAGE, '', rows);
 };
 
-ancestryAssistant.getTableData = function (personId) {
+// Reads and generates a message back to the app with the table data
+// Any page that has a dropdown of details table, example Census
+ancestryAssistant.getAncestryTableData = function (personId) {
   var pid = personId;
   var pageTitle = document.getElementsByClassName('collectionTitle')[0].getElementsByTagName('a')[0].innerText;
   var pageNbr = document.getElementsByClassName('page-input')[0].value;
@@ -149,8 +133,8 @@ ancestryAssistant.getTableData = function (personId) {
   this.postMessage(this.MessageTypes.MT_TABLEDATA, pid, rows);
 };
 
-ancestryAssistant.getImage = function () {
-  //Trigger the download
+// When on within the Ancestry Image/Media viewer, this function will trigger the image download
+ancestryAssistant.triggerAncestryImageDownload = function () {
   var items = document.getElementsByClassName('iconTools calloutTrigger');
   if (items.length > 0) {
     items[0].click();
@@ -162,15 +146,14 @@ ancestryAssistant.getImage = function () {
   document.body.click();
 };
 
-ancestryAssistant.getFindAGrave = function () {
+// Captures a person object from FindAGrave, and sends a message back to the app
+ancestryAssistant.getFindAGravePerson = function () {
   var key = "";
   var hdr = [], dta = [];
   if (typeof (findagrave) == 'undefined') {
-    console.log("Waiting: FindAGrave object not yet loaded");
     setTimeout(() => { ancestryAssistant.getFindAGrave(); }, 2000);
     return;
   }
-  console.log("Executing: GetFindAGrave");
   if (typeof (findagrave) !== 'undefined') {
     console.log("Generating Message");
     hdr.push("memorialId"); dta.push(findagrave.memorialId);
@@ -189,5 +172,300 @@ ancestryAssistant.getFindAGrave = function () {
     hdr.push("deathDay"); dta.push(findagrave.deathDay);
     hdr.push("locationName"); dta.push(findagrave.locationName);
     this.postMessage(this.MessageTypes.MT_FINDAGRAVE, key, [hdr, dta]);
+  }
+};
+
+window.MyAncestryAPI = {
+  ctlType: "",
+  ctlKey: "",
+  ctlDataSet: "",
+  selectedRID: -1,
+  selectedText: "",
+  itemType: "none",
+  itemCount: 0,
+  itemVisibleCount: 0,
+  filter: "",
+  columnCount: 0,
+  data: chrome.webview.hostObjects.sync.DataMgr,
+  metadata: {},
+  setControlFocus: function () { document.body.className = 'webcontrol hasfocus'; },
+  removeControlFocus: function () { document.body.className = 'webcontrol'; },
+  addDataHandlers: function () {
+    chrome.webview.hostObjects.sync.DataMgr.addEventListener('DataChanged', function (dataSetName) {
+      window.MyAncestryAPI.displayData(dataSetName);
+    });
+  },
+  addEventHandlers: function (tag) {
+    var tbody
+    tbody = document.getElementById("gallery");
+    Array.from(tbody.getElementsByTagName(tag)).forEach(function (item) {
+      item.addEventListener('click', function () {
+        var selectedRID = this.getAttribute("data-rid");
+        document.querySelectorAll('.selected').forEach(function (sitem) { sitem.className = ""; });
+        this.className = 'selected';
+        window.MyAncestryAPI.selectedRID = selectedRID;
+        if (window.MyAncestryAPI.data.selectedRID(window.MyAncestryAPI.ctlDataSet) != selectedRID) {
+          window.MyAncestryAPI.data.SelectRowWeb(window.MyAncestryAPI.ctlDataSet, selectedRID);
+        }
+      });
+    });
+  },
+  displayData: function (dataSetName) {
+    var htm = "";
+    var i, j;
+    this.metadata = JSON.parse(this.data.getMetaDataWeb(dataSetName));
+    htm += "<div id='gallery'>";
+    for (i = 0; i < this.metadata.Rows; i++) {
+      var dataRowObject = JSON.parse(this.data.getDataRowWeb(this.ctlDataSet, i));
+      var RID = dataRowObject.RID;
+      var dataRow = dataRowObject.data;
+      htm += "<section data-rid='" + RID + "'>";
+      htm += "<div><img src='" + dataRow[0] + "'></div><span>" + dataRow[1] + "</span>";
+      htm += "</section>";
+    }
+    htm += "</div>";
+    document.body.innerHTML = htm;
+    this.addEventHandlers("section");
+  },
+  createControl: function (dataSetName) {
+    this.ctlType = "WebControl";
+    this.ctlDataSet = dataSetName;
+    document.body.className = "webcontrol";
+    this.displayData(dataSetName);
+    this.addDataHandlers();
+  },
+  applyFilter: function (filterValue) {
+    var filter, ol, li, i, txtValue;
+    filter = filterValue.toUpperCase();
+    ol = document.getElementById("gallery");
+    li = ol.getElementsByTagName('tr');
+    for (i = 0; i < li.length; i++) {
+      txtValue = li[i].innerText
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+    return true;
+  },
+  clearFilter: function () {
+    var ol, li, i;
+    ol = document.getElementById("dataset");
+    li = ol.getElementsByTagName('tr');
+    for (i = 0; i < li.length; i++) {
+      li[i].style.display = "";
+    }
+    return true;
+  },
+  selectItem: function (RID) {
+    if (window.MyAncestryAPI.selectedRID != RID) {
+      window.MyAncestryAPI.selectedRID = RID;
+      document.querySelectorAll('.selected').forEach(function (sitem) { sitem.className = ""; });
+      document.querySelectorAll("tr[data-rid='" + RID + "']").forEach(function (sitem) { sitem.className = "selected"; });
+    }
+  }
+};
+
+window.MyAncestryAPI = {
+  ctlType: "",
+  ctlKey: "",
+  ctlDataSet: "",
+  selectedRID: -1,
+  selectedText: "",
+  itemType: "none",
+  itemCount: 0,
+  itemVisibleCount: 0,
+  filter: "",
+  columnCount: 0,
+  data: chrome.webview.hostObjects.sync.DataMgr,
+  metadata: {},
+  setControlFocus: function () { document.body.className = 'webcontrol hasfocus'; },
+  removeControlFocus: function () { document.body.className = 'webcontrol'; },
+  addDataHandlers: function () {
+    chrome.webview.hostObjects.sync.DataMgr.addEventListener('SelectionChangedWeb', function (dataSetName, selectedRID) {
+      window.MyAncestryAPI.selectItem(selectedRID);
+    });
+  },
+  addEventHandlers: function (tag) {
+    var tbody
+    tbody = document.getElementById("dataset");
+    Array.from(tbody.getElementsByTagName(tag)).forEach(function (item) {
+      item.addEventListener('click', function () {
+        var selectedRID = this.getAttribute("data-rid");
+        document.querySelectorAll('.selected').forEach(function (sitem) { sitem.className = ""; });
+        this.className = 'selected';
+        window.MyAncestryAPI.selectedRID = selectedRID;
+        if (window.MyAncestryAPI.data.selectedRID(window.MyAncestryAPI.ctlDataSet) != selectedRID) {
+          window.MyAncestryAPI.data.SelectRowWeb(window.MyAncestryAPI.ctlDataSet, selectedRID);
+        }
+      });
+    });
+  },
+  createControl: function (dataSetName) {
+    this.ctlType = "WebControl";
+    this.ctlDataSet = dataSetName;
+    var body = document.body;
+    body.className = "webcontrol";
+    var htm = "";
+    var i, j;
+    this.metadata = JSON.parse(this.data.getMetaDataWeb(dataSetName));
+    htm += "<TABLE class='ColumnList'><THEAD>";
+    for (i = 0; i < this.metadata.Columns.length; i++) {
+      if (this.metadata.Columns[i].Visible == true) {
+        htm += "<TH>" + this.metadata.Columns[i].Name + "</TH>";
+      }
+    }
+    htm += "</THEAD><TBODY id='dataset'>";
+    for (i = 0; i < this.metadata.Rows; i++) {
+      var dataRowObject = JSON.parse(this.data.getDataRowWeb(this.ctlDataSet, i));
+      var RID = dataRowObject.RID;
+      var dataRow = dataRowObject.data;
+      htm += "<TR data-rid=" + RID + ">";
+      //array[0] is always the unique rowid of the datarow
+      for (j = 0; j < this.metadata.Columns.length; j++) {
+        if (this.metadata.Columns[j].Visible == true) {
+          htm += "<TD>" + dataRow[j] + "</TD>";
+        }
+      }
+      htm += "</TR>";
+    }
+    htm += "</TBODY></TABLE>";
+    body.innerHTML = htm;
+    this.addEventHandlers("tr");
+    this.addDataHandlers();
+  },
+  applyFilter: function (filterValue) {
+    var filter, ol, li, i, txtValue;
+    filter = filterValue.toUpperCase();
+    ol = document.getElementById("dataset");
+    li = ol.getElementsByTagName('tr');
+    for (i = 0; i < li.length; i++) {
+      txtValue = li[i].innerText
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+    return true;
+  },
+  clearFilter: function () {
+    var ol, li, i;
+    ol = document.getElementById("dataset");
+    li = ol.getElementsByTagName('tr');
+    for (i = 0; i < li.length; i++) {
+      li[i].style.display = "";
+    }
+    return true;
+  },
+  selectItem: function (RID) {
+    if (window.MyAncestryAPI.selectedRID != RID) {
+      window.MyAncestryAPI.selectedRID = RID;
+      document.querySelectorAll('.selected').forEach(function (sitem) { sitem.className = ""; });
+      document.querySelectorAll("tr[data-rid='" + RID + "']").forEach(function (sitem) { sitem.className = "selected"; });
+    }
+  }
+};
+
+window.MyAncestryAPI = {
+  ctlType: "",
+  ctlKey: "",
+  ctlDataSet: "",
+  selectedRID: -1,
+  selectedText: "",
+  itemType: "none",
+  itemCount: 0,
+  itemVisibleCount: 0,
+  filter: "",
+  columnCount: 0,
+  data: chrome.webview.hostObjects.sync.DataMgr,
+  metadata: {},
+  setControlFocus: function () { document.body.className = 'webcontrol hasfocus'; },
+  removeControlFocus: function () { document.body.className = 'webcontrol'; },
+  addDataHandlers: function () {
+    chrome.webview.hostObjects.sync.DataMgr.addEventListener('SelectionChangedWeb', function (dataSetName, selectedRID) {
+      window.MyAncestryAPI.selectItem(selectedRID);
+    });
+  },
+  addEventHandlers: function (tag) {
+    var tbody
+    tbody = document.getElementById("dataset");
+    Array.from(tbody.getElementsByTagName(tag)).forEach(function (item) {
+      item.addEventListener('click', function () {
+        var selectedRID = this.getAttribute("data-rid");
+        document.querySelectorAll('.selected').forEach(function (sitem) { sitem.className = ""; });
+        this.className = 'selected';
+        window.MyAncestryAPI.selectedRID = selectedRID;
+        if (window.MyAncestryAPI.data.selectedRID(window.MyAncestryAPI.ctlDataSet) != selectedRID) {
+          window.MyAncestryAPI.data.SelectRowWeb(window.MyAncestryAPI.ctlDataSet, selectedRID);
+        }
+      });
+    });
+  },
+  createControl: function (dataSetName) {
+    this.ctlType = "WebControl";
+    this.ctlDataSet = dataSetName;
+    var body = document.body;
+    body.className = "webcontrol webtable";
+    var htm = "";
+    var i, j;
+    this.metadata = JSON.parse(this.data.getMetaDataWeb(dataSetName));
+    htm += "<TABLE class='TableList'><THEAD>";
+    for (i = 0; i < this.metadata.Columns.length; i++) {
+      if (this.metadata.Columns[i].Visible == true) {
+        var minWidth = this.metadata.Columns[i].MinWidth * 8;
+        htm += "<TH style='min-width:" + minWidth + "px'>" + this.metadata.Columns[i].Name + "</TH>";
+      }
+    }
+    htm += "</THEAD><TBODY id='dataset'>";
+    for (i = 0; i < this.metadata.Rows; i++) {
+      var dataRowObject = JSON.parse(this.data.getDataRowWeb(this.ctlDataSet, i));
+      var RID = dataRowObject.RID;
+      var dataRow = dataRowObject.data;
+      htm += "<TR data-rid=" + RID + ">";
+      //array[0] is always the unique rowid of the datarow
+      for (j = 0; j < this.metadata.Columns.length; j++) {
+        if (this.metadata.Columns[j].Visible == true) {
+          htm += "<TD>" + dataRow[j] + "</TD>";
+        }
+      }
+      htm += "</TR>";
+    }
+    htm += "</TBODY></TABLE>";
+    body.innerHTML = htm;
+    this.addEventHandlers("tr");
+    this.addDataHandlers();
+  },
+  applyFilter: function (filterValue) {
+    var filter, ol, li, i, txtValue;
+    filter = filterValue.toUpperCase();
+    ol = document.getElementById("dataset");
+    li = ol.getElementsByTagName('tr');
+    for (i = 0; i < li.length; i++) {
+      txtValue = li[i].innerText
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+    return true;
+  },
+  clearFilter: function () {
+    var ol, li, i;
+    ol = document.getElementById("dataset");
+    li = ol.getElementsByTagName('tr');
+    for (i = 0; i < li.length; i++) {
+      li[i].style.display = "";
+    }
+    return true;
+  },
+  selectItem: function (RID) {
+    if (window.MyAncestryAPI.selectedRID != RID) {
+      window.MyAncestryAPI.selectedRID = RID;
+      document.querySelectorAll('.selected').forEach(function (sitem) { sitem.className = ""; });
+      document.querySelectorAll("tr[data-rid='" + RID + "']").forEach(function (sitem) { sitem.className = "selected"; });
+    }
   }
 };

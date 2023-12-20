@@ -34,7 +34,7 @@
 
   Private RegistryPanels As Dictionary(Of DockPanelLocation, DockPanel)
 
-  Public Delegate Function PanelItemCreateDelegate(instanceKey As String) As DockPanelItem
+  Public Delegate Function PanelItemCreateDelegate(instanceKey As String, ancestorId As String) As DockPanelItem
 
   Public Event PanelItemEvent(panelItem As DockPanelItem, eventType As DockPanelItemEventType, eventData As Object)
 
@@ -308,10 +308,10 @@
     Return Not (dockLocation.Equals(DockPanelLocation.None) Or dockLocation.Equals(DockPanelLocation.TrayBottom) Or dockLocation.Equals(DockPanelLocation.Tray) Or dockLocation.Equals(DockPanelLocation.TrayLeft) Or dockLocation.Equals(DockPanelLocation.TrayRight) Or dockLocation.Equals(DockPanelLocation.Floating))
   End Function
 
-  Private Function ItemCreate(itemKey As String, Optional instanceKey As String = "") As DockPanelItem
+  Private Function ItemCreate(itemKey As String, Optional instanceKey As String = "", Optional ancestorId As String = "") As DockPanelItem
     If RegistryDelegates.ContainsKey(itemKey) Then
       Dim funcCreate As PanelItemCreateDelegate = RegistryDelegates(itemKey)
-      Return funcCreate(instanceKey)
+      Return funcCreate(instanceKey, ancestorId)
     End If
     Return Nothing
   End Function
@@ -495,21 +495,14 @@
     itm.EventRequest(eventType, eventData)
   End Sub
 
-  Public Function ItemGet(itemKey As String, Optional instanceKey As String = "") As DockPanelItem
-    If RegistryItems.ContainsKey(itemKey) Then
-#If DEBUG Then
-      Logger.debugPrint("DockPanelManager.ItemGet(key=[{0}], FromRegistry)", itemKey)
-#End If
-      Return RegistryItems(itemKey)
-    Else
-#If DEBUG Then
-      Logger.debugPrint("DockPanelManager.ItemGet(key=[{0}], FromDelegate)", itemKey)
-#End If
-      Dim panelItem As DockPanelItem = ItemCreate(itemKey, instanceKey)
-      If panelItem IsNot Nothing Then
-        RegistryItems.Add(panelItem.Key, panelItem)
-        Return panelItem
-      End If
+  Public Function ItemGet(itemKey As String, Optional instanceKey As String = "", Optional ancestorId As String = "") As DockPanelItem
+    Dim workingKey As String = itemKey + instanceKey + ancestorId
+    If RegistryItems.ContainsKey(workingKey) Then Return RegistryItems(workingKey)
+    If RegistryItems.ContainsKey(itemKey) Then Return RegistryItems(itemKey)
+    Dim panelItem As DockPanelItem = ItemCreate(itemKey, instanceKey, ancestorId)
+    If panelItem IsNot Nothing Then
+      RegistryItems.Add(panelItem.Key, panelItem)
+      Return panelItem
     End If
     Return Nothing
   End Function
@@ -544,17 +537,17 @@
     PanelFocus(panelItem.LocationCurrent)
   End Sub
 
-  Public Sub ItemShow(itemKey As String, Optional instanceKey As String = "")
+  Public Sub ItemShow(itemKey As String, Optional instanceKey As String = "", Optional ancestorId As String = "")
 #If TRACE Then
     Logger.debugPrint("DockPanelManager.ItemShow(itemKey=[{0}], instanceKey=[{1}])", itemKey,instanceKey)
 #End If
-    Dim itm As DockPanelItem = ItemGet(itemKey, instanceKey)
+    Dim itm As DockPanelItem = ItemGet(itemKey, instanceKey, ancestorId)
     Dim loc As DockPanelLocation = itm.LocationPrevious
     If itm.LocationCurrent = DockPanelLocation.Tray Or itm.LocationCurrent = DockPanelLocation.None Then
       If itm.LocationPrevious = DockPanelLocation.None Or itm.LocationPrevious = DockPanelLocation.Tray Then
         loc = itm.LocationPrefered
       End If
-      ItemAdd(loc, itemKey + instanceKey)
+      ItemAdd(loc, itm.Key)
     Else
       loc = itm.LocationCurrent
     End If
@@ -666,7 +659,8 @@
       PanelVisible(DockPanelLocation.RightTop, False)
     End If
     'Clean up any assigned items to hidden Tabs
-    For Each key As String In RegistryItems.Keys
+    Dim workingKeys() As String = RegistryItems.Keys.ToArray()
+    For Each key As String In workingKeys
       Dim itm As DockPanelItem = RegistryItems(key)
       If IsDockableLocation(itm.LocationCurrent) Then
         Dim Pnl As DockPanel = RegistryPanels(itm.LocationCurrent)

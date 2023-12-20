@@ -42,7 +42,7 @@ Partial Class AssistantAppForm
       Case RibbonBar.Key("ANCESTOR_CENSUS_UNIFIED") 'Census
         DockManager.ItemShow(DPICensusWeb.Base_Key, "Unified")
       Case RibbonBar.Key("ANCESTOR_CENSUS_YR1")
-        DockManager.ItemShow(DPICensusWeb.Base_Key, CStr(value))
+        DockManager.ItemShow(DPICensusWeb.Base_Key, CStr(value), Ancestors.ActiveAncestorID)
       Case RibbonBar.Key("ANCESTOR_CENSUS_YR2")
         DockManager.ItemShow(DPICensusWeb.Base_Key, CStr(value))
       Case RibbonBar.Key("ANCESTOR_CENSUS_YR3")

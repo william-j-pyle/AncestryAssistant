@@ -4,6 +4,7 @@
   Protected Friend WithEvents _Ancestors As AncestorCollection
   Private _ItemCaption As String = ""
   Protected Friend _LocationCurrent As DockPanelLocation
+  Protected Friend AncestorKey As String = ""
   Protected Friend blockEvents As Boolean = False
   Public Property Ancestors As AncestorCollection
     Get
@@ -47,7 +48,7 @@
   Public Property ItemSupportsSearch As Boolean = False
   Public ReadOnly Property Key As String
     Get
-      Return ItemKey + ItemInstanceKey
+      Return ItemKey + ItemInstanceKey + AncestorKey
     End Get
   End Property
 
